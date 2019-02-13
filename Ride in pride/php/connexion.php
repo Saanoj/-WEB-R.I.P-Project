@@ -52,7 +52,7 @@ $form = new App\Form(array());
                                     
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                        <?php echo $form->inputConnexion('username','text','Login','form-control'); ?>
+                                        <?php echo $form->inputConnexion('email','text','Login','form-control'); ?>
                                     </div>
                                 
                             <div style="margin-bottom: 25px" class="input-group">

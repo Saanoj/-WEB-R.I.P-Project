@@ -31,8 +31,20 @@ $form = new App\Form(array());
         <section class="signup">
             <!-- <img src="images/signup-bg.jpg" alt=""> -->
             <div class="container">
+          
                 <div class="signup-content">
+
                     <form method="POST" id="signup-form" class="signup-form" action="Class/VerifInscription">
+                   
+                    <div class="form-row">
+                    
+                            <div class="form-group">
+                                <label for="password">Email</label>
+                                <?php echo $form->input('email','text'); ?>
+                            </div>
+                           
+                        </div>
+
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="first_name">Prenom</label>
@@ -70,6 +82,8 @@ $form = new App\Form(array());
                                 <?php echo $form->input('confirmPassword','password'); ?>
                             </div>
                         </div>
+
+                
                        
                         <div class="form-group">
                             <?php echo $form->submit(); ?>

@@ -72,7 +72,7 @@ $form = new App\Form(array());
                         </div>
                        
                         <div class="form-group">
-                            <input type="submit" name="submit" id="submit" class="form-submit" value="Inscription"/>
+                            <?php echo $form->submit(); ?>
                         </div>
                     </form>
                 </div>

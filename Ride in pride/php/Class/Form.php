@@ -23,7 +23,19 @@ class Form{
     public function submit(){
         return $this->surround('<button type="submit" name="submit" id="submit" class="form-submit" value="Inscription">Inscription</button>');
     }
+
+    public function inputConnexion($name,$type,$placeholder,$class) {
+         return  $this->surround('<input type="' . $type . '" name="'. $name . '"  placeholder="' . $placeholder . '"  class="' . $class .'" >');
+
+    }
+
+    public function submitConnexion (){
+        return $this->surround('<button  type="submit" href="#" class="btn btn-success" name="submit"  value="Valider">Valider</button>');
+
+    }
 }
+
+
 
 
 ?>

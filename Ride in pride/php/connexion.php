@@ -6,6 +6,7 @@ require 'Class/Autoloader.php';
 App\Autoloader::register();
 // init des objets
 $bdd = new App\Database('rip');
+$form = new App\Form(array());
 ?>
 
 
@@ -51,12 +52,12 @@ $bdd = new App\Database('rip');
                                     
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                        <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="Email">                                        
+                                        <?php echo $form->inputConnexion('username','text','Login','form-control'); ?>
                                     </div>
                                 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                        <input id="login-password" type="password" class="form-control" name="password" placeholder="Mot de passe">
+                                        <?php echo $form->inputConnexion('password','password','Mot de passe','form-control'); ?>
                                     </div>
                                     
 
@@ -74,7 +75,7 @@ $bdd = new App\Database('rip');
                                     <!-- Button -->
 
                                     <div class="col-sm-12 controls">
-                                       <input type="submit" id="btn-login" href="#" class="btn btn-success" name="submit" placeholder="Login"> </input>
+                                      <?php  echo $form->submitConnexion();?>
                                       
 
                                     </div>

@@ -1,4 +1,8 @@
 <?php
+
+namespace App;
+
+use \PDO; 
 class Form{
 
     private $data;

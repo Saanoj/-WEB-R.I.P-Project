@@ -1,8 +1,18 @@
 <?php
 
-$db = new Bdd\Config('rip');
-$datas = $db->query('SELECT * FROM users');
-var_dump($datas);
+namespace App;
 
+use \PDO;
+
+class VerifInscription {
+    private $login;
+    private $password;
+    public function __construct($login,$password) {
+        $this->login  = $login;
+        $this->password = $password;
+
+    }
+
+}
 
 ?>

@@ -1,25 +1,14 @@
 <?php
 
+require 'Class/Autoloader.php';
+App\Autoloader::register();
 
 
-
-require "Class/Form.php";
-
-$form = new Form(array());
-
-      
-       // echo $form->input('password','password');
-        //echo $form->submit();
-?>
-
-<?php
-
-$db = new DataBase\Config('rip');
-$datas = $db->query('SELECT * FROM users');
-var_dump($datas);
-
+$form = new App\Form(array());
 
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

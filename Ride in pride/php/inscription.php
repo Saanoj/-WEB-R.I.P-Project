@@ -58,15 +58,15 @@ $form = new App\Form(array());
                         <div class="form-row">
                             <div class="form-group form-icon">
                                 <label for="birth_date">Date de naissance</label>
-                                <?php echo $form->input('birthday','text'); ?>
+                                <?php echo $form->input('birthday','date'); ?>
                             </div>
                             <div class="form-radio">
                                 <label for="gender">Genre</label>
                                 <div class="form-flex">
-                                    <input type="radio" name="gender" value="male" id="male" checked="checked" />
+                                    <input type="radio" name="gender" value="1" id="male" checked="checked" />
                                     <label for="male">Homme</label>
     
-                                    <input type="radio" name="gender" value="female" id="female" />
+                                    <input type="radio" name="gender" value="0" id="female" />
                                     <label for="female">Femme</label>
                                 </div>
                             </div>

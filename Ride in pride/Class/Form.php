@@ -2,7 +2,7 @@
 
 namespace App;
 
-use \PDO; 
+use \PDO;
 class Form{
 
     private $data;
@@ -21,7 +21,7 @@ class Form{
 
     }
     public function submit(){
-        return $this->surround('<button type="submit" name="submit" id="submit" class="form-submit" value="Inscription">Inscription</button>');
+        return $this->surround('<button type="submit" href="#" class="btn btn-success" name="submit"  value="Inscription">Inscription</button>');
     }
 
     public function inputConnexion($name,$type,$placeholder,$class) {
@@ -30,7 +30,7 @@ class Form{
     }
 
     public function submitConnexion (){
-        return $this->surround('<button  type="submit" href="#" class="btn btn-success" name="submit"  value="Valider">Valider</button>');
+        return $this->surround('<button  type="submit" href="#" class="btn btn-success" name="submit"  value="Connexion">Valider</button>');
 
     }
 }

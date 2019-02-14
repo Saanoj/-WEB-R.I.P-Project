@@ -104,7 +104,7 @@ if  (
             }	
         }
     }
-
+    echo 'ok';
     $user = new Membre($_POST['email'],$_POST['password'],$_POST['firstName'],$_POST['lastName'],$_POST['birthday'],$_POST['gender'],$_POST['confirmPassword']);
 
     $req = $user->checkUserExist($bdd,'SELECT email FROM users WHERE email=:email',$user);

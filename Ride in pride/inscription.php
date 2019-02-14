@@ -28,7 +28,7 @@ $form = new App\Form(array());
           <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
 
 
-          <form method="POST" id="signup-form" class="signup-form" action="Class/VerifInscription">
+          <form method="POST" id="signup-form" class="signup-form" action="Class/VerifInscription.php">
 
             <div class="form-row">
 
@@ -52,7 +52,7 @@ $form = new App\Form(array());
             <div class="form-row">
               <div class="form-group form-icon">
                 <label for="birth_date">Date de naissance</label>
-                <?php echo $form->input('birthday','text'); ?>
+                <?php echo $form->input('birthday','date'); ?>
               </div>
               <div class="form-radio">
                 <label for="gender">Genre</label>

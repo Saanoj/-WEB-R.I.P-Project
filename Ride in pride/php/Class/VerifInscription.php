@@ -1,5 +1,4 @@
 <?php
-
 namespace App;
 use \PDO;
 
@@ -86,16 +85,24 @@ if  (
 
             $req1 = $bdd->getPDO()->prepare($statement);
             $req1->bindValue(':email', $user->getEmail());
-            $req1->bindValue(':password',$user->getPassword());
+            $req1->bindValue(':password',password_hash($user->getPassword(),PASSWORD_DEFAULT));
             $req1->bindValue(':password_confirm',$user->getPassword_confirm());
             $req1->bindValue(':last_name',$user->getLast_name());
             $req1->bindValue(':birthday', $user->getBirthday());
             $req1->bindValue(':gender',$user->getGender());
             $req1->bindValue(':first_name',$user->getFirst_name());
             $req1->execute();
-
-         
         }  
+        public function startSession($bdd,$statement) {
+            session_start();
+            $req = $bdd->getPDO()->prepare($statement);
+            $req->bindValue(':email', $this->getEmail());
+            $req->execute();
+            while	($donnees	=	$req->fetch())
+            {	
+             $_SESSION['id'] =	$donnees['id'];
+            }	
+        }
     }
 
     $user = new Membre($_POST['email'],$_POST['password'],$_POST['firstName'],$_POST['lastName'],$_POST['birthday'],$_POST['gender'],$_POST['confirmPassword']);
@@ -104,11 +111,11 @@ if  (
    if ($req === 0) 
    {
     $req2 = $user->addUser($bdd,'INSERT INTO `users` (`email`, `password`, `password_confirm`, `last_name`, `birthday`, `gender`, `first_name`) VALUES (:email,:password,:password_confirm,:last_name,:birthday,:gender,:first_name);',$user);
-
+    $user->startSession($bdd,'SELECT id FROM users WHERE email = :email');
    }
    else
    {
-       echo "Mail deja utilisé";
+       header('location:../inscription.php?Mail_deja_utilisé');
    }
 
     }

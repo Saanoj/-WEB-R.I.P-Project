@@ -4,7 +4,7 @@
   <section class="banner" role="banner">
     <!--header navigation -->
     <header id="header">
-      <div class="header-content clearfix"> <a class="logo" href="index.php"><img src="../images/RIP2small2.png" alt=""></a>
+      <div class="header-content clearfix"> <a class="logo" href="index.php"><img src="images/RIP2small2.png" alt=""></a>
         <nav class="navigation" role="navigation">
           <ul class="primary-nav">
             <li><a href="index.php">Acceuil</a></li>

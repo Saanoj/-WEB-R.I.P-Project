@@ -32,7 +32,7 @@ $form = new App\Form(array());
 
           <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
 
-          <form action="Class/VerifInscription.php" id="signupform" class="form-horizontal" role="form" method="POST">
+          <form action="Class/VerifConnexion.php" id="signupform" class="form-horizontal" role="form" method="POST">
 
             <div style="margin-bottom: 25px" class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>

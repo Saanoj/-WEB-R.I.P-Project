@@ -75,7 +75,7 @@ a:hover, a:focus {
 body {
 	font-family: "Source Sans Pro";
 	font-weight: 400;
-	color: #6c7279;
+	background-color: #D5D6D2;
 }
 ul, ol {
 	margin: 0;
@@ -90,6 +90,7 @@ ul li {
 .no-padding {
 	padding: 0;
 }
+
 .no-gutter [class*=col-] {
 	padding-right: 0;
 	padding-left: 0;
@@ -296,20 +297,21 @@ ul li {
 -------------------------------------------------------------------------------*/
 
 .banner {
-	background-image: url(../images/banner.jpg);
+	background-color: #2F2E33;
 	background-position: center top;
 	background-repeat: no-repeat;
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	-webkit-background-size: cover;
 	background-size: cover;
-	min-height: 750px;
+	min-height: 100px;
+	max-height: 300px;
 }
 .banner-btn {
 	opacity: 0.5;
 }
 .banner-text {
-	padding-top: 33%;
+	padding-top: 10%;
 }
 .banner-text h1 {
 	color: #fff;

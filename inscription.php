@@ -10,7 +10,7 @@ $form = new App\Form(array());
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js">
 <?php include "includehtml/head.html" ?>
 <body>
   <?php include "navbar/navbar.php" ?>
@@ -96,11 +96,6 @@ $form = new App\Form(array());
 
 </div>
 <?php include "includehtml/footer.html" ?>
-<!-- JS -->
-<script src="../vendor/jquery/jquery.min.js"></script>
-<script src="../vendor/jquery-ui/jquery-ui.min.js"></script>
-<script src="../vendor/jquery-validation/dist/jquery.validate.min.js"></script>
-<script src="../vendor/jquery-validation/dist/additional-methods.min.js"></script>
-<script src="../js/inscriptionjs/main.js"></script>
+
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>

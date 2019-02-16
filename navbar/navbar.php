@@ -24,7 +24,7 @@
           <div class="banner-text text-center">
             <h1>Ride in Pride</h1>
             <p>Services VTC de luxe</p>
-            <nav role="navigation"> <a href="#services" class="banner-btn"><img src="images/down-arrow.png" alt=""></a></nav>
+
           </div>
         </div>
       </div>

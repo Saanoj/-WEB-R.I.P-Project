@@ -21,7 +21,9 @@ if  (
     htmlspecialchars(!empty($_POST['lastName'])) &&
     htmlspecialchars(!empty($_POST['birthday'])) &&
     htmlspecialchars(!empty($_POST['gender'])) &&
-    htmlspecialchars(!empty($_POST['confirmPassword'])) 
+    htmlspecialchars(!empty($_POST['confirmPassword'])) &&
+    strlen($_POST['password']) >= 6 && preg_match('/(?=.*[0-9])[A-Z]|(?=.*[A-Z])[0-9]/', $_POST['password']) &&
+    $_POST['password'] === $_POST['confirmPassword']
   
     )
     {
@@ -86,7 +88,6 @@ if  (
             $req1 = $bdd->getPDO()->prepare($statement);
             $req1->bindValue(':email', $user->getEmail());
             $req1->bindValue(':password',password_hash($user->getPassword(),PASSWORD_DEFAULT));
-            $req1->bindValue(':password_confirm',$user->getPassword_confirm());
             $req1->bindValue(':last_name',$user->getLast_name());
             $req1->bindValue(':birthday', $user->getBirthday());
             $req1->bindValue(':gender',$user->getGender());
@@ -102,6 +103,7 @@ if  (
             {	
              $_SESSION['id'] =	$donnees['id'];
             }	
+            $_SESSION['email'] = $this->getEmail();
         }
     }
 
@@ -110,8 +112,9 @@ if  (
     $req = $user->checkUserExist($bdd,'SELECT email FROM users WHERE email=:email',$user);
    if ($req === 0) 
    {
-    $req2 = $user->addUser($bdd,'INSERT INTO `users` (`email`, `password`, `password_confirm`, `last_name`, `birthday`, `gender`, `first_name`) VALUES (:email,:password,:password_confirm,:last_name,:birthday,:gender,:first_name);',$user);
+    $req2 = $user->addUser($bdd,'INSERT INTO `users` (`email`, `password`, `last_name`, `birthday`, `gender`, `first_name`) VALUES (:email,:password,:last_name,:birthday,:gender,:first_name);',$user);
     $user->startSession($bdd,'SELECT id FROM users WHERE email = :email');
+    header('location:../index.php?id='.$_SESSION['id'].'');
    }
    else
    {
@@ -121,7 +124,7 @@ if  (
     }
     else
     {
-            echo 'Informations inexactes';
+            echo 'Informations inexactes ( Mot de passe supérier a 6 s\'il vous plait + majuscule et chiffres obligatoires';
     }   
 
 ?>

@@ -1,8 +1,10 @@
 <?php
+require 'Class/Autoloader.php';
+$bdd = new Database('rip');
 if(isset($_SESSION['id'])){
       $query=$bdd->prepare('SELECT isAdmin
       FROM USER WHERE id = :id');
-      $query->bindValue(':mail',$_SESSION['mail'], PDO::PARAM_STR);
+      $query->bindValue(':id',$_SESSION['id'], PDO::PARAM_STR);
       $query->execute();
       $data=$query->fetch();
       if($data['isAdmin'] == 1){
@@ -12,7 +14,6 @@ if(isset($_SESSION['id'])){
       }
     }
    else{
-      include("navbar.php');
+      include('navbar.php');
     }
-
- ?>
+?>

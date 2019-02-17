@@ -40,7 +40,7 @@ session_start();
 
 
  // REQUETE POUR RECUPER LES INFOS DU USER
- $req = $bdd->prepare('SELECT * FROM users WHERE id = ?');
+ $req = $bdd->getPDO()->prepare('SELECT * FROM users WHERE id = ?');
  $req->execute(array($_SESSION['id']));
  $datas = $req->fetch();
 
@@ -56,7 +56,10 @@ session_start();
         $this->last_name = $last_name;
         $this->birthday = $birthday;
         $this->gender = $gender;
+
     }
+
+
 
     /* GETTERS */
     public function getFirst_name() {return $this->first_name;}
@@ -74,9 +77,9 @@ session_start();
 
 
  }
- 
+
  $user = new Profil($datas['first_name'],$datas['last_name'],$datas['birthday'],$datas['gender']);
- var_dump($user);
+
  ?>
 
 <div class="container emp-profile">

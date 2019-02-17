@@ -21,16 +21,7 @@ session_start();
 <body>
 
   <?php
- 
- if (isset($_SESSION['id']))
- {
-   include "../navbar/navbarDeco.php";
- }
- else
- {
-   include "../navbar/navbar.php"; 
- }
- 
+// include '../navbar/chooseNav.php';
 
  
  
@@ -134,7 +125,7 @@ session_start();
                                                 <label>Nom</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Kshiti Ghelani</p>
+                                                <p> <?= $user->getLast_name(); ?></p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -142,7 +133,7 @@ session_start();
                                                 <label>Prenom</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>kshitighelani@gmail.com</p>
+                                                <p> <?= $user->getFirst_name(); ?></p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -150,7 +141,7 @@ session_start();
                                                 <label>Date de naissance</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>123 456 7890</p>
+                                                <p> <?= $user->getBirthday(); ?></p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -158,14 +149,14 @@ session_start();
                                                 <label>Genre</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Web Developer and Designer</p>
+                                                <p> <?= $user->getGender(); ?></p>
                                             </div>
                                         </div>
                             </div>
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Experience</label>
+                                                <label>Mes anciens trajets</label>
                                             </div>
                                             <div class="col-md-6">
                                                 <p>Expert</p>

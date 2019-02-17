@@ -1,5 +1,5 @@
 <?php
-include('../config.php');
+$bdd = new PDO('mysql:host=localhost;dbname=rip', 'root', '');
 
 if(isset($_SESSION['id'])){
       $query=$bdd->prepare('SELECT isAdmin

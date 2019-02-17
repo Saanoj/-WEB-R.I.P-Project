@@ -21,9 +21,10 @@ if  (
     htmlspecialchars(!empty($_POST['lastName'])) &&
     htmlspecialchars(!empty($_POST['birthday'])) &&
     htmlspecialchars(!empty($_POST['gender'])) &&
-    htmlspecialchars(!empty($_POST['confirmPassword'])) &&
-    strlen($_POST['password']) >= 6 && preg_match('/(?=.*[0-9])[A-Z]|(?=.*[A-Z])[0-9]/', $_POST['password']) &&
-    $_POST['password'] === $_POST['confirmPassword']
+    htmlspecialchars(!empty($_POST['confirmPassword']))
+     
+    // && strlen($_POST['password']) >= 6 && preg_match('/(?=.*[0-9])[A-Z]|(?=.*[A-Z])[0-9]/', $_POST['password']) &&
+   // $_POST['password'] === $_POST['confirmPassword']
   
     )
     {
@@ -82,17 +83,42 @@ if  (
             return $check->rowCount();
         }
 
+        public function checkDateBirth() {
+            $min = strtotime($this->getBirthday());
+            $now = strtotime("now") + 7200;
+            if($now - $min < 0){
+               
+                $date_erreur1 = "Vous n'êtes pas encore né";
+                header('location:../inscription.php?error="'.$date_erreur1 .'"');
+               }
+            if($now - $min < 	504576000){
+                 
+                 $date_erreur3 = "Il faut avoir plus de 16 ans pour créer un compte";
+                 header('location:../inscription.php?error="'.$date_erreur3 .'"');
+               }
+                else {
+                    return 1;
+                }   
+        }
+
+        public function chiffrerPassword() {
+            $salage='SuP4rS4aL4g3';
+            return hash('md5',$salage.$this->password);
+
+        }
+
             public function addUser($bdd,$statement,$user) {
              
 
             $req1 = $bdd->getPDO()->prepare($statement);
             $req1->bindValue(':email', $user->getEmail());
-            $req1->bindValue(':password',password_hash($user->getPassword(),PASSWORD_DEFAULT));
+            $req1->bindValue(':password',$user->chiffrerPassword($user->getPassword()));
             $req1->bindValue(':last_name',$user->getLast_name());
             $req1->bindValue(':birthday', $user->getBirthday());
             $req1->bindValue(':gender',$user->getGender());
             $req1->bindValue(':first_name',$user->getFirst_name());
             $req1->execute();
+            
         }  
         public function startSession($bdd,$statement) {
             session_start();
@@ -108,18 +134,23 @@ if  (
     }
 
     $user = new Membre($_POST['email'],$_POST['password'],$_POST['firstName'],$_POST['lastName'],$_POST['birthday'],$_POST['gender'],$_POST['confirmPassword']);
-
+  
     $req = $user->checkUserExist($bdd,'SELECT email FROM users WHERE email=:email',$user);
    if ($req === 0) 
    {
+       if ($user->checkDateBirth() === 1) {
     $req2 = $user->addUser($bdd,'INSERT INTO `users` (`email`, `password`, `last_name`, `birthday`, `gender`, `first_name`) VALUES (:email,:password,:last_name,:birthday,:gender,:first_name);',$user);
     $user->startSession($bdd,'SELECT id FROM users WHERE email = :email');
     header('location:../index.php?id='.$_SESSION['id'].'');
    }
+}
+
+
    else
    {
        header('location:../inscription.php?Mail_deja_utilisé');
    }
+   
 
     }
     else

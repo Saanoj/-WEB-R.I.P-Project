@@ -45,9 +45,7 @@ if  (
                 $req = $bdd->getPDO()->prepare($statement);
                 $req->bindValue(':email', $this->getEmail());
                 $req->execute();
-                while	($donnees	=	$req->fetch()){	
-                    $val	= $donnees['password'];
-           }	
+         	
            $req->closeCursor();
 
            return $val;
@@ -55,37 +53,66 @@ if  (
 
             }
 
+            public function createCookie()
+            {
+                if (isset($_POST['remember']))
+                {
+                  setcookie('email',$this->getEmail(),time()+365*24*3600,null,null,false,true);
+                  setcookie('password',$this->getPassword(),time()+365*24*3600,null,null,false,true);
+                  setcookie('id',$_SESSION['id'],time()+365*24*3600,null,null,false,true);
+                }
+            }
+            public function chiffrerPassword() {
+                $salage='SuP4rS4aL4g3';
+                return hash('md5',$salage.$this->password);
+    
+            }
+        
 
 
-
-                       public function checkBdd($bdd,$statement,$hash_password) {
-                        
-              
+                       public function checkBdd($bdd,$statement) {
             $req = $bdd->getPDO()->prepare($statement);
             $req->bindValue(':email', $this->getEmail());
-            $req->bindValue(':password',$hash_password);
             $req->execute();
-            $userexist = $req->RowCount();
-            var_dump($userexist);
-            if ($userexist == 1)
-             {
-                $userinfos = $req->fetch();
-                $_SESSION['email'] = $this->getEmail();
-                header('location:../index.php?id='.$_SESSION['email'].'');
+            $data=$req->fetch();
+            $req->closeCursor();
+            if ($this->chiffrerPassword($this->getPassword()) == $data['password'])
+            {
+            if ( $data['isBanned'] == 0 )
+	       {
+           
+            $_SESSION['id'] = $data['id'];            
+            header('location:../index.php?id='.$_SESSION['id'].'');
+           }
+           else
+           {
+            echo '<h4 class = "text-center">Vous avez été banni</h4> <br>
+            <li class="nav-item text-center">
+              <a class="nav-link" href="../connexion.php">
+                <i class="fa d-inline fa-lg fa-arrow-circle-left "></i> retour</a>
+            </li> ';
+           }
+        }
+           else {
+
+            echo '<h4 class = "text-center">mauvais mot de passe ou pseudo</h4> <br>
+            <li class="nav-item text-center">
+              <a class="nav-link" href="../connexion.php">
+                <i class="fa d-inline fa-lg fa-arrow-circle-left "></i> retour</a>
+            </li> ';
+
+           }
             }
             
         }
-    }
+    
         
 
         $user = new VerifConnexion($_POST['email'],$_POST['password']);
-        var_dump(password_verify($user->getPassword(),$req = $user->getHashPassword($bdd,'SELECT password FROM users WHERE email = :email')));
-        if (password_verify($user->getPassword(),$req = $user->getHashPassword($bdd,'SELECT password FROM users WHERE email = :email')) == 1);
-        {
-        $hash_password = $user->getHashPassword($bdd,'SELECT password FROM users WHERE email = :email');
-         $req2 = $user->checkBdd($bdd,'SELECT * FROM users WHERE email = :email AND password = :password',$hash_password);
-        var_dump($hash_password);
-        }
+      
+         $req = $user->checkBdd($bdd,'SELECT id,password, isBanned FROM users WHERE email = :email');
+        $user->createCookie();
+        
 
      
         

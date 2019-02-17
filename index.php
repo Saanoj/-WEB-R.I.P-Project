@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 ?>
 <!doctype html>
@@ -9,16 +9,8 @@ session_start();
 <body>
   <!-- header section -->
   <?php
- 
-  if (isset($_SESSION['id']))
-  {
-    include "navbar/navbarDeco.php";
-  }
-  else
-  {
-    include "navbar/navbar.php"; 
-  }
-  
+    include "navbar/chooseNav.php"; 
+
   ?>
 
   <!-- Get a quote section -->

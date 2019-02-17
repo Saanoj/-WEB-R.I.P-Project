@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<?
 
-?>
 <html lang="en" dir="ltr">
 <body>
   <section class="banner" role="banner">

@@ -1,12 +1,25 @@
+<?php 
+session_start();
+?>
 <!doctype html>
-
 <html class="no-js">
 <!--<![endif]-->
 <?php include "includehtml/head.html" ?>
 
 <body>
   <!-- header section -->
-  <?php include "navbar/navbar.php" ?>
+  <?php
+ 
+  if (isset($_SESSION['id']))
+  {
+    include "navbar/navbarDeco.php";
+  }
+  else
+  {
+    include "navbar/navbar.php"; 
+  }
+  
+  ?>
 
   <!-- Get a quote section -->
   <section  class="section quote">

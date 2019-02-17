@@ -80,8 +80,9 @@ if  (
             {
             if ( $data['isBanned'] == 0 )
 	       {
-           
-            $_SESSION['id'] = $data['id'];            
+            session_start();
+            $_SESSION['id'] = $data['id'];      
+            $_SESSION['email'] = $this->getEmail();      
             header('location:../index.php?id='.$_SESSION['id'].'');
            }
            else

@@ -7,6 +7,8 @@ if(isset($_SESSION['id'])){
       $data=$query->fetch();
       if($data['isAdmin'] == 1){
          include('Navbar/NavbarAdmin.php');
+      }else{
+        nclude('Navbar/NavbarCustomer.php');
       }
     }
    else{

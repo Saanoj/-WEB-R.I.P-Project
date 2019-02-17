@@ -1,5 +1,9 @@
 <?php
-require 'Class/Autoloader.php';
+namespace App;
+use \PDO;
+
+require '../Class/Autoloader.php';
+Autoloader::register();
 $bdd = new Database('rip');
 if(isset($_SESSION['id'])){
       $query=$bdd->prepare('SELECT isAdmin

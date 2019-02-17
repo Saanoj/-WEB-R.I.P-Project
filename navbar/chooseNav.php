@@ -6,13 +6,13 @@ if(isset($_SESSION['id'])){
       $query->execute();
       $data=$query->fetch();
       if($data['isAdmin'] == 1){
-         include('Navbar/NavbarAdmin.php');
+         include('navbarAdmin.php');
       }else{
-        nclude('Navbar/NavbarCustomer.php');
+        nclude('navbarCustomer.php');
       }
     }
    else{
-      include('Navbar/Navbar.php');
+      include("navbar.php');
     }
 
  ?>

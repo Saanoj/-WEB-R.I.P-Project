@@ -21,13 +21,8 @@ session_start();
 <body>
 
   <?php
-// include '../navbar/chooseNav.php';
+ include '../navbar/chooseNav.php';
 
- 
- 
- require 'Autoloader.php';
- Autoloader::register();
- $bdd = new Database('rip');
 
 
  // REQUETE POUR RECUPER LES INFOS DU USER

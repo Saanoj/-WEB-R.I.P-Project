@@ -22,8 +22,8 @@ $req->bindValue(':columnValue', $newval);
 $req->bindValue(':id', $id);
 $req->execute();
 $req->closeCursor();
-echo "string";
-//header('location:Profil.php?c fait');
+
+
 exit;
 
 

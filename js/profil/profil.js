@@ -28,6 +28,10 @@ $(document).ready(function(){
 		$(this).css("display", "none");
 		savebtn.css("display", "block");
 	});
+
+
+
+
 	$(".savebtn").on("click", function(e){
 		e.preventDefault();
 		var elink   = $(this).prev(".editlink");

@@ -5,6 +5,7 @@ use \PDO;
 
 require 'Autoloader.php';
 Autoloader::register();
+
 $bdd = new Database('rip');
 
 if(isset($_SESSION['id'])){

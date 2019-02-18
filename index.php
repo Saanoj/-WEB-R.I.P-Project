@@ -8,10 +8,7 @@ session_start();
 
 <body>
   <!-- header section -->
-  <?php
-    include "class/chooseNav.php";
-
-  ?>
+  <?php include "class/chooseNav.php";  ?>
 
   <!-- Get a quote section -->
   <section  class="section quote">

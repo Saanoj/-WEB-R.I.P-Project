@@ -1,13 +1,30 @@
+<<<<<<< HEAD
+=======
+<?php
+
+require 'Class/Autoloader.php';
+App\Autoloader::register();
+
+$form = new App\Form(array());
+
+?>
+
+
+>>>>>>> 9362eff0e844fd1347fb59ccca59e63464ab12f7
 <!DOCTYPE html>
 <html class="no-js">
 <?php include "includehtml/head.html" ?>
 <body>
+<<<<<<< HEAD
   <?php  // include "navbar/chooseNav.php"; 
   require 'Class/Autoloader.php';
 App\Autoloader::register();
 
 
 $form = new App\Form(array()); ?>
+=======
+  <?php   //include "navbar/chooseNav.php";  ?>
+>>>>>>> 9362eff0e844fd1347fb59ccca59e63464ab12f7
 
   <div class="container">
     <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">

@@ -1,4 +1,5 @@
 <?php
+
 namespace App;
 use \PDO;
 
@@ -14,8 +15,10 @@ $req->bindValue(':nameRaw', $nameRaw);
 $req->bindValue(':id', $id);
 $req->execute();
 $req->closeCursor();
-header('location:Profil.php?c fait');
-exit;
+
+
+
+
   
 
 

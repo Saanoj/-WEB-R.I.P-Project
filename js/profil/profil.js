@@ -66,15 +66,16 @@ function updateProfil(newval,newid,idProfil) {
 	var request = new XMLHttpRequest();
 	request.onreadystatechange = function(){
 	  if(request.status == 200 && request.readyState == 4){
-		console.log("newval = " + newval);
-		console.log("newid = " + newid);
-		console.log("idProfil = " + idProfil.innerHTML);
+		
 	  }
 	};
+	var data = 'newval=' + newval+ '&newid=' + newid + '&idProfil='+idProfil.innerHTML ;
+	console.log("data = " + data);
 	request.open('POST', 'updateProfil.php');
 	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
-	request.send(newval,newid,idProfil.innerHTML);
+	request.send(data);
 	return false;
   }
+  
   
   

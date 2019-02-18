@@ -17,16 +17,16 @@ class Form{
     }
 
     public function input($name,$type) {
-       return  $this->surround('<input type="' . $type . '" name="'. $name . '" autofocus onblur="check'.$name.'(this)">');
+       return  $this->surround('<input type="' . $type . '" name="'. $name . '" id="' .$name .'" autofocus onblur="check'.$name.'(this)">');
 
     }
     public function submit(){
-        return $this->surround('<button type="submit" href="#" class="btn btn-success" name="submit"  value="Inscription">Inscription</button>');
+        return $this->surround('<submit  href="#" class="btn btn-success" name="submit"  value="Inscription">Inscription</submit>');
     
     }
 
     public function inputConnexion($name,$type,$placeholder,$class) {
-         return  $this->surround('<input type="' . $type . '" name="'. $name . '"  placeholder="' . $placeholder . '"  class="' . $class .'" >');
+         return  $this->surround('<input type="' . $type . '" name="'. $name . '" id="' .$name .'" placeholder="' . $placeholder . '"  class="' . $class .'" >');
 
     }
 

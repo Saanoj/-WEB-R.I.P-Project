@@ -22,10 +22,10 @@ if  (
     htmlspecialchars(!empty($_POST['birthday'])) &&
     htmlspecialchars(!empty($_POST['gender'])) &&
     htmlspecialchars(!empty($_POST['confirmPassword']))
-     
-    // && strlen($_POST['password']) >= 6 && preg_match('/(?=.*[0-9])[A-Z]|(?=.*[A-Z])[0-9]/', $_POST['password']) &&
-   // $_POST['password'] === $_POST['confirmPassword']
-  
+    /*&& 
+    strlen($_POST['password']) >= 6 &&
+     preg_match('/(?=.*[0-9])[A-Z]|(?=.*[A-Z])[0-9]/', $_POST['password']) &&$_POST['password'] === $_POST['confirmPassword']
+  */
     )
     {
 
@@ -153,9 +153,10 @@ if  (
    
 
     }
+    /*
     else
     {
             echo 'Informations inexactes ( Mot de passe supérier a 6 s\'il vous plait + majuscule et chiffres obligatoires';
     }   
-
+*/
 ?>

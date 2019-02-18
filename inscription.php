@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 <?php
 
 require 'Class/Autoloader.php';
@@ -10,28 +8,20 @@ $form = new App\Form(array());
 ?>
 
 
->>>>>>> 9362eff0e844fd1347fb59ccca59e63464ab12f7
 <!DOCTYPE html>
 <html class="no-js">
 <?php include "includehtml/head.html" ?>
+<script type="text/javascript" src="js/inscription/main.js"></script>
+
 <body>
-<<<<<<< HEAD
-  <?php  // include "navbar/chooseNav.php"; 
-  require 'Class/Autoloader.php';
-App\Autoloader::register();
-
-
-$form = new App\Form(array()); ?>
-=======
   <?php   //include "navbar/chooseNav.php";  ?>
->>>>>>> 9362eff0e844fd1347fb59ccca59e63464ab12f7
 
   <div class="container">
     <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
       <div class="panel panel-info" >
         <div class="panel-heading">
           <div class="panel-title">Se connecter</div>
-          <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Mot de passe oubllié ?</a></div>
+          <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="Class/forgotPassword.php">Mot de passe oubllié ?</a></div>
         </div>
 
         <div style="padding-top:30px" class="panel-body" >
@@ -39,7 +29,7 @@ $form = new App\Form(array()); ?>
           <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
 
 
-          <form method="POST" id="signup-form" class="signup-form" action="Class/VerifInscription.php">
+          <form method="POST" id="signup-form" class="signup-form" action="Class/VerifInscription.php" onsubmit="return checkGlobal(this)">
 
             <div class="form-row">
 
@@ -62,7 +52,7 @@ $form = new App\Form(array()); ?>
             </div>
             <div class="form-row">
               <div class="form-group form-icon">
-                <label for="birth_date">Date de naissance</label>
+                <label for="birth_date">Date de naissance (16 ans minimum) </label>
                 <?php echo $form->input('birthday','date'); ?>
               </div>
               <div class="form-radio">
@@ -79,7 +69,7 @@ $form = new App\Form(array()); ?>
 
             <div class="form-row">
               <div class="form-group">
-                <label for="password">Mot de passe</label>
+                <label for="password">Mot de passe ( 6 caractères au minimum, 1 majuscule et un chiffre)</label>
                 <?php echo $form->input('password','password'); ?>
               </div>
               <div class="form-group">

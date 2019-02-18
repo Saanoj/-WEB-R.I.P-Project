@@ -22,17 +22,9 @@ $req->bindValue(':columnValue', $newval);
 $req->bindValue(':id', $id);
 $req->execute();
 $req->closeCursor();
-<<<<<<< HEAD
-
-
-
-
-  
-=======
 echo "string";
 //header('location:Profil.php?c fait');
 exit;
->>>>>>> 97880055f76ba46b67dea478cb9d3d15894a5434
 
 
 

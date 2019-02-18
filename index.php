@@ -9,7 +9,11 @@ session_start();
 <body>
   <!-- header section -->
   <?php
+<<<<<<< HEAD
   //  include "navbar/chooseNav.php"; 
+=======
+    include "class/chooseNav.php"; 
+>>>>>>> 7c330539e462a264d72e3779551b220b15c235c8
 
   ?>
 

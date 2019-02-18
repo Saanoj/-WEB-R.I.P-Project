@@ -57,10 +57,10 @@ $form = new App\Form(array());
               <div class="form-radio">
                 <label for="gender">Genre</label>
                 <div class="form-flex">
-                  <input type="radio" name="gender" value="male" id="male" checked="checked" />
+                  <input type="radio" name="gender" value="Man" id="Man" checked="checked" />
                   <label for="male">Homme</label>
 
-                  <input type="radio" name="gender" value="female" id="female" />
+                  <input type="radio" name="gender" value="Woman" id="Woman" />
                   <label for="female">Femme</label>
                 </div>
               </div>

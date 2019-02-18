@@ -9,21 +9,29 @@ session_start();
 <head>
     <meta charset="utf-8">
     <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
-    <title>Bootstrap Profile Page Design - Bootsnipp.com</title>
+    <title>Profil</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/profil/style.css" rel="stylesheet">
+    <link href="../css/profil/style.css" rel="stylesheet"> 
     <style type="text/css">
     </style>
+
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../js/profil/profil.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
 </head>
 <body>
 
+
   <?php
- include '../navbar/chooseNav.php';
+  include '../includehtml/head.html';
+ // include '../navbar/chooseNav.php';
 
-
+ require '../Class/Autoloader.php';
+ Autoloader::register();
+ $bdd = new Database('rip');
 
  // REQUETE POUR RECUPER LES INFOS DU USER
  $req = $bdd->getPDO()->prepare('SELECT * FROM users WHERE id = ?');
@@ -60,6 +68,12 @@ session_start();
     public function setGender($newGender) {return $this->gender = $newGender;}
 
     /* FONCTIONS */
+/*
+    public function updateBdd($bdd,$) {
+        $req = $bdd->getPDO()->prepare('UPDATE ')
+    }
+    */
+
 
 
  }
@@ -74,15 +88,12 @@ session_start();
                     <div class="col-md-4">
                         <div class="profile-img">
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
-                            <div class="file btn btn-lg btn-primary">
-                                Change Photo
-                                <input type="file" name="file"/>
-                            </div>
+                        
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="profile-head">
-                                    <h5>
+                                    <h5 id="mailA" value="<?php echo $_SESSION['email']; ?>">
                                         <?php echo $_SESSION['email']; ?>
                                     </h5>
                                  
@@ -97,7 +108,9 @@ session_start();
                         </div>
                     </div>
                     <div class="col-md-2">
+                      
                         <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                     
                     </div>
                 </div>
                 <div class="row">
@@ -112,7 +125,7 @@ session_start();
                                                 <label>Id</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p><?= $_SESSION['id'];?></p>
+                                            <span id="idProfil" class="datainfo" value="'<?= $_SESSION['id']?>'"><?= $_SESSION['id'] ?></span>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -120,7 +133,13 @@ session_start();
                                                 <label>Nom</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p> <?= $user->getLast_name(); ?></p>
+                                                <div class="gear">
+                                            <span id="last_name" class="datainfo"><?= $user->getLast_name(); ?></span>
+                                            <a href="#" class="editlink">Editer</a>
+                    <a class="savebtn">Sauvegarder</a>
+</div>
+
+                                             
                                             </div>
                                         </div>
                                         <div class="row">
@@ -128,7 +147,13 @@ session_start();
                                                 <label>Prenom</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p> <?= $user->getFirst_name(); ?></p>
+                                                <div class="gear">
+                                            <span id="first_name" class="datainfo"><?= $user->getFirst_name(); ?></span>
+                                            <a href="#" class="editlink">Editer</a>
+                    <a class="savebtn" >Sauvegarder</a>
+</div>
+
+                          
                                             </div>
                                         </div>
                                         <div class="row">
@@ -136,7 +161,17 @@ session_start();
                                                 <label>Date de naissance</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p> <?= $user->getBirthday(); ?></p>
+                                                <div class="gear">
+                                                
+                                                
+
+                                            <span id="birthday" class="datainfo"><?php
+                                            setlocale(LC_TIME, "fr_FR","French");
+                                            $date = strftime("%d %B %Y", strtotime($user->getBirthday()));
+                                            echo  $date; ?></span>
+                                            <a href="#" class="editlink">Editer</a>
+                    <a class="savebtn" >Sauvegarder</a>
+</div>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -144,7 +179,11 @@ session_start();
                                                 <label>Genre</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p> <?= $user->getGender(); ?></p>
+                                            <div class="gear">
+                                            <span id="gender" class="datainfo"><?= $user->getGender(); ?></span>
+                                            <a href="#" class="editlink">Editer</a>
+                    <a class="savebtn">Sauvegarder</a>
+</div>
                                             </div>
                                         </div>
                             </div>
@@ -203,6 +242,8 @@ session_start();
         </div>
 <script type="text/javascript">
 
+
 </script>
+
 </body>
 </html>

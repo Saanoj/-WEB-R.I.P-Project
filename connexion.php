@@ -19,7 +19,7 @@ $form = new App\Form(array());
 <?php include "includehtml/head.html" ?>
 
 <body>
-  <?php   include "navbar/chooseNav.php";  ?>
+  <?php  // include "navbar/chooseNav.php";  ?>
   <div class="container">
     <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
       <div class="panel panel-info" >

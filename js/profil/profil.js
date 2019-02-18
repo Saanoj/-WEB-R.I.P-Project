@@ -69,20 +69,9 @@ function updateProfil(newval,newid,idProfil) {
 		
 	  }
 	};
-<<<<<<< HEAD
-	var data = 'newval=' + newval+ '&newid=' + newid + '&idProfil='+idProfil.innerHTML ;
-	console.log("data = " + data);
-=======
 	data='newval=' + newval + '&newid=' + newid + '&id=' + idProfil.innerHTML;
->>>>>>> 97880055f76ba46b67dea478cb9d3d15894a5434
 	request.open('POST', 'updateProfil.php');
 	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
 	request.send(data);
 	return false;
   }
-<<<<<<< HEAD
-  
-  
-  
-=======
->>>>>>> 97880055f76ba46b67dea478cb9d3d15894a5434

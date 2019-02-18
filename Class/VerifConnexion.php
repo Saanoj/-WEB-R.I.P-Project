@@ -10,7 +10,7 @@ $bdd = new Database('rip');
 
 if  (
     htmlspecialchars(isset($_POST['email'])) &&
-    htmlspecialchars(isset($_POST['password'])) 
+    htmlspecialchars(isset($_POST['password']))
     )
     {
 
@@ -31,7 +31,7 @@ if  (
 
             public function getEmail() {return $this->email;}
             public function getPassword() {return $this->password;}
-        
+
 
             /* Setters */
             public function setEmail($newEmail) {return $this->email = $newEmail;}
@@ -45,7 +45,7 @@ if  (
                 $req = $bdd->getPDO()->prepare($statement);
                 $req->bindValue(':email', $this->getEmail());
                 $req->execute();
-         	
+
            $req->closeCursor();
 
            return $val;
@@ -65,12 +65,12 @@ if  (
             public function chiffrerPassword() {
                 $salage='SuP4rS4aL4g3';
                 return hash('md5',$salage.$this->password);
-    
+
             }
-        
 
 
-                       public function checkBdd($bdd,$statement) {
+
+        public function checkBdd($bdd,$statement) {
             $req = $bdd->getPDO()->prepare($statement);
             $req->bindValue(':email', $this->getEmail());
             $req->execute();
@@ -81,8 +81,8 @@ if  (
             if ( $data['isBanned'] == 0 )
 	       {
             session_start();
-            $_SESSION['id'] = $data['id'];      
-            $_SESSION['email'] = $this->getEmail();      
+            $_SESSION['id'] = $data['id'];
+            $_SESSION['email'] = $this->getEmail();
             header('location:../index.php?id='.$_SESSION['id'].'');
            }
            else
@@ -104,22 +104,22 @@ if  (
 
            }
             }
-            
+
         }
-    
-        
+
+
 
         $user = new VerifConnexion($_POST['email'],$_POST['password']);
-      
+
          $req = $user->checkBdd($bdd,'SELECT id,password, isBanned FROM users WHERE email = :email');
         $user->createCookie();
-        
 
-     
-        
 
-              
+
+
+
+
     }
- 
+
 
 ?>

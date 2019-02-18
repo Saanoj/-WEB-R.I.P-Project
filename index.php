@@ -1,4 +1,4 @@
-<?php
+  <?php
 session_start();
 ?>
 <!doctype html>
@@ -9,7 +9,7 @@ session_start();
 <body>
   <!-- header section -->
   <?php
-    include "class/chooseNav.php"; 
+    include "class/chooseNav.php";
 
   ?>
 

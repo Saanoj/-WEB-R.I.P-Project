@@ -12,7 +12,7 @@ session_start();
     <title>Profil</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/profil/style.css" rel="stylesheet"> 
+    <link href="../css/profil/style.css" rel="stylesheet">
     <style type="text/css">
     </style>
 
@@ -88,7 +88,7 @@ session_start();
                     <div class="col-md-4">
                         <div class="profile-img">
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
-                        
+
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -96,7 +96,7 @@ session_start();
                                     <h5 id="mailA" value="<?php echo $_SESSION['email']; ?>">
                                         <?php echo $_SESSION['email']; ?>
                                     </h5>
-                                 
+
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Mes informations</a>
@@ -108,14 +108,14 @@ session_start();
                         </div>
                     </div>
                     <div class="col-md-2">
-                      
+
                         <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
-                     
+
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
-                   
+
                     </div>
                     <div class="col-md-8">
                         <div class="tab-content profile-tab" id="myTabContent">
@@ -136,10 +136,10 @@ session_start();
                                                 <div class="gear">
                                             <span id="last_name" class="datainfo"><?= $user->getLast_name(); ?></span>
                                             <a href="#" class="editlink">Editer</a>
-                    <a class="savebtn">Sauvegarder</a>
+                                            <a class="savebtn">Sauvegarder</a>
 </div>
 
-                                             
+
                                             </div>
                                         </div>
                                         <div class="row">
@@ -150,10 +150,10 @@ session_start();
                                                 <div class="gear">
                                             <span id="first_name" class="datainfo"><?= $user->getFirst_name(); ?></span>
                                             <a href="#" class="editlink">Editer</a>
-                    <a class="savebtn" >Sauvegarder</a>
+                                            <a class="savebtn" >Sauvegarder</a>
 </div>
 
-                          
+
                                             </div>
                                         </div>
                                         <div class="row">
@@ -162,15 +162,15 @@ session_start();
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="gear">
-                                                
-                                                
+
+
 
                                             <span id="birthday" class="datainfo"><?php
                                             setlocale(LC_TIME, "fr_FR","French");
                                             $date = strftime("%d %B %Y", strtotime($user->getBirthday()));
                                             echo  $date; ?></span>
                                             <a href="#" class="editlink">Editer</a>
-                    <a class="savebtn" >Sauvegarder</a>
+                                            <a class="savebtn" >Sauvegarder</a>
 </div>
                                             </div>
                                         </div>
@@ -182,7 +182,7 @@ session_start();
                                             <div class="gear">
                                             <span id="gender" class="datainfo"><?= $user->getGender(); ?></span>
                                             <a href="#" class="editlink">Editer</a>
-                    <a class="savebtn">Sauvegarder</a>
+                                            <a class="savebtn">Sauvegarder</a>
 </div>
                                             </div>
                                         </div>
@@ -238,7 +238,7 @@ session_start();
                         </div>
                     </div>
                 </div>
-            </form>           
+            </form>
         </div>
 <script type="text/javascript">
 

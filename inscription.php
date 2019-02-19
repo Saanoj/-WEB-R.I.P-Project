@@ -29,7 +29,7 @@ $form = new App\Form(array());
           <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
 
 
-          <form method="POST" id="signup-form" class="signup-form" action="Class/VerifInscription.php" onsubmit="return checkGlobal(this)">
+          <form method="POST" id="signup-form" class="signup-form" onsubmit="return checkGlobal(this)" action="Class/VerifInscription.php" >
 
             <div class="form-row">
 

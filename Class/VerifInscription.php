@@ -117,6 +117,8 @@ if  (
             $req1->bindValue(':birthday', $user->getBirthday());
             $req1->bindValue(':gender',$user->getGender());
             $req1->bindValue(':first_name',$user->getFirst_name());
+            $req1->bindValue(':isBanned',0);
+            $req1->bindValue(':isAdmin',0);
             $req1->execute();
             
         }  
@@ -139,7 +141,7 @@ if  (
    if ($req === 0) 
    {
        if ($user->checkDateBirth() === 1) {
-    $req2 = $user->addUser($bdd,'INSERT INTO `users` (`email`, `password`, `last_name`, `birthday`, `gender`, `first_name`) VALUES (:email,:password,:last_name,:birthday,:gender,:first_name);',$user);
+    $req2 = $user->addUser($bdd,'INSERT INTO `users` (`email`, `password`, `last_name`, `birthday`, `gender`,`first_name`,`isBanned`,`isAdmin`) VALUES (:email,:password,:last_name,:birthday,:gender,:first_name,:isBanned,:isAdmin);',$user);
     $user->startSession($bdd,'SELECT id FROM users WHERE email = :email');
     header('location:../index.php?id='.$_SESSION['id'].'');
    }

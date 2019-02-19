@@ -21,7 +21,7 @@ class Form{
 
     }
     public function submit(){
-        return $this->surround('<submit  href="#" class="btn btn-success" name="submit"  value="Inscription">Inscription</submit>');
+        return $this->surround('<input type="submit"   class="btn btn-success" name="submit"  value="Connexion">Valider</submit>');
     
     }
 
@@ -31,7 +31,7 @@ class Form{
     }
 
     public function submitConnexion (){
-        return $this->surround('<button  type="submit" href="#" class="btn btn-success" name="submit"  value="Connexion">Valider</button>');
+        return $this->surround('<button  type="submit"  class="btn btn-success" name="submit"  value="Connexion">Valider</button>');
 
     }
 }

@@ -41,7 +41,6 @@ function checklastName(last_name) {
   }
 
   function checkpassword(password){
-  
     clearInput(password);
     var regex = /(?=.*[0-9])[A-Z]|(?=.*[A-Z])[0-9]/; // chaine limitée par /^ chaine $/ | {2,} == 2 ou plus | {2,4} == entre 2 et 4 | \ devant le point pour enlever le "spécial" du caractère
     if(!regex.test(password.value))
@@ -59,8 +58,7 @@ function checklastName(last_name) {
     clearInput(confirmPassword);
 
     var p = document.getElementById("password");
-    console.log(p.value)
-    console.log(confirmPassword.value)
+
     if (confirmPassword.value == p.value) {
    
         return true;
@@ -86,6 +84,7 @@ function displayError(input, message) {
 
   function clearInput(input) {
     input.style.borderColor = '';
+  
     var parent = input.parentNode;
     var elements = parent.getElementsByTagName('p');
     if(elements.length > 0){
@@ -95,21 +94,22 @@ function displayError(input, message) {
 
   function checkGlobal(donnees) {
     var email =checkemail(donnees.email);
+  
     var first_name =checkfirstName(donnees.first_name);
     var last_name =checklastName(donnees.last_name);
     var password =checkpassword(donnees.password);
     var confirmPassword =checkconfirmPassword(donnees.confirmPassword);
-
-  
+    console.log(email);
+      
     if(email && first_name && last_name && password && confirmPassword)
     {
+     
         return true;
     }
       
     else
      {
         return false;
-         header('location:inscription.php?error=Formulaire_invalide');
        
      }
    

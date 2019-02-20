@@ -1,19 +1,17 @@
 <!DOCTYPE html>
-
 <html lang="en" dir="ltr">
 <body>
   <section class="banner" role="banner">
     <!--header navigation -->
     <header id="header">
-      <div class="header-content clearfix"> <a class="logo" href="index.php"><img src="images/RIP2small2.png" alt=""></a>
+      <div class="header-content clearfix"> <a class="logo" href="index.php"><img src="../images/RIP2small2.png" alt=""></a>
         <nav class="navigation" role="navigation">
           <ul class="primary-nav">
             <li><a href="index.php">Acceuil</a></li>
             <li><a href="#">Reserver un trajet</a></li>
             <li><a href="#">Services</a></li>
-            <li><a href="backOffice/backOffice.php">backOffice</a></li>
-            <li><a href="Class/profil.php">Profil</a></li>
-            <li><a href="deconnexion.php">Deconnexion</a></li>
+            <li><a href="connexion.php">Connexion</a></li>
+            <li><a href="inscription.php">Inscription</a></li>
             <li><a href="#">Contact</a></li>
           </ul>
         </nav>

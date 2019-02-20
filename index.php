@@ -8,7 +8,12 @@ session_start();
 
 <body>
   <!-- header section -->
-  <?php include "class/chooseNav.php";  ?>
+  <?php
+  require 'Class/Autoloader.php';
+  App\Autoloader::register();
+  $navbar = new App\Navbar();
+  $backOffice=0;
+  $navbar->navbar($backOffice);?>
 
   <!-- Get a quote section -->
   <section  class="section quote">

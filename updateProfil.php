@@ -1,12 +1,9 @@
 <?php
 
-namespace App;
-use \PDO;
 
-
-require 'Autoloader.php';
-Autoloader::register();
-$bdd = new Database('rip');
+require 'Class/Autoloader.php';
+App\Autoloader::register();
+$bdd = new App\Database('rip');
 $id = $_POST['id'];
 $newval = $_POST['newval'] ;
 $columnName  = $_POST['newid'] ;

@@ -14,7 +14,10 @@ $form = new App\Form(array());
 <script type="text/javascript" src="js/inscription/main.js"></script>
 
 <body>
-  <?php   //include "navbar/chooseNav.php";  ?>
+  <?php
+  $navbar = new App\Navbar();
+  $backOffice=0;
+  $navbar->navbar($backOffice);?>
 
   <div class="container">
     <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">

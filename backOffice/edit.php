@@ -2,7 +2,6 @@
 session_start();
 include '../include/fonction.php';
 
-echo '  <script>console.log('.$_POST["pseudo"].'.value)</script>';
-edit($_POST["mail"], $_POST["pseudo"], $_POST["birthday"], $_POST["gender"]);
+edit($_POST["id"],$_POST["email"], $_POST["first_name"], $_POST["last_name"], $_POST["birthday"], $_POST["gender"]);
 header("location: backOffice.php");
 ?>

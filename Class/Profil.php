@@ -1,6 +1,7 @@
 <?php
 namespace App;
 use \PDO;
+<<<<<<< HEAD
 session_start();
 
 ?>
@@ -37,6 +38,8 @@ session_start();
  $req = $bdd->getPDO()->prepare('SELECT * FROM users WHERE id = ?');
  $req->execute(array($_SESSION['id']));
  $datas = $req->fetch();
+=======
+>>>>>>> 19a4c9c59f18d9222c6b1cbfaaf371f9592451ec
 
 
  class Profil {
@@ -88,6 +91,7 @@ session_start();
 
 
  }
+<<<<<<< HEAD
 
  $user = new Profil($datas['first_name'],$datas['last_name'],$datas['birthday'],$datas['gender'],$datas['address'],$datas['zip_code']);
 
@@ -255,3 +259,6 @@ session_start();
 
 </body>
 </html>
+=======
+?>
+>>>>>>> 19a4c9c59f18d9222c6b1cbfaaf371f9592451ec

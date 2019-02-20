@@ -21,7 +21,7 @@ class Form{
 
     }
     public function submit(){
-        return $this->surround('<input type="submit"   class="btn btn-success" name="submit"  value="Connexion">Valider</submit>');
+        return $this->surround('<input type="submit"   class="btn btn-success" name="submit"  value="Connexion">');
     
     }
 

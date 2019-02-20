@@ -42,17 +42,17 @@ $form = new App\Form(array());
 
             <div class="form-row">
               <div class="form-group">
-                <label for="first_name">Prenom</label>
+                <label for="firstName">Prenom</label>
                 <?php echo $form->input('firstName','text'); ?>
               </div>
               <div class="form-group">
-                <label for="last_name">Nom</label>
+                <label for="lastName">Nom</label>
                 <?php echo $form->input('lastName','text'); ?>
               </div>
             </div>
             <div class="form-row">
               <div class="form-group form-icon">
-                <label for="birth_date">Date de naissance (16 ans minimum) </label>
+                <label for="birthday">Date de naissance (16 ans minimum) </label>
                 <?php echo $form->input('birthday','date'); ?>
               </div>
               <div class="form-radio">

@@ -1,7 +1,7 @@
 
 
 function checkemail(email) {
-    clearInput(email);
+     clearInput(email);
     var regex = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/; // chaine limitée par /^ chaine $/ | {2,} == 2 ou plus | {2,4} == entre 2 et 4 | \ devant le point pour enlever le "spécial" du caractère
     if(!regex.test(email.value))
     {
@@ -15,11 +15,11 @@ function checkemail(email) {
   }
 
   
-function checkfirstName(first_name) {
-    clearInput(first_name); //voir en bas
-    if (first_name.value.length  < 3 || first_name.value.length > 30)
+function checkfirstName(firstName) {
+    clearInput(firstName); //voir en bas
+    if (firstName.value.length  < 3 || firstName.value.length > 30)
     {
-      displayError(first_name, 'Votre prenom doit contenir entre 3 et 30 caractères'); //voir en bas
+      displayError(firstName, 'Votre prenom doit contenir entre 3 et 30 caractères'); //voir en bas
       return false;
     }
     else {
@@ -28,11 +28,11 @@ function checkfirstName(first_name) {
   }
 
     
-function checklastName(last_name) {
-    clearInput(last_name); //voir en bas
-    if (last_name.value.length  < 3 || last_name.value.length > 30)
+function checklastName(lastName) {
+    clearInput(lastName); //voir en bas
+    if (lastName.value.length  < 3 || lastName.value.length > 30)
     {
-      displayError(last_name, 'Votre nom doit contenir entre 3 et 30 caractères'); //voir en bas
+      displayError(lastName, 'Votre nom doit contenir entre 3 et 30 caractères'); //voir en bas
       return false;
     }
     else {
@@ -41,7 +41,7 @@ function checklastName(last_name) {
   }
 
   function checkpassword(password){
-    clearInput(password);
+     clearInput(password);
     var regex = /(?=.*[0-9])[A-Z]|(?=.*[A-Z])[0-9]/; // chaine limitée par /^ chaine $/ | {2,} == 2 ou plus | {2,4} == entre 2 et 4 | \ devant le point pour enlever le "spécial" du caractère
     if(!regex.test(password.value))
     {
@@ -72,6 +72,18 @@ function checklastName(last_name) {
 
   }
 
+  function checkbirthday(birthday) {
+    clearInput(birthday);
+
+    var b = document.getElementById("birthday");
+    alert(b);
+
+    var d=new Date(b);
+  alert(d.getTime() + " milliseconds since 1970/01/01");
+  return true;
+
+  }
+
 
 function displayError(input, message) {
     input.style.borderColor = 'red';
@@ -94,14 +106,18 @@ function displayError(input, message) {
 
   function checkGlobal(donnees) {
     var email =checkemail(donnees.email);
-  
-    var first_name =checkfirstName(donnees.first_name);
-    var last_name =checklastName(donnees.last_name);
+    var firstName =checkfirstName(donnees.firstName);
+    var lastName =checklastName(donnees.lastName);
     var password =checkpassword(donnees.password);
     var confirmPassword =checkconfirmPassword(donnees.confirmPassword);
+    var checkbirthday =checkconfirmPassword(donnees.checkbirthday);
     console.log(email);
+    console.log(firstName);
+    console.log(lastName);
+    console.log(confirmPassword);
+    console.log(checkbirthday);
       
-    if(email && first_name && last_name && password && confirmPassword)
+    if(email && firstName && lastName && password && confirmPassword && checkbirthday)
     {
      
         return true;

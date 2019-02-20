@@ -102,7 +102,7 @@ session_start();
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Mes informations</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Favoris</a>
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Mes abonnements</a>
                                 </li>
                             </ul>
                         </div>
@@ -137,9 +137,7 @@ session_start();
                                             <span id="last_name" class="datainfo"><?= $user->getLast_name(); ?></span>
                                             <a href="#" class="editlink">Editer</a>
                                             <a class="savebtn">Sauvegarder</a>
-</div>
-
-
+                                        </div>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -187,10 +185,12 @@ session_start();
                                             </div>
                                         </div>
                             </div>
+
+                            
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Mes anciens trajets</label>
+                                                <label>Mon abonnement</label>
                                             </div>
                                             <div class="col-md-6">
                                                 <p>Expert</p>

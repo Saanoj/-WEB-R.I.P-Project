@@ -12,7 +12,7 @@
             <li><a href="#">Reserver un trajet</a></li>
             <li><a href="#">Services</a></li>
             <li><a href="backOffice/backOffice.php">backOffice</a></li>
-            <li><a href="Class/profil.php">Profil</a></li>
+            <li><a href="profil.php">Profil</a></li>
             <li><a href="deconnexion.php">Deconnexion</a></li>
             <li><a href="#">Contact</a></li>
           </ul>

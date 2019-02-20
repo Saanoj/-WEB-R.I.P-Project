@@ -11,7 +11,7 @@
             <li><a href="../index.php">Acceuil</a></li>
             <li><a href="backOffice.php">Utilisateur</a></li>
             <li><a href="backOfficeBanned.php">Utilisateur Bannis</a></li>
-            <li><a href="../Class/profil.php">Profil</a></li>
+            <li><a href="../profil.php">Profil</a></li>
             <li><a href="../deconnexion.php">Deconnexion</a></li>
             <li><a href="#">Contact</a></li>
           </ul>

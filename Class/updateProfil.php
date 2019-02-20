@@ -11,11 +11,6 @@ $id = $_POST['id'];
 $newval = $_POST['newval'] ;
 $columnName  = $_POST['newid'] ;
 
-/*
-ChromePhp::log($id);
-ChromePhp::log($newval);
-ChromePhp::log($nameRaw);
-*/
 
 $req = $bdd->getPDO()->prepare('UPDATE users SET '.$columnName.' = :columnValue WHERE id =:id');
 $req->bindValue(':columnValue', $newval);

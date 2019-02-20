@@ -29,7 +29,7 @@ session_start();
   include '../includehtml/head.html';
  // include '../navbar/chooseNav.php';
 
- require '../Class/Autoloader.php';
+  require 'Autoloader.php';
  Autoloader::register();
  $bdd = new Database('rip');
 
@@ -44,12 +44,16 @@ session_start();
     private $last_name;
     private $birthday;
     private $gender;
+    private $address;
+    private $zip_code;
 
-    public function __construct($first_name,$last_name,$birthday,$gender) {
+    public function __construct($first_name,$last_name,$birthday,$gender,$address,$zip_code) {
         $this->first_name = $first_name;
         $this->last_name = $last_name;
         $this->birthday = $birthday;
         $this->gender = $gender;
+        $this->address = $address;
+        $this->zip_code = $zip_code;
 
     }
 
@@ -60,12 +64,19 @@ session_start();
     public function getLast_name() {return $this->last_name;}
     public function getBirthday() {return $this->birthday;}
     public function getGender() {return $this->gender;}
+    public function getAddress() {return $this->address;}
+    public function getZipCode() {return $this->zip_code;}
+
 
     /* SETTERS */
     public function setFirst_name($newFirst_name) {return $this->first_name = $newFirst_name;}
     public function setLast_name($newLast_name) {return $this->last_name = $newLast_name;}
     public function setBirthday($newBirthday) {return $this->birthday = $newBirthday;}
     public function setGender($newGender) {return $this->gender = $newGender;}
+    public function setAddress($newAddress) {return $this->address = $address;}
+    public function setZipCode($newZipCode) {return $this->zip_code = $newZipCode;}
+
+
 
     /* FONCTIONS */
 /*
@@ -78,7 +89,7 @@ session_start();
 
  }
 
- $user = new Profil($datas['first_name'],$datas['last_name'],$datas['birthday'],$datas['gender']);
+ $user = new Profil($datas['first_name'],$datas['last_name'],$datas['birthday'],$datas['gender'],$datas['address'],$datas['zip_code']);
 
  ?>
 
@@ -128,6 +139,7 @@ session_start();
                                             <span id="idProfil" class="datainfo" value="'<?= $_SESSION['id']?>'"><?= $_SESSION['id'] ?></span>
                                             </div>
                                         </div>
+
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <label>Nom</label>
@@ -149,9 +161,7 @@ session_start();
                                             <span id="first_name" class="datainfo"><?= $user->getFirst_name(); ?></span>
                                             <a href="#" class="editlink">Editer</a>
                                             <a class="savebtn" >Sauvegarder</a>
-</div>
-
-
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -181,59 +191,57 @@ session_start();
                                             <span id="gender" class="datainfo"><?= $user->getGender(); ?></span>
                                             <a href="#" class="editlink">Editer</a>
                                             <a class="savebtn">Sauvegarder</a>
-</div>
+                                            </div>
+                                            </div>
+                                            </div>
+                                           </div>
+
+                                            <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Adresse</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="gear">
+                                            <span id="address" class="datainfo"><?= $user->getAddress(); ?></span>
+                                            <a href="#" class="editlink">Editer</a>
+                                            <a class="savebtn">Sauvegarder</a>
+                                        </div>
                                             </div>
                                         </div>
-                            </div>
 
-                            
+
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Mon abonnement</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Expert</p>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Hourly Rate</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>10$/hr</p>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Total Projects</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>230</p>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>English Level</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Expert</p>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Availability</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>6 months</p>
                                             </div>
                                         </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label>Your Bio</label><br/>
-                                        <p>Your detail description</p>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
                     </div>

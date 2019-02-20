@@ -1,7 +1,8 @@
 <?php
 session_start();
 include '../include/config.php';
-include '../include/fonction.php'; ?>
+include '../include/fonction.php';
+?>
 
 <!DOCTYPE html>
 <html>
@@ -9,8 +10,12 @@ include '../include/fonction.php'; ?>
 
 <body>
 
-  <?php include "../class/chooseNav.php";  ?>
-
+  <?php
+  require '../Class/Autoloader.php';
+  App\Autoloader::register();
+  $navbar = new App\Navbar();
+  $backOffice=1;
+  $navbar->navbar($backOffice);?>
 
   <div>
     <h1> Costumer Table</h1>

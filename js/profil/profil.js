@@ -17,7 +17,7 @@ $(document).ready(function(){
 		}
 		if( theid == 'gender') {
 
-			$('<select  name="'+newid+'" id="'+newid+'" class="hlite"> <option value="Man">Homme </option><option value="Woman">Femme </option> </select>').appendTo(dataset);
+			$('<select  name="'+newid+'" id="'+newid+'" class="hlite"> <option value="Homme">Homme </option><option value="Femme">Femme </option> </select>').appendTo(dataset);
 
 		 }
 		 		if (theid != 'gender' && theid != 'birthday' )
@@ -70,7 +70,7 @@ function updateProfil(newval,newid,idProfil) {
 	var request = new XMLHttpRequest();
 	request.onreadystatechange = function(){
 	  if(request.status == 200 && request.readyState == 4){
-		
+
 	  }
 	};
 	data='newval=' + newval + '&newid=' + newid + '&id=' + idProfil.innerHTML;

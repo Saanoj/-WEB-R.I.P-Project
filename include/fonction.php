@@ -25,12 +25,32 @@ function backOffice(){
     echo'
     <tr>
         <form method="POST" action="edit.php">
-          <td><input name="mail" type="text" value="'.$member["email"].'"/></td>
-          <td><input name="pseudo" type="text" value="'.$member["last_name"].'"/></td>
-          <td><input name="pseudo" type="text" value="'.$member["last_name"].'"/></td>
+          <input  name="id" type="hidden" value="'.$member["id"].'"/>
+          <td><input name="email" type="text" value="'.$member["email"].'"/></td>
+          <td><input name="last_name" type="text" value="'.$member["last_name"].'"/></td>
+          <td><input name="first_name" type="text" value="'.$member["first_name"].'"/></td>
           <td><input name="birthday" type="text" value="'.$member["birthday"].'"/></td>
-          <td><input name="gender" type="text" value="'.$member["gender"].'"/></td>
+          ';
+          if($member["gender"]=="Homme"){
+            echo '
+            <td>
+              <select  name="gender" class="hlite">
+                <option value="Homme">Homme </option>
+                <option value="Femme">Femme </option>
+              </select>
+            </td>';
+          }else{
+            echo '
+            <td>
+              <select  name="gender" class="hlite">
+                <option value="Femme">Femme </option>
+                <option value="Homme">Homme </option>
+              </select>
+            </td>';
+          }
+        echo'
           <td>
+
           <button type="submit" class="btn btn-blue">
             <span class="glyphicon glyphicon-edit"></span>
           </button>
@@ -84,27 +104,27 @@ function showBanned(){
   foreach($result as $member){
     echo'
     <tr>
-    <td><input name="mail" type="text" value="'.$member["email"].'"/></td>
-    <td><input name="pseudo" type="text" value="'.$member["last_name"].'"/></td>
-    <td><input name="pseudo" type="text" value="'.$member["last_name"].'"/></td>
-    <td><input name="birthday" type="text" value="'.$member["birthday"].'"/></td>
-    <td><input name="gender" type="text" value="'.$member["gender"].'"/></td>
+    <td>'.$member["email"].'</td>
+    <td>'.$member["last_name"].'</td>
+    <td>'.$member["last_name"].'</td>
+    <td>'.$member["birthday"].'</td>
+    <td>'.$member["gender"].'</td>
     ';
     if ($member["isAdmin"] == 1){
     echo '
     <td>
-      <form method="POST" action="student.php">
-        <input  name="mail" type="hidden" value="'.$member["id"].'"/>
-        <button name="student" type="submit" value="1" class="btn btn-success"></button>
+      <form method="POST" action="admin.php">
+        <input  name="id" type="hidden" value="'.$member["id"].'"/>
+        <button name="admin" type="submit" value="1" class="btn btn-success"></button>
       </form>
     </td>';
     }
     else {
       echo '
       <td>
-        <form method="POST" action="student.php">
-          <input  name="mail" type="hidden" value="'.$member["id"].'"/>
-          <button name="student" type="submit" value="0" class="btn btn-danger"></button>
+        <form method="POST" action="admin.php">
+          <input  name="id" type="hidden" value="'.$member["id"].'"/>
+          <button name="admin" type="submit" value="0" class="btn btn-danger"></button>
         </form>
       </td>';
     }
@@ -112,7 +132,7 @@ function showBanned(){
     echo'
     <td>
       <form method="GET" action="unban.php">
-        <input  name="mail" type="hidden" value="'.$member["Mail"].'"/>
+        <input  name="id" type="hidden" value="'.$member["id"].'"/>
         <button type="submit" class="btn btn-danger">
           <span class=""></span>
         </button>
@@ -142,12 +162,14 @@ function unban($id){
 //---------------------------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------------------------
 
-function edit($mail, $pseudo1, $birthday, $gender){
+function edit($id, $email, $last_name, $first_name, $birthday, $gender){
   include ("config.php");
-  $query = $bdd->prepare("UPDATE USER SET mail = :mail, pseudo = :pseudo, birthday = :birthday, gender = :gender WHERE mail = :mail");
+  $query = $bdd->prepare("UPDATE USERS SET email = :email, first_name = :first_name, last_name = :last_name, birthday = :birthday, gender = :gender WHERE id = :id");
   $query->execute([
-                  "mail"=>$mail,
-                  "pseudo"=>$pseudo1,
+                  "id"=>$id,
+                  "email"=>$email,
+                  "first_name"=>$first_name,
+                  "last_name"=>$last_name,
                   "birthday"=>$birthday,
                   "gender"=>$gender
                   ]);

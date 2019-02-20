@@ -76,10 +76,8 @@ function checklastName(lastName) {
     clearInput(birthday);
 
     var b = document.getElementById("birthday");
-    alert(b);
 
     var d=new Date(b);
-  alert(d.getTime() + " milliseconds since 1970/01/01");
   return true;
 
   }

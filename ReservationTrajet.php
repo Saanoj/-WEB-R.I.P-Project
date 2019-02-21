@@ -50,10 +50,10 @@ $navbar->navbar($backOffice);
 						<div class="home_search_title">Recherche un trajet</div>
 						<div class="home_search_content">
 							<form action="#" class="home_search_form" id="home_search_form">
-								<div class="d-flex flex-lg-row flex-column align-items-start justify-content-lg-between justify-content-start">
-									<input type="text" class="search_input search_input_1" placeholder="Adresse de départ" required="required">
-									<input type="text" class="search_input search_input_2" placeholder="Adresse d'arrivé" required="required">
-									<input type="text" class="search_input search_input_4" placeholder="Budget" required="required">
+								<div class="d-flex flex-lg-row flex-column align-items-start justify-content-lg-between justify-content-start" id="locationField">
+									<input id="autocomplete" type="text" class="search_input search_input_1" placeholder="Adresse de départ" required="required">
+									<input id="autocomplete2" type="text" class="search_input search_input_2" placeholder="Adresse d'arrivé" required="required">
+									<input type="number" value='20€' .'€'.'' max="200" min="0" step="10" class="search_input search_input_4" placeholder="Budget" required="required">
 									<button class="home_search_button">Rechercher</button>
 								</div>
 							</form>
@@ -112,20 +112,13 @@ $navbar->navbar($backOffice);
 			</div>
 		</div>
 	</div>
-
-	
-
-					
-
-	
-
-
-
-
-
 </div>
 
 	<?php include "includehtml/footer.html" ?>
+
+				<script src="js/ReservationTrajet/main.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAyUEYzEivgVQJxxot06Z6ZsqfbIR4p_wU&libraries=places&callback=initAutocomplete"
+        async defer></script>
 
 
 </body>

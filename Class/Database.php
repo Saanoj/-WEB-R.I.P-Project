@@ -24,16 +24,16 @@ class Database{
       $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $this->pdo = $pdo;
       }
-      
-    
+
+
     return $this->pdo;
   }
 
 
 
-  public function query($statement, $class_name){
+  public function query($statement){  //, $class_name
     $req = $this->getPDO()->query($statement);
-    $datas = $req->fetchALL(PDO::FETCH_CLASS, $class_name);
+    $datas = $req->fetchALL(); //PDO::FETCH_CLASS, $class_name
     return $datas;
   }
 }

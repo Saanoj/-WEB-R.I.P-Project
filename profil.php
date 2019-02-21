@@ -33,6 +33,13 @@ session_start();
   $datas = $req->fetch();
   $user = new App\Profil($datas['first_name'],$datas['last_name'],$datas['birthday'],$datas['gender'],$datas['address'],$datas['zip_code']);
 
+  //recupere les infos d'abonnement
+  $dataAbonnement=$bdd->query('SELECT * FROM abonnement WHERE idClient='.$_SESSION['id'].'');
+  var_dump($dataAbonnement);
+  if (!empty($dataAbonnement)) {
+    $abonnement = new App\Abonnement($dataAbonnement['idAbonnement'],$dataAbonnement['idClient'],$dataAbonnement['dateDebut'],$dataAbonnement['dateFin'],$dataAbonnement['typeAbonnement']);
+  }
+
   ?>
 
   <div class="container emp-profile">
@@ -105,7 +112,7 @@ session_start();
                     <a class="savebtn">Sauvegarder</a>
                   </div>
                 </div>
-              </div> 
+              </div>
 
                       <div class="row">
                 <div class="col-md-6">
@@ -164,40 +171,47 @@ session_start();
               </div>
             </div>
 
-         
 
+            <?php
+
+            if(!empty($dataAbonnement)){
+
+              ?>
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
               <div class="row">
                 <div class="col-md-6">
                   <label>Mon abonnement</label>
                 </div>
                 <div class="col-md-6">
-                <p> PAS ENCORE CODER</p>
+                <p> </p>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-6">
                 </div>
                 <div class="col-md-6">
-           
+                    <?= $abonnement->getIdAbonnement(); ?>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-6">
                 </div>
                 <div class="col-md-6">
+                    <?= $abonnement->getDateDebut(); ?>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-6">
                 </div>
                 <div class="col-md-6">
+                    <?= $abonnement->getDateFin(); ?>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-6">
                 </div>
                 <div class="col-md-6">
+                  <?= $abonnement->getTypeAbonnement(); ?>
                 </div>
               </div>
               <div class="row">
@@ -205,6 +219,7 @@ session_start();
                 </div>
               </div>
             </div>
+            <?php } ?>
           </div>
         </div>
       </div>

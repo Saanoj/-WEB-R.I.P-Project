@@ -3,7 +3,7 @@ namespace App;
 use \PDO;
 
 
-require 'Autoloader.php';
+require 'Class/Autoloader.php';
 Autoloader::register();
 $bdd = new Database('rip');
 
@@ -95,7 +95,7 @@ if  (
         if($now - $min < 	504576000){
 
           $date_erreur3 = "Il faut avoir plus de 16 ans pour créer un compte";
-          header('location:../inscription.php?error="'.$date_erreur3 .'"');
+          header('location:inscription.php?error="'.$date_erreur3 .'"');
         }
         else {
           return 1;
@@ -144,14 +144,14 @@ if  (
       if ($user->checkDateBirth() === 1) {
         $req2 = $user->addUser($bdd,'INSERT INTO `users` (`email`, `password`, `last_name`, `birthday`, `gender`,`first_name`,`isBanned`,`isAdmin`) VALUES (:email,:password,:last_name,:birthday,:gender,:first_name,:isBanned,:isAdmin);',$user);
         $user->startSession($bdd,'SELECT id FROM users WHERE email = :email');
-        header('location:../index.php?id='.$_SESSION['id'].'');
+        header('location:index.php?id='.$_SESSION['id'].'');
       }
     }
 
 
     else
     {
-      header('location:../inscription.php?Mail_deja_utilisé');
+      header('location:inscription.php?Mail_deja_utilisé');
     }
 
 

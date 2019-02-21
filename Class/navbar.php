@@ -21,8 +21,11 @@ class Navbar
             $data=$query->fetch();
             if($data['isAdmin'] == 1){
               if ($backOffice == 1){
-                include('../navbar/NavbarBackOffice.php');
-              }else{
+                  include('../navbar/NavbarBackOffice.php');
+              }elseif ($backOffice == 2) {
+                include('../../navbar/NavbarBackOfficeUsers.php');
+              }
+              else{
                include('navbar/navbarAdmin.php');
                }
             }else{

@@ -3,7 +3,7 @@ namespace App;
 use \PDO;
 
 
-require 'Autoloader.php';
+require 'Class/Autoloader.php';
 Autoloader::register();
 $bdd = new Database('rip');
 
@@ -83,13 +83,13 @@ if  (
             session_start();
             $_SESSION['id'] = $data['id'];
             $_SESSION['email'] = $this->getEmail();
-            header('location:../index.php?id='.$_SESSION['id'].'');
+            header('location:index.php?id='.$_SESSION['id'].'');
            }
            else
            {
             echo '<h4 class = "text-center">Vous avez été banni</h4> <br>
             <li class="nav-item text-center">
-              <a class="nav-link" href="../connexion.php">
+              <a class="nav-link" href="connexion.php">
                 <i class="fa d-inline fa-lg fa-arrow-circle-left "></i> retour</a>
             </li> ';
            }
@@ -98,7 +98,7 @@ if  (
 
             echo '<h4 class = "text-center">mauvais mot de passe ou pseudo</h4> <br>
             <li class="nav-item text-center">
-              <a class="nav-link" href="../connexion.php">
+              <a class="nav-link" href="connexion.php">
                 <i class="fa d-inline fa-lg fa-arrow-circle-left "></i> retour</a>
             </li> ';
 

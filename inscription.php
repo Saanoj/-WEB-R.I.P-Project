@@ -24,7 +24,7 @@ $form = new App\Form(array());
       <div class="panel panel-info" >
         <div class="panel-heading">
           <div class="panel-title">Se connecter</div>
-          <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="Class/forgotPassword.php">Mot de passe oubllié ?</a></div>
+          <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="forgotPassword.php">Mot de passe oubllié ?</a></div>
         </div>
 
         <div style="padding-top:30px" class="panel-body" >
@@ -32,7 +32,7 @@ $form = new App\Form(array());
           <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
 
 
-          <form method="POST" id="signup-form" class="signup-form" onsubmit="return checkGlobal(this)" action="Class/VerifInscription.php" >
+          <form method="POST" id="signup-form" class="signup-form" onsubmit="return checkGlobal(this)" action="VerifInscription.php" >
 
             <div class="form-row">
 

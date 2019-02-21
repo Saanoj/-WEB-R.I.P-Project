@@ -162,7 +162,7 @@ function unban($id){
 //---------------------------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------------------------
 
-function edit($id, $email, $last_name, $first_name, $birthday, $gender){
+function edit($id, $email, $first_name, $last_name, $birthday, $gender){
   include ("config.php");
   $query = $bdd->prepare("UPDATE USERS SET email = :email, first_name = :first_name, last_name = :last_name, birthday = :birthday, gender = :gender WHERE id = :id");
   $query->execute([

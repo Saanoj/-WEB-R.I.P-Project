@@ -15,26 +15,23 @@ include '../include/fonction.php';
   App\Autoloader::register();
   $navbar = new App\Navbar();
   $backOffice=1;
-  $navbar->navbar($backOffice);?>
+  $navbar->navbar($backOffice);
+  ?>
 
-  <div>
-    <h1> Costumer Table</h1>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">Mail</th>
-          <th scope="col">Nom</th>
-          <th scope="col">Prenom</th>
-          <th scope="col">Date de naissance</th>
-          <th scope="col">Sexe</th>
-          <th scope="col">Edit</th>
-          <th scope="col">Admin</th>
-          <th scope="col">Ban</th>
-        </tr>
-      </thead>
-      <?php backOffice();
-      ?>
-    </table>
+  <div class="container">
+    <h1>Bienvenue sur le Back Office</h1>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
   </div>
   <?php include "includehtml/footer.html" ?>
 </body>

@@ -27,17 +27,17 @@ $navbar->navbar($backOffice);
   ?>
 
 <div class="super_container">
-	
+
 	<!-- Home -->
 
 	<div class="home">
-		
+
 		<!-- Home Slider -->
-		<div class="home_slider_container">
-		
+    <div class="home_slider_container">
+
       </div>
 
-	
+
 
 
 	<!-- Recherche -->
@@ -63,7 +63,7 @@ $navbar->navbar($backOffice);
 			</div>
 		</div>
   </div>
- 
+
 	<!-- Intro -->
 
 	<div class="intro">
@@ -108,16 +108,16 @@ $navbar->navbar($backOffice);
 
 						</div>
 					</div>
-				</div>		
+				</div>
 			</div>
 		</div>
 	</div>
 
-	
 
-					
 
-	
+
+
+
 
 
 

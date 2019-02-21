@@ -56,23 +56,27 @@ function backOffice(){
           </button>
           </form>
           </td>
+          <td>'.$member["id"].'</td>
         ';
+
         //bouton student
         if ($member["isAdmin"] == 1){
         echo '
         <td>
-          <form method="POST" action="admin.php">
-            <input  name="id" type="hidden" value="'.$member["id"].'"/>
-            <button name="admin" type="submit" value="1" class="btn btn-success"></button>
+          <form method="POST">
+            <input  id="id" type="hidden" value="'.$member["id"].'"/>
+            <input  id="admin" type="hidden" value="1"/>
+            <button name="admin" value="1" class="btn btn-success" onclick="updateAdmin(this.parentElement);"></button>
           </form>
         </td>';
         }
         else {
           echo '
           <td>
-            <form method="POST" action="admin.php">
-              <input  name="id" type="hidden" value="'.$member["id"].'"/>
-              <button name="admin" type="submit" value="0" class="btn btn-danger"></button>
+            <form method="POST">
+              <input  id="id" type="hidden" value="'.$member["id"].'"/>
+              <input  id="admin" type="hidden" value="0"/>
+              <button name="admin" value="0" class="btn btn-danger" onclick="updateAdmin(this.parentElement);"></button>
             </form>
           </td>';
         }
@@ -109,13 +113,14 @@ function showBanned(){
     <td>'.$member["last_name"].'</td>
     <td>'.$member["birthday"].'</td>
     <td>'.$member["gender"].'</td>
+    <td>'.$member["id"].'</td>
     ';
     if ($member["isAdmin"] == 1){
     echo '
     <td>
       <form method="POST" action="admin.php">
         <input  name="id" type="hidden" value="'.$member["id"].'"/>
-        <button name="admin" type="submit" value="1" class="btn btn-success"></button>
+        <button name="admin" value="1" class="btn btn-success"></button>
       </form>
     </td>';
     }
@@ -124,7 +129,7 @@ function showBanned(){
       <td>
         <form method="POST" action="admin.php">
           <input  name="id" type="hidden" value="'.$member["id"].'"/>
-          <button name="admin" type="submit" value="0" class="btn btn-danger"></button>
+          <button name="admin" value="0" class="btn btn-danger"></button>
         </form>
       </td>';
     }

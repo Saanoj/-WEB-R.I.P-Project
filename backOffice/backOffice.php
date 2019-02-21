@@ -7,9 +7,8 @@ include '../include/fonction.php';
 <!DOCTYPE html>
 <html>
 <?php include "includehtml/head.html" ?>
-
 <body>
-
+  <script type="text/javascript" src="../js/backOffice/backOfficeAjax.js"></script>
   <?php
   require '../Class/Autoloader.php';
   App\Autoloader::register();
@@ -28,6 +27,7 @@ include '../include/fonction.php';
           <th scope="col">Date de naissance</th>
           <th scope="col">Sexe</th>
           <th scope="col">Edit</th>
+          <th scope="col">ID</th>
           <th scope="col">Admin</th>
           <th scope="col">Ban</th>
         </tr>

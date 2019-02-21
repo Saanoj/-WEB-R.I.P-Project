@@ -3,6 +3,12 @@ namespace App;
 use \PDO;
 
 
+
+
+//require 'Autoloader.php';
+//Autoloader::register();
+$bdd = new Database('rip');
+
  class Abonnement {
     private $idAbonnement;
     private $idClient;
@@ -22,11 +28,11 @@ use \PDO;
 
 
     /* GETTERS */
-    public function getIdAbonnement() {return $this->$idAbonnement;}
-    public function getIdClient() {return $this->$idClient;}
-    public function getDateDebut() {return $this->$dateDebut;}
-    public function getDateFin() {return $this->$dateFin;}
-    public function getTypeAbonnement(){return $this->$typeAbonnement;}
+    public function getIdAbonnement() {return $this->idAbonnement;}
+    public function getIdClient() {return $this->idClient;}
+    public function getDateDebut() {return $this->dateDebut;}
+    public function getDateFin() {return $this->dateFin;}
+    public function getTypeAbonnement(){return $this->typeAbonnement;}
 
     /* SETTERS */
     public function setIdAbonnement($newIdAbonnement) {return $this->idAbonnement = $newIdAbonnement;}
@@ -45,7 +51,33 @@ use \PDO;
     }
     */
 
+    public static function createAbonnement($bdd) {
+        $dataAbonnement = Abonnement::getAll($bdd);
+        return $abo = new Abonnement($dataAbonnement['idAbonnement'],$dataAbonnement['idClient'],$dataAbonnement['dateDebut'],$dataAbonnement['dateFin'],$dataAbonnement['typeAbonnement']);
+        
+    }
+
+    public static function getAll($bdd) {
+        $statement = 'SELECT * FROM abonnement WHERE idClient = ?';
+        $reqAbo = $bdd->getPDO()->prepare($statement);
+        $reqAbo->execute(array($_SESSION['id']));
+        $dataAbonnement = $reqAbo->fetch();
+         return $dataAbonnement;
+
+    }
+}
+
+  
+
+    
+
+    
+
+  
 
 
- }
+
+
+
+ 
 ?>

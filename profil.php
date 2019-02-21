@@ -31,15 +31,15 @@ session_start();
   $req = $bdd->getPDO()->prepare('SELECT * FROM users WHERE id = ?');
   $req->execute(array($_SESSION['id']));
   $datas = $req->fetch();
+  $req->closeCursor();
   $user = new App\Profil($datas['first_name'],$datas['last_name'],$datas['birthday'],$datas['gender'],$datas['address'],$datas['zip_code']);
 
-  //recupere les infos d'abonnement
-  $dataAbonnement=$bdd->query('SELECT * FROM abonnement WHERE idClient='.$_SESSION['id'].'');
-  var_dump($dataAbonnement);
-  if (!empty($dataAbonnement)) {
-    $abonnement = new App\Abonnement($dataAbonnement['idAbonnement'],$dataAbonnement['idClient'],$dataAbonnement['dateDebut'],$dataAbonnement['dateFin'],$dataAbonnement['typeAbonnement']);
-  }
+  //CREATION DE L'ABONNEMENT
 
+ $abo = App\Abonnement::createAbonnement($bdd);
+
+
+  
   ?>
 
   <div class="container emp-profile">
@@ -171,61 +171,54 @@ session_start();
               </div>
             </div>
 
-
-            <?php
-
-            if(!empty($dataAbonnement)){
-
-              ?>
-            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-              <div class="row">
-                <div class="col-md-6">
-                  <label>Mon abonnement</label>
+                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Id de l'abonnement</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><?= $abo->getIdAbonnement();?></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Votre id</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><?= $abo->getIdClient();?></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Date d'achat de l'abonnement</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><?= $abo->getDateDebut();?></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Date de fin d'abonnement</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><?= $abo->getDateFin();?></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Votre type d'abonnement</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><?= $abo->getTypeAbonnement();?></p>
+                                            </div>
+                                        </div>
+                          
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                <p> </p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                </div>
-                <div class="col-md-6">
-                    <?= $abonnement->getIdAbonnement(); ?>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                </div>
-                <div class="col-md-6">
-                    <?= $abonnement->getDateDebut(); ?>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                </div>
-                <div class="col-md-6">
-                    <?= $abonnement->getDateFin(); ?>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                </div>
-                <div class="col-md-6">
-                  <?= $abonnement->getTypeAbonnement(); ?>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
-                </div>
-              </div>
-            </div>
-            <?php } ?>
-          </div>
+            </form>           
         </div>
-      </div>
-    </form>
-  </div>
-
 </body>
 <script type="text/javascript" src="js/profil/profil.js"></script>
 <?php include "includehtml/footer.html" ?>

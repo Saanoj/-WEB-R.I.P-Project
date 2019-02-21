@@ -31,7 +31,7 @@ session_start();
   $req = $bdd->getPDO()->prepare('SELECT * FROM users WHERE id = ?');
   $req->execute(array($_SESSION['id']));
   $datas = $req->fetch();
-  $user = new App\Profil($datas['first_name'],$datas['last_name'],$datas['birthday'],$datas['gender']);
+  $user = new App\Profil($datas['first_name'],$datas['last_name'],$datas['birthday'],$datas['gender'],$datas['address'],$datas['zip_code']);
 
   ?>
 
@@ -93,6 +93,33 @@ session_start();
                   </div>
                 </div>
               </div>
+
+                      <div class="row">
+                <div class="col-md-6">
+                  <label>Adresse</label>
+                </div>
+                <div class="col-md-6">
+                  <div class="gear">
+                    <span id="address" class="datainfo"><?= $user->getAddress(); ?></span>
+                    <a href="#" class="editlink">Editer</a>
+                    <a class="savebtn">Sauvegarder</a>
+                  </div>
+                </div>
+              </div> 
+
+                      <div class="row">
+                <div class="col-md-6">
+                  <label>Code postal</label>
+                </div>
+                <div class="col-md-6">
+                  <div class="gear">
+                    <span id="zip_code" class="datainfo"><?= $user->getZipCode(); ?></span>
+                    <a href="#" class="editlink">Editer</a>
+                    <a class="savebtn">Sauvegarder</a>
+                  </div>
+                </div>
+              </div>
+
               <div class="row">
                 <div class="col-md-6">
                   <label>Prenom</label>
@@ -113,9 +140,6 @@ session_start();
                 </div>
                 <div class="col-md-6">
                   <div class="gear">
-
-
-
                     <span id="birthday" class="datainfo"><?php
                     setlocale(LC_TIME, "fr_FR","French");
                     $date = strftime("%d %B %Y", strtotime($user->getBirthday()));
@@ -125,6 +149,7 @@ session_start();
                   </div>
                 </div>
               </div>
+
               <div class="row">
                 <div class="col-md-6">
                   <label>Genre</label>
@@ -139,6 +164,7 @@ session_start();
               </div>
             </div>
 
+         
 
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
               <div class="row">
@@ -146,45 +172,36 @@ session_start();
                   <label>Mon abonnement</label>
                 </div>
                 <div class="col-md-6">
-                  <p>Expert</p>
+                <p> PAS ENCORE CODER</p>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-6">
-                  <label>Hourly Rate</label>
                 </div>
                 <div class="col-md-6">
-                  <p>10$/hr</p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <label>Total Projects</label>
-                </div>
-                <div class="col-md-6">
-                  <p>230</p>
+           
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-6">
-                  <label>English Level</label>
                 </div>
                 <div class="col-md-6">
-                  <p>Expert</p>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-6">
-                  <label>Availability</label>
                 </div>
                 <div class="col-md-6">
-                  <p>6 months</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                </div>
+                <div class="col-md-6">
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <label>Your Bio</label><br/>
-                  <p>Your detail description</p>
                 </div>
               </div>
             </div>

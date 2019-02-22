@@ -55,7 +55,7 @@
                     ?>
                     <li class="list-group-item">
                       <h3><?php echo $service->getNomService(); ?></h3>
-                      <h6>idService: <?php echo $service->getIdService(); ?> Prix: <?php $service->getPrixService(); ?></h6>
+                      <?php /* >?idService: <?php echo $service->getIdService(); ?> Prix: <?php $service->getPrixService(); ?></h6> <?php */ ?>
                       <label>Description:</label>
                       <p><?php echo $service->getDescription(); ?></p>
                       <label class="switch">

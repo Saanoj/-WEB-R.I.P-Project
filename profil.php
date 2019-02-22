@@ -207,10 +207,10 @@ session_start();
                         <h3 class="title" data-content="Simple">Simple</h3>
                     </div>
                     <ul class="pricing-content">
-                    <li>Tarifs préférentiels</li>
-                        <li>Accès aux différents services</li>
-                        <li>Soutenir Ride in Pride</li>
-                        <li>Engagement sur <b>12 mois</b></li>
+                    <li id="0">Tarifs préférentiels</li>
+                        <li id="1">Accès aux différents services</li>
+                        <li id="2">Soutenir Ride in Pride</li>
+                        <li id="3">Engagement sur 12 mois</li>
                         <li></li>
                     </ul>
                     <div class="price-value">

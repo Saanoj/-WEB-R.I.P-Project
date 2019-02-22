@@ -53,7 +53,7 @@ $navbar->navbar($backOffice);
                 
 							<input type="text" name="start"  id="autocomplete" class="search_input search_input_1" placeholder="Adresse de départ" required="required">
 									<input type="text" name="end"  id="autocomplete2" class="search_input search_input_2" placeholder="Adresse d'arrivé" required="required">
-									<input type="text" name="price"  id="price" class="search_input search_input_4" placeholder="Budget" required="required">
+									<input type="number" name="price"  id="price" class="search_input search_input_4" placeholder="Budget" required="required">
 									<button class="home_search_button">Rechercher</button>
 
 							</form>

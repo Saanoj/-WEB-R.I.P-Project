@@ -40,7 +40,7 @@
                 <!-- Default panel contents -->
                 <div class="card-header">
                   <h1 class="display-3">Choisissez vos services</h1>
-                  <p><?php echo "idTrajet: ".$_SESSION["idTrajet"]."<br>Trajet: ". "<br>".$_SESSION["startTrajet"]. " =><br> ".$_SESSION["endTrajet"] ?></p>
+                  <p><?php echo "idTrajet: ".$_SESSION["idTrajet"]."<br>Trajet: ". "<br>".$_SESSION["startTrajet"]. " => ".$_SESSION["endTrajet"] ?></p>
                 </div>
 
                 <form class="list-group list-group-flush" method="POST" action="valideReservationServices.php">

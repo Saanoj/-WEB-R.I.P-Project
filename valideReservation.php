@@ -8,12 +8,15 @@ $trajet = new App\Trajet($_POST["start"],$_POST["end"],$_POST["price"],$_SESSION
 $trajet->addTrajetStart($bdd,'INSERT INTO `trajet` (`idClient`, `debut`, `fin`, `prixTrajet`, `heureDebut`,`heureFin`,`dateTrajet`,`distanceTrajet`) VALUES (:idClient,:debut,:fin,:prixTrajet,:heureDebut,:heureFin,:dateTrajet,:distanceTrajet)',$trajet);
 $trajet->startSessionId($bdd); //add idTrajet in SESSION
 
-echo $_SESSION["idTrajet"];
-$data=$bdd->query('SELECT * FROM abonnement WHERE idClient='.$_SESSION['id'].'');
+echo "id trajet: ".$_SESSION["idTrajet"];
+echo "<br>";
+echo "id: ".$_SESSION["id"];
 
+$data=$bdd->query('SELECT * FROM abonnement WHERE idClient='.$_SESSION['id'].'');
+var_dump($data);
 if (!empty($data)) {
   echo "found";
-  var_dump($data);
+
   header("location: resevationChooseService.php");
 }else{
   echo "not found";

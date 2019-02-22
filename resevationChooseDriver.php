@@ -21,6 +21,8 @@
   </head>
   <body>
     <?php
+    session_start();
+
     require 'Class/Autoloader.php';
     App\Autoloader::register();
     $bdd = new App\Database('rip');
@@ -28,28 +30,62 @@
     $backOffice=0;
     $navbar->navbar($backOffice);
 
+    $form = new App\Form(array());
+
     /*
     if (isset($_POST[""])) {
       // code...
     }
     */
     ?>
-    <div class="container">
-        <div class="col-md-6">
-             <h4>Choisissez votre chauffeur</h4>
+   <div class="container">
+      <div class="row">
+        <div class="offset-md-3 col-md-6">
+          <div class="card" style="margin:50px 0">
+             <!-- Default panel contents -->
+             <div class="card-header">
+               <h1 class="display-3">Choisissez votre chauffeur</h1>
+               <p><?php echo "idTrajet: ".$_SESSION["idTrajet"]."<br>Trajet: ". "<br>".$_SESSION["startTrajet"]. " => ".$_SESSION["endTrajet"] ?></p>
+             </div>
+            <form class="funkyradio list-group list-group-flush" method="post" action="verifyChauffeur.php">
+              <?php
+              // Affichage d'un service
+              $chauffeurs = $bdd->getPDO()->prepare('SELECT * FROM collaborateurs WHERE metier="chauffeur"');
+              $chauffeurs->execute();
+              $i=0;
 
-            <form class="funkyradio" method="post" action="verifyChauffeur.php">
-
-                <div class="funkyradio-primary">
-                    <input type="radio" name="radio" id="radio1" checked/>
-                    <label for="radio1">Choisir ce chauffeur statique 1</label>
+              while($unChauffeur = $chauffeurs->fetch())
+              {
+              $chauffeur = new App\Collaborateur($unChauffeur["idCollaborateurs"],$unChauffeur["email"],$unChauffeur["last_name"],$unChauffeur["first_name"],$unChauffeur["metier"],$unChauffeur["prixCollaborateur"],$unChauffeur["dateEmbauche"],$unChauffeur["ville"],$unChauffeur["heuresTravailees"]);
+              ?>
+              <li class="list-group-item">
+                <?php echo $i?>
+                <h3><?php echo $chauffeur->getFirst_name()." ".$chauffeur->getLast_name();?></h3>
+                <h6>idService: <?php echo $chauffeur->getIdCollaborateur(); ?> Prix: <?php $chauffeur->getPrixCollaborateur()." / Km  // AJOUTER SYSTEME PHOTO + SYSTEME ETOILES" ?></h6>
+                <h4>Infos: </h4>
+                <ul>
+                  <li><?php echo "Ville d'operation: ".$chauffeur->getVille(); ?></li>
+                  <li><?php echo "Heures Travailées: ".$chauffeur->getHeuresTravailees(); ?></li>
+                  <li><?php echo "Date d'embauche: ".$chauffeur->getDateEmbauche(); ?></li>
+                </ul>
+                <div class="funkyradio-primary col-md-6 center-block">
+                    <input type="radio" name="radio" id="radio<?php echo $i ?>" checked/>
+                    <label for="radio<?php echo $i ?>">Choisir ce chauffeur</label>
                 </div>
-                <div class="funkyradio-primary">
-                    <input type="radio" name="radio" id="radio2" checked/>
-                    <label for="radio2">Choisir ce chauffeur statique 2</label>
+              </li>
+              <?php
+              $i++;
+              }
+              ?>
+              <li class="list-group-item">
+                <div class="center-block">
+                  <?php echo $form->submit(); ?>
                 </div>
+              </li>
             </form>
+          </div>
         </div>
+      </div>
     </div>
 
     <?php include "includehtml/footer.html" ?>

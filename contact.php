@@ -47,16 +47,16 @@ $navbar->navbar($backOffice);
 			<div class="row">
 				<div class="col">
 					<div class="home_search_container">
-						<div class="home_search_title">Recherche un trajet</div>
+						<div class="home_search_title">Nous contacter</div>
 						<div class="home_search_content">
-							<form action="valideReservation.php" method="post" class="home_search_form d-flex flex-lg-row flex-column align-items-start justify-content-lg-between justify-content-start" id="home_search_form">
-                
-									<input type="text" name="start"  id="startAddr" class="search_input search_input_1" placeholder="Adresse de départ" required="required">
-									<input type="text" name="end"  id="endAddr" class="search_input search_input_2" placeholder="Adresse d'arrivé" required="required">
-									<input type="text" name="price"  id="price" class="search_input search_input_4" placeholder="Budget" required="required">
-									<button class="home_search_button">Rechercher</button>
-
-							</form>
+							<p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+                eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                culpa qui officia deserunt mollit anim id est laborum.
+              </p>
 						</div>
 					</div>
 				</div>

@@ -13,6 +13,9 @@
   <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   <link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
 
+  <link rel="stylesheet" type="text/css" href="css/choixDriver/main.css">
+
+
   <?php
     include 'includehtml/head.html'; ?>
   </head>
@@ -24,7 +27,30 @@
     $navbar = new App\Navbar();
     $backOffice=0;
     $navbar->navbar($backOffice);
+
+    /*
+    if (isset($_POST[""])) {
+      // code...
+    }
+    */
     ?>
+    <div class="container">
+        <div class="col-md-6">
+             <h4>Choisissez votre chauffeur</h4>
+
+            <form class="funkyradio" method="post" action="verifyChauffeur.php">
+
+                <div class="funkyradio-primary">
+                    <input type="radio" name="radio" id="radio1" checked/>
+                    <label for="radio1">Choisir ce chauffeur statique 1</label>
+                </div>
+                <div class="funkyradio-primary">
+                    <input type="radio" name="radio" id="radio2" checked/>
+                    <label for="radio2">Choisir ce chauffeur statique 2</label>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <?php include "includehtml/footer.html" ?>
   </body>

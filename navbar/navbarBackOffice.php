@@ -13,7 +13,7 @@
             <li><a href="backOfficeBanned.php">Utilisateur Bannis</a></li>
             <li><a href="../profil.php">Profil</a></li>
             <li><a href="../deconnexion.php">Deconnexion</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="../contact.php">Contact</a></li>
           </ul>
         </nav>
         <a href="#" class="nav-toggle">Menu<span></span></a> </div>

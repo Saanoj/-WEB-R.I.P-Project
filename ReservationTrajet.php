@@ -51,8 +51,8 @@ $navbar->navbar($backOffice);
 						<div class="home_search_content">
 							<form action="valideReservation.php" method="post" class="home_search_form d-flex flex-lg-row flex-column align-items-start justify-content-lg-between justify-content-start" id="home_search_form">
                 
-									<input type="text" name="start"  id="startAddr" class="search_input search_input_1" placeholder="Adresse de départ" required="required">
-									<input type="text" name="end"  id="endAddr" class="search_input search_input_2" placeholder="Adresse d'arrivé" required="required">
+							<input type="text" name="start"  id="autocomplete" class="search_input search_input_1" placeholder="Adresse de départ" required="required">
+									<input type="text" name="end"  id="autocomplete2" class="search_input search_input_2" placeholder="Adresse d'arrivé" required="required">
 									<input type="text" name="price"  id="price" class="search_input search_input_4" placeholder="Budget" required="required">
 									<button class="home_search_button">Rechercher</button>
 
@@ -116,6 +116,10 @@ $navbar->navbar($backOffice);
 </div>
 
 	<?php include "includehtml/footer.html" ?>
+
+		<script src="js/ReservationTrajet/main.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAyUEYzEivgVQJxxot06Z6ZsqfbIR4p_wU&libraries=places&callback=initAutocomplete"
+        async defer></script>
 
 
 </body>

@@ -3,13 +3,12 @@ session_start();
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-
   <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"></link>
   <?php
   include 'includehtml/head.html'; ?>
   <link rel="stylesheet" href="css/profil/style.css">
@@ -28,15 +27,18 @@ session_start();
   $navbar->navbar($backOffice);
 
   // REQUETE POUR RECUPER LES INFOS DU USER
+  
   $req = $bdd->getPDO()->prepare('SELECT * FROM users WHERE id = ?');
   $req->execute(array($_SESSION['id']));
   $datas = $req->fetch();
   $req->closeCursor();
   $user = new App\Profil($datas['first_name'],$datas['last_name'],$datas['birthday'],$datas['gender'],$datas['address'],$datas['zip_code']);
 
-  //CREATION DE L'ABONNEMENT
+
+//CREATION DE L'ABONNEMENT
 
  $abo = App\Abonnement::createAbonnement($bdd);
+ 
 
 
   
@@ -67,11 +69,8 @@ session_start();
             </ul>
           </div>
         </div>
-        <div class="col-md-2">
+     
 
-          <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
-
-        </div>
       </div>
       <div class="row">
         <div class="col-md-4">
@@ -171,50 +170,121 @@ session_start();
               </div>
             </div>
 
-                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Id de l'abonnement</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?= $abo->getIdAbonnement();?></p>
-                                            </div>
+            <?php if ($abo->getIdAbonnement() == null) {?>
+
+                 <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                 
+                 <div class="demo">
+    <div class="container">
+
+    
+        <div class="row">
+  
+            <div class="col-md-4 col-sm-6">
+                <div class="pricingTable">
+                    <div class="pricingTable-header">
+                        <h3 class="title" data-content="Simple">Simple</h3>
+                    </div>
+                    <ul class="pricing-content">
+                        <li>Tarifs préférentiels</li>
+                        <li>Accès aux différents services</li>
+                        <li>Soutenir Ride in Pride</li>
+                        <li>Sans engagement</li>
+                        <li></li>
+                    </ul>
+                    <div class="price-value">
+                        <span class="amount" data-content="28 €">28€ TTC /mois</span>
+                    </div>
+                    
+                    <a href="#" class="pricingTable-signup">Souscrire à l'offre</a>
+                </div>
+         
+            </div>
+           
+            <div class=" offset-md-4 col-md-4 col-sm-6">
+                <div class="pricingTable orange">
+                    <div class="pricingTable-header">
+                        <h3 class="title" data-content="Simple">Simple</h3>
+                    </div>
+                    <ul class="pricing-content">
+                    <li>Tarifs préférentiels</li>
+                        <li>Accès aux différents services</li>
+                        <li>Soutenir Ride in Pride</li>
+                        <li>Engagement sur <b>12 mois</b></li>
+                        <li></li>
+                    </ul>
+                    <div class="price-value">
+                        <span class="amount" data-content="$20.00">20€ TTC /mois</span>
+                    </div>
+                    <a href="#" class="pricingTable-signup">Souscrire à l'offre</a>
+                </div>
+         
+            </div>
+        </div>
+    </div>
+</div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Votre id</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?= $abo->getIdClient();?></p>
-                                            </div>
+            <?php } else {?>
+
+
+<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">    
+
+              
+<div class="demo">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-6">
+                <div class="pricingTables">
+                    <div class="pricingTable-header">
+                        <h3 class="title" data-content="Simple">SIMPLE</h3>
+                    </div>
+                    <ul class="pricing-content">
+                        <li>Date d'achat : <?php
+                    setlocale(LC_TIME, "fr_FR","French");
+                    $date = strftime("%d/%m/%Y", strtotime($abo->getDateDebut()));
+                    echo  $date; ?></li>
+                        <li>Date de fin résiliation : <?php
+                    setlocale(LC_TIME, "fr_FR","French");
+                    $date = strftime("%d/%m/%Y", strtotime($abo->getDateFin()));
+                    echo  $date; ?></li>
+                        <li>Type d'abonnement : <?php
+                         if($abo->getTypeAbonnement() == 1) {
+                           echo "Simple";} else if($abo->getTypeAbonnement() == 2){echo "Entreprise";}
+                           else{echo "Sans abonnement";}?> </li>
+                        <li>Engagement sur 12 mois : <?php
+                        if ($abo->getIsEngagement() == 1){
+                          echo "Oui"; }
+                          else {
+                            echo "Non";}?> </li>
+
+                    </ul>
+                    <div class="price-value">
+                        <span class="amount" data-content="$10.00">// A définir</span>
+                    </div>
+                    <a href="#" class="pricingTable-signup"></a>
+                </div>
+            </div>
+          
+        </div>
+    </div>
+</div> 
+
+
+                    
+                    <div class="gear">
+                    <span id="idAbonnement" class="datainfo" value="'<?= $abo->getIdAbonnement(); ?>'"><?= $abo->getIdAbonnement(); ?></span>
+                    <a href="#" class="profile-edit-btn">Supprimer</a>
+                  </div>
+
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Date d'achat de l'abonnement</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?= $abo->getDateDebut();?></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Date de fin d'abonnement</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?= $abo->getDateFin();?></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Votre type d'abonnement</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?= $abo->getTypeAbonnement();?></p>
-                                            </div>
-                                        </div>
-                          
+                          <?php } ?>
+
+
                             </div>
+
+
                         </div>
+                        
                     </div>
                 </div>
             </form>           

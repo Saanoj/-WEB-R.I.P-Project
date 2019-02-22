@@ -15,13 +15,15 @@ $bdd = new Database('rip');
     private $dateDebut;
     private $dateFin;
     private $typeAbonnement;
+    private $isEngagement;
 
-    public function __construct($idAbonnement,$idClient,$dateDebut,$dateFin,$typeAbonnement) {
+    public function __construct($idAbonnement,$idClient,$dateDebut,$dateFin,$typeAbonnement,$isEngagement) {
         $this->idAbonnement = $idAbonnement;
         $this->idClient = $idClient;
         $this->dateDebut = $dateDebut;
         $this->dateFin = $dateFin;
         $this->typeAbonnement = $typeAbonnement;
+        $this->isEngagement = $isEngagement;
 
     }
 
@@ -33,6 +35,7 @@ $bdd = new Database('rip');
     public function getDateDebut() {return $this->dateDebut;}
     public function getDateFin() {return $this->dateFin;}
     public function getTypeAbonnement(){return $this->typeAbonnement;}
+    public function getIsEngagement(){return $this->isEngagement;}
 
     /* SETTERS */
     public function setIdAbonnement($newIdAbonnement) {return $this->idAbonnement = $newIdAbonnement;}
@@ -40,6 +43,7 @@ $bdd = new Database('rip');
     public function setDateDebut($newDateDebut) {return $this->dateDebut = $newDateDebut;}
     public function setDateFin($newDateFin) {return $this->dateFin = $newDateFin;}
     public function setTypeAbonnement($newTypeAbonnement) {return $this->typeAbonnement = $newTypeAbonnement;}
+    public function setIsEngagement($newIsEngagement) {return $this->isEngagement = $newIsEngagement;}
 
 
 
@@ -53,7 +57,7 @@ $bdd = new Database('rip');
 
     public static function createAbonnement($bdd) {
         $dataAbonnement = Abonnement::getAll($bdd);
-        return $abo = new Abonnement($dataAbonnement['idAbonnement'],$dataAbonnement['idClient'],$dataAbonnement['dateDebut'],$dataAbonnement['dateFin'],$dataAbonnement['typeAbonnement']);
+        return $abo = new Abonnement($dataAbonnement['idAbonnement'],$dataAbonnement['idClient'],$dataAbonnement['dateDebut'],$dataAbonnement['dateFin'],$dataAbonnement['typeAbonnement'],$dataAbonnement['isEngagement']);
         
     }
 

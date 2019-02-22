@@ -9,12 +9,12 @@
         <nav class="navigation" role="navigation">
           <ul class="primary-nav">
             <li><a href="index.php">Acceuil</a></li>
-            <li><a href="#">Reserver un trajet</a></li>
+            <li><a href="reservationTrajet.php">Reserver un trajet</a></li>
             <li><a href="#">Services</a></li>
             <li><a href="backOffice/backOffice.php">backOffice</a></li>
             <li><a href="profil.php">Profil</a></li>
             <li><a href="deconnexion.php">Deconnexion</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="contact.php">Contact</a></li>
           </ul>
         </nav>
         <a href="#" class="nav-toggle">Menu<span></span></a> </div>

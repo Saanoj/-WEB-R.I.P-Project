@@ -79,3 +79,33 @@ function updateProfil(newval,newid,idProfil) {
 	request.send(data);
 	return false;
   }
+ // FONCTION AJAX QUI DELETE L'ABONNEMENT
+
+ 
+$(document).ready(function(){
+	$(".profile-edit-btn").on("click", function(inp){
+
+		
+	  inp.preventDefault();
+	  var idProfil = document.getElementById("idProfil").innerHTML;
+	  var idAbo = document.getElementById("idAbonnement").innerHTML;
+	
+	  deleteSubscription(idAbo);
+
+		
+	});
+});
+
+function deleteSubscription(idAbo,idProfil) {
+	var request = new XMLHttpRequest();
+	request.onreadystatechange = function(){
+	  if(request.status == 200 && request.readyState == 4){
+
+	  }
+	};
+	data='idAbo=' + idAbo + '&idProfil=' + idProfil;
+	request.open('POST', 'updateProfil.php');
+	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+	request.send(data);
+	return false;
+  }

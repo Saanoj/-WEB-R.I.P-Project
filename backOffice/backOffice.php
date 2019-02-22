@@ -7,9 +7,8 @@ include '../include/fonction.php';
 <!DOCTYPE html>
 <html>
 <?php include "includehtml/head.html" ?>
-
 <body>
-
+  <script type="text/javascript" src="../js/backOffice/backOfficeAjax.js"></script>
   <?php
   require '../Class/Autoloader.php';
   App\Autoloader::register();

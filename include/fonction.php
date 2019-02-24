@@ -56,16 +56,15 @@ function backOffice(){
           </button>
           </form>
           </td>
-          <td>'.$member["id"].'</td>
         ';
 
         //bouton student
         if ($member["isAdmin"] == 1){
         echo '
         <td>
-          <form method="POST">
-            <input  id="id" type="hidden" value="'.$member["id"].'"/>
-            <input  id="admin" type="hidden" value="1"/>
+          <form method="POST" action="admin.php">
+            <input  name="id" type="hidden" value="'.$member["id"].'"/>
+            <input  name="admin" type="hidden" value="1"/>
             <button name="admin" value="1" class="btn btn-success" onclick="updateAdmin(this.parentElement);"></button>
           </form>
         </td>';
@@ -73,9 +72,9 @@ function backOffice(){
         else {
           echo '
           <td>
-            <form method="POST">
-              <input  id="id" type="hidden" value="'.$member["id"].'"/>
-              <input  id="admin" type="hidden" value="0"/>
+            <form method="POST" action="admin.php">
+              <input  name="id" type="hidden" value="'.$member["id"].'"/>
+              <input  name="admin" type="hidden" value="0"/>
               <button name="admin" value="0" class="btn btn-danger" onclick="updateAdmin(this.parentElement);"></button>
             </form>
           </td>';
@@ -113,7 +112,6 @@ function showBanned(){
     <td>'.$member["last_name"].'</td>
     <td>'.$member["birthday"].'</td>
     <td>'.$member["gender"].'</td>
-    <td>'.$member["id"].'</td>
     ';
     if ($member["isAdmin"] == 1){
     echo '

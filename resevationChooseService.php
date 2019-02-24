@@ -11,6 +11,9 @@
   <link rel="stylesheet" type="text/css" href="css/ReservationTrajet/responsive.css">
 
   <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/reservationChooseService/main.js"></script>
   <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   <link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
 
@@ -39,33 +42,46 @@
            <div class="card" style="margin:50px 0">
                 <!-- Default panel contents -->
                 <div class="card-header">
+                  <h1 class="display-3">Informations complémentaires au trajet</h1>
+                  <form method="POST" action="valideReservationServices.php">
+
+                  <label for="dateDebut">Date de début du trajet : </label>
+                  <?php echo $form->input('dateDebut','date'); ?>
+
+                  <label for="heureDebut">Heure de début du trajet</label>
+                  <?php echo $form->input('heureDebut','time'); ?>
+                </div>
+
+                <div class="card-header">
                   <h1 class="display-3">Choisissez vos services</h1>
-                  <p><?php echo "idTrajet: ".$_SESSION["idTrajet"]."<br>Trajet: ". "<br>".$_SESSION["startTrajet"]. " => ".$_SESSION["endTrajet"] ?></p>
+                  <p><?php echo "Trajet: ". "<br>".$_SESSION["startTrajet"]. " => ".$_SESSION["endTrajet"] ?></p>
                 </div>
 
                 <form class="list-group list-group-flush" method="POST" action="valideReservationServices.php">
                   <?php
-                  // Affichage d'un service
-                  $services = $bdd->getPDO()->prepare('SELECT * FROM services');
-                  $services->execute();
-                  $i=0;
-                  while($unService = $services->fetch())
-                  {
-                    $service = new App\Service($unService["idService"],$unService["nomService"],$unService["description"],$unService["prixService"]);
+                  // Affichage SERVICE DE REPAS ET DE BOISSONS 
                     ?>
                     <li class="list-group-item">
-                      <h3><?php echo $service->getNomService(); ?></h3>
-                      <?php /* >?idService: <?php echo $service->getIdService(); ?> Prix: <?php $service->getPrixService(); ?></h6> <?php */ ?>
-                      <label>Description:</label>
-                      <p><?php echo $service->getDescription(); ?></p>
+                    <div class="dropdown">
+    <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">
+      <span id="selected">Chose option</span><span class="caret"></span></a>
+  <ul class="dropdown-menu">
+    <li><a href="#">Option 1</a></li>
+    <li><a href="#">Option 2</a></li>
+    <li><a href="#">Option 3</a></li>
+    <li><a href="#">Option 4</a></li>
+  </ul>
+</div>
+                      
+                     
                       <label class="switch">
-                        <input type="checkbox" class="primary" name="services[<?php $i ?>]" value="<?php echo $service->getIdService(); ?>">
+                        <input type="checkbox" class="primary" name="" value="">
                         <span class="slider round"></span>
                       </label>
                     </li>
                 <?php
-                $i++;
-              }
+  
+              
               ?>
                 <br>
                 <div class="center-block">

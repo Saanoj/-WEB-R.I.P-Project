@@ -25,6 +25,6 @@ session_start();
     </section>
     <!-- Get a quote section -->
 
-    <?php include "includehtml/footer.html" ?>
+    <?php include "includehtml/footer.html"; ?>
   </body>
   </html>

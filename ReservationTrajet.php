@@ -1,3 +1,9 @@
+<?php if (isset($_SESSION['id'])) {
+	header('location:index.php'); }
+	else {
+?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -12,6 +18,7 @@
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+<script src="js/popper.min.js"></script>
 
 <?php
   include 'includehtml/head.html'; ?>
@@ -124,3 +131,4 @@ $navbar->navbar($backOffice);
 
 </body>
 </html>
+	<?php } ?>

@@ -40,14 +40,14 @@
     ?>
    <div class="container">
       <div class="row">
-        <div class="offset-md-3 col-md-6">
+        <div class="offset-md-2 col-md-8">
           <div class="card" style="margin:50px 0">
              <!-- Default panel contents -->
              <div class="card-header">
                <h1 class="display-3">Choisissez votre chauffeur</h1>
                <p><?php echo "idTrajet: ".$_SESSION["idTrajet"]."<br>Trajet: ". "<br>".$_SESSION["startTrajet"]. " => ".$_SESSION["endTrajet"] ?></p>
              </div>
-            <form class="funkyradio list-group list-group-flush" method="post" action="verifyChauffeur.php">
+            <form class="funkyradio list-group list-group-flush" method="post" action="valideReservationDriver.php">
               <?php
               // Affichage d'un service
               $chauffeurs = $bdd->getPDO()->prepare('SELECT * FROM collaborateurs WHERE metier="chauffeur"');
@@ -56,20 +56,36 @@
 
               while($unChauffeur = $chauffeurs->fetch())
               {
-              $chauffeur = new App\Collaborateur($unChauffeur["idCollaborateurs"],$unChauffeur["email"],$unChauffeur["last_name"],$unChauffeur["first_name"],$unChauffeur["metier"],$unChauffeur["prixCollaborateur"],$unChauffeur["dateEmbauche"],$unChauffeur["ville"],$unChauffeur["heuresTravailees"]);
+              $car=App\Chauffeur::getCar($unChauffeur["idCollaborateurs"],$bdd);
+              
+              $chauffeur = new App\Chauffeur($unChauffeur["idCollaborateurs"],$unChauffeur["email"],$unChauffeur["last_name"],$unChauffeur["first_name"],$unChauffeur["metier"],$unChauffeur["prixCollaborateur"],
+                                            $unChauffeur["dateEmbauche"],$unChauffeur["ville"],$unChauffeur["heuresTravailees"],$car["carId"],$car["carBrand"],$car["carModel"],$car["carColor"]);
               ?>
               <li class="list-group-item">
-                <?php echo $i?>
+                <?php //echo $i?>
                 <h3><?php echo $chauffeur->getFirst_name()." ".$chauffeur->getLast_name();?></h3>
-                <h6>idService: <?php echo $chauffeur->getIdCollaborateur(); ?> Prix: <?php $chauffeur->getPrixCollaborateur()." / Km  // AJOUTER SYSTEME PHOTO + SYSTEME ETOILES" ?></h6>
-                <h4>Infos: </h4>
-                <ul>
-                  <li><?php echo "Ville d'operation: ".$chauffeur->getVille(); ?></li>
-                  <li><?php echo "Heures Travailées: ".$chauffeur->getHeuresTravailees(); ?></li>
-                  <li><?php echo "Date d'embauche: ".$chauffeur->getDateEmbauche(); ?></li>
-                </ul>
+                <h6>id du Chauffeur: <?php echo $chauffeur->getIdCollaborateur(); ?> Prix: <?php $chauffeur->getPrixCollaborateur()." / Km  // AJOUTER SYSTEME PHOTO + SYSTEME ETOILES" ?></h6>
+                <div class="row">
+                  <div class="col-md-6">
+                    <h4>Infos: </h4>
+                    <ul>
+                      <li><?php echo "Ville d'operation: ".$chauffeur->getVille(); ?></li>
+                      <li><?php echo "Heures Travailées: ".$chauffeur->getHeuresTravailees(); ?></li>
+                      <li><?php echo "Date d'embauche: ".$chauffeur->getDateEmbauche(); ?></li>
+                    </ul>
+                  </div>
+                  <div class="col-md-6">
+                    <h4>Véhicule: </h4>
+                    <ul>
+                      <li><?php echo "Marque: ".$chauffeur->getCarBrand(); ?></li>
+                      <li><?php echo "Modèle: ".$chauffeur->getCarModel(); ?></li>
+                      <li><?php echo "Couleur: ".$chauffeur->getCarColor(); ?></li>
+                    </ul>
+                  </div>
+                </div>
+
                 <div class="funkyradio-primary col-md-6 center-block">
-                    <input type="radio" name="radio" id="radio<?php echo $i ?>" checked/>
+                    <input type="radio" name="idChauffeur" id="radio<?php echo $i ?>" value="<?php echo $chauffeur->getIdCollaborateur() ?>" checked/>
                     <label for="radio<?php echo $i ?>">Choisir ce chauffeur</label>
                 </div>
               </li>

@@ -50,6 +50,14 @@ $bdd = new Database('rip');
         $req = $bdd->getPDO()->prepare('UPDATE ')
     }
     */
+    static public function addDriverToTrajet($bdd,$statement,$idChauffeur) {
+
+      $req1 = $bdd->getPDO()->prepare($statement);
+      $req1->bindValue(':idTrajet', $_SESSION["idTrajet"]);
+      $req1->bindValue(':idChauffeur', $idChauffeur);
+
+      $req1->execute();
+    }
 
     public function addTrajetStart($bdd,$statement,$trajet) {
 

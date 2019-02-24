@@ -38,7 +38,7 @@
 
     <div class="container">
        <div class="row">
-         <div class="offset-md-3 col-md-6">
+         <div class="offset-md-2 col-md-8">
            <div class="card" style="margin:50px 0">
                 <!-- Default panel contents -->
                 <div class="card-header">
@@ -59,7 +59,7 @@
 
                 <form class="list-group list-group-flush" method="POST" action="valideReservationServices.php">
                   <?php
-                  // Affichage SERVICE DE REPAS ET DE BOISSONS 
+                  // Affichage SERVICE DE REPAS ET DE BOISSONS
                     ?>
                     <li class="list-group-item">
                     <div class="dropdown">
@@ -72,16 +72,16 @@
     <li><a href="#">Option 4</a></li>
   </ul>
 </div>
-                      
-                     
+
+
                       <label class="switch">
                         <input type="checkbox" class="primary" name="" value="">
                         <span class="slider round"></span>
                       </label>
                     </li>
                 <?php
-  
-              
+
+
               ?>
                 <br>
                 <div class="center-block">

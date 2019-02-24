@@ -10,15 +10,15 @@ use \PDO;
 $bdd = new Database('rip');
 
  class Collaborateur {
-    private $idCollaborateur;
-    private $email;
-    private $last_name;
-    private $first_name;
-    private $metier;
-    private $prixCollaborateur;
-    private $dateEmbauche;
-    private $ville;
-    private $heuresTravailees;
+    protected $idCollaborateur;
+    protected $email;
+    protected $last_name;
+    protected $first_name;
+    protected $metier;
+    protected $prixCollaborateur;
+    protected $dateEmbauche;
+    protected $ville;
+    protected $heuresTravailees;
 
     public function __construct($idCollaborateur,$email,$last_name,$first_name,$metier,$prixCollaborateur,$dateEmbauche,$ville,$heuresTravailees) {
         $this->idCollaborateur = $idCollaborateur;

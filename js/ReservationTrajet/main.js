@@ -63,7 +63,7 @@ for (var i = 0; i < place.address_components.length; i++) {
 var addressType = place.address_components[i].types[0];
 if (componentForm[addressType]) {
   var val = place.address_components[i][componentForm[addressType]];
-  document.getElementById(addressType).value = val;
+  // document.getElementById(addressType).value = val;
 }
 }
 }

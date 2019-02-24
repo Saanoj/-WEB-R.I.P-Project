@@ -32,11 +32,6 @@
 
     $form = new App\Form(array());
 
-    /*
-    if (isset($_POST[""])) {
-      // code...
-    }
-    */
     ?>
    <div class="container">
       <div class="row">
@@ -47,6 +42,7 @@
                <h1 class="display-3">Choisissez votre chauffeur</h1>
                <p><?php echo "idTrajet: ".$_SESSION["idTrajet"]."<br>Trajet: ". "<br>".$_SESSION["startTrajet"]. " => ".$_SESSION["endTrajet"] ?></p>
              </div>
+
             <form class="funkyradio list-group list-group-flush" method="post" action="valideReservationDriver.php">
               <?php
               // Affichage d'un service
@@ -56,6 +52,8 @@
 
               while($unChauffeur = $chauffeurs->fetch())
               {
+
+                
               $car=App\Chauffeur::getCar($unChauffeur["idCollaborateurs"],$bdd);
 
               $chauffeur = new App\Chauffeur($unChauffeur["idCollaborateurs"],$unChauffeur["email"],$unChauffeur["last_name"],$unChauffeur["first_name"],$unChauffeur["metier"],$unChauffeur["prixCollaborateur"],

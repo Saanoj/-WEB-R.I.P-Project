@@ -2,7 +2,7 @@
 <html lang="fr">
   <head>
   <title>Reservation de services</title>
-  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="Ride in pride">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,44 +45,36 @@
                   <h1 class="display-3">Informations complémentaires au trajet</h1>
                   <form method="POST" action="valideReservationServices.php">
 
-                  <label for="dateDebut">Date de début du trajet : </label>
+                  <label for="dateDebut">Date du trajet : </label>
                   <?php echo $form->input('dateDebut','date'); ?>
 
-                  <label for="heureDebut">Heure de début du trajet</label>
+                  <label for="heureDebut">Heure du trajet : </label>
                   <?php echo $form->input('heureDebut','time'); ?>
-                </div>
-
-                <div class="card-header">
-                  <h1 class="display-3">Choisissez vos services</h1>
-                  <p><?php echo "Trajet: ". "<br>".$_SESSION["startTrajet"]. " => ".$_SESSION["endTrajet"] ?></p>
                 </div>
 
                 <form class="list-group list-group-flush" method="POST" action="valideReservationServices.php">
                   <?php
+                      // Affichage d'un service
+                      $services = $bdd->getPDO()->prepare('SELECT * FROM services');
+                      $services->execute();
+              
+                      while($unService = $services->fetch())
+                      {
+                        $service = new App\Service($unService["idService"],$unService["nomService"],$unService["description"],$unService["prixService"]);
                   // Affichage SERVICE DE REPAS ET DE BOISSONS
-                    ?>
-                    <li class="list-group-item">
-                    <div class="dropdown">
-    <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">
-      <span id="selected">Chose option</span><span class="caret"></span></a>
-  <ul class="dropdown-menu">
-    <li><a href="#">Option 1</a></li>
-    <li><a href="#">Option 2</a></li>
-    <li><a href="#">Option 3</a></li>
-    <li><a href="#">Option 4</a></li>
-  </ul>
-</div>
+                  ?>
+                  <li class="list-group-item">
+                  <h3><?php echo $service->getNomService(); ?></h3>
+                      <?php /* >?idService: <?php echo $service->getIdService(); ?> Prix: <?php $service->getPrixService(); ?></h6> <?php */ ?>
+                      <label>Description:</label>
+                      <p><?php echo $service->getDescription(); ?></p>
 
-
-                      <label class="switch">
-                        <input type="checkbox" class="primary" name="" value="">
-                        <span class="slider round"></span>
+                       <label class="switch">
+                       <input type="checkbox" class="primary" name="service<?= $service->getIdService();?>" value="<?php echo $service->getIdService(); ?>">
+                       <span class="slider round"></span>
                       </label>
                     </li>
-                <?php
-
-
-              ?>
+                      <?php } ?>
                 <br>
                 <div class="center-block">
                   <?php echo $form->submit(); ?>

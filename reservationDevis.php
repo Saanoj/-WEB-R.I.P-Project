@@ -37,7 +37,6 @@
       // code...
     }
     */
-    $_SESSION["idTrajet"]=25;
     ?>
    <div class="container">
       <div class="row">
@@ -51,45 +50,41 @@
 
              <div class="list-group list-group-flush">
                <h3 class="display-5 center-block">Services choisi</h3>
-               <p>
+               <p class="center-block">
                <?php
                //$idServices = $bdd->query('SELECT idService FROM linkServicetrajet WHERE idTrajet='.$_SESSION["idTrajet"].'');
-               $idServices = $bdd->getPDO()->prepare('SELECT idService FROM linkServicetrajet WHERE idTrajet='.$_SESSION["idTrajet"].'');
-               $idServices->execute();
+               $idServices = $bdd->query('SELECT idService FROM linkServicetrajet WHERE idTrajet='.$_SESSION["idTrajet"].'');
 
-               while($unIdService = $idServices->fetch())
-               {
-                 $service = $bdd->query('SELECT * FROM services WHERE idService='.$unIdService["idService"].'');
-                 $service=$service[0];
-                 //var_dump($service);
+               if (empty($idServices)) {
+                 echo "Aucun services selectionnés";
+               }else {
+                 foreach ($idServices as $unIdService) {
+                   $service = $bdd->queryOne('SELECT * FROM services WHERE idService='.$unIdService["idService"].'');
+                   echo $service["nomService"].", ";
+                 }
+              }
               ?>
-                <?php echo $service["nomService"]; ?>
-
-               <?php
-               } ?>
                </p>
              </div>
 
-             <div class="list-group list-group-flush">
-               <h3 class="display-5 center-block">Votre chauffeur</h3>
+             <div class="list-group-item list-group-flush">
+               <div class="">
+                 <h3 class="center-block">Votre chauffeur</h3>
+               </div>
+
                <p>
                <?php
                //$idServices = $bdd->query('SELECT idService FROM linkServicetrajet WHERE idTrajet='.$_SESSION["idTrajet"].'');
                $idChauffeur= $bdd->queryOne('SELECT idChauffeur FROM trajet WHERE idTrajet='.$_SESSION["idTrajet"].'');
-
-
                $unChauffeur= $bdd->queryOne('SELECT * FROM collaborateurs WHERE idCollaborateurs='.$idChauffeur["idChauffeur"].'');
-               var_dump($unChauffeur);
+
                $car=App\Chauffeur::getCar($unChauffeur["idCollaborateurs"],$bdd);
-
                $chauffeur = new App\Chauffeur($unChauffeur["idCollaborateurs"],$unChauffeur["email"],$unChauffeur["last_name"],$unChauffeur["first_name"],$unChauffeur["metier"],$unChauffeur["prixCollaborateur"],
-                                             $unChauffeur["dateEmbauche"],$unChauffeur["ville"],$unChauffeur["heuresTravailees"],$car["carId"],$car["carBrand"],$car["carModel"],$car["carColor"]);
+                                             $unChauffeur["dateEmbauche"],$unChauffeur["ville"],$unChauffeur["heuresTravailees"],$car["carId"],$car["carBrand"],$car["carModel"],$car["carColor"],$car["nbPlaces"]);
                ?>
-
-                <?php echo $idChauffeur["nomService"]; ?>
-                <li class="list-group-item">
+                <li class="list-group">
                   <?php //echo $i?>
-                  <h3><?php echo $chauffeur->getFirst_name()." ".$chauffeur->getLast_name();?></h3>
+                  <h4><?php echo $chauffeur->getFirst_name()." ".$chauffeur->getLast_name();?></h4>
                   <h6>id du Chauffeur: <?php echo $chauffeur->getIdCollaborateur(); ?> Prix: <?php $chauffeur->getPrixCollaborateur()." / Km  // AJOUTER SYSTEME PHOTO + SYSTEME ETOILES" ?></h6>
                   <div class="row">
                     <div class="col-md-6">
@@ -111,16 +106,17 @@
                   </div>
                 </li>
 
-                  <div class="funkyradio-primary col-md-6 center-block">
-                      <input type="radio" name="idChauffeur" id="radio<?php echo $i ?>" value="<?php echo $chauffeur->getIdCollaborateur() ?>" checked/>
-                      <label for="radio<?php echo $i ?>">Choisir ce chauffeur</label>
-                  </div>
-                </li>
+
+
 
 
                </p>
              </div>
-
+             <div class="row list-group-item center-block">
+               <div class="center-block">
+                 <?php echo $form->submit(); ?>
+               </div>
+             </div>
           </div>
         </div>
       </div>

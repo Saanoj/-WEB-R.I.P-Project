@@ -15,9 +15,8 @@ $bdd = new Database('rip');
    protected $carBrand;
    protected $carModel;
    protected $carColor;
-   protected $carSeats;
 
-   public function __construct($idCollaborateur,$email,$last_name,$first_name,$metier,$prixCollaborateur,$dateEmbauche,$ville,$heuresTravailees,$carId,$carBrand,$carModel,$carColor,$carSeats) {
+   public function __construct($idCollaborateur,$email,$last_name,$first_name,$metier,$prixCollaborateur,$dateEmbauche,$ville,$heuresTravailees,$carId,$carBrand,$carModel,$carColor) {
 
      parent::__construct($idCollaborateur,$email,$last_name,$first_name,$metier,$prixCollaborateur,$dateEmbauche,$ville,$heuresTravailees);
 
@@ -25,20 +24,17 @@ $bdd = new Database('rip');
        $this->carBrand = $carBrand;
        $this->carModel = $carModel;
        $this->carColor = $carColor;
-       $this->carSeats = $carSeats;
    }
 
     public function getCarId(){return $this->carId;}
     public function getCarBrand(){return $this->carBrand;}
     public function getCarModel(){return $this->carModel;}
     public function getCarColor(){return $this->carColor;}
-    public function getCarSeats(){return $this->carSeats;}
 
     public function setCarId($carId){$this->carId = $carId;}
     public function setCarBrand($carBrand){$this->carBrand = $carBrand;}
     public function setCarModel($carModel){$this->carModel = $carModel;}
     public function setCarColor($carColor){$this->carColor = $carColor;}
-    public function setCarSeats($carSeats){$this->carSeats = $carSeats;}
 
 
 

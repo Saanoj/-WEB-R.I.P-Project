@@ -57,9 +57,9 @@
               while($unChauffeur = $chauffeurs->fetch())
               {
               $car=App\Chauffeur::getCar($unChauffeur["idCollaborateurs"],$bdd);
-
+              
               $chauffeur = new App\Chauffeur($unChauffeur["idCollaborateurs"],$unChauffeur["email"],$unChauffeur["last_name"],$unChauffeur["first_name"],$unChauffeur["metier"],$unChauffeur["prixCollaborateur"],
-                                            $unChauffeur["dateEmbauche"],$unChauffeur["ville"],$unChauffeur["heuresTravailees"],$car["carId"],$car["carBrand"],$car["carModel"],$car["carColor"],$car["nbPlaces"]);
+                                            $unChauffeur["dateEmbauche"],$unChauffeur["ville"],$unChauffeur["heuresTravailees"],$car["carId"],$car["carBrand"],$car["carModel"],$car["carColor"]);
               ?>
               <li class="list-group-item">
                 <?php //echo $i?>
@@ -80,7 +80,6 @@
                       <li><?php echo "Marque: ".$chauffeur->getCarBrand(); ?></li>
                       <li><?php echo "Modèle: ".$chauffeur->getCarModel(); ?></li>
                       <li><?php echo "Couleur: ".$chauffeur->getCarColor(); ?></li>
-                      <li><?php echo "Places : ".$chauffeur->getCarSeats(); ?></li>
                     </ul>
                   </div>
                 </div>

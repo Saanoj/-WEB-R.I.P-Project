@@ -7,7 +7,7 @@
       <div class="header-content clearfix"> <a class="logo" href="index.php"><img src="../images/RIP2small2.png" alt=""></a>
         <nav class="navigation" role="navigation">
           <ul class="primary-nav">
-            <li><a href="index.php">Acceuil</a></li>
+            <li><a href="index.php">Accueil</a></li>
             <li><a href="reservationTrajet.php">Reserver un trajet</a></li>
             <li><a href="#">Services</a></li>
             <li><a href="connexion.php">Connexion</a></li>

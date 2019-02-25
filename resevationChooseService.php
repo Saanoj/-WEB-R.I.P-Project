@@ -2,7 +2,7 @@
 <html lang="fr">
   <head>
   <title>Reservation de services</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="Ride in pride">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,36 +45,48 @@
                   <h1 class="display-3">Informations complémentaires au trajet</h1>
                   <form method="POST" action="valideReservationServices.php">
 
-                  <label for="dateDebut">Date du trajet : </label>
+                  <label for="dateDebut">Date de début du trajet : </label>
                   <?php echo $form->input('dateDebut','date'); ?>
 
-                  <label for="heureDebut">Heure du trajet : </label>
+                  <label for="heureDebut">Heure de début du trajet</label>
                   <?php echo $form->input('heureDebut','time'); ?>
                 </div>
 
-                <form class="list-group list-group-flush" method="POST" action="valideReservationServices.php">
-                  <?php
-                      // Affichage d'un service
-                      $services = $bdd->getPDO()->prepare('SELECT * FROM services');
-                      $services->execute();
-              
-                      while($unService = $services->fetch())
-                      {
-                        $service = new App\Service($unService["idService"],$unService["nomService"],$unService["description"],$unService["prixService"]);
-                  // Affichage SERVICE DE REPAS ET DE BOISSONS
-                  ?>
-                  <li class="list-group-item">
-                  <h3><?php echo $service->getNomService(); ?></h3>
-                      <?php /* >?idService: <?php echo $service->getIdService(); ?> Prix: <?php $service->getPrixService(); ?></h6> <?php */ ?>
-                      <label>Description:</label>
-                      <p><?php echo $service->getDescription(); ?></p>
+                <div class="card-header">
+                  <h1 class="display-3">Choisissez vos services</h1>
+                  <p><?php echo "Trajet: ". "<br>".$_SESSION["startTrajet"]. " => ".$_SESSION["endTrajet"] ?></p>
+                </div>
 
-                       <label class="switch">
-                       <input type="checkbox" class="primary" name="service<?= $service->getIdService();?>" value="<?php echo $service->getIdService(); ?>">
-                       <span class="slider round"></span>
+                <form class="list-group list-group-flush container" method="POST" action="valideReservationServices.php">
+
+
+                  <div class="container col-md-12">
+
+
+                  <?php
+                  // Affichage d'un service
+                  $services = $bdd->getPDO()->prepare('SELECT * FROM services');
+                  $services->execute();
+                  $i=0;
+                  while($unService = $services->fetch())
+                  {
+                    $service = new App\Service($unService["idService"],$unService["nomService"],$unService["description"],$unService["prixService"]);
+                    ?>
+                    <li class="list-group-item col-md-12 row">
+                      <h3 class="col-md-6"><?php echo $service->getNomService(); ?></h3>
+                      <h6 class="col-md-2">idService: <?php echo $service->getIdService()."<br>"; ?> Prix: <?php echo $service->getPrixService()." €"; ?></h6>
+                      <label>Description:</label>
+                      <?php echo $service->getDescription(); ?>
+                      <label class="switch" class="col-md-2">
+                        <input type="checkbox" class="primary" name="services[<?php $i ?>]" value="<?php echo $service->getIdService(); ?>">
+                        <span class="slider round"></span>
                       </label>
                     </li>
-                      <?php } ?>
+                <?php
+                $i++;
+              }
+              ?>
+              </div>
                 <br>
                 <div class="center-block">
                   <?php echo $form->submit(); ?>

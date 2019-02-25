@@ -31,13 +31,12 @@ class Database{
   }
 
 
-/*
+
   public function query($statement){  //, $class_name
     $req = $this->getPDO()->query($statement);
     $datas = $req->fetchALL(); //PDO::FETCH_CLASS, $class_name
     return $datas;
   }
-  */
 
   public function queryOne($statement){  //, $class_name
     $req = $this->getPDO()->query($statement);

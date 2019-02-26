@@ -17,8 +17,10 @@ $bdd = new Database('rip');
     private $dateReservation;
     private $dateDebut;
     private $heureFin;
+    private $distance;
+    private $duration;
 
-    public function __construct($start,$end,$price,$idClient,$dateReservation,$dateDebut,$heureFin) {
+    public function __construct($start,$end,$price,$idClient,$dateReservation,$dateDebut,$heureFin,$distance,$duration) {
         $this->start = $start;
         $this->end = $end;
         $this->price = $price;
@@ -26,6 +28,8 @@ $bdd = new Database('rip');
         $this->dateReservation = $dateReservation;
         $this->dateDebut = $dateDebut;
         $this->heureFin = $heureFin;
+        $this->distance = $distance;
+        $this->duration = $duration;
 
     }
 
@@ -39,6 +43,8 @@ $bdd = new Database('rip');
     public function getDateReservation() {return $this->dateReservation;}
     public function getDateDebut() {return $this->dateDebut;}
     public function getHeureFin() {return $this->heureFin;}
+    public function getDistance() {return $this->distance;}
+    public function getDuration() {return $this->duration;}
 
     /* SETTERS */
     public function setStart($newIdAbonnement) {return $this->idAbonnement = $newIdAbonnement;}
@@ -48,6 +54,8 @@ $bdd = new Database('rip');
     public function setDateReservation($dateReservation) {return $this->dateReservation = $dateReservation;}
     public function setDateDebut($dateDebut) {return $this->dateDebut = $dateDebut;}
     public function setHeureFin($heureFin) {return $this->heureFin = $heureFin;}
+    public function setDistance($distance) {return $this->distance = $distance;}
+    public function setDuration($duration) {return $this->duration = $duration;}
 
 
 
@@ -79,7 +87,7 @@ $bdd = new Database('rip');
       $req1->bindValue(':dateDebut', $trajet->getDateDebut());
       $req1->bindValue(':dateFin', $trajet->getHeureFin());
       $req1->bindValue(':dateReservation', $trajet->getDateReservation());
-      $req1->bindValue(':distanceTrajet', 12);
+      $req1->bindValue(':distanceTrajet', intval($trajet->getDistance()));
 
       $req1->execute();
     }
@@ -107,7 +115,18 @@ $bdd = new Database('rip');
 
     public function showInfosTrajet(){
       echo "<p>Trajet: "."<br>".$this->getStart(). " => ".$this->getEnd()."</p>
-      <p>Temps de trajet estimé: ".$this->getTimeTrajet()."</p>";
+      <p>Temps de trajet estimé: ".$this->getDuration()." | Distance: ".$this->getDistance()." Km</p>";
+    }
+
+    static public function getDistanceTime($start,$end){
+      $api = file_get_contents("https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=".$_POST["start"]."&destinations=".$_POST["end"]."&key=AIzaSyD9V95TZkvQgMaGrryXqkveGQSFdPtyK0Y");
+      $data = json_decode($api);
+
+      //echo "<br>Distance: ".((int)$data->rows[0]->elements[0]->distance->value/1000).;
+      //echo "<br>Duration: ".$data->rows[0]->elements[0]->duration->text;
+      $apiReturn = array('distance' => ((int)$data->rows[0]->elements[0]->distance->value/1000),'time' => $data->rows[0]->elements[0]->duration->text);
+
+      return $apiReturn;
     }
   }
 

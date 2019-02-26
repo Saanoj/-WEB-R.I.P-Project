@@ -4,11 +4,18 @@ require 'Class/Autoloader.php';
 App\Autoloader::register();
 $bdd = new App\Database('rip');
 
+// VERIFICATION DE LA DATE DU TRAJET : IL DOIT ETRE SUPERIEUR A LA DATE DU JOUR 
+
+$date1 = new DateTime($_POST['dateDebut']);
+$date2 = new DateTime("now");
+var_dump($date1 < $date2);
+
+
 
 $timeStart = $_POST["dateDebut"]." ".$_POST["heureDebut"];
 echo $timeStart;
 $timestampStart = strtotime($timeStart);
-echo "<br>".$timestampStart;
+// echo "<br>".$timestampStart;
 
 $start = str_replace(' ',"%20",$_POST["start"]);
 $end = str_replace(' ',"%20",$_POST["end"]);
@@ -41,9 +48,9 @@ $data=$bdd->query('SELECT * FROM abonnement WHERE idClient='.$_SESSION['id'].'')
 if (!empty($data)) {
   echo "found";
 
-  header("location: resevationChooseService.php");
+ // header("location: resevationChooseService.php");
 }else{
   echo "not found";
-  header("location: resevationChooseDriver.php");
+//  header("location: resevationChooseDriver.php");
 }
  ?>

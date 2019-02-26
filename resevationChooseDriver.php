@@ -32,6 +32,8 @@
 
     $form = new App\Form(array());
 
+    //recup obj trajet de session
+    $trajet = unserialize($_SESSION['trajet']);
     ?>
    <div class="container">
       <div class="row">
@@ -40,29 +42,25 @@
              <!-- Default panel contents -->
              <div class="card-header">
                <h1 class="display-3">Choisissez votre chauffeur</h1>
-               <p><?php echo "idTrajet: ".$_SESSION["idTrajet"]."<br>Trajet: ". "<br>".$_SESSION["startTrajet"]. " => ".$_SESSION["endTrajet"] ?></p>
+               <?php $trajet->showInfosTrajet(); ?>
              </div>
 
             <form class="funkyradio list-group list-group-flush" method="post" action="valideReservationDriver.php">
               <?php
               // Affichage d'un service
-              $chauffeurs = $bdd->getPDO()->prepare('SELECT * FROM collaborateurs WHERE metier="chauffeur"');
-              $chauffeurs->execute();
+              $chauffeurs = $bdd->queryPrepareForWhile('SELECT * FROM collaborateurs WHERE metier="chauffeur"',$bdd);
               $i=0;
 
               while($unChauffeur = $chauffeurs->fetch())
               {
-
-                
               $car=App\Chauffeur::getCar($unChauffeur["idCollaborateurs"],$bdd);
-
               $chauffeur = new App\Chauffeur($unChauffeur["idCollaborateurs"],$unChauffeur["email"],$unChauffeur["last_name"],$unChauffeur["first_name"],$unChauffeur["metier"],$unChauffeur["prixCollaborateur"],
                                             $unChauffeur["dateEmbauche"],$unChauffeur["ville"],$unChauffeur["heuresTravailees"],$car["carId"],$car["carBrand"],$car["carModel"],$car["carColor"],$car["nbPlaces"]);
               ?>
               <li class="list-group-item">
                 <?php //echo $i?>
                 <h3><?php echo $chauffeur->getFirst_name()." ".$chauffeur->getLast_name();?></h3>
-                <h6>id du Chauffeur: <?php echo $chauffeur->getIdCollaborateur(); ?> Prix: <?php $chauffeur->getPrixCollaborateur()." / Km  // AJOUTER SYSTEME PHOTO + SYSTEME ETOILES" ?></h6>
+                <h6>id du Chauffeur: <?php echo $chauffeur->getIdCollaborateur(); ?> Prix: <?php echo $chauffeur->getPrixCollaborateur()."€ / Km  // AJOUTER SYSTEME PHOTO + SYSTEME ETOILES" ?></h6>
                 <div class="row">
                   <div class="col-md-6">
                     <h4>Infos: </h4>

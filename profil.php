@@ -22,13 +22,12 @@ session_start();
   require 'Class/Autoloader.php';
   App\Autoloader::register();
   $bdd = new App\Database('rip');
-  $bdd->query("SET NAMES UTF8");//Solution encodage UTF8
   $navbar = new App\Navbar();
   $backOffice=0;
   $navbar->navbar($backOffice);
 
   // REQUETE POUR RECUPER LES INFOS DU USER
-  
+
   $req = $bdd->getPDO()->prepare('SELECT * FROM users WHERE id = ?');
   $req->execute(array($_SESSION['id']));
   $datas = $req->fetch();
@@ -39,10 +38,10 @@ session_start();
 //CREATION DE L'ABONNEMENT
 
  $abo = App\Abonnement::createAbonnement($bdd);
- 
 
 
-  
+
+
   ?>
 
   <div class="container emp-profile">
@@ -70,7 +69,7 @@ session_start();
             </ul>
           </div>
         </div>
-     
+
 
       </div>
       <div class="row">
@@ -174,13 +173,13 @@ session_start();
             <?php if ($abo->getIdAbonnement() == null) {?>
 
                  <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                 
+
                  <div class="demo">
     <div class="container">
 
-    
+
         <div class="row">
-  
+
             <div class="col-md-4 col-sm-6">
                 <div class="pricingTable">
                     <div class="pricingTable-header">
@@ -196,12 +195,12 @@ session_start();
                     <div class="price-value">
                         <span class="amount" data-content="28 €">28€ TTC /mois</span>
                     </div>
-                    
+
                     <a href="#" class="pricingTable-signup">Souscrire à l'offre</a>
                 </div>
-         
+
             </div>
-           
+
             <div class=" offset-md-4 col-md-4 col-sm-6">
                 <div class="pricingTable orange">
                     <div class="pricingTable-header">
@@ -219,7 +218,7 @@ session_start();
                     </div>
                     <a href="#" class="pricingTable-signup">Souscrire à l'offre</a>
                 </div>
-         
+
             </div>
         </div>
     </div>
@@ -228,9 +227,9 @@ session_start();
             <?php } else {?>
 
 
-<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">    
+<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 
-              
+
 <div class="demo">
     <div class="container">
         <div class="row">
@@ -265,13 +264,13 @@ session_start();
                     <a href="#" class="pricingTable-signup"></a>
                 </div>
             </div>
-          
+
         </div>
     </div>
-</div> 
+</div>
 
 
-                    
+
                     <div class="gear">
                     <span id="idAbonnement" class="datainfo" value="'<?= $abo->getIdAbonnement(); ?>'"><?= $abo->getIdAbonnement(); ?></span>
                     <a href="#" class="profile-edit-btn">Supprimer</a>
@@ -285,10 +284,10 @@ session_start();
 
 
                         </div>
-                        
+
                     </div>
                 </div>
-            </form>           
+            </form>
         </div>
 </body>
 <script type="text/javascript" src="js/profil/profil.js"></script>

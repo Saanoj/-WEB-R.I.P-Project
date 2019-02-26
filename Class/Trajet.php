@@ -14,14 +14,18 @@ $bdd = new Database('rip');
     private $end;
     private $price;
     private $idClient;
-    private $dateTrajet;
+    private $dateReservation;
+    private $dateDebut;
+    private $heureFin;
 
-    public function __construct($start,$end,$price,$idClient,$dateTrajet) {
+    public function __construct($start,$end,$price,$idClient,$dateReservation,$dateDebut,$heureFin) {
         $this->start = $start;
         $this->end = $end;
         $this->price = $price;
         $this->idClient = $idClient;
-        $this->dateTrajet = $dateTrajet;
+        $this->dateReservation = $dateReservation;
+        $this->dateDebut = $dateDebut;
+        $this->heureFin = $heureFin;
 
     }
 
@@ -32,14 +36,18 @@ $bdd = new Database('rip');
     public function getEnd() {return $this->end;}
     public function getPrice() {return $this->price;}
     public function getIdClient() {return $this->idClient;}
-    public function getDateTrajet() {return $this->dateTrajet;}
+    public function getDateReservation() {return $this->dateReservation;}
+    public function getDateDebut() {return $this->dateDebut;}
+    public function getHeureFin() {return $this->heureFin;}
 
     /* SETTERS */
     public function setStart($newIdAbonnement) {return $this->idAbonnement = $newIdAbonnement;}
     public function setEnd($newIdClient) {return $this->idClient = $newIdClient;}
     public function setPrice($newDateDebut) {return $this->dateDebut = $newDateDebut;}
     public function setIdClient($newIdClient) {return $this->idClient = $newIdClient;}
-    public function setDateTrajet($newDateTrajet) {return $this->dateTrajet = $newDateTrajet;}
+    public function setDateReservation($dateReservation) {return $this->dateReservation = $dateReservation;}
+    public function setDateDebut($dateDebut) {return $this->dateDebut = $dateDebut;}
+    public function setHeureFin($heureFin) {return $this->heureFin = $heureFin;}
 
 
 
@@ -65,21 +73,21 @@ $bdd = new Database('rip');
       $req1->bindValue(':idClient', $trajet->getIdClient());
       $req1->bindValue(':debut', $trajet->getStart());
       $req1->bindValue(':fin', $trajet->getEnd());
-      $req1->bindValue(':prixTrajet', $trajet->getPrice());
+      $req1->bindValue(':prixTrajet', 0);
 
       //TERMINER CETTE PARTIE!!! valeurs mauvaisess
-      $req1->bindValue(':heureDebut', date('Y-m-d G:i:s'));
-      $req1->bindValue(':heureFin', date('Y-m-d G:i:s'));
-      $req1->bindValue(':dateTrajet', $trajet->getDateTrajet());
+      $req1->bindValue(':dateDebut', $trajet->getDateDebut());
+      $req1->bindValue(':dateFin', $trajet->getHeureFin());
+      $req1->bindValue(':dateReservation', $trajet->getDateReservation());
       $req1->bindValue(':distanceTrajet', 12);
 
       $req1->execute();
     }
 
     public function startSessionId($bdd) {
-      $req = $bdd->getPDO()->prepare('SELECT * FROM trajet WHERE idClient = :idClient AND dateTrajet = :dateTrajet');
+      $req = $bdd->getPDO()->prepare('SELECT * FROM trajet WHERE idClient = :idClient AND dateResevation = :dateResevation');
       $req->bindValue(':idClient', $this->getIdClient());
-      $req->bindValue(':dateTrajet', $this->getDateTrajet());
+      $req->bindValue(':dateResevation', $this->getDateReservation());
       $req->execute();
       while	($donnees	=	$req->fetch())
       {
@@ -87,6 +95,19 @@ $bdd = new Database('rip');
       }
       $_SESSION['startTrajet']=$this->getStart();
       $_SESSION['endTrajet']=$this->getEnd();
+      $_SESSION['startTrajet']=$this->getStart();
+      $_SESSION['endTrajet']=$this->getEnd();
+    }
+
+    public function getTimeTrajet(){
+      $timestamp = strtotime($this->heureFin) - strtotime($this->dateDebut);
+      $time = gmdate('G:i:s', $timestamp);
+      return $time;
+    }
+
+    public function showInfosTrajet(){
+      echo "<p>Trajet: "."<br>".$this->getStart(). " => ".$this->getEnd()."</p>
+      <p>Temps de trajet estimé: ".$this->getTimeTrajet()."</p>";
     }
   }
 

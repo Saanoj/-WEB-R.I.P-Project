@@ -29,6 +29,7 @@ require 'Class/Autoloader.php';
 App\Autoloader::register();
 $bdd = new App\Database('rip');
 $navbar = new App\Navbar();
+$form = new App\Form();
 $backOffice=0;
 $navbar->navbar($backOffice);
   ?>
@@ -57,10 +58,16 @@ $navbar->navbar($backOffice);
 						<div class="home_search_title">Recherche un trajet</div>
 						<div class="home_search_content">
 							<form action="valideReservation.php" method="post" class="home_search_form d-flex flex-lg-row flex-column align-items-start justify-content-lg-between justify-content-start" id="home_search_form">
-                
-							<input type="text" name="start"  id="autocomplete" class="search_input search_input_1" placeholder="Adresse de départ" required="required">
+
+									<input type="text" name="start"  id="autocomplete" class="search_input search_input_1" placeholder="Adresse de départ" required="required">
 									<input type="text" name="end"  id="autocomplete2" class="search_input search_input_2" placeholder="Adresse d'arrivé" required="required">
-									<input type="number" name="price"  id="price" class="search_input search_input_4" placeholder="Budget" required="required">
+									<!--<input type="number" name="price"  id="price" class="search_input search_input_4" placeholder="Budget" required="required">-->
+
+									<label for="dateDebut">Date de début du trajet : </label>
+									<?php echo $form->input('dateDebut','date'); ?>
+
+									<label for="heureDebut">Heure de début du trajet</label>
+									<?php echo $form->input('heureDebut','time'); ?>
 									<button class="home_search_button">Rechercher</button>
 
 							</form>

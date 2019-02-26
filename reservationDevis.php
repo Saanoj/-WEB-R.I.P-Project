@@ -32,6 +32,7 @@
 
     $form = new App\Form(array());
 
+    $trajet = unserialize($_SESSION['trajet']);
     /*
     if (isset($_POST[""])) {
       // code...
@@ -45,7 +46,7 @@
              <!-- Default panel contents -->
              <div class="card-header">
                <h1 class="display-3">Devis</h1>
-               <p><?php echo "idTrajet: ".$_SESSION["idTrajet"]."<br>Trajet: ". "<br>".$_SESSION["startTrajet"]. " => ".$_SESSION["endTrajet"] ?></p>
+               <?php $trajet->showInfosTrajet(); ?>
              </div>
 
              <div class="list-group list-group-flush">
@@ -85,7 +86,7 @@
                 <li class="list-group">
                   <?php //echo $i?>
                   <h4><?php echo $chauffeur->getFirst_name()." ".$chauffeur->getLast_name();?></h4>
-                  <h6>id du Chauffeur: <?php echo $chauffeur->getIdCollaborateur(); ?> Prix: <?php $chauffeur->getPrixCollaborateur()." / Km  // AJOUTER SYSTEME PHOTO + SYSTEME ETOILES" ?></h6>
+                  <h6>id du Chauffeur: <?php echo $chauffeur->getIdCollaborateur(); ?> Prix: <?php echo $chauffeur->getPrixCollaborateur()."€ / Km  // AJOUTER SYSTEME PHOTO + SYSTEME ETOILES" ?></h6>
                   <div class="row">
                     <div class="col-md-6">
                       <h4>Infos: </h4>

@@ -30,6 +30,11 @@ class Database{
     return $this->pdo;
   }
 
+  public function queryPrepareForWhile($statement,$bdd){
+    $chauffeurs = $bdd->getPDO()->prepare($statement);
+    $chauffeurs->execute();
+    return $chauffeurs;
+  }
 
 
   public function query($statement){  //, $class_name

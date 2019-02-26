@@ -34,6 +34,9 @@
     $navbar->navbar($backOffice);
 
     $form = new App\Form(array());
+
+    //recup obj trajet de session
+    $trajet = unserialize($_SESSION['trajet']);
     ?>
 
     <div class="container">
@@ -41,20 +44,10 @@
          <div class="offset-md-2 col-md-8">
            <div class="card" style="margin:50px 0">
                 <!-- Default panel contents -->
-                <div class="card-header">
-                  <h1 class="display-3">Informations complémentaires au trajet</h1>
-                  <form method="POST" action="valideReservationServices.php">
-
-                  <label for="dateDebut">Date de début du trajet : </label>
-                  <?php echo $form->input('dateDebut','date'); ?>
-
-                  <label for="heureDebut">Heure de début du trajet</label>
-                  <?php echo $form->input('heureDebut','time'); ?>
-                </div>
 
                 <div class="card-header">
                   <h1 class="display-3">Choisissez vos services</h1>
-                  <p><?php echo "Trajet: ". "<br>".$_SESSION["startTrajet"]. " => ".$_SESSION["endTrajet"] ?></p>
+                  <?php $trajet->showInfosTrajet(); ?>
                 </div>
 
                 <form class="list-group list-group-flush container" method="POST" action="valideReservationServices.php">
@@ -72,7 +65,7 @@
                   {
                     $service = new App\Service($unService["idService"],$unService["nomService"],$unService["description"],$unService["prixService"]);
                     ?>
-                    <li class="list-group-item col-md-12 row">
+                    <li class="list-group-item col-md-8 row">
                       <h3 class="col-md-6"><?php echo $service->getNomService(); ?></h3>
                       <h6 class="col-md-2">idService: <?php echo $service->getIdService()."<br>"; ?> Prix: <?php echo $service->getPrixService()." €"; ?></h6>
                       <label>Description:</label>

@@ -68,9 +68,12 @@
                     <li class="list-group-item col-md-8 row">
                       <h3 class="col-md-6"><?php echo $service->getNomService(); ?></h3>
                       <h6 class="col-md-2">idService: <?php echo $service->getIdService()."<br>"; ?> Prix: <?php echo $service->getPrixService()." €"; ?></h6>
-                      <label>Description:</label>
-                      <?php echo $service->getDescription(); ?>
-                      <label class="switch" class="col-md-2">
+                      <div class="col-md-2">
+                        <label class="">Description:</label>
+                        <?php echo $service->getDescription(); ?>
+                      </div>
+
+                      <label class="switch col-md-2">
                         <input type="checkbox" class="primary" name="services[<?php $i ?>]" value="<?php echo $service->getIdService(); ?>">
                         <span class="slider round"></span>
                       </label>

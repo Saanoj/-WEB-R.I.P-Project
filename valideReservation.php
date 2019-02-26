@@ -10,7 +10,15 @@ echo $timeStart;
 $timestampStart = strtotime($timeStart);
 echo "<br>".$timestampStart;
 
-$apiReturn = App\Trajet::getDistanceTime($_POST["start"], $_POST["end"]);
+$start = str_replace(' ',"%20",$_POST["start"]);
+$end = str_replace(' ',"%20",$_POST["end"]);
+$start = str_replace(',',"",$start);
+$end = str_replace(',',"",$end);
+
+echo "<br>".$start;
+echo "<br>".$end;
+
+$apiReturn = App\Trajet::getDistanceTime($start, $end);
 
 $estimatedTime=60*$apiReturn["time"]; //temps estimé de 34 minutes
 $timestampEnd = $timestampStart+$estimatedTime;

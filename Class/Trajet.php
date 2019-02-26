@@ -119,7 +119,7 @@ $bdd = new Database('rip');
     }
 
     static public function getDistanceTime($start,$end){
-      $api = file_get_contents("https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=".$_POST["start"]."&destinations=".$_POST["end"]."&key=AIzaSyD9V95TZkvQgMaGrryXqkveGQSFdPtyK0Y");
+      $api = file_get_contents("https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=".$start."&destinations=".$end."&key=AIzaSyD9V95TZkvQgMaGrryXqkveGQSFdPtyK0Y");
       $data = json_decode($api);
 
       //echo "<br>Distance: ".((int)$data->rows[0]->elements[0]->distance->value/1000).;

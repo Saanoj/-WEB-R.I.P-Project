@@ -90,7 +90,7 @@ session_start();
                         <input type="checkbox" href="#costumModal1" role="button" data-target="#costumModal<?php echo $i ?>" class="primary"  name="services[<?php echo $i ?>]" data-toggle="modal"  value="<?php echo $service->getIdService(); ?>"></input>
                         <span class="slider round"></span>
                       </label>
-                      <div id="costumModal<?php echo $i ?>" class="modal" data-easein="flipXIn" tabindex="-1" role="dialog" aria-labelledby="costumModalLabel" aria-hidden="false">
+                      <div id="costumModal<?php echo $i ?>" class="modal" data-easein="pulse" tabindex="-1" role="dialog" aria-labelledby="costumModalLabel" aria-hidden="false">
                         <div class="modal-dialog">
                           <div class="modal-content">
                             <div class="modal-header">
@@ -100,19 +100,32 @@ session_start();
                               <h4 class="modal-title" id="costumModalLabel">
                                 <?php
                                 //var_dump($service);
-                                echo $service->getIdService(); ?>
+                                echo $service->getNomService(); ?>
                               </h4>
                             </div>
-                            <div class="modal-body">
-                              <input type="text">test</text>
-                            </div>
+                            <?php
+
+                              $restaurants = $bdd->getPDO()->prepare('SELECT * FROM restaurants');
+                              $restaurants->execute();
+                              
+                              while($unRestaurants = $restaurants->fetch())
+                              {
+                                $datas = App\Restaurant::createRestaurant($unRestaurants['idRestaurant'],$unRestaurants['nomRestaurant'],$unRestaurants['prixMoyen'],$unRestaurants['horrairesDebut'],$unRestaurants['horrairesFin']);                                
+                               ?> 
+                         <div class="funkyradio-primary col-md-6 center-block">
+                    <input type="radio" name="idRestaurant" id="<?php echo $unRestaurants['idRestaurant'] ?>" value="<?php echo $unRestaurants['idRestaurant'] ?>" checked/><?=$unRestaurants['nomRestaurant'] ?> </input>
+                    <label for="radio<?php echo $unRestaurants['idRestaurant'] ?>">Choisir ce restaurant</label>
+                </div>
+                    <?php
+                              }
+
+                            ?>
+                            
                             <div class="modal-footer">
                               <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">
-                                Ferme
+                                Sauvegarder
                               </button>
-                              <button class="btn btn-primary">
-                                Sauvegarder les changements
-                              </button>
+                            
                             </div>
                           </div>
                         </div>

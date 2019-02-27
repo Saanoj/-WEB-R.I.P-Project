@@ -64,7 +64,7 @@
                   while($unService = $services->fetch())
                   {
                     $service = new App\Service($unService["idService"],$unService["nomService"],$unService["description"],$unService["categorie"],$unService["prixService"]);
-                    var_dump($service);
+                    
                     ?>
                     <li class="list-group-item col-md-8 row">
                       <h3 class="col-md-6"><?php echo $service->getNomService(); ?></h3>
@@ -95,7 +95,9 @@
                            
                        </button>
                        <h4 class="modal-title" id="costumModalLabel">
-                         <?php echo $service->getIdService(); ?>
+                         <?php
+                         var_dump($service);
+                          echo $service->getIdService(); ?>
                        </h4>
                    </div>
                    <div class="modal-body">

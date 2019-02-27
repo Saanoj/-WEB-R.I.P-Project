@@ -28,7 +28,10 @@ class Navbar
               else{
                include('navbar/navbarAdmin.php');
                }
-            }else{
+            }elseif($backOffice !=0){
+              header('Location:http://localhost/-WEB-R.I.P-Project/');
+            }
+            else{
               include('navbar/navbarCustomer.php');
             }
           }

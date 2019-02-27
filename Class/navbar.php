@@ -29,13 +29,15 @@ class Navbar
                include('navbar/navbarAdmin.php');
                }
             }elseif($backOffice !=0){
-              header('Location:http://localhost/-WEB-R.I.P-Project/');
+              header('Location:http://localhost/-WEB-R.I.P-Project/notConnect.php');
             }
             else{
               include('navbar/navbarCustomer.php');
             }
           }
-         else{
+          elseif($backOffice !=0){
+            header('Location:http://localhost/-WEB-R.I.P-Project/notConnect.php');
+          }else{
             include('navbar/navbar.php');
           }
     }

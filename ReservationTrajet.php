@@ -1,8 +1,12 @@
-<?php 
+<?php
 session_start();
-if (isset($_SESSION['id'])) {
-	header('location:index.php'); }
-	else {
+require 'Class/Autoloader.php';
+App\Autoloader::register();
+$navbar = new App\Navbar();
+$form = new App\Form();
+$Session = new App\Session();
+$backOffice=0;
+$Session->isConnect();
 ?>
 
 
@@ -23,18 +27,12 @@ if (isset($_SESSION['id'])) {
 <script src="js/popper.min.js"></script>
 
 <?php
-  include 'includehtml/head.html'; ?>
+
+  include 'includehtml/head.html';
+	$navbar->navbar($backOffice);?>
 </head>
 <body>
-  <?php
-require 'Class/Autoloader.php';
-App\Autoloader::register();
-$bdd = new App\Database('rip');
-$navbar = new App\Navbar();
-$form = new App\Form();
-$backOffice=0;
-$navbar->navbar($backOffice);
-  ?>
+
 
 <div class="super_container">
 
@@ -140,4 +138,3 @@ $navbar->navbar($backOffice);
 
 </body>
 </html>
-	<?php } ?>

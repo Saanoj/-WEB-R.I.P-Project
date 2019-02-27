@@ -63,7 +63,8 @@
                   $i=0;
                   while($unService = $services->fetch())
                   {
-                    $service = new App\Service($unService["idService"],$unService["nomService"],$unService["description"],$unService["prixService"]);
+                    $service = new App\Service($unService["idService"],$unService["nomService"],$unService["description"],$unService["categorie"],$unService["prixService"]);
+                    var_dump($service);
                     ?>
                     <li class="list-group-item col-md-8 row">
                       <h3 class="col-md-6"><?php echo $service->getNomService(); ?></h3>
@@ -72,11 +73,48 @@
                         <label class="">Description:</label>
                         <?php echo $service->getDescription(); ?>
                       </div>
-
+                      <?php
+                      if ($service->getIdService() != 1 && $service->getIdService() !=7 && $service->getIdService() != 8 && $service->getIdService() !=16 ) {
+                      ?>
                       <label class="switch col-md-2">
-                        <input type="checkbox" class="primary" name="services[<?php $i ?>]" value="<?php echo $service->getIdService(); ?>">
+                        <input type="checkbox" class="primary" name="services[<?php echo $i ?>]" value="<?php echo $service->getIdService(); ?>">
                         <span class="slider round"></span>
-                      </label>
+                      </label> <?php } else { ?>
+
+
+
+<label class="switch col-md-2">
+<input type="checkbox" href="#costumModal1" role="button" data-target="#costumModal1" class="primary"  name="services[<?php echo $i ?>]" data-toggle="modal"  value="<?php echo $service->getIdService(); ?>"></input>
+             <span class="slider round"></span>
+                     </label>
+       <div id="costumModal1" class="modal" data-easein="flipXIn" tabindex="-1" role="dialog" aria-labelledby="costumModalLabel" aria-hidden="false">
+           <div class="modal-dialog">
+               <div class="modal-content">
+                   <div class="modal-header">
+                       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                           
+                       </button>
+                       <h4 class="modal-title" id="costumModalLabel">
+                         <?php echo $service->getIdService(); ?>
+                       </h4>
+                   </div>
+                   <div class="modal-body">
+                 <input type="text">test</text>
+                   </div>
+                   <div class="modal-footer">
+                       <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">
+                           Ferme
+                       </button>
+                       <button class="btn btn-primary">
+                           Sauvegarder les changements
+                       </button>
+                   </div>
+               </div>
+           </div>
+       </div>
+
+<?php } ?>
+
                     </li>
                 <?php
                 $i++;
@@ -92,6 +130,9 @@
           </div>
         </div>
       </div>
+
+
+        
 
     <?php include "includehtml/footer.html" ?>
   </body>

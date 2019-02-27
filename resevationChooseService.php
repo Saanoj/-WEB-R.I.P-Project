@@ -1,3 +1,6 @@
+<?php 
+  session_start();
+  ?>
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -24,7 +27,7 @@
   </head>
   <body>
     <?php
-    session_start();
+  
     require 'Class/Autoloader.php';
     App\Autoloader::register();
     $bdd = new App\Database('rip');

@@ -4,7 +4,7 @@ require 'Class/Autoloader.php';
 App\Autoloader::register();
 $bdd = new App\Database('rip');
 
-echo "string";
+
 $servicesChoisi=$_POST['services'];
 
 var_dump($servicesChoisi);

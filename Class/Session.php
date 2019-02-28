@@ -11,7 +11,7 @@ class Session
   }
   public function isConnect()
   {
-    if(isset($this->getId())){
+    if($this->getId()){
       //good
     }else{
       header('Location:http://localhost/-WEB-R.I.P-Project/notConnect.php');

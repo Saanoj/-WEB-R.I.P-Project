@@ -20,7 +20,7 @@ class Database{
 
   public function getPDO(){
     if($this->pdo === null){
-      $pdo = new PDO('mysql:dbname=rip;host=localhost', 'root', '');
+      $pdo = new PDO('mysql:dbname=rip;host=localhost;charset=UTF8', 'root', '');
 
       $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $this->pdo = $pdo;

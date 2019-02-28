@@ -75,21 +75,26 @@ session_start();
                   <div class="col-md-2">
                     <label class="">Description:</label>
                     <?php echo $service->getDescription(); ?>
-                  </div>
+                  </div><label class="switch col-md-2">
+                    <input type="checkbox" class="primary" name="services[<?php echo $i ?>]" value="<?php echo $service->getIdService(); ?>">
+                    <span class="slider round"></span>
+                  </label>
                   <?php
                   if ($service->getIdService() != 1 && $service->getIdService() !=7 && $service->getIdService() != 8 && $service->getIdService() !=16 ) {
                     ?>
-                    <label class="switch col-md-2">
-                      <input type="checkbox" class="primary" name="services[<?php echo $i ?>]" value="<?php echo $service->getIdService(); ?>">
-                      <span class="slider round"></span>
-                    </label> <?php } else { ?>
+
+                    <!--<button type="button" name="services[<?php echo $i ?>]" class="btn btn-info">Choisir</button>-->
+                  <?php } else { ?>
 
 
+                      <button type="button" href="#costumModal<?php echo $i ?>" data-target="#costumModal<?php echo $i ?>" name="services[<?php echo $i ?>]" class="btn btn-info" data-toggle="modal">Choisir</button>
 
+                      <!--
                       <label class="switch col-md-2">
                         <input type="checkbox" href="#costumModal1" role="button" data-target="#costumModal<?php echo $i ?>" class="primary"  name="services[<?php echo $i ?>]" data-toggle="modal"  value="<?php echo $service->getIdService(); ?>"></input>
                         <span class="slider round"></span>
                       </label>
+                    -->
                       <div id="costumModal<?php echo $i ?>" class="modal" data-easein="pulse" tabindex="-1" role="dialog" aria-labelledby="costumModalLabel" aria-hidden="false">
                         <div class="modal-dialog">
                           <div class="modal-content">

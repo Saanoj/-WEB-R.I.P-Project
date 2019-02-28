@@ -87,76 +87,76 @@ session_start();
                   <?php } else { ?>
 
 
-                      <button type="button" href="#costumModal<?php echo $i ?>" data-target="#costumModal<?php echo $i ?>" name="services[<?php echo $i ?>]" class="btn btn-info" data-toggle="modal">Choisir</button>
+                    <button type="button" href="#costumModal<?php echo $i ?>" data-target="#costumModal<?php echo $i ?>" name="services[<?php echo $i ?>]" class="btn btn-info" data-toggle="modal">Choisir</button>
 
-                      <!--
-                      <label class="switch col-md-2">
-                        <input type="checkbox" href="#costumModal1" role="button" data-target="#costumModal<?php echo $i ?>" class="primary"  name="services[<?php echo $i ?>]" data-toggle="modal"  value="<?php echo $service->getIdService(); ?>"></input>
-                        <span class="slider round"></span>
-                      </label>
-                    -->
-                      <div id="costumModal<?php echo $i ?>" class="modal" data-easein="pulse" tabindex="-1" role="dialog" aria-labelledby="costumModalLabel" aria-hidden="false">
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <!--
+                    <label class="switch col-md-2">
+                    <input type="checkbox" href="#costumModal1" role="button" data-target="#costumModal<?php echo $i ?>" class="primary"  name="services[<?php echo $i ?>]" data-toggle="modal"  value="<?php echo $service->getIdService(); ?>"></input>
+                    <span class="slider round"></span>
+                  </label>
+                -->
+                <div id="costumModal<?php echo $i ?>" class="modal" data-easein="pulse" tabindex="-1" role="dialog" aria-labelledby="costumModalLabel" aria-hidden="false">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 
-                              </button>
-                              <h4 class="modal-title" id="costumModalLabel">
-                                <?php
-                                //var_dump($service);
-                                echo $service->getNomService(); ?>
-                              </h4>
-                            </div>
-                            <?php
-
-                              $restaurants = $bdd->getPDO()->prepare('SELECT * FROM restaurants');
-                              $restaurants->execute();
-
-                              while($unRestaurants = $restaurants->fetch())
-                              {
-                                $datas = App\Restaurant::createRestaurant($unRestaurants['idRestaurant'],$unRestaurants['nomRestaurant'],$unRestaurants['prixMoyen'],$unRestaurants['horrairesDebut'],$unRestaurants['horrairesFin']);
-                               ?>
-                         <div class="funkyradio-primary col-md-6 center-block">
-                    <input type="radio" name="idRestaurant" id="<?php echo $unRestaurants['idRestaurant'] ?>" value="<?php echo $unRestaurants['idRestaurant'] ?>" checked/><?=$unRestaurants['nomRestaurant'] ?> </input>
-                    <label for="radio<?php echo $unRestaurants['idRestaurant'] ?>">Choisir ce restaurant</label>
-                </div>
-                    <?php
-                              }
-
-                            ?>
-
-                            <div class="modal-footer">
-                              <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">
-                                Sauvegarder
-                              </button>
-
-                            </div>
-                          </div>
-                        </div>
+                        </button>
+                        <h4 class="modal-title" id="costumModalLabel">
+                          <?php
+                          //var_dump($service);
+                          echo $service->getNomService(); ?>
+                        </h4>
                       </div>
+                      <?php
 
-                    <?php } ?>
+                      $restaurants = $bdd->getPDO()->prepare('SELECT * FROM restaurants');
+                      $restaurants->execute();
 
-                  </li>
-                  <?php
-                  $i++;
-                }
-                ?>
-              </div>
-              <br>
-              <div class="center-block">
-                <?php echo $form->submit(); ?>
-              </div>
-            </form>
-          </div>
+                      while($unRestaurants = $restaurants->fetch())
+                      {
+                        $datas = App\Restaurant::createRestaurant($unRestaurants['idRestaurant'],$unRestaurants['nomRestaurant'],$unRestaurants['prixMoyen'],$unRestaurants['horrairesDebut'],$unRestaurants['horrairesFin']);
+                        ?>
+                        <div class="funkyradio-primary col-md-6 center-block">
+                          <input type="radio" name="idRestaurant" id="<?php echo $unRestaurants['idRestaurant'] ?>" value="<?php echo $unRestaurants['idRestaurant'] ?>" checked/><?=$unRestaurants['nomRestaurant'] ?> </input>
+                          <label for="radio<?php echo $unRestaurants['idRestaurant'] ?>">Choisir ce restaurant</label>
+                        </div>
+                        <?php
+                      }
+
+                      ?>
+
+                      <div class="modal-footer">
+                        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">
+                          Sauvegarder
+                        </button>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              <?php } ?>
+
+            </li>
+            <?php
+            $i++;
+          }
+          ?>
         </div>
-      </div>
+        <br>
+        <div class="center-block">
+          <?php echo $form->submit(); ?>
+        </div>
+      </form>
     </div>
+  </div>
+</div>
+</div>
 
 
 
 
-    <?php include "includehtml/footer.html" ?>
-  </body>
-  </html>
+<?php include "includehtml/footer.html" ?>
+</body>
+</html>

@@ -4,7 +4,7 @@ use \PDO;
 
 class Session
 {
-  private $id
+  private $id;
   public function __construct($id)
   {
     $this->id = $id;

@@ -13,9 +13,9 @@ include '../../include/fonction.php';
   <?php
   require '../../Class/Autoloader.php';
   App\Autoloader::register();
-  $navbar = new App\Navbar();
   $backOffice=2;
-  $navbar->navbar($backOffice);
+  $navbar = new App\Navbar($backOffice);
+  $navbar->navbar();
   $Session = new App\Session($_SESSION['id']);
   $Session->isConnect();
   ?>

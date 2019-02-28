@@ -25,10 +25,11 @@
     require 'Class/Autoloader.php';
     App\Autoloader::register();
     $bdd = new App\Database('rip');
-    $navbar = new App\Navbar();
     $backOffice=0;
+    $navbar = new App\Navbar($backOffice);
+    $navbar->navbar();
     $form =new App\Form(array());
-    $navbar->navbar($backOffice);
+
 
     $form = new App\Form(array());
     $abo = App\Abonnement::createAbonnement($bdd);
@@ -46,7 +47,7 @@
                 <div>
                 <ul>
                 <li><?php
-                
+
                 ?></li>
                 <li>b</li>
 
@@ -54,7 +55,7 @@
                 </ul>
                 </div>
 
-                
+
 
 
             </div>

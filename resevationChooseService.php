@@ -31,10 +31,10 @@ session_start();
   require 'Class/Autoloader.php';
   App\Autoloader::register();
   $bdd = new App\Database('rip');
-  $navbar = new App\Navbar();
-  $backOffice=0;
   $form =new App\Form(array());
-  $navbar->navbar($backOffice);
+  $backOffice=0;
+  $navbar = new App\Navbar($backOffice);
+  $navbar->navbar();
 
   $form = new App\Form(array());
 
@@ -107,11 +107,11 @@ session_start();
 
                               $restaurants = $bdd->getPDO()->prepare('SELECT * FROM restaurants');
                               $restaurants->execute();
-                              
+
                               while($unRestaurants = $restaurants->fetch())
                               {
-                                $datas = App\Restaurant::createRestaurant($unRestaurants['idRestaurant'],$unRestaurants['nomRestaurant'],$unRestaurants['prixMoyen'],$unRestaurants['horrairesDebut'],$unRestaurants['horrairesFin']);                                
-                               ?> 
+                                $datas = App\Restaurant::createRestaurant($unRestaurants['idRestaurant'],$unRestaurants['nomRestaurant'],$unRestaurants['prixMoyen'],$unRestaurants['horrairesDebut'],$unRestaurants['horrairesFin']);
+                               ?>
                          <div class="funkyradio-primary col-md-6 center-block">
                     <input type="radio" name="idRestaurant" id="<?php echo $unRestaurants['idRestaurant'] ?>" value="<?php echo $unRestaurants['idRestaurant'] ?>" checked/><?=$unRestaurants['nomRestaurant'] ?> </input>
                     <label for="radio<?php echo $unRestaurants['idRestaurant'] ?>">Choisir ce restaurant</label>
@@ -120,12 +120,12 @@ session_start();
                               }
 
                             ?>
-                            
+
                             <div class="modal-footer">
                               <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">
                                 Sauvegarder
                               </button>
-                            
+
                             </div>
                           </div>
                         </div>

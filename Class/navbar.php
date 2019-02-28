@@ -8,17 +8,28 @@ use \PDO;
  */
 class Navbar
 {
+  private $backOffice;
+  public function __construct($backOffice)
+  {
+    $this->backOffice=$backOffice;
+  }
+  public function getBackOffice() {return $this->backOffice;}
 
-  public function navbar($backOffice)
+  public function navbar()
   {
 
       $bdd = new Database('rip');
-      if(isset($_SESSION['id'])){
+      $session = new Session($_SESSION['id']);
+      $id = $session->getId();
+      if(isset($id)){
             $query=$bdd->getPDO()->prepare('SELECT isAdmin
             FROM users WHERE id = :id');
             $query->bindValue(':id',$_SESSION['id']);
             $query->execute();
             $data=$query->fetch();
+
+            $backOffice = $this->getBackOffice();
+
             if($data['isAdmin'] == 1){
               if ($backOffice == 1){
                   include('../navbar/NavbarBackOffice.php');

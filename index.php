@@ -11,9 +11,10 @@ session_start();
   <?php
   require 'Class/Autoloader.php';
   App\Autoloader::register();
-  $navbar = new App\Navbar();
   $backOffice=0;
-  $navbar->navbar($backOffice);?>
+  $navbar = new App\Navbar($backOffice);
+  $navbar->navbar();
+  ?>
 
   <!-- Get a quote section -->
   <section  class="section quote">

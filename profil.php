@@ -22,9 +22,9 @@ session_start();
   require 'Class/Autoloader.php';
   App\Autoloader::register();
   $bdd = new App\Database('rip');
-  $navbar = new App\Navbar();
   $backOffice=0;
-  $navbar->navbar($backOffice);
+  $navbar = new App\Navbar($backOffice);
+  $navbar->navbar();
 
   // REQUETE POUR RECUPER LES INFOS DU USER
 

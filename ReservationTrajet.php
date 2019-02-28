@@ -23,10 +23,6 @@ session_start();
 <?php
 
   include 'includehtml/head.html';
-<<<<<<< HEAD
-  $form =new App\Form(array());
-	$navbar->navbar($backOffice);?>
-=======
   require 'Class/Autoloader.php';
   App\Autoloader::register();
   $backOffice=0;
@@ -37,7 +33,6 @@ session_start();
   $form = new App\Form();
 
   ?>
->>>>>>> aedc041b433ce3992cc79f7cf8e349e3de13b878
 </head>
 <body>
 

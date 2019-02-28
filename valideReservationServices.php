@@ -5,7 +5,7 @@ App\Autoloader::register();
 $bdd = new App\Database('rip');
 
 
-
+if (isset($_POST['services']) && (!empty($_POST['services']))) {
 $servicesChoisi=$_POST['services'];
 
 var_dump($servicesChoisi);
@@ -19,7 +19,7 @@ foreach ($servicesChoisi as $service) {
       $idAnnexe=$_POST["idHotel"];
       break;
     case 8:
-      $idAnnexe=$_POST["billetTouristique"];
+      $idAnnexe=$_POST["idBillet"];
       break;
 
     default:
@@ -35,4 +35,8 @@ foreach ($servicesChoisi as $service) {
   $req->closeCursor();
 }
 //header("location: resevationChooseDriver.php");
+}
+else {
+  header("location:resevationChooseService.php?probleme_de_case");
+}
 ?>

@@ -3,9 +3,9 @@ session_start();
 require 'Class/Autoloader.php';
 App\Autoloader::register();
 $navbar = new App\Navbar();
-$form = new App\Form();
-$Session = new App\Session();
 $backOffice=0;
+$form = new App\Form();
+$Session = new App\Session($_SESSION['id']);
 $Session->isConnect();
 ?>
 

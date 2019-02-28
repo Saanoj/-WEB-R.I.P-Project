@@ -16,6 +16,8 @@ include '../../include/fonction.php';
   $navbar = new App\Navbar();
   $backOffice=2;
   $navbar->navbar($backOffice);
+  $Session = new App\Session($_SESSION['id']);
+  $Session->isConnect();
   ?>
 
   <br>

@@ -1,12 +1,6 @@
 <?php
 session_start();
-require 'Class/Autoloader.php';
-App\Autoloader::register();
-$backOffice=0;
-$navbar = new App\Navbar($backOffice);
-$navbar->navbar();
-$Session = new App\Session($_SESSION['id']);
-$Session->isConnect();
+
 ?>
 
 
@@ -29,7 +23,16 @@ $Session->isConnect();
 <?php
 
   include 'includehtml/head.html';
-	$navbar->navbar($backOffice);?>
+  require 'Class/Autoloader.php';
+  App\Autoloader::register();
+  $backOffice=0;
+  $navbar = new App\Navbar($backOffice);
+  $navbar->navbar();
+  $Session = new App\Session($_SESSION['id']);
+  $Session->isConnect();
+  $form = new App\Form();
+
+  ?>
 </head>
 <body>
 

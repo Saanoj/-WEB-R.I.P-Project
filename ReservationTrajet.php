@@ -29,6 +29,7 @@ $Session->isConnect();
 <?php
 
   include 'includehtml/head.html';
+  $form =new App\Form(array());
 	$navbar->navbar($backOffice);?>
 </head>
 <body>

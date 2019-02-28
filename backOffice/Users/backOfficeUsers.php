@@ -1,5 +1,7 @@
 <?php
 session_start();
+
+
 include '../../include/config.php';
 include '../../include/fonction.php';
 ?>
@@ -21,7 +23,7 @@ include '../../include/fonction.php';
   ?>
 
   <div>
-    <h1> Costumer Table</h1>
+    <h1>Table comptes</h1>
     <table class="table">
       <thead>
         <tr>
@@ -39,6 +41,6 @@ include '../../include/fonction.php';
       ?>
     </table>
   </div>
-  <?php include "../includehtml/footer.html" ?>
+  <?php include "../includehtml/footer.php" ?>
 </body>
 </html>

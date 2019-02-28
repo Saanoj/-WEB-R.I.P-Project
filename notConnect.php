@@ -1,6 +1,13 @@
 <?php
 session_start();
 
+//multilingue
+if (!isset($_SESSION['lang'])) {
+  $_SESSION['lang'] = "fr";
+}
+include "multilingue/multilingue.php";
+loadLanguageFromSession($_SESSION['lang']);
+
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -22,5 +29,5 @@ $navbar->navbar();?>
     <br>
   </div>
 </body>
-<?php include "includehtml/footer.html" ?>
+<?php include "includehtml/footer.php" ?>
 </html>

@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 include '../include/config.php';
 include '../include/fonction.php';
 ?>
@@ -20,7 +21,7 @@ include '../include/fonction.php';
   ?>
 
   <div class="container">
-    <h1>Bienvenue sur le Back Office</h1>
+    <h1>Bienvenue sur le back-office</h1>
     <br>
     <br>
     <br>
@@ -34,6 +35,6 @@ include '../include/fonction.php';
     <br>
     <br>
   </div>
-  <?php include "includehtml/footer.html" ?>
+  <?php include "includehtml/footer.php" ?>
 </body>
 </html>

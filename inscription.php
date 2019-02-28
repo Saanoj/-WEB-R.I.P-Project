@@ -1,4 +1,13 @@
 <?php
+session_start();
+
+//multilingue
+if (!isset($_SESSION['lang'])) {
+  $_SESSION['lang'] = "fr";
+}
+include "multilingue/multilingue.php";
+loadLanguageFromSession($_SESSION['lang']);
+
 
 require 'Class/Autoloader.php';
 App\Autoloader::register();
@@ -99,7 +108,7 @@ $form = new App\Form(array());
   </div>
 
 </div>
-<?php include "includehtml/footer.html" ?>
+<?php include "includehtml/footer.php" ?>
 
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>

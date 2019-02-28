@@ -1,5 +1,7 @@
 <?php
 session_start();
+
+
 include '../../include/config.php';
 include '../../include/fonction.php';
 ?>
@@ -23,7 +25,7 @@ include '../../include/fonction.php';
   <br>
   <br>
   <div class="container">
-    <h1>Banned Guide Table</h1>
+    <h1>Table des comptes bannis</h1>
     <table class="table">
       <thead>
         <tr>
@@ -40,6 +42,6 @@ include '../../include/fonction.php';
       ?>
     </table>
   </div>
-  <?php include "../includehtml/footer.html" ?>
+  <?php include "../includehtml/footer.php" ?>
 </body>
 </html>

@@ -12,14 +12,14 @@
       <div class="footer-top section">
         <div class="container">
           <div class="row">
-            <div class="footer-col col-md-6">
+            <div class="footer-col col-md-4">
               <h5>Nos locaux</h5>
               <p>242 rue faubourg saint antoine, Paris 12ème France.<br>
                 0101010101<br>
                 email@email.com</p>
               <p>Copyright © 2019 Ride in Pride Inc. All Rights Reserved. Made with <i class="fa fa-heart pulse"></i> by Arthur, Jonas et Maxime</p>
             </div>
-            <div class="footer-col col-md-3">
+            <div class="footer-col col-md-2">
               <h5>Nos Services</h5>
               <p>
               <ul>

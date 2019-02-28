@@ -1,3 +1,13 @@
+<?php
+    session_start();
+
+    //multilingue
+    if (!isset($_SESSION['lang'])) {
+      $_SESSION['lang'] = "fr";
+    }
+    include "multilingue/multilingue.php";
+    loadLanguageFromSession($_SESSION['lang']);
+ ?>
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -21,7 +31,6 @@
   </head>
   <body>
     <?php
-    session_start();
 
     require 'Class/Autoloader.php';
     App\Autoloader::register();
@@ -101,6 +110,6 @@
       </div>
     </div>
 
-    <?php include "includehtml/footer.html" ?>
+    <?php include "includehtml/footer.php" ?>
   </body>
 </html>

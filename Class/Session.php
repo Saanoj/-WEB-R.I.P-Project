@@ -14,7 +14,10 @@ class Session
     if($this->getId()){
       //good
     }else{
-      header('Location:http://localhost/-WEB-R.I.P-Project/notConnect.php');
+      $path=__DIR__.'../notConnect.php';
+      header('Location:'.$path);
+
+      
     }
   }
   public function getId() {return $this->id;}

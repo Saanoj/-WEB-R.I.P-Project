@@ -15,6 +15,7 @@ if(isset($servicesChoisi)){
   switch ($service) {
     case 1:
       $idAnnexe=$_POST["idRestaurant"];
+
       break;
     case 7:
       $idAnnexe=$_POST["idHotel"];
@@ -28,10 +29,11 @@ if(isset($servicesChoisi)){
         break;
     }
 
-    $req=$bdd->getPDO()->prepare('INSERT INTO linkServicetrajet (`idTrajet`,`idService`,`idAnnexe`) VALUES (:idTrajet,:idService,:idAnnexe)');
+    $req=$bdd->getPDO()->prepare('INSERT INTO linkServicetrajet (`idTrajet`,`idService`,`idAnnexe`,`quantite`,) VALUES (:idTrajet,:idService,:idAnnexe,:quantite)');
     $req->bindValue(':idTrajet', $_SESSION["idTrajet"]);
     $req->bindValue(':idService', $service);
     $req->bindValue(':idAnnexe', $idAnnexe);
+    $req->bindValue(':quantite', $quantite);
     $req->execute();
     $req->closeCursor();
 }

@@ -35,18 +35,19 @@ class Navbar
             include('../navbar/NavbarBackOffice.php');
           }elseif ($backOffice == 2) {
             include('../../navbar/NavbarBackOfficeUsers.php');
-          }
-          else{
+          }elseif ($backOffice == 3){
+            include('navbar/navbarReservation.php');
+          }else{
             include('navbar/navbarAdmin.php');
           }
-        }elseif($backOffice !=0){
+        }elseif($backOffice !=0 && $backOffice != 3){
           header('Location:http://localhost/-WEB-R.I.P-Project/notConnect.php');
-        }
-        else{
+        }elseif($backOffice==3){
+          include('navbar/navbarReservation.php');
+        }else{
           include('navbar/navbarCustomer.php');
         }
-      }
-      elseif($backOffice !=0){
+      }elseif($backOffice !=0){
         header('Location:http://localhost/-WEB-R.I.P-Project/notConnect.php');
       }else{
         include('navbar/navbar.php');

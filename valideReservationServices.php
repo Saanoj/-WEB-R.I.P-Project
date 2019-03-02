@@ -8,13 +8,18 @@ $bdd = new App\Database('rip');
 if (isset($_POST['services']) && (!empty($_POST['services']))) {
 $servicesChoisi=$_POST['services'];
 
+
+var_dump($_POST['quantite']);
+
 var_dump($servicesChoisi);
+
 if(isset($servicesChoisi)){
   foreach ($servicesChoisi as $service) {
 
   switch ($service) {
     case 1:
       $idAnnexe=$_POST["idRestaurant"];
+
       break;
     case 7:
       $idAnnexe=$_POST["idHotel"];
@@ -28,10 +33,11 @@ if(isset($servicesChoisi)){
         break;
     }
 
-    $req=$bdd->getPDO()->prepare('INSERT INTO linkServicetrajet (`idTrajet`,`idService`,`idAnnexe`) VALUES (:idTrajet,:idService,:idAnnexe)');
+    $req=$bdd->getPDO()->prepare('INSERT INTO linkServicetrajet (`idTrajet`,`idService`,`idAnnexe`,`quantite`,) VALUES (:idTrajet,:idService,:idAnnexe,:quantite)');
     $req->bindValue(':idTrajet', $_SESSION["idTrajet"]);
     $req->bindValue(':idService', $service);
     $req->bindValue(':idAnnexe', $idAnnexe);
+    $req->bindValue(':quantite', $quantite);
     $req->execute();
     $req->closeCursor();
 }

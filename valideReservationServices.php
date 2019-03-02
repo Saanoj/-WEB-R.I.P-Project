@@ -42,6 +42,7 @@ if (isset($_POST['services']) && (!empty($_POST['services']))) {
         $thisQuantite=0;
         break;
       }
+      echo "aaa ".$thisQuantite;
 
       $req=$bdd->getPDO()->prepare('INSERT INTO linkServicetrajet (`idTrajet`,`idService`,`idAnnexe`,`quantite`) VALUES (:idTrajet,:idService,:idAnnexe,:quantite)');
       $req->bindValue(':idTrajet', $_SESSION["idTrajet"]);

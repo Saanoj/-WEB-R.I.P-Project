@@ -141,13 +141,13 @@
                         $restaurants->execute();
                             while($unRestaurants = $restaurants->fetch())
                             {
-                              $datas = App\Restaurant::createRestaurant($unRestaurants['idRestaurant'],$unRestaurants['nomRestaurant'],$unRestaurants['prixMoyen'],$unRestaurants['horrairesDebut'],$unRestaurants['horrairesFin'],$unRestaurants['adresseRestaurant'],$unRestaurants['villeRestaurant']);
+                              $datas = App\Restaurant::createRestaurant($unRestaurants['idRestaurant'],$unRestaurants['nomRestaurant'],$unRestaurants['prixMoyen'],$unRestaurants['horrairesDebut'],$unRestaurants['horrairesFin'],$unRestaurants['adresseRestaurant'],$unRestaurants['villeRestaurant'],$unRestaurants['placeDispo']);
                              
                               
                               $unRestaurants['horrairesDebut'] = $res[0] . ' ' . $unRestaurants['horrairesDebut'];
                               $unRestaurants['horrairesFin'] = $res[0] . ' ' . $unRestaurants['horrairesFin'];
                           
-                              if (strtotime($hour) - strtotime($unRestaurants['horrairesDebut'])> 0 && strtotime($hour) - strtotime($unRestaurants['horrairesFin']) < 0 && $unRestaurants['isDispo'] == 1 )
+                              if (strtotime($hour) - strtotime($unRestaurants['horrairesDebut'])> 0 && strtotime($hour) - strtotime($unRestaurants['horrairesFin']) < 0 && $unRestaurants['isDispo'] == 1 && $unRestaurants['placeDispo'] > 0)
                               {
                                      
                               ?>

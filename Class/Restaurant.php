@@ -17,8 +17,9 @@ $bdd = new Database('rip');
     private $horrairesFin;
     private $adresseRestaurant;
     private $villeRestaurant;
+    private $placeDispo;
 
-    public function __construct($idRestaurant,$nomRestaurant,$prixMoyen,$horrairesDebut,$horrairesFin,$adresseRestaurant, $villeRestaurant) {
+    public function __construct($idRestaurant,$nomRestaurant,$prixMoyen,$horrairesDebut,$horrairesFin,$adresseRestaurant, $villeRestaurant,$placeDispo) {
         $this->idRestaurant = $idRestaurant;
         $this->nomRestaurant = $nomRestaurant;
         $this->prixMoyen = $prixMoyen;
@@ -26,6 +27,7 @@ $bdd = new Database('rip');
         $this->horrairesFin = $horrairesFin;
         $this->adresseRestaurant = $adresseRestaurant;
         $this->villeRestaurant = $villeRestaurant;
+        $this->placeDispo = $placeDispo;
 
 
     }
@@ -40,6 +42,7 @@ $bdd = new Database('rip');
     public function getHorrairesFinRestaurant() {return $this->horrairesFin;}
     public function getAdresseRestaurant() {return $this->adresseRestaurant;}
     public function getVilleRestaurant() {return $this->villeRestaurant;}
+    public function getPlaceDispoRestaurant() {return $this->placeDispo;}
 
     /* SETTERS */
     public function setIdRestaurant($newIdRestaurant) {return $this->idRestaurant = $newIdRestaurant;}
@@ -49,11 +52,12 @@ $bdd = new Database('rip');
     public function setHorrairesFinRestaurant($newHorrairesFinRestaurant) {return $this->horrairesFin = $newHorrairesFinRestaurant;}
     public function setAdresseRestaurant($newAdresseRestaurant) {return $this->adresseRestaurant = $newAdresseRestaurant;}
     public function setVilleRestaurant($newVilleRestaurant) {return $this->villeRestaurant = $newVilleRestaurant;}
+    public function setPlaceDispoRestaurant($newPlaceDispo) {return $this->placeDispo = $newPlaceDispo;}
 
     // METHODES
 
-    public static function createRestaurant($idRestaurant,$nomRestaurant,$prixMoyen,$horrairesDebut,$horrairesFin,$newAdresseRestaurant,$newVilleRestaurant) {
-        return $resto = new Restaurant($idRestaurant,$nomRestaurant,$prixMoyen,$horrairesDebut,$horrairesFin,$newAdresseRestaurant,$newVilleRestaurant);
+    public static function createRestaurant($idRestaurant,$nomRestaurant,$prixMoyen,$horrairesDebut,$horrairesFin,$newAdresseRestaurant,$newVilleRestaurant,$placeDispo) {
+        return $resto = new Restaurant($idRestaurant,$nomRestaurant,$prixMoyen,$horrairesDebut,$horrairesFin,$newAdresseRestaurant,$newVilleRestaurant,$placeDispo);
     }
 
     public static function querySelect($bdd,$statement) {

@@ -7,8 +7,8 @@ $bdd = new App\Database('rip');
 
 if (isset($_POST['services']) && (!empty($_POST['services']))) {
 $servicesChoisi=$_POST['services'];
+var_dump($_POST['quantite[1]']);
 
-var_dump($servicesChoisi);
 if(isset($servicesChoisi)){
   foreach ($servicesChoisi as $service) {
 

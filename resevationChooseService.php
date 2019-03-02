@@ -139,54 +139,9 @@ loadLanguageFromSession($_SESSION['lang']);
 
                         $restaurants = $bdd->getPDO()->prepare('SELECT * FROM restaurants ORDER BY idRestaurant DESC LIMIT 10 ');
                         $restaurants->execute();
-                            while($unRestaurants = $restaurants->fetch())
-                            {
-                              $datas = App\Restaurant::createRestaurant($unRestaurants['idRestaurant'],$unRestaurants['nom'],$unRestaurants['prixMoyen'],$unRestaurants['horrairesDebut'],$unRestaurants['horrairesFin'],$unRestaurants['adresseRestaurant'],$unRestaurants['villeRestaurant'],$unRestaurants['placeDispo']);
-
-
-                              $unRestaurants['horrairesDebut'] = $res[0] . ' ' . $unRestaurants['horrairesDebut'];
-                              $unRestaurants['horrairesFin'] = $res[0] . ' ' . $unRestaurants['horrairesFin'];
-
-                              if (strtotime($hour) - strtotime($unRestaurants['horrairesDebut'])> 0 && strtotime($hour) - strtotime($unRestaurants['horrairesFin']) < 0 && $unRestaurants['isDispo'] == 1 && $unRestaurants['placeDispo'] > 0)
-                              {
-
-                              ?>
-                              <table>
-
-                                          <tr>
-                                              <th scope="col">Nom du restaurant : </th>
-                                              <th scope="col">Adresse : </th>
-                                              <th scope="col">Prix moyen : </th>
-                                              <th scope="col">Quantité : </th>
-
-                                          </tr>
-                                          <tr>
-                                              <th scope="row"> <?= $unRestaurants['nom'];?></th>
-                                              <td> <?= $unRestaurants['adresseRestaurant'];?></td>
-                                              <td> <?= $unRestaurants['prixMoyen']. '€';?></td>
-                                              <td><input type="number" min="1" max="10" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]"></input></td>
-
-                                              <td>
-                                              <div class="funkyradio-primary col-md-6 center-block">
-                                                  <input type="radio"  name="idRestaurant" id="<?php echo $unRestaurants['idRestaurant'] ?>" value="<?php echo $unRestaurants['idRestaurant'] ?>" checked ></input>
-                                                  <label for="radio<?php echo $unRestaurants['idRestaurant'] ?>">Choisir ce restaurant</label>
-                                                </div>
-                                              </td>
-                                          </tr>
-                                      </table> <?php
-                              }
-
-                            }
-                            break;
-                          case '7':
-
-                      $hotel = $bdd->getPDO()->prepare('SELECT * FROM chambre INNER JOIN hotel ON chambre.idHotel = hotel.idHotel WHERE isDispo = 1 AND litsDispo > 0 ORDER BY idChambre DESC LIMIT 10 ');
-                      $hotel->execute();
-                          while($unHotel = $hotel->fetch())
-                          {
-                            $datas = App\Hotel::createHotel($unHotel['idHotel'],$unHotel['nom'],$unHotel['adresseHotel'],$unHotel['prixHotel']);
-                            $chambre = App\Chambre::createChambre($unHotel['idChambre'],$unHotel['typeChambre'],$unHotel['idHotel'],$unHotel['litsDispo'],$unHotel['isDispo']);
-
+                        while($unRestaurants = $restaurants->fetch())
+                        {
+                          $datas = App\Restaurant::createRestaurant($unRestaurants['idRestaurant'],$unRestaurants['nom'],$unRestaurants['prixMoyen'],$unRestaurants['horrairesDebut'],$unRestaurants['horrairesFin'],$unRestaurants['adresseRestaurant'],$unRestaurants['villeRestaurant']);
 
 
                           $unRestaurants['horrairesDebut'] = $res[0] . ' ' . $unRestaurants['horrairesDebut'];

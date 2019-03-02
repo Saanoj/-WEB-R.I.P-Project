@@ -57,21 +57,47 @@
              <div class="card-header">
                <h1 class="display-3">Devis</h1>
                <?php $trajet->showInfosTrajet(); ?>
+               <?php echo "<p>ID de votre trajet: ".$_SESSION["idTrajet"]."</p>" ?>
              </div>
 
              <div class="list-group list-group-flush">
                <h3 class="display-5 center-block">Services choisi</h3>
                <p class="center-block">
                <?php
-               //$idServices = $bdd->query('SELECT idService FROM linkServicetrajet WHERE idTrajet='.$_SESSION["idTrajet"].'');
                $idServices = $bdd->query('SELECT idService FROM linkServicetrajet WHERE idTrajet='.$_SESSION["idTrajet"].'');
 
                if (empty($idServices)) {
                  echo "Aucun services selectionnés";
                }else {
+                 //var_dump($idServices);
                  foreach ($idServices as $unIdService) {
+                   //var_dump($unIdService);
                    $service = $bdd->queryOne('SELECT * FROM services WHERE idService='.$unIdService["idService"].'');
-                   echo $service["nomService"].", ";
+                   $linkService = $bdd->queryOne('SELECT * FROM linkServicetrajet WHERE idService='.$unIdService["idService"].'');
+
+                   //echo $linkService["idAnnexe"];
+                   //var_dump($linkService);
+                   if($unIdService["idService"] == 1){
+                     $infoLinkService = $bdd->queryOne('SELECT * FROM restaurants WHERE idRestaurant='.$linkService["idAnnexe"].'');
+                     $typeEtablissement="Restaurant";
+                   }elseif ($unIdService["idService"] == 7) {
+                     $infoLinkService = $bdd->queryOne('SELECT * FROM hotel WHERE idHotel='.$linkService["idAnnexe"].'');
+                     $typeEtablissement="Hotel";
+                   }elseif ($unIdService["idService"] == 8) {
+                     $infoLinkService = $bdd->queryOne('SELECT * FROM billettourisme WHERE idBillet='.$linkService["idAnnexe"].'');
+                     $typeEtablissement="Billet touristque";
+                   }else {
+
+                   }
+
+
+                   if ($linkService["idAnnexe"] < 0) {
+                     echo "ID: ".$service["idService"]." | ".$service["nomService"];
+                   }else{
+                     //var_dump($infoLinkService);
+                     echo "ID: ".$service["idService"]." | ".$service["nomService"]." : ".$typeEtablissement." ".$infoLinkService["nom"]." | Quantitée: ".$linkService["quantite"]." places";
+                   }
+                   echo "<br><br>";
                  }
               }
               ?>
@@ -115,12 +141,24 @@
                       </ul>
                     </div>
                   </div>
+
                 </li>
 
-
-
-
-
+               </p>
+             </div>
+             <div class="list-group-item list-group-flush">
+               <div class="">
+                 <h3 class="center-block">Récapitulatif des prix</h3>
+               </div>
+               <p>
+                 <ul>
+                   <li>Prix chauffeur/trajet: <?php echo $chauffeur->getPrixCollaborateur()." €/Km " ?>* <?php echo $trajet->getDistance()." Km " ?>= <?php echo $trajet->getDistance()*$chauffeur->getPrixCollaborateur()." €" ?></li>
+                   <li>Prix Services: </li>
+                   <li></li>
+                 </ul>
+               </p>
+               <p>
+                 Prix total HT :
                </p>
              </div>
              <div class="row list-group-item center-block">

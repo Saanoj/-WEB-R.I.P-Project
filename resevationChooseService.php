@@ -83,7 +83,7 @@ loadLanguageFromSession($_SESSION['lang']);
               // Affichage d'un service
               $services = $bdd->getPDO()->prepare('SELECT * FROM services');
               $services->execute();
-              $i=0;
+              $i=1;
               while($unService = $services->fetch())
               {
                 $service = new App\Service($unService["idService"],$unService["nomService"],$unService["description"],$unService["prixService"],$unService["categorie"]);
@@ -141,7 +141,7 @@ loadLanguageFromSession($_SESSION['lang']);
                         $restaurants->execute();
                         while($unRestaurants = $restaurants->fetch())
                         {
-                          $datas = App\Restaurant::createRestaurant($unRestaurants['idRestaurant'],$unRestaurants['nomRestaurant'],$unRestaurants['prixMoyen'],$unRestaurants['horrairesDebut'],$unRestaurants['horrairesFin'],$unRestaurants['adresseRestaurant'],$unRestaurants['villeRestaurant']);
+                          $datas = App\Restaurant::createRestaurant($unRestaurants['idRestaurant'],$unRestaurants['nom'],$unRestaurants['prixMoyen'],$unRestaurants['horrairesDebut'],$unRestaurants['horrairesFin'],$unRestaurants['adresseRestaurant'],$unRestaurants['villeRestaurant']);
 
 
                           $unRestaurants['horrairesDebut'] = $res[0] . ' ' . $unRestaurants['horrairesDebut'];
@@ -161,7 +161,7 @@ loadLanguageFromSession($_SESSION['lang']);
 
                               </tr>
                               <tr>
-                                <th scope="row"> <?= $unRestaurants['nomRestaurant'];?></th>
+                                <th scope="row"> <?= $unRestaurants['nom'];?></th>
                                 <td> <?= $unRestaurants['adresseRestaurant'];?></td>
                                 <td> <?= $unRestaurants['prixMoyen']. '€';?></td>
                                 <td><input type="number" min="1" max="10" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]"></input></td>
@@ -184,7 +184,7 @@ loadLanguageFromSession($_SESSION['lang']);
                         $hotel->execute();
                         while($unHotel = $hotel->fetch())
                         {
-                          $datas = App\Hotel::createHotel($unHotel['idHotel'],$unHotel['nomHotel'],$unHotel['adresseHotel'],$unHotel['prixHotel']);
+                          $datas = App\Hotel::createHotel($unHotel['idHotel'],$unHotel['nom'],$unHotel['adresseHotel'],$unHotel['prixHotel']);
                           $chambre = App\Chambre::createChambre($unHotel['idChambre'],$unHotel['typeChambre'],$unHotel['idHotel'],$unHotel['litsDispo'],$unHotel['isDispo']);
 
 
@@ -202,12 +202,12 @@ loadLanguageFromSession($_SESSION['lang']);
 
                             </tr>
                             <tr>
-                              <th scope="row"> <?= $unHotel['nomHotel'];?></th>
+                              <th scope="row"> <?= $unHotel['nom'];?></th>
                               <td> <?= $unHotel['adresseHotel'];?></td>
                               <td> <?= $unHotel['prixHotel'] . '€ la nuit';?></td>
                               <td> <?= $unHotel['typeChambre'];?></td>
                               <td> <?= $unHotel['litsDispo'];?></td>
-                              <td><input type="number" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]"></input></td>
+                              <td><input type="number" min="1" max="10" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]"></input></td>
 
                               <td>
                                 <div class="funkyradio-primary col-md-6 center-block">
@@ -228,7 +228,7 @@ loadLanguageFromSession($_SESSION['lang']);
                         while($unBillet = $billet->fetch())
                         {
                           $j=0;
-                          $datas = App\BilletTourisme::createBilletTourisme($unBillet['idBillet'],$unBillet['nomBillet'],$unBillet['isValide'],$unBillet['villeBillet'],$unBillet['prixBillet']);
+                          $datas = App\BilletTourisme::createBilletTourisme($unBillet['idBillet'],$unBillet['nom'],$unBillet['isValide'],$unBillet['villeBillet'],$unBillet['prixBillet']);
                           ?>
 
 
@@ -243,14 +243,14 @@ loadLanguageFromSession($_SESSION['lang']);
 
                             </tr>
                             <tr>
-                              <th scope="row"> <?= $unBillet['nomBillet'];?></th>
+                              <th scope="row"> <?= $unBillet['nom'];?></th>
                               <td>  <?php
                               if  ($unBillet['isValide'] == 1) {
                                 echo "Valide";}
                                 else{ echo "Non valide";}?></td>
                                 <td> <?= $unBillet['villeBillet'];?></td>
                                 <td>  <?= $unBillet['prixBillet']. '€';?> </td>
-                                <td><input type="number" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]"></input></td>
+                                <td><input type="number" min="1" max="10" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]"></input></td>
 
                                 <td>
                                   <div class="funkyradio-primary col-md-6 center-block">
@@ -267,7 +267,7 @@ loadLanguageFromSession($_SESSION['lang']);
 
                           case '16' :
 
-
+                          break;
                           default:
                           break;
                         }

@@ -6,43 +6,54 @@ $bdd = new App\Database('rip');
 
 
 if (isset($_POST['services']) && (!empty($_POST['services']))) {
-$servicesChoisi=$_POST['services'];
+  $servicesChoisi=$_POST['services'];
+
+  $quantiteCertainService=$_POST['quantite'];
 
 
-var_dump($_POST['quantite']);
 
-var_dump($servicesChoisi);
+  echo "<br>spacer<br>";
+  var_dump($_POST['quantite']);
+  var_dump($servicesChoisi);
 
-if(isset($servicesChoisi)){
-  foreach ($servicesChoisi as $service) {
+  if(isset($servicesChoisi)){
+    foreach ($servicesChoisi as $service) {
 
-  switch ($service) {
-    case 1:
-      $idAnnexe=$_POST["idRestaurant"];
+      foreach ($quantiteCertainService as $key => $quantite) {
+        if ($key == $service) {
+          $thisQuantite=$quantite;
 
-      break;
-    case 7:
-      $idAnnexe=$_POST["idHotel"];
-      break;
-    case 8:
-      $idAnnexe=$_POST["idBillet"];
-      break;
+        }
+      }
+      switch ($service) {
+        case 1:
+        $idAnnexe=$_POST["idRestaurant"];
 
-      default:
-        $idAnnexe=-1;
         break;
-    }
+        case 7:
+        $idAnnexe=$_POST["idHotel"];
+        break;
+        case 8:
+        $idAnnexe=$_POST["idBillet"];
+        break;
 
-    $req=$bdd->getPDO()->prepare('INSERT INTO linkServicetrajet (`idTrajet`,`idService`,`idAnnexe`,`quantite`,) VALUES (:idTrajet,:idService,:idAnnexe,:quantite)');
-    $req->bindValue(':idTrajet', $_SESSION["idTrajet"]);
-    $req->bindValue(':idService', $service);
-    $req->bindValue(':idAnnexe', $idAnnexe);
-    $req->bindValue(':quantite', $quantite);
-    $req->execute();
-    $req->closeCursor();
-}
-}
-//header("location: resevationChooseDriver.php");
+        default:
+        $idAnnexe=-1;
+        $thisQuantite=0;
+        break;
+      }
+
+      $req=$bdd->getPDO()->prepare('INSERT INTO linkServicetrajet (`idTrajet`,`idService`,`idAnnexe`,`quantite`) VALUES (:idTrajet,:idService,:idAnnexe,:quantite)');
+      $req->bindValue(':idTrajet', $_SESSION["idTrajet"]);
+      $req->bindValue(':idService', $service);
+      $req->bindValue(':idAnnexe', $idAnnexe);
+      $req->bindValue(':quantite', $thisQuantite);
+      $req->execute();
+      $req->closeCursor();
+
+    }
+  }
+    header("location: resevationChooseDriver.php");
 }
 else {
   header("location:resevationChooseService.php?probleme_de_case");

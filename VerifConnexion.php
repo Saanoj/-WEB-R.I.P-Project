@@ -83,6 +83,8 @@ if  (
             session_start();
             $_SESSION['id'] = $data['id'];
             $_SESSION['email'] = $this->getEmail();
+            $this->addUserToSession($data["id"],$bdd);
+
             header('location:index.php?id='.$_SESSION['id'].'');
            }
            else
@@ -105,13 +107,22 @@ if  (
            }
             }
 
+            public function addUserToSession($id,$bdd){
+              $req = $bdd->getPDO()->prepare('SELECT * FROM users WHERE id = ?');
+              $req->execute(array($_SESSION['id']));
+              $datas = $req->fetch();
+              $req->closeCursor();
+              $user = new Profil($datas['first_name'],$datas['last_name'],$datas['birthday'],$datas['gender'],$datas['address'],$datas['zip_code']);
+              $_SESSION["user"] = serialize($user);
+            }
+
         }
 
 
 
         $user = new VerifConnexion($_POST['email'],$_POST['password']);
 
-         $req = $user->checkBdd($bdd,'SELECT id,password, isBanned FROM users WHERE email = :email');
+        $req = $user->checkBdd($bdd,'SELECT * FROM users WHERE email = :email');
         $user->createCookie();
 
 

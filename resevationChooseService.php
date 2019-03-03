@@ -1,12 +1,12 @@
 <?php
-  session_start();
+session_start();
 
-  //multilingue
-  if (!isset($_SESSION['lang'])) {
-    $_SESSION['lang'] = "fr";
-  }
-  include "multilingue/multilingue.php";
-  loadLanguageFromSession($_SESSION['lang']);
+//multilingue
+if (!isset($_SESSION['lang'])) {
+  $_SESSION['lang'] = "fr";
+}
+include "multilingue/multilingue.php";
+loadLanguageFromSession($_SESSION['lang']);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -39,7 +39,7 @@
   App\Autoloader::register();
   $bdd = new App\Database('rip');
   $form =new App\Form(array());
-  $backOffice=0;
+  $backOffice=3;
   $navbar = new App\Navbar($backOffice);
   $navbar->navbar();
 
@@ -47,6 +47,19 @@
 
   //recup obj trajet de session
   $trajet = unserialize($_SESSION['trajet']);
+
+  // Recuperation de l'heure du début
+
+
+  $hour = $_SESSION['timeStart'];
+  $res=explode(' ',$hour);
+  //var_dump($res[1]);
+  // var_dump(strotime($res[1]));
+  //var_dump(strtotime($hour));
+  ;
+
+
+
   ?>
 
   <div class="container">
@@ -70,10 +83,10 @@
               // Affichage d'un service
               $services = $bdd->getPDO()->prepare('SELECT * FROM services');
               $services->execute();
-              $i=0;
+              $i=1;
               while($unService = $services->fetch())
               {
-                $service = new App\Service($unService["idService"],$unService["nomService"],$unService["description"],$unService["categorie"],$unService["prixService"]);
+                $service = new App\Service($unService["idService"],$unService["nomService"],$unService["description"],$unService["prixService"],$unService["categorie"]);
 
                 ?>
                 <li class="list-group-item col-md-8 row">
@@ -102,8 +115,8 @@
                     <span class="slider round"></span>
                   </label>
                 -->
-                <div id="costumModal<?php echo $i ?>" class="modal" data-easein="pulse" tabindex="-1" role="dialog" aria-labelledby="costumModalLabel" aria-hidden="false">
-                  <div class="modal-dialog">
+                <div id="costumModal<?php echo $i ?>" class="modal fade bd-example-modal-lg"  data-target=".bd-example-modal-lg" data-easein="pulse" tabindex="-1" role="dialog" aria-labelledby="costumModalLabel" aria-hidden="false">
+                  <div class="modal-dialog modal-lg modal-dialog-centered">
                     <div class="modal-content">
                       <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
@@ -111,54 +124,180 @@
                         </button>
                         <h4 class="modal-title" id="costumModalLabel">
                           <?php
-                          //var_dump($service);
                           echo $service->getNomService(); ?>
                         </h4>
                       </div>
                       <?php
 
-                      $restaurants = $bdd->getPDO()->prepare('SELECT * FROM restaurants');
-                      $restaurants->execute();
 
-                      while($unRestaurants = $restaurants->fetch())
-                      {
-                        $datas = App\Restaurant::createRestaurant($unRestaurants['idRestaurant'],$unRestaurants['nomRestaurant'],$unRestaurants['prixMoyen'],$unRestaurants['horrairesDebut'],$unRestaurants['horrairesFin']);
+
+
+                      switch ($service->getIdService()) {
+
+                        case '1':
+
+
+                        $restaurants = $bdd->getPDO()->prepare('SELECT * FROM restaurants ORDER BY idRestaurant DESC LIMIT 10 ');
+                        $restaurants->execute();
+                        while($unRestaurants = $restaurants->fetch())
+                        {
+                          $datas = App\Restaurant::createRestaurant($unRestaurants['idRestaurant'],$unRestaurants['nom'],$unRestaurants['prix'],$unRestaurants['horrairesDebut'],$unRestaurants['horrairesFin'],$unRestaurants['adresseRestaurant'],$unRestaurants['villeRestaurant']);
+
+
+                          $unRestaurants['horrairesDebut'] = $res[0] . ' ' . $unRestaurants['horrairesDebut'];
+                          $unRestaurants['horrairesFin'] = $res[0] . ' ' . $unRestaurants['horrairesFin'];
+
+                          if (strtotime($hour) - strtotime($unRestaurants['horrairesDebut'])> 0 && strtotime($hour) - strtotime($unRestaurants['horrairesFin']) < 0 && $unRestaurants['isDispo'] == 1 )
+                          {
+
+                            ?>
+                            <table>
+
+                              <tr>
+                                <th scope="col">Nom du restaurant : </th>
+                                <th scope="col">Adresse : </th>
+                                <th scope="col">Prix moyen : </th>
+                                <th scope="col">Quantité : </th>
+
+                              </tr>
+                              <tr>
+                                <th scope="row"> <?= $unRestaurants['nom'];?></th>
+                                <td> <?= $unRestaurants['adresseRestaurant'];?></td>
+                                <td> <?= $unRestaurants['prix']. '€';?></td>
+                                <td><input type="number" min="1" max="10" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]" value="1"></input></td>
+
+                                <td>
+                                  <div class="funkyradio-primary col-md-6 center-block">
+                                    <input type="radio"  name="idRestaurant" id="<?php echo $unRestaurants['idRestaurant'] ?>" value="<?php echo $unRestaurants['idRestaurant'] ?>" checked ></input>
+                                    <label for="radio<?php echo $unRestaurants['idRestaurant'] ?>">Choisir ce restaurant</label>
+                                  </div>
+                                </td>
+                              </tr>
+                            </table> <?php
+                          }
+
+                        }
+                        break;
+                        case '7':
+
+                        $hotel = $bdd->getPDO()->prepare('SELECT * FROM chambre INNER JOIN hotel ON chambre.idHotel = hotel.idHotel WHERE isDispo = 1 AND litsDispo > 0 ORDER BY idChambre DESC LIMIT 10 ');
+                        $hotel->execute();
+                        while($unHotel = $hotel->fetch())
+                        {
+                          $datas = App\Hotel::createHotel($unHotel['idHotel'],$unHotel['nom'],$unHotel['adresseHotel'],$unHotel['prix']);
+                          $chambre = App\Chambre::createChambre($unHotel['idChambre'],$unHotel['typeChambre'],$unHotel['idHotel'],$unHotel['litsDispo'],$unHotel['isDispo']);
+
+
+
+
+                          ?>
+                          <table>
+
+                            <tr>
+                              <th scope="col">Nom de l'hotel : </th>
+                              <th scope="col">Adresse : </th>
+                              <th scope="col">Prix : </th>
+                              <th scope="col">Type de chambre : </th>
+                              <th scope="col">Lits disponibles : </th>
+
+                            </tr>
+                            <tr>
+                              <th scope="row"> <?= $unHotel['nom'];?></th>
+                              <td> <?= $unHotel['adresseHotel'];?></td>
+                              <td> <?= $unHotel['prix'] . '€ la nuit';?></td>
+                              <td> <?= $unHotel['typeChambre'];?></td>
+                              <td> <?= $unHotel['litsDispo'];?></td>
+                              <td><input type="number" min="1" max="10" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]" value="1"></input></td>
+
+                              <td>
+                                <div class="funkyradio-primary col-md-6 center-block">
+                                  <input type="radio" name="idHotel" id="<?php echo $unHotel['idHotel'] ?>" value="<?php echo $unHotel['idHotel'] ?>" checked></input>
+                                  <label for="radio<?php echo $unHotel['idHotel'] ?>">Choisir cet hotel</label>
+                                </div>
+                              </td>
+                            </tr>
+                          </table>
+                          <?php
+
+                        }
+                        break;
+
+                        case '8' :
+                        $billet = $bdd->getPDO()->prepare('SELECT * FROM billettourisme ORDER BY idBillet DESC LIMIT 10');
+                        $billet->execute();
+                        while($unBillet = $billet->fetch())
+                        {
+                          $j=0;
+                          $datas = App\BilletTourisme::createBilletTourisme($unBillet['idBillet'],$unBillet['nom'],$unBillet['isValide'],$unBillet['villeBillet'],$unBillet['prix']);
+                          ?>
+
+
+                          <table>
+
+                            <tr>
+                              <th scope="col">Nom du billet : </th>
+                              <th scope="col">Validité : </th>
+                              <th scope="col">Ville : </th>
+                              <th scope="col">Prix : </th>
+                              <th scope="col">Quantité : </th>
+
+                            </tr>
+                            <tr>
+                              <th scope="row"> <?= $unBillet['nom'];?></th>
+                              <td>  <?php
+                              if  ($unBillet['isValide'] == 1) {
+                                echo "Valide";}
+                                else{ echo "Non valide";}?></td>
+                                <td> <?= $unBillet['villeBillet'];?></td>
+                                <td>  <?= $unBillet['prix']. '€';?> </td>
+                                <td><input type="number" min="1" max="10" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]" value="1"></input></td>
+
+                                <td>
+                                  <div class="funkyradio-primary col-md-6 center-block">
+                                    <input type="radio" name="idBillet" id="<?php echo $unBillet['idBillet'] ?>" value="<?php echo $unBillet['idBillet'] ?>" checked></input>
+                                    <label for="radio<?php echo $unBillet['idBillet'] ?>">Choisir ce billet</label>
+                                  </div>
+                                </td>
+                              </tr>
+                            </table>
+                            <?php
+
+                          }
+                          break;
+
+                          case '16' :
+
+                          break;
+                          default:
+                          break;
+                        }
+
+
                         ?>
-                        <div class="funkyradio-primary col-md-6 center-block">
-                          <input type="radio" name="idRestaurant" id="<?php echo $unRestaurants['idRestaurant'] ?>" value="<?php echo $unRestaurants['idRestaurant'] ?>" checked/><?=$unRestaurants['nomRestaurant'] ?> </input>
-                          <label for="radio<?php echo $unRestaurants['idRestaurant'] ?>">Choisir ce restaurant</label>
+                        <div class="modal-footer">
+                          <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">
+                            Sauvegarder
+                          </button>
                         </div>
-                        <?php
-                      }
-
-                      ?>
-
-                      <div class="modal-footer">
-                        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">
-                          Sauvegarder
-                        </button>
-
                       </div>
                     </div>
                   </div>
-                </div>
 
-              <?php } ?>
-
-            </li>
-            <?php
-            $i++;
-          }
-          ?>
-        </div>
-        <br>
-        <div class="center-block">
-          <?php echo $form->submit(); ?>
-        </div>
-      </form>
+                <?php } ?>
+              </li>
+              <?php
+              $i++;
+            }
+            ?>
+          </div>
+          <br>
+          <div class="center-block">
+            <?php echo $form->submit(); ?>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
-</div>
 </div>
 
 

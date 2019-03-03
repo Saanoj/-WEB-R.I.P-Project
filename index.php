@@ -23,6 +23,7 @@ loadLanguageFromSession($_SESSION['lang']);
   $backOffice=0;
   $navbar = new App\Navbar($backOffice);
   $navbar->navbar();
+
   ?>
 
   <!-- Get a quote section -->

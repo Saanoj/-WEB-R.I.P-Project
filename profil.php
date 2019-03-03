@@ -34,7 +34,6 @@ loadLanguageFromSession($_SESSION['lang']);
   $navbar->navbar();
 
   // REQUETE POUR RECUPER LES INFOS DU USER
-
   $req = $bdd->getPDO()->prepare('SELECT * FROM users WHERE id = ?');
   $req->execute(array($_SESSION['id']));
   $datas = $req->fetch();

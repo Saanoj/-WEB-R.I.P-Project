@@ -21,7 +21,8 @@ loadLanguageFromSession($_SESSION['lang']);
   require 'Class/Autoloader.php';
   App\Autoloader::register();
   $backOffice=0;
-  $navbar = new App\Navbar($backOffice);
+  $type = 0;
+  $navbar = new App\Navbar($backOffice,$type);
   $navbar->navbar();
 
   ?>

@@ -9,16 +9,20 @@ use \PDO;
 class Navbar
 {
   private $backOffice;
-  public function __construct($backOffice)
+  private $type;
+  public function __construct($backOffice,$type)
   {
     $this->backOffice=$backOffice;
+    $this->type=$type;
   }
   public function getBackOffice() {return $this->backOffice;}
+  public function getType() {return $this->type;}
 
   public function navbar()
   {
     $bdd = new Database('rip');
     $backOffice = $this->getBackOffice();
+    $type = $this->getType();
     if(isset($_SESSION['id'])){
       $session = new Session($_SESSION['id']);
       $id = $session->getId();
@@ -28,15 +32,17 @@ class Navbar
         $query->execute();
         $data=$query->fetch();
 
-
-
-        if($data['isAdmin'] == 1){
+        if($type !=0){
+          if($type == 1){
+            include('navbar/navbarReservation.php');
+          }
+        }elseif($data['isAdmin'] == 1){
           if ($backOffice == 1){
             include('../navbar/NavbarBackOffice.php');
           }elseif ($backOffice == 2) {
             include('../../navbar/NavbarBackOfficeUsers.php');
           }elseif ($backOffice == 3){
-            include('navbar/navbarReservation.php');
+            include('navbar/navbarCollab.php');
           }else{
             include('navbar/navbarAdmin.php');
           }

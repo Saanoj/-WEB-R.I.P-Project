@@ -19,20 +19,17 @@ loadLanguageFromSession($_SESSION['lang']);
   <link rel="stylesheet" type="text/css" href="css/ReservationTrajet/bootstrap4/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="css/ReservationTrajet/main_styles.css">
   <link rel="stylesheet" type="text/css" href="css/ReservationTrajet/responsive.css">
-
-
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"></link>
+  <?php include 'includehtml/head.html'; ?>
+  <link rel="stylesheet" type="text/css" href="css/choixService/main.css">
+  <link rel="stylesheet" type="text/css" href="css/choixService/calendrier.css">
   <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/popper.min.js"></script>
   <script src="js/reservationChooseService/main.js"></script>
-  <script src="js/reservationChooseService/calendrier.js"></script>
   <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"></link>
+  <script src="js/reservationChooseService/calendrier.js"></script>
 
-  <?php include 'includehtml/head.html'; ?>
-
-  <link rel="stylesheet" type="text/css" href="css/choixService/main.css">
-  <link rel="stylesheet" type="text/css" href="css/choixService/calendrier.css">
 
 
 
@@ -279,7 +276,16 @@ loadLanguageFromSession($_SESSION['lang']);
                           
 
                           case '16' :
+?>
+  Heure de début :  <input type="time" name="startInterprete">
 
+  Heure de fin : <input type="time" name="endInterprete">
+
+   <p>
+            <span id="value">n/a</span>
+  </p>
+
+<?php
                           break;
                           default:
                           break;

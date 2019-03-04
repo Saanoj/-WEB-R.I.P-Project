@@ -24,7 +24,8 @@ loadLanguageFromSession($_SESSION['lang']);
   $bdd = new App\Database('rip');
   $form = new App\Form(array());
   $backOffice=0;
-  $navbar = new App\Navbar($backOffice);
+  $type = 0;
+  $navbar = new App\Navbar($backOffice,$type);
   $navbar->navbar();
 
   ?>

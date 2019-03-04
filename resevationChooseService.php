@@ -41,8 +41,9 @@ loadLanguageFromSession($_SESSION['lang']);
   App\Autoloader::register();
   $bdd = new App\Database('rip');
   $form =new App\Form(array());
-  $backOffice=3;
-  $navbar = new App\Navbar($backOffice);
+  $backOffice=0;
+  $type = 1;
+  $navbar = new App\Navbar($backOffice,$type);
   $navbar->navbar();
 
   $form = new App\Form(array());
@@ -266,14 +267,14 @@ loadLanguageFromSession($_SESSION['lang']);
 
                           }
                           break;
-                          case '11' : 
+                          case '11' :
                           ?>
                           <div id='calendar'></div>
                           <?php
 
 
 
-                          
+
 
                           case '16' :
 ?>

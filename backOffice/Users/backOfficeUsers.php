@@ -16,7 +16,8 @@ include '../../include/fonction.php';
   require '../../Class/Autoloader.php';
   App\Autoloader::register();
   $backOffice=2;
-  $navbar = new App\Navbar($backOffice);
+  $type =0;
+  $navbar = new App\Navbar($backOffice,$type);
   $navbar->navbar();
   $Session = new App\Session($_SESSION['id']);
   $Session->isConnect();
@@ -37,7 +38,7 @@ include '../../include/fonction.php';
           <th scope="col">Ban</th>
         </tr>
       </thead>
-      <?php backOffice();
+      <?php backOfficeUser();
       ?>
     </table>
   </div>

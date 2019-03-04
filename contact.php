@@ -32,7 +32,8 @@ loadLanguageFromSession($_SESSION['lang']);
   App\Autoloader::register();
   $bdd = new App\Database('rip');
   $backOffice=0;
-  $navbar = new App\Navbar($backOffice);
+  $type = 0;
+  $navbar = new App\Navbar($backOffice,$type);
   $navbar->navbar();
   ?>
 

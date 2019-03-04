@@ -35,8 +35,9 @@
     require 'Class/Autoloader.php';
     App\Autoloader::register();
     $bdd = new App\Database('rip');
-    $backOffice=3;
-    $navbar = new App\Navbar($backOffice);
+    $backOffice=0;
+    $type = 1;
+    $navbar = new App\Navbar($backOffice,$type);
     $navbar->navbar();
 
     $form = new App\Form(array());

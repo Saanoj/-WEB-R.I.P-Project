@@ -36,9 +36,10 @@ loadLanguageFromSession($_SESSION['lang']);
   require 'Class/Autoloader.php';
   App\Autoloader::register();
   $bdd = new App\Database('rip');
-  $backOffice=3;
-  $navbar = new App\Navbar($backOffice);
-  $navbar->navbar();;
+  $backOffice=0;
+  $type = 1;
+  $navbar = new App\Navbar($backOffice,$type);
+  $navbar->navbar();
 
   $form = new App\Form(array());
 
@@ -74,7 +75,7 @@ loadLanguageFromSession($_SESSION['lang']);
                   //on recupere les infos du service en fonction de son id
                   $service = $bdd->queryOne('SELECT * FROM services WHERE idService='.$unIdService["idService"].'');
                   $linkService = $bdd->queryOne('SELECT * FROM linkServicetrajet WHERE idService='.$unIdService["idService"].' AND idTrajet='.$_SESSION["idTrajet"].'');
-      
+
 
                   //choix en fonciton du type de service special
                   if($unIdService["idService"] == 1){

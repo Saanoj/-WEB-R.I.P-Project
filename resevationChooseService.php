@@ -268,25 +268,53 @@ loadLanguageFromSession($_SESSION['lang']);
                           }
                           break;
                           case '11' :
-                          ?>
-                          <div id='calendar'></div>
-                          <?php
 
+                          $interprete = $bdd->getPDO()->prepare('SELECT * FROM collaborateurs WHERE metier="interprete" ORDER BY idCollaborateurs DESC LIMIT 4 ');
+                          $interprete->execute();
+                                              ?>
+                      <h4> Réservation d'un interprête pendant la journée du trajet, veuillez choisir une plage horraire : </h4>
+                      <h6>Pour que votre réservation soit valide, l'heure de début doit etre égal ou supérieur a l'heure du trajet. (<?= $res[1]; ?>h) </h6>
+                      <h6>Vous ne pouvez réserver un interprète au maximum pendant 8h</h6>
+                      Heure de début :  <input type="time" name="startInterprete" value="<?= $res[1]; ?>" min="<?= $res[1]; ?>" required>
+                       Heure de fin : <input type="time" name="endInterprete" required>
+                      Nombre d'interprètes : <input type="number" min="1" max="5" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]" value="1"></input>
 
+<br> <br> <br>
+<?php
 
+                            while ($unInterprete = $interprete->fetch())
+                            {
+                              ?>
+                              <table>
+
+                      <tr>
+                        <th scope="col">Nom : </th>
+                        <th scope="col">Prenom : </th>
+                        <th scope="col">Prix :</th>
+                        <th scope="col">Note</th>
+                        </tr>
+                        <tr>
+                              <th scope="row"> <?= $unInterprete['last_name'];?></th>
+                                <td> <?= $unInterprete['first_name'];?></td>
+                                <td>  <?= $unInterprete['prixCollaborateur']. '€';?> </td>
+                                <td>  <?= $unInterprete['rating'];?> </td>
+                                <td>
+                                  <div class="funkyradio-primary col-md-6 center-block">
+                                    <input type="radio" name="idInterprete" id="<?php echo $unInterprete['idCollaborateurs'] ?>" value="<?php echo $unInterprete['idCollaborateurs'] ?>" checked></input>
+                                    <label for="radio<?php echo $unInterprete['idCollaborateurs'] ?>">Choisir cet interprète</label>
+                                  </div>
+                                </td>
+                              </tr>
+                            </table>
+                            <?php
+                            }
+                    break;
 
 
                           case '16' :
-?>
-  Heure de début :  <input type="time" name="startInterprete">
 
-  Heure de fin : <input type="time" name="endInterprete">
+                          
 
-   <p>
-            <span id="value">n/a</span>
-  </p>
-
-<?php
                           break;
                           default:
                           break;

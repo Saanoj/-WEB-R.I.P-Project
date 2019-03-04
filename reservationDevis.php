@@ -86,7 +86,10 @@ loadLanguageFromSession($_SESSION['lang']);
                     $typeEtablissement="Hotel";
                   }elseif ($unIdService["idService"] == 8) {
                     $infoLinkService = $bdd->queryOne('SELECT * FROM billettourisme WHERE idBillet='.$linkService["idAnnexe"].'');
-                    $typeEtablissement="Billet touristque";
+                    $typeEtablissement="Billet touristque"; }
+                    elseif ($unIdService["idService"] == 11) {
+                      $infoLinkService = $bdd->queryOne('SELECT *  FROM collaborateurs INNER JOIN linkservicetrajet WHERE collaborateurs.idCollaborateurs = linkservicetrajet.idAnnexe AND idTrajet='.$_SESSION["idTrajet"].'');
+                      $typeEtablissement="Interprete";
                   }else {
 
                   }
@@ -94,7 +97,11 @@ loadLanguageFromSession($_SESSION['lang']);
                   //Affichage des infos
                   if ($linkService["idAnnexe"] < 0) {
                     echo "ID: ".$service["idService"]." | ".$service["nomService"];
-                  }else{
+                  }
+                  else if ($linkService["idService"] == 11) {
+                    echo "ID: ".$infoLinkService["idCollaborateurs"]." | ".$service["nomService"]." : ".$infoLinkService["last_name"]." ".$infoLinkService["first_name"]." | Quantitée: ".$linkService["quantite"]." interprètes";
+                  }
+                  else{
                     echo "ID: ".$service["idService"]." | ".$service["nomService"]." : ".$typeEtablissement." ".$infoLinkService["nom"]." | Quantitée: ".$linkService["quantite"]." places";
                   }
                   echo "<br><br>";
@@ -180,14 +187,24 @@ loadLanguageFromSession($_SESSION['lang']);
                         }elseif ($unIdService["idService"] == 8) {
                           $infoLinkService = $bdd->queryOne('SELECT * FROM billettourisme WHERE idBillet='.$linkService["idAnnexe"].'');
                           $typeEtablissement="Billet touristque";
-                        }else {
-                        }
+                        }elseif ($unIdService["idService"] == 11) {
+                          $infoLinkService = $bdd->queryOne('SELECT *  FROM collaborateurs INNER JOIN linkservicetrajet WHERE collaborateurs.idCollaborateurs = linkservicetrajet.idAnnexe AND idTrajet='.$_SESSION["idTrajet"].'');
+                          $typeEtablissement="Interprete";
+                         }
+                       else {
+                           }
                         ?><li><?php
                         //Affichage des infos
                         if ($linkService["idAnnexe"] < 0) {
                           echo $service["nomService"].": ".$service["prixService"]."€";
                           $totalServices += $service["prixService"];
-                        }else{
+                        }
+                        else if ($linkService["idService"] == 11) {
+                          echo "ID: ".$infoLinkService["idCollaborateurs"]." | ".$service["nomService"]." : ".$infoLinkService["last_name"]." ".$infoLinkService["first_name"]." | Quantitée: ".$linkService["quantite"]." interprètes";
+                          $totalServices += ($infoLinkService["prixCollaborateur"]*$linkService["quantite"]+$service["prixService"]);
+
+                        }
+                        else{
                           echo $service["nomService"].": ".$typeEtablissement." ".$infoLinkService["nom"]." | ".$infoLinkService["prix"]."€ * ".$linkService["quantite"]." places + ".$service["prixService"]."€  = ".($infoLinkService["prix"]*$linkService["quantite"]+$service["prixService"])."€";
                           $totalServices += ($infoLinkService["prix"]*$linkService["quantite"]+$service["prixService"]);
                         }

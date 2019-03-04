@@ -72,10 +72,10 @@ loadLanguageFromSession($_SESSION['lang']);
                       <button class="btn btn-secondary col-md-1 mt-4" href="#" onClick="autoFill('<?php echo $membre->getAddress()." ".$membre->getZipCode();?>'); return false;" role="button">Home</button>
                     <?php } ?>
 
-                    <form action="valideReservation.php" method="post" class="home_search_form d-flex flex-lg-row flex-column align-items-start justify-content-lg-between justify-content-start" id="home_search_form">
+                    <form action="valideReservation.php" method="post" class="home_search_form d-flex flex-lg-row flex-column align-items-start justify-content-lg-between justify-content-start" id="home_search_form" onsubmit="return checkGlobal(this)">
+                    <input type="text" name="start"  id="autocomplete" class="search_input search_input_1 m-2 home" placeholder="<?php echo _ADRESSE_DEPART_RESERVATION ?>" required="required"  onblur="checkStart(this)">
 
-                      <input type="text" name="start"  id="autocomplete" class="search_input search_input_1 m-2 home" placeholder="<?php echo _ADRESSE_DEPART_RESERVATION ?>" required="required">
-                      <input type="text" name="end"  id="autocomplete2" class="search_input search_input_2 m-2" placeholder="<?php echo _ADRESSE_ARRIVEE_RESERVATION ?>" required="required">
+                      <input type="text" name="end"  id="autocomplete2" class="search_input search_input_2 m-2" placeholder="<?php echo _ADRESSE_ARRIVEE_RESERVATION ?>" required="required" onblur="checkEnd(this)">
                       <!--<input type="number" name="price"  id="price" class="search_input search_input_4" placeholder="Budget" required="required">-->
 
                       <label for="dateDebut"><?php echo _DATE_DEBUT_RESERVATION_TRAJET ?></label>
@@ -84,8 +84,9 @@ loadLanguageFromSession($_SESSION['lang']);
                       <label for="heureDebut"><?php echo _HEURE_DEBUT_RESERVATION_TRAJET ?></label>
                       <?php echo $form->input('heureDebut','time'); ?>
 
+                      <input type="submit"   class="home_search_button col-md-2 m-2" name="submit"  value="<?php echo _BOUTTON_RESERVATION_TRAJET ?>">
 
-                      <button class="home_search_button col-md-2 m-2"><?php echo _BOUTTON_RESERVATION_TRAJET ?></button>
+                     <!--  <button class="home_search_button col-md-2 m-2"><?php echo _BOUTTON_RESERVATION_TRAJET ?></button> !-->
 
                     </form>
                   </div>

@@ -12,6 +12,10 @@ $hour = $_SESSION['timeStart'];
 $res=explode(' ',$hour);
 $startInterprete = strtotime($_POST['startInterprete']);
 $endInterprete = strtotime($_POST['endInterprete']);
+$_SESSION['startInterprete']  = $_POST['startInterprete'];
+$_SESSION['endInterprete']  = $_POST['endInterprete'];
+
+
 
 
 

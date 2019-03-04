@@ -43,8 +43,19 @@ loadLanguageFromSession($_SESSION['lang']);
 
   $form = new App\Form(array());
 
+
+  // ON VERIFIE LA DIFFERENCE D'HEURE ENTRE LE DEBUT ET LA FIN DU CRENEAU DE L"INTERPRETE
+$_SESSION['startInterprete'];
+$_SESSION['endInterprete'];
+$hourInterprete = (strtotime($_SESSION['endInterprete']) - strtotime($_SESSION['startInterprete']));
+$hourInterprete = $hourInterprete/3600;
+
+
+
+
   // On recupere l'objet trajet contenant nos infos de trajet depuis la session
   $trajet = unserialize($_SESSION['trajet']);
+
   ?>
   <div class="container">
     <div class="row">
@@ -201,7 +212,7 @@ loadLanguageFromSession($_SESSION['lang']);
                         }
                         else if ($linkService["idService"] == 11) {
                           echo "ID: ".$infoLinkService["idCollaborateurs"]." | ".$service["nomService"]." : ".$infoLinkService["last_name"]." ".$infoLinkService["first_name"]." | Quantitée: ".$linkService["quantite"]." interprètes";
-                          $totalServices += ($infoLinkService["prixCollaborateur"]*$linkService["quantite"]+$service["prixService"]);
+                          $totalServices += ($infoLinkService["prixCollaborateur"]*$linkService["quantite"]*$hourInterprete);
 
                         }
                         else{

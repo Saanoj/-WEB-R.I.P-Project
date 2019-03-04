@@ -29,11 +29,17 @@ class Form{
          return  $this->surround('<input type="' . $type . '" name="'. $name . '" id="' .$name .'" placeholder="' . $placeholder . '"  class="' . $class .'" >');
 
     }
+    public function inputAdresse($type,$name,$id,$class,$placeholder,$required) {
+        return  $this->surround('<input type="' . $type . '" name="'. $name . '" id="' .$id .'"class="'.$class. '" placeholder="' . $placeholder . '"  required="'.$required.'" onblur="check'.$name.'(this)">');
+
+   }
 
     public function submitConnexion (){
         return $this->surround('<button  type="submit"  class="btn btn-success" name="submit"  value="Connexion">Valider</button>');
 
     }
+
+
 }
 
 

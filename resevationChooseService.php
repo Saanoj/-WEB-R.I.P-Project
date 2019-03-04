@@ -20,16 +20,21 @@ loadLanguageFromSession($_SESSION['lang']);
   <link rel="stylesheet" type="text/css" href="css/ReservationTrajet/main_styles.css">
   <link rel="stylesheet" type="text/css" href="css/ReservationTrajet/responsive.css">
 
+
   <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/popper.min.js"></script>
   <script src="js/reservationChooseService/main.js"></script>
+  <script src="js/reservationChooseService/calendrier.js"></script>
   <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"></link>
 
   <?php include 'includehtml/head.html'; ?>
 
   <link rel="stylesheet" type="text/css" href="css/choixService/main.css">
+  <link rel="stylesheet" type="text/css" href="css/choixService/calendrier.css">
+
+
 
 </head>
 <body>
@@ -100,7 +105,7 @@ loadLanguageFromSession($_SESSION['lang']);
                     <span class="slider round"></span>
                   </label>
                   <?php
-                  if ($service->getIdService() != 1 && $service->getIdService() !=7 && $service->getIdService() != 8 && $service->getIdService() !=16 ) {
+                  if ($service->getIdService() != 1 && $service->getIdService() !=7 && $service->getIdService() != 8 && $service->getIdService() !=16 && $service->getIdService() !=11 && $service->getIdService() !=12 && $service->getIdService() !=13 ) {
                     ?>
 
                     <!--<button type="button" name="services[<?php echo $i ?>]" class="btn btn-info">Choisir</button>-->
@@ -207,7 +212,7 @@ loadLanguageFromSession($_SESSION['lang']);
                               <td> <?= $unHotel['prix'] . '€ la nuit';?></td>
                               <td> <?= $unHotel['typeChambre'];?></td>
                               <td> <?= $unHotel['litsDispo'];?></td>
-                              <td><input type="number" min="1" max="10" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]" value="1"></input></td>
+                              <td><input type="number" min="1" max="10" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]" value="1FC"></input></td>
 
                               <td>
                                 <div class="funkyradio-primary col-md-6 center-block">
@@ -264,6 +269,14 @@ loadLanguageFromSession($_SESSION['lang']);
 
                           }
                           break;
+                          case '11' : 
+                          ?>
+                          <div id='calendar'></div>
+                          <?php
+
+
+
+                          
 
                           case '16' :
 

@@ -73,7 +73,8 @@ loadLanguageFromSession($_SESSION['lang']);
 
                   //on recupere les infos du service en fonction de son id
                   $service = $bdd->queryOne('SELECT * FROM services WHERE idService='.$unIdService["idService"].'');
-                  $linkService = $bdd->queryOne('SELECT * FROM linkServicetrajet WHERE idService='.$unIdService["idService"].'');
+                  $linkService = $bdd->queryOne('SELECT * FROM linkServicetrajet WHERE idService='.$unIdService["idService"].' AND idTrajet='.$_SESSION["idTrajet"].'');
+      
 
                   //choix en fonciton du type de service special
                   if($unIdService["idService"] == 1){
@@ -166,7 +167,7 @@ loadLanguageFromSession($_SESSION['lang']);
                       foreach ($idServices as $unIdService) {
                         //on recupere les infos du service en fonction de son id
                         $service = $bdd->queryOne('SELECT * FROM services WHERE idService='.$unIdService["idService"].'');
-                        $linkService = $bdd->queryOne('SELECT * FROM linkServicetrajet WHERE idService='.$unIdService["idService"].'');
+                        $linkService = $bdd->queryOne('SELECT * FROM linkServicetrajet WHERE idService='.$unIdService["idService"].' AND idTrajet='.$_SESSION["idTrajet"].'');
 
                         //choix en fonciton du type de service special
                         if($unIdService["idService"] == 1){

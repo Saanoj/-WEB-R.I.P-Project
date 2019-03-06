@@ -30,6 +30,9 @@ loadLanguageFromSession($_SESSION['lang']);
   <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   <script src="js/reservationChooseService/calendrier.js"></script>
 
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css"/>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
+
 
 
 
@@ -103,7 +106,7 @@ loadLanguageFromSession($_SESSION['lang']);
                     <span class="slider round"></span>
                   </label>
                   <?php
-                  if ($service->getIdService() != 1 && $service->getIdService() !=7 && $service->getIdService() != 8 && $service->getIdService() !=16 && $service->getIdService() !=11 && $service->getIdService() !=12 && $service->getIdService() !=13 ) {
+                  if ($service->getIdService() != 1 && $service->getIdService() !=7 && $service->getIdService() != 8 && $service->getIdService() !=16 && $service->getIdService() !=11 && $service->getIdService() !=12 && $service->getIdService() !=13 && $service->getIdService() !=10 && $service->getIdService() !=14 && $service->getIdService() !=17) {
                     ?>
 
                     <!--<button type="button" name="services[<?php echo $i ?>]" class="btn btn-info">Choisir</button>-->
@@ -267,6 +270,36 @@ loadLanguageFromSession($_SESSION['lang']);
 
                           }
                           break;
+                          case '10' :
+                          ?>
+
+                          <div class="container">
+                          <h5>Vous voulez un service qui n'est pas présent ? Envoyez nous votre demande et nous l'examinerons sous 24h ouvrés.</h5>
+	                  <div class="row">
+                  
+		
+                    <div class="row">
+                    	<div class="offset-md-6 col-md-12">
+                  		<div class="form-group">
+                            <input type="email" class="form-control" name="emailContact" autocomplete="off" id="email" placeholder="E-mail" value="<?= $_SESSION['email'];?>">
+                  		</div>
+                  	</div>
+                  	</div>
+                  	<div class="row">
+                  		<div class="offset-md-9 col-md-12">
+                  		<div class="form-group">
+                            <textarea class="form-control textarea" rows="3" name="messageContact" id="Message" placeholder="Message"></textarea>
+                  		</div>
+                  	</div>
+                    </div>
+    
+                
+               
+	</div>
+</div>
+<?php
+
+                          break;
                           case '11' :
 
                           $interprete = $bdd->getPDO()->prepare('SELECT * FROM collaborateurs WHERE metier="interprete" ORDER BY idCollaborateurs DESC LIMIT 4 ');
@@ -275,8 +308,8 @@ loadLanguageFromSession($_SESSION['lang']);
                       <h4> Réservation d'un interprête pendant la journée du trajet, veuillez choisir une plage horraire : </h4>
                       <h6>Pour que votre réservation soit valide, l'heure de début doit etre égal ou supérieur a l'heure du trajet. (<?= $res[1]; ?>h) </h6>
                       <h6>Vous ne pouvez réserver un interprète au maximum pendant 8h</h6>
-                      Heure de début :  <input type="time" name="startInterprete" value="<?= $res[1]; ?>" min="<?= $res[1]; ?>" required>
-                       Heure de fin : <input type="time" name="endInterprete" required>
+                      Heure de début :  <input type="time" name="startInterprete" value="<?= $res[1]; ?>" min="<?= $res[1]; ?>">
+                       Heure de fin : <input type="time" name="endInterprete">
                       Nombre d'interprètes : <input type="number" min="1" max="5" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]" value="1"></input>
 
 <br> <br> <br>
@@ -308,6 +341,91 @@ loadLanguageFromSession($_SESSION['lang']);
                             </table>
                             <?php
                             }
+                    break;
+
+                    case '12':
+
+                    $coachSportif = $bdd->getPDO()->prepare('SELECT * FROM collaborateurs WHERE metier="coachSportif" ORDER BY idCollaborateurs DESC LIMIT 4 ');
+                    $coachSportif->execute();
+                                        ?>
+                <h4> Réservation d'un coach sportif pendant la journée du trajet, veuillez choisir une plage horraire : </h4>
+                <h6>Pour que votre réservation soit valide, l'heure de début doit etre égal ou supérieur a l'heure du trajet. (<?= $res[1]; ?>h) </h6>
+                <h6>Vous  pouvez réserver un coach sportif  pendant 8h maximum</h6>
+                Heure de début :  <input type="time" name="startCoachSportif" value="<?= $res[1]; ?>" min="<?= $res[1]; ?>">
+                 Heure de fin : <input type="time" name="endCoachSportif">
+                Nombre de coachs sportifs : <input type="number" min="1" max="5" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]" value="1"></input>
+
+<br> <br> <br>
+<?php
+
+                      while ($unCoachSportif = $coachSportif->fetch())
+                      {
+                        ?>
+                        <table>
+
+                <tr>
+                  <th scope="col">Nom : </th>
+                  <th scope="col">Prenom : </th>
+                  <th scope="col">Prix :</th>
+                  <th scope="col">Note</th>
+                  </tr>
+                  <tr>
+                        <th scope="row"> <?= $unCoachSportif['last_name'];?></th>
+                          <td> <?= $unCoachSportif['first_name'];?></td>
+                          <td>  <?= $unCoachSportif['prixCollaborateur']. '€';?> </td>
+                          <td>  <?= $unCoachSportif['rating'];?> </td>
+                          <td>
+                            <div class="funkyradio-primary col-md-6 center-block">
+                              <input type="radio" name="idCoachSportif" id="<?php echo $unCoachSportif['idCollaborateurs'] ?>" value="<?php echo $unCoachSportif['idCollaborateurs'] ?>" checked></input>
+                              <label for="radio<?php echo $unCoachSportif['idCollaborateurs'] ?>">Choisir ce coach</label>
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+                      <?php
+                      }
+                    break;
+                    case '13':
+
+                    $coachCulture = $bdd->getPDO()->prepare('SELECT * FROM collaborateurs WHERE metier="coachCulture" ORDER BY idCollaborateurs DESC LIMIT 4 ');
+                    $coachCulture->execute();
+                                        ?>
+                <h4> Réservation d'un coach cultures pendant la journée du trajet, veuillez choisir une plage horraire : </h4>
+                <h6>Pour que votre réservation soit valide, l'heure de début doit etre égal ou supérieur a l'heure du trajet. (<?= $res[1]; ?>h) </h6>
+                <h6>Vous  pouvez réserver un coach cultures  pendant 8h maximum</h6>
+                Heure de début :  <input type="time" name="startCoachCulture" value="<?= $res[1]; ?>" min="<?= $res[1]; ?>">
+                 Heure de fin : <input type="time" name="endCoachCulture">
+                Nombre de coachs cultures : <input type="number" min="1" max="5" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]" value="1"></input>
+
+<br> <br> <br>
+<?php
+
+                      while ($unCoachCulture = $coachCulture->fetch())
+                      {
+                        ?>
+                        <table>
+
+                <tr>
+                  <th scope="col">Nom : </th>
+                  <th scope="col">Prenom : </th>
+                  <th scope="col">Prix :</th>
+                  <th scope="col">Note</th>
+                  </tr>
+                  <tr>
+                        <th scope="row"> <?= $unCoachCulture['last_name'];?></th>
+                          <td> <?= $unCoachCulture['first_name'];?></td>
+                          <td>  <?= $unCoachCulture['prixCollaborateur']. '€';?> </td>
+                          <td>  <?= $unCoachCulture['rating'];?> </td>
+                          <td>
+                            <div class="funkyradio-primary col-md-6 center-block">
+                              <input type="radio" name="idCoachSportif" id="<?php echo $unCoachCulture['idCollaborateurs'] ?>" value="<?php echo $unCoachCulture['idCollaborateurs'] ?>" checked></input>
+                              <label for="radio<?php echo $unCoachCulture['idCollaborateurs'] ?>">Choisir ce coach</label>
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+                      <?php
+                      }
                     break;
 
 

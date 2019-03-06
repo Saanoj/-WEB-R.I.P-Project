@@ -77,6 +77,10 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
       $idAnnexe=10;
       $thisQuantite=0;
       break;
+      default:
+      $idAnnexe=-1;
+      $thisQuantite=0;
+      break;
     }
 
 

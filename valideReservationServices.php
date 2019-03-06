@@ -77,22 +77,10 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
       $idAnnexe=10;
       $thisQuantite=0;
       break;
-      case 11:
-      $idAnnexe=$_POST["idInterprete"];
-      break;
-      case 12:
-      $idAnnexe=$_POST["idCoachSportif"];
-      break;
-      default:
-      $idAnnexe=-1;
-      $thisQuantite=0;
-      break;
     }
-    
 
 
-    
-    if (isset($_POST['emailContact']) && isset($_POST['messageContact']) && (!empty($_POST['emailContact'])) && (!empty($_POST['messageContact'])))
+    if ($service == 10/*isset($_POST['emailContact']) && isset($_POST['messageContact']) && (!empty($_POST['emailContact'])) && (!empty($_POST['messageContact']))*/)
     {
       $req=$bdd->getPDO()->prepare('INSERT INTO serviceautre (`contenuMessage`,`dateMessage`,`emailClient`) VALUES (:contenuMessage,NOW(),:emailClient)');
       $req->bindValue(':contenuMessage',$_POST['messageContact']);
@@ -117,8 +105,36 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
       $req->bindValue(':quantite', $thisQuantite);
       $req->execute();
       $req->closeCursor();
-    }
-    else {
+
+    }else if($service == 11 || $service == 12 || $service == 13){
+
+      switch ($service) {
+        case 11:
+          $idArray = $_POST["idInterprete"];
+          break;
+        case 12:
+          $idArray = $_POST["idCoachSportif"];
+          break;
+        case 13:
+          $idArray = $_POST["idCoachSportif"];
+          break;
+
+        default:
+          $idArray = array();;
+          break;
+      }
+
+      foreach ($idArray as $value) {
+        $req=$bdd->getPDO()->prepare('INSERT INTO linkServicetrajet (`idTrajet`,`idService`,`idAnnexe`,`quantite`) VALUES (:idTrajet,:idService,:idAnnexe,:quantite)');
+        $req->bindValue(':idTrajet', $_SESSION["idTrajet"]);
+        $req->bindValue(':idService', $service);
+        $req->bindValue(':idAnnexe', $value);
+        $req->bindValue(':quantite', 1);
+        $req->execute();
+        $req->closeCursor();
+      }
+
+    }else{
     //on insere les id et la quantité pour lier ce choix de service au trajet dans cette table e liaison
     $req=$bdd->getPDO()->prepare('INSERT INTO linkServicetrajet (`idTrajet`,`idService`,`idAnnexe`,`quantite`) VALUES (:idTrajet,:idService,:idAnnexe,:quantite)');
     $req->bindValue(':idTrajet', $_SESSION["idTrajet"]);
@@ -151,7 +167,7 @@ function checkInterprete($startInterprete,$endInterprete,$res) {
     else {
       return false;
     }
-  
+
   }
   else {
     return true;

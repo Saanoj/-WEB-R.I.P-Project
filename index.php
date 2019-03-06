@@ -64,7 +64,7 @@ loadLanguageFromSession($_SESSION['lang']);
         {
           $car=App\Chauffeur::getCar($unChauffeur["idCollaborateurs"],$bdd);
           $chauffeur = new App\Chauffeur($unChauffeur["idCollaborateurs"],$unChauffeur["email"],$unChauffeur["last_name"],$unChauffeur["first_name"],$unChauffeur["metier"],$unChauffeur["prixCollaborateur"],
-          $unChauffeur["dateEmbauche"],$unChauffeur["ville"],$unChauffeur["heuresTravailees"],$unChauffeur["rating"],$unChauffeur["ratingNumber"],$car["carId"],$car["carBrand"],$car["carModel"],$car["carColor"],$car["nbPlaces"]);
+          $unChauffeur["dateEmbauche"],$unChauffeur["ville"],$unChauffeur["heuresTravailees"],$unChauffeur["rating"],$unChauffeur["ratingNumber"],$unChauffeur["description"],$car["carId"],$car["carBrand"],$car["carModel"],$car["carColor"],$car["nbPlaces"]);
           ?>
           <div class="col-md-4">
             <div class="list-group-item" style="background-color: #D5D6D2;">
@@ -91,7 +91,7 @@ loadLanguageFromSession($_SESSION['lang']);
                     </div>
                     <div class="modal-body">
                       <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                           <h4>Infos: </h4>
                           <ul>
                             <li><?php echo "Ville d'operation: ".$chauffeur->getVille(); ?></li>
@@ -99,14 +99,18 @@ loadLanguageFromSession($_SESSION['lang']);
                             <li><?php echo "Date d'embauche: ".$chauffeur->getDateEmbauche(); ?></li>
                           </ul>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                           <h4>Véhicule: </h4>
                           <ul>
                             <li><?php echo "Marque: ".$chauffeur->getCarBrand(); ?></li>
                             <li><?php echo "Modèle: ".$chauffeur->getCarModel(); ?></li>
                             <li><?php echo "Couleur: ".$chauffeur->getCarColor(); ?></li>
-                            <li><?php echo "Places : ".$chauffeur->getCarSeats(); ?></li>
+                            <li><?php echo "Places: ".$chauffeur->getCarSeats(); ?></li>
                           </ul>
+                        </div>
+                        <div class="col-md-4">
+                          <h4>Description: </h4>
+                          <p><?php echo $chauffeur->getDescription(); ?></p>
                         </div>
                       </div>
                     </div>

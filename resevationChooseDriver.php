@@ -65,14 +65,14 @@
               {
               $car=App\Chauffeur::getCar($unChauffeur["idCollaborateurs"],$bdd);
               $chauffeur = new App\Chauffeur($unChauffeur["idCollaborateurs"],$unChauffeur["email"],$unChauffeur["last_name"],$unChauffeur["first_name"],$unChauffeur["metier"],$unChauffeur["prixCollaborateur"],
-                                            $unChauffeur["dateEmbauche"],$unChauffeur["ville"],$unChauffeur["heuresTravailees"],$unChauffeur["rating"],$unChauffeur["ratingNumber"],$car["carId"],$car["carBrand"],$car["carModel"],$car["carColor"],$car["nbPlaces"]);
+                                            $unChauffeur["dateEmbauche"],$unChauffeur["ville"],$unChauffeur["heuresTravailees"],$unChauffeur["rating"],$unChauffeur["ratingNumber"],$unChauffeur["description"],$car["carId"],$car["carBrand"],$car["carModel"],$car["carColor"],$car["nbPlaces"]);
               ?>
               <li class="list-group-item">
                 <?php //echo $i?>
                 <h3><?php echo $chauffeur->getFirst_name()." ".$chauffeur->getLast_name();?></h3>
                 <h6>ID: <?php echo $chauffeur->getIdCollaborateur(); ?> | Prix: <?php echo $chauffeur->getPrixCollaborateur()."€ / Km | Note: ".$chauffeur->getRating()."/5 sur ".$chauffeur->getRatingNumber()." votes" ?></h6>
                 <div class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-4">
                     <h4>Infos: </h4>
                     <ul>
                       <li><?php echo "Ville d'operation: ".$chauffeur->getVille(); ?></li>
@@ -80,7 +80,7 @@
                       <li><?php echo "Date d'embauche: ".$chauffeur->getDateEmbauche(); ?></li>
                     </ul>
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-4">
                     <h4>Véhicule: </h4>
                     <ul>
                       <li><?php echo "Marque: ".$chauffeur->getCarBrand(); ?></li>
@@ -88,6 +88,10 @@
                       <li><?php echo "Couleur: ".$chauffeur->getCarColor(); ?></li>
                       <li><?php echo "Places : ".$chauffeur->getCarSeats(); ?></li>
                     </ul>
+                  </div>
+                  <div class="col-md-4">
+                    <h4>Description: </h4>
+                    <p><?php echo $chauffeur->getDescription(); ?></p>
                   </div>
                 </div>
 

@@ -18,9 +18,9 @@ $bdd = new Database('rip');
    protected $carColor;
    protected $carSeats;
 
-   public function __construct($idCollaborateur,$email,$last_name,$first_name,$metier,$prixCollaborateur,$dateEmbauche,$ville,$heuresTravailees,$rating,$ratingNumber,$carId,$carBrand,$carModel,$carColor,$carSeats) {
+   public function __construct($idCollaborateur,$email,$last_name,$first_name,$metier,$prixCollaborateur,$dateEmbauche,$ville,$heuresTravailees,$rating,$ratingNumber,$description,$carId,$carBrand,$carModel,$carColor,$carSeats) {
 
-     parent::__construct($idCollaborateur,$email,$last_name,$first_name,$metier,$prixCollaborateur,$dateEmbauche,$ville,$heuresTravailees,$rating,$ratingNumber);
+     parent::__construct($idCollaborateur,$email,$last_name,$first_name,$metier,$prixCollaborateur,$dateEmbauche,$ville,$heuresTravailees,$rating,$ratingNumber,$description);
 
        $this->carId = $carId;
        $this->carBrand = $carBrand;

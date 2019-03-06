@@ -97,24 +97,27 @@ $hourCoachCulture = $hourCoachCulture/3600;
                   if($unIdService["idService"] == 1){
                     $infoLinkService = $bdd->queryOne('SELECT * FROM restaurants WHERE idRestaurant='.$linkService["idAnnexe"].'');
                     $typeEtablissement="Restaurant";
+
                   }elseif ($unIdService["idService"] == 7) {
                     $infoLinkService = $bdd->queryOne('SELECT * FROM hotel WHERE idHotel='.$linkService["idAnnexe"].'');
                     $typeEtablissement="Hotel";
+
                   }elseif ($unIdService["idService"] == 8) {
                     $infoLinkService = $bdd->queryOne('SELECT * FROM billettourisme WHERE idBillet='.$linkService["idAnnexe"].'');
-                    $typeEtablissement="Billet touristque"; }
-                    elseif ($unIdService["idService"] == 11) {
+                    $typeEtablissement="Billet touristque";
+
+                  }elseif ($unIdService["idService"] == 11) {
                       $infoLinkService = $bdd->queryOne('SELECT *  FROM collaborateurs INNER JOIN linkservicetrajet WHERE collaborateurs.idCollaborateurs = linkservicetrajet.idAnnexe AND idTrajet='.$_SESSION["idTrajet"].'');
                       $typeEtablissement="Interprete";
-                  }
-                  elseif ($unIdService["idService"] == 12) {
+
+                  }elseif ($unIdService["idService"] == 12) {
                     $infoLinkService = $bdd->queryOne('SELECT *  FROM collaborateurs INNER JOIN linkservicetrajet WHERE collaborateurs.idCollaborateurs = linkservicetrajet.idAnnexe AND idTrajet='.$_SESSION["idTrajet"].'');
                     $typeEtablissement="Coach Sportif";
-                }
-                elseif ($unIdService["idService"] == 13) {
-                  $infoLinkService = $bdd->queryOne('SELECT *  FROM collaborateurs INNER JOIN linkservicetrajet WHERE collaborateurs.idCollaborateurs = linkservicetrajet.idAnnexe AND idTrajet='.$_SESSION["idTrajet"].'');
-                  $typeEtablissement="Coach Culture";
-              }else {
+
+                  }elseif ($unIdService["idService"] == 13) {
+                    $infoLinkService = $bdd->queryOne('SELECT *  FROM collaborateurs INNER JOIN linkservicetrajet WHERE collaborateurs.idCollaborateurs = linkservicetrajet.idAnnexe AND idTrajet='.$_SESSION["idTrajet"].'');
+                    $typeEtablissement="Coach Culture";
+                  }else {
 
                   }
 
@@ -123,13 +126,13 @@ $hourCoachCulture = $hourCoachCulture/3600;
                     echo "ID: ".$service["idService"]." | ".$service["nomService"];
                   }
                   else if ($linkService["idService"] == 11) {
-                    echo "ID: ".$infoLinkService["idCollaborateurs"]." | ".$service["nomService"]." : ".$infoLinkService["last_name"]." ".$infoLinkService["first_name"]." | Quantitée: ".$linkService["quantite"]." interprètes";
+                    echo "ID: ".$service["idService"]." | ".$service["nomService"]." : ".$infoLinkService["last_name"]." ".$infoLinkService["first_name"]." | Langue: ".$infoLinkService["description"];
                   }
                   else if ($linkService["idService"] == 12) {
-                    echo "ID: ".$infoLinkService["idCollaborateurs"]." | ".$service["nomService"]." : ".$infoLinkService["last_name"]." ".$infoLinkService["first_name"]." | Quantitée: ".$linkService["quantite"]." Coachs Sportifs";
+                    echo "ID: ".$service["idService"]." | ".$service["nomService"]." : ".$infoLinkService["last_name"]." ".$infoLinkService["first_name"]." | Quantitée: ".$linkService["quantite"]." Coachs Sportifs";
                   }
                   else if ($linkService["idService"] == 13) {
-                    echo "ID: ".$infoLinkService["idCollaborateurs"]." | ".$service["nomService"]." : ".$infoLinkService["last_name"]." ".$infoLinkService["first_name"]." | Quantitée: ".$linkService["quantite"]." Coachs Cultures";
+                    echo "ID: ".$service["idService"]." | ".$service["nomService"]." : ".$infoLinkService["last_name"]." ".$infoLinkService["first_name"]." | Quantitée: ".$linkService["quantite"]." Coachs Cultures";
                   }
                   else{
                     echo "ID: ".$service["idService"]." | ".$service["nomService"]." : ".$typeEtablissement." ".$infoLinkService["nom"]." | Quantitée: ".$linkService["quantite"]." places";
@@ -153,14 +156,14 @@ $hourCoachCulture = $hourCoachCulture/3600;
 
                 $car=App\Chauffeur::getCar($unChauffeur["idCollaborateurs"],$bdd);
                 $chauffeur = new App\Chauffeur($unChauffeur["idCollaborateurs"],$unChauffeur["email"],$unChauffeur["last_name"],$unChauffeur["first_name"],$unChauffeur["metier"],$unChauffeur["prixCollaborateur"],
-                $unChauffeur["dateEmbauche"],$unChauffeur["ville"],$unChauffeur["heuresTravailees"],$unChauffeur["rating"],$unChauffeur["ratingNumber"],$car["carId"],$car["carBrand"],$car["carModel"],$car["carColor"],$car["nbPlaces"]);
+                $unChauffeur["dateEmbauche"],$unChauffeur["ville"],$unChauffeur["heuresTravailees"],$unChauffeur["rating"],$unChauffeur["ratingNumber"],$unChauffeur["description"],$car["carId"],$car["carBrand"],$car["carModel"],$car["carColor"],$car["nbPlaces"]);
                 ?>
                 <li class="list-group">
                   <?php //echo $i?>
                   <h4><?php echo $chauffeur->getFirst_name()." ".$chauffeur->getLast_name();?></h4>
                   <h6>id du Chauffeur: <?php echo $chauffeur->getIdCollaborateur(); ?> Prix: <?php echo $chauffeur->getPrixCollaborateur()."€ / Km  // AJOUTER SYSTEME PHOTO + SYSTEME ETOILES" ?></h6>
                   <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <h4>Infos: </h4>
                       <ul>
                         <li><?php echo "Ville d'operation: ".$chauffeur->getVille(); ?></li>
@@ -168,7 +171,7 @@ $hourCoachCulture = $hourCoachCulture/3600;
                         <li><?php echo "Date d'embauche: ".$chauffeur->getDateEmbauche(); ?></li>
                       </ul>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <h4>Véhicule: </h4>
                       <ul>
                         <li><?php echo "Marque: ".$chauffeur->getCarBrand(); ?></li>
@@ -176,6 +179,10 @@ $hourCoachCulture = $hourCoachCulture/3600;
                         <li><?php echo "Couleur: ".$chauffeur->getCarColor(); ?></li>
                         <li><?php echo "Places: ".$chauffeur->getCarSeats(); ?></li>
                       </ul>
+                    </div>
+                    <div class="col-md-4">
+                      <h4>Description: </h4>
+                      <p><?php echo $chauffeur->getDescription(); ?></p>
                     </div>
                   </div>
                 </li>
@@ -229,7 +236,7 @@ $hourCoachCulture = $hourCoachCulture/3600;
                           $infoLinkService = $bdd->queryOne('SELECT *  FROM collaborateurs INNER JOIN linkservicetrajet WHERE collaborateurs.idCollaborateurs = linkservicetrajet.idAnnexe AND idTrajet='.$_SESSION["idTrajet"].'');
                           $typeEtablissement="Coachs Cultures";
                          }
-                       
+
                        else {
                            }
                         ?><li><?php

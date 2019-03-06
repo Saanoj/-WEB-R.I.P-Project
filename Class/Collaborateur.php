@@ -21,8 +21,9 @@ $bdd = new Database('rip');
     protected $heuresTravailees;
     protected $rating;
     protected $ratingNumber;
+    protected $description;
 
-    public function __construct($idCollaborateur,$email,$last_name,$first_name,$metier,$prixCollaborateur,$dateEmbauche,$ville,$heuresTravailees,$rating,$ratingNumber) {
+    public function __construct($idCollaborateur,$email,$last_name,$first_name,$metier,$prixCollaborateur,$dateEmbauche,$ville,$heuresTravailees,$rating,$ratingNumber,$description) {
         $this->idCollaborateur = $idCollaborateur;
         $this->email = $email;
         $this->last_name = $last_name;
@@ -34,6 +35,7 @@ $bdd = new Database('rip');
         $this->heuresTravailees = $heuresTravailees;
         $this->rating = $rating;
         $this->ratingNumber = $ratingNumber;
+        $this->description = $description;
     }
 
     /* GETTERS */
@@ -48,6 +50,7 @@ $bdd = new Database('rip');
     public function getHeuresTravailees(){return $this->heuresTravailees;}
     public function getRating(){return $this->rating;}
     public function getRatingNumber(){return $this->ratingNumber;}
+    public function getDescription(){return $this->description;}
 
     /* SETTERS */
     public function setIdCollaborateur($idCollaborateur){$this->idCollaborateur = $idCollaborateur;}
@@ -61,6 +64,7 @@ $bdd = new Database('rip');
   	public function setHeuresTravailees($heuresTravailees){$this->heuresTravailees = $heuresTravailees;}
   	public function setRating($rating){$this->rating = $rating;}
   	public function setRatingNumber($ratingNumber){$this->ratingNumber = $ratingNumber;}
+  	public function setDescription($description){$this->description = $description;}
 
 
 

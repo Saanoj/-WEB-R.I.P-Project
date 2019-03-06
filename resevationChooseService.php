@@ -31,7 +31,7 @@ loadLanguageFromSession($_SESSION['lang']);
   <script src="js/reservationChooseService/calendrier.js"></script>
 
   <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css"/>
-<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
 
 
 
@@ -274,164 +274,171 @@ loadLanguageFromSession($_SESSION['lang']);
                           ?>
 
                           <div class="container">
-                          <h5>Vous voulez un service qui n'est pas présent ? Envoyez nous votre demande et nous l'examinerons sous 24h ouvrés.</h5>
-	                  <div class="row">
-                  
-		
-                    <div class="row">
-                    	<div class="offset-md-6 col-md-12">
-                  		<div class="form-group">
-                            <input type="email" class="form-control" name="emailContact" autocomplete="off" id="email" placeholder="E-mail" value="<?= $_SESSION['email'];?>">
-                  		</div>
-                  	</div>
-                  	</div>
-                  	<div class="row">
-                  		<div class="offset-md-9 col-md-12">
-                  		<div class="form-group">
-                            <textarea class="form-control textarea" rows="3" name="messageContact" id="Message" placeholder="Message"></textarea>
-                  		</div>
-                  	</div>
-                    </div>
-    
-                
-               
-	</div>
-</div>
-<?php
+                            <h5>Vous voulez un service qui n'est pas présent ? Envoyez nous votre demande et nous l'examinerons sous 24h ouvrés.</h5>
+                            <div class="row">
+
+
+                              <div class="row">
+                                <div class="offset-md-6 col-md-12">
+                                  <div class="form-group">
+                                    <input type="email" class="form-control" name="emailContact" autocomplete="off" id="email" placeholder="E-mail" value="<?= $_SESSION['email'];?>">
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="offset-md-9 col-md-12">
+                                  <div class="form-group">
+                                    <textarea class="form-control textarea" rows="3" name="messageContact" id="Message" placeholder="Message"></textarea>
+                                  </div>
+                                </div>
+                              </div>
+
+
+
+                            </div>
+                          </div>
+                          <?php
 
                           break;
                           case '11' :
 
                           $interprete = $bdd->getPDO()->prepare('SELECT * FROM collaborateurs WHERE metier="interprete" ORDER BY idCollaborateurs DESC LIMIT 4 ');
                           $interprete->execute();
-                                              ?>
-                      <h4> Réservation d'un interprête pendant la journée du trajet, veuillez choisir une plage horraire : </h4>
-                      <h6>Pour que votre réservation soit valide, l'heure de début doit etre égal ou supérieur a l'heure du trajet. (<?= $res[1]; ?>h) </h6>
-                      <h6>Vous ne pouvez réserver un interprète au maximum pendant 8h</h6>
-                      Heure de début :  <input type="time" name="startInterprete" value="<?= $res[1]; ?>" min="<?= $res[1]; ?>">
-                       Heure de fin : <input type="time" name="endInterprete">
-                      Nombre d'interprètes : <input type="number" min="1" max="5" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]" value="1"></input>
+                          ?>
+                          <h4> Réservation d'un interprête pendant la journée du trajet, veuillez choisir une plage horraire : </h4>
+                          <h6>Pour que votre réservation soit valide, l'heure de début doit etre égal ou supérieur a l'heure du trajet. (<?= $res[1]; ?>h) </h6>
+                          <h6>Vous ne pouvez réserver un interprète au maximum pendant 8h</h6>
+                          Heure de début :  <input type="time" name="startInterprete" value="<?= $res[1]; ?>" min="<?= $res[1]; ?>">
+                          Heure de fin : <input type="time" name="endInterprete">
+                          <!-- Nombre d'interprètes : <input type="number" min="1" max="5" class="primary" name="quantite[<?php //echo $service->getIdService(); ?>]" value="1"></input> -->
 
-<br> <br> <br>
-<?php
+                          <br> <br> <br>
+                          <?php
+                          $j=0;
+                          while ($unInterprete = $interprete->fetch())
+                          {
+                            ?>
+                            <table>
 
-                            while ($unInterprete = $interprete->fetch())
-                            {
-                              ?>
-                              <table>
-
-                      <tr>
-                        <th scope="col">Nom : </th>
-                        <th scope="col">Prenom : </th>
-                        <th scope="col">Prix :</th>
-                        <th scope="col">Note</th>
-                        </tr>
-                        <tr>
-                              <th scope="row"> <?= $unInterprete['last_name'];?></th>
+                              <tr>
+                                <th scope="col">Nom : </th>
+                                <th scope="col">Prenom : </th>
+                                <th scope="col">Prix :</th>
+                                <th scope="col">Note</th>
+                                <th scope="col">Langue:</th>
+                              </tr>
+                              <tr>
+                                <th scope="row"> <?= $unInterprete['last_name'];?></th>
                                 <td> <?= $unInterprete['first_name'];?></td>
-                                <td>  <?= $unInterprete['prixCollaborateur']. '€';?> </td>
+                                <td>  <?= $unInterprete['prixCollaborateur'].'€';?> </td>
                                 <td>  <?= $unInterprete['rating'];?> </td>
+                                <td>  <?= $unInterprete['description'];?> </td>
                                 <td>
                                   <div class="funkyradio-primary col-md-6 center-block">
-                                    <input type="radio" name="idInterprete" id="<?php echo $unInterprete['idCollaborateurs'] ?>" value="<?php echo $unInterprete['idCollaborateurs'] ?>" checked></input>
+                                    <input type="checkbox" name="idInterprete[<?php echo $j ?>]" id="<?php echo $unInterprete['idCollaborateurs'] ?>" value="<?php echo $unInterprete['idCollaborateurs'] ?>" <?php $check = ($j==0)?("checked"):("unchecked"); echo $check ?>></input>
                                     <label for="radio<?php echo $unInterprete['idCollaborateurs'] ?>">Choisir cet interprète</label>
                                   </div>
                                 </td>
                               </tr>
                             </table>
                             <?php
-                            }
-                    break;
+                            $j++;
+                          }
+                          break;
 
-                    case '12':
+                          case '12':
 
-                    $coachSportif = $bdd->getPDO()->prepare('SELECT * FROM collaborateurs WHERE metier="coachSportif" ORDER BY idCollaborateurs DESC LIMIT 4 ');
-                    $coachSportif->execute();
-                                        ?>
-                <h4> Réservation d'un coach sportif pendant la journée du trajet, veuillez choisir une plage horraire : </h4>
-                <h6>Pour que votre réservation soit valide, l'heure de début doit etre égal ou supérieur a l'heure du trajet. (<?= $res[1]; ?>h) </h6>
-                <h6>Vous  pouvez réserver un coach sportif  pendant 8h maximum</h6>
-                Heure de début :  <input type="time" name="startCoachSportif" value="<?= $res[1]; ?>" min="<?= $res[1]; ?>">
-                 Heure de fin : <input type="time" name="endCoachSportif">
-                Nombre de coachs sportifs : <input type="number" min="1" max="5" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]" value="1"></input>
+                          $coachSportif = $bdd->getPDO()->prepare('SELECT * FROM collaborateurs WHERE metier="coachSportif" ORDER BY idCollaborateurs DESC LIMIT 4 ');
+                          $coachSportif->execute();
+                          ?>
+                          <h4> Réservation d'un coach sportif pendant la journée du trajet, veuillez choisir une plage horraire : </h4>
+                          <h6>Pour que votre réservation soit valide, l'heure de début doit etre égal ou supérieur a l'heure du trajet. (<?= $res[1]; ?>h) </h6>
+                          <h6>Vous  pouvez réserver un coach sportif  pendant 8h maximum</h6>
+                          Heure de début :  <input type="time" name="startCoachSportif" value="<?= $res[1]; ?>" min="<?= $res[1]; ?>">
+                          Heure de fin : <input type="time" name="endCoachSportif">
 
-<br> <br> <br>
-<?php
+                          <br> <br> <br>
+                          <?php
+                          $j=0;
+                          while ($unCoachSportif = $coachSportif->fetch())
+                          {
+                            ?>
+                            <table>
 
-                      while ($unCoachSportif = $coachSportif->fetch())
-                      {
-                        ?>
-                        <table>
+                              <tr>
+                                <th scope="col">Nom : </th>
+                                <th scope="col">Prenom : </th>
+                                <th scope="col">Prix :</th>
+                                <th scope="col">Note</th>
+                                <th scope="col">Domaine:</th>
+                              </tr>
+                              <tr>
+                                <th scope="row"> <?= $unCoachSportif['last_name'];?></th>
+                                <td> <?= $unCoachSportif['first_name'];?></td>
+                                <td>  <?= $unCoachSportif['prixCollaborateur']. '€';?> </td>
+                                <td>  <?= $unCoachSportif['rating'];?> </td>
+                                <td>  <?= $unCoachSportif['description'];?> </td>
+                                <td>
+                                  <div class="funkyradio-primary col-md-6 center-block">
+                                    <input type="checkbox" name="idCoachSportif[<?php echo $j ?>]" id="<?php echo $unCoachSportif['idCollaborateurs'] ?>" value="<?php echo $unCoachSportif['idCollaborateurs'] ?>" <?php $check = ($j==0)?("checked"):("unchecked"); echo $check ?>></input>
+                                    <label for="radio<?php echo $unCoachSportif['idCollaborateurs'] ?>">Choisir ce coach</label>
+                                  </div>
+                                </td>
+                              </tr>
+                            </table>
+                            <?php
+                            $j++;
+                          }
+                          break;
+                          case '13':
 
-                <tr>
-                  <th scope="col">Nom : </th>
-                  <th scope="col">Prenom : </th>
-                  <th scope="col">Prix :</th>
-                  <th scope="col">Note</th>
-                  </tr>
-                  <tr>
-                        <th scope="row"> <?= $unCoachSportif['last_name'];?></th>
-                          <td> <?= $unCoachSportif['first_name'];?></td>
-                          <td>  <?= $unCoachSportif['prixCollaborateur']. '€';?> </td>
-                          <td>  <?= $unCoachSportif['rating'];?> </td>
-                          <td>
-                            <div class="funkyradio-primary col-md-6 center-block">
-                              <input type="radio" name="idCoachSportif" id="<?php echo $unCoachSportif['idCollaborateurs'] ?>" value="<?php echo $unCoachSportif['idCollaborateurs'] ?>" checked></input>
-                              <label for="radio<?php echo $unCoachSportif['idCollaborateurs'] ?>">Choisir ce coach</label>
-                            </div>
-                          </td>
-                        </tr>
-                      </table>
-                      <?php
-                      }
-                    break;
-                    case '13':
+                          $coachCulture = $bdd->getPDO()->prepare('SELECT * FROM collaborateurs WHERE metier="coachCulture" ORDER BY idCollaborateurs DESC LIMIT 4 ');
+                          $coachCulture->execute();
+                          ?>
+                          <h4> Réservation d'un coach cultures pendant la journée du trajet, veuillez choisir une plage horraire : </h4>
+                          <h6>Pour que votre réservation soit valide, l'heure de début doit etre égal ou supérieur a l'heure du trajet. (<?= $res[1]; ?>h) </h6>
+                          <h6>Vous  pouvez réserver un coach cultures  pendant 8h maximum</h6>
+                          Heure de début :  <input type="time" name="startCoachCulture" value="<?= $res[1]; ?>" min="<?= $res[1]; ?>">
+                          Heure de fin : <input type="time" name="endCoachCulture">
 
-                    $coachCulture = $bdd->getPDO()->prepare('SELECT * FROM collaborateurs WHERE metier="coachCulture" ORDER BY idCollaborateurs DESC LIMIT 4 ');
-                    $coachCulture->execute();
-                                        ?>
-                <h4> Réservation d'un coach cultures pendant la journée du trajet, veuillez choisir une plage horraire : </h4>
-                <h6>Pour que votre réservation soit valide, l'heure de début doit etre égal ou supérieur a l'heure du trajet. (<?= $res[1]; ?>h) </h6>
-                <h6>Vous  pouvez réserver un coach cultures  pendant 8h maximum</h6>
-                Heure de début :  <input type="time" name="startCoachCulture" value="<?= $res[1]; ?>" min="<?= $res[1]; ?>">
-                 Heure de fin : <input type="time" name="endCoachCulture">
-                Nombre de coachs cultures : <input type="number" min="1" max="5" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]" value="1"></input>
+                          <br> <br> <br>
+                          <?php
+                          $j=0;
+                          while ($unCoachCulture = $coachCulture->fetch())
+                          {
+                            ?>
+                            <table>
 
-<br> <br> <br>
-<?php
-
-                      while ($unCoachCulture = $coachCulture->fetch())
-                      {
-                        ?>
-                        <table>
-
-                <tr>
-                  <th scope="col">Nom : </th>
-                  <th scope="col">Prenom : </th>
-                  <th scope="col">Prix :</th>
-                  <th scope="col">Note</th>
-                  </tr>
-                  <tr>
-                        <th scope="row"> <?= $unCoachCulture['last_name'];?></th>
-                          <td> <?= $unCoachCulture['first_name'];?></td>
-                          <td>  <?= $unCoachCulture['prixCollaborateur']. '€';?> </td>
-                          <td>  <?= $unCoachCulture['rating'];?> </td>
-                          <td>
-                            <div class="funkyradio-primary col-md-6 center-block">
-                              <input type="radio" name="idCoachSportif" id="<?php echo $unCoachCulture['idCollaborateurs'] ?>" value="<?php echo $unCoachCulture['idCollaborateurs'] ?>" checked></input>
-                              <label for="radio<?php echo $unCoachCulture['idCollaborateurs'] ?>">Choisir ce coach</label>
-                            </div>
-                          </td>
-                        </tr>
-                      </table>
-                      <?php
-                      }
-                    break;
+                              <tr>
+                                <th scope="col">Nom : </th>
+                                <th scope="col">Prenom : </th>
+                                <th scope="col">Prix :</th>
+                                <th scope="col">Note</th>
+                                <th scope="col">Domaine:</th>
+                              </tr>
+                              <tr>
+                                <th scope="row"> <?= $unCoachCulture['last_name'];?></th>
+                                <td> <?= $unCoachCulture['first_name'];?></td>
+                                <td>  <?= $unCoachCulture['prixCollaborateur']. '€';?> </td>
+                                <td>  <?= $unCoachCulture['rating'];?> </td>
+                                <td>  <?= $unCoachCulture['description'];?> </td>
+                                <td>
+                                  <div class="funkyradio-primary col-md-6 center-block">
+                                    <input type="checkbox" name="idCoachCulture[<?php echo $j ?>]" id="<?php echo $unCoachCulture['idCollaborateurs'] ?>" value="<?php echo $unCoachCulture['idCollaborateurs'] ?>" <?php $check = ($j==0)?("checked"):("unchecked"); echo $check ?>></input>
+                                    <label for="radio<?php echo $unCoachCulture['idCollaborateurs'] ?>">Choisir ce coach</label>
+                                  </div>
+                                </td>
+                              </tr>
+                            </table>
+                            <?php
+                          $j++;
+                          }
+                          break;
 
 
                           case '16' :
 
-                          
+
 
                           break;
                           default:

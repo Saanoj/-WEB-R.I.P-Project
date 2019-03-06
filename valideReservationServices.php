@@ -83,6 +83,9 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
       case 12:
       $idAnnexe=$_POST["idCoachSportif"];
       break;
+      case 12:
+      $idAnnexe=$_POST["idCoachCulture"];
+      break;
       default:
       $idAnnexe=-1;
       $thisQuantite=0;

@@ -418,7 +418,7 @@ loadLanguageFromSession($_SESSION['lang']);
                           <td>  <?= $unCoachCulture['rating'];?> </td>
                           <td>
                             <div class="funkyradio-primary col-md-6 center-block">
-                              <input type="radio" name="idCoachSportif" id="<?php echo $unCoachCulture['idCollaborateurs'] ?>" value="<?php echo $unCoachCulture['idCollaborateurs'] ?>" checked></input>
+                              <input type="radio" name="idCoachCulture" id="<?php echo $unCoachCulture['idCollaborateurs'] ?>" value="<?php echo $unCoachCulture['idCollaborateurs'] ?>" checked></input>
                               <label for="radio<?php echo $unCoachCulture['idCollaborateurs'] ?>">Choisir ce coach</label>
                             </div>
                           </td>

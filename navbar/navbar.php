@@ -8,7 +8,7 @@
         <nav class="navigation" role="navigation">
           <ul class="primary-nav">
             <li><a href="index.php">Accueil</a></li>
-            <li><a href="#">Services</a></li>
+            <li><a href="services.php">Services</a></li>
             <li><a href="connexion.php">Connexion</a></li>
             <li><a href="inscription.php">Inscription</a></li>
             <li><a href="contact.php">Contact</a></li>

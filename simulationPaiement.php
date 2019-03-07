@@ -41,6 +41,7 @@ $backOffice=0;
 $type = 1;
 $navbar = new App\Navbar($backOffice,$type);
 $navbar->navbar();
+$trajet = unserialize($_SESSION['trajet']);
 
 $form = new App\Form(array());
 if (isset($_POST['price'])) {
@@ -207,16 +208,34 @@ function stripeResponseHandler(status, response) {
 }
 
 function addPDFButton(){
-  var button = document.createElement("button");
+  var button = document.createElement("submit");
 	button.onclick = function(){sayHi()};
   button.className = "btn btn-success";
 	button.innerText = "Facture PDF";
-	document.getElementById('id1').appendChild(button);
+  document.getElementById('id1').appendChild(button);
+  generatePDF();
+
 }
 
 function sayHi(){
   console.log("Hi mate :3");
+  generatePDF();
 }
+
+function generatePDF() {
+  	var request = new XMLHttpRequest();
+	request.onreadystatechange = function(){
+	  if(request.status == 200 && request.readyState == 4){
+
+	  }
+	};
+	data=''
+	request.open('POST', 'paymentProcess.php');
+	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+	request.send(data);
+	return false;
+
+  }
 
 </script>
 </head>

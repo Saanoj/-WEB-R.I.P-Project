@@ -309,6 +309,8 @@ loadLanguageFromSession($_SESSION['lang']);
           <!-- Validation -->
           <form class="row list-group-item center-block" method="post" action="simulationpaiement.php">
             <input type="hidden" name="price" value="<?php echo $total; ?>">
+            <?php $_SESSION['prixTotal'] = $totalServices+$totalChauffeurTrajet ?>
+           
             <div class="center-block">
               <?php echo $form->submit(); ?>
             </div>

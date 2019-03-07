@@ -192,7 +192,7 @@ function checkInterprete($startInterprete,$endInterprete,$res) {
       else {
         return false;
       }
-  
+
     }
     else {
       return true;
@@ -209,7 +209,7 @@ function checkInterprete($startInterprete,$endInterprete,$res) {
         else {
           return false;
         }
-    
+
       }
       else {
         return true;

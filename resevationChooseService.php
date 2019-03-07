@@ -97,13 +97,7 @@ loadLanguageFromSession($_SESSION['lang']);
                     <input type="checkbox" class="primary" name="services[<?php echo $i ?>]" value="<?php echo $service->getIdService(); ?>">
                     <span class="slider round"></span>
                   </label>
-                  <?php
-                  if ($service->getIdService() != 1 && $service->getIdService() !=7 && $service->getIdService() != 8 && $service->getIdService() !=16 && $service->getIdService() !=11 && $service->getIdService() !=12 && $service->getIdService() !=13 && $service->getIdService() !=10 && $service->getIdService() !=14 && $service->getIdService() !=17) {
-                    ?>
-
-                    <!--<button type="button" name="services[<?php echo $i ?>]" class="btn btn-info">Choisir</button>-->
-                  <?php } else { ?>
-
+  
 
                     <button type="button" href="#costumModal<?php echo $i ?>" data-target="#costumModal<?php echo $i ?>" name="services[<?php echo $i ?>]" class="btn btn-info" data-toggle="modal">Choisir</button>
 
@@ -450,7 +444,7 @@ loadLanguageFromSession($_SESSION['lang']);
                     </div>
                   </div>
 
-                <?php } ?>
+          
               </li>
               <?php
               $i++;

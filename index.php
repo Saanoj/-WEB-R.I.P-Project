@@ -30,17 +30,17 @@ loadLanguageFromSession($_SESSION['lang']);
   ?>
 
   <!-- Get a quote section -->
-  <section  class="section quote">
+  <div class="section">
     <div class="container">
       <div class="col-md-8 col-md-offset-2 text-center">
         <h3><?php echo _TITRE_BODY?></h3>
         <a href="#" class="btn btn-large"><?php echo _TITRE_BOUTTON ?></a>
       </div>
     </div>
-  </section>
+  </div>
 
   <!-- Get a quote section -->
-  <div class="container p-2 pb-1" style="border-radius: 10px; background-color: #2F2E33">
+  <div class="container p-2" style="border-radius: 10px; background-color: #2F2E33; padding: 10px;">
     <br>
     <div class="row mt-md-1">
       <div class="col-md-4 blue col-md-offset-4 text-center">
@@ -50,9 +50,11 @@ loadLanguageFromSession($_SESSION['lang']);
       </div>
     </div>
     <br>
-    <div class="p1">
+    <div class="row">
 
+    <div class="col-md-1">
 
+    </div>
     <?php
     // Affichage d'un service
     $chauffeurs = $bdd->queryPrepareForWhile('SELECT * FROM collaborateurs WHERE metier="chauffeur" ORDER BY rating DESC LIMIT 3',$bdd);
@@ -64,7 +66,7 @@ loadLanguageFromSession($_SESSION['lang']);
       $chauffeur = new App\Chauffeur($unChauffeur["idCollaborateurs"],$unChauffeur["email"],$unChauffeur["last_name"],$unChauffeur["first_name"],$unChauffeur["metier"],$unChauffeur["prixCollaborateur"],
       $unChauffeur["dateEmbauche"],$unChauffeur["ville"],$unChauffeur["heuresTravailees"],$unChauffeur["rating"],$unChauffeur["ratingNumber"],$unChauffeur["description"],$car["carId"],$car["carBrand"],$car["carModel"],$car["carColor"],$car["nbPlaces"]);
       ?>
-      <li class="list-group-item col-md-4 ml-1" style="border-radius: 10px">
+      <div class="col-md-3" style="border-radius: 10px; background-color: #D5D6D2;margin: 10px;padding: 10px;">
 
         <div class="container">
           <div class="">
@@ -120,10 +122,12 @@ loadLanguageFromSession($_SESSION['lang']);
             </div>
           </div>
         </div>
-
-      </li>
-    <?php } ?>
-    <br>
+      </div>
+    <?php
+    $i++;
+    }
+    ?>
+    <br><br>
     </div>
     </div>
     <br>

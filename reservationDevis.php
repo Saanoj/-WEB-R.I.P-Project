@@ -47,16 +47,16 @@ loadLanguageFromSession($_SESSION['lang']);
   // ON VERIFIE LA DIFFERENCE D'HEURE ENTRE LE DEBUT ET LA FIN DU CRENEAU DE L"INTERPRETE
   $_SESSION['startInterprete'];
   $_SESSION['endInterprete'];
-  $hourInterprete = (strtotime($_SESSION['endInterprete']) - strtotime($_SESSION['startInterprete']));
-  $hourInterprete = $hourInterprete/3600;
+  $hourInterprete = floor((strtotime($_SESSION['endInterprete']) - strtotime($_SESSION['startInterprete'])));
+  $hourInterprete = floor($hourInterprete/3600);
 
   // ON VERIFIE LA DIFFERENCE D'HEURE ENTRE LE DEBUT ET LA FIN DU CRENEAU DU COACH SPORTIF
-  $hourCoachSportif = (strtotime($_SESSION['endCoachSportif']) - strtotime($_SESSION['startCoachSportif']));
-  $hourCoachSportif = $hourCoachSportif/3600;
+  $hourCoachSportif = floor((strtotime($_SESSION['endCoachSportif']) - strtotime($_SESSION['startCoachSportif'])));
+  $hourCoachSportif = floor($hourCoachSportif/3600);
 
   //  ON VERIFIE LA DIFFERENCE D'HEURE ENTRE LE DEBUT ET LA FIN DU CRENEAU DU COACH CULTURE
-  $hourCoachCulture = (strtotime($_SESSION['endCoachCulture']) - strtotime($_SESSION['startCoachCulture']));
-  $hourCoachCulture = $hourCoachCulture/3600;
+  $hourCoachCulture = floor((strtotime($_SESSION['endCoachCulture']) - strtotime($_SESSION['startCoachCulture'])));
+  $hourCoachCulture = floor($hourCoachCulture/3600);
 
   // On recupere l'objet trajet contenant nos infos de trajet depuis la session
   $trajet = unserialize($_SESSION['trajet']);
@@ -82,7 +82,7 @@ loadLanguageFromSession($_SESSION['lang']);
               //on recupere les id des services choisis sur ce trajet
               $idServices = $bdd->query('SELECT * FROM linkServicetrajet WHERE idTrajet='.$_SESSION["idTrajet"].'');
 
-              $idCollaborateurMultiples = $bdd->query('SELECT idAnnexe FROM linkServicetrajet WHERE idTrajet='.$_SESSION["idTrajet"].' AND (idService=11 OR idService=12 OR idService=13)');
+            //  $idCollaborateurMultiples = $bdd->query('SELECT idAnnexe FROM linkServicetrajet WHERE idTrajet='.$_SESSION["idTrajet"].' AND (idService=11 OR idService=12 OR idService=13)');
 
               if (empty($idServices)) {
                 echo "Aucun services selectionnés";
@@ -91,9 +91,10 @@ loadLanguageFromSession($_SESSION['lang']);
 
                   }
                 //on boucle les id des services choisis
+                $i=0;$j=0;$k=0;
                 foreach ($idServices as $unIdService) {
 
-                  foreach ($idCollaborateurMultiples as $unCollab) {
+
 
                     //on recupere les infos du service en fonction de son id
                     $service = $bdd->queryOne('SELECT * FROM services WHERE idService='.$unIdService["idService"].'');
@@ -115,16 +116,22 @@ loadLanguageFromSession($_SESSION['lang']);
                       $typeEtablissement="Billet touristque";
 
                     }elseif ($unIdService["idService"] == 11) {
-                      $infoLinkService = $bdd->queryOne('SELECT *  FROM collaborateurs INNER JOIN linkservicetrajet WHERE collaborateurs.idCollaborateurs = linkservicetrajet.idAnnexe AND idTrajet='.$_SESSION["idTrajet"].' AND idService ='.$unIdService["idService"].' AND idAnnexe='.$unCollab["idAnnexe"].'');
+                      $infoLinkService = $bdd->query('SELECT *  FROM collaborateurs INNER JOIN linkservicetrajet WHERE collaborateurs.idCollaborateurs = linkservicetrajet.idAnnexe AND idTrajet='.$_SESSION["idTrajet"].' AND idService ='.$unIdService["idService"].'');
                       $typeEtablissement="Interprete";
-
+                      $infoLinkService=$infoLinkService[$i];
+                      $i++;
+                      //var_dump($infoLinkService);
                     }elseif ($unIdService["idService"] == 12) {
-                      $infoLinkService = $bdd->queryOne('SELECT *  FROM collaborateurs INNER JOIN linkservicetrajet WHERE collaborateurs.idCollaborateurs = linkservicetrajet.idAnnexe AND idTrajet='.$_SESSION["idTrajet"].' AND idService ='.$unIdService["idService"].'');
+                      $infoLinkService = $bdd->query('SELECT *  FROM collaborateurs INNER JOIN linkservicetrajet WHERE collaborateurs.idCollaborateurs = linkservicetrajet.idAnnexe AND idTrajet='.$_SESSION["idTrajet"].' AND idService ='.$unIdService["idService"].'');
                       $typeEtablissement="Coach Sportif";
+                      $infoLinkService=$infoLinkService[$j];
+                      $j++;
 
                     }elseif ($unIdService["idService"] == 13) {
-                      $infoLinkService = $bdd->queryOne('SELECT *  FROM collaborateurs INNER JOIN linkservicetrajet WHERE collaborateurs.idCollaborateurs = linkservicetrajet.idAnnexe AND idTrajet='.$_SESSION["idTrajet"].' AND idService ='.$unIdService["idService"].'');
+                      $infoLinkService = $bdd->query('SELECT *  FROM collaborateurs INNER JOIN linkservicetrajet WHERE collaborateurs.idCollaborateurs = linkservicetrajet.idAnnexe AND idTrajet='.$_SESSION["idTrajet"].' AND idService ='.$unIdService["idService"].'');
                       $typeEtablissement="Coach Culture";
+                      $infoLinkService=$infoLinkService[$k];
+                      $k++;
                     }else {
 
                     }
@@ -135,7 +142,7 @@ loadLanguageFromSession($_SESSION['lang']);
                     }
                     else if ($linkService["idService"] == 11) {
                       echo "ID: ".$service["idService"]." | ".$service["nomService"]." : ".$infoLinkService["last_name"]." ".$infoLinkService["first_name"]." | Langue: ".$infoLinkService["description"];
-                      //var_dump($infoLinkService);
+
                     }
                     else if ($linkService["idService"] == 12) {
                       echo "ID: ".$service["idService"]." | ".$service["nomService"]." : ".$infoLinkService["last_name"]." ".$infoLinkService["first_name"]." | Domaine: ".$infoLinkService["description"];
@@ -147,7 +154,7 @@ loadLanguageFromSession($_SESSION['lang']);
                       echo "ID: ".$service["idService"]." | ".$service["nomService"]." : ".$typeEtablissement." ".$infoLinkService["nom"]." | Quantitée: ".$linkService["quantite"]." places";
                     }
                     echo "<br><br>";
-                  }
+
                 }
               }
               ?>
@@ -219,6 +226,7 @@ loadLanguageFromSession($_SESSION['lang']);
                     }else {
                       //on boucle les id des services choisis
                       $totalServices = 0;
+                      $i=0;$j=0;$k=0;
                       foreach ($idServices as $unIdService) {
                         //on recupere les infos du service en fonction de son id
                         $service = $bdd->queryOne('SELECT * FROM services WHERE idService='.$unIdService["idService"].'');
@@ -235,42 +243,41 @@ loadLanguageFromSession($_SESSION['lang']);
                           $infoLinkService = $bdd->queryOne('SELECT * FROM billettourisme WHERE idBillet='.$linkService["idAnnexe"].'');
                           $typeEtablissement="Billet touristque";
                         }elseif ($unIdService["idService"] == 11) {
-                          $infoLinkService = $bdd->queryOne('SELECT *  FROM collaborateurs INNER JOIN linkservicetrajet WHERE collaborateurs.idCollaborateurs = linkservicetrajet.idAnnexe AND idTrajet='.$_SESSION["idTrajet"].'');
+                          $infoLinkService = $bdd->query('SELECT *  FROM collaborateurs INNER JOIN linkservicetrajet WHERE collaborateurs.idCollaborateurs = linkservicetrajet.idAnnexe AND idTrajet='.$_SESSION["idTrajet"].' AND idService ='.$unIdService["idService"].'');
                           $typeEtablissement="Interprete";
-                        }
-                        elseif ($unIdService["idService"] == 12) {
-                          $infoLinkService = $bdd->queryOne('SELECT *  FROM collaborateurs INNER JOIN linkservicetrajet WHERE collaborateurs.idCollaborateurs = linkservicetrajet.idAnnexe AND idTrajet='.$_SESSION["idTrajet"].'');
-                          $typeEtablissement="Coachs Sportifs";
-                        }
-                        elseif ($unIdService["idService"] == 13) {
-                          $infoLinkService = $bdd->queryOne('SELECT *  FROM collaborateurs INNER JOIN linkservicetrajet WHERE collaborateurs.idCollaborateurs = linkservicetrajet.idAnnexe AND idTrajet='.$_SESSION["idTrajet"].'');
-                          $typeEtablissement="Coachs Cultures";
-                        }
+                          $infoLinkService=$infoLinkService[$i];
+                          $i++;
+                          $numHour=$hourInterprete;
+                          //var_dump($infoLinkService);
+                        }elseif ($unIdService["idService"] == 12) {
+                          $infoLinkService = $bdd->query('SELECT *  FROM collaborateurs INNER JOIN linkservicetrajet WHERE collaborateurs.idCollaborateurs = linkservicetrajet.idAnnexe AND idTrajet='.$_SESSION["idTrajet"].' AND idService ='.$unIdService["idService"].'');
+                          $typeEtablissement="Coach Sportif";
+                          $infoLinkService=$infoLinkService[$j];
+                          $j++;
+                          $numHour=$hourCoachSportif;
 
-                        else {
+                        }elseif ($unIdService["idService"] == 13) {
+                          $infoLinkService = $bdd->query('SELECT *  FROM collaborateurs INNER JOIN linkservicetrajet WHERE collaborateurs.idCollaborateurs = linkservicetrajet.idAnnexe AND idTrajet='.$_SESSION["idTrajet"].' AND idService ='.$unIdService["idService"].'');
+                          $typeEtablissement="Coach Culture";
+                          $infoLinkService=$infoLinkService[$k];
+                          $k++;
+                          $numHour=$hourCoachCulture;
+
+                        }else {
+                          $numHour=0;
                         }
                         ?><li><?php
+
                         //Affichage des infos
                         if ($linkService["idAnnexe"] < 0) {
                           echo $service["nomService"].": ".$service["prixService"]."€";
                           $totalServices += $service["prixService"];
-                        }
-                        else if ($linkService["idService"] == 11) {
-                          echo $service["nomService"]." : ".$infoLinkService["last_name"]." ".$infoLinkService["first_name"]." | Prix: ".$infoLinkService["prixCollaborateur"]."€/h *".$hourInterprete."h Total:".($infoLinkService["prixCollaborateur"]*$hourInterprete)." €";
-                          $totalServices += ($infoLinkService["prixCollaborateur"]*$linkService["quantite"]*$hourInterprete);
 
-                        }
-                        else if ($linkService["idService"] == 12) {
-                          echo $service["nomService"]." : ".$infoLinkService["last_name"]." ".$infoLinkService["first_name"]." | Prix: ".$infoLinkService["prixCollaborateur"]."€/h *".$hourCoachSportif."h Total:".($infoLinkService["prixCollaborateur"]*$hourCoachSportif)." €";
-                          $totalServices += ($infoLinkService["prixCollaborateur"]*$linkService["quantite"]*$hourCoachSportif);
+                        }else if ($linkService["idService"] == 11 || $linkService["idService"] == 12 || $linkService["idService"] == 13) {
+                          echo $service["nomService"]." : ".$infoLinkService["last_name"]." ".$infoLinkService["first_name"]." | Prix: ".$infoLinkService["prixCollaborateur"]."€/h *".$numHour ."h = ".($infoLinkService["prixCollaborateur"]*$numHour)." €";
+                          $totalServices += ($infoLinkService["prixCollaborateur"]*$numHour);
 
-                        }
-                        else if ($linkService["idService"] == 13) {
-                          echo $service["nomService"]." : ".$infoLinkService["last_name"]." ".$infoLinkService["first_name"]." | Prix: ".$infoLinkService["prixCollaborateur"]."€/h *".$hourCoachCulture."h Total:".($infoLinkService["prixCollaborateur"]*$hourCoachCulture)." €";
-                          $totalServices += ($infoLinkService["prixCollaborateur"]*$linkService["quantite"]*$hourCoachCulture);
-
-                        }
-                        else{
+                        }else{
                           echo $service["nomService"].": ".$typeEtablissement." ".$infoLinkService["nom"]." | ".$infoLinkService["prix"]."€ * ".$linkService["quantite"]." places + ".$service["prixService"]."€  = ".($infoLinkService["prix"]*$linkService["quantite"]+$service["prixService"])."€";
                           $totalServices += ($infoLinkService["prix"]*$linkService["quantite"]+$service["prixService"]);
                         }

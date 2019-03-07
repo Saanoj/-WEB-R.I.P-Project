@@ -157,7 +157,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
   }
 
   //redirection
-  // header("location:resevationChooseDriver.php");
+    header("location:resevationChooseDriver.php");
 }
 else {
 
@@ -192,7 +192,7 @@ function checkInterprete($startInterprete,$endInterprete,$res) {
       else {
         return false;
       }
-  
+
     }
     else {
       return true;
@@ -209,7 +209,7 @@ function checkInterprete($startInterprete,$endInterprete,$res) {
         else {
           return false;
         }
-    
+
       }
       else {
         return true;

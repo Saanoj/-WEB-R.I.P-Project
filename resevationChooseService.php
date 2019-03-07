@@ -23,15 +23,7 @@ loadLanguageFromSession($_SESSION['lang']);
   <?php include 'includehtml/head.html'; ?>
   <link rel="stylesheet" type="text/css" href="css/choixService/main.css">
   <link rel="stylesheet" type="text/css" href="css/choixService/calendrier.css">
-  <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/popper.min.js"></script>
-  <script src="js/reservationChooseService/main.js"></script>
-  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-  <script src="js/reservationChooseService/calendrier.js"></script>
-
   <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css"/>
-  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
 
 
 
@@ -79,7 +71,7 @@ loadLanguageFromSession($_SESSION['lang']);
             <?php $trajet->showInfosTrajet(); ?>
           </div>
 
-          <form class="list-group list-group-flush container" method="POST" action="valideReservationServices.php">
+          <form class="list-group list-group-flush container" method="POST" action="valideReservationServices.php" >
 
 
             <div class="container col-md-12">
@@ -308,8 +300,8 @@ loadLanguageFromSession($_SESSION['lang']);
                           <h4> Réservation d'un interprête pendant la journée du trajet, veuillez choisir une plage horraire : </h4>
                           <h6>Pour que votre réservation soit valide, l'heure de début doit etre égal ou supérieur a l'heure du trajet. (<?= $res[1]; ?>h) </h6>
                           <h6>Vous ne pouvez réserver un interprète au maximum pendant 8h</h6>
-                          Heure de début :  <input type="time" name="startInterprete" value="<?= $res[1]; ?>" min="<?= $res[1]; ?>">
-                          Heure de fin : <input type="time" name="endInterprete">
+                          Heure de début :  <input type="time" name="startInterprete" id="startInterprete" value="<?= $res[1]; ?>" min="<?= $res[1]; ?>">
+                          Heure de fin : <input type="time" name="endInterprete" onblur="checkHeureFinInterprete(this)">
                           <!-- Nombre d'interprètes : <input type="number" min="1" max="5" class="primary" name="quantite[<?php //echo $service->getIdService(); ?>]" value="1"></input> -->
 
                           <br> <br> <br>
@@ -354,8 +346,8 @@ loadLanguageFromSession($_SESSION['lang']);
                           <h4> Réservation d'un coach sportif pendant la journée du trajet, veuillez choisir une plage horraire : </h4>
                           <h6>Pour que votre réservation soit valide, l'heure de début doit etre égal ou supérieur a l'heure du trajet. (<?= $res[1]; ?>h) </h6>
                           <h6>Vous  pouvez réserver un coach sportif  pendant 8h maximum</h6>
-                          Heure de début :  <input type="time" name="startCoachSportif" value="<?= $res[1]; ?>" min="<?= $res[1]; ?>">
-                          Heure de fin : <input type="time" name="endCoachSportif">
+                          Heure de début :  <input type="time" name="startCoachSportif" id="startCoachSportif"  value="<?= $res[1]; ?>" min="<?= $res[1]; ?>">
+                         Heure de fin : <input type="time" name="endCoachSportif" onblur="checkHeureFinSportif(this)">
 
                           <br> <br> <br>
                           <?php
@@ -395,11 +387,13 @@ loadLanguageFromSession($_SESSION['lang']);
                           $coachCulture = $bdd->getPDO()->prepare('SELECT * FROM collaborateurs WHERE metier="coachCulture" ORDER BY idCollaborateurs DESC LIMIT 4 ');
                           $coachCulture->execute();
                           ?>
+                          
                           <h4> Réservation d'un coach cultures pendant la journée du trajet, veuillez choisir une plage horraire : </h4>
                           <h6>Pour que votre réservation soit valide, l'heure de début doit etre égal ou supérieur a l'heure du trajet. (<?= $res[1]; ?>h) </h6>
                           <h6>Vous  pouvez réserver un coach cultures  pendant 8h maximum</h6>
-                          Heure de début :  <input type="time" name="startCoachCulture" value="<?= $res[1]; ?>" min="<?= $res[1]; ?>">
-                          Heure de fin : <input type="time" name="endCoachCulture">
+                          Heure de début :  <input type="time" name="startCoachCulture" id="startCoachCulture" value="<?= $res[1]; ?>" min="<?= $res[1]; ?>">
+                          Heure de fin : <input type="time" name="endCoachCulture" onblur="checkHeureFinCulture(this)">
+                          
 
                           <br> <br> <br>
                           <?php
@@ -477,5 +471,12 @@ loadLanguageFromSession($_SESSION['lang']);
 
 
 <?php include "includehtml/footer.php" ?>
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/reservationChooseService/main.js"></script>
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script src="js/reservationChooseService/calendrier.js"></script>
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
 </body>
 </html>

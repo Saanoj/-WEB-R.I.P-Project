@@ -32,7 +32,7 @@ $_SESSION['endCoachCulture']  = $_POST['endCoachCulture'];
 
 
 // QUELQUES TEST
-var_dump(checkInterprete($startInterprete,$endInterprete,$res) == true);
+/*
 var_dump((isset($_POST['services'])));
 var_dump(!empty($_POST['services']));
 var_dump(isset($_POST['quantite']));
@@ -42,13 +42,17 @@ var_dump((!empty($_POST['quantite'])));
 var_dump($_POST['emailContact']);
 var_dump($_POST['messageContact']);
 
+var_dump(checkInterprete($startInterprete,$endInterprete,$res) == true);
 
+var_dump(checkSportif($startCoachSportif,$endCoachSportif,$res) == true);
+var_dump(checkCulture($startCoachCulture,$endCoachCulture,$res) == true);
 
+*/
 
-
+// && checkInterprete($startCoachSportif,$endCoachSportif,$res) == true && checkInterprete($startCoachCulture,$endCoachCulture,$res) == true
 
 //verifications que les variables récupérées ne sont pas vides et existent bien
-if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['quantite']) && (!empty($_POST['quantite'])) && checkInterprete($startInterprete,$endInterprete,$res) == true) {
+if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['quantite']) && (!empty($_POST['quantite'])) && checkInterprete($startInterprete,$endInterprete,$res) == true &&  checkSportif($startCoachSportif,$endCoachSportif,$res) &&  checkCulture($startCoachCulture,$endCoachCulture,$res)) {
 
   $servicesChoisi=$_POST['services'];
   $quantiteCertainService=$_POST['quantite'];
@@ -153,7 +157,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
   }
 
   //redirection
-   header("location:resevationChooseDriver.php");
+  // header("location:resevationChooseDriver.php");
 }
 else {
 
@@ -177,5 +181,39 @@ function checkInterprete($startInterprete,$endInterprete,$res) {
     return true;
   }
   }
+
+  function checkSportif($startCoachSportif,$endCoachSportif,$res) {
+    if ((!empty($_SESSION['startCoachSportif'])) && (!empty($_SESSION['endCoachSportif'])))
+    {
+      if ($startCoachSportif - strtotime($res[1]) >= 0 &&  $endCoachSportif - $startCoachSportif > 0 && $endCoachSportif - $startCoachSportif <= 28800)
+      {
+        return true;
+      }
+      else {
+        return false;
+      }
+  
+    }
+    else {
+      return true;
+    }
+    }
+
+    function checkCulture($startCoachCulture,$endCoachCulture,$res) {
+      if ((!empty($_SESSION['startCoachCulture'])) && (!empty($_SESSION['endCoachCulture'])))
+      {
+        if ($startCoachCulture - strtotime($res[1]) >= 0 &&  $endCoachCulture - $startCoachCulture > 0 && $endCoachCulture - $startCoachCulture <= 28800)
+        {
+          return true;
+        }
+        else {
+          return false;
+        }
+    
+      }
+      else {
+        return true;
+      }
+      }
 
 ?>

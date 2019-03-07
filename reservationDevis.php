@@ -291,16 +291,17 @@ loadLanguageFromSession($_SESSION['lang']);
                 </ul>
               </p>
               <!-- Afficher le prix total-->
-              <?php echo "<p>Prix total TTC: ".($totalServices+$totalChauffeurTrajet)."€ TTC</p>"; ?>
+              <?php echo "<p>Prix total TTC: ".($totalServices+$totalChauffeurTrajet)."€ TTC</p>"; $total=$totalServices+$totalChauffeurTrajet?>
             </div>
           </div>
 
           <!-- Validation -->
-          <div class="row list-group-item center-block">
+          <form class="row list-group-item center-block" method="post" action="simulationpaiement.php">
+            <input type="hidden" name="price" value="<?php echo $total; ?>">
             <div class="center-block">
               <?php echo $form->submit(); ?>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

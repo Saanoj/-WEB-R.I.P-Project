@@ -51,10 +51,13 @@ loadLanguageFromSession($_SESSION['lang']);
 
   $hour = $_SESSION['timeStart'];
   $res=explode(' ',$hour);
+  $resFin = $res[1];
+  $resFin += 1;
+  $resFin = $resFin.":"."00";
   //var_dump($res[1]);
   // var_dump(strotime($res[1]));
   //var_dump(strtotime($hour));
-  ;
+  
 
 
 
@@ -156,7 +159,7 @@ loadLanguageFromSession($_SESSION['lang']);
                                 <th scope="row"> <?= $unRestaurants['nom'];?></th>
                                 <td> <?= $unRestaurants['adresseRestaurant'];?></td>
                                 <td> <?= $unRestaurants['prix']. '€';?></td>
-                                <td><input type="number" min="1" max="10" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]" value="1"></input></td>
+                                <td><input type="number" min="1" max="10" id="<?php echo $service->getIdService(); ?>" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]" value="1"></input></td>
 
                                 <td>
                                   <div class="funkyradio-primary col-md-6 center-block">
@@ -170,6 +173,32 @@ loadLanguageFromSession($_SESSION['lang']);
 
                         }
                         break;
+                        
+                        case '2':
+                        case '3' :
+                        case '4' :
+                        case '5':
+                        case '6':
+                        case '9':
+                        case '15':
+                        case '16' :
+                        case '18' :
+                        case '19' : 
+                        ?>
+                        <table>
+
+<tr>
+  <th scope="col">Quantité</th>
+
+
+</tr>
+<tr>
+  <td><input type="number" min="1" max="4" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]" value="1"></input></td>
+</tr>
+</table> 
+                        <?php 
+                        break;
+                  
                         case '7':
 
                         $hotel = $bdd->getPDO()->prepare('SELECT * FROM chambre INNER JOIN hotel ON chambre.idHotel = hotel.idHotel WHERE isDispo = 1 AND litsDispo > 0 ORDER BY idChambre DESC LIMIT 10 ');
@@ -199,7 +228,7 @@ loadLanguageFromSession($_SESSION['lang']);
                               <td> <?= $unHotel['prix'] . '€ la nuit';?></td>
                               <td> <?= $unHotel['typeChambre'];?></td>
                               <td> <?= $unHotel['litsDispo'];?></td>
-                              <td><input type="number" min="1" max="10" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]" value="1FC"></input></td>
+                              <td><input type="number" min="1" max="10" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]" value="1"></input></td>
 
                               <td>
                                 <div class="funkyradio-primary col-md-6 center-block">
@@ -295,7 +324,7 @@ loadLanguageFromSession($_SESSION['lang']);
                           <h6>Pour que votre réservation soit valide, l'heure de début doit etre égal ou supérieur a l'heure du trajet. (<?= $res[1]; ?>h) </h6>
                           <h6>Vous ne pouvez réserver un interprète au maximum pendant 8h</h6>
                           Heure de début :  <input type="time" name="startInterprete" id="startInterprete" value="<?= $res[1]; ?>" min="<?= $res[1]; ?>">
-                          Heure de fin : <input type="time" name="endInterprete" onblur="checkHeureFinInterprete(this)">
+                          Heure de fin : <input type="time" name="endInterprete" value="<?= $resFin; ?>" min="<?= $resFin; ?>" onblur="checkHeureFinInterprete(this)">
                           <!-- Nombre d'interprètes : <input type="number" min="1" max="5" class="primary" name="quantite[<?php //echo $service->getIdService(); ?>]" value="1"></input> -->
 
                           <br> <br> <br>
@@ -341,7 +370,7 @@ loadLanguageFromSession($_SESSION['lang']);
                           <h6>Pour que votre réservation soit valide, l'heure de début doit etre égal ou supérieur a l'heure du trajet. (<?= $res[1]; ?>h) </h6>
                           <h6>Vous  pouvez réserver un coach sportif  pendant 8h maximum</h6>
                           Heure de début :  <input type="time" name="startCoachSportif" id="startCoachSportif"  value="<?= $res[1]; ?>" min="<?= $res[1]; ?>">
-                         Heure de fin : <input type="time" name="endCoachSportif" onblur="checkHeureFinSportif(this)">
+                         Heure de fin : <input type="time" name="endCoachSportif" value="<?= $resFin; ?>" min="<?= $resFin; ?>"  onblur="checkHeureFinSportif(this)">
 
                           <br> <br> <br>
                           <?php
@@ -386,7 +415,7 @@ loadLanguageFromSession($_SESSION['lang']);
                           <h6>Pour que votre réservation soit valide, l'heure de début doit etre égal ou supérieur a l'heure du trajet. (<?= $res[1]; ?>h) </h6>
                           <h6>Vous  pouvez réserver un coach cultures  pendant 8h maximum</h6>
                           Heure de début :  <input type="time" name="startCoachCulture" id="startCoachCulture" value="<?= $res[1]; ?>" min="<?= $res[1]; ?>">
-                          Heure de fin : <input type="time" name="endCoachCulture" onblur="checkHeureFinCulture(this)">
+                          Heure de fin : <input type="time" name="endCoachCulture" value="<?= $resFin; ?>" min="<?= $resFin; ?>" onblur="checkHeureFinCulture(this)">
                           
 
                           <br> <br> <br>

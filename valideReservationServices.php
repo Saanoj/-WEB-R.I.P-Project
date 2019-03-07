@@ -16,12 +16,14 @@ $_SESSION['startInterprete']  = $_POST['startInterprete'];
 $_SESSION['endInterprete']  = $_POST['endInterprete'];
 
 
+
 // POUR LE COACH SPORTIF CETTE FOIS CI
 
 $startCoachSportif = strtotime($_POST['startCoachSportif']);
 $endCoachSportif = strtotime($_POST['endCoachSportif']);
 $_SESSION['startCoachSportif']  = $_POST['startCoachSportif'];
 $_SESSION['endCoachSportif']  = $_POST['endCoachSportif'];
+
 
 // Pour le coach culture
 
@@ -56,6 +58,8 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
 
   $servicesChoisi=$_POST['services'];
   $quantiteCertainService=$_POST['quantite'];
+  var_dump($servicesChoisi);
+  var_dump($quantiteCertainService);
 
   //on boucle nos services choisis
   foreach ($servicesChoisi as $service) {
@@ -65,11 +69,24 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
         $thisQuantite=$quantite;
       }
     }
+  
 
     //affectation de l'id annexe du service si besoin
     switch ($service) {
       case 1:
       $idAnnexe=$_POST["idRestaurant"];
+      break;
+      case '2':
+      case '3' :
+      case '4' :
+      case '5':
+      case '6':
+      case '9':
+      case '15' :
+      case '16' :
+      case '18' :
+      case '19' : 
+      $idAnnexe=-1;
       break;
       case 7:
       $idAnnexe=$_POST["idHotel"];

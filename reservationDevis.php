@@ -47,16 +47,16 @@ loadLanguageFromSession($_SESSION['lang']);
   // ON VERIFIE LA DIFFERENCE D'HEURE ENTRE LE DEBUT ET LA FIN DU CRENEAU DE L"INTERPRETE
   $_SESSION['startInterprete'];
   $_SESSION['endInterprete'];
-  $hourInterprete = floor((strtotime($_SESSION['endInterprete']) - strtotime($_SESSION['startInterprete'])));
-  $hourInterprete = $hourInterprete>1?floor($hourInterprete/3600):ceil($hourInterprete/3600);
-
+  $hourInterprete = (strtotime($_SESSION['endInterprete']) - strtotime($_SESSION['startInterprete']));
+  $hourInterprete = $hourInterprete/3600>1?floor($hourInterprete/3600):ceil($hourInterprete/3600);
+  var_dump($hourInterprete);
   // ON VERIFIE LA DIFFERENCE D'HEURE ENTRE LE DEBUT ET LA FIN DU CRENEAU DU COACH SPORTIF
-  $hourCoachSportif = floor((strtotime($_SESSION['endCoachSportif']) - strtotime($_SESSION['startCoachSportif'])));
-  $hourCoachSportif = $hourCoachSportif>1?floor($hourCoachSportif/3600):ceil($hourCoachSportif/3600);
+  $hourCoachSportif = (strtotime($_SESSION['endCoachSportif']) - strtotime($_SESSION['startCoachSportif']));
+  $hourCoachSportif = $hourCoachSportif/3600>1?floor($hourCoachSportif/3600):ceil($hourCoachSportif/3600);
 
   //  ON VERIFIE LA DIFFERENCE D'HEURE ENTRE LE DEBUT ET LA FIN DU CRENEAU DU COACH CULTURE
-  $hourCoachCulture = floor((strtotime($_SESSION['endCoachCulture']) - strtotime($_SESSION['startCoachCulture'])));
-  $hourCoachCulture =  $hourCoachCulture>1?floor($hourCoachCulture/3600):ceil($hourCoachCulture/3600);
+  $hourCoachCulture = (strtotime($_SESSION['endCoachCulture']) - strtotime($_SESSION['startCoachCulture']));
+  $hourCoachCulture =  $hourCoachCulture/3600>1?floor($hourCoachCulture/3600):ceil($hourCoachCulture/3600);
 
   // On recupere l'objet trajet contenant nos infos de trajet depuis la session
   $trajet = unserialize($_SESSION['trajet']);
@@ -215,8 +215,8 @@ loadLanguageFromSession($_SESSION['lang']);
                 <ul>
                   <div class="border border-primary p-3 m-1">
                     <label>Prix chauffeur/trajet:</label>
-                    <li><?php echo $chauffeur->getPrixCollaborateur()." €/Km " ?>* <?php echo $trajet->getDistance()." Km " ?>= <?php echo $trajet->getDistance()*$chauffeur->getPrixCollaborateur()." €"; $totalChauffeurTrajet=$trajet->getDistance()*$chauffeur->getPrixCollaborateur(); ?></li>
-                    <?php echo "<p>Total Chauffeur: ".$totalChauffeurTrajet."€ TTC</p>"; ?>
+                    <li><?php echo $chauffeur->getPrixCollaborateur()." €/Km " ?>* <?php echo $trajet->getDistance()." Km " ?>= <?php echo sprintf("%.2f",$trajet->getDistance()*$chauffeur->getPrixCollaborateur())." €"; $totalChauffeurTrajet=sprintf("%.2f",$trajet->getDistance()*$chauffeur->getPrixCollaborateur()); ?></li>
+                    <p>Total Chauffeur: <?php echo $totalChauffeurTrajet; ?>€ TTC</p>
                   </div>
                   <div class="border border-primary p-3 m-1">
                     <label>Prix services:</label>
@@ -309,7 +309,7 @@ loadLanguageFromSession($_SESSION['lang']);
           <!-- Validation -->
           <form class="row list-group-item center-block" method="post" action="simulationpaiement.php">
             <input type="hidden" name="price" value="<?php echo $total; ?>">
-            <?php $_SESSION['prixTotal'] = $totalServices+$totalChauffeurTrajet ?>
+            <?php $_SESSION['prixTotal'] = $total ?>
 
             <div class="center-block">
               <?php echo $form->submit(); ?>

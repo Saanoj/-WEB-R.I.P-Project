@@ -19,13 +19,13 @@ function backOfficeCollab()
           <td><input name="last_name" type="text" value="'.$member["last_name"].'"/></td>
           <td><input name="first_name" type="text" value="'.$member["first_name"].'"/></td>
           <td><input name="metier" type="text" value="'.$member["metier"].'"/></td>
+          <td><input name="description" type="text" value="'.$member["description"].'"/></td>
           <td><input name="prixCollaborateur" type="text" value="'.$member["prixCollaborateur"].'"/></td>
           <td><input name="dateEmbauche" type="text" value="'.$member["dateEmbauche"].'"/></td>
           <td><input name="ville" type="text" value="'.$member["ville"].'"/></td>
           <td><input name="heuresTravailees" type="text" value="'.$member["heuresTravailees"].'"/></td>
-          ';
-
-        echo'
+          <td><input name="rating" type="text" value="'.$member["rating"].'"/></td>
+          <td><input name="ratingNumber" type="text" value="'.$member["ratingNumber"].'"/></td>
           <td>
 
           <button type="submit" class="btn btn-blue">
@@ -33,6 +33,15 @@ function backOfficeCollab()
           </button>
           </form>
           </td>
+          <form method="POST" action="drop.php">
+          <td>
+          <input  name="id" type="hidden" value="'.$member["idCollaborateurs"].'"/>
+          <button type="submit" class="btn btn-danger">
+            Delete
+            <span class="glyphicon glyphicon"></span>
+          </button>
+          </td>
+          </form>
         ';
 
 
@@ -40,35 +49,41 @@ function backOfficeCollab()
   echo'
   <tr>
       <form method="POST" action="add.php">
-        <input  name="id" type="hidden" />
         <td><input name="email" type="text" /></td>
         <td><input name="last_name" type="text" ></td>
         <td><input name="first_name" type="text" /></td>
         <td><input name="metier" type="text"/></td>
+        <td><input name="description" type="text" /></td>
         <td><input name="prixCollaborateur" type="text" /></td>
         <td><input name="dateEmbauche" type="text" /></td>
         <td><input name="ville" type="text" /></td>
         <td><input name="heuresTravailees" type="text" /></td>
+        <td><input name="rating" type="text" /></td>
+        <td><input name="ratingNumber" type="text" /></td>
         <td>
 
-        <button type="submit" class="btn btn-blue">
-          <span class="glyphicon glyphicon-edit"></span>
+        <button type="submit" class="btn">
+          Add
+          <span class="glyphicon glyphicon"></span>
         </button>
         </form>
         </td>
       ';
 }
-function edit($id, $email, $first_name, $last_name, $metier, $prixCollaborateur, $dateEmbauche, $ville, $heuresTravailees){
+function edit($id, $email, $last_name, $first_name, $metier, $description, $prixCollaborateur, $dateEmbauche, $ville, $heuresTravailees,$rating ,$ratingNumber){
   include ("config.php");
   $query = $bdd->prepare("UPDATE collaborateurs SET
     email = :email,
     first_name = :first_name,
     last_name = :last_name,
     metier = :metier,
+    description = :description,
     prixCollaborateur = :prixCollaborateur,
     dateEmbauche = :dateEmbauche,
     ville = :ville,
-    heuresTravailees = :heuresTravailees
+    heuresTravailees = :heuresTravailees,
+    rating = :rating,
+    ratingNumber = :ratingNumber
     WHERE idCollaborateurs = :id");
   $query->execute([
                   "id"=>$id,
@@ -76,33 +91,54 @@ function edit($id, $email, $first_name, $last_name, $metier, $prixCollaborateur,
                   "first_name"=>$first_name,
                   "last_name"=>$last_name,
                   "metier" => $metier,
+                  "description"=>$description,
                   "prixCollaborateur"=>$prixCollaborateur,
                   "dateEmbauche"=>$dateEmbauche,
                   "ville"=>$ville,
-                  "heuresTravailees"=>$heuresTravailees
+                  "heuresTravailees"=>$heuresTravailees,
+                  "rating"=>$rating,
+                  "ratingNumber"=>$ratingNumber,
+
                   ]);
 }
-function add($id, $email, $first_name, $last_name, $metier, $prixCollaborateur, $dateEmbauche, $ville, $heuresTravailees){
+function add($email, $last_name, $first_name, $metier, $description, $prixCollaborateur, $dateEmbauche, $ville, $heuresTravailees,$rating ,$ratingNumber){
   include ("config.php");
-  $query = $bdd->prepare("INSERT INTO collaborateurs (email, last_name, first_name, metier, description, prixCollaborateur, dateEmbauche, ville, heuresTravailees) VALUES
-    :email,
+  $query = $bdd->prepare("INSERT INTO collaborateurs (email, last_name, first_name, metier, description, prixCollaborateur, dateEmbauche, ville, heuresTravailees, rating, ratingNumber) VALUES
+    (:email,
     :first_name,
     :last_name,
     :metier,
+    :description,
     :prixCollaborateur,
     :dateEmbauche,
     :ville,
-    :heuresTravailees
+    :heuresTravailees,
+    :rating,
+    :ratingNumber)
     ");
   $query->execute([
                   "email"=>$email,
                   "first_name"=>$first_name,
                   "last_name"=>$last_name,
                   "metier" => $metier,
+                  "description"=>$description,
                   "prixCollaborateur"=>$prixCollaborateur,
                   "dateEmbauche"=>$dateEmbauche,
                   "ville"=>$ville,
-                  "heuresTravailees"=>$heuresTravailees
+                  "heuresTravailees"=>$heuresTravailees,
+                  "rating"=>$rating,
+                  "ratingNumber"=>$ratingNumber,
                   ]);
+}
+
+function drop($id)
+{
+  include ("config.php");
+  $query = $bdd->prepare("DELETE FROM `collaborateurs` WHERE idCollaborateurs = :id");
+  $query->execute([
+                  "id"=>$id,
+
+                  ]);
+
 }
  ?>

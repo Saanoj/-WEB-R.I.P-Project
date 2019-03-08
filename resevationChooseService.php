@@ -46,18 +46,11 @@ loadLanguageFromSession($_SESSION['lang']);
   //recup obj trajet de session
   $trajet = unserialize($_SESSION['trajet']);
 
-  // Recuperation de l'heure du début
+  // Recuperation de l'heure de Fin
+  $resFin = $trajet->getEndofTrajet();
 
-
-  $hour = $_SESSION['timeStart'];
-  $res=explode(' ',$hour);
-  $resFin = $res[1];
-  $resFin += 1;
-  $resFin = $resFin.":"."00";
-  //var_dump($res[1]);
-  // var_dump(strotime($res[1]));
-  //var_dump(strtotime($hour));
-  
+  //Recuperation date/heure/min de debut
+  $res=explode(' ',$trajet->getDateDebut());
 
 
 
@@ -100,7 +93,7 @@ loadLanguageFromSession($_SESSION['lang']);
                     <input type="checkbox" class="primary" name="services[<?php echo $i ?>]" value="<?php echo $service->getIdService(); ?>">
                     <span class="slider round"></span>
                   </label>
-  
+
 
                     <button type="button" href="#costumModal<?php echo $i ?>" data-target="#costumModal<?php echo $i ?>" name="services[<?php echo $i ?>]" class="btn btn-info" data-toggle="modal">Choisir</button>
 
@@ -173,7 +166,7 @@ loadLanguageFromSession($_SESSION['lang']);
 
                         }
                         break;
-                        
+
                         case '2':
                         case '3' :
                         case '4' :
@@ -183,7 +176,7 @@ loadLanguageFromSession($_SESSION['lang']);
                         case '15':
                         case '16' :
                         case '18' :
-                        case '19' : 
+                        case '19' :
                         ?>
                         <table>
 
@@ -195,10 +188,10 @@ loadLanguageFromSession($_SESSION['lang']);
 <tr>
   <td><input type="number" min="1" max="4" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]" value="1"></input></td>
 </tr>
-</table> 
-                        <?php 
+</table>
+                        <?php
                         break;
-                  
+
                         case '7':
 
                         $hotel = $bdd->getPDO()->prepare('SELECT * FROM chambre INNER JOIN hotel ON chambre.idHotel = hotel.idHotel WHERE isDispo = 1 AND litsDispo > 0 ORDER BY idChambre DESC LIMIT 10 ');
@@ -410,13 +403,13 @@ loadLanguageFromSession($_SESSION['lang']);
                           $coachCulture = $bdd->getPDO()->prepare('SELECT * FROM collaborateurs WHERE metier="coachCulture" ORDER BY idCollaborateurs DESC LIMIT 4 ');
                           $coachCulture->execute();
                           ?>
-                          
+
                           <h4> Réservation d'un coach cultures pendant la journée du trajet, veuillez choisir une plage horraire : </h4>
                           <h6>Pour que votre réservation soit valide, l'heure de début doit etre égal ou supérieur a l'heure du trajet. (<?= $res[1]; ?>h) </h6>
                           <h6>Vous  pouvez réserver un coach cultures  pendant 8h maximum</h6>
                           Heure de début :  <input type="time" name="startCoachCulture" id="startCoachCulture" value="<?= $res[1]; ?>" min="<?= $res[1]; ?>">
                           Heure de fin : <input type="time" name="endCoachCulture" value="<?= $resFin; ?>" min="<?= $resFin; ?>" onblur="checkHeureFinCulture(this)">
-                          
+
 
                           <br> <br> <br>
                           <?php
@@ -473,7 +466,7 @@ loadLanguageFromSession($_SESSION['lang']);
                     </div>
                   </div>
 
-          
+
               </li>
               <?php
               $i++;

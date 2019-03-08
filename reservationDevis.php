@@ -48,15 +48,15 @@ loadLanguageFromSession($_SESSION['lang']);
   $_SESSION['startInterprete'];
   $_SESSION['endInterprete'];
   $hourInterprete = floor((strtotime($_SESSION['endInterprete']) - strtotime($_SESSION['startInterprete'])));
-  $hourInterprete = floor($hourInterprete/3600);
+  $hourInterprete = $hourInterprete>1?floor($hourInterprete/3600):ceil($hourInterprete/3600);
 
   // ON VERIFIE LA DIFFERENCE D'HEURE ENTRE LE DEBUT ET LA FIN DU CRENEAU DU COACH SPORTIF
   $hourCoachSportif = floor((strtotime($_SESSION['endCoachSportif']) - strtotime($_SESSION['startCoachSportif'])));
-  $hourCoachSportif = floor($hourCoachSportif/3600);
+  $hourCoachSportif = $hourCoachSportif>1?floor($hourCoachSportif/3600):ceil($hourCoachSportif/3600);
 
   //  ON VERIFIE LA DIFFERENCE D'HEURE ENTRE LE DEBUT ET LA FIN DU CRENEAU DU COACH CULTURE
   $hourCoachCulture = floor((strtotime($_SESSION['endCoachCulture']) - strtotime($_SESSION['startCoachCulture'])));
-  $hourCoachCulture = floor($hourCoachCulture/3600);
+  $hourCoachCulture =  $hourCoachCulture>1?floor($hourCoachCulture/3600):ceil($hourCoachCulture/3600);
 
   // On recupere l'objet trajet contenant nos infos de trajet depuis la session
   $trajet = unserialize($_SESSION['trajet']);
@@ -149,7 +149,7 @@ loadLanguageFromSession($_SESSION['lang']);
                     else if ($linkService["idService"] == 13) {
                       echo "ID: ".$service["idService"]." | ".$service["nomService"]." : ".$infoLinkService["last_name"]." ".$infoLinkService["first_name"]." | Domaine: ".$infoLinkService["description"];
                     }
-                  
+
                     else{
                       echo "ID: ".$service["idService"]." | ".$service["nomService"]." : ".$typeEtablissement." ".$infoLinkService["nom"]." | Quantitée: ".$linkService["quantite"]." places";
                     }
@@ -231,14 +231,14 @@ loadLanguageFromSession($_SESSION['lang']);
                         //on recupere les infos du service en fonction de son id
                         $service = $bdd->queryOne('SELECT * FROM services WHERE idService='.$unIdService["idService"].'');
                         $linkService = $bdd->queryOne('SELECT * FROM linkServicetrajet WHERE idService='.$unIdService["idService"].' AND idTrajet='.$_SESSION["idTrajet"].'');
-                        
+
                         //choix en fonciton du type de service special
                         if($unIdService["idService"] == 1){
                           $infoLinkService = $bdd->queryOne('SELECT * FROM restaurants WHERE idRestaurant='.$linkService["idAnnexe"].'');
                           $typeEtablissement="Restaurant";
                         }elseif ($unIdService["idService"] == 7) {
                           $infoLinkService = $bdd->queryOne('SELECT * FROM hotel WHERE idHotel='.$linkService["idAnnexe"].'');
-                          $typeEtablissement="Hotel"; 
+                          $typeEtablissement="Hotel";
 
                         }elseif ($unIdService["idService"] == 8) {
                           $infoLinkService = $bdd->queryOne('SELECT * FROM billettourisme WHERE idBillet='.$linkService["idAnnexe"].'');
@@ -249,7 +249,7 @@ loadLanguageFromSession($_SESSION['lang']);
                           $infoLinkService=$infoLinkService[$i];
                           $i++;
                           $numHour=$hourInterprete;
-                          
+
                         }elseif ($unIdService["idService"] == 12) {
                           $infoLinkService = $bdd->query('SELECT *  FROM collaborateurs INNER JOIN linkservicetrajet WHERE collaborateurs.idCollaborateurs = linkservicetrajet.idAnnexe AND idTrajet='.$_SESSION["idTrajet"].' AND idService ='.$unIdService["idService"].'');
                           $typeEtablissement="Coach Sportif";
@@ -310,7 +310,7 @@ loadLanguageFromSession($_SESSION['lang']);
           <form class="row list-group-item center-block" method="post" action="simulationpaiement.php">
             <input type="hidden" name="price" value="<?php echo $total; ?>">
             <?php $_SESSION['prixTotal'] = $totalServices+$totalChauffeurTrajet ?>
-           
+
             <div class="center-block">
               <?php echo $form->submit(); ?>
             </div>

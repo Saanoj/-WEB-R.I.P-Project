@@ -44,12 +44,13 @@ $navbar->navbar();
 $trajet = unserialize($_SESSION['trajet']);
 
 $form = new App\Form(array());
+
 if (isset($_POST['price'])) {
   $_SESSION['price'] = $_POST["price"];
-}
-$_SESSION['price'] = sprintf("%.2f",$_SESSION['price']);
-$price = sprintf("%.2f",$_SESSION['price']);
-$price = intval($price)."00";
+  }
+  $_SESSION['price'] = sprintf("%.2f",$_SESSION['price']);
+  $price = sprintf("%.2f",$_SESSION['price']);
+  $price = intval($price)."00";
 
 include 'includehtml/head.html'; ?>
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
@@ -220,6 +221,7 @@ function addPDFButton(){
 function sayHi(){
   console.log("Hi mate :3");
   generatePDF();
+  document.location.href="facture.pdf";
 }
 
 function generatePDF() {

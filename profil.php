@@ -51,7 +51,7 @@ loadLanguageFromSession($_SESSION['lang']);
 
   ?>
 
-  <div class="container emp-profile">
+  <div class="container emp-profile bg-light rounded">
     <form method="post">
       <div class="row">
         <div class="col-md-4">

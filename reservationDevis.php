@@ -29,7 +29,7 @@ loadLanguageFromSession($_SESSION['lang']);
   <?php
   include 'includehtml/head.html'; ?>
 </head>
-<body>
+<body class="bg-secondary">
   <?php
 
 
@@ -47,16 +47,18 @@ loadLanguageFromSession($_SESSION['lang']);
   // ON VERIFIE LA DIFFERENCE D'HEURE ENTRE LE DEBUT ET LA FIN DU CRENEAU DE L"INTERPRETE
   $_SESSION['startInterprete'];
   $_SESSION['endInterprete'];
-  $hourInterprete = floor((strtotime($_SESSION['endInterprete']) - strtotime($_SESSION['startInterprete'])));
-  $hourInterprete = floor($hourInterprete/3600);
+
+  //si temps de trajet < 1H alors on passe le temps d'interprete a un 1 et si au dessus on la tronque à l'heure en dessous
+  $hourInterprete = (strtotime($_SESSION['endInterprete']) - strtotime($_SESSION['startInterprete']));
+  $hourInterprete = $hourInterprete/3600>1?floor($hourInterprete/3600):ceil($hourInterprete/3600);
 
   // ON VERIFIE LA DIFFERENCE D'HEURE ENTRE LE DEBUT ET LA FIN DU CRENEAU DU COACH SPORTIF
-  $hourCoachSportif = floor((strtotime($_SESSION['endCoachSportif']) - strtotime($_SESSION['startCoachSportif'])));
-  $hourCoachSportif = floor($hourCoachSportif/3600);
+  $hourCoachSportif = (strtotime($_SESSION['endCoachSportif']) - strtotime($_SESSION['startCoachSportif']));
+  $hourCoachSportif = $hourCoachSportif/3600>1?floor($hourCoachSportif/3600):ceil($hourCoachSportif/3600);
 
   //  ON VERIFIE LA DIFFERENCE D'HEURE ENTRE LE DEBUT ET LA FIN DU CRENEAU DU COACH CULTURE
-  $hourCoachCulture = floor((strtotime($_SESSION['endCoachCulture']) - strtotime($_SESSION['startCoachCulture'])));
-  $hourCoachCulture = floor($hourCoachCulture/3600);
+  $hourCoachCulture = (strtotime($_SESSION['endCoachCulture']) - strtotime($_SESSION['startCoachCulture']));
+  $hourCoachCulture =  $hourCoachCulture/3600>1?floor($hourCoachCulture/3600):ceil($hourCoachCulture/3600);
 
   // On recupere l'objet trajet contenant nos infos de trajet depuis la session
   $trajet = unserialize($_SESSION['trajet']);
@@ -68,15 +70,15 @@ loadLanguageFromSession($_SESSION['lang']);
         <div class="card" style="margin:50px 0">
 
           <!-- Infos Trajet -->
-          <div class="card-header">
-            <h1 class="display-3">Devis</h1>
+          <div class="card-header bg-light">
+            <h1 class="display-2 text-center">Devis</h1>
             <?php $trajet->showInfosTrajet(); ?>
             <?php echo "<p>ID de votre trajet: ".$_SESSION["idTrajet"]."</p>" ?>
           </div>
 
           <!-- Info choix des services -->
           <div class="list-group list-group-flush">
-            <h3 class="display-5 center-block">Services choisi</h3>
+            <h3 class="display-4 text-center m-3">Services choisi</h3>
             <p class="center-block">
               <?php
               //on recupere les id des services choisis sur ce trajet
@@ -149,7 +151,7 @@ loadLanguageFromSession($_SESSION['lang']);
                     else if ($linkService["idService"] == 13) {
                       echo "ID: ".$service["idService"]." | ".$service["nomService"]." : ".$infoLinkService["last_name"]." ".$infoLinkService["first_name"]." | Domaine: ".$infoLinkService["description"];
                     }
-                  
+
                     else{
                       echo "ID: ".$service["idService"]." | ".$service["nomService"]." : ".$typeEtablissement." ".$infoLinkService["nom"]." | Quantitée: ".$linkService["quantite"]." places";
                     }
@@ -164,7 +166,7 @@ loadLanguageFromSession($_SESSION['lang']);
           <!-- Info choix des services -->
           <div class="list-group-item">
             <div class="list-group list-group-flush">
-              <h3 class="display-5 center-block">Votre chauffeur</h3>
+              <h3 class="display-4 text-center">Votre chauffeur</h3>
               <p>
                 <?php
                 //$idServices = $bdd->query('SELECT idService FROM linkServicetrajet WHERE idTrajet='.$_SESSION["idTrajet"].'');
@@ -177,28 +179,28 @@ loadLanguageFromSession($_SESSION['lang']);
                 ?>
                 <li class="list-group">
                   <?php //echo $i?>
-                  <h4><?php echo $chauffeur->getFirst_name()." ".$chauffeur->getLast_name();?></h4>
-                  <h6>id du Chauffeur: <?php echo $chauffeur->getIdCollaborateur(); ?> Prix: <?php echo $chauffeur->getPrixCollaborateur()."€ / Km  // AJOUTER SYSTEME PHOTO + SYSTEME ETOILES" ?></h6>
+                  <h4 class="h1"><?php echo $chauffeur->getFirst_name()." ".$chauffeur->getLast_name();?></h4>
+                  <p>id du Chauffeur: <?php echo $chauffeur->getIdCollaborateur(); ?> Prix: <?php echo $chauffeur->getPrixCollaborateur()."€ / Km  // AJOUTER SYSTEME PHOTO + SYSTEME ETOILES" ?></p>
                   <div class="row">
                     <div class="col-md-4">
-                      <h4>Infos: </h4>
+                      <h4 class="h2">Infos: </h4>
                       <ul>
-                        <li><?php echo "Ville d'operation: ".$chauffeur->getVille(); ?></li>
-                        <li><?php echo "Heures Travailées: ".$chauffeur->getHeuresTravailees(); ?></li>
-                        <li><?php echo "Date d'embauche: ".$chauffeur->getDateEmbauche(); ?></li>
+                        <li><p><?php echo "Ville d'operation: ".$chauffeur->getVille(); ?></p></li>
+                        <li><p><?php echo "Heures Travailées: ".$chauffeur->getHeuresTravailees(); ?></p></li>
+                        <li><p><?php echo "Date d'embauche: ".$chauffeur->getDateEmbauche(); ?></p></li>
                       </ul>
                     </div>
                     <div class="col-md-4">
-                      <h4>Véhicule: </h4>
+                      <h4 class="h2">Véhicule: </h4>
                       <ul>
-                        <li><?php echo "Marque: ".$chauffeur->getCarBrand(); ?></li>
-                        <li><?php echo "Modèle: ".$chauffeur->getCarModel(); ?></li>
-                        <li><?php echo "Couleur: ".$chauffeur->getCarColor(); ?></li>
-                        <li><?php echo "Places: ".$chauffeur->getCarSeats(); ?></li>
+                        <li><p><?php echo "Marque: ".$chauffeur->getCarBrand(); ?></p></li>
+                        <li><p><?php echo "Modèle: ".$chauffeur->getCarModel(); ?></p></li>
+                        <li><p><?php echo "Couleur: ".$chauffeur->getCarColor(); ?></p></li>
+                        <li><p><?php echo "Places: ".$chauffeur->getCarSeats(); ?></p></li>
                       </ul>
                     </div>
                     <div class="col-md-4">
-                      <h4>Description: </h4>
+                      <h4 class="h2">Description: </h4>
                       <p><?php echo $chauffeur->getDescription(); ?></p>
                     </div>
                   </div>
@@ -210,16 +212,16 @@ loadLanguageFromSession($_SESSION['lang']);
           <!-- Recapitulatif des prix -->
           <div class="list-group-item">
             <div class="list-group list-group-flush">
-              <h3 class="center-block">Récapitulatif des prix</h3>
+              <h3 class="display-4 text-center">Récapitulatif des prix</h3>
               <p>
                 <ul>
-                  <div class="border border-primary p-3 m-1">
-                    <label>Prix chauffeur/trajet:</label>
-                    <li><?php echo $chauffeur->getPrixCollaborateur()." €/Km " ?>* <?php echo $trajet->getDistance()." Km " ?>= <?php echo $trajet->getDistance()*$chauffeur->getPrixCollaborateur()." €"; $totalChauffeurTrajet=$trajet->getDistance()*$chauffeur->getPrixCollaborateur(); ?></li>
-                    <?php echo "<p>Total Chauffeur: ".$totalChauffeurTrajet."€ TTC</p>"; ?>
+                  <div class="border border-secondary pb-2 pr-2 pl-2 m-1">
+                    <div class='h1'>Prix chauffeur/trajet:</div>
+                    <p><?php echo $chauffeur->getPrixCollaborateur()." €/Km " ?>* <?php echo $trajet->getDistance()." Km " ?>= <?php echo sprintf("%.2f",$trajet->getDistance()*$chauffeur->getPrixCollaborateur())." €"; $totalChauffeurTrajet=sprintf("%.2f",$trajet->getDistance()*$chauffeur->getPrixCollaborateur()); ?></p>
+                    <p class='h2'>Total Chauffeur: <?php echo $totalChauffeurTrajet; ?>€ TTC</p>
                   </div>
-                  <div class="border border-primary p-3 m-1">
-                    <label>Prix services:</label>
+                  <div class="border border-secondary pb-2 pr-2 pl-2 m-1">
+                    <div class='h1'>Prix services:</div>
                     <?php
                     if (empty($idServices)) {
                       echo "Aucun services selectionnés";
@@ -231,14 +233,14 @@ loadLanguageFromSession($_SESSION['lang']);
                         //on recupere les infos du service en fonction de son id
                         $service = $bdd->queryOne('SELECT * FROM services WHERE idService='.$unIdService["idService"].'');
                         $linkService = $bdd->queryOne('SELECT * FROM linkServicetrajet WHERE idService='.$unIdService["idService"].' AND idTrajet='.$_SESSION["idTrajet"].'');
-                        
+
                         //choix en fonciton du type de service special
                         if($unIdService["idService"] == 1){
                           $infoLinkService = $bdd->queryOne('SELECT * FROM restaurants WHERE idRestaurant='.$linkService["idAnnexe"].'');
                           $typeEtablissement="Restaurant";
                         }elseif ($unIdService["idService"] == 7) {
                           $infoLinkService = $bdd->queryOne('SELECT * FROM hotel WHERE idHotel='.$linkService["idAnnexe"].'');
-                          $typeEtablissement="Hotel"; 
+                          $typeEtablissement="Hotel";
 
                         }elseif ($unIdService["idService"] == 8) {
                           $infoLinkService = $bdd->queryOne('SELECT * FROM billettourisme WHERE idBillet='.$linkService["idAnnexe"].'');
@@ -249,7 +251,7 @@ loadLanguageFromSession($_SESSION['lang']);
                           $infoLinkService=$infoLinkService[$i];
                           $i++;
                           $numHour=$hourInterprete;
-                          
+
                         }elseif ($unIdService["idService"] == 12) {
                           $infoLinkService = $bdd->query('SELECT *  FROM collaborateurs INNER JOIN linkservicetrajet WHERE collaborateurs.idCollaborateurs = linkservicetrajet.idAnnexe AND idTrajet='.$_SESSION["idTrajet"].' AND idService ='.$unIdService["idService"].'');
                           $typeEtablissement="Coach Sportif";
@@ -267,7 +269,7 @@ loadLanguageFromSession($_SESSION['lang']);
                         }else {
                           $numHour=0;
                         }
-                        ?><li><?php
+                        ?><p><?php
 
                         //Affichage des infos
                         if ($linkService["idAnnexe"] < 0) {
@@ -292,25 +294,25 @@ loadLanguageFromSession($_SESSION['lang']);
                           echo $service["nomService"].": ".$typeEtablissement." ".$infoLinkService["nom"]." | ".$infoLinkService["prix"]."€ * ".$linkService["quantite"]." places + ".$service["prixService"]."€  = ".($infoLinkService["prix"]*$linkService["quantite"]+$service["prixService"])."€";
                           $totalServices += ($infoLinkService["prix"]*$linkService["quantite"]+$service["prixService"]);
                         }
-                        ?></li><?php
+                        ?></p><?php
 
                       }
-                      echo "<p>Total Services: ".$totalServices."€ TTC</p>";
+                      echo "<p class='h2'>Total Services: ".$totalServices."€ TTC</p>";
                     }
                     ?>
                   </div>
                 </ul>
               </p>
               <!-- Afficher le prix total-->
-              <?php echo "<p>Prix total TTC: ".($totalServices+$totalChauffeurTrajet)."€ TTC</p>"; $total=$totalServices+$totalChauffeurTrajet?>
+              <?php echo "<p class='display-4'>Prix total: ".($totalServices+$totalChauffeurTrajet)."€ TTC</p>"; $total=$totalServices+$totalChauffeurTrajet?>
             </div>
           </div>
 
           <!-- Validation -->
-          <form class="row list-group-item center-block" method="post" action="simulationpaiement.php">
+          <form class="list-group-item center-block" method="post" action="simulationpaiement.php">
             <input type="hidden" name="price" value="<?php echo $total; ?>">
-            <?php $_SESSION['prixTotal'] = $totalServices+$totalChauffeurTrajet ?>
-           
+            <?php $_SESSION['prixTotal'] = $total ?>
+            
             <div class="center-block">
               <?php echo $form->submit(); ?>
             </div>

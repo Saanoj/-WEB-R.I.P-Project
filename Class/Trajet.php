@@ -88,6 +88,7 @@ $bdd = new Database('rip');
       $req1->bindValue(':dateFin', $trajet->getHeureFin());
       $req1->bindValue(':dateReservation', $trajet->getDateReservation());
       $req1->bindValue(':distanceTrajet', intval($trajet->getDistance()));
+      $req1->bindValue(':duration', $trajet->getDuration());
 
       $req1->execute();
     }
@@ -115,7 +116,7 @@ $bdd = new Database('rip');
 
     public function showInfosTrajet(){
       echo "<p>Trajet: "."<br>".$this->getStart(). " => ".$this->getEnd()."</p>
-      <p>Temps de trajet estimé: ".$this->getDuration()." | Distance: ".$this->getDistance()." Km</p>";
+      <p>Temps de trajet estimé: ".$this->getDuration()." | Distance: ".$this->getDistance()." Km | Heure d'arrivée prévue: ".$this->getEndofTrajet()."</p>";
     }
 
     static public function getDistanceTime($start,$end){
@@ -127,6 +128,30 @@ $bdd = new Database('rip');
       $apiReturn = array('distance' => ((int)$data->rows[0]->elements[0]->distance->value/1000),'time' => $data->rows[0]->elements[0]->duration->text);
 
       return $apiReturn;
+    }
+
+    public function getEndofTrajet(){
+      //heures minutes du trajet
+      $durationHour=explode(' ',$this->getDuration());
+
+      //heure minute du debut du trajet
+      $hour = $this->getDateDebut();
+      $res=explode(' ',$hour);
+      list($hr,$min)=explode(":",$res[1]);
+
+
+      if(strlen($this->getDuration())<8){
+        $strDurationHour=$durationHour[0];
+        $minutes=(60*$hr+$min)+($strDurationHour);
+      }else{
+        $strDurationHour=$durationHour[0].":".$durationHour[2];
+        list($hr2,$min2)=explode(":",$strDurationHour);
+        $minutes=(60*$hr+$min)+(60*$hr2+$min2);
+      }
+
+      $resFin = date('H:i', $minutes*60);
+
+      return $resFin;
     }
   }
 

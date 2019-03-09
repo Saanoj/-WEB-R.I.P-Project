@@ -4,7 +4,7 @@ require 'Class/Autoloader.php';
 App\Autoloader::register();
 $bdd = new App\Database('rip');
 
-// VERIFICATION DE LA DATE DU TRAJET : IL DOIT ETRE SUPERIEUR A LA DATE DU JOUR 
+// VERIFICATION DE LA DATE DU TRAJET : IL DOIT ETRE SUPERIEUR A LA DATE DU JOUR
 $timeStart = $_POST["dateDebut"]." ".$_POST["heureDebut"];
 $dateTrajet = new DateTime($timeStart, new DateTimeZone('Europe/Paris'));
 $dateNow = new DateTime("now", new DateTimeZone('Europe/Paris'));
@@ -22,7 +22,7 @@ if ($interval->format('%R') == "-")
 {
   if($interval->format('%i') > 0 || $interval->format('%S') > 0 || $interval->format('%H') > 0 || $interval->format('%D') > 0|| $interval->format('%M') > 0 || $interval->format('%Y') > 0)
   {
-  
+
 // echo $timeStart;
 $timestampStart = strtotime($timeStart);
 // echo "<br>".$timestampStart;
@@ -40,9 +40,10 @@ $apiReturn = App\Trajet::getDistanceTime($start, $end);
 $estimatedTime=60*$apiReturn["time"]; //temps estimé de 34 minutes
 $timestampEnd = $timestampStart+$estimatedTime;
 $dateFin = gmdate('Y-m-d G:i:s', $timestampEnd);
+var_dump($dateFin);
 
 $trajet = new App\Trajet($_POST["start"],$_POST["end"],0,$_SESSION['id'],date('Y-m-d G:i:s'),$timeStart,$dateFin,$apiReturn["distance"],$apiReturn["time"]);
-$trajet->addTrajetStart($bdd,'INSERT INTO `trajet` (`idClient`, `debut`, `fin`, `prixTrajet`, `heureDebut`,`heureFin`,`dateResevation`,`distanceTrajet`) VALUES (:idClient,:debut,:fin,:prixTrajet,:dateDebut,:dateFin,:dateReservation,:distanceTrajet)',$trajet);
+$trajet->addTrajetStart($bdd,'INSERT INTO `trajet` (`idClient`, `debut`, `fin`, `prixTrajet`, `heureDebut`,`heureFin`,`dateResevation`,`distanceTrajet`,`duration`) VALUES (:idClient,:debut,:fin,:prixTrajet,:dateDebut,:dateFin,:dateReservation,:distanceTrajet,:duration)',$trajet);
 $trajet->startSessionId($bdd); //add idTrajet in SESSION
 // echo "<br> temps trajet: ".$trajet->getTimeTrajet();
 
@@ -68,7 +69,7 @@ if (!empty($data)) {
 }
 
 
- 
+
 
   }
   else {
@@ -77,12 +78,5 @@ if (!empty($data)) {
 }
 else {
   header('location:ReservationTrajet.php');
-  
+
 }
-
-
-
-
-
-
-

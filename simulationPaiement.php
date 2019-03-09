@@ -221,6 +221,7 @@ function addPDFButton(){
 function sayHi(){
   console.log("Hi mate :3");
   generatePDF();
+  document.location.href="facture.pdf";
 }
 
 function generatePDF() {

@@ -33,8 +33,8 @@ loadLanguageFromSession($_SESSION['lang']);
   <div class="section">
     <div class="container">
       <div class="col-md-8 col-md-offset-2 text-center">
-        <h3><?php echo _TITRE_BODY?></h3>
-        <a href="#" class="btn btn-large"><?php echo _TITRE_BOUTTON ?></a>
+        <h3 class="h3"><?php echo _TITRE_BODY?></h3>
+        <a href="#" class="btn btn-success"><?php echo _TITRE_BOUTTON ?></a>
       </div>
     </div>
   </div>

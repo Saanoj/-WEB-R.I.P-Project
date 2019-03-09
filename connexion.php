@@ -13,6 +13,7 @@ loadLanguageFromSession($_SESSION['lang']);
 <!DOCTYPE html>
 <html class="no-js">
 <!--<![endif]-->
+<link rel="stylesheet" href="css/connexion/style.css">
 <?php include "includehtml/head.html" ?>
 
 <body>
@@ -52,7 +53,6 @@ loadLanguageFromSession($_SESSION['lang']);
               <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
               <?php echo $form->inputConnexion('password','password',_PASSWORD_CONNEXION,'form-control'); ?>
             </div>
-
 
 
             <div class="input-group">

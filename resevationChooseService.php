@@ -93,16 +93,16 @@ loadLanguageFromSession($_SESSION['lang']);
                 array_push($categorieSet,$unService["categorie"]);
                 ?>
                 <?php
-                $res = preg_replace("/[^a-zA-Z]/", "", str_replace(" ","",$unService["categorie"]));
+                $newCategorie = preg_replace("/[^a-zA-Z]/", "", str_replace(" ","",$unService["categorie"]));
                 ?>
 
 
                 <li class="list-group-item row">
                   <a class="h1 col-md-10"><?php echo $unService["categorie"] ?></a>
                   <!--<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample  " aria-expanded="false" aria-controls="collapseExample">-->
-                  <div class="btn btn-primary fa fa-plus col-md-2" type="button" data-toggle="collapse" data-target="<?php echo "#".$res;?>" aria-expanded="true" aria-controls="<?php echo $res;?>">Ouvrir</div>
+                  <div class="btn btn-primary fa fa-plus col-md-2" type="button" data-toggle="collapse" data-target="<?php echo "#".$newCategorie;?>" aria-expanded="true" aria-controls="<?php echo $newCategorie;?>">Ouvrir</div>
                 </li>
-                <div class="list-group-item collapse" id="<?php echo $res;?>">
+                <div class="list-group-item collapse" id="<?php echo $newCategorie;?>">
 
 
                   <?php
@@ -482,7 +482,7 @@ loadLanguageFromSession($_SESSION['lang']);
 
                           ?>
                           <div class="modal-footer">
-                            <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">
+                            <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">
                               Sauvegarder
                             </button>
                           </div>

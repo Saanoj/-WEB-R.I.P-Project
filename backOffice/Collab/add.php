@@ -1,18 +1,19 @@
 <?php
 session_start();
 include '../../include/fonctionCollab.php';
-if(
-  isset($_POST["email"])&&
-  isset($_POST["last_name"])&&
-  isset($_POST["first_name"])&&
-  isset($_POST["metier"])&&
-  isset($_POST["description"])&&
-  isset($_POST["prixCollaborateur"])&&
-  isset($_POST["dateEmbauche"])&&
-  isset($_POST["ville"])&&
-  isset($_POST["heuresTravailees"])&&
-  isset($_POST["rating"])&&
-  isset($_POST["ratingNumber"])
+if(!(
+  empty($_POST["email"])&&
+  empty($_POST["last_name"])&&
+  empty($_POST["first_name"])&&
+  empty($_POST["metier"])&&
+  empty($_POST["description"])&&
+  empty($_POST["prixCollaborateur"])&&
+  empty($_POST["dateEmbauche"])&&
+  empty($_POST["ville"])&&
+  empty($_POST["heuresTravailees"])&&
+  empty($_POST["rating"])&&
+  empty($_POST["ratingNumber"])
+  )
 ){
 
   add($_POST["email"],

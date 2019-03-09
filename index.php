@@ -15,7 +15,7 @@ loadLanguageFromSession($_SESSION['lang']);
 <link rel="stylesheet" type="text/css" href="css/choixDriver/main.css">
 <?php include "includehtml/head.html" ?>
 
-<body>
+<body class="bg-light">
   <!-- header section -->
   <?php
 
@@ -135,7 +135,7 @@ loadLanguageFromSession($_SESSION['lang']);
     <section  class="section quote">
       <div class="container">
         <div class="col-md-8 col-md-offset-2 text-center">
-          <h3><?php echo "Je suis dans l'accueil de R.I.P, <br> le truc fait de la merde au dessus :cry:" ?></h3>
+          <h3><?php echo "Je suis dans l'accueil de R.I.P" ?></h3>
           <a href="#" class="btn btn-large"><?php echo _TITRE_BOUTTON ?></a>
         </div>
       </div>

@@ -25,9 +25,8 @@
 
   <link rel="stylesheet" type="text/css" href="css/choixDriver/main.css">
 
+  <?php include 'includehtml/head.html'; ?>
 
-  <?php
-    include 'includehtml/head.html'; ?>
   </head>
   <body class="bg-secondary">
     <?php
@@ -51,7 +50,7 @@
           <div class="card" style="margin:50px 0">
              <!-- Default panel contents -->
              <div class="card-header">
-               <h1 class="display-3">Choisissez votre chauffeur</h1>
+               <h1 class="display-3 text-center">Choisissez votre chauffeur</h1>
                <?php $trajet->showInfosTrajet(); ?>
              </div>
 

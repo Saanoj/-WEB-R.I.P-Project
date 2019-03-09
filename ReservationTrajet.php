@@ -46,8 +46,13 @@ loadLanguageFromSession($_SESSION['lang']);
   }
   ?>
   <script type="text/javascript">
-  function autoFill(home) {
-    $('.home').val(home);
+  function autoFillStart(home) {
+    $('.start').val(home);
+    $('.end').val(" ");
+  }
+  function autoFillEnd(home) {
+    $('.end').val(home);
+    $('.start').val(" ");
   }
   </script>
 </head>
@@ -69,13 +74,17 @@ loadLanguageFromSession($_SESSION['lang']);
         <div class="row p-4 bg-secondary rounded">
           <!-- boutton d'autocomplétion de depart depuis son adresse -->
           <?php if (!empty($membre->getAddress())) { ?>
-            <button class="btn btn-dark col-md-1 p-0" href="#" onClick="autoFill('<?php echo $membre->getAddress()." ".$membre->getZipCode();?>'); return false;" role="button">Home</button>
+          <div class="col-md-2">
+
+            <button class="btn btn-dark col-md-12 m-1" style="height: 25px;" href="#" onClick="autoFillStart('<?php echo $membre->getAddress()." ".$membre->getZipCode();?>'); return false;">Start home</button>
+            <button class="btn btn-dark col-md-12 m-1" style="height: 25px;" href="#" onClick="autoFillEnd('<?php echo $membre->getAddress()." ".$membre->getZipCode();?>'); return false;">End home</button>
+          </div>
           <?php } ?>
 
           <form action="valideReservation.php" method="post" class="home_search_form d-flex flex-lg-row flex-column align-items-start justify-content-lg-between justify-content-start" id="home_search_form" onsubmit="return checkGlobal(this)">
-            <input type="text" name="start"  id="autocomplete" class="col-md-4 search_input search_input_1 m-2 home" placeholder="<?php echo _ADRESSE_DEPART_RESERVATION ?>" required="required"  onblur="checkStart(this)">
+            <input type="text" name="start"  id="autocomplete" class="col-md-4 search_input search_input_1 m-2 start" placeholder="<?php echo _ADRESSE_DEPART_RESERVATION ?>" required="required"  onblur="checkStart(this)">
 
-            <input type="text" name="end"  id="autocomplete2" class="col-md-4 search_input search_input_2 m-2" placeholder="<?php echo _ADRESSE_ARRIVEE_RESERVATION ?>" required="required" onblur="checkEnd(this)">
+            <input type="text" name="end"  id="autocomplete2" class="col-md-4 search_input search_input_2 m-2 end" placeholder="<?php echo _ADRESSE_ARRIVEE_RESERVATION ?>" required="required" onblur="checkEnd(this)">
             <!--<input type="number" name="price"  id="price" class="search_input search_input_4" placeholder="Budget" required="required">-->
             <div class="col-md-2">
               <label for="dateDebut"><?php echo _DATE_DEBUT_RESERVATION_TRAJET ?></label>

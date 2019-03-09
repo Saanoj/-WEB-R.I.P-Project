@@ -48,11 +48,11 @@ loadLanguageFromSession($_SESSION['lang']);
   <script type="text/javascript">
   function autoFillStart(home) {
     $('.start').val(home);
-    $('.end').val(" ");
+    $('.end').val("");
   }
   function autoFillEnd(home) {
     $('.end').val(home);
-    $('.start').val(" ");
+    $('.start').val("");
   }
   </script>
 </head>
@@ -71,17 +71,17 @@ loadLanguageFromSession($_SESSION['lang']);
             <?php echo _TITRE_RESERVATION_TRAJET ?>
           </div>
         </div>
-        <div class="row p-4 bg-secondary rounded">
+        <div class="row pt-4 pb-4 bg-secondary rounded">
           <!-- boutton d'autocomplétion de depart depuis son adresse -->
           <?php if (!empty($membre->getAddress())) { ?>
           <div class="col-md-2">
 
-            <button class="btn btn-dark col-md-12 m-1" style="height: 25px;" href="#" onClick="autoFillStart('<?php echo $membre->getAddress()." ".$membre->getZipCode();?>'); return false;">Start home</button>
-            <button class="btn btn-dark col-md-12 m-1" style="height: 25px;" href="#" onClick="autoFillEnd('<?php echo $membre->getAddress()." ".$membre->getZipCode();?>'); return false;">End home</button>
+            <button class="glyphicon glyphicon-home btn btn-dark col-md-12 mt-1" style="height: 25px;" href="#" onClick="autoFillStart('<?php echo $membre->getAddress()." ".$membre->getZipCode();?>'); return false;">Start</button>
+            <button class="glyphicon glyphicon-home btn btn-dark col-md-12 mt-1" style="height: 25px;" href="#" onClick="autoFillEnd('<?php echo $membre->getAddress()." ".$membre->getZipCode();?>'); return false;">End</button>
           </div>
           <?php } ?>
 
-          <form action="valideReservation.php" method="post" class="home_search_form d-flex flex-lg-row flex-column align-items-start justify-content-lg-between justify-content-start" id="home_search_form" onsubmit="return checkGlobal(this)">
+          <form action="valideReservation.php" method="post" class=" d-flex flex-lg-row flex-column align-items-start justify-content-lg-between justify-content-start" id="home_search_form" onsubmit="return checkGlobal(this)">
             <input type="text" name="start"  id="autocomplete" class="col-md-4 search_input search_input_1 m-2 start" placeholder="<?php echo _ADRESSE_DEPART_RESERVATION ?>" required="required"  onblur="checkStart(this)">
 
             <input type="text" name="end"  id="autocomplete2" class="col-md-4 search_input search_input_2 m-2 end" placeholder="<?php echo _ADRESSE_ARRIVEE_RESERVATION ?>" required="required" onblur="checkEnd(this)">
@@ -95,7 +95,7 @@ loadLanguageFromSession($_SESSION['lang']);
               <?php echo $form->input('heureDebut','time'); ?>
             </div>
 
-            <button type="submit" class="btn btn-dark col-md-2 p-3 mt-4" name="submit"><?php echo _BOUTTON_RESERVATION_TRAJET ?></Button>
+            <button type="submit" class="glyphicon glyphicon-search btn btn-dark col-md-1 ml-5 p-3 mt-4" name="submit">
 
            <!--  <button class="home_search_button col-md-2 m-2"><?php echo _BOUTTON_RESERVATION_TRAJET ?></button> !-->
 

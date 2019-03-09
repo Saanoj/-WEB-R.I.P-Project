@@ -9,7 +9,6 @@ include '../include/fonction.php';
 <html>
 <?php include "includehtml/head.html" ?>
 <body>
-  <script type="text/javascript" src="../js/backOffice/backOfficeAjax.js"></script>
   <?php
   require '../Class/Autoloader.php';
   App\Autoloader::register();
@@ -17,25 +16,17 @@ include '../include/fonction.php';
   $type = 0;
   $navbar = new App\Navbar($backOffice,$type);
   $navbar->navbar();
+
   $Session = new App\Session($_SESSION['id']);
   $Session->isConnect();
   ?>
 
   <div class="container">
-    <h1>Bienvenue sur le back-office</h1>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+    <div class="" style="margin-bottom: 25%;">
+      <h1>Bienvenue sur le back-office</h1>
+    </div>
   </div>
+  
   <?php include "includehtml/footer.php" ?>
 </body>
 </html>

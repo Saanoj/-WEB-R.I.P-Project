@@ -52,51 +52,45 @@ loadLanguageFromSession($_SESSION['lang']);
   </script>
 </head>
 <body>
-  <div class="super_container">
+  <div class="">
     <!-- Home -->
-    <div class="home">
+    <div class="">
       <!-- Home Slider -->
-      <div class="home_slider_container">
+      <div class="">
       </div>
       <!-- Recherche -->
-      <div class="row">
-        <div class="home_search">
-          <div class="container">
-            <div class="row">
-              <div class="col">
-                <div class="home_search_container">
-                  <div class="home_search_title"><?php echo _TITRE_RESERVATION_TRAJET ?></div>
-                  <div class="home_search_content p-5">
-                    <!-- boutton d'autocomplétion de depart depuis son adresse -->
-                    <?php if (!empty($membre->getAddress())) { ?>
-                      <button class="btn btn-secondary col-md-1 mt-4" href="#" onClick="autoFill('<?php echo $membre->getAddress()." ".$membre->getZipCode();?>'); return false;" role="button">Home</button>
-                    <?php } ?>
+      <div class="container mt-5 mb-5">
 
-                    <form action="valideReservation.php" method="post" class="home_search_form d-flex flex-lg-row flex-column align-items-start justify-content-lg-between justify-content-start" id="home_search_form" onsubmit="return checkGlobal(this)">
-                    <input type="text" name="start"  id="autocomplete" class="search_input search_input_1 m-2 home" placeholder="<?php echo _ADRESSE_DEPART_RESERVATION ?>" required="required"  onblur="checkStart(this)">
-
-                      <input type="text" name="end"  id="autocomplete2" class="search_input search_input_2 m-2" placeholder="<?php echo _ADRESSE_ARRIVEE_RESERVATION ?>" required="required" onblur="checkEnd(this)">
-                      <!--<input type="number" name="price"  id="price" class="search_input search_input_4" placeholder="Budget" required="required">-->
-
-                      <label for="dateDebut"><?php echo _DATE_DEBUT_RESERVATION_TRAJET ?></label>
-                      <?php echo $form->input('dateDebut','date'); ?>
-
-                      <label for="heureDebut"><?php echo _HEURE_DEBUT_RESERVATION_TRAJET ?></label>
-                      <?php echo $form->input('heureDebut','time'); ?>
-
-                      <input type="submit"   class="home_search_button col-md-2 m-2" name="submit"  value="<?php echo _BOUTTON_RESERVATION_TRAJET ?>">
-
-                     <!--  <button class="home_search_button col-md-2 m-2"><?php echo _BOUTTON_RESERVATION_TRAJET ?></button> !-->
-
-                    </form>
-                  </div>
-                </div>
-                <div class="">
-
-                </div>
-              </div>
-            </div>
+        <div class="row">
+          <div class="display-3 text-white bg-secondary col-md-6 offset-3 rounded-top text-center">
+            <?php echo _TITRE_RESERVATION_TRAJET ?>
           </div>
+        </div>
+        <div class="row p-4 bg-secondary rounded">
+          <!-- boutton d'autocomplétion de depart depuis son adresse -->
+          <?php if (!empty($membre->getAddress())) { ?>
+            <button class="btn btn-dark col-md-1 p-0" href="#" onClick="autoFill('<?php echo $membre->getAddress()." ".$membre->getZipCode();?>'); return false;" role="button">Home</button>
+          <?php } ?>
+
+          <form action="valideReservation.php" method="post" class="home_search_form d-flex flex-lg-row flex-column align-items-start justify-content-lg-between justify-content-start" id="home_search_form" onsubmit="return checkGlobal(this)">
+            <input type="text" name="start"  id="autocomplete" class="col-md-4 search_input search_input_1 m-2 home" placeholder="<?php echo _ADRESSE_DEPART_RESERVATION ?>" required="required"  onblur="checkStart(this)">
+
+            <input type="text" name="end"  id="autocomplete2" class="col-md-4 search_input search_input_2 m-2" placeholder="<?php echo _ADRESSE_ARRIVEE_RESERVATION ?>" required="required" onblur="checkEnd(this)">
+            <!--<input type="number" name="price"  id="price" class="search_input search_input_4" placeholder="Budget" required="required">-->
+            <div class="col-md-2">
+              <label for="dateDebut"><?php echo _DATE_DEBUT_RESERVATION_TRAJET ?></label>
+              <?php echo $form->input('dateDebut','date'); ?>
+            </div>
+            <div class="col-md-2 offset-1">
+              <label for="heureDebut"><?php echo _HEURE_DEBUT_RESERVATION_TRAJET ?></label>
+              <?php echo $form->input('heureDebut','time'); ?>
+            </div>
+
+            <button type="submit" class="btn btn-dark col-md-2 p-3 mt-4" name="submit"><?php echo _BOUTTON_RESERVATION_TRAJET ?></Button>
+
+           <!--  <button class="home_search_button col-md-2 m-2"><?php echo _BOUTTON_RESERVATION_TRAJET ?></button> !-->
+
+          </form>
         </div>
       </div>
       <!-- Intro -->

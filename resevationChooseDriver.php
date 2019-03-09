@@ -29,7 +29,7 @@
   <?php
     include 'includehtml/head.html'; ?>
   </head>
-  <body>
+  <body class="bg-secondary">
     <?php
 
     require 'Class/Autoloader.php';
@@ -74,17 +74,15 @@
                       <h3><?php echo $chauffeur->getFirst_name()." ".$chauffeur->getLast_name();?></h3>
                       <h6>ID: <?php echo $chauffeur->getIdCollaborateur(); ?> | Prix: <?php echo $chauffeur->getPrixCollaborateur()."€ / Km | Note: ".$chauffeur->getRating()."/5 sur ".$chauffeur->getRatingNumber()." votes" ?></h6>
                     </div>
-                    <div class="col-md-8">
-                      <!-- Button trigger modal -->
-                      <div class="">
-                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal<?php echo $i ?>">
-                          Infos chauffeur
-                        </button>
-                      </div>
-                      <div class="funkyradio-primary col-md-4 center-block">
-                          <input type="radio" name="idChauffeur" id="radio<?php echo $i ?>" value="<?php echo $chauffeur->getIdCollaborateur() ?>" checked/>
-                          <label for="radio<?php echo $i ?>">Choisir ce chauffeur</label>
-                      </div>
+                    <!-- Button trigger modal -->
+                    <div class="col-md-2 align-middle">
+                      <button type="button" class="btn btn-secondary " data-toggle="modal" data-target="#exampleModal<?php echo $i ?>">
+                        Infos chauffeur
+                      </button>
+                    </div>
+                    <div class="funkyradio-primary col-md-3 center-block">
+                        <input type="radio" name="idChauffeur" id="radio<?php echo $i ?>" value="<?php echo $chauffeur->getIdCollaborateur() ?>" checked/>
+                        <label for="radio<?php echo $i ?>">Choisir ce chauffeur</label>
                     </div>
 
                   </div>

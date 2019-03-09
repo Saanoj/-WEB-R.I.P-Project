@@ -29,7 +29,7 @@ loadLanguageFromSession($_SESSION['lang']);
   <?php
   include 'includehtml/head.html'; ?>
 </head>
-<body>
+<body class="bg-secondary">
   <?php
 
 
@@ -309,7 +309,7 @@ loadLanguageFromSession($_SESSION['lang']);
           </div>
 
           <!-- Validation -->
-          <form class="row list-group-item center-block" method="post" action="simulationpaiement.php">
+          <form class="list-group-item center-block" method="post" action="simulationpaiement.php">
             <input type="hidden" name="price" value="<?php echo $total; ?>">
             <?php $_SESSION['prixTotal'] = $total ?>
 

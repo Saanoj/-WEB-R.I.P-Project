@@ -149,7 +149,7 @@ loadLanguageFromSession($_SESSION['lang']);
                       echo "ID: ".$service["idService"]." | ".$service["nomService"]." : ".$infoLinkService["last_name"]." ".$infoLinkService["first_name"]." | Domaine: ".$infoLinkService["description"];
                     }
                     else if ($linkService["idService"] == 13) {
-                      echo "ID: ".$service["idService"]." | ".$service["nomService"]." : ".$infoLinkService["last_name"]." ".$infoLinkService["first_name"]." | Domaine: ".$infoLinkService["description"];
+                      echo "ID: ".$service["idService"]." | ".$service["nomService"]." : ".$infoLinkService["last_name"]." ".$infoLinkService["first_name"]." | Guide en: ".$infoLinkService["description"];
                     }
 
                     else{
@@ -312,7 +312,7 @@ loadLanguageFromSession($_SESSION['lang']);
           <form class="list-group-item center-block" method="post" action="simulationpaiement.php">
             <input type="hidden" name="price" value="<?php echo $total; ?>">
             <?php $_SESSION['prixTotal'] = $total ?>
-            
+
             <div class="center-block">
               <?php echo $form->submit(); ?>
             </div>

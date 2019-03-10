@@ -4,6 +4,9 @@ require 'Class/Autoloader.php';
 App\Autoloader::register();
 $bdd = new App\Database('rip');
 
+var_dump($_POST["idInterprete"]);
+var_dump($_POST["idCoachSportif"]);
+var_dump($_POST["idCoachCulture"]);
 
 //On recuperer la valeur de l'heure du trajet. Il faut que la date du début de l'interprete soit supérieur a la date du trajet . Il faut aussi
 // que la date de fin soit supérieur a la date du début
@@ -69,7 +72,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
         $thisQuantite=$quantite;
       }
     }
-  
+
 
     //affectation de l'id annexe du service si besoin
     switch ($service) {
@@ -85,7 +88,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
       case '15' :
       case '16' :
       case '18' :
-      case '19' : 
+      case '19' :
       $idAnnexe=-1;
       break;
       case 7:
@@ -141,14 +144,14 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
           $idArray = $_POST["idCoachSportif"];
           break;
         case 13:
-          $idArray = $_POST["idCoachSportif"];
+          $idArray = $_POST["idCoachCulture"];
           break;
 
         default:
           $idArray = array();;
           break;
       }
-
+      
       foreach ($idArray as $value) {
         $req=$bdd->getPDO()->prepare('INSERT INTO linkServicetrajet (`idTrajet`,`idService`,`idAnnexe`,`quantite`) VALUES (:idTrajet,:idService,:idAnnexe,:quantite)');
         $req->bindValue(':idTrajet', $_SESSION["idTrajet"]);

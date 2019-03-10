@@ -3,7 +3,7 @@ session_start();
 
 
 include '../../include/config.php';
-include '../../include/fonctionCollab.php';
+include '../../include/fonctionTrajet.php';
 ?>
 
 <!DOCTYPE html>
@@ -28,22 +28,20 @@ include '../../include/fonctionCollab.php';
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">Mail</th>
-          <th scope="col">Nom</th>
-          <th scope="col">Prenom</th>
-          <th scope="col">Profession</th>
-          <th scope="col">Description</th>
-          <th scope="col">Prix </th>
-          <th scope="col">Date d'embauche</th>
-          <th scope="col">Ville</th>
-          <th scope="col">Nombre d'heure</th>
-          <th scope="col">Note</th>
-          <th scope="col">Nombre de placement</th>
+          <th scope="col">Client</th>
+          <th scope="col">Chauffeur</th>
+          <th scope="col">Heure du début</th>
+          <th scope="col">Heure de fin </th>
+          <th scope="col">Date</th>
+          <th scope="col">Distance</th>
+          <th scope="col">Prix</th>
+          <th scope="col">Debut</th>
+          <th scope="col">Fin</th>
           <th scope="col">Edit/Add</th>
           <th scope="col">Supprimer</th>
         </tr>
       </thead>
-      <?php backOfficeCollab();
+      <?php backOfficeTrajet();
       ?>
     </table>
   </div>

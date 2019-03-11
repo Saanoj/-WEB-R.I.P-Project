@@ -1,7 +1,7 @@
 <?php
 session_start();
-include '../../include/fonctionCollab.php';
+include '../../include/fonctionTrajet.php';
 
 drop($_POST["id"]);
-header("location: backOfficeCollab.php");
+header("location: backOfficeTrajet.php");
 ?>

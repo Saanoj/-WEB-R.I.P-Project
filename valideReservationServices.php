@@ -61,6 +61,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
 
  
 
+  $thisQuantite=0;
   //on boucle nos services choisis
   foreach ($servicesChoisi as $service) {
     // On recupere la quantite si c'est un service qui a une quantité en foncition de son id
@@ -70,7 +71,8 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
         $thisQuantite=$quantite;
       }
     }
-  
+    //echo $thisQuantite." ".$service."<br>";
+
 
     //affectation de l'id annexe du service si besoin
     switch ($service) {
@@ -82,19 +84,6 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
       else {
         header('location:resevationChooseService.php');
       }
-      break;
-      case '2':
-      case '3' :
-      case '4' :
-      case '5':
-      case '6':
-      case '9':
-      case '15' :
-      case '16' :
-      case '18' :
-      
-      case '19' : 
-      $idAnnexe=-1;
       break;
       case 7:
       $idAnnexe=$_POST["idHotel"];
@@ -108,7 +97,6 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
       break;
       default:
       $idAnnexe=-1;
-      $thisQuantite=0;
       break;
     }
 
@@ -149,7 +137,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
           $idArray = $_POST["idCoachSportif"];
           break;
         case 13:
-          $idArray = $_POST["idCoachSportif"];
+          $idArray = $_POST["idCoachCulture"];
           break;
 
         default:
@@ -158,6 +146,8 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
       }
 
       foreach ($idArray as $value) {
+        //echo "elseif 11 12 13<br>";
+
         $req=$bdd->getPDO()->prepare('INSERT INTO linkServicetrajet (`idTrajet`,`idService`,`idAnnexe`,`quantite`) VALUES (:idTrajet,:idService,:idAnnexe,:quantite)');
         $req->bindValue(':idTrajet', $_SESSION["idTrajet"]);
         $req->bindValue(':idService', $service);
@@ -165,10 +155,14 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
         $req->bindValue(':quantite', 1);
         $req->execute();
         $req->closeCursor();
+
       }
 
     }else{
     //on insere les id et la quantité pour lier ce choix de service au trajet dans cette table e liaison
+    //echo "else ";
+    //echo $thisQuantite."<br>";
+
     $req=$bdd->getPDO()->prepare('INSERT INTO linkServicetrajet (`idTrajet`,`idService`,`idAnnexe`,`quantite`) VALUES (:idTrajet,:idService,:idAnnexe,:quantite)');
     $req->bindValue(':idTrajet', $_SESSION["idTrajet"]);
     $req->bindValue(':idService', $service);
@@ -176,6 +170,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
     $req->bindValue(':quantite', $thisQuantite);
     $req->execute();
     $req->closeCursor();
+
 
     }
 

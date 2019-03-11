@@ -84,7 +84,7 @@ loadLanguageFromSession($_SESSION['lang']);
               //on recupere les id des services choisis sur ce trajet
               $idServices = $bdd->query('SELECT * FROM linkServicetrajet WHERE idTrajet='.$_SESSION["idTrajet"].'');
 
-            //  $idCollaborateurMultiples = $bdd->query('SELECT idAnnexe FROM linkServicetrajet WHERE idTrajet='.$_SESSION["idTrajet"].' AND (idService=11 OR idService=12 OR idService=13)');
+              //$idCollaborateurMultiples = $bdd->query('SELECT idAnnexe FROM linkServicetrajet WHERE idTrajet='.$_SESSION["idTrajet"].' AND (idService=11 OR idService=12 OR idService=13)');
 
               if (empty($idServices)) {
                 echo "Aucun services selectionnés";
@@ -149,7 +149,7 @@ loadLanguageFromSession($_SESSION['lang']);
                       echo "ID: ".$service["idService"]." | ".$service["nomService"]." : ".$infoLinkService["last_name"]." ".$infoLinkService["first_name"]." | Domaine: ".$infoLinkService["description"];
                     }
                     else if ($linkService["idService"] == 13) {
-                      echo "ID: ".$service["idService"]." | ".$service["nomService"]." : ".$infoLinkService["last_name"]." ".$infoLinkService["first_name"]." | Domaine: ".$infoLinkService["description"];
+                      echo "ID: ".$service["idService"]." | ".$service["nomService"]." : ".$infoLinkService["last_name"]." ".$infoLinkService["first_name"]." | Guide en: ".$infoLinkService["description"];
                     }
 
                     else{
@@ -282,7 +282,7 @@ loadLanguageFromSession($_SESSION['lang']);
 
                         }
                         else if ($linkService["idService"] == 7 ) {
-                          echo $service["nomService"]." | Prix de la chambre : ".$infoLinkService["prix"]."€/nuit +".$service["prixService"]." € ( prix du service)";
+                          echo $service["nomService"]." | Prix de la chambre : ".$infoLinkService["prix"]."€/personne * ".$linkService["quantite"]." + ".$service["prixService"]."€ = ".($infoLinkService["prix"]*$linkService["quantite"]+$service['prixService'])." €";
                           $totalServices += ($infoLinkService["prix"]+$service['prixService']);
                         }
                         else if ($linkService["idService"] == 2 || $linkService["idService"] == 3 || $linkService["idService"] == 4|| $linkService["idService"] == 5 || $linkService["idService"] == 6 ||$linkService["idService"] == 9 || $linkService["idService"] == 18 || $linkService["idService"] == 19) {
@@ -312,7 +312,7 @@ loadLanguageFromSession($_SESSION['lang']);
           <form class="list-group-item center-block" method="post" action="simulationpaiement.php">
             <input type="hidden" name="price" value="<?php echo $total; ?>">
             <?php $_SESSION['prixTotal'] = $total ?>
-            
+
             <div class="center-block">
               <?php echo $form->submit(); ?>
             </div>

@@ -120,7 +120,7 @@ function add($id,$idClient, $idChauffeur, $heureDebut, $heureFin, $dateResevatio
 function drop($id)
 {
   include ("config.php");
-  $query = $bdd->prepare("DELETE FROM `collaborateurs` WHERE idCollaborateurs = :id");
+  $query = $bdd->prepare("DELETE FROM `collaborateurs` WHERE idTrajet = :id");
   $query->execute([
                   "id"=>$id,
 

@@ -10,9 +10,9 @@ require_once('fpdf/fpdf.php');
 // INFOS TRAJET ET SERVICES
 $reqTrajet = $bdd->queryOne('SELECT * FROM `trajet` WHERE idTrajet ='.$_SESSION["idTrajet"].'');
 
-  var_dump($reqTrajet);
+
   $idClient = $reqTrajet['idClient'];
-  var_dump($idClient);
+
 
 $trajet = unserialize($_SESSION['trajet']);
 
@@ -34,6 +34,25 @@ $reqInfosClient = $bdd->queryOne('SELECT * FROM `users` WHERE id ='.$idClient.''
 
 
 
+//on boucle les id des services choisis
+$idServices = $bdd->query('SELECT * FROM linkServicetrajet WHERE idTrajet='.$_SESSION["idTrajet"].'');
+
+// UPDATE DE LA BDD EN FONCTION DES SERVICES CHOISIS
+
+
+foreach ($idServices as $unIdService) {
+  //on recupere les infos du service en fonction de son id
+  $service = $bdd->queryOne('SELECT * FROM services WHERE idService='.$unIdService["idService"].'');
+  $linkService = $bdd->queryOne('SELECT * FROM linkServicetrajet WHERE idService='.$unIdService["idService"].' AND idTrajet='.$_SESSION["idTrajet"].'');
+  var_dump($service);
+  var_dump($linkService);
+}
+
+
+// GENERATION DU PDF
+
+
+
 //Initialize the 3 columns and the total
 $column_Id = "";
 $column_Services = "";
@@ -41,8 +60,7 @@ $column_Quantitee = "";
 $column_Prix = "";
 $total = 0;
 
-//on boucle les id des services choisis
-$idServices = $bdd->query('SELECT * FROM linkServicetrajet WHERE idTrajet='.$_SESSION["idTrajet"].'');
+
 $totalServices = 0;
 $i=0;$j=0;$k=0;
 foreach ($idServices as $unIdService) {
@@ -163,6 +181,7 @@ $pdf->SetFont("Arial",'',"12");
 $pdf->SetXY (10,30);
 $pdf->MultiCell(50,5,$reqInfosClient["last_name"]." ".$reqInfosClient["first_name"]);
 $pdf->Ln();
+
 //Fields Name position
 $Y_Fields_Name_position = 44;
 //Table position, under Fields Name
@@ -201,7 +220,7 @@ $pdf->MultiCell(30,6,$column_Prix,1);
 
 echo "<p class='h2'>Total Services: ".$totalServices."€ TTC</p>";
 
-$pdf->Output('F',"facture.pdf");
+// $pdf->Output('F',"facture.pdf");
 ob_end_flush();
 
 
@@ -244,5 +263,5 @@ $pdf = new FPDF();
 
     //$pdf->Output('F',"facture.pdf");
 */
-header("location: facture.pdf");
+// header("location: facture.pdf");
 ?>

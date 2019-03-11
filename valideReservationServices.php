@@ -58,13 +58,14 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
 
   $servicesChoisi=$_POST['services'];
   $quantiteCertainService=$_POST['quantite'];
-  var_dump($servicesChoisi);
-  var_dump($quantiteCertainService);
+
+ 
 
   //on boucle nos services choisis
   foreach ($servicesChoisi as $service) {
     // On recupere la quantite si c'est un service qui a une quantité en foncition de son id
     foreach ($quantiteCertainService as $key => $quantite) {
+      
       if ($key == $service) {
         $thisQuantite=$quantite;
       }
@@ -73,8 +74,14 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
 
     //affectation de l'id annexe du service si besoin
     switch ($service) {
+      
       case 1:
+      if (isset($_POST["idRestaurant"]) && (!empty($_POST["idRestaurant"]))) {
       $idAnnexe=$_POST["idRestaurant"];
+      }
+      else {
+        header('location:resevationChooseService.php');
+      }
       break;
       case '2':
       case '3' :
@@ -85,6 +92,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
       case '15' :
       case '16' :
       case '18' :
+      
       case '19' : 
       $idAnnexe=-1;
       break;
@@ -174,7 +182,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
   }
 
   //redirection
-   header("location:resevationChooseDriver.php");
+    header("location:resevationChooseDriver.php");
 }
 else {
 

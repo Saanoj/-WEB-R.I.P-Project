@@ -123,7 +123,7 @@ loadLanguageFromSession($_SESSION['lang']);
                           <input type="checkbox" class="primary" name="services[<?php echo $i ?>]" value="<?php echo $service->getIdService(); ?>">
                           <span class="slider round"></span>
                         </label>
-                        <button type="button" href="#costumModal<?php echo $i ?>" data-target="#costumModal<?php echo $i ?>" name="services[<?php echo $i ?>]" class="btn btn-info" data-toggle="modal">Choisir</button>
+                        <button type="button" href="#costumModal<?php echo $i ?>" data-target="#costumModal<?php echo $i ?>" name="services[<?php echo $service->getIdService(); ?>]" class="btn btn-info" data-toggle="modal">Choisir</button>
                       </div>
 
 
@@ -190,7 +190,6 @@ loadLanguageFromSession($_SESSION['lang']);
 
                               }
                               break;
-
                               case '2':
                               case '3' :
                               case '4' :

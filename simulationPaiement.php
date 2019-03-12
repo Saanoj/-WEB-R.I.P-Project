@@ -262,6 +262,7 @@ function generatePDF() {
 
         if ($_POST) {
           Stripe::setApiKey("sk_test_ze3ZePlRbWuZCbCAfKs4DOTc");
+          
 
           try {
             if (!isset($_POST['stripeToken']))

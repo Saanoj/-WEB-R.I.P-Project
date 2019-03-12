@@ -22,7 +22,10 @@ function initAutocomplete() {
 // geographical location types.
 
 autocomplete = new google.maps.places.Autocomplete(
-  document.getElementById('autocomplete'), {types: ['geocode']});
+  document.getElementById('autocomplete'), {
+      types: ['geocode'],
+      componentRestrictions: {country: "fr"}
+  });
 // Avoid paying for data that you don't need by restricting the set of
 // place fields that are returned to just the address components.
 
@@ -33,7 +36,10 @@ autocomplete = new google.maps.places.Autocomplete(
 autocomplete.addListener('place_changed', fillInAddress);
 
 autocomplete2 = new google.maps.places.Autocomplete(
-    document.getElementById('autocomplete2'), {types: ['geocode']});
+  document.getElementById('autocomplete2'), {
+      types: ['geocode'],
+      componentRestrictions: {country: "fr"}
+  });
   // Avoid paying for data that you don't need by restricting the set of
   // place fields that are returned to just the address components.
   

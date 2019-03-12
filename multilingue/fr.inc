@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 //fichier langue francais
 // Navbar
 define("_ACCUEIL","Accueil");
@@ -31,4 +31,6 @@ define("_PASSWORD_OUBLIE_CONNEXION","Mot de passe oublié ?");
 define("_SOUVENIR_CONNEXION","Se souvenir de moi");
 define("_PAS_COMPTE_CONNEXION","Vous n'avez pas de compte ?");
 define("_INSCRIPTION_CONNEXION","Inscrivez vous ici.");
+
+
  ?>

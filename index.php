@@ -13,11 +13,28 @@ loadLanguageFromSession($_SESSION['lang']);
 <html class="no-js">
 
 <link rel="stylesheet" type="text/css" href="css/choixDriver/main.css">
+<script src="js/index/main.js"></script>
+
+<style>
+/* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    
 <?php include "includehtml/head.html" ?>
 
 <body class="bg-light">
   <!-- header section -->
   <?php
+
 
   require 'Class/Autoloader.php';
   App\Autoloader::register();
@@ -28,6 +45,9 @@ loadLanguageFromSession($_SESSION['lang']);
   $navbar->navbar();
 
   ?>
+
+<div id="map"></div>
+
 
   <!-- Get a quote section -->
   <div class="section">
@@ -143,5 +163,7 @@ loadLanguageFromSession($_SESSION['lang']);
 
 
     <?php include "includehtml/footer.php"; ?>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBceTkjdStb2X5btD_NmC3yNsbXKIjCMc&callback=initMap"async defer></script>
+
   </body>
   </html>

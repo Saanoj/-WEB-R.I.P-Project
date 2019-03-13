@@ -44,8 +44,8 @@ foreach ($idServices as $unIdService) {
   //on recupere les infos du service en fonction de son id
   $service = $bdd->queryOne('SELECT * FROM services WHERE idService='.$unIdService["idService"].'');
   $linkService = $bdd->queryOne('SELECT * FROM linkServicetrajet WHERE idService='.$unIdService["idService"].' AND idTrajet='.$_SESSION["idTrajet"].'');
-  var_dump($service);
-  var_dump($linkService);
+  //var_dump($service);
+  //var_dump($linkService);
 }
 
 
@@ -60,7 +60,7 @@ $column_Quantitee = "";
 $column_Prix = "";
 $total = 0;
 
-
+$counterService=0;
 $totalServices = 0;
 $i=0;$j=0;$k=0;
 foreach ($idServices as $unIdService) {
@@ -147,6 +147,8 @@ foreach ($idServices as $unIdService) {
   //chr(128) egal €
   $column_Prix = $column_Prix.$prixNow.chr(128)."\n";
   $column_Quantitee = $column_Quantitee.$linkService["quantite"]."\n";
+
+  $counterService++;
 }
 
 $code = $_SESSION["idTrajet"];
@@ -171,6 +173,8 @@ $pdf->Cell(10);
 $pdf->SetFont("Arial","B","22");
 $pdf->SetXY (10,15);
 $pdf->MultiCell(50,5,"Facture");
+
+//num
 $pdf->SetFont("Arial","","16");
 $pdf->SetXY (10,25);
 $pdf->MultiCell(100,5,"Numero Trajet: ".$code);
@@ -182,8 +186,15 @@ $pdf->SetXY (10,30);
 $pdf->MultiCell(50,5,$reqInfosClient["last_name"]." ".$reqInfosClient["first_name"]);
 $pdf->Ln();
 
+//total trajet
+$pdf->SetFont("Arial",'B',"16");
+$pdf->SetXY (10,40);
+$pdf->MultiCell(50,5,"Total: ".$totalServices." ".chr(128));
+$pdf->Ln();
+
+//Prix services
 //Fields Name position
-$Y_Fields_Name_position = 44;
+$Y_Fields_Name_position = 50;
 //Table position, under Fields Name
 $Y_Table_Position = $Y_Fields_Name_position + 6;
 
@@ -218,9 +229,42 @@ $pdf->SetY($Y_Table_Position);
 $pdf->SetX(165);
 $pdf->MultiCell(30,6,$column_Prix,1);
 
-echo "<p class='h2'>Total Services: ".$totalServices."€ TTC</p>";
+$reqChauffeur = $bdd->query("SELECT * FROM collaborateurs WHERE idCollaborateurs=".$reqTrajet["idChauffeur"]."");
+//prix trajet
+$Y_Fields_Name_position += ($counterService+1)*6;
+$Y_Table_Position = $Y_Fields_Name_position + 6;
 
-// $pdf->Output('F',"facture.pdf");
+$pdf->SetFont('Arial','B',12);
+$pdf->SetY($Y_Fields_Name_position);
+$pdf->SetX(20);
+$pdf->Cell(30,6,'ID Trajet',1,0,'L',1);
+$pdf->SetX(50);
+$pdf->Cell(85,6,'Chauffeur',1,0,'L',1);
+$pdf->SetX(135);
+$pdf->Cell(30,6,'Distance',1,0,'L',1);
+$pdf->SetX(165);
+$pdf->Cell(30,6,'Prix',1,0,'R',1);
+$pdf->Ln();
+
+//Now show the 3 columns
+$pdf->SetFont('Arial','',12);
+$pdf->SetY($Y_Table_Position);
+$pdf->SetX(20);
+$pdf->MultiCell(30,6,$_SESSION["idTrajet"],1);
+$pdf->SetY($Y_Table_Position);
+$pdf->SetX(50);
+$pdf->MultiCell(85,6,$reqChauffeur["first_name"]." ".$reqChauffeur["last_name"],1);
+$pdf->SetY($Y_Table_Position);
+$pdf->SetX(135);
+$pdf->MultiCell(30,6,$reqTrajet["distanceTrajet"]."Km",1);
+$pdf->SetY($Y_Table_Position);
+$pdf->SetX(165);
+$pdf->MultiCell(30,6,($reqChauffeur["last_name"]*$reqTrajet["distanceTrajet"])." ".chr(128),1);
+
+
+//echo "<p class='h2'>Total Services: ".$totalServices."€ TTC</p>";
+
+$pdf->Output('F',"facture.pdf");
 ob_end_flush();
 
 
@@ -259,9 +303,9 @@ $pdf = new FPDF();
 
 
          }
+         $pdf->Output('F',"facture.pdf");
 
-
-    //$pdf->Output('F',"facture.pdf");
 */
-// header("location: facture.pdf");
+
+ header("location: facture.pdf");
 ?>

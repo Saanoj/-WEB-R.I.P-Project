@@ -229,7 +229,7 @@ $pdf->SetY($Y_Table_Position);
 $pdf->SetX(165);
 $pdf->MultiCell(30,6,$column_Prix,1);
 
-$reqChauffeur = $bdd->query("SELECT * FROM collaborateurs WHERE idCollaborateurs=".$reqTrajet["idChauffeur"]."");
+$reqChauffeur = $bdd->queryOne("SELECT * FROM collaborateurs WHERE idCollaborateurs=".$reqTrajet["idChauffeur"]."");
 //prix trajet
 $Y_Fields_Name_position += ($counterService+1)*6;
 $Y_Table_Position = $Y_Fields_Name_position + 6;
@@ -253,14 +253,13 @@ $pdf->SetX(20);
 $pdf->MultiCell(30,6,$_SESSION["idTrajet"],1);
 $pdf->SetY($Y_Table_Position);
 $pdf->SetX(50);
-$pdf->MultiCell(85,6,$reqChauffeur["first_name"]." ".$reqChauffeur["last_name"],1);
+$pdf->MultiCell(85,6,$reqChauffeur["first_name"]." ".$reqChauffeur["last_name"]." Prix: ".$reqChauffeur["prixCollaborateur"].chr(128)."/Km",1);
 $pdf->SetY($Y_Table_Position);
 $pdf->SetX(135);
-$pdf->MultiCell(30,6,$reqTrajet["distanceTrajet"]."Km",1);
+$pdf->MultiCell(35,6,$reqTrajet["distanceTrajet"]."Km ",1);
 $pdf->SetY($Y_Table_Position);
 $pdf->SetX(165);
-$pdf->MultiCell(30,6,($reqChauffeur["last_name"]*$reqTrajet["distanceTrajet"])." ".chr(128),1);
-
+$pdf->MultiCell(30,6,($reqChauffeur["prixCollaborateur"]*$reqTrajet["distanceTrajet"])." ".chr(128),1);
 
 //echo "<p class='h2'>Total Services: ".$totalServices."€ TTC</p>";
 

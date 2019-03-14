@@ -221,7 +221,7 @@ function addPDFButton(){
 function sayHi(){
   console.log("Hi mate :3");
   generatePDF();
-  document.location.href="facture.pdf";
+  document.location.href="paymentProcess.php";
 }
 
 function generatePDF() {

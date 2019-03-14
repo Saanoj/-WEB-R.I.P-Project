@@ -63,6 +63,7 @@ loadLanguageFromSession($_SESSION['lang']);
   // On recupere l'objet trajet contenant nos infos de trajet depuis la session
   $trajet = unserialize($_SESSION['trajet']);
 
+
   ?>
   <div class="container">
     <div class="row">
@@ -101,6 +102,7 @@ loadLanguageFromSession($_SESSION['lang']);
                     //on recupere les infos du service en fonction de son id
                     $service = $bdd->queryOne('SELECT * FROM services WHERE idService='.$unIdService["idService"].'');
                     $linkService = $bdd->queryOne('SELECT * FROM linkServicetrajet WHERE idService='.$unIdService["idService"].' AND idTrajet='.$_SESSION["idTrajet"].'');
+                    
 
 
                     //choix en fonction du type de service special
@@ -307,6 +309,14 @@ loadLanguageFromSession($_SESSION['lang']);
               <?php echo "<p class='display-4'>Prix total: ".($totalServices+$totalChauffeurTrajet)."€ TTC</p>"; $total=$totalServices+$totalChauffeurTrajet?>
             </div>
           </div>
+<?php
+           $req = $bdd->getPDO()->prepare('UPDATE trajet SET prixTrajet = :prixTrajet WHERE idTrajet= :idTrajet');
+           $req->bindValue(":prixTrajet",$total);
+           $req->bindValue(":idTrajet",$_SESSION["idTrajet"]);
+           $req->execute();
+           $req->closeCursor();
+
+  ?>
 
           <!-- Validation -->
           <form class="list-group-item center-block" method="post" action="simulationpaiement.php">

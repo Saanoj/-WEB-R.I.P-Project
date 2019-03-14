@@ -3,7 +3,16 @@ session_start();
 require 'Class/Autoloader.php';
 App\Autoloader::register();
 $bdd = new App\Database('rip');
-require_once('fpdf/fpdf.php');
+require_once('fpdf/test/tfpdf.php');
+?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <title>PDF</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Ride in pride">
+<?php
 
 
 //Select the Products you want to show in your PDF file
@@ -15,6 +24,7 @@ $reqTrajet = $bdd->queryOne('SELECT * FROM `trajet` WHERE idTrajet ='.$_SESSION[
 
 
 $trajet = unserialize($_SESSION['trajet']);
+
 
 //temps des collabs
 //si temps de trajet < 1H alors on passe le temps d'interprete a un 1 et si au dessus on la tronque à l'heure en dessous
@@ -145,7 +155,7 @@ foreach ($idServices as $unIdService) {
   $column_Id = $column_Id.$service["idService"]."\n";
 
   //chr(128) egal €
-  $column_Prix = $column_Prix.$prixNow.chr(128)."\n";
+  $column_Prix = $column_Prix.$prixNow."€"."\n";
   $column_Quantitee = $column_Quantitee.$linkService["quantite"]."\n";
 
   $counterService++;
@@ -158,43 +168,128 @@ $real_price = $_SESSION['prixTotal'];
 $price_to_show = $real_price;//number_format($real_price,',','.','.');
 
 
+$dateDebut = dateFrDebut($trajet->getDateDebut());
+$dateFin = dateFrDebut($trajet->getHeureFin());
+
 
 //Create a new PDF file
 ob_start();
-$pdf=new FPDF();
+$pdf = new tFPDF();
 $titre = 'Trajet grace a Ride in Pride';
 $pdf->SetTitle($titre);
 $pdf->AddPage();
 
+// Add Unicode fonts (.ttf files)
+$pdf->AddFont('DejaVu', '', 'DejaVuSansCondensed.ttf', true);
+$pdf->AddFont('DejaVu', 'B', 'DejaVuSansCondensed-Bold.ttf', true);
+
+
+
 $pdf->Rect(5, 5, 200, 287, 'D');
 
-
+// Informations entreprise
 $pdf->Cell(10);
-$pdf->SetFont("Arial","B","22");
+$pdf->SetFont('DejaVu',"B","22");
 $pdf->SetXY (10,15);
-$pdf->MultiCell(50,5,"Facture");
+$pdf->MultiCell(100,5,"Ride in Pride");
 
-//num
-$pdf->SetFont("Arial","","16");
+$pdf->SetFont("DejaVu",'',"10");
 $pdf->SetXY (10,25);
+$pdf->MultiCell(100,5,"Adresse : 242 Rue du Faubourg-Saint-Antoine");
+$pdf->Ln();
+
+$pdf->SetFont("DejaVu",'',"10");
+$pdf->SetXY (10,35);
+$pdf->MultiCell(100,5,"Code postal : 75012");
+$pdf->Ln();
+
+$pdf->SetFont("DejaVu",'',"10");
+$pdf->SetXY (10,45);
+$pdf->MultiCell(100,5,"Telephone :  01 56 06 90 41");
+$pdf->Ln();
+
+$pdf->SetFont("DejaVu",'',"10");
+$pdf->SetXY (10,55);
+$pdf->MultiCell(200,5,"Site internet : https://www.esgi.fr/ecole-informatique.html");
+$pdf->Ln();
+
+
+
+
+
+//infos client (nom et prenom)
+
+$pdf->SetFont("DejaVu",'B',"16");
+$pdf->SetXY (120,65);
+$pdf->MultiCell(100,5,"Informations personnelles : ");
+$pdf->Ln();
+
+$pdf->SetFont("DejaVu",'',"10");
+$pdf->SetXY (120,73);
+$pdf->MultiCell(100,5,"Nom et prenom : ".$reqInfosClient["last_name"]." ".$reqInfosClient["first_name"]);
+$pdf->Ln();
+
+
+$pdf->SetFont("DejaVu",'',"10");
+$pdf->SetXY (120,81);
+$pdf->MultiCell(100,5,"Email : ".$reqInfosClient["email"]);
+$pdf->Ln();
+
+if (!empty($reqInfosClient))
+{
+  $pdf->SetFont("DejaVu",'',"10");
+$pdf->SetXY (120,89);
+$pdf->MultiCell(100,5,"Adresse : ".$reqInfosClient["address"]);
+$pdf->Ln();
+}
+
+
+// Informations du trajet
+
+$pdf->SetFont("DejaVu",'B',"16");
+$pdf->SetXY (10,107);
+$pdf->MultiCell(100,5,"Informations du trajet : ");
+$pdf->Ln();
+
+
+$pdf->SetFont("DejaVu","","10");
+$pdf->SetXY (10,119);
 $pdf->MultiCell(100,5,"Numero Trajet: ".$code);
 $pdf->Ln();
 
-//infos client
-$pdf->SetFont("Arial",'',"12");
-$pdf->SetXY (10,30);
-$pdf->MultiCell(50,5,$reqInfosClient["last_name"]." ".$reqInfosClient["first_name"]);
+$pdf->SetFont("DejaVu",'',"10");
+$pdf->SetXY (10,126);
+$pdf->MultiCell(100,5,"Lieu de départ : ".$trajet->getStart());
 $pdf->Ln();
 
-//total trajet
-$pdf->SetFont("Arial",'B',"16");
-$pdf->SetXY (10,40);
-$pdf->MultiCell(50,5,"Total: ".$totalServices." ".chr(128));
+$pdf->SetFont("DejaVu",'',"10");
+$pdf->SetXY (10,133);
+$pdf->MultiCell(100,5,"Lieu d'arrivé : ".$trajet->getEnd());
+$pdf->Ln();
+
+$pdf->SetFont("DejaVu",'',"10");
+$pdf->SetXY (10,140);
+$pdf->MultiCell(100,5,"Distance : ".$trajet->getDistance()." km");
+$pdf->Ln();
+
+$pdf->SetFont("DejaVu",'',"10");
+$pdf->SetXY (10,147);
+$pdf->MultiCell(100,5,"Temps estimé : ".$trajet->getDuration());
+$pdf->Ln();
+
+$pdf->SetFont("DejaVu",'',"10");
+$pdf->SetXY (10,154);
+$pdf->MultiCell(100,5,"Date du départ : ".$dateDebut);
+$pdf->Ln();
+
+$pdf->SetFont("DejaVu",'',"10");
+$pdf->SetXY (10,161);
+$pdf->MultiCell(100,5,"Date d'arrivé : ".$dateFin);
 $pdf->Ln();
 
 //Prix services
 //Fields Name position
-$Y_Fields_Name_position = 50;
+$Y_Fields_Name_position = 200;
 //Table position, under Fields Name
 $Y_Table_Position = $Y_Fields_Name_position + 6;
 
@@ -202,7 +297,7 @@ $Y_Table_Position = $Y_Fields_Name_position + 6;
 //Gray color filling each Field Name box
 $pdf->SetFillColor(232,232,232);
 //Bold Font for Field Name
-$pdf->SetFont('Arial','B',12);
+$pdf->SetFont('DejaVu','B',10);
 $pdf->SetY($Y_Fields_Name_position);
 $pdf->SetX(20);
 $pdf->Cell(30,6,'ID Service',1,0,'L',1);
@@ -215,7 +310,7 @@ $pdf->Cell(30,6,'Prix',1,0,'R',1);
 $pdf->Ln();
 
 //Now show the 3 columns
-$pdf->SetFont('Arial','',12);
+$pdf->SetFont('DejaVu','',10);
 $pdf->SetY($Y_Table_Position);
 $pdf->SetX(20);
 $pdf->MultiCell(30,6,$column_Id,1);
@@ -234,40 +329,76 @@ $reqChauffeur = $bdd->queryOne("SELECT * FROM collaborateurs WHERE idCollaborate
 $Y_Fields_Name_position += ($counterService+1)*6;
 $Y_Table_Position = $Y_Fields_Name_position + 6;
 
-$pdf->SetFont('Arial','B',12);
+$pdf->SetFont('DejaVu','B',10);
 $pdf->SetY($Y_Fields_Name_position);
 $pdf->SetX(20);
 $pdf->Cell(30,6,'ID Trajet',1,0,'L',1);
 $pdf->SetX(50);
 $pdf->Cell(85,6,'Chauffeur',1,0,'L',1);
 $pdf->SetX(135);
-$pdf->Cell(30,6,'Distance',1,0,'L',1);
+$pdf->Cell(30,6,'Description',1,0,'R',1);
 $pdf->SetX(165);
 $pdf->Cell(30,6,'Prix',1,0,'R',1);
+
 $pdf->Ln();
 
 //Now show the 3 columns
-$pdf->SetFont('Arial','',12);
+$pdf->SetFont('DejaVu','',10);
 $pdf->SetY($Y_Table_Position);
 $pdf->SetX(20);
-$pdf->MultiCell(30,6,$_SESSION["idTrajet"],1);
+$pdf->MultiCell(30,8,$_SESSION["idTrajet"],1);
 $pdf->SetY($Y_Table_Position);
 $pdf->SetX(50);
-$pdf->MultiCell(85,6,$reqChauffeur["first_name"]." ".$reqChauffeur["last_name"]." Prix: ".$reqChauffeur["prixCollaborateur"].chr(128)."/Km",1);
+$pdf->MultiCell(85,8,$reqChauffeur["first_name"]." ".$reqChauffeur["last_name"]." Prix: ".$reqChauffeur["prixCollaborateur"]."€/Km",1);
 $pdf->SetY($Y_Table_Position);
 $pdf->SetX(135);
-$pdf->MultiCell(35,6,$reqTrajet["distanceTrajet"]."Km ",1);
+//$pdf->MultiCell(30,8,($reqChauffeur["description"]),1);
 $pdf->SetY($Y_Table_Position);
 $pdf->SetX(165);
-$pdf->MultiCell(30,6,($reqChauffeur["prixCollaborateur"]*$reqTrajet["distanceTrajet"])." ".chr(128),1);
+$pdf->MultiCell(30,8,($reqChauffeur["prixCollaborateur"]*$reqTrajet["distanceTrajet"])."€",1);
+
+//prix trajet
+$Y_Fields_Name_position += ($counterService-1)*6;
+$Y_Table_Position = $Y_Fields_Name_position + 6;
+
+$pdf->SetFont('DejaVu','B',10);
+$pdf->SetY($Y_Fields_Name_position);
+$pdf->SetX(20);
+$pdf->Cell(30,6,'',1,0,'L',1);
+$pdf->SetX(50);
+$pdf->Cell(85,6,'',1,0,'L',1);
+$pdf->SetX(135);
+$pdf->Cell(30,6,'',1,0,'R',1);
+$pdf->SetX(165);
+$pdf->Cell(30,6,'Prix total',1,0,'R',1);
+
+$pdf->Ln();
+
+//Now show the 3 columns
+$pdf->SetFont('DejaVu','',10);
+
+$pdf->SetY($Y_Table_Position);
+$pdf->SetX(165);
+$pdf->MultiCell(30,8,($reqTrajet['prixtrajet'])."€",1);
 
 //echo "<p class='h2'>Total Services: ".$totalServices."€ TTC</p>";
 
-$pdf->Output('F',"facture.pdf");
+ $pdf->Output();
 ob_end_flush();
 
 
+// Config de la date en francais en PHP
+function dateFrDebut($dateFr) {
+  $dateFr = explode(" ", $dateFr);
+  $dateFrHeure = explode(":",$dateFr[1]);
+  $dateFrHeure = $dateFrHeure[1]."h ".$dateFrHeure[0]."min ";
+  $dateFrDebut = $dateFr[0];
+  $dateFrDebut =  explode("-", $dateFrDebut);
+  return  $dateFrDebut[2]."/".$dateFrDebut[1]."/".$dateFrDebut[0]." à ".$dateFrHeure;
+  }
 
+  
+  
 /*
 $pdf = new FPDF();
     //global $DB;
@@ -306,5 +437,4 @@ $pdf = new FPDF();
 
 */
 
- header("location: facture.pdf");
 ?>

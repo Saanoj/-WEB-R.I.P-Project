@@ -379,11 +379,11 @@ $pdf->SetFont('DejaVu','',10);
 
 $pdf->SetY($Y_Table_Position);
 $pdf->SetX(165);
-$pdf->MultiCell(30,8,($reqTrajet['prixtrajet'])."€",1);
+$pdf->MultiCell(30,8,($reqTrajet["prixtrajet"])."€",1);
 
+//var_dump($reqTrajet);
 //echo "<p class='h2'>Total Services: ".$totalServices."€ TTC</p>";
-
- $pdf->Output();
+ //$pdf->Output();
 ob_end_flush();
 
 
@@ -394,47 +394,9 @@ function dateFrDebut($dateFr) {
   $dateFrHeure = $dateFrHeure[1]."h ".$dateFrHeure[0]."min ";
   $dateFrDebut = $dateFr[0];
   $dateFrDebut =  explode("-", $dateFrDebut);
+  
   return  $dateFrDebut[2]."/".$dateFrDebut[1]."/".$dateFrDebut[0]." à ".$dateFrHeure;
   }
 
-  
-  
-/*
-$pdf = new FPDF();
-    //global $DB;
-    //$orderID=123;
-    //$sql = "SELECT * FROM `" . $DB->pre . "garorder` WHERE garID= '" . $orderID . "'";
-    //$d = $DB->dbRow($sql);
-
-    //echo 'name:'.$d['orderdate'].' Party Code :'.$d['partyCode'];
-
-    $pdf->AddPage();
-
-
-
-          $pdf->SetFont('helvetica','B',10);
-          $pdf->Cell(190,7,'Order Details',1,2,'C');
-          $pdf->SetFont('helvetica','',10);
-          $y= $pdf->GetY();
-          $pdf->MultiCell(95,8, "Garment ID: "."\nParty Code: "."\nOrder Date: " , 'LRB',1 );
-          //$x= $pdf->GetX();
-          //$pdf->setXY($x+95,$y);
-          $pdf->Cell(90);
-          $pdf->SetFont('helvetica','',10);
-         $pdf->SetXY (105,62);
-          $pdf->MultiCell(95,12, "Name: "."\nDelivery Status: " , 'LRB',1 );
-      $pdf-> Ln();
-         $pdf->Cell(32,10,'Material Description',1,0,'L',0);
-         $period = 50;
-         for($x=36;$x <=$period; $x=$x+2){
-
-           $pdf->Cell(20,10,$x,1,0,'L',0);
-
-
-
-         }
-         $pdf->Output('F',"facture.pdf");
-
-*/
 
 ?>

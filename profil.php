@@ -42,9 +42,9 @@ loadLanguageFromSession($_SESSION['lang']);
   $user = new App\Profil($datas['first_name'],$datas['last_name'],$datas['birthday'],$datas['gender'],$datas['address'],$datas['zip_code']);
 
 
-//CREATION DE L'ABONNEMENT
+  //CREATION DE L'ABONNEMENT
 
- $abo = App\Abonnement::createAbonnement($bdd);
+  $abo = App\Abonnement::createAbonnement($bdd);
 
 
 
@@ -72,6 +72,9 @@ loadLanguageFromSession($_SESSION['lang']);
               </li>
               <li class="nav-item">
                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Mes abonnements</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="trajet-tab" data-toggle="tab" href="#trajet" role="tab" aria-controls="trajet" aria-selected="false">Mes trajets</a>
               </li>
             </ul>
           </div>
@@ -107,7 +110,7 @@ loadLanguageFromSession($_SESSION['lang']);
                 </div>
               </div>
 
-                      <div class="row">
+              <div class="row">
                 <div class="col-md-6">
                   <label>Adresse</label>
                 </div>
@@ -120,7 +123,7 @@ loadLanguageFromSession($_SESSION['lang']);
                 </div>
               </div>
 
-                      <div class="row">
+              <div class="row">
                 <div class="col-md-6">
                   <label>Code postal</label>
                 </div>
@@ -179,123 +182,142 @@ loadLanguageFromSession($_SESSION['lang']);
 
             <?php if ($abo->getIdAbonnement() == null) {?>
 
-                 <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+              <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 
-                 <div class="demo">
-    <div class="container">
+                <div class="demo">
+                  <div class="container">
 
 
-        <div class="row">
+                    <div class="row">
 
-            <div class="col-md-4 col-sm-6">
-                <div class="pricingTable">
-                    <div class="pricingTable-header">
-                        <h3 class="title" data-content="Simple">Simple</h3>
+                      <div class="col-md-4 col-sm-6">
+                        <div class="pricingTable">
+                          <div class="pricingTable-header">
+                            <h3 class="title" data-content="Simple">Simple</h3>
+                          </div>
+                          <ul class="pricing-content">
+                            <li>Tarifs préférentiels</li>
+                            <li>Accès aux différents services</li>
+                            <li>Soutenir Ride in Pride</li>
+                            <li>Sans engagement</li>
+                            <li></li>
+                          </ul>
+                          <div class="price-value">
+                            <span class="amount" data-content="28 €">28€ TTC /mois</span>
+                          </div>
+
+                          <a href="#" class="pricingTable-signup">Souscrire à l'offre</a>
+                        </div>
+
+                      </div>
+
+                      <div class=" offset-md-4 col-md-4 col-sm-6">
+                        <div class="pricingTable orange">
+                          <div class="pricingTable-header">
+                            <h3 class="title" data-content="Simple">Simple</h3>
+                          </div>
+                          <ul class="pricing-content">
+                            <li id="0">Tarifs préférentiels</li>
+                            <li id="1">Accès aux différents services</li>
+                            <li id="2">Soutenir Ride in Pride</li>
+                            <li id="3">Engagement sur 12 mois</li>
+                            <li></li>
+                          </ul>
+                          <div class="price-value">
+                            <span class="amount" data-content="$20.00">20€ TTC /mois</span>
+                          </div>
+                          <a href="#" class="pricingTable-signup">Souscrire à l'offre</a>
+                        </div>
+
+                      </div>
                     </div>
-                    <ul class="pricing-content">
-                        <li>Tarifs préférentiels</li>
-                        <li>Accès aux différents services</li>
-                        <li>Soutenir Ride in Pride</li>
-                        <li>Sans engagement</li>
-                        <li></li>
-                    </ul>
-                    <div class="price-value">
-                        <span class="amount" data-content="28 €">28€ TTC /mois</span>
-                    </div>
-
-                    <a href="#" class="pricingTable-signup">Souscrire à l'offre</a>
+                  </div>
                 </div>
-
-            </div>
-
-            <div class=" offset-md-4 col-md-4 col-sm-6">
-                <div class="pricingTable orange">
-                    <div class="pricingTable-header">
-                        <h3 class="title" data-content="Simple">Simple</h3>
-                    </div>
-                    <ul class="pricing-content">
-                    <li id="0">Tarifs préférentiels</li>
-                        <li id="1">Accès aux différents services</li>
-                        <li id="2">Soutenir Ride in Pride</li>
-                        <li id="3">Engagement sur 12 mois</li>
-                        <li></li>
-                    </ul>
-                    <div class="price-value">
-                        <span class="amount" data-content="$20.00">20€ TTC /mois</span>
-                    </div>
-                    <a href="#" class="pricingTable-signup">Souscrire à l'offre</a>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>
-                                        </div>
+              </div>
             <?php } else {?>
 
 
-<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+              <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 
 
-<div class="demo">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 col-sm-6">
-                <div class="pricingTables">
-                    <div class="pricingTable-header">
-                        <h3 class="title" data-content="Simple">SIMPLE</h3>
-                    </div>
-                    <ul class="pricing-content">
-                        <li>Date d'achat : <?php
-                    setlocale(LC_TIME, "fr_FR","French");
-                    $date = strftime("%d/%m/%Y", strtotime($abo->getDateDebut()));
-                    echo  $date; ?></li>
-                        <li>Date de fin résiliation : <?php
-                    setlocale(LC_TIME, "fr_FR","French");
-                    $date = strftime("%d/%m/%Y", strtotime($abo->getDateFin()));
-                    echo  $date; ?></li>
-                        <li>Type d'abonnement : <?php
-                         if($abo->getTypeAbonnement() == 1) {
-                           echo "Simple";} else if($abo->getTypeAbonnement() == 2){echo "Entreprise";}
-                           else{echo "Sans abonnement";}?> </li>
-                        <li>Engagement sur 12 mois : <?php
-                        if ($abo->getIsEngagement() == 1){
-                          echo "Oui"; }
-                          else {
-                            echo "Non";}?> </li>
+                <div class="demo">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-md-4 col-sm-6">
+                        <div class="pricingTables">
+                          <div class="pricingTable-header">
+                            <h3 class="title" data-content="Simple">SIMPLE</h3>
+                          </div>
+                          <ul class="pricing-content">
+                            <li>Date d'achat : <?php
+                            setlocale(LC_TIME, "fr_FR","French");
+                            $date = strftime("%d/%m/%Y", strtotime($abo->getDateDebut()));
+                            echo  $date; ?></li>
+                            <li>Date de fin résiliation : <?php
+                            setlocale(LC_TIME, "fr_FR","French");
+                            $date = strftime("%d/%m/%Y", strtotime($abo->getDateFin()));
+                            echo  $date; ?></li>
+                            <li>Type d'abonnement : <?php
+                            if($abo->getTypeAbonnement() == 1) {
+                              echo "Simple";} else if($abo->getTypeAbonnement() == 2){echo "Entreprise";}
+                              else{echo "Sans abonnement";}?> </li>
+                              <li>Engagement sur 12 mois : <?php
+                              if ($abo->getIsEngagement() == 1){
+                                echo "Oui"; }
+                                else {
+                                  echo "Non";}?> </li>
 
-                    </ul>
-                    <div class="price-value">
-                        <span class="amount" data-content="$10.00">// A définir</span>
-                    </div>
-                    <a href="#" class="pricingTable-signup"></a>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-
-
-                    <div class="gear">
-                    <span id="idAbonnement" class="datainfo" value="'<?= $abo->getIdAbonnement(); ?>'"><?= $abo->getIdAbonnement(); ?></span>
-                    <a href="#" class="profile-edit-btn">Supprimer</a>
-                  </div>
-
-                                        </div>
-                          <?php } ?>
-
-
+                                </ul>
+                                <div class="price-value">
+                                  <span class="amount" data-content="$10.00">// A définir</span>
+                                </div>
+                                <a href="#" class="pricingTable-signup"></a>
+                              </div>
                             </div>
 
-
+                          </div>
                         </div>
+                      </div>
+
+
+
+                      <div class="gear">
+                        <span id="idAbonnement" class="datainfo" value="'<?= $abo->getIdAbonnement(); ?>'"><?= $abo->getIdAbonnement(); ?></span>
+                        <a href="#" class="profile-edit-btn">Supprimer</a>
+                      </div>
 
                     </div>
+                  <?php } ?>
+
+
                 </div>
-            </form>
+
+                <div class="tab-pane fade" id="trajet" role="tabpanel" aria-labelledby="trajet-tab">
+
+
+                  <div class="display-4">Vos trajets</div>
+                  <div class="container">
+                    <?php for ($i=0; $i < 4; $i++) {?>
+                      <div class="row">
+                        aaa
+                      </div>
+                    <?php  } ?>
+                  </div>
+
+
+
+
+
+
+            </div>
+
+
+          </div>
+
         </div>
+      </div>
+    </form>
+  </div>
 </body>
 <script type="text/javascript" src="js/profil/profil.js"></script>
 <?php include "includehtml/footer.php" ?>

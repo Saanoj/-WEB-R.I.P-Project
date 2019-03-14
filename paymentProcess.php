@@ -171,6 +171,10 @@ $price_to_show = $real_price;//number_format($real_price,',','.','.');
 $dateDebut = dateFrDebut($trajet->getDateDebut());
 $dateFin = dateFrDebut($trajet->getHeureFin());
 
+var_dump($trajet->getDateDebut());
+var_dump($trajet->getHeureFin());
+var_dump($trajet->getEndofTrajet());
+
 
 //Create a new PDF file
 ob_start();
@@ -279,12 +283,12 @@ $pdf->Ln();
 
 $pdf->SetFont("DejaVu",'',"10");
 $pdf->SetXY (10,154);
-$pdf->MultiCell(100,5,"Date du départ : ".$dateDebut);
+$pdf->MultiCell(100,5,"Date du départ : ".dateFrench($trajet->getDateDebut())." à ".heureDebutFr($trajet->getDateDebut()));
 $pdf->Ln();
 
 $pdf->SetFont("DejaVu",'',"10");
 $pdf->SetXY (10,161);
-$pdf->MultiCell(100,5,"Date d'arrivé : ".$dateFin);
+$pdf->MultiCell(100,5,"Date d'arrivé : ".dateFrench($trajet->getDateDebut())." à ".$trajet->getEndofTrajet());
 $pdf->Ln();
 
 //Prix services
@@ -358,7 +362,7 @@ $pdf->SetX(165);
 $pdf->MultiCell(30,8,($reqChauffeur["prixCollaborateur"]*$reqTrajet["distanceTrajet"])."€",1);
 
 //prix trajet
-$Y_Fields_Name_position += ($counterService-1)*6;
+$Y_Fields_Name_position += ($counterService+1)*6;
 $Y_Table_Position = $Y_Fields_Name_position + 6;
 
 $pdf->SetFont('DejaVu','B',10);
@@ -381,22 +385,39 @@ $pdf->SetY($Y_Table_Position);
 $pdf->SetX(165);
 $pdf->MultiCell(30,8,($reqTrajet['prixtrajet'])."€",1);
 
+
+
 //echo "<p class='h2'>Total Services: ".$totalServices."€ TTC</p>";
 
- $pdf->Output();
+  $pdf->Output();
 ob_end_flush();
 
 
 // Config de la date en francais en PHP
 function dateFrDebut($dateFr) {
   $dateFr = explode(" ", $dateFr);
-  $dateFrHeure = explode(":",$dateFr[1]);
-  $dateFrHeure = $dateFrHeure[1]."h ".$dateFrHeure[0]."min ";
   $dateFrDebut = $dateFr[0];
   $dateFrDebut =  explode("-", $dateFrDebut);
-  return  $dateFrDebut[2]."/".$dateFrDebut[1]."/".$dateFrDebut[0]." à ".$dateFrHeure;
+  return  $dateFrDebut[2]."/".$dateFrDebut[1]."/".$dateFrDebut[0];
   }
 
+  function dateFrench($dateFr)
+  {
+    $dateFr = explode(" ", $dateFr);
+    $dateFrDebut = $dateFr[0];
+    $heure = explode(":",$dateFr[1]);
+    $dateFrDebut =  explode("-", $dateFrDebut);
+    return  $dateFrDebut[2]."/".$dateFrDebut[1]."/".$dateFrDebut[0];
+  }
+
+  function heureDebutFr($dateFr) {
+    $dateFr = explode(" ", $dateFr);
+    return  $dateFr[1];
+
+  }
+
+
+  
   
   
 /*

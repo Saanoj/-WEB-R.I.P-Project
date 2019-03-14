@@ -290,25 +290,30 @@ loadLanguageFromSession($_SESSION['lang']);
                   <?php } ?>
 
 
-                </div>
 
                 <div class="tab-pane fade" id="trajet" role="tabpanel" aria-labelledby="trajet-tab">
 
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="display-4">Vos trajets</div>
+                    </div>
+                    <div class="card-body ">
 
-                  <div class="display-4">Vos trajets</div>
-                  <div class="container">
-                    <?php for ($i=0; $i < 4; $i++) {?>
-                      <div class="row">
-                        aaa
-                      </div>
-                    <?php  } ?>
+                    <?php
+                    $trajets = $bdd->queryPrepareForWhile("SELECT * FROM trajet WHERE idClient=".$_SESSION["id"]."",$bdd);
+
+                    while ($trajet = $trajets->fetch()) {
+                      echo "<div class='row list-group-item'>";
+                      echo "<p>ID:".$trajet["idTrajet"]."<p><div class='h4'>".$trajet["debut"]." <div class='glyphicon glyphicon-arrow-right'></div> ".$trajet["fin"]."</div>";
+                      echo "<p>".$trajet["duration"]."<p>";
+                      echo "<button class='btn btn-success p-3'>PDF</button>";
+                      echo "</div>";
+                    }
+                     ?>
+                   </div>
                   </div>
 
-
-
-
-
-
+                </div>
             </div>
 
 

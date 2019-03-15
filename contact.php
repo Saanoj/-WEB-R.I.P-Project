@@ -19,6 +19,7 @@ loadLanguageFromSession($_SESSION['lang']);
   <link rel="stylesheet" type="text/css" href="css/ReservationTrajet/bootstrap4/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="css/ReservationTrajet/main_styles.css">
   <link rel="stylesheet" type="text/css" href="css/ReservationTrajet/responsive.css">
+  <link rel="stylesheet" type="text/css" href="css/contact/main.css">
   <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
   <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   <link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
@@ -43,38 +44,48 @@ loadLanguageFromSession($_SESSION['lang']);
 
     <div class="home">
 
+    
+    <div class="container contact-form">
+            <div class="contact-image">
+                <img src="https://image.ibb.co/kUagtU/rocket_contact.png" alt="rocket_contact"/>
+            </div>
+            <form method="post" action="verifContact.php" method="post" onsubmit="return checkGlobal(this)">
+                <h3>Laissez nous un message ! </h3>
+               <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" name="nameClient" id="name" class="form-control" placeholder="Votre nom *" onblur="checkfirstName(this)" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="email" id="email" class="form-control" placeholder="Votre email *" value="<?= $_SESSION["email"]; ?>" readonly="readonly" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="phoneNumber" id="phone" class="form-control" placeholder="Votre numéro de téléphone *" onblur="Verifier_Numero_Telephone(this)" />
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" name="submit" class="btnContact" value="Envoyez un message" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <textarea name="messageContact" class="form-control" placeholder="Your Message *" style="width: 100%; height: 150px;"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
       <!-- Home Slider -->
       <div class="home_slider_container">
+      
+
+</div>
 
       </div>
 
 
 
 
-      <!-- Recherche -->
-
-      <div class="home_search">
-        <div class="container">
-          <div class="row">
-            <div class="col">
-              <div class="home_search_container">
-                <div class="home_search_title">Nous contacter</div>
-                <div class="home_search_content">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                    eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      
       <!-- Intro -->
 
       <div class="intro">
@@ -127,6 +138,7 @@ loadLanguageFromSession($_SESSION['lang']);
     </div>
 
     <?php include "includehtml/footer.php" ?>
+    <script src="js/contact/main.js"></script>
 
 
   </body>

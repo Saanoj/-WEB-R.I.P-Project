@@ -180,61 +180,19 @@ loadLanguageFromSession($_SESSION['lang']);
               </div>
             </div>
 
-            <?php if ($abo->getIdAbonnement() == null) {?>
+            <?php if (1 == 1) {
+              ?>
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+             <a href="abonnement.php"> <button type="button"  class="btn btn-success">Souscrire à un abonnement</button></a>
+            </div>
 
-              <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-
-                <div class="demo">
-                  <div class="container">
 
 
-                    <div class="row">
 
-                      <div class="col-md-4 col-sm-6">
-                        <div class="pricingTable">
-                          <div class="pricingTable-header">
-                            <h3 class="title" data-content="Simple">Simple</h3>
-                          </div>
-                          <ul class="pricing-content">
-                            <li>Tarifs préférentiels</li>
-                            <li>Accès aux différents services</li>
-                            <li>Soutenir Ride in Pride</li>
-                            <li>Sans engagement</li>
-                            <li></li>
-                          </ul>
-                          <div class="price-value">
-                            <span class="amount" data-content="28 €">28€ TTC /mois</span>
-                          </div>
 
-                          <a href="#" class="pricingTable-signup">Souscrire à l'offre</a>
-                        </div>
 
-                      </div>
-
-                      <div class=" offset-md-4 col-md-4 col-sm-6">
-                        <div class="pricingTable orange">
-                          <div class="pricingTable-header">
-                            <h3 class="title" data-content="Simple">Simple</h3>
-                          </div>
-                          <ul class="pricing-content">
-                            <li id="0">Tarifs préférentiels</li>
-                            <li id="1">Accès aux différents services</li>
-                            <li id="2">Soutenir Ride in Pride</li>
-                            <li id="3">Engagement sur 12 mois</li>
-                            <li></li>
-                          </ul>
-                          <div class="price-value">
-                            <span class="amount" data-content="$20.00">20€ TTC /mois</span>
-                          </div>
-                          <a href="#" class="pricingTable-signup">Souscrire à l'offre</a>
-                        </div>
-
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            <?php } else {?>
+            <?php
+            } else {?>
 
 
               <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">

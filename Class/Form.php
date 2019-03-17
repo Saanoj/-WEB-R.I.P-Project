@@ -16,8 +16,8 @@ class Form{
         return "<{$this->surround}>{$html}</{$this->surround}>";
     }
 
-    public function input($name,$type) {
-       return  $this->surround('<input type="' . $type . '" name="'. $name . '" id="' .$name .'" autofocus onblur="check'.$name.'(this)">');
+    public function input($name,$type,$placholder='default') {
+       return  $this->surround('<input type="' . $type . '" name="'. $name . '" id="' .$name .'" class="form-control" placeholder="'.$placholder.'" autofocus onblur="check'.$name.'(this)">');
 
     }
     public function submit(){

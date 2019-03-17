@@ -83,6 +83,7 @@ if  (
             session_start();
             $_SESSION['id'] = $data['id'];
             $_SESSION['email'] = $this->getEmail();
+            $_SESSION['isCollaborateur']=$data["isCollaborateur"];
             $this->addUserToSession($data["id"],$bdd);
 
             header('location:index.php?id='.$_SESSION['id'].'');

@@ -76,6 +76,66 @@ $bdd = new Database('rip');
         $req = $bdd->getPDO()->prepare('UPDATE ')
     }
     */
+    public function checkUserExist($bdd,$statement,$user) {
+      $check = $bdd->getPDO()->prepare($statement);
+      $check->execute(array(
+
+        'email' => $user->getEmail()
+      ));
+      return $check->rowCount();
+    }
+
+    public function checkDateBirth() {
+      $min = strtotime($this->getBirthday());
+      $now = strtotime("now") + 7200;
+      if($now - $min < 0){
+
+        $date_erreur1 = "Vous n'êtes pas encore né";
+        header('location:../inscription.php?error="'.$date_erreur1 .'"');
+      }
+      if($now - $min < 	504576000){
+
+        $date_erreur3 = "Il faut avoir plus de 16 ans pour créer un compte";
+        header('location:inscription.php?error="'.$date_erreur3 .'"');
+      }
+      else {
+        return 1;
+      }
+    }
+
+    public function chiffrerPassword() {
+      $salage='SuP4rS4aL4g3';
+      return hash('md5',$salage.$this->password);
+
+    }
+
+    public function addUser($bdd,$statement,$user) {
+
+
+      $req1 = $bdd->getPDO()->prepare($statement);
+      $req1->bindValue(':email', $user->getEmail());
+      $req1->bindValue(':password',$user->chiffrerPassword($user->getPassword()));
+      $req1->bindValue(':last_name',$user->getLast_name());
+      $req1->bindValue(':birthday', $user->getBirthday());
+      $req1->bindValue(':gender',$user->getGender());
+      $req1->bindValue(':first_name',$user->getFirst_name());
+      $req1->bindValue(':isBanned',0);
+      $req1->bindValue(':isAdmin',0);
+      $req1->execute();
+
+    }
+    public function startSession($bdd,$statement) {
+      session_start();
+      $req = $bdd->getPDO()->prepare($statement);
+      $req->bindValue(':email', $this->getEmail());
+      $req->execute();
+      while	($donnees	=	$req->fetch())
+      {
+        $_SESSION['id'] =	$donnees['id'];
+      }
+      $_SESSION['email'] = $this->getEmail();
+    }
+    
 
 
 

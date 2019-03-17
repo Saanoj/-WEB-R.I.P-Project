@@ -10,7 +10,7 @@ $id = $_POST['id'];
 $newval = $_POST['newval'] ;
 $columnName  = $_POST['newid'] ;
 
-
+echo "string";
 $req = $bdd->getPDO()->prepare('UPDATE users SET '.$columnName.' = :columnValue WHERE id =:id');
 $req->bindValue(':columnValue', $newval);
 $req->bindValue(':id', $id);
@@ -29,7 +29,7 @@ $req->execute();
 $req->closeCursor();
 }
 
-
+echo "string1";
 exit;
 
 

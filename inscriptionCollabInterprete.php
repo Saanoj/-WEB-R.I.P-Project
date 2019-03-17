@@ -46,29 +46,10 @@ $form = new App\Form(array());
 
           <form  class="form-horizontal container" method="post" action="verifInscriptionCollab.php">
             <div class="form-group required mt-3">
-              <label class="control-label col-md-4  requiredField">Votre secteur<span class="asteriskField">*</span> </label>
+              <label class="control-label col-md-4  requiredField"> Description de votre domaine d'expertise en langues<span class="asteriskField">*</span> </label>
               <div class="controls col-md-8 ">
-                <select name="metier" class="form-control" id="exampleFormControlSelect1">
-                  <option value="chauffeur">Chauffeur</option>
-                  <option value="interprete">Interprete</option>
-                  <option value="coachSportif">Coach sportif</option>
-                  <option value="coachCulture">coachCulture</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-group required mt-3">
-              <label class="control-label col-md-4  requiredField">Votre Ville<span class="asteriskField">*</span> </label>
-              <div class="controls col-md-8 ">
-                <select name="ville" class="form-control" id="exampleFormControlSelect1">
-                  <option value="Paris">Paris</option>
-                  <option value="Bordeaux">Bordeaux</option>
-                  <option value="Lyon">Lyon</option>
-                  <option value="Marseille">Marseille</option>
-                  <option value="Orange">Orange</option>
-                  <option value="Montpellier">Montpellier</option>
-                  <option value="Lille">Lille</option>
-                </select>
+                <?php //echo $form->input('description','textarea','Votre description'); ?>
+                <textarea style="resize: none;" name="description" cols="40" rows="2" placeholder="ex: 'English(anglais) - Francais' pour de l'anglais"></textarea>
               </div>
             </div>
 

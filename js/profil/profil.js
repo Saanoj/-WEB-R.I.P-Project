@@ -1,6 +1,11 @@
 $(document).ready(function(){
+
 	$(".editlink").on("click", function(e){
+<<<<<<< HEAD
 		
+=======
+		console.log("ok2");
+>>>>>>> 82b2c0c2b88e043d8ded3020a8ba44b823e5568e
 	  e.preventDefault();
 		var dataset = $(this).prev(".datainfo");
 		var savebtn = $(this).next(".savebtn");
@@ -13,6 +18,7 @@ $(document).ready(function(){
 
 		if (theid == 'birthday') {
 			$('<input type="date" name="'+newid+'" id="'+newid+'" value="'+currval+'" class="hlite">').appendTo(dataset);
+			console.log("zer");
 
 		}
 		if( theid == 'gender') {
@@ -34,6 +40,7 @@ $(document).ready(function(){
 
 
 	$(".savebtn").on("click", function(e){
+		console.log("ok1");
 		e.preventDefault();
 		var elink   = $(this).prev(".editlink");
 		var dataset = elink.prev(".datainfo");
@@ -83,23 +90,36 @@ function updateProfil(newval,newid,idProfil) {
 
 	  }
 	};
+<<<<<<< HEAD
 
   }
  // FONCTION AJAX QUI DELETE L'ABONNEMENT
 
  
  
+=======
+	data='newval=' + newval + '&newid=' + newid + '&id=' + idProfil.innerHTML;
+	request.open('POST', 'updateProfil.php');
+	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+	request.send(data);
+	console.log(okkkkkk);
+	return false;
+  }
+ // FONCTION AJAX QUI DELETE L'ABONNEMENT
+
+
+>>>>>>> 82b2c0c2b88e043d8ded3020a8ba44b823e5568e
 $(document).ready(function(){
 	$(".profile-edit-btn").on("click", function(inp){
 
-		
+
 	  inp.preventDefault();
 	  var idProfil = document.getElementById("idProfil").innerHTML;
 	  var idAbo = document.getElementById("idAbonnement").innerHTML;
-	
+
 	  deleteSubscription(idAbo);
 
-		
+
 	});
 });
 
@@ -128,10 +148,10 @@ function deleteSubscription(idAbo,idProfil) {
 		console.log(opt2);
 		console.log(opt3);
 		console.log(opt4);
-		
-	
-		
 
-		
+
+
+
+
 	});
 });

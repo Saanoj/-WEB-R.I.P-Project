@@ -42,7 +42,7 @@ switch ($infoCollab["metier"]) {
 }
 $reqUser = $bdd->queryOne('SELECT * FROM users WHERE id='.$_SESSION["id"].'');
 
-$req=$bdd->getPDO()->prepare('INSERT INTO collaborateurs (idCollaborateurs,email,last_name,first_name,metier,description,prixCollaborateur,dateEmbauche,ville,heuresTravailees,ratingNumber) VALUES ( :idCollaborateur, :email, :last_name, :first_name, :metier, :description, :prixCollaborateur, :dateEmbauche, :ville, 0, 0)');
+$req=$bdd->getPDO()->prepare('INSERT INTO collaborateurs (idCollaborateurs,email,last_name,first_name,metier,description,prixCollaborateur,dateEmbauche,ville,heuresTravailees,ratingNumber,isOff) VALUES ( :idCollaborateur, :email, :last_name, :first_name, :metier, :description, :prixCollaborateur, :dateEmbauche, :ville, 0, 0, 0)');
 $req->bindValue(':idCollaborateur', $_SESSION["id"]);
 $req->bindValue(':email', $reqUser["email"]);
 $req->bindValue(':last_name', $reqUser["last_name"]);

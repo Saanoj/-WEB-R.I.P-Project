@@ -1,11 +1,7 @@
 $(document).ready(function(){
 
 	$(".editlink").on("click", function(e){
-<<<<<<< HEAD
 		
-=======
-		console.log("ok2");
->>>>>>> 82b2c0c2b88e043d8ded3020a8ba44b823e5568e
 	  e.preventDefault();
 		var dataset = $(this).prev(".datainfo");
 		var savebtn = $(this).next(".savebtn");
@@ -90,25 +86,12 @@ function updateProfil(newval,newid,idProfil) {
 
 	  }
 	};
-<<<<<<< HEAD
 
   }
  // FONCTION AJAX QUI DELETE L'ABONNEMENT
 
  
  
-=======
-	data='newval=' + newval + '&newid=' + newid + '&id=' + idProfil.innerHTML;
-	request.open('POST', 'updateProfil.php');
-	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
-	request.send(data);
-	console.log(okkkkkk);
-	return false;
-  }
- // FONCTION AJAX QUI DELETE L'ABONNEMENT
-
-
->>>>>>> 82b2c0c2b88e043d8ded3020a8ba44b823e5568e
 $(document).ready(function(){
 	$(".profile-edit-btn").on("click", function(inp){
 

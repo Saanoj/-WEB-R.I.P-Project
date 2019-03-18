@@ -180,31 +180,27 @@ loadLanguageFromSession($_SESSION['lang']);
               </div>
             </div>
 
-            <?php if (1 == 1) {
+            <?php
+
+      
+            
+            if (checkIfAbonnementValide($bdd) == true) {
               ?>
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
              <a href="abonnement.php"> <button type="button"  class="btn btn-success">Souscrire à un abonnement</button></a>
-            </div>
-
-
-
-
-
-
+</div>
             <?php
-            } else {?>
+            } else { ?>
+              <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+ 
 
-              
+ <a href="showAbonnementProfil.php"><button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal"> Voir les informations de mon abonnements</button></a>
 
 
 
-                      <div class="gear">
-                        <span id="idAbonnement" class="datainfo" value="'<?= $abo->getIdAbonnement(); ?>'"><?= $abo->getIdAbonnement(); ?></span>
-                        <a href="#" class="profile-edit-btn">Supprimer</a>
-                      </div>
+</div>
 
-                    </div>
-                  <?php } ?>
+           <?php  } ?>
 
 
 
@@ -244,3 +240,19 @@ loadLanguageFromSession($_SESSION['lang']);
 <script type="text/javascript" src="js/profil/profil.js"></script>
 <?php include "includehtml/footer.php" ?>
 </html>
+<?php
+      function checkIfAbonnementValide($bdd) 
+            {
+            $req = $bdd->getPDO()->prepare('SELECT * FROM linkabonnemententreprise WHERE idClient = :idClient');
+            $req->execute(array('idClient' => $_SESSION['id']));
+            $req->closeCursor();
+            if ($req->rowCount() == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            }
+            ?>

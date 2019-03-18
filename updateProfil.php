@@ -5,7 +5,7 @@ require 'Class/Autoloader.php';
 App\Autoloader::register();
 $bdd = new App\Database('rip');
 
-if (isset($_POST['id']) && isset($_POST['newval']) && isset($_POST['columnName'])) {
+if (isset($_POST['id']) && isset($_POST['newval']) && isset($_POST['newid'])) {
 $id = $_POST['id'];
 $newval = $_POST['newval'] ;
 $columnName  = $_POST['newid'] ;

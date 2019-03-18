@@ -22,7 +22,8 @@ function deleteAbonnement() {
 }    
         data='id=' + idSession + '&idEntreprise=' + idEntreprise;
 		request.open('POST', 'updateProfil.php');
-		request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        console.log(data)
 		request.send(data);
   }
 

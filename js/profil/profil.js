@@ -14,7 +14,6 @@ $(document).ready(function(){
 
 		if (theid == 'birthday') {
 			$('<input type="date" name="'+newid+'" id="'+newid+'" value="'+currval+'" class="hlite">').appendTo(dataset);
-			console.log("zer");
 
 		}
 		if( theid == 'gender') {
@@ -36,7 +35,7 @@ $(document).ready(function(){
 
 
 	$(".savebtn").on("click", function(e){
-		console.log("ok1");
+		
 		e.preventDefault();
 		var elink   = $(this).prev(".editlink");
 		var dataset = elink.prev(".datainfo");
@@ -73,7 +72,6 @@ function convertDate(dateString){
 
 function updateProfil(newval,newid,idProfil) {
 	
-
 	var request = new XMLHttpRequest();
 	request.onreadystatechange = function(){
 	  if(request.status == 200 && request.readyState == 4){
@@ -83,6 +81,7 @@ function updateProfil(newval,newid,idProfil) {
 		request.open('POST', 'updateProfil.php');
 		request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		request.send(data);
+		console.log(data)
   }
 
 

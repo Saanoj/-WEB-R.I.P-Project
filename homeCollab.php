@@ -12,14 +12,13 @@ loadLanguageFromSession($_SESSION['lang']);
 <!doctype html>
 <html class="no-js">
 
-<link rel="stylesheet" type="text/css" href="css/choixDriver/main.css">
-<script src="js/index/main.js"></script>
 
-<style>
 
-</style>
+
 
 <?php include "includehtml/head.html" ?>
+<script src="js/homeCollab/main.js"></script>
+<link rel="stylesheet" type="text/css" href="css/homeCollab/main.css"></link>
 
 <body class="bg-secondary">
   <!-- header section -->
@@ -34,46 +33,248 @@ loadLanguageFromSession($_SESSION['lang']);
   $navbar = new App\Navbar($backOffice,$type);
   $navbar->navbar();
 
+  $collaborateur = $bdd->queryOne('SELECT * FROM collaborateurs WHERE idCollaborateurs='.$_SESSION["id"].'');
+  $user = $bdd->queryOne('SELECT * FROM users WHERE id='.$_SESSION["id"].'');
+
+  //var_dump($user);
+  //var_dump($collaborateur);
   ?>
-  <div class="container">
 
-    <div class="row m-5">
-      <div class="col-md-8 offset-2" style="border-radius: 10px; background-color: #2F2E33; padding: 10px;">
-          <p class="display-2 text-center text-light">Espace collaborateur:</p>
+    <div class="container bg-light">
+      <div class="row">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">Dashboard Collaborateur</h1>
+          <div class="row placeholders">
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <?php if(empty($collaborateur["rating"])){ ?>
+                <div class="jumbotron display-1">∅</div>
+              <?php }else{?>
+                <div class="jumbotron display-1"><?php echo $collaborateur["rating"] ?></div>
+              <?php } ?>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <div class="jumbotron display-1"><?php echo $collaborateur["ratingNumber"] ?></div>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <div class="jumbotron display-1"><?php echo $collaborateur["heuresTravailees"] ?></div>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <?php if($collaborateur["isOnline"] == 0){ ?>
+                <div id="statusLogo" class="jumbotron display-1 bg-warning text-center">Off</div>
+              <?php }else{?>
+                <div id="statusLogo" class="jumbotron display-1 bg-success text-center">On</div>
+              <?php } ?>
+
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+      <div class="row">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <div class="row placeholders">
+            <div class="col-xs-6 col-sm-3 placeholder">
 
-    <div class="row m-5">
-      <div class="col-md-4 offset-4 text-center" style="border-radius: 10px; background-color: #2F2E33; padding: 10px;">
+              <h4>Rating</h4>
+              <span class="text-muted">Something else</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <h4>Nombre d'avis sur vous</h4>
+              <span class="text-muted">Something else</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
 
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">
-          Désactiver son<br>compte Collaborateur
-        </button>
+              <h4>Nombre d'Heures Travailees</h4>
+              <span class="text-muted">Something else</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <h4>Statut</h4>
+              <span class="text-muted">Something else</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 text-center">
+          Changer ses infos profil:
+        </div>
+        <div class="col-md-3 text-center">
+          Statut en/hors ligne
+        </div>
+        <div class="col-md-3 text-center">
+          Détruire votre compte
+        </div>
+      </div>
 
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Désactivation du compte Collaborateur</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <div class="h4">Attention,vous allez garder votre comte R.I.P normal. Mais vos informations collaborateur seront gardé. Vous pourrez revenir sur ce compte collaborateur en gardant vos infos actuelle, ou de les supprimer et en saisir de nouvelle si vous revenez vers nous.</div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <a href="verifDesactiverCollab.php" class="btn btn-danger">Désactiver</a>
+      <div class="row">
+        <div class="col-md-3 text-center">
+            <a href="profil.php" class="btn btn-primary col-md-12">Changer ses<br>informations profil</a>
+        </div>
+        <div class="col-md-3 text-center">
+
+          <?php if($collaborateur["isOnline"] == 0){ ?>
+            <button type="button" id="onlineButton" class="btn btn-success col-md-12" onclick="updateCollabStatus(1)">Se mettre<br>en ligne ajax</button>
+          <?php }else{?>
+            <button type="button" id="onlineButton" class="btn btn-warning col-md-12" onclick="updateCollabStatus(0)">Se mettre<br>hors ligne ajax</button>
+          <?php } ?>
+        </div>
+        <div class="col-md-3 text-center">
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+            Désactiver son<br>compte Collaborateur
+          </button>
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Désactivation du compte Collaborateur</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="h4">Attention,vous allez garder votre comte R.I.P normal. Mais vos informations collaborateur seront gardé. Vous pourrez revenir sur ce compte collaborateur en gardant vos infos actuelle, ou de les supprimer et en saisir de nouvelle si vous revenez vers nous.</div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <a href="verifDesactiverCollab.php" class="btn btn-danger">Désactiver</a>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+
+      <h2 class="sub-header">Section title</h2>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Header</th>
+              <th>Header</th>
+              <th>Header</th>
+              <th>Header</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1,001</td>
+              <td>Lorem</td>
+              <td>ipsum</td>
+              <td>dolor</td>
+              <td>sit</td>
+            </tr>
+            <tr>
+              <td>1,002</td>
+              <td>amet</td>
+              <td>consectetur</td>
+              <td>adipiscing</td>
+              <td>elit</td>
+            </tr>
+            <tr>
+              <td>1,003</td>
+              <td>Integer</td>
+              <td>nec</td>
+              <td>odio</td>
+              <td>Praesent</td>
+            </tr>
+            <tr>
+              <td>1,003</td>
+              <td>libero</td>
+              <td>Sed</td>
+              <td>cursus</td>
+              <td>ante</td>
+            </tr>
+            <tr>
+              <td>1,004</td>
+              <td>dapibus</td>
+              <td>diam</td>
+              <td>Sed</td>
+              <td>nisi</td>
+            </tr>
+            <tr>
+              <td>1,005</td>
+              <td>Nulla</td>
+              <td>quis</td>
+              <td>sem</td>
+              <td>at</td>
+            </tr>
+            <tr>
+              <td>1,006</td>
+              <td>nibh</td>
+              <td>elementum</td>
+              <td>imperdiet</td>
+              <td>Duis</td>
+            </tr>
+            <tr>
+              <td>1,007</td>
+              <td>sagittis</td>
+              <td>ipsum</td>
+              <td>Praesent</td>
+              <td>mauris</td>
+            </tr>
+            <tr>
+              <td>1,008</td>
+              <td>Fusce</td>
+              <td>nec</td>
+              <td>tellus</td>
+              <td>sed</td>
+            </tr>
+            <tr>
+              <td>1,009</td>
+              <td>augue</td>
+              <td>semper</td>
+              <td>porta</td>
+              <td>Mauris</td>
+            </tr>
+            <tr>
+              <td>1,010</td>
+              <td>massa</td>
+              <td>Vestibulum</td>
+              <td>lacinia</td>
+              <td>arcu</td>
+            </tr>
+            <tr>
+              <td>1,011</td>
+              <td>eget</td>
+              <td>nulla</td>
+              <td>Class</td>
+              <td>aptent</td>
+            </tr>
+            <tr>
+              <td>1,012</td>
+              <td>taciti</td>
+              <td>sociosqu</td>
+              <td>ad</td>
+              <td>litora</td>
+            </tr>
+            <tr>
+              <td>1,013</td>
+              <td>torquent</td>
+              <td>per</td>
+              <td>conubia</td>
+              <td>nostra</td>
+            </tr>
+            <tr>
+              <td>1,014</td>
+              <td>per</td>
+              <td>inceptos</td>
+              <td>himenaeos</td>
+              <td>Curabitur</td>
+            </tr>
+            <tr>
+              <td>1,015</td>
+              <td>sodales</td>
+              <td>ligula</td>
+              <td>in</td>
+              <td>libero</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
 
 
   <?php include "includehtml/footer.php"; ?>

@@ -43,8 +43,9 @@ $form = new App\Form(array());
             <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="connexionCollab.php">ou connectez vous si vous etes deja inscris</a></div>
           </div>
 
+          <?php var_dump($_SESSION["infoCollab"]);  ?>
 
-          <form  class="form-horizontal container" method="post" action="verifInscriptionCollab.php">
+          <form  class="form-horizontal container" method="post" action="verifInscriptionCollabBDD.php">
             <div class="form-group required mt-3">
               <label class="control-label col-md-4  requiredField"> Description de votre domaine d'expertise en langues<span class="asteriskField">*</span> </label>
               <div class="controls col-md-8 ">

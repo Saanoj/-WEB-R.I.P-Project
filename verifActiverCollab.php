@@ -17,5 +17,6 @@ $req=$bdd->getPDO()->prepare('UPDATE users SET isCollaborateur=1 WHERE id='.$_SE
 $req->execute();
 $req->closeCursor();
 
+$_SESSION["isCollaborateur"]=1;
 header('location: homeCollab.php')
 ?>

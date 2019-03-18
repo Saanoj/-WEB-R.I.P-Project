@@ -44,7 +44,7 @@ $form = new App\Form(array());
           </div>
 
 
-          <form  class="form-horizontal container" method="post" action="verifInscriptionCollab.php">
+          <form  class="form-horizontal container" method="post" action="verifInscriptionCollabBDD.php">
 
             <div class="form-group required mt-3">
               <label class="control-label col-md-4  requiredField"> Description de votre domaine d'expertise culturelle<span class="asteriskField">*</span> </label>

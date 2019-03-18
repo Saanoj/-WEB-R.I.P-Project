@@ -57,7 +57,7 @@
             <form class="funkyradio list-group list-group-flush" method="post" action="valideReservationDriver.php">
               <?php
               // Affichage d'un service
-              $chauffeurs = $bdd->queryPrepareForWhile('SELECT * FROM collaborateurs WHERE metier="chauffeur" ORDER BY rating DESC ',$bdd);
+              $chauffeurs = $bdd->queryPrepareForWhile('SELECT * FROM collaborateurs WHERE metier="chauffeur" and isOnline=1 ORDER BY rating DESC ',$bdd);
               $i=0;
 
               while($unChauffeur = $chauffeurs->fetch())

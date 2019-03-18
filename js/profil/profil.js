@@ -1,6 +1,6 @@
-
 $(document).ready(function(){
 	$(".editlink").on("click", function(e){
+		
 	  e.preventDefault();
 		var dataset = $(this).prev(".datainfo");
 		var savebtn = $(this).next(".savebtn");
@@ -27,6 +27,7 @@ $(document).ready(function(){
 		 }
 		$(this).css("display", "none");
 		savebtn.css("display", "block");
+		
 	});
 
 
@@ -54,6 +55,7 @@ $(document).ready(function(){
 			{
 		dataset.html(newval);
 			}
+		
 
 		elink.css("display", "block");
 
@@ -67,20 +69,25 @@ function convertDate(dateString){
 }
 
 function updateProfil(newval,newid,idProfil) {
+	
+
 	var request = new XMLHttpRequest();
 	request.onreadystatechange = function(){
 	  if(request.status == 200 && request.readyState == 4){
+		data='newval=' + newval + '&newid=' + newid + '&id=' + idProfil.innerHTML;
+		request.open('POST', 'updateProfil.php');
+		request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		console.log(data)
+		request.send(data);
+		return false;
 
 	  }
 	};
-	data='newval=' + newval + '&newid=' + newid + '&id=' + idProfil.innerHTML;
-	request.open('POST', 'updateProfil.php');
-	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
-	request.send(data);
-	return false;
+
   }
  // FONCTION AJAX QUI DELETE L'ABONNEMENT
 
+ 
  
 $(document).ready(function(){
 	$(".profile-edit-btn").on("click", function(inp){

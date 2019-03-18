@@ -194,48 +194,7 @@ loadLanguageFromSession($_SESSION['lang']);
             <?php
             } else {?>
 
-
-              <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-
-
-                <div class="demo">
-                  <div class="container">
-                    <div class="row">
-                      <div class="col-md-4 col-sm-6">
-                        <div class="pricingTables">
-                          <div class="pricingTable-header">
-                            <h3 class="title" data-content="Simple">SIMPLE</h3>
-                          </div>
-                          <ul class="pricing-content">
-                            <li>Date d'achat : <?php
-                            setlocale(LC_TIME, "fr_FR","French");
-                            $date = strftime("%d/%m/%Y", strtotime($abo->getDateDebut()));
-                            echo  $date; ?></li>
-                            <li>Date de fin résiliation : <?php
-                            setlocale(LC_TIME, "fr_FR","French");
-                            $date = strftime("%d/%m/%Y", strtotime($abo->getDateFin()));
-                            echo  $date; ?></li>
-                            <li>Type d'abonnement : <?php
-                            if($abo->getTypeAbonnement() == 1) {
-                              echo "Simple";} else if($abo->getTypeAbonnement() == 2){echo "Entreprise";}
-                              else{echo "Sans abonnement";}?> </li>
-                              <li>Engagement sur 12 mois : <?php
-                              if ($abo->getIsEngagement() == 1){
-                                echo "Oui"; }
-                                else {
-                                  echo "Non";}?> </li>
-
-                                </ul>
-                                <div class="price-value">
-                                  <span class="amount" data-content="$10.00">// A définir</span>
-                                </div>
-                                <a href="#" class="pricingTable-signup"></a>
-                              </div>
-                            </div>
-
-                          </div>
-                        </div>
-                      </div>
+              
 
 
 

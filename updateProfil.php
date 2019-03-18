@@ -5,17 +5,30 @@ require 'Class/Autoloader.php';
 App\Autoloader::register();
 $bdd = new App\Database('rip');
 
-if (isset($_POST['id']) && isset($_POST['newval']) && isset($_POST['newid'])) {
-$id = $_POST['id'];
+if (isset($_POST['idProfil']) && isset($_POST['newval']) && isset($_POST['newid']) && isset($_POST['idEntreprise'])) {
+$idProfil = $_POST['idProfil'];
 $newval = $_POST['newval'] ;
 $columnName  = $_POST['newid'] ;
+$idEntreprise  = $_POST['idEntreprise'] ;
 
-
-$req = $bdd->getPDO()->prepare('UPDATE users SET '.$columnName.' = :columnValue WHERE id =:id');
+if ($columnName == "email" || $columnName == "last_name" || $columnName == "birthday" || $columnName == "gender" || $columnName == "first_name" || $columnName == "zipcode")
+{
+$req = $bdd->getPDO()->prepare('UPDATE users SET '.$columnName.' = :columnValue WHERE id =:idProfil');
 $req->bindValue(':columnValue', $newval);
-$req->bindValue(':id', $id);
+$req->bindValue(':idProfil', $idProfil);
 $req->execute();
 $req->closeCursor();
+}
+
+else 
+{
+    $req = $bdd->getPDO()->prepare('UPDATE entreprise SET '.$columnName.' = :columnValue WHERE idEntreprise =:idEntreprise');
+    $req->bindValue(':columnValue', $newval);
+    $req->bindValue(':idEntreprise', $idEntreprise);
+    $req->execute();
+    $req->closeCursor();
+}
+
 }
 
 

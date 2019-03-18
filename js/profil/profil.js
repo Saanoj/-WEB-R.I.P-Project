@@ -9,6 +9,8 @@ $(document).ready(function(){
 		var newid   = theid+"-form";
 		var currval = dataset.text();
 		var idProfil = document.getElementById("idProfil").innerHTML;
+		var idEntreprise = document.getElementById("idEntreprise").innerHTML;
+		console.log(idEntreprise);
 
 		dataset.empty();
 
@@ -45,7 +47,7 @@ $(document).ready(function(){
 		var einput  = $(cinput);
 		var newval  = einput.attr("value");
 
-		updateProfil(newval,newid,idProfil);
+		updateProfil(newval,newid,idProfil,idEntreprise);
 		$(this).css("display", "none");
 		einput.remove();
 
@@ -70,14 +72,14 @@ function convertDate(dateString){
 
 }
 
-function updateProfil(newval,newid,idProfil) {
+function updateProfil(newval,newid,idProfil,idEntreprise) {
 	
 	var request = new XMLHttpRequest();
 	request.onreadystatechange = function(){
 	  if(request.status == 200 && request.readyState == 4){
 	  }
 	}
-		data='newval=' + newval + '&newid=' + newid + '&id=' + idProfil.innerHTML;
+		data='newval=' + newval + '&newid=' + newid + '&idProfil=' + idProfil.innerHTML + '&idEntreprise=' + idEntreprise.innerHTML;
 		request.open('POST', 'updateProfil.php');
 		request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		request.send(data);

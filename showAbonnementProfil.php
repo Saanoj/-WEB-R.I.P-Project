@@ -12,6 +12,7 @@ $bdd = new Database('rip');
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 <link href="css/abonnement/verifAbonnement/style.css" rel="stylesheet"></link>
 </head>
 <!------ Include the above in your HEAD tag ---------->
@@ -35,6 +36,7 @@ $unAbonnement = $req->fetch();
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <h3 class="register-heading">Récapitulatif de l'abonnement</h3>
                                 <div class="row register-form">
+                                <input type="text" id="idSession" value="<?= $_SESSION['id'];?>" hidden>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                         <span >Votre type d'abonnement :</span>
@@ -72,6 +74,7 @@ $unAbonnement = $req->fetch();
 
                                     
                                         <input type="submit" class="btnRegister"  value="Profil"/>
+                                        <a href="profil.php"><button type="button" class="btnRegister" data-toggle="modal" data-target="#exampleModal"onclick="deleteAbonnement()">Supprimer abo</button></a>
                                     </div>
                                 </div>
                             </div>
@@ -83,10 +86,12 @@ $unAbonnement = $req->fetch();
 
                             <!-- ENTREPRISE <!-->
                             <?php if ($unAbonnement['idAbonnement'] == 3 || $unAbonnement['idAbonnement'] == 4)
+                            {
                             $req = $bdd->getPDO()->prepare('SELECT * FROM `entreprise` INNER JOIN abonnement where entreprise.idDirecteur = idDirecteur AND abonnement.idAbonnement = 4');
                             $req->execute(array("idDirecteur" => $_SESSION['id']));
                             $uneEntreprise = $req->fetch();
-                            { ?>
+                            ?>
+                            
                             <div class="container register">
                 <div class="row">
                     <div class="col-md-3 register-left">
@@ -100,6 +105,7 @@ $unAbonnement = $req->fetch();
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <h3 class="register-heading">Récapitulatif de l'entreprise</h3>
                                 <div class="row register-form">
+                                <input type="text" id="idEntreprise" value="<?= $uneEntreprise['idEntreprise'];?>" hidden>
                                     
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -141,6 +147,8 @@ $unAbonnement = $req->fetch();
                                        
                                        
                                         <input type="submit" class="btnRegister"  value="Profil"/>
+                                        <a href="profil.php"><button type="button" class="btnRegister" data-toggle="modal" data-target="#exampleModal"onclick="deleteEntreprise()">Supprimer entreprise</button></a>
+
                                     </div>
                                 </div>
 
@@ -223,3 +231,4 @@ $unAbonnement = $req->fetch();
 
 
 ?>
+<script src="js/profil/showAbonnementProfil/main.js"></script>

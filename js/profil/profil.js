@@ -77,64 +77,12 @@ function updateProfil(newval,newid,idProfil) {
 	var request = new XMLHttpRequest();
 	request.onreadystatechange = function(){
 	  if(request.status == 200 && request.readyState == 4){
+	  }
+	}
 		data='newval=' + newval + '&newid=' + newid + '&id=' + idProfil.innerHTML;
 		request.open('POST', 'updateProfil.php');
 		request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-		console.log(data)
 		request.send(data);
-		return false;
-
-	  }
-	};
-
-  }
- // FONCTION AJAX QUI DELETE L'ABONNEMENT
-
- 
- 
-$(document).ready(function(){
-	$(".profile-edit-btn").on("click", function(inp){
-
-
-	  inp.preventDefault();
-	  var idProfil = document.getElementById("idProfil").innerHTML;
-	  var idAbo = document.getElementById("idAbonnement").innerHTML;
-
-	  deleteSubscription(idAbo);
-
-
-	});
-});
-
-function deleteSubscription(idAbo,idProfil) {
-	var request = new XMLHttpRequest();
-	request.onreadystatechange = function(){
-	  if(request.status == 200 && request.readyState == 4){
-
-	  }
-	};
-	data='idAbo=' + idAbo + '&idProfil=' + idProfil;
-	request.open('POST', 'updateProfil.php');
-	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
-	request.send(data);
-	return false;
   }
 
-  $(document).ready(function(){
-	$(".pricingTable-signup").on("click", function(){
-		var opt1 = document.getElementById("0").innerHTML;
-		var opt2 = document.getElementById("1").innerHTML;
-		var opt3 = document.getElementById("2").innerHTML;
-		var opt4 = document.getElementById("3").innerHTML;
 
-		console.log(opt1);
-		console.log(opt2);
-		console.log(opt3);
-		console.log(opt4);
-
-
-
-
-
-	});
-});

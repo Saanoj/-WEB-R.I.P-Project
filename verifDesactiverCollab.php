@@ -9,7 +9,7 @@ $bdd = new Database('rip');
 session_start();
 
 
-$req=$bdd->getPDO()->prepare('UPDATE collaborateurs SET isOFF=1 isOnline=1 WHERE idCollaborateurs='.$_SESSION["id"].'');
+$req=$bdd->getPDO()->prepare('UPDATE collaborateurs SET isOFF=1 AND isOnline=1 WHERE idCollaborateurs='.$_SESSION["id"].'');
 $req->execute();
 $req->closeCursor();
 

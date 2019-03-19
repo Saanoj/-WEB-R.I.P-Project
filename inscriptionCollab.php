@@ -41,7 +41,7 @@ $form = new App\Form(array());
         <div class="panel panel-info">
           <div class="panel-heading">
             <div class="panel-title">Inscrivez vous</div>
-            <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="connexionCollab.php">ou connectez vous si vous etes deja inscris</a></div>
+            <div style="float:right; font-size: 85%; position: relative; top:-10px"></div>
           </div>
 
           <?php
@@ -51,6 +51,8 @@ $form = new App\Form(array());
           //si addr et zip ne sont pas rempli
           if (!isset($reqUser["address"]) || empty($reqUser["address"]) || !isset($reqUser["zip_code"]) || empty($reqUser["zip_code"])) {
             echo "<div class='h1'>Remplissez votre adresse et code postal dans votre profil avant de continuer</div>";
+          }else if($reqUser["isAdmin"]!=0){
+            echo "<div class='h1'>Vous ne pouvez pas devenir collaborateur si vous etes administrateur</div>";
           }else {
             //si le comte n'existe pas en collaborateur
             if ($reqCollab === false) {

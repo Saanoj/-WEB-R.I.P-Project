@@ -140,16 +140,20 @@ loadLanguageFromSession($_SESSION['lang']);
     </div>
   </div>
   <div class="row m-5" id="join">
+    <?php $isAdmin = $bdd->queryOne('SELECT * FROM users WHERE id='.$_SESSION["id"].''); ?>
     <div class="col-md-4 offset-4" style="border-radius: 10px; background-color: #2F2E33; padding: 10px;">
       <div class="col-md-8 blue offset-1 text-center">
-        <?php if(isset($_SESSION["id"]) && !empty($_SESSION["id"])){ ?>
+        <?php if(isset($_SESSION["id"]) && !empty($_SESSION["id"]) && $isAdmin["isAdmin"]==0 ){ ?>
         <a class="btn btn-info display-4" href="inscriptionCollab.php">Joindre en tant<br>que collaborateur</a>
-      <?php }else{ ?>
-        <a class="btn btn-info display-4" href="inscription.php">Inscrivez vous pour nous<br>joindre en tant que collaborateur</a>
-      <?php } ?>
+        <?php }else if($isAdmin["isAdmin"] !=0 ){ ?>
+          <button class="btn btn-danger display-4">Vous etes Admin, vous ne<br>pouvez pas devenir  collaborateur</button>
+        <?php }else{ ?>
+          <a class="btn btn-info display-4" href="inscription.php">Inscrivez vous pour nous<br>joindre en tant que collaborateur</a>
+        <?php } ?>
       </div>
     </div>
   </div>
+
 
 
   <?php include "includehtml/footer.php"; ?>

@@ -19,6 +19,7 @@ loadLanguageFromSession($_SESSION['lang']);
 <?php include "includehtml/head.html" ?>
 <script src="js/homeCollab/main.js"></script>
 <link rel="stylesheet" type="text/css" href="css/homeCollab/main.css"></link>
+<link rel="stylesheet" href="css/profil/style.css">
 
 <body class="bg-secondary">
   <!-- header section -->
@@ -42,57 +43,55 @@ loadLanguageFromSession($_SESSION['lang']);
 
     <div class="container bg-light">
       <div class="row">
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="col-md-10 col-md-offset-2">
           <h1 class="page-header">Dashboard Collaborateur: <?php echo $collaborateur["metier"]; ?></h1>
-          <div class="row placeholders">
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <?php if(empty($collaborateur["rating"])){ ?>
-                <div class="jumbotron display-1">∅</div>
-              <?php }else{?>
-                <div class="jumbotron display-1"><?php echo $collaborateur["rating"] ?></div>
-              <?php } ?>
+          <div class="row placeholders border p-2 mr-1">
+            <div class="col-md-3 placeholder pb-0 ">
+              <div class="row">
+                <?php if(empty($collaborateur["rating"])){ ?>
+                  <div class="jumbotron display-1 mb-0 col-md-10 offset-1">∅</div>
+                <?php }else{?>
+                  <div class="jumbotron display-1 mb-0 col-md-10 offset-1"><?php echo $collaborateur["rating"] ?></div>
+                <?php } ?>
+              </div>
+              <div class="row">
+                <h4 class="h1 mt-0 text-align col-md-10 offset-1 border pb-3">Rating</h4>
+              </div>
             </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <div class="jumbotron display-1"><?php echo $collaborateur["ratingNumber"] ?></div>
+            <div class="col-md-3 placeholder pb-0">
+              <div class="row">
+                <div class="jumbotron display-1 mb-0 col-md-10 offset-1"><?php echo $collaborateur["ratingNumber"] ?></div>
+              </div>
+              <div class="row">
+                <h4 class="h1 mt-0 text-align col-md-10 offset-1  border">Nombre d'avis sur vous</h4>
+              </div>
             </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <div class="jumbotron display-1"><?php echo $collaborateur["heuresTravailees"] ?></div>
+            <div class="col-md-3 placeholder pb-0">
+              <div class="row">
+                <div class="jumbotron display-1 mb-0 col-md-10 offset-1"><?php echo $collaborateur["heuresTravailees"] ?></div>
+              </div>
+              <div class="row">
+                <h4 class="h1 mt-0 text-align col-md-10 offset-1  border">Nombre d'Heures Travailees</h4>
+              </div>
             </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <?php if($collaborateur["isOnline"] == 0){ ?>
-                <div id="statusLogo" class="jumbotron display-1 bg-warning text-center">Off</div>
-              <?php }else{?>
-                <div id="statusLogo" class="jumbotron display-1 bg-success text-center">On</div>
-              <?php } ?>
-
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <div class="row placeholders">
-            <div class="col-xs-6 col-sm-3 placeholder">
-
-              <h4>Rating</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <h4>Nombre d'avis sur vous</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-
-              <h4>Nombre d'Heures Travailees</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <h4>Statut</h4>
-              <span class="text-muted">Something else</span>
+            <div class="col-md-3 placeholder pb-0">
+              <div class="row">
+                <?php if($collaborateur["isOnline"] == 0){ ?>
+                  <div id="statusLogo" class="jumbotron display-1 bg-warning text-center mb-0 col-md-10 offset-1">Off</div>
+                <?php }else{?>
+                  <div id="statusLogo" class="jumbotron display-1 bg-success text-center mb-0 col-md-10 offset-1">On</div>
+                <?php } ?>
+              </div>
+              <div class="row">
+                <h4 class="h1 mt-0 text-align col-md-10 offset-1 border pb-3">Statut</h4>
+              </div>
             </div>
           </div>
         </div>
       </div>
+
+      <hr>
+
       <div class="row">
         <div class="col-md-3 text-center">
           Changer ses infos profil:
@@ -102,6 +101,9 @@ loadLanguageFromSession($_SESSION['lang']);
         </div>
         <div class="col-md-3 text-center">
           Détruire votre compte
+        </div>
+        <div class="col-md-3 text-center">
+          Trajet
         </div>
       </div>
 
@@ -119,7 +121,7 @@ loadLanguageFromSession($_SESSION['lang']);
         </div>
         <div class="col-md-3 text-center">
           <!-- Button trigger modal -->
-          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+          <button type="button" class="btn btn-danger  col-md-12" data-toggle="modal" data-target="#exampleModal">
             Désactiver son<br>compte Collaborateur
           </button>
           <!-- Modal -->
@@ -143,9 +145,29 @@ loadLanguageFromSession($_SESSION['lang']);
             </div>
           </div>
         </div>
+        <div class="col-md-3 text-center">
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-success col-md-12" data-toggle="modal" data-target="#exampleModal">
+            Terminer<br>le trajet
+          </button>
+        </div>
       </div>
 
+      <hr>
 
+      <div class="row m-5">
+        <?php
+        if($collaborateur["metier"]=="chauffeur"){
+
+        $car=App\Chauffeur::getCar($_SESSION["id"],$bdd);
+
+        echo "<p class='display-4'>Votre voiture: ".$car["carBrand"]." ".$car["carModel"]." ".$car["carColor"]." ".$car["nbPlaces"]." place(s)</p>";
+        } ?>
+
+      </div>
+
+      <br>
+      <br>
       <h2 class="sub-header">Section title</h2>
       <div class="table-responsive">
         <table class="table table-striped">

@@ -10,10 +10,10 @@
             <li><a href="index.php">Accueil</a></li>
             <?php if ($_SESSION['isCollaborateur']==0) { ?>
               <li><a href="inscriptionCollab.php">Espace Collaborateur</a></li>
+              <li><a href="reservationTrajet.php">Reserver un trajet</a></li>
             <?php }else{ ?>
               <li><a href="homeCollab.php">Espace Collaborateur</a></li>
             <?php } ?>
-            <li><a href="reservationTrajet.php">Reserver un trajet</a></li>
             <li><a href="services.php">Services</a></li>
             <li><a href="profil.php">Profil</a></li>
             <li><a href="deconnexion.php">Deconnexion</a></li>

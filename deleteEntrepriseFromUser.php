@@ -20,7 +20,7 @@ $req->closeCursor();
 
 
 // UPDATE USER 
-$req = $bdd->getPDO()->prepare('UPDATE users SET idEntreprise = NULL WHERE id = :id');
+$req = $bdd->getPDO()->prepare('UPDATE users SET idEntreprise = NULL,isDirecteur = 0 WHERE id = :id');
 $req->execute(array('id' => $_SESSION['id']));
 $req->closeCursor();
 

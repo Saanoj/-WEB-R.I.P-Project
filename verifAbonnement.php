@@ -101,8 +101,7 @@ function reqEntreprise($bdd,$isEngagement)
  {
     if (checkIfAbonnementValide($bdd) == true)
     {
-        if (reqIsDirecteur($bdd) == true)
-        {
+       
  $req = $bdd->getPDO()->prepare('SELECT * FROM entreprise WHERE idDirecteur = :idDirecteur');
  $req->execute(array('idDirecteur' => $_SESSION['id']));
  $req->closeCursor();
@@ -113,12 +112,7 @@ function reqEntreprise($bdd,$isEngagement)
  {
     header('location:configAbonnementEntreprise.php?isEngagement='.$isEngagement.'');
  }
- }
-
- else
- {
-    header('location:abonnement?Pas_directeur');
- }
+ 
 }
 else
 {
@@ -126,6 +120,7 @@ else
 }
 }
 // On check si l'utilisateur est un directeur, sinon il ne pourra pas créer d'entreprise
+/*
 var_dump(reqIsDirecteur($bdd));
 function reqIsDirecteur($bdd)
 {
@@ -143,4 +138,5 @@ function reqIsDirecteur($bdd)
     }
     
 }
+*/
 ?>

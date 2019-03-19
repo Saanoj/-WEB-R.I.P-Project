@@ -17,8 +17,18 @@ $bdd = new Database('rip');
 
 <?php
 
+
+$req = $bdd->getPDO()->prepare('SELECT isDirecteur FROM users WHERE id = :id');
+$req->execute(array('id' => $_SESSION['id']));
+$unUser = $req->fetch();
+if ($unUser['isDirecteur'] == 1)
+{
+    header('location:profil.php?Deja_directeur');
+}
 $req = $bdd->getPDO()->prepare('SELECT * FROM `entreprise`');
 $req->execute();
+
+
 
 ?>
 <body>

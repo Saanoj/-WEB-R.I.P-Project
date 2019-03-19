@@ -17,7 +17,7 @@ $bdd = new Database('rip');
 
 <?php
 
-$req = $bdd->getPDO()->prepare('SELECT * FROM `entreprise` INNER JOIN abonnement where entreprise.idDirecteur = idDirecteur AND abonnement.idAbonnement = 4');
+$req = $bdd->getPDO()->prepare('SELECT * FROM `entreprise` INNER JOIN abonnement where entreprise.idDirecteur = idDirecteur');
 $req->execute(array("idDirecteur" => $_SESSION['id']));
 $uneEntreprise = $req->fetch();
 
@@ -25,7 +25,7 @@ $uneEntreprise = $req->fetch();
     
     $nbSalarie = $uneEntreprise['nbSalarie'];
     $count=0;
-    if ($nbSalarie < 10)
+    if ($nbSalarie <= 10)
     {
         $prixTotal = 65;
     }

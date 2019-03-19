@@ -6,7 +6,13 @@
 </head>
 <!------ Include the above in your HEAD tag ---------->
 <body><?php 
-$isEngagement = $_GET['isEngagement']; ?>
+if (isset( $_GET['isEngagement']))  {
+    $isEngagement = $_GET['isEngagement'];
+}
+else {
+    $isEngagement='';
+}
+ ?>
 <form action='verifEntreprise.php?isEngagement=<?= $isEngagement;?>' method="post" onsubmit="return checkGlobal(this)">
 <div class="container register">
                 <div class="row">
@@ -57,6 +63,19 @@ $isEngagement = $_GET['isEngagement']; ?>
                                                 <option>Finlande</option>
                                             </select>
                                         </div>
+                                        <?php if(!isset($_GET['isEngagement'])) { ?>
+                                            <div class="form-group">
+                                            <select class="form-control" name="isEngagement">
+                                                <option class="hidden"  selected disabled>Engagement ? </option>
+                                                <option>Avec engagement</option>
+                                                <option>Sans engagement</option>
+                                    
+                                            </select>
+                                        </div>
+
+
+                                         <?php } ?>
+
                                        
                                         <input type="submit" class="btnRegister"  value="Valider"/>
                                     </div>

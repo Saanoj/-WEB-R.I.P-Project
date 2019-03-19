@@ -66,8 +66,23 @@ isset($_SESSION['id']) && !empty($_SESSION['id'])
   Votre entreprise est bien enrengistré ! Vous allez être redirigé dans quelques secondes.
     </div>
     <?php
+  
    // header('location:verifAbonnement');
-   header ('Refresh: 3;URL=configAbonnementEntreprise.php?isEngagement='.$_GET['isEngagement'].'');
+   if (($_GET['isEngagement']) != '') {
+  header ('Refresh: 3;URL=configAbonnementEntreprise.php?isEngagement='.$_GET['isEngagement'].'');
+   }
+   else 
+   {
+       if ($_POST['isEngagement'] == 'Avec engagement')
+       {
+           
+        header ('Refresh: 3;URL=configAbonnementEntreprise.php?isEngagement=1');
+       }
+       else 
+       {
+        header ('Refresh: 3;URL=configAbonnementEntreprise.php?isEngagement=0');
+       }
+   }
     
   
 }

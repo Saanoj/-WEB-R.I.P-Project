@@ -50,9 +50,11 @@ $req = $bdd->getPDO()->prepare('DELETE FROM linkabonnemententreprise WHERE idEnt
 $req->execute(array('idEntreprise' => $_POST['idEntreprise']));
 $req->closeCursor();
 
-$req = $bdd->getPDO()->prepare('UPDATE users SET idEntreprise = NULL WHERE idEntreprise = :idEntreprise');
+$req = $bdd->getPDO()->prepare('UPDATE users SET idEntreprise = NULL,isDirecteur = 0 WHERE idEntreprise = :idEntreprise');
 $req->execute(array('idEntreprise' => $_POST['idEntreprise']));
 $req->closeCursor();
+
+
 }
 
 exit;

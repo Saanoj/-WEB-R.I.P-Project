@@ -186,6 +186,10 @@ loadLanguageFromSession($_SESSION['lang']);
                   </div>
                 </div>
 
+                
+
+            
+
     
               </div>
             </div>
@@ -201,6 +205,7 @@ loadLanguageFromSession($_SESSION['lang']);
              } else { ?>
                
                <a href="joinEntreprise.php"> <button type="button"  class="btn btn-info">Rejoindre une entreprise</button></a>
+               <a href="createEntreprise.php"> <button type="button"  class="btn btn-info">Créer une entreprise</button></a>
 
             <?php  }?>
             
@@ -214,7 +219,7 @@ loadLanguageFromSession($_SESSION['lang']);
           
             ?>
 
-<?php /*
+
                 <div class="tab-pane fade" id="trajet" role="tabpanel" aria-labelledby="trajet-tab">
 
                   <div class="card">
@@ -239,12 +244,11 @@ loadLanguageFromSession($_SESSION['lang']);
               </div>
 
            
+          
 
+                     
 
-                     <div class="row">
-        <div class="col-md-4">
-        </div>
-        <div class="col-md-8">
+    
           <div class="tab-content entreprise-tab" id="myTabContent">
           <div class="tab-pane fade" id="entreprise" role="tabpanel" aria-labelledby="entreprise-tab">
               <div class="row">
@@ -315,51 +319,8 @@ loadLanguageFromSession($_SESSION['lang']);
                 </div>
               </div>
 
-              <div class="row">
-                <div class="col-md-6">
-                  <label>Adresse</label>
-                </div>
-                <div class="col-md-6">
-                  <div class="gear">
-                    <span id="address" class="datainfo"><?= $user->getAddress(); ?></span>
-                    <a href="#" class="editlink">Editer</a>
-                    <a class="savebtn">Sauvegarder</a>
-                  </div>
-                </div>
-              </div>
-
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <label>Nombres de salariés dans l'entreprise</label>
-                </div>
-                <div class="col-md-6">
-                  <div class="gear">
-                    <span id="nbSalarie" class="datainfo"><?= $uneEntreprise['nbSalarie']; ?></span>
-                    <?php if($uneEntreprise['idDirecteur'] == $_SESSION['id']) {?>
-                    <a href="#" class="editlink">Editer</a>
-                    <a class="savebtn" >Sauvegarder</a>
-                    <?php } ?>
-                  </div>
-                  
-
-              <div class="row">
-                <div class="col-md-6">
-                  <label>Pays de l'entreprise</label>
-                </div>
-                <div class="col-md-6">
-                  <div class="gear">
-                    <span id="pays" class="datainfo"><?= $uneEntreprise['pays']; ?></span>
-                    <?php if($uneEntreprise['idDirecteur'] == $_SESSION['id']) {?>
-                    <a href="#" class="editlink">Editer</a>
-                    <a class="savebtn">Sauvegarder</a>
-                    <?php } ?> 
-                  </div>
-                </div>
-              </div>
-            </div>
-*/ ?>
+          
+          
 
 <?php // -------- DELIMITATION ENTREPRISE ?>
 

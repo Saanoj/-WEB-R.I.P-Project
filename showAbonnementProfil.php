@@ -185,7 +185,7 @@ $unAbonnement = $req->fetch();
                                 else if ($unAbonnement['idAbonnement'] == 3)
                                 {
                                     
-                                    if ($nbSalarie < 10)
+                                    if ($nbSalarie <= 10)
                                     {
                                         $prix = 80;
                                     }

@@ -48,6 +48,7 @@ loadLanguageFromSession($_SESSION['lang']);
   //CREATION DE L'ABONNEMENT
 
   $abo = App\Abonnement::createAbonnement($bdd);
+  // serialize($abo);
 
 
 
@@ -295,7 +296,21 @@ loadLanguageFromSession($_SESSION['lang']);
                     <a class="savebtn" >Sauvegarder</a>
                     <?php } ?>
                   </div>
+                </div>
+              </div>
 
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Adresse</label>
+                </div>
+                <div class="col-md-6">
+                  <div class="gear">
+                    <span id="address" class="datainfo"><?= $user->getAddress(); ?></span>
+                    <a href="#" class="editlink">Editer</a>
+                    <a class="savebtn">Sauvegarder</a>
+                  </div>
+                </div>
+              </div>
 
                 </div>
               </div>
@@ -332,6 +347,18 @@ loadLanguageFromSession($_SESSION['lang']);
 
 <?php // -------- DELIMITATION ENTREPRISE ?>
 
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Genre</label>
+                </div>
+                <div class="col-md-6">
+                  <div class="gear">
+                    <span id="gender" class="datainfo"><?= $user->getGender(); ?></span>
+                    <a href="#" class="editlink">Editer</a>
+                    <a class="savebtn">Sauvegarder</a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

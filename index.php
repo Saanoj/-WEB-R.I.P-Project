@@ -55,7 +55,7 @@ loadLanguageFromSession($_SESSION['lang']);
     <div class="row mt-md-1">
       <div class="col-md-4 blue col-md-offset-4 text-center">
         <div class="list-group-item" style="background-color: #D5D6D2;">
-          <h3 class="display-4">Nos 3 meilleurs chauffeurs</h3>
+          <h3 class="display-4"><?php echo _TITRE_CHAUFFEUR?></h3>
         </div>
       </div>
     </div>

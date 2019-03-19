@@ -56,9 +56,9 @@ $trajet->startSessionId($bdd); //add idTrajet in SESSION
 $_SESSION['trajet'] = serialize($trajet);
 $_SESSION['timeStart'] = $timeStart;
 
+var_dump($_SESSION['id']);
 
-
-$data=$bdd->query('SELECT * FROM abonnement WHERE idClient='.$_SESSION['id'].'');
+$data=$bdd->query('SELECT * FROM linkabonnemententreprise WHERE idClient='.$_SESSION['id'].'');
 if (!empty($data)) {
  // echo "found";
 

@@ -340,7 +340,7 @@ $pdf->Cell(30,6,'ID Trajet',1,0,'L',1);
 $pdf->SetX(50);
 $pdf->Cell(85,6,'Chauffeur',1,0,'L',1);
 $pdf->SetX(135);
-$pdf->Cell(30,6,'Description',1,0,'R',1);
+$pdf->Cell(30,6,'Distance',1,0,'R',1);
 $pdf->SetX(165);
 $pdf->Cell(30,6,'Prix',1,0,'R',1);
 
@@ -356,7 +356,7 @@ $pdf->SetX(50);
 $pdf->MultiCell(85,8,$reqChauffeur["first_name"]." ".$reqChauffeur["last_name"]." Prix: ".$reqChauffeur["prixCollaborateur"]."€/Km",1);
 $pdf->SetY($Y_Table_Position);
 $pdf->SetX(135);
-//$pdf->MultiCell(30,8,($reqChauffeur["description"]),1);
+$pdf->MultiCell(30,8,($reqTrajet["distanceTrajet"]." Km"),1);
 $pdf->SetY($Y_Table_Position);
 $pdf->SetX(165);
 $pdf->MultiCell(30,8,($reqChauffeur["prixCollaborateur"]*$reqTrajet["distanceTrajet"])."€",1);
@@ -385,17 +385,9 @@ $pdf->SetY($Y_Table_Position);
 $pdf->SetX(165);
 $pdf->MultiCell(30,8,($reqTrajet["prixtrajet"])."€",1);
 
-<<<<<<< HEAD
 //var_dump($reqTrajet);
 //echo "<p class='h2'>Total Services: ".$totalServices."€ TTC</p>";
- //$pdf->Output();
-=======
-
-
-//echo "<p class='h2'>Total Services: ".$totalServices."€ TTC</p>";
-
-  $pdf->Output();
->>>>>>> 9b6733e099bea18189c097fdf1db99807d0b5576
+ $pdf->Output();
 ob_end_flush();
 
 
@@ -404,12 +396,6 @@ function dateFrDebut($dateFr) {
   $dateFr = explode(" ", $dateFr);
   $dateFrDebut = $dateFr[0];
   $dateFrDebut =  explode("-", $dateFrDebut);
-<<<<<<< HEAD
-  
-  return  $dateFrDebut[2]."/".$dateFrDebut[1]."/".$dateFrDebut[0]." à ".$dateFrHeure;
-  }
-
-=======
   return  $dateFrDebut[2]."/".$dateFrDebut[1]."/".$dateFrDebut[0];
   }
 
@@ -429,9 +415,9 @@ function dateFrDebut($dateFr) {
   }
 
 
-  
-  
-  
+
+
+
 /*
 $pdf = new FPDF();
     //global $DB;
@@ -469,6 +455,5 @@ $pdf = new FPDF();
          $pdf->Output('F',"facture.pdf");
 
 */
->>>>>>> 9b6733e099bea18189c097fdf1db99807d0b5576
 
 ?>

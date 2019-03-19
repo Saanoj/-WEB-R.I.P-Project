@@ -31,11 +31,14 @@ $form = new App\Form(array());
   ?>
 
   <div class="container">
+    <div class="display-1 text-center">
+      Inscription Client
+    </div>
     <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
       <div class="panel panel-info" >
         <div class="panel-heading">
-          <div class="panel-title">Se connecter</div>
-          <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="forgotPassword.php">Mot de passe oubllié ?</a></div>
+          <div class="panel-title">S'inscrire</div>
+          <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="connexion.php">ou se connecter</a></div>
         </div>
 
         <div style="padding-top:30px" class="panel-body" >

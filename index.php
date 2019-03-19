@@ -17,11 +17,11 @@ loadLanguageFromSession($_SESSION['lang']);
 
 <style>
 
-    </style>
-    
+</style>
+
 <?php include "includehtml/head.html" ?>
 
-<body class="bg-light">
+<body class="bg-secondary">
   <!-- header section -->
   <?php
 
@@ -35,8 +35,8 @@ loadLanguageFromSession($_SESSION['lang']);
   $navbar->navbar();
 
   ?>
-
-<div id="map"></div>
+  <br>
+  <div class="col-md-6 offset-3" id="map"></div>
 
 
   <!-- Get a quote section -->
@@ -50,7 +50,7 @@ loadLanguageFromSession($_SESSION['lang']);
   </div>
 
   <!-- Get a quote section -->
-  <div class="container p-2" style="border-radius: 10px; background-color: #2F2E33; padding: 10px;">
+  <div class="container" style="border-radius: 10px; background-color: #2F2E33; padding: 10px;">
     <br>
     <div class="row mt-md-1">
       <div class="col-md-4 blue col-md-offset-4 text-center">
@@ -62,98 +62,98 @@ loadLanguageFromSession($_SESSION['lang']);
     <br>
     <div class="row">
 
-    <div class="col-md-1">
+      <div class="col-md-1">
 
-    </div>
-    <?php
-    // Affichage d'un service
-    $chauffeurs = $bdd->queryPrepareForWhile('SELECT * FROM collaborateurs WHERE metier="chauffeur" ORDER BY rating DESC LIMIT 3',$bdd);
-    $i=0;
+      </div>
+      <?php
+      // Affichage d'un service
+      $chauffeurs = $bdd->queryPrepareForWhile('SELECT * FROM collaborateurs WHERE metier="chauffeur" ORDER BY rating DESC LIMIT 3',$bdd);
+      $i=0;
 
-    while($unChauffeur = $chauffeurs->fetch())
-    {
-      $car=App\Chauffeur::getCar($unChauffeur["idCollaborateurs"],$bdd);
-      $chauffeur = new App\Chauffeur($unChauffeur["idCollaborateurs"],$unChauffeur["email"],$unChauffeur["last_name"],$unChauffeur["first_name"],$unChauffeur["metier"],$unChauffeur["prixCollaborateur"],
-      $unChauffeur["dateEmbauche"],$unChauffeur["ville"],$unChauffeur["heuresTravailees"],$unChauffeur["rating"],$unChauffeur["ratingNumber"],$unChauffeur["description"],$car["carId"],$car["carBrand"],$car["carModel"],$car["carColor"],$car["nbPlaces"]);
-      ?>
-      <div class="col-md-3" style="border-radius: 10px; background-color: #D5D6D2;margin: 10px;padding: 10px;">
+      while($unChauffeur = $chauffeurs->fetch())
+      {
+        $car=App\Chauffeur::getCar($unChauffeur["idCollaborateurs"],$bdd);
+        $chauffeur = new App\Chauffeur($unChauffeur["idCollaborateurs"],$unChauffeur["email"],$unChauffeur["last_name"],$unChauffeur["first_name"],$unChauffeur["metier"],$unChauffeur["prixCollaborateur"],
+        $unChauffeur["dateEmbauche"],$unChauffeur["ville"],$unChauffeur["heuresTravailees"],$unChauffeur["rating"],$unChauffeur["ratingNumber"],$unChauffeur["description"],$car["carId"],$car["carBrand"],$car["carModel"],$car["carColor"],$car["nbPlaces"]);
+        ?>
+        <div class="col-md-3" style="border-radius: 10px; background-color: #D5D6D2;margin: 10px;padding: 10px;">
 
-        <div class="container">
-          <div class="">
-            <h3 class="center-block"><?php echo $chauffeur->getFirst_name()." ".$chauffeur->getLast_name();?></h3>
-            <h6>ID: <?php echo $chauffeur->getIdCollaborateur(); ?> <?php echo _PRIX ?> <?php echo $chauffeur->getPrixCollaborateur()."€ / Km |" ?> <?php  echo _NOTE ?> <?php echo $chauffeur->getRating()."/5 (".$chauffeur->getRatingNumber() ?> <?php echo _VOTES.")";  ?></h6>
-          </div>
-          <div class="">
-            <!-- Button trigger modal -->
+          <div class="container">
             <div class="">
-              <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal<?php echo $i ?>">Infos</button>
+              <h3 class="center-block"><?php echo $chauffeur->getFirst_name()." ".$chauffeur->getLast_name();?></h3>
+              <h6>ID: <?php echo $chauffeur->getIdCollaborateur(); ?> | Prix: <?php echo $chauffeur->getPrixCollaborateur()."€ / Km | Note: ".$chauffeur->getRating()."/5 sur ".$chauffeur->getRatingNumber()." votes" ?></h6>
+            </div>
+            <div class="">
+              <!-- Button trigger modal -->
+              <div class="">
+                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal<?php echo $i ?>">Infos</button>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal<?php echo $i ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel<?php echo $i ?>" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel<?php echo $i ?>"><?php echo $chauffeur->getFirst_name()." ".$chauffeur->getLast_name();?></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col-md-4">
-                    <h4>Infos: </h4>
-                    <ul>
-                      <li><?php echo _VILLE.$chauffeur->getVille(); ?></li>
-                      <li><?php echo _HEURE_TRAVAIL.$chauffeur->getHeuresTravailees(); ?></li>
-                      <li><?php echo _DATE_EMBAUCHE.$chauffeur->getDateEmbauche(); ?></li>
-                    </ul>
-                  </div>
-                  <div class="col-md-4">
-                    <h4><?php echo _VEHICULE;?>  </h4>
-                    <ul>
-                      <li><?php echo _MARQUE." : ".$chauffeur->getCarBrand(); ?></li>
-                      <li><?php echo _MODELE." : ".$chauffeur->getCarModel(); ?></li>
-                      <li><?php echo _COULEUR." : ".$chauffeur->getCarColor(); ?></li>
-                      <li><?php echo _PLACES." : ".$chauffeur->getCarSeats(); ?></li>
-                    </ul>
-                  </div>
-                  <div class="col-md-4">
-                    <h4>Description: </h4>
-                    <p><?php echo $chauffeur->getDescription(); ?></p>
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal<?php echo $i ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel<?php echo $i ?>" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel<?php echo $i ?>"><?php echo $chauffeur->getFirst_name()." ".$chauffeur->getLast_name();?></h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <h4>Infos: </h4>
+                      <ul>
+                        <li><?php echo "Ville d'operation: ".$chauffeur->getVille(); ?></li>
+                        <li><?php echo "Heures Travailées: ".$chauffeur->getHeuresTravailees(); ?></li>
+                        <li><?php echo "Date d'embauche: ".$chauffeur->getDateEmbauche(); ?></li>
+                      </ul>
+                    </div>
+                    <div class="col-md-4">
+                      <h4>Véhicule: </h4>
+                      <ul>
+                        <li><?php echo "Marque: ".$chauffeur->getCarBrand(); ?></li>
+                        <li><?php echo "Modèle: ".$chauffeur->getCarModel(); ?></li>
+                        <li><?php echo "Couleur: ".$chauffeur->getCarColor(); ?></li>
+                        <li><?php echo "Places: ".$chauffeur->getCarSeats(); ?></li>
+                      </ul>
+                    </div>
+                    <div class="col-md-4">
+                      <h4>Description: </h4>
+                      <p><?php echo $chauffeur->getDescription(); ?></p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    <?php
-    $i++;
-    }
-    ?>
-    <br><br>
+        <?php
+        $i++;
+      }
+      ?>
     </div>
-    </div>
-    <br>
-    <!-- Get a quote section -->
-    <section  class="section quote">
-      <div class="container">
-        <div class="col-md-8 col-md-offset-2 text-center">
-          <h3><?php echo "Je suis dans l'accueil de R.I.P" ?></h3>
-          <a href="#" class="btn btn-large"><?php echo _TITRE_BOUTTON ?></a>
-        </div>
+  </div>
+  <div class="row m-5" id="join">
+    <div class="col-md-4 offset-4" style="border-radius: 10px; background-color: #2F2E33; padding: 10px;">
+      <div class="col-md-8 blue offset-1 text-center">
+        <?php if(isset($_SESSION["id"]) && !empty($_SESSION["id"])){ ?>
+        <a class="btn btn-info display-4" href="inscriptionCollab.php">Joindre en tant<br>que collaborateur</a>
+      <?php }else{ ?>
+        <a class="btn btn-info display-4" href="inscription.php">Inscrivez vous pour nous<br>joindre en tant que collaborateur</a>
+      <?php } ?>
       </div>
-    </section>
+    </div>
+  </div>
 
 
-    <?php include "includehtml/footer.php"; ?>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBceTkjdStb2X5btD_NmC3yNsbXKIjCMc&callback=initMap"async defer></script>
+  <?php include "includehtml/footer.php"; ?>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBceTkjdStb2X5btD_NmC3yNsbXKIjCMc&callback=initMap"async defer></script>
 
-  </body>
-  </html>
+</body>
+</html>

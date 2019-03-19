@@ -42,6 +42,9 @@ loadLanguageFromSession($_SESSION['lang']);
   $user = new App\Profil($datas['first_name'],$datas['last_name'],$datas['birthday'],$datas['gender'],$datas['address'],$datas['zip_code']);
 
 
+  // On obtients les informations de l'entreprise
+
+  $uneEntreprise = infosEntreprise($bdd);
   //CREATION DE L'ABONNEMENT
 
   $abo = App\Abonnement::createAbonnement($bdd);
@@ -77,15 +80,19 @@ loadLanguageFromSession($_SESSION['lang']);
               <li class="nav-item">
                 <a class="nav-link" id="trajet-tab" data-toggle="tab" href="#trajet" role="tab" aria-controls="trajet" aria-selected="false">Mes trajets</a>
               </li>
+              <?php if ($uneEntreprise['idEntreprise'] != null) {?>
+              <li class="nav-item">
+                <a class="nav-link" id="entreprise-tab" data-toggle="tab" href="#entreprise" role="tab" aria-controls="entreprise" aria-selected="false">Mon entreprise</a>
+              </li>
+              <?php } ?>
             </ul>
           </div>
         </div>
-
-
       </div>
+
+
       <div class="row">
         <div class="col-md-4">
-
         </div>
         <div class="col-md-8">
           <div class="tab-content profile-tab" id="myTabContent">
@@ -180,143 +187,114 @@ loadLanguageFromSession($_SESSION['lang']);
                 </div>
               </div>
             </div>
-
             <?php
-            
-             $_SESSION['abo'] = serialize($abo);
+            if (checkIfAbonnementValide($bdd) == true) {
+              ?>
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+             <a href="abonnement.php"> <button type="button"  class="btn btn-success">Souscrire à un abonnement</button></a>
+            </div>
+           <?php
+             } else { ?>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <a href="showAbonnementProfil.php"><button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal"> Voir les informations de mon abonnements</button></a>
+            </div>
+             <?php  } ?>
+                <div class="tab-pane fade" id="trajet" role="tabpanel" aria-labelledby="trajet-tab">
 
-            
-        var_dump($_SESSION['abo']);
-            if ($abo->getIdAbonnement() == null) {?>
-
-              <div class="tab-pane fade show active" id="abonnement" role="tabpanel" aria-labelledby="profile-tab">
-
-                <div class="demo">
-                  <div class="container">
-
-
-                    <div class="row">
-
-                      <div class="col-md-4 col-sm-6">
-                        <div class="pricingTable">
-                          <div class="pricingTable-header">
-                            <h3 class="title" data-content="Simple">Simple</h3>
-                          </div>
-                          <ul class="pricing-content">
-                            <li>Tarifs préférentiels</li>
-                            <li>Accès aux différents services</li>
-                            <li>Soutenir Ride in Pride</li>
-                            <li>Sans engagement</li>
-                            <li></li>
-                          </ul>
-                          <div class="price-value">
-                            <span class="amount" data-content="28 €">28€ TTC /mois</span>
-                          </div>
-
-                          <a href="#" class="pricingTable-signup">Souscrire à l'offre</a>
-                        </div>
-
-                      </div>
-
-                      <div class=" offset-md-4 col-md-4 col-sm-6">
-                        <div class="pricingTable orange">
-                          <div class="pricingTable-header">
-                            <h3 class="title" data-content="Simple">Simple</h3>
-                          </div>
-                          <ul class="pricing-content">
-                            <li id="0">Tarifs préférentiels</li>
-                            <li id="1">Accès aux différents services</li>
-                            <li id="2">Soutenir Ride in Pride</li>
-                            <li id="3">Engagement sur 12 mois</li>
-                            <li></li>
-                          </ul>
-                          <div class="price-value">
-                            <span class="amount" data-content="$20.00">20€ TTC /mois</span>
-                          </div>
-                          <a href="#" class="pricingTable-signup">Souscrire à l'offre</a>
-                        </div>
-
-                      </div>
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="display-4">Vos trajets</div>
                     </div>
+                    <div class="card-body ">
+
+                    <?php
+                    $trajets = $bdd->queryPrepareForWhile("SELECT * FROM trajet WHERE idClient=".$_SESSION["id"]."",$bdd);
+
+                    while ($trajet = $trajets->fetch()) {
+                      echo "<div class='row list-group-item'>";
+                      echo "<p>ID:".$trajet["idTrajet"]."<p><div class='h4'>".$trajet["debut"]." <div class='glyphicon glyphicon-arrow-right'></div> ".$trajet["fin"]."</div>";
+                      echo "<p>".$trajet["duration"]."<p>";
+                      echo "<button class='btn btn-success p-3'>PDF</button>";
+                      echo "</div>";
+                    }
+                     ?>
                   </div>
                 </div>
               </div>
-            <?php } else {?>
+
+           
 
 
-              <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-
-
-                <div class="demo">
-                  <div class="container">
-                    <div class="row">
-                      <div class="col-md-4 col-sm-6">
-                        <div class="pricingTables">
-                          <div class="pricingTable-header">
-                            <h3 class="title" data-content="Simple">SIMPLE</h3>
-                          </div>
-                          <ul class="pricing-content">
-                            <li>Date d'achat : <?php
-                            setlocale(LC_TIME, "fr_FR","French");
-                            $date = strftime("%d/%m/%Y", strtotime($abo->getDateDebut()));
-                            echo  $date; ?></li>
-                            <li>Date de fin résiliation : <?php
-                            setlocale(LC_TIME, "fr_FR","French");
-                            $date = strftime("%d/%m/%Y", strtotime($abo->getDateFin()));
-                            echo  $date; ?></li>
-                            <li>Type d'abonnement : <?php
-                            if($abo->getTypeAbonnement() == 1) {
-                              echo "Simple";} else if($abo->getTypeAbonnement() == 2){echo "Entreprise";}
-                              else{echo "Sans abonnement";}?> </li>
-                              <li>Engagement sur 12 mois : <?php
-                              if ($abo->getIsEngagement() == 1){
-                                echo "Oui"; }
-                                else {
-                                  echo "Non";}?> </li>
-
-                                </ul>
-                                <div class="price-value">
-                                  <span class="amount" data-content="$10.00">// A définir</span>
-                                </div>
-                                <a href="#" class="pricingTable-signup"></a>
-                              </div>
-                            </div>
-
-                          </div>
-                        </div>
-                      </div>
-
-
-
-                      <div class="gear">
-                        <span id="idAbonnement" class="datainfo" value="'<?= $abo->getIdAbonnement(); ?>'"><?= $abo->getIdAbonnement(); ?></span>
-                        <a href="#" class="profile-edit-btn">Supprimer</a>
-                      </div>
-
-                    </div>
-                  <?php } ?>
-                </div>
-
-                <div class="col-md-8">
-          <div class="tab-content profile-tab" id="myTabContent">
-            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                     <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-8">
+          <div class="tab-content entreprise-tab" id="myTabContent">
+          <div class="tab-pane fade" id="entreprise" role="tabpanel" aria-labelledby="entreprise-tab">
               <div class="row">
                 <div class="col-md-6">
-                  <label>Id</label>
+                  <label>Id de l'entreprise</label>
                 </div>
                 <div class="col-md-6">
-                  <span id="idProfil" class="datainfo" value="'<?= $_SESSION['id']?>'"><?= $_SESSION['id'] ?></span>
+                  <span id="idEntreprise" class="datainfo" value="'<?= $uneEntreprise['idEntreprise'];?>'"><?= $uneEntreprise['idEntreprise']; ?></span>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-6">
-                  <label>Nom</label>
+                  <label>Nom de l'entreprise</label>
                 </div>
                 <div class="col-md-6">
                   <div class="gear">
-                    <span id="last_name" class="datainfo"><?= $user->getLast_name(); ?></span>
+                    <span id="nameEntreprise" class="datainfo"><?= $uneEntreprise['nameEntreprise']; ?></span>
+                    <?php if($uneEntreprise['idDirecteur'] == $_SESSION['id']) {?>
                     <a href="#" class="editlink">Editer</a>
                     <a class="savebtn">Sauvegarder</a>
+                    <?php } ?>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Adresse de l'entreprise</label>
+                </div>
+                <div class="col-md-6">
+                  <div class="gear">
+                    <span id="adresse" class="datainfo"><?= $uneEntreprise['adresse']; ?></span>
+                    <?php if($uneEntreprise['idDirecteur'] == $_SESSION['id']) {?>
+                    <a href="#" class="editlink">Editer</a>
+                    <a class="savebtn">Sauvegarder</a>
+                    <?php } ?>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Numéro de l'entreprise</label>
+                </div>
+                <div class="col-md-6">
+                  <div class="gear">
+                    <span id="numEntreprise" class="datainfo"><?= $uneEntreprise['numEntreprise']; ?></span>
+                    <?php if($uneEntreprise['idDirecteur'] == $_SESSION['id']) {?>
+                    <a href="#" class="editlink">Editer</a>
+                    <a class="savebtn">Sauvegarder</a>
+                    <?php } ?>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Numéro SIRET de l'entreprise</label>
+                </div>
+                <div class="col-md-6">
+                  <div class="gear">
+                    <span id="numSiret" class="datainfo"><?= $uneEntreprise['numSiret']; ?></span>
+                    <?php if($uneEntreprise['idDirecteur'] == $_SESSION['id']) {?>
+                    <a href="#" class="editlink">Editer</a>
+                    <a class="savebtn" >Sauvegarder</a>
+                    <?php } ?>
                   </div>
                 </div>
               </div>
@@ -334,48 +312,40 @@ loadLanguageFromSession($_SESSION['lang']);
                 </div>
               </div>
 
+                </div>
+              </div>
               <div class="row">
                 <div class="col-md-6">
-                  <label>Code postal</label>
+                  <label>Nombres de salariés dans l'entreprise</label>
                 </div>
                 <div class="col-md-6">
                   <div class="gear">
-                    <span id="zip_code" class="datainfo"><?= $user->getZipCode(); ?></span>
+                    <span id="nbSalarie" class="datainfo"><?= $uneEntreprise['nbSalarie']; ?></span>
+                    <?php if($uneEntreprise['idDirecteur'] == $_SESSION['id']) {?>
+                    <a href="#" class="editlink">Editer</a>
+                    <a class="savebtn" >Sauvegarder</a>
+                    <?php } ?>
+                  </div>
+                  
+
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Pays de l'entreprise</label>
+                </div>
+                <div class="col-md-6">
+                  <div class="gear">
+                    <span id="pays" class="datainfo"><?= $uneEntreprise['pays']; ?></span>
+                    <?php if($uneEntreprise['idDirecteur'] == $_SESSION['id']) {?>
                     <a href="#" class="editlink">Editer</a>
                     <a class="savebtn">Sauvegarder</a>
+                    <?php } ?>
                   </div>
                 </div>
               </div>
-
-              <div class="row">
-                <div class="col-md-6">
-                  <label>Prenom</label>
-                </div>
-                <div class="col-md-6">
-                  <div class="gear">
-                    <span id="first_name" class="datainfo"><?= $user->getFirst_name(); ?></span>
-                    <a href="#" class="editlink">Editer</a>
-                    <a class="savebtn" >Sauvegarder</a>
-                  </div>
+            </div>
 
 
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <label>Date de naissance</label>
-                </div>
-                <div class="col-md-6">
-                  <div class="gear">
-                    <span id="birthday" class="datainfo"><?php
-                    setlocale(LC_TIME, "fr_FR","French");
-                    $date = strftime("%d %B %Y", strtotime($user->getBirthday()));
-                    echo  $date; ?></span>
-                    <a href="#" class="editlink">Editer</a>
-                    <a class="savebtn" >Sauvegarder</a>
-                  </div>
-                </div>
-              </div>
+<?php // -------- DELIMITATION ENTREPRISE ?>
 
               <div class="row">
                 <div class="col-md-6">
@@ -390,8 +360,6 @@ loadLanguageFromSession($_SESSION['lang']);
                 </div>
               </div>
             </div>
-
-            </div>
           </div>
         </div>
       </div>
@@ -401,3 +369,28 @@ loadLanguageFromSession($_SESSION['lang']);
 <script type="text/javascript" src="js/profil/profil.js"></script>
 <?php include "includehtml/footer.php" ?>
 </html>
+<?php
+      function checkIfAbonnementValide($bdd) 
+            {
+            $req = $bdd->getPDO()->prepare('SELECT * FROM linkabonnemententreprise WHERE idClient = :idClient');
+            $req->execute(array('idClient' => $_SESSION['id']));
+            $req->closeCursor();
+            if ($req->rowCount() == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            }
+
+            function infosEntreprise($bdd)
+            {
+              $req = $bdd->getPDO()->prepare('SELECT * FROM `entreprise` WHERE idDirecteur = idDirecteur');
+              $req->execute(array("idDirecteur" => $_SESSION['id']));
+              return $req->fetch();
+              $req->closeCursor();
+
+            }
+            ?>

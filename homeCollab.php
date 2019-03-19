@@ -1,4 +1,6 @@
 <?php
+
+
 session_start();
 
 //multilingue
@@ -9,7 +11,7 @@ include "multilingue/multilingue.php";
 loadLanguageFromSession($_SESSION['lang']);
 ?>
 
-<!doctype html>
+<!DOCTYPE html>
 <html class="no-js">
 
 

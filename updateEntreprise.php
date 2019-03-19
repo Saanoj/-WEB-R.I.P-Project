@@ -30,6 +30,13 @@ if (isset($_POST['submit'])) {
         'id' => $_SESSION['id']
     ));
     $req2->closeCursor();
+
+
+    $req = $bdd->getPDO()->prepare('UPDATE entreprise SET nbSalarie = Nbsalarie +1 WHERE nameEntreprise = :nameEntreprise');
+    $req->execute(array("nameEntreprise" => $_POST['nameEntreprise']));
+    $req->closeCursor();
+
+    
     header('location:profil.php');
 }
 

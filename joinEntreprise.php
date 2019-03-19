@@ -20,7 +20,6 @@ $bdd = new Database('rip');
 $req = $bdd->getPDO()->prepare('SELECT * FROM `entreprise`');
 $req->execute();
 
-
 ?>
 <body>
 <form  method="post" action="updateEntreprise.php">

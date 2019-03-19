@@ -185,20 +185,36 @@ loadLanguageFromSession($_SESSION['lang']);
                     <a class="savebtn">Sauvegarder</a>
                   </div>
                 </div>
+
+    
               </div>
             </div>
             <?php
-            if (checkIfAbonnementValide($bdd) == true) {
+            if (checkIfAbonnementValide($bdd) == true) { 
               ?>
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
              <a href="abonnement.php"> <button type="button"  class="btn btn-success">Souscrire à un abonnement</button></a>
+             <?php 
+             if (checkIfexistEntreprise($bdd) == true) {?>
+              <a href="deleteEntrepriseFromUser.php"> <button type="button"  class="btn btn-danger">Supprimer une entreprise</button></a>
+               <?php
+             } else { ?>
+               
+               <a href="joinEntreprise.php"> <button type="button"  class="btn btn-info">Rejoindre une entreprise</button></a>
+
+            <?php  }?>
+            
             </div>
            <?php
              } else { ?>
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             <a href="showAbonnementProfil.php"><button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal"> Voir les informations de mon abonnements</button></a>
             </div>
-             <?php  } ?>
+             <?php  } 
+          
+            ?>
+
+<?php /*
                 <div class="tab-pane fade" id="trajet" role="tabpanel" aria-labelledby="trajet-tab">
 
                   <div class="card">
@@ -338,26 +354,16 @@ loadLanguageFromSession($_SESSION['lang']);
                     <?php if($uneEntreprise['idDirecteur'] == $_SESSION['id']) {?>
                     <a href="#" class="editlink">Editer</a>
                     <a class="savebtn">Sauvegarder</a>
-                    <?php } ?>
+                    <?php } ?> 
                   </div>
                 </div>
               </div>
             </div>
-
+*/ ?>
 
 <?php // -------- DELIMITATION ENTREPRISE ?>
 
-              <div class="row">
-                <div class="col-md-6">
-                  <label>Genre</label>
-                </div>
-                <div class="col-md-6">
-                  <div class="gear">
-                    <span id="gender" class="datainfo"><?= $user->getGender(); ?></span>
-                    <a href="#" class="editlink">Editer</a>
-                    <a class="savebtn">Sauvegarder</a>
-                  </div>
-                </div>
+              
               </div>
             </div>
           </div>
@@ -393,4 +399,21 @@ loadLanguageFromSession($_SESSION['lang']);
               $req->closeCursor();
 
             }
+
+            function checkIfexistEntreprise($bdd) 
+            {
+            $req = $bdd->getPDO()->prepare('SELECT * FROM users WHERE idEntreprise > 0 AND id = :id');
+            $req->execute(array('id' => $_SESSION['id']));
+            $req->closeCursor();
+            if ($req->rowCount() > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            }
+
+            
             ?>

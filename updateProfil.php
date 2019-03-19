@@ -28,8 +28,6 @@ $req->bindValue(':columnValue', $idAbo);
 $req->execute();
 $req->closeCursor();
 }
-
-
 exit;
 
 

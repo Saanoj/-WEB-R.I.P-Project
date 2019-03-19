@@ -55,7 +55,7 @@ loadLanguageFromSession($_SESSION['lang']);
     <div class="row mt-md-1">
       <div class="col-md-4 blue col-md-offset-4 text-center">
         <div class="list-group-item" style="background-color: #D5D6D2;">
-          <h3 class="display-4">Nos 3 meilleurs chauffeurs</h3>
+          <h3 class="display-4"><?php echo _TITRE_CHAUFFEUR?></h3>
         </div>
       </div>
     </div>
@@ -81,7 +81,7 @@ loadLanguageFromSession($_SESSION['lang']);
         <div class="container">
           <div class="">
             <h3 class="center-block"><?php echo $chauffeur->getFirst_name()." ".$chauffeur->getLast_name();?></h3>
-            <h6>ID: <?php echo $chauffeur->getIdCollaborateur(); ?> | Prix: <?php echo $chauffeur->getPrixCollaborateur()."€ / Km | Note: ".$chauffeur->getRating()."/5 sur ".$chauffeur->getRatingNumber()." votes" ?></h6>
+            <h6>ID: <?php echo $chauffeur->getIdCollaborateur(); ?> <?php echo _PRIX ?> <?php echo $chauffeur->getPrixCollaborateur()."€ / Km |" ?> <?php  echo _NOTE ?> <?php echo $chauffeur->getRating()."/5 (".$chauffeur->getRatingNumber() ?> <?php echo _VOTES.")";  ?></h6>
           </div>
           <div class="">
             <!-- Button trigger modal -->
@@ -106,18 +106,18 @@ loadLanguageFromSession($_SESSION['lang']);
                   <div class="col-md-4">
                     <h4>Infos: </h4>
                     <ul>
-                      <li><?php echo "Ville d'operation: ".$chauffeur->getVille(); ?></li>
-                      <li><?php echo "Heures Travailées: ".$chauffeur->getHeuresTravailees(); ?></li>
-                      <li><?php echo "Date d'embauche: ".$chauffeur->getDateEmbauche(); ?></li>
+                      <li><?php echo _VILLE.$chauffeur->getVille(); ?></li>
+                      <li><?php echo _HEURE_TRAVAIL.$chauffeur->getHeuresTravailees(); ?></li>
+                      <li><?php echo _DATE_EMBAUCHE.$chauffeur->getDateEmbauche(); ?></li>
                     </ul>
                   </div>
                   <div class="col-md-4">
-                    <h4>Véhicule: </h4>
+                    <h4><?php echo _VEHICULE;?>  </h4>
                     <ul>
-                      <li><?php echo "Marque: ".$chauffeur->getCarBrand(); ?></li>
-                      <li><?php echo "Modèle: ".$chauffeur->getCarModel(); ?></li>
-                      <li><?php echo "Couleur: ".$chauffeur->getCarColor(); ?></li>
-                      <li><?php echo "Places: ".$chauffeur->getCarSeats(); ?></li>
+                      <li><?php echo _MARQUE." : ".$chauffeur->getCarBrand(); ?></li>
+                      <li><?php echo _MODELE." : ".$chauffeur->getCarModel(); ?></li>
+                      <li><?php echo _COULEUR." : ".$chauffeur->getCarColor(); ?></li>
+                      <li><?php echo _PLACES." : ".$chauffeur->getCarSeats(); ?></li>
                     </ul>
                   </div>
                   <div class="col-md-4">

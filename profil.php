@@ -45,6 +45,7 @@ loadLanguageFromSession($_SESSION['lang']);
   //CREATION DE L'ABONNEMENT
 
   $abo = App\Abonnement::createAbonnement($bdd);
+  // serialize($abo);
 
 
 
@@ -180,9 +181,15 @@ loadLanguageFromSession($_SESSION['lang']);
               </div>
             </div>
 
-            <?php if ($abo->getIdAbonnement() == null) {?>
+            <?php
+            
+             $_SESSION['abo'] = serialize($abo);
 
-              <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            
+        var_dump($_SESSION['abo']);
+            if ($abo->getIdAbonnement() == null) {?>
+
+              <div class="tab-pane fade show active" id="abonnement" role="tabpanel" aria-labelledby="profile-tab">
 
                 <div class="demo">
                   <div class="container">
@@ -288,32 +295,104 @@ loadLanguageFromSession($_SESSION['lang']);
 
                     </div>
                   <?php } ?>
-
-
                 </div>
 
-                <div class="tab-pane fade" id="trajet" role="tabpanel" aria-labelledby="trajet-tab">
+                <div class="col-md-8">
+          <div class="tab-content profile-tab" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Id</label>
+                </div>
+                <div class="col-md-6">
+                  <span id="idProfil" class="datainfo" value="'<?= $_SESSION['id']?>'"><?= $_SESSION['id'] ?></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Nom</label>
+                </div>
+                <div class="col-md-6">
+                  <div class="gear">
+                    <span id="last_name" class="datainfo"><?= $user->getLast_name(); ?></span>
+                    <a href="#" class="editlink">Editer</a>
+                    <a class="savebtn">Sauvegarder</a>
+                  </div>
+                </div>
+              </div>
 
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Adresse</label>
+                </div>
+                <div class="col-md-6">
+                  <div class="gear">
+                    <span id="address" class="datainfo"><?= $user->getAddress(); ?></span>
+                    <a href="#" class="editlink">Editer</a>
+                    <a class="savebtn">Sauvegarder</a>
+                  </div>
+                </div>
+              </div>
 
-                  <div class="display-4">Vos trajets</div>
-                  <div class="container">
-                    <?php for ($i=0; $i < 4; $i++) {?>
-                      <div class="row">
-                        aaa
-                      </div>
-                    <?php  } ?>
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Code postal</label>
+                </div>
+                <div class="col-md-6">
+                  <div class="gear">
+                    <span id="zip_code" class="datainfo"><?= $user->getZipCode(); ?></span>
+                    <a href="#" class="editlink">Editer</a>
+                    <a class="savebtn">Sauvegarder</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Prenom</label>
+                </div>
+                <div class="col-md-6">
+                  <div class="gear">
+                    <span id="first_name" class="datainfo"><?= $user->getFirst_name(); ?></span>
+                    <a href="#" class="editlink">Editer</a>
+                    <a class="savebtn" >Sauvegarder</a>
                   </div>
 
 
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Date de naissance</label>
+                </div>
+                <div class="col-md-6">
+                  <div class="gear">
+                    <span id="birthday" class="datainfo"><?php
+                    setlocale(LC_TIME, "fr_FR","French");
+                    $date = strftime("%d %B %Y", strtotime($user->getBirthday()));
+                    echo  $date; ?></span>
+                    <a href="#" class="editlink">Editer</a>
+                    <a class="savebtn" >Sauvegarder</a>
+                  </div>
+                </div>
+              </div>
 
-
-
-
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Genre</label>
+                </div>
+                <div class="col-md-6">
+                  <div class="gear">
+                    <span id="gender" class="datainfo"><?= $user->getGender(); ?></span>
+                    <a href="#" class="editlink">Editer</a>
+                    <a class="savebtn">Sauvegarder</a>
+                  </div>
+                </div>
+              </div>
             </div>
 
-
+            </div>
           </div>
-
         </div>
       </div>
     </form>

@@ -7,6 +7,21 @@ define("_RESERVER_SERVICE","Réserver un trajet");
 //index.php
 define("_TITRE_BODY","Body en francais");
 define("_TITRE_BOUTTON","Petit boutton vert!");
+define("_TITRE_CHAUFFEUR","Nos 3 meilleurs chauffeurs!");
+define("_PRIX","Prix");
+define("_NOTE","Rang");
+define("_VOTES","Votes totaux");
+
+// MODAL INFORMATIONS CHAUFFEURS
+define("_VILLE","Ville d'opération : ");
+define("_HEURE_TRAVAIL","Heures travaillés : ");
+define("_DATE_EMBAUCHE","Date d'embauche : ");
+
+define("_VEHICULE","Véhicules");
+define("_MARQUE","Marque");
+define("_MODELE","Modèle");
+define("_COULEUR","Couleur");
+define("_PLACES","Places");
 
 //Reservation trajet
 define("_TITRE_RESERVATION_TRAJET","Rechercher un trajet");
@@ -15,7 +30,11 @@ define("_ADRESSE_ARRIVEE_RESERVATION","Adresse d'arrivée");
 define("_DATE_DEBUT_RESERVATION_TRAJET","Date du trajet");
 define("_HEURE_DEBUT_RESERVATION_TRAJET","Heure du trajet");
 define("_BOUTTON_RESERVATION_TRAJET","Réserver");
+// RESERVATION Services
+define("_TITRE_SERVICE","Reservation de services");
+define("_TITRE_CHOOSE_SERVICE","Choisissez vos services");
 
+// RESERVATION TRAJET
 define("_TITRE_INFO1_RESERVATION","Course sécurisée");
 define("_INFO1_RESERVATION","Nous prenons trés au serieux la sécuritée et le comfort de nos clients.");
 define("_TITRE_INFO2_RESERVATION","Courses le moins chères");

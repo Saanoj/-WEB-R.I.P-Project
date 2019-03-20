@@ -43,7 +43,10 @@ loadLanguageFromSession($_SESSION['lang']);
 
   $form = new App\Form(array());
 
+  $isAbonnee=$bdd->query('SELECT * FROM linkabonnemententreprise WHERE idClient='.$_SESSION['id'].'');
 
+  //que si on a un abonnement
+  if (!empty($isAbonnee)) {
   // ON VERIFIE LA DIFFERENCE D'HEURE ENTRE LE DEBUT ET LA FIN DU CRENEAU DE L"INTERPRETE
   $_SESSION['startInterprete'];
   $_SESSION['endInterprete'];
@@ -59,7 +62,7 @@ loadLanguageFromSession($_SESSION['lang']);
   //  ON VERIFIE LA DIFFERENCE D'HEURE ENTRE LE DEBUT ET LA FIN DU CRENEAU DU COACH CULTURE
   $hourCoachCulture = (strtotime($_SESSION['endCoachCulture']) - strtotime($_SESSION['startCoachCulture']));
   $hourCoachCulture =  $hourCoachCulture/3600>1?floor($hourCoachCulture/3600):ceil($hourCoachCulture/3600);
-
+  }
   // On recupere l'objet trajet contenant nos infos de trajet depuis la session
   $trajet = unserialize($_SESSION['trajet']);
 
@@ -82,6 +85,8 @@ loadLanguageFromSession($_SESSION['lang']);
             <h3 class="display-4 text-center m-3">Services choisi</h3>
             <p class="center-block">
               <?php
+              //services, que si on a un abonnement
+              if (!empty($isAbonnee)) {
               //on recupere les id des services choisis sur ce trajet
               $idServices = $bdd->query('SELECT * FROM linkServicetrajet WHERE idTrajet='.$_SESSION["idTrajet"].'');
 
@@ -102,7 +107,7 @@ loadLanguageFromSession($_SESSION['lang']);
                     //on recupere les infos du service en fonction de son id
                     $service = $bdd->queryOne('SELECT * FROM services WHERE idService='.$unIdService["idService"].'');
                     $linkService = $bdd->queryOne('SELECT * FROM linkServicetrajet WHERE idService='.$unIdService["idService"].' AND idTrajet='.$_SESSION["idTrajet"].'');
-                    
+
 
 
                     //choix en fonction du type de service special
@@ -161,6 +166,9 @@ loadLanguageFromSession($_SESSION['lang']);
 
                 }
               }
+            }else{
+                echo "Aucun abonnements souscrit, pas de services disponibles.";
+            }
               ?>
             </p>
           </div>
@@ -222,6 +230,10 @@ loadLanguageFromSession($_SESSION['lang']);
                     <p><?php echo $chauffeur->getPrixCollaborateur()." €/Km " ?>* <?php echo $trajet->getDistance()." Km " ?>= <?php echo sprintf("%.2f",$trajet->getDistance()*$chauffeur->getPrixCollaborateur())." €"; $totalChauffeurTrajet=sprintf("%.2f",$trajet->getDistance()*$chauffeur->getPrixCollaborateur()); ?></p>
                     <p class='h2'>Total Chauffeur: <?php echo $totalChauffeurTrajet; ?>€ TTC</p>
                   </div>
+
+                  <?php
+                  //prix des services
+                  if (empty($isAbonnee)) { ?>
                   <div class="border border-secondary pb-2 pr-2 pl-2 m-1">
                     <div class='h1'>Prix services:</div>
                     <?php
@@ -303,10 +315,19 @@ loadLanguageFromSession($_SESSION['lang']);
                     }
                     ?>
                   </div>
+              <?php }else{
+                      echo "<p class='h2'>Pas de services, vous n'avez pas souscrits d'abonnements</p>";
+                    } ?>
                 </ul>
               </p>
               <!-- Afficher le prix total-->
-              <?php echo "<p class='display-4'>Prix total: ".($totalServices+$totalChauffeurTrajet)."€ TTC</p>"; $total=$totalServices+$totalChauffeurTrajet?>
+              <?php
+              if (empty($isAbonnee)) {
+                echo "<p class='display-4'>Prix total: ".($totalChauffeurTrajet)."€ TTC</p>"; $total=$totalChauffeurTrajet;
+              }else {
+                echo "<p class='display-4'>Prix total: ".($totalServices+$totalChauffeurTrajet)."€ TTC</p>"; $total=$totalServices+$totalChauffeurTrajet;
+              }
+              ?>
             </div>
           </div>
 <?php

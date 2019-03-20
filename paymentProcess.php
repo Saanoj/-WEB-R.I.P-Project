@@ -19,13 +19,18 @@ require_once('fpdf/test/tfpdf.php');
 // INFOS TRAJET ET SERVICES
 $reqTrajet = $bdd->queryOne('SELECT * FROM `trajet` WHERE idTrajet ='.$_SESSION["idTrajet"].'');
 
+$isAbonnee=$bdd->query('SELECT * FROM linkabonnemententreprise WHERE idClient='.$_SESSION['id'].'');
 
-  $idClient = $reqTrajet['idClient'];
-
+//infos client
+$idClient = $reqTrajet['idClient'];
+$reqInfosClient = $bdd->queryOne('SELECT * FROM `users` WHERE id ='.$idClient.'');
 
 $trajet = unserialize($_SESSION['trajet']);
 
 
+
+
+if(!empty($isAbonnee)){
 //temps des collabs
 //si temps de trajet < 1H alors on passe le temps d'interprete a un 1 et si au dessus on la tronque à l'heure en dessous
 $hourInterprete = (strtotime($_SESSION['endInterprete']) - strtotime($_SESSION['startInterprete']));
@@ -38,10 +43,6 @@ $hourCoachSportif = $hourCoachSportif/3600>1?floor($hourCoachSportif/3600):ceil(
 //  ON VERIFIE LA DIFFERENCE D'HEURE ENTRE LE DEBUT ET LA FIN DU CRENEAU DU COACH CULTURE
 $hourCoachCulture = (strtotime($_SESSION['endCoachCulture']) - strtotime($_SESSION['startCoachCulture']));
 $hourCoachCulture =  $hourCoachCulture/3600>1?floor($hourCoachCulture/3600):ceil($hourCoachCulture/3600);
-
-//infos client
-$reqInfosClient = $bdd->queryOne('SELECT * FROM `users` WHERE id ='.$idClient.'');
-
 
 
 //on boucle les id des services choisis
@@ -59,6 +60,7 @@ foreach ($idServices as $unIdService) {
 }
 
 
+
 // GENERATION DU PDF
 
 
@@ -69,6 +71,7 @@ $column_Services = "";
 $column_Quantitee = "";
 $column_Prix = "";
 $total = 0;
+
 
 $counterService=0;
 $totalServices = 0;
@@ -161,6 +164,7 @@ foreach ($idServices as $unIdService) {
   $counterService++;
 }
 
+}
 $code = $_SESSION["idTrajet"];
 $name = substr($reqInfosClient["last_name"],0,20);
 $real_price = $_SESSION['prixTotal'];
@@ -291,6 +295,9 @@ $pdf->SetXY (10,161);
 $pdf->MultiCell(100,5,"Date d'arrivé : ".dateFrench($trajet->getDateDebut())." à ".$trajet->getEndofTrajet());
 $pdf->Ln();
 
+
+
+if(!empty($isAbonnee)){
 //Prix services
 //Fields Name position
 $Y_Fields_Name_position = 200;
@@ -328,8 +335,15 @@ $pdf->SetY($Y_Table_Position);
 $pdf->SetX(165);
 $pdf->MultiCell(30,6,$column_Prix,1);
 
+}
+
+
 $reqChauffeur = $bdd->queryOne("SELECT * FROM collaborateurs WHERE idCollaborateurs=".$reqTrajet["idChauffeur"]."");
 //prix trajet
+if(empty($isAbonnee)){
+  $counterService=0;
+  $Y_Fields_Name_position=200;
+}
 $Y_Fields_Name_position += ($counterService+1)*6;
 $Y_Table_Position = $Y_Fields_Name_position + 6;
 

@@ -9,6 +9,7 @@ include '../../include/fonction.php';
 <!DOCTYPE html>
 <html>
 <?php include "includehtml/head.html" ?>
+<script type="text/javascript" src="includehtml/mainUsers.js"></script>
 
 <body>
 
@@ -23,9 +24,13 @@ include '../../include/fonction.php';
   $Session->isConnect();
   ?>
 
-  <div>
-    <h1>Table comptes</h1>
-    <table class="table">
+  <div class="jumbotron m-5 p-5">
+    <h1 class="display-1">Table Utilisateurs</h1>
+    <div class="col-md-4 border border-rounded">
+      <div class="display-4">Recherche d'un utilisateur:</div>
+      <input type="text" name="" value="" placeholder="Cherchez un utilisateur" id='inputUsers'>
+    </div>
+    <table class="table" id=users>
       <thead>
         <tr>
           <th scope="col">Mail</th>
@@ -38,8 +43,7 @@ include '../../include/fonction.php';
           <th scope="col">Ban</th>
         </tr>
       </thead>
-      <?php backOfficeUser();
-      ?>
+      <?php backOfficeUser(); ?>
     </table>
   </div>
   <?php include "../includehtml/footer.php" ?>

@@ -68,22 +68,9 @@ isset($_SESSION['id']) && !empty($_SESSION['id'])
     <?php
   
    // header('location:verifAbonnement');
-   if (($_GET['isEngagement']) != '') {
-  header ('Refresh: 3;URL=configAbonnementEntreprise.php?isEngagement='.$_GET['isEngagement'].'');
-   }
-   else 
-   {
-       if ($_POST['isEngagement'] == 'Avec engagement')
-       {
-           
-        header ('Refresh: 3;URL=configAbonnementEntreprise.php?isEngagement=1');
-       }
-       else 
-       {
-        header ('Refresh: 3;URL=configAbonnementEntreprise.php?isEngagement=0');
-       }
-   }
-    
+
+  header ('Refresh: 3;URL=profil.php?');
+
   
 }
 else 

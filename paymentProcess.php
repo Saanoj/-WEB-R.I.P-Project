@@ -19,7 +19,9 @@ require_once('fpdf/test/tfpdf.php');
 // INFOS TRAJET ET SERVICES
 $reqTrajet = $bdd->queryOne('SELECT * FROM `trajet` WHERE idTrajet ='.$_SESSION["idTrajet"].'');
 
-$isAbonnee=$bdd->query('SELECT * FROM linkabonnemententreprise WHERE idClient='.$_SESSION['id'].'');
+$req3=$bdd->getPDO()->prepare('SELECT * FROM linkabonnemententreprise WHERE idClient= :idClient');
+$req3->execute(array('idClient' => $_SESSION['id']));
+$isAbonnee = $req3->fetch();
 
 //infos client
 $idClient = $reqTrajet['idClient'];
@@ -30,7 +32,9 @@ $trajet = unserialize($_SESSION['trajet']);
 
 
 
-if(!empty($isAbonnee)){
+
+
+if(empty($isAbonnee['idAbonnement'])){
 //temps des collabs
 //si temps de trajet < 1H alors on passe le temps d'interprete a un 1 et si au dessus on la tronque à l'heure en dessous
 $hourInterprete = (strtotime($_SESSION['endInterprete']) - strtotime($_SESSION['startInterprete']));
@@ -159,6 +163,7 @@ foreach ($idServices as $unIdService) {
 
   //chr(128) egal €
   $column_Prix = $column_Prix.$prixNow."€"."\n";
+  
   $column_Quantitee = $column_Quantitee.$linkService["quantite"]."\n";
 
   $counterService++;
@@ -175,9 +180,10 @@ $price_to_show = $real_price;//number_format($real_price,',','.','.');
 $dateDebut = dateFrDebut($trajet->getDateDebut());
 $dateFin = dateFrDebut($trajet->getHeureFin());
 
-var_dump($trajet->getDateDebut());
-var_dump($trajet->getHeureFin());
-var_dump($trajet->getEndofTrajet());
+
+
+
+
 
 
 //Create a new PDF file
@@ -296,8 +302,8 @@ $pdf->MultiCell(100,5,"Date d'arrivé : ".dateFrench($trajet->getDateDebut())." 
 $pdf->Ln();
 
 
-
-if(!empty($isAbonnee)){
+var_dump(!empty($isAbonnee['idAbonnement']));
+if(!empty($isAbonnee['idAbonnement'])){
 //Prix services
 //Fields Name position
 $Y_Fields_Name_position = 200;
@@ -340,9 +346,10 @@ $pdf->MultiCell(30,6,$column_Prix,1);
 
 $reqChauffeur = $bdd->queryOne("SELECT * FROM collaborateurs WHERE idCollaborateurs=".$reqTrajet["idChauffeur"]."");
 //prix trajet
-if(empty($isAbonnee)){
+if(empty($isAbonnee['idAbonnement'])){
   $counterService=0;
   $Y_Fields_Name_position=200;
+  $totalServices = 0;
 }
 $Y_Fields_Name_position += ($counterService+1)*6;
 $Y_Table_Position = $Y_Fields_Name_position + 6;
@@ -400,9 +407,22 @@ $pdf->SetX(165);
 $pdf->MultiCell(30,8,($reqTrajet["prixtrajet"])."€",1);
 
 //var_dump($reqTrajet);
-//echo "<p class='h2'>Total Services: ".$totalServices."€ TTC</p>";
- $pdf->Output();
+echo "<p class='h2'>Total Services: ".$totalServices."€ TTC</p>";
+ // $pdf->Output();
 ob_end_flush();
+
+
+
+// On créer une facture du trajet pour pouvoir récuperer les informations plus tard
+
+$req2 = $bdd->getPDO()->prepare('INSERT INTO factures(prixTrajet,idTrajet,prixService,prixTotal,dateFacture) VALUES (:prixTrajet,:idTrajet,:prixService,:prixTotal,NOW())');
+$req2->execute(array(
+  'prixTrajet' => $reqTrajet["prixtrajet"],
+  'idTrajet' =>$code,
+  'prixService' => $totalServices,
+  'prixTotal' => $real_price
+));
+
 
 
 // Config de la date en francais en PHP

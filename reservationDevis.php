@@ -43,10 +43,13 @@ loadLanguageFromSession($_SESSION['lang']);
 
   $form = new App\Form(array());
 
-  $isAbonnee=$bdd->query('SELECT * FROM linkabonnemententreprise WHERE idClient='.$_SESSION['id'].'');
+  $req=$bdd->getPDO()->prepare('SELECT * FROM linkabonnemententreprise WHERE idClient= :idClient');
+  $req->execute(array('idClient' => $_SESSION['id']));
+  $isAbonnee = $req->fetch();
+
 
   //que si on a un abonnement
-  if (!empty($isAbonnee)) {
+  if (!empty($isAbonnee['idAbonnement'])) {
   // ON VERIFIE LA DIFFERENCE D'HEURE ENTRE LE DEBUT ET LA FIN DU CRENEAU DE L"INTERPRETE
   $_SESSION['startInterprete'];
   $_SESSION['endInterprete'];
@@ -86,7 +89,7 @@ loadLanguageFromSession($_SESSION['lang']);
             <p class="center-block">
               <?php
               //services, que si on a un abonnement
-              if (!empty($isAbonnee)) {
+              if (isset($isAbonnee['idAbonnement'])) {
               //on recupere les id des services choisis sur ce trajet
               $idServices = $bdd->query('SELECT * FROM linkServicetrajet WHERE idTrajet='.$_SESSION["idTrajet"].'');
 
@@ -233,7 +236,7 @@ loadLanguageFromSession($_SESSION['lang']);
 
                   <?php
                   //prix des services
-                  if (empty($isAbonnee)) { ?>
+                  if (isset($isAbonnee['idAbonnement'])) { ?>
                   <div class="border border-secondary pb-2 pr-2 pl-2 m-1">
                     <div class='h1'>Prix services:</div>
                     <?php
@@ -322,7 +325,7 @@ loadLanguageFromSession($_SESSION['lang']);
               </p>
               <!-- Afficher le prix total-->
               <?php
-              if (empty($isAbonnee)) {
+              if (empty($isAbonnee['idAbonnement'])) {
                 echo "<p class='display-4'>Prix total: ".($totalChauffeurTrajet)."€ TTC</p>"; $total=$totalChauffeurTrajet;
               }else {
                 echo "<p class='display-4'>Prix total: ".($totalServices+$totalChauffeurTrajet)."€ TTC</p>"; $total=$totalServices+$totalChauffeurTrajet;

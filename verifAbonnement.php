@@ -24,14 +24,29 @@ switch ($_POST['submit'])
     $isEngagement = 1;
     $idAbonnement = 2;
     $dateFin=date("Y-m-d", strtotime("+1 year"));
+    if (existEntreprise($bdd) == true) 
+    {
     req($idAbonnement,$isEngagement,$dateFin,$bdd);
+    
+    }
+    else 
+    {
+        header('location:appartientEntreprise.php?isValide=0');
+    }
     break;
 
     case 'nonEngagementStandard':
     $isEngagement = 0;
     $idAbonnement = 1;
     $dateFin=date("Y-m-d", strtotime("+10 year"));
+    if (existEntreprise($bdd) == true) 
+    {
     req($idAbonnement,$isEngagement,$dateFin,$bdd);
+    }
+    else 
+    {
+        header('location:appartientEntreprise.php?isValide=0');
+    }
     break;
 
     case 'nonEngagementEntreprise':
@@ -139,4 +154,20 @@ function reqIsDirecteur($bdd)
     
 }
 */
+
+function existEntreprise($bdd) {
+    $req = $bdd->getPDO()->prepare('SELECT * FROM entreprise WHERE idDirecteur = :idDirecteur');
+    $req->execute(array('idDirecteur' => $_SESSION['id']));
+    if($req->rowCount() == 0)
+    {
+        $req->closeCursor();
+        return true;
+    } 
+    else {
+        $req->closeCursor();
+        return false;
+    }
+    
+
+}
 ?>

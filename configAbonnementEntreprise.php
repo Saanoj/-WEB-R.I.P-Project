@@ -11,17 +11,15 @@ $bdd = new Database('rip');
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<link href="css/abonnement/verifAbonnement/style.css" rel="stylesheet"></link>
+<link href="css/abonnement/verifAbonnement/style.css" rel="stylesheet">
 </head>
 <!------ Include the above in your HEAD tag ---------->
 
 <?php
 
-$req = $bdd->getPDO()->prepare('SELECT * FROM `entreprise` INNER JOIN abonnement where entreprise.idDirecteur = idDirecteur');
+$req = $bdd->getPDO()->prepare('SELECT * FROM entreprise INNER JOIN abonnement ON entreprise.idDirecteur = :idDirecteur');
 $req->execute(array("idDirecteur" => $_SESSION['id']));
 $uneEntreprise = $req->fetch();
-
-
     
     $nbSalarie = $uneEntreprise['nbSalarie'];
     $count=0;
@@ -45,7 +43,7 @@ $uneEntreprise = $req->fetch();
 
 ?>
 <body>
-<form  method="post" action="verifConfigAbonnementEntreprise.php?isEngagement='<?= $_GET['isEngagement'];?>'">
+<form  method="post" action="verifConfigAbonnementEntreprise.php?isEngagement=<?= $_GET['isEngagement'];?>">
 <div class="container register">
                 <div class="row">
                     <div class="col-md-3 register-left">

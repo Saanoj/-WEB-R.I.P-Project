@@ -13,7 +13,7 @@ $bdd = new Database('rip');
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<link href="css/abonnement/verifAbonnement/style.css" rel="stylesheet"></link>
+<link href="css/abonnement/verifAbonnement/style.css" rel="stylesheet">
 </head>
 <!------ Include the above in your HEAD tag ---------->
 <?php
@@ -87,8 +87,8 @@ $unAbonnement = $req->fetch();
                             <!-- ENTREPRISE <!-->
                             <?php if ($unAbonnement['idAbonnement'] == 3 || $unAbonnement['idAbonnement'] == 4)
                             {
-                            $req = $bdd->getPDO()->prepare('SELECT * FROM `entreprise` INNER JOIN abonnement where entreprise.idDirecteur = idDirecteur AND abonnement.idAbonnement = 4');
-                            $req->execute(array("idDirecteur" => $_SESSION['id']));
+                            $req = $bdd->getPDO()->prepare('SELECT * FROM `entreprise` INNER JOIN abonnement where entreprise.idDirecteur = :idDirecteur AND abonnement.idAbonnement = :idAbonnement');
+                            $req->execute(array("idDirecteur" => $_SESSION['id'],'idAbonnement' => $unAbonnement['idAbonnement']));
                             $uneEntreprise = $req->fetch();
                             ?>
                             

@@ -44,4 +44,4 @@ $req->execute(array('id' => $idEntreprise));
 $req->closeCursor();
 
 
-header('location:profil.php');
+ header('location:profil.php');

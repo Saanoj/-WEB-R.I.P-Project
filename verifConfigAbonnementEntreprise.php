@@ -24,7 +24,7 @@ $req->execute(array('idDirecteur' => $_SESSION['id']));
 $uneEntreprise = $req->fetch(); 
 $idEntreprise = $uneEntreprise['idEntreprise'];
 $req->closeCursor();
-if ($_GET['isEngagement'] == 1)
+if ($_GET['isEngagement'] == '1')
  {
      $idAbo = 4;
  }
@@ -32,7 +32,6 @@ if ($_GET['isEngagement'] == 1)
  {
      $idAbo = 3;
  }
-
 
 // On créer un abonnement pour toutes les personnes appartenant a l'entreprise
 $dateFin=date("Y-m-d", strtotime("+1 year"));
@@ -56,6 +55,6 @@ $req->closeCursor();
 Tous vos salariés possèdent à présent un abonnement ! Vous allez être redirigé dans quelques secondes.
 </div>
 <?php
-header ("Refresh: 6;URL=index.php");
+ header ("Refresh: 3;URL=index.php");
 
 ?>

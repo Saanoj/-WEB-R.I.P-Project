@@ -60,7 +60,7 @@ loadLanguageFromSession($_SESSION['lang']);
       <div class="row">
         <div class="col-md-4">
           <div class="profile-img">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
+            <img src="images/henni.jpg" alt=""/>
 
           </div>
         </div>
@@ -213,7 +213,7 @@ loadLanguageFromSession($_SESSION['lang']);
            <?php
              } else { ?>
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            <a href="showAbonnementProfil.php"><button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal"> Voir les informations de mon abonnements</button></a>
+            <a href="showAbonnementProfil.php"><button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal"> Voir les informations de mon abonnements / mon entreprise</button></a>
             </div>
              <?php  } 
           

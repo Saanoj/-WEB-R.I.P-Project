@@ -13,7 +13,7 @@ else {
     $isEngagement='';
 }
  ?>
-<form action='verifEntreprise.php?isEngagement=<?= $isEngagement;?>' method="post" onsubmit="return checkGlobal(this)">
+<form action='verifEntreprise.php?' method="post" onsubmit="return checkGlobal(this)">
 <div class="container register">
                 <div class="row">
                     <div class="col-md-3 register-left">
@@ -62,21 +62,7 @@ else {
                                                 <option>Irlande</option>
                                                 <option>Finlande</option>
                                             </select>
-                                        </div>
-                                        <?php if(!isset($_GET['isEngagement'])) { ?>
-                                            <div class="form-group">
-                                            <select class="form-control" name="isEngagement">
-                                                <option class="hidden"  selected disabled>Engagement ? </option>
-                                                <option>Avec engagement</option>
-                                                <option>Sans engagement</option>
-                                    
-                                            </select>
-                                        </div>
-
-
-                                         <?php } ?>
-
-                                       
+                                        </div>     
                                         <input type="submit" class="btnRegister"  value="Valider"/>
                                     </div>
                                 </div>

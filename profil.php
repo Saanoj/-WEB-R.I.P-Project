@@ -75,7 +75,7 @@ loadLanguageFromSession($_SESSION['lang']);
                 <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Mes informations</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Mes abonnements</a>
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Mes abonnements/Mon entreprise</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" id="trajet-tab" data-toggle="tab" href="#trajet" role="tab" aria-controls="trajet" aria-selected="false">Mes trajets</a>
@@ -200,7 +200,7 @@ loadLanguageFromSession($_SESSION['lang']);
              <a href="abonnement.php"> <button type="button"  class="btn btn-success">Souscrire à un abonnement</button></a>
              <?php 
              if (checkIfexistEntreprise($bdd) == true) {?>
-              <a href="deleteEntrepriseFromUser.php"> <button type="button"  class="btn btn-danger">Supprimer une entreprise</button></a>
+              <a href="deleteEntrepriseFromUser.php"> <button type="button"  class="btn btn-danger">Quitter/Supprimer une entreprise</button></a>
                <?php
              } else { ?>
                
@@ -248,7 +248,7 @@ loadLanguageFromSession($_SESSION['lang']);
 
                      
 
-    
+    <?php //// DEBUT ENTREPRISE ?>
           <div class="tab-content entreprise-tab" id="myTabContent">
           <div class="tab-pane fade" id="entreprise" role="tabpanel" aria-labelledby="entreprise-tab">
               <div class="row">

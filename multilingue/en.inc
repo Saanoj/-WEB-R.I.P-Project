@@ -7,6 +7,22 @@ define("_RESERVER_SERVICE","Book a trip");
 //index.php
 define("_TITRE_BODY","Body in english");
 define("_TITRE_BOUTTON","Little green button!");
+define("_TITRE_CHAUFFEUR","Our 3 best drivers!");
+define("_PRIX","Price");
+define("_NOTE","Rank");
+define("_VOTES","Total votes");
+
+// MODAL CHAUFFEUR
+define("_VILLE","City : ");
+define("_HEURE_TRAVAIL","Hours works : ");
+define("_DATE_EMBAUCHE","Date of employment : ");
+define("_VEHICULE","Car");
+define("_MARQUE","Brand");
+define("_MODELE","Model");
+define("_COULEUR","Color");
+define("_PLACES","Places");
+
+
 
 //Reservation trajet
 define("_TITRE_RESERVATION_TRAJET","Book a trip");
@@ -22,6 +38,13 @@ define("_TITRE_INFO2_RESERVATION","Cheapest trips");
 define("_INFO2_RESERVATION","Afordable prices for trips and services of this level of quality.");
 define("_TITRE_INFO3_RESERVATION","Services");
 define("_INFO3_RESERVATION","In addition to our trips, we propose a number of services to enhace your experience");
+// RESERVATION Services
+define("_TITRE_SERVICE","Reservation of your services");
+define("_TITRE_CHOOSE_SERVICE","Choose your services");
+
+
+
+
 
 //connexion
 define("_TITRE_CONNEXION","Connect to Ride in Pride");

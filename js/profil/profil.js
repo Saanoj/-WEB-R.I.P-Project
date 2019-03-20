@@ -1,6 +1,7 @@
-
 $(document).ready(function(){
+
 	$(".editlink").on("click", function(e){
+		
 	  e.preventDefault();
 		var dataset = $(this).prev(".datainfo");
 		var savebtn = $(this).next(".savebtn");
@@ -8,6 +9,8 @@ $(document).ready(function(){
 		var newid   = theid+"-form";
 		var currval = dataset.text();
 		var idProfil = document.getElementById("idProfil").innerHTML;
+		var idEntreprise = document.getElementById("idEntreprise").innerHTML;
+		console.log(idEntreprise);
 
 		dataset.empty();
 
@@ -27,12 +30,14 @@ $(document).ready(function(){
 		 }
 		$(this).css("display", "none");
 		savebtn.css("display", "block");
+		
 	});
 
 
 
 
 	$(".savebtn").on("click", function(e){
+		
 		e.preventDefault();
 		var elink   = $(this).prev(".editlink");
 		var dataset = elink.prev(".datainfo");
@@ -42,7 +47,7 @@ $(document).ready(function(){
 		var einput  = $(cinput);
 		var newval  = einput.attr("value");
 
-		updateProfil(newval,newid,idProfil);
+		updateProfil(newval,newid,idProfil,idEntreprise);
 		$(this).css("display", "none");
 		einput.remove();
 
@@ -54,6 +59,7 @@ $(document).ready(function(){
 			{
 		dataset.html(newval);
 			}
+		
 
 		elink.css("display", "block");
 
@@ -66,65 +72,18 @@ function convertDate(dateString){
 
 }
 
-function updateProfil(newval,newid,idProfil) {
+function updateProfil(newval,newid,idProfil,idEntreprise) {
+	
 	var request = new XMLHttpRequest();
 	request.onreadystatechange = function(){
 	  if(request.status == 200 && request.readyState == 4){
-
 	  }
-	};
-	data='newval=' + newval + '&newid=' + newid + '&id=' + idProfil.innerHTML;
-	request.open('POST', 'updateProfil.php');
-	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
-	request.send(data);
-	return false;
-  }
- // FONCTION AJAX QUI DELETE L'ABONNEMENT
-
- 
-$(document).ready(function(){
-	$(".profile-edit-btn").on("click", function(inp){
-
-		
-	  inp.preventDefault();
-	  var idProfil = document.getElementById("idProfil").innerHTML;
-	  var idAbo = document.getElementById("idAbonnement").innerHTML;
-	
-	  deleteSubscription(idAbo);
-
-		
-	});
-});
-
-function deleteSubscription(idAbo,idProfil) {
-	var request = new XMLHttpRequest();
-	request.onreadystatechange = function(){
-	  if(request.status == 200 && request.readyState == 4){
-
-	  }
-	};
-	data='idAbo=' + idAbo + '&idProfil=' + idProfil;
-	request.open('POST', 'updateProfil.php');
-	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
-	request.send(data);
-	return false;
+	}
+		data='newval=' + newval + '&newid=' + newid + '&idProfil=' + idProfil.innerHTML + '&idEntreprise=' + idEntreprise.innerHTML;
+		request.open('POST', 'updateProfil.php');
+		request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		request.send(data);
+		console.log(data)
   }
 
-  $(document).ready(function(){
-	$(".pricingTable-signup").on("click", function(){
-		var opt1 = document.getElementById("0").innerHTML;
-		var opt2 = document.getElementById("1").innerHTML;
-		var opt3 = document.getElementById("2").innerHTML;
-		var opt4 = document.getElementById("3").innerHTML;
 
-		console.log(opt1);
-		console.log(opt2);
-		console.log(opt3);
-		console.log(opt4);
-		
-	
-		
-
-		
-	});
-});

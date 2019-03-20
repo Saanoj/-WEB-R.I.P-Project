@@ -2,6 +2,7 @@
 session_start();
 
 //multilingue
+var_dump($_SESSION['lang']);
 if (!isset($_SESSION['lang'])) {
   $_SESSION['lang'] = "fr";
 }
@@ -11,7 +12,7 @@ loadLanguageFromSession($_SESSION['lang']);
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <title>Reservation de services</title>
+  <title><?php echo _TITRE_SERVICE; ?></title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="Ride in pride">
@@ -64,7 +65,7 @@ loadLanguageFromSession($_SESSION['lang']);
           <!-- Default panel contents -->
 
           <div class="card-header">
-            <h1 class="display-2">Choisissez vos services</h1>
+            <h1 class="display-2"><?php _TITRE_CHOOSE_SERVICE; ?></h1>
             <?php $trajet->showInfosTrajet(); ?>
           </div>
 

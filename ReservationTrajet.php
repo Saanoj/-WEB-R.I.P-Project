@@ -79,14 +79,18 @@ loadLanguageFromSession($_SESSION['lang']);
             <button class="glyphicon glyphicon-home btn btn-dark col-md-12 mt-1" style="height: 25px;" href="#" onClick="autoFillStart('<?php echo $membre->getAddress()." ".$membre->getZipCode();?>'); return false;">Start</button>
             <button class="glyphicon glyphicon-home btn btn-dark col-md-12 mt-1" style="height: 25px;" href="#" onClick="autoFillEnd('<?php echo $membre->getAddress()." ".$membre->getZipCode();?>'); return false;">End</button>
           </div>
-          <?php } ?>
+        <?php }else{ ?>
+            <div class="col-md-1">
+
+            </div>
+        <?php } ?>
 
           <form action="valideReservation.php" method="post" class=" d-flex flex-lg-row flex-column align-items-start justify-content-lg-between justify-content-start" id="home_search_form" onsubmit="return checkGlobal(this)">
             <input type="text" name="start"  id="autocomplete" class="col-md-4 search_input search_input_1 m-2 start" placeholder="<?php echo _ADRESSE_DEPART_RESERVATION ?>" required="required"  onblur="checkStart(this)">
 
             <input type="text" name="end"  id="autocomplete2" class="col-md-4 search_input search_input_2 m-2 end" placeholder="<?php echo _ADRESSE_ARRIVEE_RESERVATION ?>" required="required" onblur="checkEnd(this)">
             <!--<input type="number" name="price"  id="price" class="search_input search_input_4" placeholder="Budget" required="required">-->
-            <div class="col-md-2">
+            <div class="col-md-3">
               <label for="dateDebut"><?php echo _DATE_DEBUT_RESERVATION_TRAJET ?></label>
               <?php echo $form->input('dateDebut','date'); ?>
             </div>

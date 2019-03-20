@@ -133,6 +133,7 @@ if  (
           $_SESSION['id'] =	$donnees['id'];
         }
         $_SESSION['email'] = $this->getEmail();
+        $_SESSION['isCollaborateur']=0;
       }
     }
 
@@ -142,7 +143,7 @@ if  (
     if ($req === 0)
     {
       if ($user->checkDateBirth() === 1) {
-        $req2 = $user->addUser($bdd,'INSERT INTO `users` (`email`, `password`, `last_name`, `birthday`, `gender`,`first_name`,`isBanned`,`isAdmin`) VALUES (:email,:password,:last_name,:birthday,:gender,:first_name,:isBanned,:isAdmin);',$user);
+        $req2 = $user->addUser($bdd,'INSERT INTO `users` (`email`, `password`, `last_name`, `birthday`, `gender`,`first_name`,`isBanned`,`isAdmin`,`isCollaborateur`) VALUES (:email,:password,:last_name,:birthday,:gender,:first_name,:isBanned,:isAdmin,0);',$user);
         $user->startSession($bdd,'SELECT id FROM users WHERE email = :email');
         header('location:index.php?id='.$_SESSION['id'].'');
       }

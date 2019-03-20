@@ -42,7 +42,7 @@ class Navbar
           }elseif ($backOffice == 2) {
             include('../../navbar/NavbarBackOfficeUsers.php');
           }elseif ($backOffice == 3){
-            include('../../navbar/navbarCollab.php');
+            include('../../navbar/navbarBackOfficeCollab.php');
           }else{
             include('navbar/navbarAdmin.php');
           }

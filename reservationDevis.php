@@ -354,7 +354,7 @@ loadLanguageFromSession($_SESSION['lang']);
           </div>
 <?php
            $req = $bdd->getPDO()->prepare('UPDATE trajet SET prixTrajet = :prixTrajet WHERE idTrajet= :idTrajet');
-           $req->bindValue(":prixTrajet",$total);
+           $req->bindValue(":prixTrajet",$totalChauffeurTrajet);
            $req->bindValue(":idTrajet",$_SESSION["idTrajet"]);
            $req->execute();
            $req->closeCursor();

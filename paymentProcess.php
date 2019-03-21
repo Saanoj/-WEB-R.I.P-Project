@@ -34,7 +34,7 @@ $trajet = unserialize($_SESSION['trajet']);
 
 
 
-if(empty($isAbonnee['idAbonnement'])){
+if(!empty($isAbonnee['idAbonnement'])){
 //temps des collabs
 //si temps de trajet < 1H alors on passe le temps d'interprete a un 1 et si au dessus on la tronque à l'heure en dessous
 $hourInterprete = (strtotime($_SESSION['endInterprete']) - strtotime($_SESSION['startInterprete']));
@@ -408,8 +408,9 @@ $pdf->MultiCell(30,8,($reqTrajet["prixtrajet"])."€",1);
 
 //var_dump($reqTrajet);
 echo "<p class='h2'>Total Services: ".$totalServices."€ TTC</p>";
- // $pdf->Output();
-ob_end_flush();
+
+
+
 
 
 
@@ -423,7 +424,8 @@ $req2->execute(array(
   'prixTotal' => $real_price
 ));
 
-
+$pdf->Output();
+ob_end_flush();
 
 // Config de la date en francais en PHP
 function dateFrDebut($dateFr) {
@@ -447,47 +449,5 @@ function dateFrDebut($dateFr) {
     return  $dateFr[1];
 
   }
-
-
-
-
-
-/*
-$pdf = new FPDF();
-    //global $DB;
-    //$orderID=123;
-    //$sql = "SELECT * FROM `" . $DB->pre . "garorder` WHERE garID= '" . $orderID . "'";
-    //$d = $DB->dbRow($sql);
-
-    //echo 'name:'.$d['orderdate'].' Party Code :'.$d['partyCode'];
-
-    $pdf->AddPage();
-
-
-
-          $pdf->SetFont('helvetica','B',10);
-          $pdf->Cell(190,7,'Order Details',1,2,'C');
-          $pdf->SetFont('helvetica','',10);
-          $y= $pdf->GetY();
-          $pdf->MultiCell(95,8, "Garment ID: "."\nParty Code: "."\nOrder Date: " , 'LRB',1 );
-          //$x= $pdf->GetX();
-          //$pdf->setXY($x+95,$y);
-          $pdf->Cell(90);
-          $pdf->SetFont('helvetica','',10);
-         $pdf->SetXY (105,62);
-          $pdf->MultiCell(95,12, "Name: "."\nDelivery Status: " , 'LRB',1 );
-      $pdf-> Ln();
-         $pdf->Cell(32,10,'Material Description',1,0,'L',0);
-         $period = 50;
-         for($x=36;$x <=$period; $x=$x+2){
-
-           $pdf->Cell(20,10,$x,1,0,'L',0);
-
-
-
-         }
-         $pdf->Output('F',"facture.pdf");
-
-*/
 
 ?>

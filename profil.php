@@ -72,17 +72,17 @@ loadLanguageFromSession($_SESSION['lang']);
 
             <ul class="nav nav-tabs" id="myTab" role="tablist">
               <li class="nav-item">
-                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Mes informations</a>
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"><?php echo _TITRE_NAVBAR_INFOS?></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Mes abonnements/Mon entreprise</a>
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false"><?php echo _TITRE_NAVBAR_ABO?></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="trajet-tab" data-toggle="tab" href="#trajet" role="tab" aria-controls="trajet" aria-selected="false">Mes trajets</a>
+                <a class="nav-link" id="trajet-tab" data-toggle="tab" href="#trajet" role="tab" aria-controls="trajet" aria-selected="false"><?php echo _TITRE_NAVBAR_TRAJETS?></a>
               </li>
               <?php if ($uneEntreprise['idEntreprise'] != null) {?>
               <li class="nav-item">
-                <a class="nav-link" id="entreprise-tab" data-toggle="tab" href="#entreprise" role="tab" aria-controls="entreprise" aria-selected="false">Mon entreprise</a>
+                <a class="nav-link" id="entreprise-tab" data-toggle="tab" href="#entreprise" role="tab" aria-controls="entreprise" aria-selected="false"><?php echo _TITRE_NAVBAR_ENTREPRISE?></a>
               </li>
               <?php } ?>
             </ul>
@@ -107,52 +107,52 @@ loadLanguageFromSession($_SESSION['lang']);
               </div>
               <div class="row">
                 <div class="col-md-6">
-                  <label>Nom</label>
+                  <label><?php echo _TITRE_NAVBAR_INFOS_NOM?></label>
                 </div>
                 <div class="col-md-6">
                   <div class="gear">
                     <span id="last_name" class="datainfo"><?= $user->getLast_name(); ?></span>
-                    <a href="#" class="editlink">Editer</a>
-                    <a class="savebtn">Sauvegarder</a>
+                    <a href="#" class="editlink"><?php echo _TITRE_NAVBAR_INFOS_EDITER?></a>
+                    <a class="savebtn"><?php echo _TITRE_NAVBAR_INFOS_SAUVEGARDER?></a>
                   </div>
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-md-6">
-                  <label>Adresse</label>
+                  <label><?php echo _TITRE_NAVBAR_INFOS_ADRESSE?></label>
                 </div>
                 <div class="col-md-6">
                   <div class="gear">
                     <span id="address" class="datainfo"><?= $user->getAddress(); ?></span>
-                    <a href="#" class="editlink">Editer</a>
-                    <a class="savebtn">Sauvegarder</a>
+                    <a href="#" class="editlink"><?php echo _TITRE_NAVBAR_INFOS_EDITER?></a>
+                    <a class="savebtn"><?php echo _TITRE_NAVBAR_INFOS_SAUVEGARDER?></a>
                   </div>
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-md-6">
-                  <label>Code postal</label>
+                  <label><?php echo _TITRE_NAVBAR_INFOS_CODE_POSTAL?></label>
                 </div>
                 <div class="col-md-6">
                   <div class="gear">
                     <span id="zip_code" class="datainfo"><?= $user->getZipCode(); ?></span>
-                    <a href="#" class="editlink">Editer</a>
-                    <a class="savebtn">Sauvegarder</a>
+                    <a href="#" class="editlink"><?php echo _TITRE_NAVBAR_INFOS_EDITER?></a>
+                    <a class="savebtn"><?php echo _TITRE_NAVBAR_INFOS_SAUVEGARDER?></a>
                   </div>
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-md-6">
-                  <label>Prenom</label>
+                  <label><?php echo _TITRE_NAVBAR_INFOS_PRENOM?></label>
                 </div>
                 <div class="col-md-6">
                   <div class="gear">
                     <span id="first_name" class="datainfo"><?= $user->getFirst_name(); ?></span>
-                    <a href="#" class="editlink">Editer</a>
-                    <a class="savebtn" >Sauvegarder</a>
+                    <a href="#" class="editlink"><?php echo _TITRE_NAVBAR_INFOS_EDITER?></a>
+                    <a class="savebtn" ><?php echo _TITRE_NAVBAR_INFOS_SAUVEGARDER?></a>
                   </div>
 
 
@@ -160,7 +160,7 @@ loadLanguageFromSession($_SESSION['lang']);
               </div>
               <div class="row">
                 <div class="col-md-6">
-                  <label>Date de naissance</label>
+                  <label><?php echo _TITRE_NAVBAR_INFOS_DATE_NAISSANCE?></label>
                 </div>
                 <div class="col-md-6">
                   <div class="gear">
@@ -168,21 +168,21 @@ loadLanguageFromSession($_SESSION['lang']);
                     setlocale(LC_TIME, "fr_FR","French");
                     $date = strftime("%d %B %Y", strtotime($user->getBirthday()));
                     echo  $date; ?></span>
-                    <a href="#" class="editlink">Editer</a>
-                    <a class="savebtn" >Sauvegarder</a>
+                    <a href="#" class="editlink"><?php echo _TITRE_NAVBAR_INFOS_EDITER?></a>
+                    <a class="savebtn" ><?php echo _TITRE_NAVBAR_INFOS_SAUVEGARDER?></a>
                   </div>
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-md-6">
-                  <label>Genre</label>
+                  <label><?php echo _TITRE_NAVBAR_INFOS_GENRE?></label>
                 </div>
                 <div class="col-md-6">
                   <div class="gear">
                     <span id="gender" class="datainfo"><?= $user->getGender(); ?></span>
-                    <a href="#" class="editlink">Editer</a>
-                    <a class="savebtn">Sauvegarder</a>
+                    <a href="#" class="editlink"><?php echo _TITRE_NAVBAR_INFOS_EDITER?></a>
+                    <a class="savebtn"><?php echo _TITRE_NAVBAR_INFOS_SAUVEGARDER?></a>
                   </div>
                 </div>
 
@@ -197,15 +197,15 @@ loadLanguageFromSession($_SESSION['lang']);
             if (checkIfAbonnementValide($bdd) == true) { 
               ?>
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-             <a href="abonnement.php"> <button type="button"  class="btn btn-success">Souscrire à un abonnement</button></a>
+             <a href="abonnement.php"> <button type="button"  class="btn btn-success"><?php echo _TITRE_NAVBAR_ABO_SOUSCRIRE?></button></a>
              <?php 
              if (checkIfexistEntreprise($bdd) == true) {?>
-              <a href="deleteEntrepriseFromUser.php"> <button type="button"  class="btn btn-danger">Quitter/Supprimer une entreprise</button></a>
+              <a href="deleteEntrepriseFromUser.php"> <button type="button"  class="btn btn-danger"><?php echo _TITRE_NAVBAR_INFOS_QUITTER_ENTREPRISE?></button></a>
                <?php
              } else { ?>
                
-               <a href="joinEntreprise.php"> <button type="button"  class="btn btn-info">Rejoindre une entreprise</button></a>
-               <a href="createEntreprise.php"> <button type="button"  class="btn btn-info">Créer une entreprise</button></a>
+               <a href="joinEntreprise.php"> <button type="button"  class="btn btn-info"><?php echo _TITRE_NAVBAR_INFOS_REJOINDRE_ENTREPRISE?></button></a>
+               <a href="createEntreprise.php"> <button type="button"  class="btn btn-info"><?php echo _TITRE_NAVBAR_INFOS_CREER_ENTREPRISE?></button></a>
 
             <?php  }?>
             
@@ -213,7 +213,7 @@ loadLanguageFromSession($_SESSION['lang']);
            <?php
              } else { ?>
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            <a href="showAbonnementProfil.php"><button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal"> Voir les informations de mon abonnements / mon entreprise</button></a>
+            <a href="showAbonnementProfil.php"><button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal"><?php echo _TITRE_NAVBAR_INFOS_VOIR_INFOS_ABONNEMENTS?></button></a>
             </div>
              <?php  } 
           

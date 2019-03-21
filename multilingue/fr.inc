@@ -49,7 +49,34 @@ define("_PASSWORD_CONNEXION","Mot de passe");
 define("_PASSWORD_OUBLIE_CONNEXION","Mot de passe oublié ?");
 define("_SOUVENIR_CONNEXION","Se souvenir de moi");
 define("_PAS_COMPTE_CONNEXION","Vous n'avez pas de compte ?");
-define("_INSCRIPTION_CONNEXION","Inscrivez vous ici.");
+define("_INSCRIPTION_CONNEXION","Inscrivez vous ici."); 
+
+// Profil Navbar
+define("_TITRE_NAVBAR_INFOS","Mes informations");
+define("_TITRE_NAVBAR_ABO","Mes abonnements/Mon entreprise");
+define("_TITRE_NAVBAR_TRAJETS","Mes trajets");
+define("_TITRE_NAVBAR_ENTREPRISE","Mon entreprise");
+
+// Profil Navbar informations
+define("_TITRE_NAVBAR_INFOS_NOM","Nom");
+define("_TITRE_NAVBAR_INFOS_ADRESSE","Adresse");
+define("_TITRE_NAVBAR_INFOS_CODE_POSTAL","Code postal");
+define("_TITRE_NAVBAR_INFOS_PRENOM","Prénom");
+define("_TITRE_NAVBAR_INFOS_DATE_NAISSANCE","Date de naissance");
+define("_TITRE_NAVBAR_INFOS_GENRE","Genre");
+define("_TITRE_NAVBAR_INFOS_EDITER","Editer");
+define("_TITRE_NAVBAR_INFOS_SAUVEGARDER","Sauvegarder");
+
+// Profil Navbar Mes abonnements
+define("_TITRE_NAVBAR_ABO_SOUSCRIRE","Souscrire à un abonnement");
+define("_TITRE_NAVBAR_INFOS_QUITTER_ENTREPRISE","Quitter/Supprimer mon entreprise");
+define("_TITRE_NAVBAR_INFOS_REJOINDRE_ENTREPRISE","Rejoindre une entreprise");
+define("_TITRE_NAVBAR_INFOS_CREER_ENTREPRISE","Créer une entreprise");
+define("_TITRE_NAVBAR_INFOS_VOIR_INFOS_ABONNEMENTS","Voir les informations de mon abonnement / mon entreprise ");
+
+
+
+
 
 
  ?>

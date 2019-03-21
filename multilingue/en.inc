@@ -42,10 +42,6 @@ define("_INFO3_RESERVATION","In addition to our trips, we propose a number of se
 define("_TITRE_SERVICE","Reservation of your services");
 define("_TITRE_CHOOSE_SERVICE","Choose your services");
 
-
-
-
-
 //connexion
 define("_TITRE_CONNEXION","Connect to Ride in Pride");
 define("_LOGIN_CONNEXION","Login");
@@ -54,4 +50,29 @@ define("_PASSWORD_OUBLIE_CONNEXION","Password forgotten?");
 define("_SOUVENIR_CONNEXION","Remember me");
 define("_PAS_COMPTE_CONNEXION","You don't have an account ?");
 define("_INSCRIPTION_CONNEXION","Sign in here.");
+
+// Profil Navbar
+define("_TITRE_NAVBAR_INFOS","My informations");
+define("_TITRE_NAVBAR_ABO","My subscriptions/My company");
+define("_TITRE_NAVBAR_TRAJETS","My travels");
+define("_TITRE_NAVBAR_ENTREPRISE","My company");
+
+// Profil Navbar informations
+define("_TITRE_NAVBAR_INFOS_NOM","Name");
+define("_TITRE_NAVBAR_INFOS_ADRESSE","Adresse");
+define("_TITRE_NAVBAR_INFOS_CODE_POSTAL","Zip code");
+define("_TITRE_NAVBAR_INFOS_PRENOM","First name");
+define("_TITRE_NAVBAR_INFOS_DATE_NAISSANCE","Birthday");
+define("_TITRE_NAVBAR_INFOS_GENRE","Gender");
+define("_TITRE_NAVBAR_INFOS_EDITER","Edit");
+define("_TITRE_NAVBAR_INFOS_SAUVEGARDER","Save");
+
+// Profil Navbar Mes abonnements
+define("_TITRE_NAVBAR_ABO_SOUSCRIRE","make a subscription");
+define("_TITRE_NAVBAR_INFOS_QUITTER_ENTREPRISE","Leave/Delete my company");
+define("_TITRE_NAVBAR_INFOS_REJOINDRE_ENTREPRISE","Join a company");
+define("_TITRE_NAVBAR_INFOS_CREER_ENTREPRISE","Create a company");
+define("_TITRE_NAVBAR_INFOS_VOIR_INFOS_ABONNEMENTS","Check informations about my subscription/ company");
+
+
  ?>

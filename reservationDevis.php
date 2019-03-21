@@ -151,6 +151,15 @@ loadLanguageFromSession($_SESSION['lang']);
                     if ($linkService["idAnnexe"] < 0) {
                       echo "ID: ".$service["idService"]." | ".$service["nomService"]." | Quantitée: ".$linkService["quantite"];
                     }
+                    else if ($linkService["idService"] == 10) {
+                                                
+                      $req=$bdd->getPDO()->prepare('SELECT * FROM serviceautre WHERE emailClient = :emailClient ORDER BY idMessage DESC');
+                      $req->bindValue(':emailClient',$_SESSION['email']);
+                      $req->execute();
+                      $unMessage = $req->fetch();
+                      echo "ID: ".$service["idService"]." | ". $service["nomService"]." service | "."Votre message est  : ".$unMessage['contenuMessage']." publié le : ".$unMessage['dateMessage'];
+
+                    }
                     else if ($linkService["idService"] == 11) {
                       echo "ID: ".$service["idService"]." | ".$service["nomService"]." : ".$infoLinkService["last_name"]." ".$infoLinkService["first_name"]." | Langue: ".$infoLinkService["description"];
 
@@ -262,7 +271,9 @@ loadLanguageFromSession($_SESSION['lang']);
                         }elseif ($unIdService["idService"] == 8) {
                           $infoLinkService = $bdd->queryOne('SELECT * FROM billettourisme WHERE idBillet='.$linkService["idAnnexe"].'');
                           $typeEtablissement="Billet touristque";
-                        }elseif ($unIdService["idService"] == 11) {
+                        }
+                        
+                        elseif ($unIdService["idService"] == 11) {
                           $infoLinkService = $bdd->query('SELECT *  FROM collaborateurs INNER JOIN linkservicetrajet WHERE collaborateurs.idCollaborateurs = linkservicetrajet.idAnnexe AND idTrajet='.$_SESSION["idTrajet"].' AND idService ='.$unIdService["idService"].'');
                           $typeEtablissement="Interprete";
                           $infoLinkService=$infoLinkService[$i];
@@ -293,7 +304,15 @@ loadLanguageFromSession($_SESSION['lang']);
                           echo $service["nomService"].":  ".$linkService["quantite"]." * ".$service["prixService"]."€  = ".($service["prixService"]*$linkService["quantite"])."€";
                           $totalServices += ($service["prixService"]*$linkService["quantite"]);
 
-                        }else if ($linkService["idService"] == 11 || $linkService["idService"] == 12 || $linkService["idService"] == 13) {
+                        }
+                        
+                        else if ($linkService["idService"] == 10) {
+
+                          echo $service["nomService"]." service | "."Votre message est  : ".$unMessage['contenuMessage']." publié le : ".$unMessage['dateMessage']." | 0€ ";
+                          
+
+                        }
+                        else if ($linkService["idService"] == 11 || $linkService["idService"] == 12 || $linkService["idService"] == 13) {
                           echo $service["nomService"]." : ".$infoLinkService["last_name"]." ".$infoLinkService["first_name"]." | Prix: ".$infoLinkService["prixCollaborateur"]."€/h *".$numHour ."h = ".($infoLinkService["prixCollaborateur"]*$numHour)." €";
                           $totalServices += ($infoLinkService["prixCollaborateur"]*$numHour);
 

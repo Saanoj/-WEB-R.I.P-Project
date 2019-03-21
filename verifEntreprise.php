@@ -24,7 +24,6 @@ if (isset($_POST['nameEntreprise']) && !empty($_POST['nameEntreprise']) &&
 isset($_POST['numEntreprise']) && !empty($_POST['numEntreprise']) &&
 isset($_POST['numSiret']) && !empty($_POST['numSiret']) &&
 isset($_POST['adresse']) && !empty($_POST['adresse']) &&
-isset($_POST['nbSalarie']) && !empty($_POST['nbSalarie']) &&
 isset($_POST['pays']) && !empty($_POST['pays']) &&
 isset($_SESSION['id']) && !empty($_SESSION['id'])
 )
@@ -35,7 +34,7 @@ isset($_SESSION['id']) && !empty($_SESSION['id'])
             'nameEntreprise' => $_POST['nameEntreprise'],
             'numSiret' => $_POST['numSiret'],
             'adresse' => $_POST['adresse'],
-            'nbSalarie' => $_POST['nbSalarie'],
+            'nbSalarie' => 1,
             'pays' => $_POST['pays'],
             'idDirecteur' => $_SESSION['id'],
             'numEntreprise' => $_POST['numEntreprise']

@@ -47,7 +47,8 @@ else {
                                             <input type="text" name="adresse" id="adresse" class="form-control"  placeholder="Adresse de l'entreprise *" value="" onblur="checkadresse(this)"/>
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" name="nbSalarie" class="form-control"  placeholder="Nombre d'employés *" value="" onblur="checknbSalarie(this)"/>
+                                        <span>Nombre d'employés (vous-même)</span>
+                                            <input type="text" name="nbSalarie" class="form-control"  value="1" onblur="checknbSalarie(this)" disabled/>
                                         </div>
                                         <div class="form-group">
                                             <select class="form-control" name="pays" onblur="checkpays(this)">

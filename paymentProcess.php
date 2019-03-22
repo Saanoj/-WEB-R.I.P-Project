@@ -302,7 +302,7 @@ $pdf->MultiCell(100,5,"Date d'arrivé : ".dateFrench($trajet->getDateDebut())." 
 $pdf->Ln();
 
 
-var_dump(!empty($isAbonnee['idAbonnement']));
+// var_dump(!empty($isAbonnee['idAbonnement']));
 if(!empty($isAbonnee['idAbonnement'])){
 //Prix services
 //Fields Name position
@@ -380,7 +380,7 @@ $pdf->SetX(135);
 $pdf->MultiCell(30,8,($reqTrajet["distanceTrajet"]." Km"),1);
 $pdf->SetY($Y_Table_Position);
 $pdf->SetX(165);
-$pdf->MultiCell(30,8,($reqChauffeur["prixCollaborateur"]*$reqTrajet["distanceTrajet"])."€",1);
+$pdf->MultiCell(30,8,(sprintf("%.2f",$reqChauffeur["prixCollaborateur"]*$reqTrajet["distanceTrajet"]))."€",1);
 
 //prix trajet
 $Y_Fields_Name_position += ($counterService+1)*6;
@@ -404,10 +404,10 @@ $pdf->SetFont('DejaVu','',10);
 
 $pdf->SetY($Y_Table_Position);
 $pdf->SetX(165);
-$pdf->MultiCell(30,8,($reqTrajet["prixtrajet"])."€",1);
+$pdf->MultiCell(30,8,($real_price)."€",1);
 
 //var_dump($reqTrajet);
-echo "<p class='h2'>Total Services: ".$totalServices."€ TTC</p>";
+// echo "<p class='h2'>Total Services: ".$totalServices."€ TTC</p>";
 
 
 

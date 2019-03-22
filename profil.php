@@ -19,6 +19,29 @@ loadLanguageFromSession($_SESSION['lang']);
   <?php
   include 'includehtml/head.html'; ?>
   <link rel="stylesheet" href="css/profil/style.css">
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('#submitAvatar').on('click', function() {
+      id = $('#id').val();
+      var file_data = $('#file').prop('files')[0];
+      var form_data = new FormData();
+      form_data.append('file', file_data);
+      $.ajax({
+          url: 'ajaxAvatar.php', // point to server-side PHP script
+          dataType: 'text',  // what to expect back from the PHP script, if anything
+          cache: false,
+          contentType: false,
+          processData: false,
+          data: form_data,
+          type: 'post',
+          success: function(php_script_response){
+              //$('#message').html(php_script_response); // display response from the PHP script, if any
+              alert(php_script_response);
+          }
+       });
+     });
+    });
+  </script>
 </head>
 <body>
 
@@ -60,8 +83,34 @@ loadLanguageFromSession($_SESSION['lang']);
       <div class="row">
         <div class="col-md-4">
           <div class="profile-img">
-            <img src="images/henni.jpg" alt=""/>
-
+            <img class="img-container" src="images/avatar/<?php echo $datas["avatar"] ?>" alt=""/>
+          </div>
+          <div class="mt-2">
+            <div class="col-md-4 offset-2">
+              <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalimage">Ajouter un avatar</button>
+            </div>
+            <div class="modal fade" id="modalimage" tabindex="-1" role="dialog" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Ajoutez votre avatar</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body p-5">
+                    <form id="uploadimage" action="" method="post" enctype="multipart/form-data">
+                      <input class="col-md-8 offset-2" type="file" name="file" id="file">
+                      <input type="hidden" name="id" id="id" value="<?php echo $_SESSION["id"]; ?>">
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button id='submitAvatar' class="submit btn btn-primary">Upload</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="col-md-6">
@@ -81,9 +130,9 @@ loadLanguageFromSession($_SESSION['lang']);
                 <a class="nav-link" id="trajet-tab" data-toggle="tab" href="#trajet" role="tab" aria-controls="trajet" aria-selected="false"><?php echo _TITRE_NAVBAR_TRAJETS?></a>
               </li>
               <?php if ($uneEntreprise['idEntreprise'] != null) {?>
-              <li class="nav-item">
-                <a class="nav-link" id="entreprise-tab" data-toggle="tab" href="#entreprise" role="tab" aria-controls="entreprise" aria-selected="false"><?php echo _TITRE_NAVBAR_ENTREPRISE?></a>
-              </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="entreprise-tab" data-toggle="tab" href="#entreprise" role="tab" aria-controls="entreprise" aria-selected="false"><?php echo _TITRE_NAVBAR_ENTREPRISE?></a>
+                </li>
               <?php } ?>
             </ul>
           </div>
@@ -186,145 +235,145 @@ loadLanguageFromSession($_SESSION['lang']);
                   </div>
                 </div>
 
-                
 
-            
 
-    
+
+
+
               </div>
             </div>
             <?php
-            if (checkIfAbonnementValide($bdd) == true) { 
+            if (checkIfAbonnementValide($bdd) == true) {
               ?>
-        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-             <a href="abonnement.php"> <button type="button"  class="btn btn-success"><?php echo _TITRE_NAVBAR_ABO_SOUSCRIRE?></button></a>
-             <?php 
-             if (checkIfexistEntreprise($bdd) == true) {?>
-              <a href="deleteEntrepriseFromUser.php"> <button type="button"  class="btn btn-danger"><?php echo _TITRE_NAVBAR_INFOS_QUITTER_ENTREPRISE?></button></a>
-               <?php
-             } else { ?>
-               
-               <a href="joinEntreprise.php"> <button type="button"  class="btn btn-info"><?php echo _TITRE_NAVBAR_INFOS_REJOINDRE_ENTREPRISE?></button></a>
-               <a href="createEntreprise.php"> <button type="button"  class="btn btn-info"><?php echo _TITRE_NAVBAR_INFOS_CREER_ENTREPRISE?></button></a>
+              <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <a href="abonnement.php"> <button type="button"  class="btn btn-success"><?php echo _TITRE_NAVBAR_ABO_SOUSCRIRE?></button></a>
+                <?php
+                if (checkIfexistEntreprise($bdd) == true) {?>
+                  <a href="deleteEntrepriseFromUser.php"> <button type="button"  class="btn btn-danger"><?php echo _TITRE_NAVBAR_INFOS_QUITTER_ENTREPRISE?></button></a>
+                  <?php
+                } else { ?>
 
-            <?php  }?>
-            
-            </div>
-           <?php
-             } else { ?>
-            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            <a href="showAbonnementProfil.php"><button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal"><?php echo _TITRE_NAVBAR_INFOS_VOIR_INFOS_ABONNEMENTS?></button></a>
-            </div>
-             <?php  } 
-          
+                  <a href="joinEntreprise.php"> <button type="button"  class="btn btn-info"><?php echo _TITRE_NAVBAR_INFOS_REJOINDRE_ENTREPRISE?></button></a>
+                  <a href="createEntreprise.php"> <button type="button"  class="btn btn-info"><?php echo _TITRE_NAVBAR_INFOS_CREER_ENTREPRISE?></button></a>
+
+                <?php  }?>
+
+              </div>
+              <?php
+            } else { ?>
+              <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <a href="showAbonnementProfil.php"><button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal"><?php echo _TITRE_NAVBAR_INFOS_VOIR_INFOS_ABONNEMENTS?></button></a>
+              </div>
+            <?php  }
+
             ?>
 
 
-                <div class="tab-pane fade" id="trajet" role="tabpanel" aria-labelledby="trajet-tab">
+            <div class="tab-pane fade" id="trajet" role="tabpanel" aria-labelledby="trajet-tab">
 
-                  <div class="card">
-                    <div class="card-header">
-                      <div class="display-4">Vos trajets</div>
+              <div class="card">
+                <div class="card-header">
+                  <div class="display-4">Vos trajets</div>
+                </div>
+                <div class="card-body ">
+
+                  <?php
+                  $trajets = $bdd->queryPrepareForWhile("SELECT * FROM trajet WHERE idClient=".$_SESSION["id"]."",$bdd);
+
+                  while ($trajet = $trajets->fetch()) {
+                    echo "<div class='row list-group-item'>";
+                    echo "<p>ID:".$trajet["idTrajet"]."<p><div class='h4'>".$trajet["debut"]." <div class='glyphicon glyphicon-arrow-right'></div> ".$trajet["fin"]."</div>";
+                    echo "<p>".$trajet["duration"]."<p>";
+                    echo "<button class='btn btn-success p-3'>PDF</button>";
+                    echo "</div>";
+                  }
+                  ?>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+            <?php //// DEBUT ENTREPRISE ?>
+            <div class="tab-content entreprise-tab" id="myTabContent">
+              <div class="tab-pane fade" id="entreprise" role="tabpanel" aria-labelledby="entreprise-tab">
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>Id de l'entreprise</label>
+                  </div>
+                  <div class="col-md-6">
+                    <span id="idEntreprise" class="datainfo" value="'<?= $uneEntreprise['idEntreprise'];?>'"><?= $uneEntreprise['idEntreprise']; ?></span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>Nom de l'entreprise</label>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="gear">
+                      <span id="nameEntreprise" class="datainfo"><?= $uneEntreprise['nameEntreprise']; ?></span>
+                      <?php if($uneEntreprise['idDirecteur'] == $_SESSION['id']) {?>
+                        <a href="#" class="editlink">Editer</a>
+                        <a class="savebtn">Sauvegarder</a>
+                      <?php } ?>
                     </div>
-                    <div class="card-body ">
-
-                    <?php
-                    $trajets = $bdd->queryPrepareForWhile("SELECT * FROM trajet WHERE idClient=".$_SESSION["id"]."",$bdd);
-
-                    while ($trajet = $trajets->fetch()) {
-                      echo "<div class='row list-group-item'>";
-                      echo "<p>ID:".$trajet["idTrajet"]."<p><div class='h4'>".$trajet["debut"]." <div class='glyphicon glyphicon-arrow-right'></div> ".$trajet["fin"]."</div>";
-                      echo "<p>".$trajet["duration"]."<p>";
-                      echo "<button class='btn btn-success p-3'>PDF</button>";
-                      echo "</div>";
-                    }
-                     ?>
                   </div>
                 </div>
-              </div>
 
-           
-          
-
-                     
-
-    <?php //// DEBUT ENTREPRISE ?>
-          <div class="tab-content entreprise-tab" id="myTabContent">
-          <div class="tab-pane fade" id="entreprise" role="tabpanel" aria-labelledby="entreprise-tab">
-              <div class="row">
-                <div class="col-md-6">
-                  <label>Id de l'entreprise</label>
-                </div>
-                <div class="col-md-6">
-                  <span id="idEntreprise" class="datainfo" value="'<?= $uneEntreprise['idEntreprise'];?>'"><?= $uneEntreprise['idEntreprise']; ?></span>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <label>Nom de l'entreprise</label>
-                </div>
-                <div class="col-md-6">
-                  <div class="gear">
-                    <span id="nameEntreprise" class="datainfo"><?= $uneEntreprise['nameEntreprise']; ?></span>
-                    <?php if($uneEntreprise['idDirecteur'] == $_SESSION['id']) {?>
-                    <a href="#" class="editlink">Editer</a>
-                    <a class="savebtn">Sauvegarder</a>
-                    <?php } ?>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>Adresse de l'entreprise</label>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="gear">
+                      <span id="adresse" class="datainfo"><?= $uneEntreprise['adresse']; ?></span>
+                      <?php if($uneEntreprise['idDirecteur'] == $_SESSION['id']) {?>
+                        <a href="#" class="editlink">Editer</a>
+                        <a class="savebtn">Sauvegarder</a>
+                      <?php } ?>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="row">
-                <div class="col-md-6">
-                  <label>Adresse de l'entreprise</label>
-                </div>
-                <div class="col-md-6">
-                  <div class="gear">
-                    <span id="adresse" class="datainfo"><?= $uneEntreprise['adresse']; ?></span>
-                    <?php if($uneEntreprise['idDirecteur'] == $_SESSION['id']) {?>
-                    <a href="#" class="editlink">Editer</a>
-                    <a class="savebtn">Sauvegarder</a>
-                    <?php } ?>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>Numéro de l'entreprise</label>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="gear">
+                      <span id="numEntreprise" class="datainfo"><?= $uneEntreprise['numEntreprise']; ?></span>
+                      <?php if($uneEntreprise['idDirecteur'] == $_SESSION['id']) {?>
+                        <a href="#" class="editlink">Editer</a>
+                        <a class="savebtn">Sauvegarder</a>
+                      <?php } ?>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="row">
-                <div class="col-md-6">
-                  <label>Numéro de l'entreprise</label>
-                </div>
-                <div class="col-md-6">
-                  <div class="gear">
-                    <span id="numEntreprise" class="datainfo"><?= $uneEntreprise['numEntreprise']; ?></span>
-                    <?php if($uneEntreprise['idDirecteur'] == $_SESSION['id']) {?>
-                    <a href="#" class="editlink">Editer</a>
-                    <a class="savebtn">Sauvegarder</a>
-                    <?php } ?>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>Numéro SIRET de l'entreprise</label>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="gear">
+                      <span id="numSiret" class="datainfo"><?= $uneEntreprise['numSiret']; ?></span>
+                      <?php if($uneEntreprise['idDirecteur'] == $_SESSION['id']) {?>
+                        <a href="#" class="editlink">Editer</a>
+                        <a class="savebtn" >Sauvegarder</a>
+                      <?php } ?>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="row">
-                <div class="col-md-6">
-                  <label>Numéro SIRET de l'entreprise</label>
-                </div>
-                <div class="col-md-6">
-                  <div class="gear">
-                    <span id="numSiret" class="datainfo"><?= $uneEntreprise['numSiret']; ?></span>
-                    <?php if($uneEntreprise['idDirecteur'] == $_SESSION['id']) {?>
-                    <a href="#" class="editlink">Editer</a>
-                    <a class="savebtn" >Sauvegarder</a>
-                    <?php } ?>
-                  </div>
-                </div>
-              </div>
 
-          
-          
 
-<?php // -------- DELIMITATION ENTREPRISE ?>
 
-              
+                <?php // -------- DELIMITATION ENTREPRISE ?>
+
+
               </div>
             </div>
           </div>
@@ -337,44 +386,44 @@ loadLanguageFromSession($_SESSION['lang']);
 <?php include "includehtml/footer.php" ?>
 </html>
 <?php
-      function checkIfAbonnementValide($bdd) 
-            {
-            $req = $bdd->getPDO()->prepare('SELECT * FROM linkabonnemententreprise WHERE idClient = :idClient');
-            $req->execute(array('idClient' => $_SESSION['id']));
-            $req->closeCursor();
-            if ($req->rowCount() == 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-            }
+function checkIfAbonnementValide($bdd)
+{
+  $req = $bdd->getPDO()->prepare('SELECT * FROM linkabonnemententreprise WHERE idClient = :idClient');
+  $req->execute(array('idClient' => $_SESSION['id']));
+  $req->closeCursor();
+  if ($req->rowCount() == 0)
+  {
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}
 
-            function infosEntreprise($bdd)
-            {
-              $req = $bdd->getPDO()->prepare('SELECT * FROM `entreprise` WHERE idDirecteur = idDirecteur');
-              $req->execute(array("idDirecteur" => $_SESSION['id']));
-              return $req->fetch();
-              $req->closeCursor();
+function infosEntreprise($bdd)
+{
+  $req = $bdd->getPDO()->prepare('SELECT * FROM `entreprise` WHERE idDirecteur = idDirecteur');
+  $req->execute(array("idDirecteur" => $_SESSION['id']));
+  return $req->fetch();
+  $req->closeCursor();
 
-            }
+}
 
-            function checkIfexistEntreprise($bdd) 
-            {
-            $req = $bdd->getPDO()->prepare('SELECT * FROM users WHERE idEntreprise > 0 AND id = :id');
-            $req->execute(array('id' => $_SESSION['id']));
-            $req->closeCursor();
-            if ($req->rowCount() > 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-            }
+function checkIfexistEntreprise($bdd)
+{
+  $req = $bdd->getPDO()->prepare('SELECT * FROM users WHERE idEntreprise > 0 AND id = :id');
+  $req->execute(array('id' => $_SESSION['id']));
+  $req->closeCursor();
+  if ($req->rowCount() > 0)
+  {
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}
 
-            
-            ?>
+
+?>

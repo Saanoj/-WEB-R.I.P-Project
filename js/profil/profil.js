@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 	$(".editlink").on("click", function(e){
-		
+
 	  e.preventDefault();
 		var dataset = $(this).prev(".datainfo");
 		var savebtn = $(this).next(".savebtn");
@@ -30,14 +30,14 @@ $(document).ready(function(){
 		 }
 		$(this).css("display", "none");
 		savebtn.css("display", "block");
-		
+
 	});
 
 
 
 
 	$(".savebtn").on("click", function(e){
-		
+
 		e.preventDefault();
 		var elink   = $(this).prev(".editlink");
 		var dataset = elink.prev(".datainfo");
@@ -59,7 +59,7 @@ $(document).ready(function(){
 			{
 		dataset.html(newval);
 			}
-		
+
 
 		elink.css("display", "block");
 
@@ -73,7 +73,7 @@ function convertDate(dateString){
 }
 
 function updateProfil(newval,newid,idProfil,idEntreprise) {
-	
+
 	var request = new XMLHttpRequest();
 	request.onreadystatechange = function(){
 	  if(request.status == 200 && request.readyState == 4){
@@ -86,4 +86,4 @@ function updateProfil(newval,newid,idProfil,idEntreprise) {
 		console.log(data)
   }
 
-
+	

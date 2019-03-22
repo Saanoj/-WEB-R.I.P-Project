@@ -143,7 +143,7 @@ if  (
     if ($req === 0)
     {
       if ($user->checkDateBirth() === 1) {
-        $req2 = $user->addUser($bdd,'INSERT INTO `users` (`email`, `password`, `last_name`, `birthday`, `gender`,`first_name`,`isBanned`,`isAdmin`,`isCollaborateur`) VALUES (:email,:password,:last_name,:birthday,:gender,:first_name,:isBanned,:isAdmin,0);',$user);
+        $req2 = $user->addUser($bdd,'INSERT INTO `users` (`email`, `password`, `last_name`, `birthday`, `gender`,`first_name`,`isBanned`,`isAdmin`,`isCollaborateur`,`avatar`) VALUES (:email,:password,:last_name,:birthday,:gender,:first_name,:isBanned,:isAdmin,0,"ripdefaultavatar.png");',$user);
         $user->startSession($bdd,'SELECT id FROM users WHERE email = :email');
         header('location:index.php?id='.$_SESSION['id'].'');
       }

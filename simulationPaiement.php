@@ -20,19 +20,7 @@ loadLanguageFromSession($_SESSION['lang']);
   <link rel="stylesheet" href="css/simulationPaiement/bootstrapValidator-min.css"/>
   <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
   <link rel="stylesheet" href="css/simulationPaiement/bootstrap-side-notes.css" />
-  <style type="text/css">
-  .col-centered {
-    display:inline-block;
-    float:none;
-    text-align:left;
-    margin-right:-4px;
-  }
-  .row-centered {
-    margin-left: 9px;
-    margin-right: 9px;
-  }
 
-</style>
 <?php
 require 'Class/Autoloader.php';
 App\Autoloader::register();
@@ -58,189 +46,8 @@ include 'includehtml/head.html'; ?>
 <script src="js/simulationPaiement/bootstrap-min.js"></script>
 <script src="js/simulationPaiement/bootstrap-formhelpers-min.js"></script>
 <script type="text/javascript" src="js/simulationPaiement/bootstrapValidator-min.js"></script>
-<script type="text/javascript">
 
-$(document).ready(function() {
-  $('#payment-form').bootstrapValidator({
-    message: 'This value is not valid',
-    feedbackIcons: {
-      valid: 'glyphicon glyphicon-ok',
-      invalid: 'glyphicon glyphicon-remove',
-      validating: 'glyphicon glyphicon-refresh'
-    },
-    submitHandler: function(validator, form, submitButton) {
-      // createToken returns immediately - the supplied callback submits the form if there are no errors
-      Stripe.card.createToken({
-        number: $('.card-number').val(),
-        cvc: $('.card-cvc').val(),
-        exp_month: $('.card-expiry-month').val(),
-        exp_year: $('.card-expiry-year').val()
 
-      }, stripeResponseHandler);
-      return false; // submit from callback
-    },
-    fields: {
-      cardholdername: {
-        validators: {
-          notEmpty: {
-            message: 'Le nom de la carte bleu ne peut pas être vide.'
-          },
-          stringLength: {
-            min: 6,
-            max: 70,
-            message: 'La taille du nom doit faire entre 6 et 70 caractères.'
-          }
-        }
-      },
-      cardnumber: {
-        selector: '#cardnumber',
-        validators: {
-          notEmpty: {
-            message: 'Le numéro de carte bleu ne peut pas être vide.'
-          },
-          creditCard: {
-            message: 'La carte de crédit n\'est pas valide.'
-          },
-        }
-      },
-      expMonth: {
-        selector: '[data-stripe="exp-month"]',
-        validators: {
-          notEmpty: {
-            message: 'La date d\'expiration est obligatoire.'
-          },
-          digits: {
-            message: 'La date d\'expiration est composé de chiffres uniquement.'
-          },
-          callback: {
-            message: 'Expired',
-            callback: function(value, validator) {
-              value = parseInt(value, 10);
-              var year         = validator.getFieldElements('expYear').val(),
-              currentMonth = new Date().getMonth() + 1,
-              currentYear  = new Date().getFullYear();
-              if (value < 0 || value > 12) {
-                return false;
-              }
-              if (year == '') {
-                return true;
-              }
-              year = parseInt(year, 10);
-              if (year > currentYear || (year == currentYear && value > currentMonth)) {
-                validator.updateStatus('expYear', 'VALID');
-                return true;
-              } else {
-                return false;
-              }
-            }
-          }
-        }
-      },
-      expYear: {
-        selector: '[data-stripe="exp-year"]',
-        validators: {
-          notEmpty: {
-            message: 'La date d\'expiration est obligatoire.'
-          },
-          digits: {
-            message: 'La date d\'expiration est composé de chiffres uniquement.'
-          },
-          callback: {
-            message: 'Expired',
-            callback: function(value, validator) {
-              value = parseInt(value, 10);
-              var month        = validator.getFieldElements('expMonth').val(),
-              currentMonth = new Date().getMonth() + 1,
-              currentYear  = new Date().getFullYear();
-              if (value < currentYear || value > currentYear + 100) {
-                return false;
-              }
-              if (month == '') {
-                return false;
-              }
-              month = parseInt(month, 10);
-              if (value > currentYear || (value == currentYear && month > currentMonth)) {
-                validator.updateStatus('expMonth', 'VALID');
-                return true;
-              } else {
-                return false;
-              }
-            }
-          }
-        }
-      },
-      cvv: {
-        selector: '#cvv',
-        validators: {
-          notEmpty: {
-            message: 'Le code CVV est obligatoire.'
-          },
-          cvv: {
-            message: 'Code invalide.',
-            creditCardField: 'cardnumber'
-          }
-        }
-      },
-    }
-  });
-});
-</script>
-<script type="text/javascript">
-// this identifies your website in the createToken call below
-Stripe.setPublishableKey('pk_test_lwDEu24XNnK0Phc4YD3aagcp');
-
-function stripeResponseHandler(status, response) {
-  if (response.error) {
-    // re-enable the submit button
-    $('.submit-button').removeAttr("disabled");
-    // show hidden div
-    document.getElementById('a_x200').style.display = 'block';
-    // show the errors on the form
-    $(".payment-errors").html(response.error.message);
-  } else {
-    var form$ = $("#payment-form");
-    // token contains id, last4, and card type
-    var token = response['id'];
-    // insert the token into the form so it gets submitted to the server
-    form$.append("<input type='hidden' name='stripeToken' value='" + token + "' />");
-    // and submit
-    form$.get(0).submit();
-  }
-}
-
-function addPDFButton(){
-  var button = document.createElement("submit");
-	button.onclick = function(){sayHi()};
-  button.className = "btn btn-success";
-	button.innerText = "Facture PDF";
-  document.getElementById('id1').appendChild(button);
-  generatePDF();
- 
-
-}
-
-function sayHi(){
-  console.log("Hi mate :3");
-  generatePDF();
-  document.location.href="paymentProcess.php";
-}
-
-function generatePDF() {
-  	var request = new XMLHttpRequest();
-	request.onreadystatechange = function(){
-	  if(request.status == 200 && request.readyState == 4){
-
-	  }
-	};
-	data=''
-	request.open('POST', 'paymentProcess.php');
-	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
-	request.send(data);
-	return false;
-
-  }
-
-</script>
 </head>
 <body>
   <form action="" method="POST" id="payment-form" class="form-horizontal">
@@ -292,16 +99,6 @@ function generatePDF() {
           <?= $error ?>
         </span>
 
-
-
-        <!-- Card Holder Name -->
-        <div class="form-group">
-          <label class="col-sm-4 control-label"  for="textinput">Nom et Prenom</label>
-          <div class="col-sm-6">
-            <input type="text" name="cardholdername" maxlength="70" placeholder="Nom et Prenom" class="card-holder-name form-control">
-          </div>
-        </div>
-
         <!-- Card Number -->
         <div class="form-group">
           <label class="col-sm-4 control-label" for="textinput">Numéro de carte</label>
@@ -348,7 +145,7 @@ function generatePDF() {
         <div class="form-group">
           <label class="col-sm-4 control-label" for="textinput">CVV</label>
           <div class="col-sm-3">
-            <input type="text" id="cvv" placeholder="CVV" maxlength="4" class="card-cvc form-control">
+            <input type="text" id="cvv" placeholder="CVV" maxlength="3" class="card-cvc form-control">
           </div>
         </div>
 
@@ -358,7 +155,7 @@ function generatePDF() {
         <div class="control-group">
           <div class="controls">
             <center>
-              <button class="btn btn-success" type="submit">Payez maintenant <?= $_SESSION['price']."€";?></button>
+              <button class="btn btn-success" id="buttonSuccess" type="submit">Payez maintenant <?= $_SESSION['price']."€";?></button>
             </center>
           </div>
         </div>
@@ -374,5 +171,6 @@ function generatePDF() {
       </fieldset>
     </form>
     <?php //  include "includehtml/footer.php" ?>
+    <script src="js/simulationPaiement/main.js"></script>
   </body>
   </html>

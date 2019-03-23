@@ -154,7 +154,7 @@ loadLanguageFromSession($_SESSION['lang']);
     </div>
   </div>
   <script type="text/javascript">
-  
+
   </script>
   <select name="model" id="testing">
     <option value="DB11" class="Aston-Martin">DB11</option>

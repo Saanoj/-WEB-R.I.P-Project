@@ -1,94 +1,39 @@
 $(document).ready(function() {
   $('#payment-form').bootstrapValidator({
-    message: 'This value is not valid',
+    message: 'Valeur invalide',
     feedbackIcons: {
       valid: 'glyphicon glyphicon-ok',
       invalid: 'glyphicon glyphicon-remove',
       validating: 'glyphicon glyphicon-refresh'
     },
     submitHandler: function(validator, form, submitButton) {
-      // createToken returns immediately - the supplied callback submits the form if there are no errors
+
+      // Créer un token qui se génère instantanément. S'il n'y a pas d'erreur dans le formulaire => on soumet les informations a Stripe
       Stripe.card.createToken({
         number: $('.card-number').val(),
         cvc: $('.card-cvc').val(),
         exp_month: $('.card-expiry-month').val(),
-        exp_year: $('.card-expiry-year').val(),
-        name: $('.card-holder-name').val(),
-        address_line1: $('.address').val(),
-        address_city: $('.city').val(),
-        address_zip: $('.zip').val(),
-        address_state: $('.state').val(),
-        address_country: $('.country').val()
+        exp_year: $('.card-expiry-year').val()
+
       }, stripeResponseHandler);
       return false; // submit from callback
     },
     fields: {
-      street: {
-        validators: {
-          notEmpty: {
-            message: 'The street is required and cannot be empty'
-          },
-          stringLength: {
-            min: 6,
-            max: 96,
-            message: 'The street must be more than 6 and less than 96 characters long'
-          }
-        }
-      },
-      city: {
-        validators: {
-          notEmpty: {
-            message: 'The city is required and cannot be empty'
-          }
-        }
-      },
-      zip: {
-        validators: {
-          notEmpty: {
-            message: 'The zip is required and cannot be empty'
-          },
-          stringLength: {
-            min: 3,
-            max: 9,
-            message: 'The zip must be more than 3 and less than 9 characters long'
-          }
-        }
-      },
-      email: {
-        validators: {
-          notEmpty: {
-            message: 'The email address is required and can\'t be empty'
-          },
-          emailAddress: {
-            message: 'The input is not a valid email address'
-          },
-          stringLength: {
-            min: 6,
-            max: 65,
-            message: 'The email must be more than 6 and less than 65 characters long'
-          }
-        }
-      },
       cardholdername: {
         validators: {
           notEmpty: {
-            message: 'The card holder name is required and can\'t be empty'
+            message: 'Le nom de la carte bleu ne peut pas être vide.'
           },
-          stringLength: {
-            min: 6,
-            max: 70,
-            message: 'The card holder name must be more than 6 and less than 70 characters long'
-          }
         }
       },
       cardnumber: {
         selector: '#cardnumber',
         validators: {
           notEmpty: {
-            message: 'The credit card number is required and can\'t be empty'
+            message: 'Le numéro de carte bleu ne peut pas être vide.'
           },
           creditCard: {
-            message: 'The credit card number is invalid'
+            message: 'La carte de crédit n\'est pas valide.'
           },
         }
       },
@@ -96,13 +41,13 @@ $(document).ready(function() {
         selector: '[data-stripe="exp-month"]',
         validators: {
           notEmpty: {
-            message: 'The expiration month is required'
+            message: 'La date d\'expiration est obligatoire.'
           },
           digits: {
-            message: 'The expiration month can contain digits only'
+            message: 'La date d\'expiration est composé de chiffres uniquement.'
           },
           callback: {
-            message: 'Expired',
+            message: 'Mois invalide',
             callback: function(value, validator) {
               value = parseInt(value, 10);
               var year         = validator.getFieldElements('expYear').val(),
@@ -129,13 +74,13 @@ $(document).ready(function() {
         selector: '[data-stripe="exp-year"]',
         validators: {
           notEmpty: {
-            message: 'The expiration year is required'
+            message: 'La date d\'expiration est obligatoire.'
           },
           digits: {
-            message: 'The expiration year can contain digits only'
+            message: 'La date d\'expiration est composé de chiffres uniquement.'
           },
           callback: {
-            message: 'Expired',
+            message: 'Année invalide',
             callback: function(value, validator) {
               value = parseInt(value, 10);
               var month        = validator.getFieldElements('expMonth').val(),
@@ -162,10 +107,10 @@ $(document).ready(function() {
         selector: '#cvv',
         validators: {
           notEmpty: {
-            message: 'The cvv is required and can\'t be empty'
+            message: 'Le code CVV est obligatoire.'
           },
           cvv: {
-            message: 'The value is not a valid CVV',
+            message: 'Code invalide.',
             creditCardField: 'cardnumber'
           }
         }
@@ -195,4 +140,33 @@ function stripeResponseHandler(status, response) {
     form$.get(0).submit();
   }
 }
+
+function addPDFButton(){
+  var button = document.createElement("submit");
+  var buttonSuccess = document.getElementById('buttonSuccess').remove();
+  button.className = "btn btn-success";
+	button.innerText = "Facture PDF";
+  document.getElementById('id1').appendChild(button);
+  generatePDF();
+  document.location.href="paymentProcess.php";
+ 
+
+}
+
+
+
+function generatePDF() {
+  	var request = new XMLHttpRequest();
+	request.onreadystatechange = function(){
+	  if(request.status == 200 && request.readyState == 4){
+
+	  }
+	};
+	data=''
+	request.open('POST', 'paymentProcess.php');
+	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+	request.send(data);
+	return false;
+
+  }
 

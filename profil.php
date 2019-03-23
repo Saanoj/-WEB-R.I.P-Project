@@ -40,6 +40,21 @@ loadLanguageFromSession($_SESSION['lang']);
           }
        });
      });
+
+     $('#resetAvatar').on('click', function() {
+
+     $.ajax({
+         url: 'ajaxResetAvatar.php', // point to server-side PHP script
+         dataType: 'text',  // what to expect back from the PHP script, if anything
+         cache: false,
+         contentType: false,
+         processData: false,
+         type: 'post',
+         success: function(php_script_response){
+             alert(php_script_response);
+         }
+      });
+    });
     });
   </script>
 </head>
@@ -86,8 +101,9 @@ loadLanguageFromSession($_SESSION['lang']);
             <img class="img-container" src="images/avatar/<?php echo $datas["avatar"] ?>" alt=""/>
           </div>
           <div class="mt-2">
-            <div class="col-md-4 offset-2">
-              <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalimage">Ajouter un avatar</button>
+            <div class="offset-4">
+              <button type="button" class="btn" data-toggle="modal" data-target="#modalimage"><span class="glyphicon glyphicon-plus-sign" style="font-size: 30px;"></button>
+              <button type="button" class="btn" id="resetAvatar"><span class="glyphicon glyphicon-remove-circle" style="font-size: 30px;"></span></button>
             </div>
             <div class="modal fade" id="modalimage" tabindex="-1" role="dialog" aria-hidden="true">
               <div class="modal-dialog" role="document">

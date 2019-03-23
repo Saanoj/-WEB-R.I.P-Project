@@ -20,7 +20,23 @@ $bdd = new Database('rip');
 $req = $bdd->getPDO()->prepare('SELECT * FROM users INNER JOIN abonnement INNER JOIN linkabonnemententreprise ON users.id = ? AND abonnement.idAbonnement = linkabonnemententreprise.idAbonnement');
 $req->execute(array($_SESSION['id']));
 $unAbonnement = $req->fetch();
+
+
+
 ?>
+
+<!-- ENTREPRISE <!-->
+<?php if ($unAbonnement['idAbonnement'] == 3 || $unAbonnement['idAbonnement'] == 4)
+{
+        
+        $req = $bdd->getPDO()->prepare('SELECT * FROM linkabonnemententreprise INNER JOIN abonnement INNER JOIN entreprise ON linkabonnemententreprise.idClient = :idClient AND abonnement.idAbonnement = :idAbonnement AND entreprise.idEntreprise = linkabonnemententreprise.idEntreprise');
+        $req->execute(array(
+        'idClient' => $_SESSION['id'],
+        'idAbonnement' => $unAbonnement['idAbonnement']
+    ));
+        $uneEntreprise = $req->fetch();
+}
+        ?>
 <body>
 <form action="profil.php">
 
@@ -74,7 +90,14 @@ $unAbonnement = $req->fetch();
 
                                     
                                         <input type="submit" class="btnRegister"  value="Profil"/>
+                                        <?php  if ($unAbonnement['idAbonnement'] == 3 || $unAbonnement['idAbonnement'] == 4)
+                                            {
+                                                 if ($uneEntreprise['idDirecteur'] == $_SESSION['id']) {?>
                                         <a href="profil.php"><button type="button" class="btnRegister" data-toggle="modal" data-target="#exampleModal"onclick="deleteAbonnement()">Supprimer abo</button></a>
+                                        <?php } }
+                                        else {?>
+                                        <a href="profil.php"><button type="button" class="btnRegister" data-toggle="modal" data-target="#exampleModal"onclick="deleteAbonnement()">Supprimer abo</button></a>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>
@@ -84,13 +107,9 @@ $unAbonnement = $req->fetch();
                             </div>
                             
 
-                            <!-- ENTREPRISE <!-->
-                            <?php if ($unAbonnement['idAbonnement'] == 3 || $unAbonnement['idAbonnement'] == 4)
-                            {
-                            $req = $bdd->getPDO()->prepare('SELECT * FROM `entreprise` INNER JOIN abonnement where entreprise.idDirecteur = :idDirecteur AND abonnement.idAbonnement = :idAbonnement');
-                            $req->execute(array("idDirecteur" => $_SESSION['id'],'idAbonnement' => $unAbonnement['idAbonnement']));
-                            $uneEntreprise = $req->fetch();
-                            ?>
+                        <?php if ($unAbonnement['idAbonnement'] == 3 || $unAbonnement['idAbonnement'] == 4)
+                            { ?>
+
                             
                             <div class="container register">
                 <div class="row">
@@ -147,17 +166,21 @@ $unAbonnement = $req->fetch();
                                        
                                        
                                         <input type="submit" class="btnRegister"  value="Profil"/>
+                                        <?php  if ($unAbonnement['idAbonnement'] == 3 || $unAbonnement['idAbonnement'] == 4)
+                                        {
+                                        if ($uneEntreprise['idDirecteur'] == $_SESSION['id']) {?>
                                         <a href="profil.php"><button type="button" class="btnRegister" data-toggle="modal" data-target="#exampleModal"onclick="deleteEntreprise()">Supprimer entreprise</button></a>
-
+                                        <?php }}?>
                                     </div>
                                 </div>
+                                        <?php } ?>
 
                             </div>
                             </div>
                             </div>
                             </div>
                             </div>
-                            <?php } ?>
+                          
                             </form>
 
                             </body>

@@ -279,6 +279,7 @@ loadLanguageFromSession($_SESSION['lang']);
             } else { ?>
               <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                 <a href="showAbonnementProfil.php"><button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal"><?php echo _TITRE_NAVBAR_INFOS_VOIR_INFOS_ABONNEMENTS?></button></a>
+                <a href="deleteEntrepriseFromUser.php"> <button type="button"  class="btn btn-danger"><?php echo _TITRE_NAVBAR_INFOS_QUITTER_ENTREPRISE?></button></a>
               </div>
             <?php  }
 

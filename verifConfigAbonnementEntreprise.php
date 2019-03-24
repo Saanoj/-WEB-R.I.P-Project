@@ -52,9 +52,10 @@ while ($uneEntreprise = $req->fetch())
 $req->closeCursor();
 ?>
 <div class="alert alert-success" role="alert">
-Tous vos salariés possèdent à présent un abonnement ! Vous allez être redirigé dans quelques secondes.
+Votre entreprise possède désormais un abonnement. Dîtes à vos salariés de rejoindre l'entreprise afin de profiter des différents services ! <br>
+Vous allez être redirigé dans quelques secondes.
 </div>
 <?php
- header ("Refresh: 3;URL=index.php");
+ header ("Refresh: 6;URL=index.php");
 
 ?>

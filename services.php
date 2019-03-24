@@ -42,17 +42,6 @@ loadLanguageFromSession($_SESSION['lang']);
   $navbar->navbar();
 
   $form = new App\Form(array());
-
-
-  $hour = $_SESSION['timeStart'];
-  $res=explode(' ',$hour);
-  //var_dump($res[1]);
-  // var_dump(strotime($res[1]));
-  //var_dump(strtotime($hour));
-  ;
-
-
-
   ?>
 
   <div class="container">

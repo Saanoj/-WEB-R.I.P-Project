@@ -30,6 +30,56 @@ $type = 0;
 $navbar = new App\Navbar($backOffice,$type);
 $navbar->navbar();
 $form = new App\Form(array());
+ if (isset($_GET['idAbonnement'])) {
+$req = $bdd->getPDO()->prepare('SELECT * FROM users INNER JOIN abonnement ON users.id = ? AND abonnement.idAbonnement = ?');
+$req->execute(array($_SESSION['id'],$_GET['idAbonnement']));
+$unAbonnement = $req->fetch();
+
+if ($_GET['isEngagement'] == 0)
+{
+    $prixTotal = 28;
+}
+else
+{
+    $prixTotal = 20;
+}
+ }
+
+ else 
+ {
+  $req = $bdd->getPDO()->prepare('SELECT * FROM entreprise INNER JOIN abonnement ON entreprise.idDirecteur = :idDirecteur');
+  $req->execute(array("idDirecteur" => $_SESSION['id']));
+  $uneEntreprise = $req->fetch();
+      if ($_GET['isEngagement'] == 0) 
+      {
+        $prixTotal = 80;
+      }
+      else 
+      {
+        $prixTotal = 65;
+      }
+      /*
+      $nbSalarie = $uneEntreprise['nbSalarie'];
+      $count=0;
+      if ($nbSalarie <= 10)
+      {
+          $prixTotal = 65;
+      }
+      if ($nbSalarie > 10 )
+      {
+          
+          for ($i=$nbSalarie;$i>0;)
+          {
+              $count +=1;
+              $i -=10;
+           
+          }
+  
+          $prixTotal = 85+(12*$count);
+  
+      }
+      */
+ }
 
 
 
@@ -47,7 +97,8 @@ include 'includehtml/head.html'; ?>
     <div class="row row-centered">
       <div class="col-md-4 col-md-offset-4">
         <div class="page-header">
-        <h1> Payez votre abonnement </h1> <br>
+        <h1> Payez votre abonnement.</h1> <h3>Vous serez débiter <?= $prixTotal.'€/mois'; ?> . <br>
+         Vous pouvez annuler votre abonnement quand vous voulez dans votre profil.</h3>  <br>
           <h2 class="gdfg">Paiement sécurisé.</h2>
         </div>
         <noscript>
@@ -59,7 +110,7 @@ include 'includehtml/head.html'; ?>
         <?php
         // On récupère les informations de l'abonnement en cours afin qu'il puisse payez avec les infos qu'on a
 
-        
+       // $req = $bdd->getPDO()->prepare('SELECT ')
 
 
         require_once 'lib/Stripe.php';
@@ -74,16 +125,32 @@ include 'includehtml/head.html'; ?>
           try {
             if (!isset($_POST['stripeToken']))
             throw new Exception("Le token a mal été généré.");
-            Stripe_Plan::create([
-                "amount" => 0,
+            if (isset($_GET['idAbonnement'])) {
+              Stripe_Plan::create([
+                "amount" => $prixTotal*100,
                 "interval" => "month",
-                "nickname" => 'Jean Paul',
+                "nickname" => $unAbonnement['typeAbonnement'],
                 "product" => [
-                  "name" => "Abonnement test"
+                  "name" => $unAbonnement['first_name'].' '.$unAbonnement['last_name']
+                  
                 ],
                 "currency" => "eur",
-                "id" => "Abonnement"
-                ]);
+                
+
+              ]);
+            }
+            else 
+            {
+              Stripe_Plan::create([
+              "amount" => $prixTotal*100,
+              "interval" => "month",
+              "product" => [
+                "name" => $uneEntreprise['nameEntreprise']
+              ],
+              "currency" => "eur",
+              "id" => $uneEntreprise['idEntreprise']              
+            ]);
+            }
             $success = '<div class="alert alert-success">
             <strong>Bravo!</strong> Votre paiement a été accepté.
             </div><script>
@@ -161,7 +228,7 @@ include 'includehtml/head.html'; ?>
         <div class="control-group">
           <div class="controls">
             <center>
-              <button class="btn btn-success" id="buttonSuccess" type="submit">Payez maintenant <?= $_SESSION['price']."€";?></button>
+              <button class="btn btn-success" id="buttonSuccess" type="submit">Payez maintenant <?= $prixTotal."€";?></button>
             </center>
           </div>
         </div>
@@ -177,6 +244,7 @@ include 'includehtml/head.html'; ?>
       </fieldset>
     </form>
     <?php //  include "includehtml/footer.php" ?>
+    <script src="js/paiementAbonnement/main.js"></script>
     
   </body>
   </html>

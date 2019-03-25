@@ -20,7 +20,18 @@ $bdd = new Database('rip');
 $req = $bdd->getPDO()->prepare('SELECT * FROM entreprise INNER JOIN abonnement ON entreprise.idDirecteur = :idDirecteur');
 $req->execute(array("idDirecteur" => $_SESSION['id']));
 $uneEntreprise = $req->fetch();
-    
+
+$isEngagement = $_GET['isEngagement'];
+if ($isEngagement == 0) 
+{
+  $prixTotal = 80;
+}
+else 
+{
+  $prixTotal = 65;
+}
+
+/*
     $nbSalarie = $uneEntreprise['nbSalarie'];
     $count=0;
     if ($nbSalarie <= 10)
@@ -40,10 +51,11 @@ $uneEntreprise = $req->fetch();
         $prixTotal = 85+(12*$count);
 
     }
+    */
 
 ?>
 <body>
-<form  method="post" action="verifConfigAbonnementEntreprise.php?isEngagement=<?= $_GET['isEngagement'];?>">
+<form  method="post" action="paiementAbonnement.php?isEngagement=<?= $isEngagement;?>">
 <div class="container register">
                 <div class="row">
                     <div class="col-md-3 register-left">
@@ -74,7 +86,7 @@ $uneEntreprise = $req->fetch();
                                         </div>
                                         <div class="form-group">
                                         <span >Engagement sur 12 mois</span>
-                                            <input type="text" name="isEngagement" class="form-control" value="<?php if($_GET['isEngagement'] == 1) {echo "Oui";} else{echo "Non";}?>" disabled/>
+                                            <input type="text" name="isEngagement" class="form-control" value="<?php if( $isEngagement == 1) {echo "Oui";} else{echo "Non";}?>" disabled/>
                                         </div>
                                        
                                        

@@ -101,7 +101,8 @@ function req($idAbonnement,$isEngagement,$dateFin,$bdd)
     $req->closeCursor();
 ?>
     <?php 
-    header ('Refresh: 0;URL=recapAbonnement?isEngagement='.$isEngagement.'&idAbonnement='.$idAbonnement.'');
+    header('location:paiementAbonnement.php?isEngagement='.$isEngagement.'&idAbonnement='.$idAbonnement.'');
+  //  header ('Refresh: 0;URL=recapAbonnement?isEngagement='.$isEngagement.'&idAbonnement='.$idAbonnement.'');
 }
 else 
 {
@@ -126,6 +127,7 @@ function reqEntreprise($bdd,$isEngagement)
  else
  {
     header('location:configAbonnementEntreprise.php?isEngagement='.$isEngagement.'');
+    
  }
  
 }

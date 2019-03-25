@@ -24,7 +24,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/statsToExcel/Bdd.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="788">
+            <state relative-caret-position="1037">
               <caret line="61" column="7" selection-start-line="61" selection-start-column="7" selection-end-line="61" selection-end-column="7" />
             </state>
           </provider>
@@ -83,7 +83,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="1017" />
     <option name="width" value="1038" />
     <option name="height" value="1113" />
@@ -184,9 +184,9 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1017" y="0" width="1038" height="1113" extended-state="0" />
+    <frame x="-8" y="-8" width="2064" height="1122" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22494887" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.10978044" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -243,7 +243,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/statsToExcel/Bdd.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="788">
+        <state relative-caret-position="1037">
           <caret line="61" column="7" selection-start-line="61" selection-start-column="7" selection-end-line="61" selection-end-column="7" />
         </state>
       </provider>

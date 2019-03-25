@@ -56,4 +56,4 @@ $req->execute(array('id' => $_SESSION['id']));
 $req->closeCursor();
 
 
- // header('location:profil.php');
+  header('location:profil.php');

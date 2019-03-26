@@ -1,14 +1,9 @@
 <!doctype html>
 <html>
 <head>
-<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<?php include "includehtml/head.html" ?>
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 <meta charset="utf-8">
 <link rel="stylesheet" href="css/abonnement/style.css">
 <title>Abonnement</title>
@@ -79,7 +74,7 @@
                             <span class="heading">
                                 <h3>Entreprise</h3>
                             </span>
-                            
+
                             <span class="price-value">65€ /mois<span class="month">Engagement sur 12 mois</span>
                             <span class="month">Accès privilégié en illimité 7/7j</span>
                         </span>
@@ -92,7 +87,7 @@
             </div>
         </div>
     </div>
-    
+
 </form>
 
 </body>

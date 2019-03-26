@@ -514,12 +514,7 @@ loadLanguageFromSession($_SESSION['lang']);
 
 
       <?php include "includehtml/footer.php" ?>
-      <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-      <script src="js/bootstrap.min.js"></script>
-      <script src="js/popper.min.js"></script>
       <script src="js/reservationChooseService/main.js"></script>
-      <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
       <script src="js/reservationChooseService/calendrier.js"></script>
-      <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
     </body>
     </html>

@@ -22,28 +22,18 @@ loadLanguageFromSession($_SESSION['lang']);
   <link rel="stylesheet" type="text/css" href="css/ReservationTrajet/bootstrap4/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="css/ReservationTrajet/main_styles.css">
   <link rel="stylesheet" type="text/css" href="css/ReservationTrajet/responsive.css">
-  <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
   <script src="js/popper.min.js"></script>
 
   <?php
 
   include 'includehtml/head.html';
-  require 'Class/Autoloader.php';
-  App\Autoloader::register();
-  $backOffice=0;
-  $type = 0;
-  $navbar = new App\Navbar($backOffice,$type);
-  $navbar->navbar();
-  $Session = new App\Session($_SESSION['id']);
-  $Session->isConnect();
-  $form = new App\Form();
+
 
   //avoir l'objet membre pour check son adresse pour le boutton d'autocomplétion
-  if(isset($_SESSION["user"]) && !empty($_SESSION["user"])){
-    $membre = unserialize($_SESSION["user"]);
-  }
+  //if(isset($_SESSION["user"]) && !empty($_SESSION["user"])){
+    //$membre = unserialize($_SESSION["user"]);
+  //}
+
   ?>
   <script type="text/javascript">
   function autoFillStart(home) {
@@ -57,6 +47,21 @@ loadLanguageFromSession($_SESSION['lang']);
   </script>
 </head>
 <body>
+  <?php
+  require 'Class/Autoloader.php';
+  App\Autoloader::register();
+  $bdd = new App\Database('rip');
+  $backOffice=0;
+  $type = 0;
+  $navbar = new App\Navbar($backOffice,$type);
+  $navbar->navbar();
+  $Session = new App\Session($_SESSION['id']);
+  $Session->isConnect();
+  $form = new App\Form();
+
+
+  $user=$bdd->queryOne('SELECT * FROM users WHERE id='.$_SESSION["id"].'');
+   ?>
   <div class="">
     <!-- Home -->
     <div class="">
@@ -73,11 +78,11 @@ loadLanguageFromSession($_SESSION['lang']);
         </div>
         <div class="row pt-4 pb-4 bg-secondary rounded">
           <!-- boutton d'autocomplétion de depart depuis son adresse -->
-          <?php if (!empty($membre->getAddress())) { ?>
+          <?php if (!empty($user["address"])) { ?>
           <div class="col-md-2">
 
-            <button class="glyphicon glyphicon-home btn btn-dark col-md-12 mt-1" style="height: 25px;" href="#" onClick="autoFillStart('<?php echo $membre->getAddress()." ".$membre->getZipCode();?>'); return false;">Start</button>
-            <button class="glyphicon glyphicon-home btn btn-dark col-md-12 mt-1" style="height: 25px;" href="#" onClick="autoFillEnd('<?php echo $membre->getAddress()." ".$membre->getZipCode();?>'); return false;">End</button>
+            <button class="glyphicon glyphicon-home btn btn-dark col-md-12 mt-1" style="height: 25px;" href="#" onClick="autoFillStart('<?php echo $user["address"]." ".$user["zip_code"];?>'); return false;">Start</button>
+            <button class="glyphicon glyphicon-home btn btn-dark col-md-12 mt-1" style="height: 25px;" href="#" onClick="autoFillEnd('<?php echo $user["address"]." ".$user["zip_code"];?>'); return false;">End</button>
           </div>
         <?php }else{ ?>
             <div class="col-md-1">

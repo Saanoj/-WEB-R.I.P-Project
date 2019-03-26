@@ -12,13 +12,16 @@ loadLanguageFromSession($_SESSION['lang']);
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"></link>
-  <?php
-  include 'includehtml/head.html'; ?>
+
+  <script type="text/javascript" src="js/profil/profil.js"></script>
+
+  <?php include 'includehtml/head.html'; ?>
+
+
   <link rel="stylesheet" href="css/profil/style.css">
+
+</head>
+<body>
   <script type="text/javascript">
     $(document).ready(function(){
       $('#submitAvatar').on('click', function() {
@@ -36,7 +39,14 @@ loadLanguageFromSession($_SESSION['lang']);
           type: 'post',
           success: function(php_script_response){
               //$('#message').html(php_script_response); // display response from the PHP script, if any
-              alert(php_script_response);
+              if (php_script_response.include("images/avatar/")) {
+                alert("Image succesfully loaded");
+                var image = document.getElementById("avatar")
+                $('#avatar').removeAttr('src');
+                image.setAttribute("src", php_script_response);
+              }else{
+                alert(php_script_response);
+              }
           }
        });
      });
@@ -57,9 +67,6 @@ loadLanguageFromSession($_SESSION['lang']);
     });
     });
   </script>
-</head>
-<body>
-
 
   <?php
 
@@ -98,7 +105,7 @@ loadLanguageFromSession($_SESSION['lang']);
       <div class="row">
         <div class="col-md-4">
           <div class="profile-img">
-            <img class="img-container" src="images/avatar/<?php echo $datas["avatar"] ?>" alt=""/>
+            <img class="img-container" id="avatar" src="images/avatar/<?php echo $datas["avatar"] ?>" alt=""/>
           </div>
           <div class="mt-2">
             <div class="offset-4">
@@ -400,8 +407,8 @@ loadLanguageFromSession($_SESSION['lang']);
     </form>
   </div>
 </body>
-<script type="text/javascript" src="js/profil/profil.js"></script>
 <?php include "includehtml/footer.php" ?>
+<script type="text/javascript" src="js/profil/profil.js"></script>
 </html>
 <?php
 function checkIfAbonnementValide($bdd)

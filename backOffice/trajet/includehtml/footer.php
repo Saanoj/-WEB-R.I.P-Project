@@ -48,16 +48,12 @@
       <!-- footer top -->
       <!-- JS -->
       <!-- JS FILES -->
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
       <script src="../js/bootstrap.min.js"></script>
       <script src="../js/jquery.flexslider-min.js"></script>
       <script src="../js/jquery.fancybox.pack.js"></script>
       <script src="../js/retina.min.js"></script>
       <script src="../js/modernizr.js"></script>
       <script src="../js/main.js"></script>
-      <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 
 
   </body>

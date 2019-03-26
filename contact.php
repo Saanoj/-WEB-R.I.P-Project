@@ -16,13 +16,10 @@ loadLanguageFromSession($_SESSION['lang']);
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="Ride in pride">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="css/ReservationTrajet/bootstrap4/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="css/ReservationTrajet/main_styles.css">
   <link rel="stylesheet" type="text/css" href="css/ReservationTrajet/responsive.css">
   <link rel="stylesheet" type="text/css" href="css/contact/main.css">
-  <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+
 
   <?php
   include 'includehtml/head.html'; ?>
@@ -44,7 +41,7 @@ loadLanguageFromSession($_SESSION['lang']);
 
     <div class="home">
 
-    
+
     <div class="container contact-form">
             <div class="contact-image">
                 <img src="https://image.ibb.co/kUagtU/rocket_contact.png" alt="rocket_contact"/>
@@ -76,7 +73,7 @@ loadLanguageFromSession($_SESSION['lang']);
 
       <!-- Home Slider -->
       <div class="home_slider_container">
-      
+
 
 </div>
 
@@ -85,7 +82,7 @@ loadLanguageFromSession($_SESSION['lang']);
 
 
 
-      
+
       <!-- Intro -->
 
       <div class="intro">

@@ -19,9 +19,6 @@ loadLanguageFromSession($_SESSION['lang']);
   <link rel="stylesheet" type="text/css" href="css/ReservationTrajet/bootstrap4/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="css/ReservationTrajet/main_styles.css">
   <link rel="stylesheet" type="text/css" href="css/ReservationTrajet/responsive.css">
-  <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
 
   <link rel="stylesheet" type="text/css" href="css/choixDriver/main.css">
 
@@ -152,7 +149,7 @@ loadLanguageFromSession($_SESSION['lang']);
                       echo "ID: ".$service["idService"]." | ".$service["nomService"]." | Quantitée: ".$linkService["quantite"];
                     }
                     else if ($linkService["idService"] == 10) {
-                                                
+
                       $req=$bdd->getPDO()->prepare('SELECT * FROM serviceautre WHERE emailClient = :emailClient ORDER BY idMessage DESC');
                       $req->bindValue(':emailClient',$_SESSION['email']);
                       $req->execute();
@@ -272,7 +269,7 @@ loadLanguageFromSession($_SESSION['lang']);
                           $infoLinkService = $bdd->queryOne('SELECT * FROM billettourisme WHERE idBillet='.$linkService["idAnnexe"].'');
                           $typeEtablissement="Billet touristque";
                         }
-                        
+
                         elseif ($unIdService["idService"] == 11) {
                           $infoLinkService = $bdd->query('SELECT *  FROM collaborateurs INNER JOIN linkservicetrajet WHERE collaborateurs.idCollaborateurs = linkservicetrajet.idAnnexe AND idTrajet='.$_SESSION["idTrajet"].' AND idService ='.$unIdService["idService"].'');
                           $typeEtablissement="Interprete";
@@ -305,11 +302,11 @@ loadLanguageFromSession($_SESSION['lang']);
                           $totalServices += ($service["prixService"]*$linkService["quantite"]);
 
                         }
-                        
+
                         else if ($linkService["idService"] == 10) {
 
                           echo $service["nomService"]." service | "."Votre message est  : ".$unMessage['contenuMessage']." publié le : ".$unMessage['dateMessage']." | 0€ ";
-                          
+
 
                         }
                         else if ($linkService["idService"] == 11 || $linkService["idService"] == 12 || $linkService["idService"] == 13) {

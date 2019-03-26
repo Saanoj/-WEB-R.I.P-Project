@@ -19,10 +19,7 @@
   <link rel="stylesheet" type="text/css" href="css/ReservationTrajet/bootstrap4/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="css/ReservationTrajet/main_styles.css">
   <link rel="stylesheet" type="text/css" href="css/ReservationTrajet/responsive.css">
-  <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-
+  
   <link rel="stylesheet" type="text/css" href="css/choixDriver/main.css">
 
   <?php include 'includehtml/head.html'; ?>
@@ -63,6 +60,7 @@
               while($unChauffeur = $chauffeurs->fetch())
               {
               $car=App\Chauffeur::getCar($unChauffeur["idCollaborateurs"],$bdd);
+
               $chauffeur = new App\Chauffeur($unChauffeur["idCollaborateurs"],$unChauffeur["email"],$unChauffeur["last_name"],$unChauffeur["first_name"],$unChauffeur["metier"],$unChauffeur["prixCollaborateur"],
                                             $unChauffeur["dateEmbauche"],$unChauffeur["ville"],$unChauffeur["heuresTravailees"],$unChauffeur["rating"],$unChauffeur["ratingNumber"],$unChauffeur["description"],$car["carId"],$car["carBrand"],$car["carModel"],$car["carColor"],$car["nbPlaces"]);
               ?>

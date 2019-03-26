@@ -15,9 +15,6 @@ loadLanguageFromSession($_SESSION['lang']);
 <link rel="stylesheet" type="text/css" href="css/choixDriver/main.css">
 <script src="js/index/main.js"></script>
 
-<style>
-
-</style>
 
 <?php include "includehtml/head.html" ?>
 
@@ -139,30 +136,24 @@ loadLanguageFromSession($_SESSION['lang']);
       ?>
     </div>
   </div>
+  <?php if (isset($_SESSION["id"])) { ?>
   <div class="row m-5" id="join">
     <?php $isAdmin = $bdd->queryOne('SELECT * FROM users WHERE id='.$_SESSION["id"].''); ?>
-    <div class="col-md-4 offset-4" style="border-radius: 10px; background-color: #2F2E33; padding: 10px;">
-      <div class="col-md-8 blue offset-1 text-center">
+    <div class="col-md-6 offset-3" style="border-radius: 10px; background-color: #2F2E33; padding: 10px;">
+      <div class="col-md-8 blue offset-2 text-center">
         <?php if(isset($_SESSION["id"]) && !empty($_SESSION["id"]) && $isAdmin["isAdmin"]==0 ){ ?>
         <a class="btn btn-info display-4" href="inscriptionCollab.php">Joindre en tant<br>que collaborateur</a>
         <?php }else if($isAdmin["isAdmin"] !=0 ){ ?>
-          <button class="btn btn-danger display-4">Vous etes Admin, vous ne<br>pouvez pas devenir  collaborateur</button>
+          <button class="btn btn-danger">Vous etes Admin, vous ne<br>pouvez pas devenir  collaborateur</button>
         <?php }else{ ?>
           <a class="btn btn-info display-4" href="inscription.php">Inscrivez vous pour nous<br>joindre en tant que collaborateur</a>
         <?php } ?>
       </div>
     </div>
   </div>
-  <script type="text/javascript">
-
-  </script>
-  <select name="model" id="testing">
-    <option value="DB11" class="Aston-Martin">DB11</option>
-    <option value="A4" class="Audi">A4</option>
-    <option value="A5" class="Audi">A5</option>
-    <option value="A8" class="Audi">A8</option>
-  </select>
-
+<?php }else{ ?>
+  <br>
+<?php } ?>
 
   <?php include "includehtml/footer.php"; ?>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBceTkjdStb2X5btD_NmC3yNsbXKIjCMc&callback=initMap"async defer></script>

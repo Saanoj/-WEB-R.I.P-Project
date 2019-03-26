@@ -33,6 +33,7 @@ public class Request {
                 results = new ArrayList(Arrays.asList(result));
                 System.out.println(results);
             }
+            bdd.stopConnect(conn);
             rs.close();
             return results;
 

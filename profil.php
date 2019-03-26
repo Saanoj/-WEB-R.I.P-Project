@@ -263,6 +263,7 @@ loadLanguageFromSession($_SESSION['lang']);
               ?>
               <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                 <a href="abonnement.php"> <button type="button"  class="btn btn-success"><?php echo _TITRE_NAVBAR_ABO_SOUSCRIRE?></button></a>
+                
                 <?php
                 if (checkIfexistEntreprise($bdd) == true) {?>
                   <a href="deleteEntrepriseFromUser.php"> <button type="button"  class="btn btn-danger"><?php echo _TITRE_NAVBAR_INFOS_QUITTER_ENTREPRISE?></button></a>

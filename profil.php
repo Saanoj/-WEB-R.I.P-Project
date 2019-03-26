@@ -190,6 +190,77 @@ loadLanguageFromSession($_SESSION['lang']);
                   </div>
                 </div>
 
+<<<<<<< HEAD
+=======
+
+
+
+
+
+              </div>
+            </div>
+            <?php
+            if (checkIfAbonnementValide($bdd) == true) {
+              ?>
+              <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <a href="abonnement.php"> <button type="button"  class="btn btn-success"><?php echo _TITRE_NAVBAR_ABO_SOUSCRIRE?></button></a>
+                
+                <?php
+                if (checkIfexistEntreprise($bdd) == true) {?>
+                  <a href="deleteEntrepriseFromUser.php"> <button type="button"  class="btn btn-danger"><?php echo _TITRE_NAVBAR_INFOS_QUITTER_ENTREPRISE?></button></a>
+                  <?php
+                } else { ?>
+
+                  <a href="joinEntreprise.php"> <button type="button"  class="btn btn-info"><?php echo _TITRE_NAVBAR_INFOS_REJOINDRE_ENTREPRISE?></button></a>
+                  <a href="createEntreprise.php"> <button type="button"  class="btn btn-info"><?php echo _TITRE_NAVBAR_INFOS_CREER_ENTREPRISE?></button></a>
+
+                <?php  }?>
+
+              </div>
+              <?php
+            } else { ?>
+              <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <a href="showAbonnementProfil.php"><button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal"><?php echo _TITRE_NAVBAR_INFOS_VOIR_INFOS_ABONNEMENTS?></button></a>
+                <?php  if (checkIfexistEntreprise($bdd) == true) {?>
+                <a href="deleteEntrepriseFromUser.php"> <button type="button"  class="btn btn-danger"><?php echo _TITRE_NAVBAR_INFOS_QUITTER_ENTREPRISE?></button></a>
+              </div>
+            <?php  } }
+
+            ?>
+
+
+            <div class="tab-pane fade" id="trajet" role="tabpanel" aria-labelledby="trajet-tab">
+
+              <div class="card">
+                <div class="card-header">
+                  <div class="display-4">Vos trajets</div>
+                </div>
+                <div class="card-body ">
+
+                  <?php
+                  $trajets = $bdd->queryPrepareForWhile("SELECT * FROM trajet WHERE idClient=".$_SESSION["id"]."",$bdd);
+
+                  while ($trajet = $trajets->fetch()) {
+                    echo "<div class='row list-group-item'>";
+                    echo "<p>ID:".$trajet["idTrajet"]."<p><div class='h4'>".$trajet["debut"]." <div class='glyphicon glyphicon-arrow-right'></div> ".$trajet["fin"]."</div>";
+                    echo "<p>".$trajet["duration"]."<p>";
+                    echo "<button class='btn btn-success p-3'>PDF</button>";
+                    echo "</div>";
+                  }
+                  ?>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+            <?php //// DEBUT ENTREPRISE ?>
+            <div class="tab-content entreprise-tab" id="myTabContent">
+              <div class="tab-pane fade" id="entreprise" role="tabpanel" aria-labelledby="entreprise-tab">
+>>>>>>> 6f80ffce5f809f160d75db107a2d850aaf58ce4c
                 <div class="row">
                   <div class="col-md-6">
                     <label><?php echo _TITRE_NAVBAR_INFOS_ADRESSE?></label>

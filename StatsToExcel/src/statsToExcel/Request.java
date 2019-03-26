@@ -11,6 +11,7 @@ public class Request {
     ArrayList results =new ArrayList(Arrays.asList(result));
 
     public Request(Bdd bdd){
+
         this.bdd = bdd;
     }
 

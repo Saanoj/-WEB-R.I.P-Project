@@ -12,11 +12,10 @@ define("_PRIX","Prix");
 define("_NOTE","Rang");
 define("_VOTES","Votes totaux");
 
-// MODAL INFORMATIONS CHAUFFEURS
+// MODAL CHAUFFEURS
 define("_VILLE","Ville d'opération : ");
 define("_HEURE_TRAVAIL","Heures travaillés : ");
 define("_DATE_EMBAUCHE","Date d'embauche : ");
-
 define("_VEHICULE","Véhicules");
 define("_MARQUE","Marque");
 define("_MODELE","Modèle");
@@ -49,7 +48,7 @@ define("_PASSWORD_CONNEXION","Mot de passe");
 define("_PASSWORD_OUBLIE_CONNEXION","Mot de passe oublié ?");
 define("_SOUVENIR_CONNEXION","Se souvenir de moi");
 define("_PAS_COMPTE_CONNEXION","Vous n'avez pas de compte ?");
-define("_INSCRIPTION_CONNEXION","Inscrivez vous ici."); 
+define("_INSCRIPTION_CONNEXION","Inscrivez vous ici.");
 
 // Profil Navbar
 define("_TITRE_NAVBAR_INFOS","Mes informations");

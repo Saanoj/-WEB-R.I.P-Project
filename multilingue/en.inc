@@ -74,5 +74,11 @@ define("_TITRE_NAVBAR_INFOS_REJOINDRE_ENTREPRISE","Join a company");
 define("_TITRE_NAVBAR_INFOS_CREER_ENTREPRISE","Create a company");
 define("_TITRE_NAVBAR_INFOS_VOIR_INFOS_ABONNEMENTS","Check informations about my subscription/ company");
 
+//contact
+define("_CONTACT_LET_MESSAGE","Leave us a message ! ");
+define("_CONTACT_SEND_MESSAGE","'Send a message'");
+define("_CONTACT_NAME", "'Your name'");
+define("_CONTACT_NUM", "'Your phone number'");
+define("_CONTACT_CORE_MESSAGE", "'Your message'");
 
  ?>

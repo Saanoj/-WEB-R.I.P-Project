@@ -11,7 +11,7 @@ loadLanguageFromSession($_SESSION['lang']);
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <title>Reservation de trajets</title>
+  <title>Contact</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="Ride in pride">
@@ -44,31 +44,31 @@ loadLanguageFromSession($_SESSION['lang']);
 
     <div class="home">
 
-    
+
     <div class="container contact-form">
             <div class="contact-image">
                 <img src="https://image.ibb.co/kUagtU/rocket_contact.png" alt="rocket_contact"/>
             </div>
             <form method="post" action="verifContact.php" method="post" onsubmit="return checkGlobal(this)">
-                <h3>Laissez nous un message ! </h3>
+                <h3><?php echo _CONTACT_LET_MESSAGE; ?></h3>
                <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input type="text" name="nameClient" id="name" class="form-control" placeholder="Votre nom *" onblur="checkfirstName(this)" />
+                            <input type="text" name="nameClient" id="name" class="form-control" placeholder=<?php echo _CONTACT_NAME; ?> onblur="checkfirstName(this)" />
                         </div>
                         <div class="form-group">
                             <input type="text" name="email" id="email" class="form-control" placeholder="Votre email *" value="<?= $_SESSION["email"]; ?>" readonly="readonly" />
                         </div>
                         <div class="form-group">
-                            <input type="text" name="phoneNumber" id="phone" class="form-control" placeholder="Votre numéro de téléphone *" onblur="Verifier_Numero_Telephone(this)" />
+                            <input type="text" name="phoneNumber" id="phone" class="form-control" placeholder=<?php echo _CONTACT_NUM; ?> onblur="Verifier_Numero_Telephone(this)" />
                         </div>
                         <div class="form-group">
-                            <input type="submit" name="submit" class="btnContact" value="Envoyez un message" />
+                            <input type="submit" name="submit" class="btnContact" value=<?php echo _CONTACT_SEND_MESSAGE; ?> />
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <textarea name="messageContact" class="form-control" placeholder="Your Message *" style="width: 100%; height: 150px;"></textarea>
+                            <textarea name="messageContact" class="form-control" placeholder=<?php echo _CONTACT_CORE_MESSAGE; ?> style="width: 100%; height: 150px;"></textarea>
                         </div>
                     </div>
                 </div>
@@ -76,7 +76,7 @@ loadLanguageFromSession($_SESSION['lang']);
 
       <!-- Home Slider -->
       <div class="home_slider_container">
-      
+
 
 </div>
 
@@ -85,7 +85,7 @@ loadLanguageFromSession($_SESSION['lang']);
 
 
 
-      
+
       <!-- Intro -->
 
       <div class="intro">

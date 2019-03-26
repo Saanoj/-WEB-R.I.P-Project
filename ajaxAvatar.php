@@ -40,7 +40,7 @@ if(isset($_FILES["file"]["type"]))
         $req->execute();
         $req->closeCursor();
 
-        echo "Image Uploaded Successfully";
+        echo $targetPath;
     }
   }
   else

@@ -14,7 +14,7 @@ function checkemail(email) {
     }
   }
 
-  
+
 function checkfirstName(firstName) {
     clearInput(firstName); //voir en bas
     if (firstName.value.length  < 3 || firstName.value.length > 30)
@@ -27,7 +27,7 @@ function checkfirstName(firstName) {
     }
   }
 
-    
+
 function checklastName(lastName) {
     clearInput(lastName); //voir en bas
     if (lastName.value.length  < 3 || lastName.value.length > 30)
@@ -60,15 +60,15 @@ function checklastName(lastName) {
     var p = document.getElementById("password");
 
     if (confirmPassword.value == p.value) {
-   
+
         return true;
     }
     else {
         displayError(confirmPassword, 'Mot de passe non identique');
         return false;
-     
+
     }
-    
+
 
   }
 
@@ -94,7 +94,7 @@ function displayError(input, message) {
 
   function clearInput(input) {
     input.style.borderColor = '';
-  
+
     var parent = input.parentNode;
     var elements = parent.getElementsByTagName('p');
     if(elements.length > 0){
@@ -114,18 +114,17 @@ function displayError(input, message) {
     console.log(lastName);
     console.log(confirmPassword);
     console.log(checkbirthday);
-      
+
     if(email && firstName && lastName && password && confirmPassword && checkbirthday)
     {
-     
+
         return true;
     }
-      
+
     else
      {
         return false;
-       
+
      }
-   
+
   }
-  

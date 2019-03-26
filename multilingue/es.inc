@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 //fichier langue francais
 // Navbar
 define("_ACCUEIL","Accueil");
@@ -76,10 +76,7 @@ define("_TITRE_NAVBAR_INFOS_VOIR_INFOS_ABONNEMENTS","Voir les informations de mo
 
 //Contact
 define("_CONTACT_LET_MESSAGE","Laissez nous un message ! ");
-define("_CONTACT_SEND_MESSAGE","'Envoyez un message'");
-define("_CONTACT_NAME", "'Votre nom'");
-define("_CONTACT_NUM", "'Votre numero de téléphone'");
-define("_CONTACT_CORE_MESSAGE", "'Votre message'");
+define("_CONTACT_SEND_MESSAGE","Envoyez un message");
 
 
  ?>

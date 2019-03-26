@@ -11,9 +11,9 @@ function backOfficeCollab()
   $result = $query->fetchAll();
 
   foreach($result as $member){
-    
-    echo '
 
+    echo '
+      <tr>
         <form method="POST" action="edit.php">
           <input  name="id" type="hidden" value="'.$member["idCollaborateurs"].'"/>
           <td><input name="email" type="text" value="'.$member["email"].'"/></td>
@@ -43,6 +43,9 @@ function backOfficeCollab()
           </button>
           </td>
           </form>
+
+        </tr>
+
         ';
 
   }

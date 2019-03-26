@@ -23,7 +23,7 @@ include '../../include/fonctionAbo.php';
   $Session->isConnect();
   ?>
 
-  <div>
+  <div class="table-responsive">
     <h1>Table comptes</h1>
     <table class="table">
       <thead>

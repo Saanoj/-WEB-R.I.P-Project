@@ -16,7 +16,7 @@ loadLanguageFromSession($_SESSION['lang']);
 
   <?php include 'includehtml/head.html'; ?>
 
-  
+
   <link rel="stylesheet" href="css/profil/style.css">
 
 </head>
@@ -190,8 +190,6 @@ loadLanguageFromSession($_SESSION['lang']);
                   </div>
                 </div>
 
-<<<<<<< HEAD
-=======
 
 
 
@@ -204,7 +202,7 @@ loadLanguageFromSession($_SESSION['lang']);
               ?>
               <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                 <a href="abonnement.php"> <button type="button"  class="btn btn-success"><?php echo _TITRE_NAVBAR_ABO_SOUSCRIRE?></button></a>
-                
+
                 <?php
                 if (checkIfexistEntreprise($bdd) == true) {?>
                   <a href="deleteEntrepriseFromUser.php"> <button type="button"  class="btn btn-danger"><?php echo _TITRE_NAVBAR_INFOS_QUITTER_ENTREPRISE?></button></a>
@@ -260,7 +258,6 @@ loadLanguageFromSession($_SESSION['lang']);
             <?php //// DEBUT ENTREPRISE ?>
             <div class="tab-content entreprise-tab" id="myTabContent">
               <div class="tab-pane fade" id="entreprise" role="tabpanel" aria-labelledby="entreprise-tab">
->>>>>>> 6f80ffce5f809f160d75db107a2d850aaf58ce4c
                 <div class="row">
                   <div class="col-md-6">
                     <label><?php echo _TITRE_NAVBAR_INFOS_ADRESSE?></label>

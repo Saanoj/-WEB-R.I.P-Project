@@ -51,14 +51,14 @@
       </footer>
       <!-- footer top -->
       <!-- JS -->
-      <!-- JS FILES -->
 
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+      <!-- JS FILES -->
       <script src="js/bootstrap.min.js"></script>
       <script src="js/jquery.flexslider-min.js"></script>
       <script src="js/jquery.fancybox.pack.js"></script>
       <script src="js/retina.min.js"></script>
       <script src="js/modernizr.js"></script>
-      <script src="js/popper.min.js"></script>
       <script src="js/main.js"></script>
+      <script src="js/popper.min.js"></script>

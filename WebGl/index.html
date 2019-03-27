@@ -64,8 +64,8 @@
 				var instructions = document.getElementById( 'instructions' );
 
 				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 2000 );
-				camera.position.set( 8, 10, 8 );
-				camera.lookAt( 0, 3, 0 );
+				camera.position.set( 20, 5, 1 );
+				camera.lookAt( 0, 1, 0 );
 
 
 				scene = new THREE.Scene();
@@ -84,6 +84,33 @@
 					scene.add( car );
 
 				} );
+				var path = "image/background/";
+				var format = '.png';
+				var directions = ["left", "right", "up", "down", "front", "back"];
+
+				var materialArray = [];
+				for (var i = 0; i < 6; i++)
+				materialArray.push (new THREE.MeshPhongMaterial({
+					map : THREE.ImageUtils.loadTexture(path + directions[i] + format),
+					side : THREE.BackSide
+				}));
+
+				var skyGeometry = new THREE.CubeGeometry(500,500,500);
+				var skyMaterial = new THREE.MeshFaceMaterial(materialArray);
+				var skyBox = new THREE.Mesh(skyGeometry, skyMaterial);
+				//skyBox.rotation.x += Math.PI /2;
+				scene.add( skyBox );
+
+
+				//base
+				var texture = new THREE.TextureLoader().load( 'image/background/down.png');
+				var geometry = new THREE.BoxBufferGeometry( 500, 1, 500 );
+				var material = new THREE.MeshPhongMaterial( { map: texture } );
+				var mesh = new THREE.Mesh( geometry, material );
+				mesh.position.set(0, -20, 0);
+				mesh.receiveShadow = true;
+				scene.add( mesh );
+
 
 				// collada
 
@@ -147,8 +174,8 @@
 
 				if ( car !== undefined ) {
 
-					car.position.x += Math.cos(1);
-					car.position.z += Math.sin(1);
+					car.rotation.z -=0.05;
+
 				}
 
 				renderer.render( scene, camera );

@@ -103,6 +103,39 @@ loadLanguageFromSession($_SESSION['lang']);
   <div class="container emp-profile bg-light rounded">
     <form method="post">
       <div class="row">
+      <div class="col-md-4">
+          <div class="profile-img">
+            <img class="img-container" id="avatar" src="images/avatar/<?php echo $datas["avatar"] ?>" alt=""/>
+          </div>
+          <div class="mt-2">
+            <div class="offset-4">
+              <button type="button" class="btn" data-toggle="modal" data-target="#modalimage"><span class="fas fa-plus" style="font-size: 30px;"></button>
+                <button type="button" class="btn" id="resetAvatar"><span class="fas fa-minus" style="font-size: 30px;"></span></button>
+              </div>
+              <div class="modal fade" id="modalimage" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Ajoutez votre avatar</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body p-5">
+                      <form id="uploadimage" action="" method="post" enctype="multipart/form-data">
+                        <input class="col-md-8 offset-2" type="file" name="file" id="file">
+                        <input type="hidden" name="id" id="id" value="<?php echo $_SESSION["id"]; ?>">
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                      <button id='submitAvatar' class="submit btn btn-primary">Upload</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
       
           <div class="col-md-6">
             <div class="profile-head">

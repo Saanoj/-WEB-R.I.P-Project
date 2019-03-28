@@ -51,7 +51,7 @@
 				document.body.appendChild( WEBGL.getWebGLErrorMessage() );
 
 			}
-
+			let carIn = 1;
 			var container, stats, clock;
 			var camera, scene, renderer, car;
 
@@ -173,8 +173,23 @@
 				var delta = clock.getDelta();
 
 				if ( car !== undefined ) {
+				camera.lookAt(car.position);
+				camera.position.set(car.position.x+20,car.position.y+10,car.position.z-10);
+				if (car.position.z > 225){
+					carIn = 0;
+				}
+				if (car.position.z < -225){
+					carIn = 1;
+				}
+				if(carIn == 0){
+					car.position.z-=1;
+				}
+				if(carIn ==1){
+					car.rotation.z -=0.0135;
+					car.position.z+=1;
+				}
 
-					car.rotation.z -=0.05;
+
 
 				}
 

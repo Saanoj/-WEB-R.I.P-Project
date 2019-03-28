@@ -72,45 +72,45 @@ loadLanguageFromSession($_SESSION['lang']);
       <div class="container mt-5 mb-5">
 
         <div class="row">
-          <div class="display-3 text-white bg-secondary col-md-6 offset-3 rounded-top text-center">
+          <div class="display-3 text-white bg-secondary col-md-8 offset-2 rounded-top text-center">
             <?php echo _TITRE_RESERVATION_TRAJET ?>
           </div>
         </div>
         <div class="row pt-4 pb-4 bg-secondary rounded">
-          <!-- boutton d'autocomplétion de depart depuis son adresse -->
-          <?php if (!empty($user["address"])) { ?>
           <div class="col-md-2">
 
-            <button class="glyphicon glyphicon-home btn btn-dark col-md-12 mt-1" style="height: 25px;" href="#" onClick="autoFillStart('<?php echo $user["address"]." ".$user["zip_code"];?>'); return false;">Start</button>
-            <button class="glyphicon glyphicon-home btn btn-dark col-md-12 mt-1" style="height: 25px;" href="#" onClick="autoFillEnd('<?php echo $user["address"]." ".$user["zip_code"];?>'); return false;">End</button>
+          <!-- boutton d'autocomplétion de depart depuis son adresse -->
+          <?php if (!empty($user["address"])) { ?>
+          <div class="col-md-12">
+
+            <button class="fas fa-home btn btn-dark col-md-12 mt-1" style="height: 25px;" href="#" onClick="autoFillStart('<?php echo $user["address"]." ".$user["zip_code"];?>'); return false;">Start</button>
+            <button class="fas fa-home btn btn-dark col-md-12 mt-1" style="height: 25px;" href="#" onClick="autoFillEnd('<?php echo $user["address"]." ".$user["zip_code"];?>'); return false;">End</button>
           </div>
-        <?php }else{ ?>
-            <div class="col-md-1">
-
-            </div>
         <?php } ?>
+        </div>
+        <div class="col-md-10">
+          <form action="valideReservation.php" method="post" class="row" id="" onsubmit="return checkGlobal(this)">
+            <input type="text" name="start"  id="autocomplete" class="col-md-3 search_input search_input_1 m-2 start" placeholder="<?php echo _ADRESSE_DEPART_RESERVATION ?>" required="required"  onblur="checkStart(this)">
 
-          <form action="valideReservation.php" method="post" class=" d-flex flex-lg-row flex-column align-items-start justify-content-lg-between justify-content-start" id="home_search_form" onsubmit="return checkGlobal(this)">
-            <input type="text" name="start"  id="autocomplete" class="col-md-4 search_input search_input_1 m-2 start" placeholder="<?php echo _ADRESSE_DEPART_RESERVATION ?>" required="required"  onblur="checkStart(this)">
-
-            <input type="text" name="end"  id="autocomplete2" class="col-md-4 search_input search_input_2 m-2 end" placeholder="<?php echo _ADRESSE_ARRIVEE_RESERVATION ?>" required="required" onblur="checkEnd(this)">
+            <input type="text" name="end"  id="autocomplete2" class="col-md-3 search_input search_input_2 m-2 end" placeholder="<?php echo _ADRESSE_ARRIVEE_RESERVATION ?>" required="required" onblur="checkEnd(this)">
             <!--<input type="number" name="price"  id="price" class="search_input search_input_4" placeholder="Budget" required="required">-->
-            <div class="col-md-3">
+            <div class="col-md-2">
               <label for="dateDebut"><?php echo _DATE_DEBUT_RESERVATION_TRAJET ?></label>
               <?php echo $form->input('dateDebut','date'); ?>
             </div>
-            <div class="col-md-2 offset-1">
+            <div class="col-md-2">
               <label for="heureDebut"><?php echo _HEURE_DEBUT_RESERVATION_TRAJET ?></label>
               <?php echo $form->input('heureDebut','time'); ?>
             </div>
 
-            <button type="submit" class="glyphicon glyphicon-search btn btn-dark col-md-1 ml-5 p-3 mt-4" name="submit">
+            <button type="submit" class="fas fa-search btn btn-dark ml-5 p-3 mt-4" name="submit">
 
            <!--  <button class="home_search_button col-md-2 m-2"><?php echo _BOUTTON_RESERVATION_TRAJET ?></button> !-->
 
           </form>
         </div>
       </div>
+    </div>
       <!-- Intro -->
       <div class="row">
 

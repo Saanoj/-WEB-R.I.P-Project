@@ -19,7 +19,7 @@
   <link rel="stylesheet" type="text/css" href="css/ReservationTrajet/bootstrap4/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="css/ReservationTrajet/main_styles.css">
   <link rel="stylesheet" type="text/css" href="css/ReservationTrajet/responsive.css">
-  
+
   <link rel="stylesheet" type="text/css" href="css/choixDriver/main.css">
 
   <?php include 'includehtml/head.html'; ?>
@@ -72,14 +72,14 @@
                       <h6>ID: <?php echo $chauffeur->getIdCollaborateur(); ?> | Prix: <?php echo $chauffeur->getPrixCollaborateur()."€ / Km | Note: ".$chauffeur->getRating()."/5 sur ".$chauffeur->getRatingNumber()." votes" ?></h6>
                     </div>
                     <!-- Button trigger modal -->
-                    <div class="col-md-2 align-middle">
+                    <div class="col-md-5">
                       <button type="button" class="btn btn-secondary " data-toggle="modal" data-target="#exampleModal<?php echo $i ?>">
-                        Infos chauffeur
+                        Infos<br>chauffeur
                       </button>
                     </div>
-                    <div class="funkyradio-primary col-md-3 center-block">
+                    <div class="funkyradio-primary col-md-4 center-block">
                         <input type="radio" name="idChauffeur" id="radio<?php echo $i ?>" value="<?php echo $chauffeur->getIdCollaborateur() ?>" checked/>
-                        <label for="radio<?php echo $i ?>">Choisir ce chauffeur</label>
+                        <label for="radio<?php echo $i ?>">Choisir<?php echo " ".$chauffeur->getFirst_name(); ?></label>
                     </div>
 
                   </div>

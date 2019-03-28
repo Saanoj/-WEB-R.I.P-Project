@@ -182,7 +182,7 @@ loadLanguageFromSession($_SESSION['lang']);
    <div class="col-md-4">                         
   <h2>Mes informations</h2>
   <!-- Button to Open the Modal -->
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myInformations">
     Ouvrir
   </button>
   </div>
@@ -190,7 +190,7 @@ loadLanguageFromSession($_SESSION['lang']);
   <div class="col-md-4">                         
   <h2>Mon entreprise</h2>
   <!-- Button to Open the Modal -->
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myCompany">
     Ouvrir
   </button>
   </div>
@@ -198,14 +198,14 @@ loadLanguageFromSession($_SESSION['lang']);
 
   <h2>Mon abonnement</h2>
   <!-- Button to Open the Modal -->
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mySubscription">
     Ouvrir
   </button>
   </div>
   </div>
 
   <!-- The Modal -->
-  <div class="modal fade" id="myModal">
+  <div class="modal fade" id="myInformations">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
       
@@ -295,63 +295,101 @@ loadLanguageFromSession($_SESSION['lang']);
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
         </div>
+
+
+
+
+  <!-- The Modal -->
+  <div class="modal fade" id="myCompany">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Informations</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
         
-      </div>
-    </div>
-  </div>
-  
-                </div>
-                            <div class="tab-pane fade" id="abonnement" role="tabpanel" aria-labelledby="abonnement-tab">
-                                        <div class="row">
+        <!-- Modal body -->
+        <div class="modal-body">
+          
+        <div class="row">
                                             <div class="col-md-6">
-                                                <label>Experience</label>
+                                                <label>Id utilisateur</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Expert</p>
+                                            <p><span id="idProfil" class="datainfo" value="'<?= $_SESSION['id']?>'"><?= $_SESSION['id'] ?></span></p>
+
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Hourly Rate</label>
+                                            <label><?php echo _TITRE_NAVBAR_INFOS_NOM?></label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>10$/hr</p>
+                                              <div class="gear">
+                                            <span id="last_name" class="datainfo"><?= $user->getLast_name(); ?></span>
+                                            <a href="#" class="editlink"><?php echo _TITRE_NAVBAR_INFOS_EDITER?></a>
+                                            <a class="savebtn"><?php echo _TITRE_NAVBAR_INFOS_SAUVEGARDER?></a>
+                                             </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Total Projects</label>
+                                            <label><?php echo _TITRE_NAVBAR_INFOS_PRENOM?></label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>230</p>
+                                              <div class="gear">
+                                            <span id="last_name" class="datainfo"><?= $user->getLast_name(); ?></span>
+                                            <a href="#" class="editlink"><?php echo _TITRE_NAVBAR_INFOS_EDITER?></a>
+                                            <a class="savebtn"><?php echo _TITRE_NAVBAR_INFOS_SAUVEGARDER?></a>
+                                             </div>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <label>English Level</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>Expert</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Availability</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>6 months</p>
-                                            </div>
-                                        </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label>Your Bio</label><br/>
-                                        <p>Your detail description</p>
+                                    <div class="col-md-6">
+                                      <label><?php echo _TITRE_NAVBAR_INFOS_DATE_NAISSANCE?></label>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
+                                    <div class="col-md-6">
+                                      <div class="gear">
+                                        <span id="birthday" class="datainfo"><?php
+                                        setlocale(LC_TIME, "fr_FR","French");
+                                        $date = strftime("%d %B %Y", strtotime($user->getBirthday()));
+                                        echo  $date; ?></span>
+                                        <a href="#" class="editlink"><?php echo _TITRE_NAVBAR_INFOS_EDITER?></a>
+                                        <a class="savebtn" ><?php echo _TITRE_NAVBAR_INFOS_SAUVEGARDER?></a>
+                                      </div>
+                                    </div>
+                                  </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                            <label><?php echo _TITRE_NAVBAR_INFOS_ADRESSE?></label>
+                                            </div>
+                                            <div class="col-md-6">
+                                              <div class="gear">
+                                            <span id="last_name" class="datainfo"><?= $user->getAddress(); ?></span>
+                                            <a href="#" class="editlink"><?php echo _TITRE_NAVBAR_INFOS_EDITER?></a>
+                                            <a class="savebtn"><?php echo _TITRE_NAVBAR_INFOS_SAUVEGARDER?></a>
+                                             </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                  <div class="col-md-6">
+                    <label><?php echo _TITRE_NAVBAR_INFOS_GENRE?></label>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="gear">
+                      <span id="gender" class="datainfo"><?= $user->getGender(); ?></span>
+                      <a href="#" class="editlink"><?php echo _TITRE_NAVBAR_INFOS_EDITER?></a>
+                      <a class="savebtn"><?php echo _TITRE_NAVBAR_INFOS_SAUVEGARDER?></a>
                     </div>
-                </div>
+                  </div>
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
             </form>           
         </div>
 

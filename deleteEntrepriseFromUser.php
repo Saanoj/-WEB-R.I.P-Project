@@ -21,8 +21,7 @@ $req->closeCursor();
 
 if ($idDirecteur == $_SESSION['id'])
 {
-        require_once 'lib/Stripe.php';
-    Stripe::setApiKey("sk_test_ze3ZePlRbWuZCbCAfKs4DOTc");
+ 
     
     $req = $bdd->getPDO()->prepare('DELETE FROM entreprise WHERE idEntreprise = :idEntreprise');
     $req->execute(array('idEntreprise' => $idEntreprise));
@@ -33,8 +32,7 @@ if ($idDirecteur == $_SESSION['id'])
     $req->execute(array('idEntreprise' => $idEntreprise));
     $req->closeCursor();
     
-    $plan = Stripe_Plan::retrieve($idEntreprise);
-    $plan->delete();
+
     
 }
 else 

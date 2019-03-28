@@ -148,7 +148,6 @@ function addPDFButton(){
 	button.innerText = "Facture PDF";
   document.getElementById('id1').appendChild(button);
   generatePDF();
-  document.location.href="paymentProcess.php";
  
 
 }

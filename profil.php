@@ -109,8 +109,8 @@ loadLanguageFromSession($_SESSION['lang']);
           </div>
           <div class="mt-2">
             <div class="offset-4">
-              <button type="button" class="btn" data-toggle="modal" data-target="#modalimage"><span class="glyphicon glyphicon-plus-sign" style="font-size: 30px;"></button>
-                <button type="button" class="btn" id="resetAvatar"><span class="glyphicon glyphicon-remove-circle" style="font-size: 30px;"></span></button>
+              <button type="button" class="btn" data-toggle="modal" data-target="#modalimage"><span class="fas fa-plus" style="font-size: 30px;"></button>
+                <button type="button" class="btn" id="resetAvatar"><span class="fas fa-minus" style="font-size: 30px;"></span></button>
               </div>
               <div class="modal fade" id="modalimage" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -337,15 +337,15 @@ loadLanguageFromSession($_SESSION['lang']);
               if (checkIfAbonnementValide($bdd) == true) {
                 ?>
                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                  <a href="abonnement.php"> <button type="button"  class="btn btn-success"><?php echo _TITRE_NAVBAR_ABO_SOUSCRIRE?></button></a>
+                  <a href="abonnement.php"> <button type="button"  class="btn btn-success"><?php echo _TITRE_NAVBAR_ABO_SOUSCRIRE?></button></a> <br>
                   <?php
                   if (checkIfexistEntreprise($bdd) == true) {?>
-                    <a href="deleteEntrepriseFromUser.php"> <button type="button"  class="btn btn-danger"><?php echo _TITRE_NAVBAR_INFOS_QUITTER_ENTREPRISE?></button></a>
+                    <a href="deleteEntrepriseFromUser.php"> <button type="button"  class="btn btn-danger"><?php echo _TITRE_NAVBAR_INFOS_QUITTER_ENTREPRISE?></button></a> <br>
                     <?php
                   } else { ?>
 
-                    <a href="joinEntreprise.php"> <button type="button"  class="btn btn-info"><?php echo _TITRE_NAVBAR_INFOS_REJOINDRE_ENTREPRISE?></button></a>
-                    <a href="createEntreprise.php"> <button type="button"  class="btn btn-info"><?php echo _TITRE_NAVBAR_INFOS_CREER_ENTREPRISE?></button></a>
+                    <a href="joinEntreprise.php"> <button type="button"  class="btn btn-info"><?php echo _TITRE_NAVBAR_INFOS_REJOINDRE_ENTREPRISE?></button></a> <br>
+                    <a href="createEntreprise.php"> <button type="button"  class="btn btn-info"><?php echo _TITRE_NAVBAR_INFOS_CREER_ENTREPRISE?></button></a> <br>
 
                   <?php  }?>
 

@@ -60,7 +60,7 @@ loadLanguageFromSession($_SESSION['lang']);
             <!-- Default panel contents -->
 
             <div class="card-header">
-              <h1 class="display-2"><?php echo _TITRE_CHOOSE_SERVICE; ?></h1>
+              <h1 class="display-3 center-text"><?php echo _TITRE_CHOOSE_SERVICE; ?></h1>
               <?php $trajet->showInfosTrajet(); ?>
             </div>
 
@@ -98,9 +98,9 @@ loadLanguageFromSession($_SESSION['lang']);
 
 
                     <li class="list-group-item row">
-                      <a class="h1 col-md-10"><?php echo $unService["categorie"] ?></a>
+                      <a class="h3 col-md-9"><?php echo $unService["categorie"] ?></a>
                       <!--<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample  " aria-expanded="false" aria-controls="collapseExample">-->
-                      <div class="btn btn-primary fa fa-plus col-md-2" type="button" data-toggle="collapse" data-target="<?php echo "#".$newCategorie;?>" aria-expanded="true" aria-controls="<?php echo $newCategorie;?>">Ouvrir</div>
+                      <button class="btn btn-primary pull-right fa fa-plus col-md-3" type="button" data-toggle="collapse" data-target="<?php echo "#".$newCategorie;?>" aria-expanded="true" aria-controls="<?php echo $newCategorie;?>">Ouvrir</button>
                     </li>
                     <div class="list-group-item collapse" id="<?php echo $newCategorie;?>">
 

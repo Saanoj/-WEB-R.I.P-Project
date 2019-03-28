@@ -39,7 +39,7 @@ loadLanguageFromSession($_SESSION['lang']);
   <!-- Get a quote section -->
   <div class="section">
     <div class="container">
-      <div class="col-md-8 col-md-offset-2 text-center">
+      <div class="col-md-8 offset-2 text-center">
         <h3 class="h3"><?php echo _TITRE_BODY?></h3>
         <a href="#" class="btn btn-success"><?php echo _TITRE_BOUTTON ?></a>
       </div>
@@ -50,7 +50,7 @@ loadLanguageFromSession($_SESSION['lang']);
   <div class="container" style="border-radius: 10px; background-color: #2F2E33; padding: 10px;">
     <br>
     <div class="row mt-md-1">
-      <div class="col-md-4 blue col-md-offset-4 text-center">
+      <div class="col-md-8 offset-2 text-center">
         <div class="list-group-item" style="background-color: #D5D6D2;">
           <h3 class="display-4">Nos 3 meilleurs chauffeurs</h3>
         </div>
@@ -58,7 +58,6 @@ loadLanguageFromSession($_SESSION['lang']);
     </div>
     <br>
     <div class="row">
-
       <div class="col-md-1">
 
       </div>

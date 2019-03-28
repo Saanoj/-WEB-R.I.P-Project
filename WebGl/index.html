@@ -31,10 +31,8 @@
 	<body>
 
 		<div id="container"></div>
-		<div id="instructions">
-			<span style="font-size:40px">Click to play</span>
-			<br />
-			(Z, Q, S, D = Move, SPACE = Jump, MOUSE = Look around)
+
+
 		</div>
 
 		<script src="three.js"></script>
@@ -51,7 +49,7 @@
 				document.body.appendChild( WEBGL.getWebGLErrorMessage() );
 
 			}
-			let carIn = 1;
+
 			var container, stats, clock;
 			var camera, scene, renderer, car;
 
@@ -64,7 +62,7 @@
 				var instructions = document.getElementById( 'instructions' );
 
 				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 2000 );
-				camera.position.set( 20, 5, 1 );
+				camera.position.set( 200, 50, 10 );
 				camera.lookAt( 0, 1, 0 );
 
 
@@ -109,7 +107,7 @@
 				var mesh = new THREE.Mesh( geometry, material );
 				mesh.position.set(0, -20, 0);
 				mesh.receiveShadow = true;
-				scene.add( mesh );
+				//scene.add( mesh );
 
 
 				// collada
@@ -119,7 +117,7 @@
 
 					car = collada.scene;
 					car.position.set(-10,-5,-10)
-					car.scale.set(0.01,0.01,0.01);
+					car.scale.set(0.05,0.05,0.05);
 
 				} );
 
@@ -168,26 +166,38 @@
 
 			}
 
+			let carIn = 1;
+			let varTurn = 0.0004;
+			var angle = 0;
 			function render() {
 
 				var delta = clock.getDelta();
-
+				angle+=0.01;
 				if ( car !== undefined ) {
 				camera.lookAt(car.position);
-				camera.position.set(car.position.x+20,car.position.y+10,car.position.z-10);
-				if (car.position.z > 225){
+				//camera.position.set(car.position.x+20,car.position.y+10,car.position.z-10);
+
+				car.rotation.z =-angle;
+
+			 	car.position.x=-30+Math.cos(angle)*100;
+			 	car.position.z=-30+Math.sin(angle)*30;
+
+				/*if (car.position.z > 225){
 					carIn = 0;
 				}
 				if (car.position.z < -225){
 					carIn = 1;
 				}
 				if(carIn == 0){
+					//car.position.z-=1;
+					car.rotation.z-=0.0135+varTurn;
 					car.position.z-=1;
+					//car.position.x-=1;
 				}
 				if(carIn ==1){
-					car.rotation.z -=0.0135;
+					car.rotation.z -=0.0135+varTurn;
 					car.position.z+=1;
-				}
+				}*/
 
 
 

@@ -190,11 +190,6 @@ loadLanguageFromSession($_SESSION['lang']);
                   </div>
                 </div>
 
-
-
-
-
-
               </div>
             </div>
             <?php
@@ -313,6 +308,7 @@ loadLanguageFromSession($_SESSION['lang']);
                     </div>
                   </div>
                 </div>
+                
 
                 <div class="row">
                   <div class="col-md-6">

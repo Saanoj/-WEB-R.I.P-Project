@@ -102,7 +102,7 @@ loadLanguageFromSession($_SESSION['lang']);
 <div class="container emp-profile">
             <form method="post">
                 <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-4 mb-5">
           <div class="profile-img">
             <img class="img-container" id="avatar" src="images/avatar/<?php echo $datas["avatar"] ?>" alt=""/>
           </div>
@@ -155,13 +155,7 @@ loadLanguageFromSession($_SESSION['lang']);
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Information</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="entreprise-tab" data-toggle="tab" href="#entreprise" role="tab" aria-controls="entreprise" aria-selected="false">Entreprise</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="abonnement-tab" data-toggle="tab" href="#abonnement" role="tab" aria-controls="abonnement" aria-selected="false">Abonnement</a>
-                                </li>
+                                </li>   
                             </ul>
                         </div>
                     </div>
@@ -184,7 +178,47 @@ loadLanguageFromSession($_SESSION['lang']);
                     <div class="col-md-8">
                         <div class="tab-content profile-tab" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                        <div class="row">
+<div class="row">
+   <div class="col-md-4">                         
+  <h2>Mes informations</h2>
+  <!-- Button to Open the Modal -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+    Ouvrir
+  </button>
+  </div>
+
+  <div class="col-md-4">                         
+  <h2>Mon entreprise</h2>
+  <!-- Button to Open the Modal -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+    Ouvrir
+  </button>
+  </div>
+  <div class="col-md-4">                         
+
+  <h2>Mon abonnement</h2>
+  <!-- Button to Open the Modal -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+    Ouvrir
+  </button>
+  </div>
+  </div>
+
+  <!-- The Modal -->
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Informations</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          
+        <div class="row">
                                             <div class="col-md-6">
                                                 <label>Id utilisateur</label>
                                             </div>
@@ -255,8 +289,19 @@ loadLanguageFromSession($_SESSION['lang']);
                       <a class="savebtn"><?php echo _TITRE_NAVBAR_INFOS_SAUVEGARDER?></a>
                     </div>
                   </div>
-                            </div>
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
+                </div>
+                            <div class="tab-pane fade" id="abonnement" role="tabpanel" aria-labelledby="abonnement-tab">
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <label>Experience</label>

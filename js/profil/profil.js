@@ -1,16 +1,20 @@
-$(document).ready(function(){
 
+$(document).ready(function(){
 	$(".editlink").on("click", function(e){
 
-	  e.preventDefault();
+		e.preventDefault();
 		var dataset = $(this).prev(".datainfo");
 		var savebtn = $(this).next(".savebtn");
 		var theid   = dataset.attr("id");
 		var newid   = theid+"-form";
 		var currval = dataset.text();
 		var idProfil = document.getElementById("idProfil").innerHTML;
+		var idEntreprise = document.getElementById("idEntreprise");
+
 		// var idEntreprise = document.getElementById("idEntreprise").innerHTML;
 	//	console.log(idEntreprise);
+
+
 
 		dataset.empty();
 
@@ -23,7 +27,8 @@ $(document).ready(function(){
 			$('<select  name="'+newid+'" id="'+newid+'" class="hlite"> <option value="Homme">Homme </option><option value="Femme">Femme </option> </select>').appendTo(dataset);
 
 		 }
-		 		if (theid != 'gender' && theid != 'birthday' )
+		 
+		if (theid != 'gender' && theid != 'birthday' )
 		 {
 
 		$('<input type="text" name="'+newid+'" id="'+newid+'" value="'+currval+'" class="hlite">').appendTo(dataset);
@@ -31,40 +36,41 @@ $(document).ready(function(){
 		$(this).css("display", "none");
 		savebtn.css("display", "block");
 
+	 
 	});
-
-
-
-
+  
 	$(".savebtn").on("click", function(e){
+	  e.preventDefault();
+	  var elink   = $(this).prev(".editlink");
+	  var datasets = $(this).prevAll(".datainfo");
+	  datasets.each(function(){
+		var newid   = $(this).attr("id");
+		var einput  = $("#"+newid+"-form");
+		var newval  = einput.val();
+		
 
-		e.preventDefault();
-		var elink   = $(this).prev(".editlink");
-		var dataset = elink.prev(".datainfo");
-		var newid   = dataset.attr("id");
-
-		var cinput  = "#"+newid+"-form";
-		var einput  = $(cinput);
-		var newval  = einput.attr("value");
-
-		updateProfil(newval,newid,idProfil);
-		$(this).css("display", "none");
+	
 		einput.remove();
-
 		if (newid == 'birthday') {
 			var newConvertDate = convertDate(newval)
-			dataset.html(newConvertDate);
+			$(this).html(newConvertDate);
 			}
 			else
 			{
-		dataset.html(newval);
+				$(this).html(newval);
 			}
 
 
-		elink.css("display", "block");
+		
 
+		update(newval,newid,idProfil,idEntreprise);
+
+	  });
+  
+	  $(this).css("display", "none");
+	  elink.css("display", "block");
 	});
-});
+  });
 
 function convertDate(dateString){
 	var p = dateString.split(/\D/g)
@@ -72,6 +78,26 @@ function convertDate(dateString){
 
 }
 
+function update(newval,newid,idProfil,idEntreprise)
+{
+	datas='newval=' + newval + '&newid=' + newid + '&idProfil=' + idProfil.innerHTML + '&idEntreprise='+ idEntreprise.innerHTML;
+
+	$.ajax({
+        url: "updateProfil.php",
+        type: "post",
+        data: datas ,
+        success: function (response) {
+		   // you will get response from your php page (what you echo or print)  
+
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+
+
+    });
+}
+/*
 function updateProfil(newval,newid,idProfil) {
 
 	var request = new XMLHttpRequest();
@@ -85,5 +111,6 @@ function updateProfil(newval,newid,idProfil) {
 		request.send(data);
 		console.log(data)
   }
+  */
 
 	

@@ -174,29 +174,29 @@ loadLanguageFromSession($_SESSION['lang']);
             <a href="">A définir</a><br/>
           </div>
         </div>
-
+              
         <div class="col-md-8">
           <div class="tab-content profile-tab" id="myTabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
               <div class="row">
-                <div class="col-md-4">
-                  <h2>Mes informations</h2>
+                <div class="col-md-5">
+                  <h4>Mes informations</h4>
                   <!-- Button to Open the Modal -->
                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myInformations">
                     Ouvrir
                   </button>
                 </div>
 
-                <div class="col-md-4">
-                  <h2>Mon entreprise</h2>
+                <div class="col-md-5">
+                  <h4>Mon entreprise</h4>
                   <!-- Button to Open the Modal -->
                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myCompany">
                     Ouvrir
                   </button>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-5">
 
-                  <h2>Mon abonnement</h2>
+                  <h4>Mon abonnement</h4>
                   <!-- Button to Open the Modal -->
                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mySubscription">
                     Ouvrir
@@ -204,6 +204,7 @@ loadLanguageFromSession($_SESSION['lang']);
                 </div>
               </div>
 
+              
               <!-- The Modal -->
               <div class="modal fade" id="myInformations">
                 <div class="modal-dialog modal-lg">
@@ -216,6 +217,7 @@ loadLanguageFromSession($_SESSION['lang']);
                     </div>
 
                     <!-- Modal body -->
+                    <form method="post">
                     <div class="modal-body">
 
                       <div class="row">
@@ -232,11 +234,12 @@ loadLanguageFromSession($_SESSION['lang']);
                           <label><?php echo _TITRE_NAVBAR_INFOS_NOM?></label>
                         </div>
                         <div class="col-md-6">
-                          <div class="gear">
-                            <span id="last_name" class="datainfo"><?= $user->getLast_name(); ?></span>
-                            <a href="#" class="editlink"><?php echo _TITRE_NAVBAR_INFOS_EDITER?></a>
-                            <a class="savebtn"><?php echo _TITRE_NAVBAR_INFOS_SAUVEGARDER?></a>
-                          </div>
+                        <div class="gear">
+                        <span id="last_name" class="datainfo"><?= $user->getLast_name(); ?></span>
+                        <a href="#" class="editlink"><?php echo _TITRE_NAVBAR_INFOS_EDITER?></a>
+                       <a class="savebtn"><?php echo _TITRE_NAVBAR_INFOS_SAUVEGARDER?></a>
+                        </div>
+
                         </div>
                       </div>
                       <div class="row">
@@ -245,7 +248,7 @@ loadLanguageFromSession($_SESSION['lang']);
                         </div>
                         <div class="col-md-6">
                           <div class="gear">
-                            <span id="last_name" class="datainfo"><?= $user->getLast_name(); ?></span>
+                            <span id="first_name" class="datainfo"><?= $user->getFirst_name(); ?></span>
                             <a href="#" class="editlink"><?php echo _TITRE_NAVBAR_INFOS_EDITER?></a>
                             <a class="savebtn"><?php echo _TITRE_NAVBAR_INFOS_SAUVEGARDER?></a>
                           </div>
@@ -267,17 +270,30 @@ loadLanguageFromSession($_SESSION['lang']);
                         </div>
                       </div>
                       <div class="row">
-                        <div class="col-md-6">
-                          <label><?php echo _TITRE_NAVBAR_INFOS_ADRESSE?></label>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="gear">
-                            <span id="last_name" class="datainfo"><?= $user->getAddress(); ?></span>
-                            <a href="#" class="editlink"><?php echo _TITRE_NAVBAR_INFOS_EDITER?></a>
-                            <a class="savebtn"><?php echo _TITRE_NAVBAR_INFOS_SAUVEGARDER?></a>
-                          </div>
-                        </div>
-                      </div>
+                <div class="col-md-6">
+                  <label>Adresse</label>
+                </div>
+                <div class="col-md-6">
+                  <div class="gear">
+                    <span id="address" class="datainfo"><?= $user->getAddress(); ?></span>
+                    <a href="#" class="editlink">Editer</a>
+                    <a class="savebtn">Sauvegarder</a>
+                  </div>
+                </div>
+              </div> 
+
+                  <div class="row">
+                  <div class="col-md-6">
+                    <label><?php echo _TITRE_NAVBAR_INFOS_CODE_POSTAL?></label>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="gear">
+                      <span id="zip_code" class="datainfo"><?= $user->getZipCode(); ?></span>
+                      <a href="#" class="editlink"><?php echo _TITRE_NAVBAR_INFOS_EDITER?></a>
+                      <a class="savebtn"><?php echo _TITRE_NAVBAR_INFOS_SAUVEGARDER?></a>
+                    </div>
+                  </div>
+                </div>
                       <div class="row">
                         <div class="col-md-6">
                           <label><?php echo _TITRE_NAVBAR_INFOS_GENRE?></label>
@@ -290,6 +306,7 @@ loadLanguageFromSession($_SESSION['lang']);
                           </div>
                         </div>
                       </div>
+                      </form>
 
                       <!-- Modal footer -->
                       <div class="modal-footer">
@@ -309,16 +326,12 @@ loadLanguageFromSession($_SESSION['lang']);
 
                     <!-- Modal Header -->
                     <div class="modal-header">
-                      <h4 class="modal-title">Informations</h4>
+                      <h4 class="modal-title">Informations de mon entreprise</h4>
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
 
                     <!-- Modal body -->
                     <div class="modal-body">
-
-                      <?php //// DEBUT ENTREPRISE ?>
-                      <div class="tab-content entreprise-tab" id="myTabContent">
-                        <div class="tab-pane fade" id="entreprise" role="tabpanel" aria-labelledby="entreprise-tab">
                           <div class="row">
                             <div class="col-md-6">
                               <label>Id de l'entreprise</label>
@@ -386,16 +399,6 @@ loadLanguageFromSession($_SESSION['lang']);
                               </div>
                             </div>
                           </div>
-
-
-
-
-                          <?php // -------- DELIMITATION ENTREPRISE ?>
-
-
-                        </div>
-                      </div>
-                    </div>
                     </div>
 
                       <!-- Modal footer -->

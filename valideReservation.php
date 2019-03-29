@@ -9,6 +9,7 @@ $timeStart = $_POST["dateDebut"]." ".$_POST["heureDebut"];
 $dateTrajet = new DateTime($timeStart, new DateTimeZone('Europe/Paris'));
 $dateNow = new DateTime("now", new DateTimeZone('Europe/Paris'));
 $interval = $dateTrajet->diff($dateNow);
+/*
 var_dump($interval->format('%Y %M %D %H %i %S %R'));
 var_dump($interval->format('%S') > 0);
 var_dump($interval->format('%i') > 0);
@@ -18,6 +19,7 @@ var_dump($interval->format('%M') > 0);
 var_dump($interval->format('%Y') > 0);
 var_dump($interval->format('%R'));
 var_dump($interval->format('%R') == "-");
+*/
 if ($interval->format('%R') == "-")
 {
   if($interval->format('%i') > 0 || $interval->format('%S') > 0 || $interval->format('%H') > 0 || $interval->format('%D') > 0|| $interval->format('%M') > 0 || $interval->format('%Y') > 0)
@@ -40,7 +42,7 @@ $apiReturn = App\Trajet::getDistanceTime($start, $end);
 $estimatedTime=60*$apiReturn["time"]; //temps estimé de 34 minutes
 $timestampEnd = $timestampStart+$estimatedTime;
 $dateFin = gmdate('Y-m-d G:i:s', $timestampEnd);
-var_dump($dateFin);
+// var_dump($dateFin);
 
 $trajet = new App\Trajet($_POST["start"],$_POST["end"],0,$_SESSION['id'],date('Y-m-d G:i:s'),$timeStart,$dateFin,$apiReturn["distance"],$apiReturn["time"]);
 $trajet->addTrajetStart($bdd,'INSERT INTO `trajet` (`idClient`, `debut`, `fin`, `prixTrajet`, `heureDebut`,`heureFin`,`dateResevation`,`distanceTrajet`,`duration`) VALUES (:idClient,:debut,:fin,:prixTrajet,:dateDebut,:dateFin,:dateReservation,:distanceTrajet,:duration)',$trajet);
@@ -56,7 +58,7 @@ $trajet->startSessionId($bdd); //add idTrajet in SESSION
 $_SESSION['trajet'] = serialize($trajet);
 $_SESSION['timeStart'] = $timeStart;
 
-var_dump($_SESSION['id']);
+// var_dump($_SESSION['id']);
 
 $data=$bdd->query('SELECT * FROM linkabonnemententreprise WHERE idClient='.$_SESSION['id'].'');
 if (!empty($data)) {

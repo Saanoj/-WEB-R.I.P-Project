@@ -74,7 +74,7 @@ include 'includehtml/head.html'; ?>
 
           try {
             if (!isset($_POST['stripeToken']))
-            throw new Exception("Le token a mal été généré.");
+            throw new Exception("");
             Stripe_Charge::create(array("amount" => $price,
             "currency" => "eur",
             "card" => $_POST['stripeToken']));
@@ -87,9 +87,7 @@ include 'includehtml/head.html'; ?>
             </script>';
           }
           catch (Exception $e) {
-            $error = '<div class="alert alert-danger">
-            <strong>Error!</strong> '.$e->getMessage().'
-            </div>';
+            $error = '';
           }
         }
         ?>

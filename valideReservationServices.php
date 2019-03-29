@@ -10,6 +10,12 @@ $bdd = new App\Database('rip');
 // Enfin, j'ai mis qu'on peux reserver un interprete au maximum pendant 8h ( a modifier si vous voulez)
 $hour = $_SESSION['timeStart'];
 $res=explode(' ',$hour);
+var_dump($res);
+
+$trajet = unserialize($_SESSION['trajet']);
+var_dump($trajet);
+
+
 $startInterprete = strtotime($_POST['startInterprete']);
 $endInterprete = strtotime($_POST['endInterprete']);
 $_SESSION['startInterprete']  = $_POST['startInterprete'];
@@ -43,13 +49,14 @@ var_dump((!empty($_POST['quantite'])));
 
 var_dump($_POST['emailContact']);
 var_dump($_POST['messageContact']);
+*/
 
 var_dump(checkInterprete($startInterprete,$endInterprete,$res) == true);
-
+/*
 var_dump(checkSportif($startCoachSportif,$endCoachSportif,$res) == true);
 var_dump(checkCulture($startCoachCulture,$endCoachCulture,$res) == true);
-
 */
+
 
 // && checkInterprete($startCoachSportif,$endCoachSportif,$res) == true && checkInterprete($startCoachCulture,$endCoachCulture,$res) == true
 
@@ -188,6 +195,7 @@ else {
 function checkInterprete($startInterprete,$endInterprete,$res) {
   if ((!empty($_SESSION['startInterprete'])) && (!empty($_SESSION['endInterprete'])))
   {
+    var_dump($endInterprete - $startInterprete);
     if ($startInterprete - strtotime($res[1]) >= 0 &&  $endInterprete - $startInterprete > 0 && $endInterprete - $startInterprete <= 28800)
     {
       return true;

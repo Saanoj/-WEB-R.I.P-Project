@@ -147,7 +147,9 @@ function addPDFButton(){
   button.className = "btn btn-success";
 	button.innerText = "Facture PDF";
   document.getElementById('id1').appendChild(button);
-  generatePDF();
+  button.setAttribute("onclick","generatePDF()");
+
+
  
 
 }
@@ -165,7 +167,8 @@ function generatePDF() {
 	request.open('POST', 'paymentProcess.php');
 	request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
 	request.send(data);
-	return false;
+  document.location.href="paymentProcess.php"
+  return false;
 
   }
 

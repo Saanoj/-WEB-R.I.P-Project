@@ -306,7 +306,7 @@ $pdf->Ln();
 if(!empty($isAbonnee['idAbonnement'])){
 //Prix services
 //Fields Name position
-$Y_Fields_Name_position = 200;
+$Y_Fields_Name_position = 170;
 //Table position, under Fields Name
 $Y_Table_Position = $Y_Fields_Name_position + 6;
 
@@ -321,7 +321,7 @@ $pdf->Cell(30,6,'ID Service',1,0,'L',1);
 $pdf->SetX(50);
 $pdf->Cell(85,6,'Service',1,0,'L',1);
 $pdf->SetX(135);
-$pdf->Cell(30,6,'Quantitee',1,0,'L',1);
+$pdf->Cell(30,6,'Quantitée',1,0,'L',1);
 $pdf->SetX(165);
 $pdf->Cell(30,6,'Prix',1,0,'R',1);
 $pdf->Ln();
@@ -346,15 +346,23 @@ $pdf->MultiCell(30,6,$column_Prix,1);
 
 $reqChauffeur = $bdd->queryOne("SELECT * FROM collaborateurs WHERE idCollaborateurs=".$reqTrajet["idChauffeur"]."");
 //prix trajet
+
 if(empty($isAbonnee['idAbonnement'])){
+  
   $counterService=0;
-  $Y_Fields_Name_position=200;
+  $Y_Fields_Name_position=170;
   $totalServices = 0;
 }
-$Y_Fields_Name_position += ($counterService+1)*6;
-$Y_Table_Position = $Y_Fields_Name_position + 6;
 
-$pdf->SetFont('DejaVu','B',10);
+$pdf->SetFillColor(232,232,232);
+
+
+$Y_Fields_Name_position += ($counterService+1)*6;
+$Y_Table_Position = $Y_Fields_Name_position +6;
+
+
+
+$pdf->SetFont('DejaVu','',10);
 $pdf->SetY($Y_Fields_Name_position);
 $pdf->SetX(20);
 $pdf->Cell(30,6,'ID Trajet',1,0,'L',1);
@@ -365,7 +373,6 @@ $pdf->Cell(30,6,'Distance',1,0,'R',1);
 $pdf->SetX(165);
 $pdf->Cell(30,6,'Prix',1,0,'R',1);
 
-$pdf->Ln();
 
 //Now show the 3 columns
 $pdf->SetFont('DejaVu','',10);
@@ -382,14 +389,16 @@ $pdf->SetY($Y_Table_Position);
 $pdf->SetX(165);
 $pdf->MultiCell(30,8,(sprintf("%.2f",$reqChauffeur["prixCollaborateur"]*$reqTrajet["distanceTrajet"]))."€",1);
 
+
+if(empty($isAbonnee['idAbonnement'])){
 //prix trajet
 $Y_Fields_Name_position += ($counterService+1)*6;
 $Y_Table_Position = $Y_Fields_Name_position + 6;
 
 $pdf->SetFont('DejaVu','B',10);
-$pdf->SetY($Y_Fields_Name_position);
+$pdf->SetY($Y_Fields_Name_position+8);
 $pdf->SetX(20);
-$pdf->Cell(30,6,'',1,0,'L',1);
+$pdf->Cell(40,6,'',1,0,'L',1);
 $pdf->SetX(50);
 $pdf->Cell(85,6,'',1,0,'L',1);
 $pdf->SetX(135);
@@ -402,9 +411,38 @@ $pdf->Ln();
 //Now show the 3 columns
 $pdf->SetFont('DejaVu','',10);
 
-$pdf->SetY($Y_Table_Position);
+$pdf->SetY($Y_Table_Position+8);
 $pdf->SetX(165);
 $pdf->MultiCell(30,8,($real_price)."€",1);
+}
+else 
+{
+  //prix trajet
+$Y_Fields_Name_position += ($counterService+1)*6;
+$Y_Table_Position = $Y_Fields_Name_position + 6;
+
+$pdf->SetFont('DejaVu','B',10);
+$pdf->SetY($Y_Fields_Name_position);
+$pdf->SetX(20);
+$pdf->Cell(40,6,'',1,0,'L',1);
+$pdf->SetX(50);
+$pdf->Cell(85,6,'',1,0,'L',1);
+$pdf->SetX(135);
+$pdf->Cell(30,6,'',1,0,'R',1);
+$pdf->SetX(165);
+$pdf->Cell(30,6,'Prix total',1,0,'R',1);
+
+$pdf->Ln();
+
+//Now show the 3 columns
+$pdf->SetFont('DejaVu','',10);
+
+$pdf->SetY($Y_Fields_Name_position+6);
+$pdf->SetX(165);
+$pdf->MultiCell(30,8,($real_price)."€",1);
+
+}
+
 
 //var_dump($reqTrajet);
 // echo "<p class='h2'>Total Services: ".$totalServices."€ TTC</p>";

@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-    -<dependencies>
+    <dependencies>
 
         <dependency>
             <groupId>mysql</groupId>

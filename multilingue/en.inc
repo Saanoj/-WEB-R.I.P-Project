@@ -72,7 +72,7 @@ define("_TITRE_NAVBAR_ABO_SOUSCRIRE","make a subscription");
 define("_TITRE_NAVBAR_INFOS_QUITTER_ENTREPRISE","Leave/Delete my company");
 define("_TITRE_NAVBAR_INFOS_REJOINDRE_ENTREPRISE","Join a company");
 define("_TITRE_NAVBAR_INFOS_CREER_ENTREPRISE","Create a company");
-define("_TITRE_NAVBAR_INFOS_VOIR_INFOS_ABONNEMENTS","Check informations about my subscription/ company");
+define("_TITRE_NAVBAR_INFOS_VOIR_INFOS_ABONNEMENTS","Check informations about my subscription");
 
 //contact
 define("_CONTACT_LET_MESSAGE","Leave us a message ! ");

@@ -33,6 +33,7 @@ if (isset($_POST['submit'])) {
     $req = $bdd->getPDO()->prepare('SELECT * FROM entreprise WHERE nameEntreprise = :nameEntreprise');
     $req->execute(array("nameEntreprise" => $_POST['nameEntreprise']));
     $uneEntreprise = $req->fetch();
+   
     $idEntreprise = $uneEntreprise['idEntreprise'];
     $req2 = $bdd->getPDO()->prepare('UPDATE users SET idEntreprise = :idEntreprise WHERE id = :id');
     $req2->execute(array(
@@ -51,8 +52,9 @@ if (isset($_POST['submit'])) {
     $req = $bdd->getPDO()->prepare('SELECT * FROM linkabonnemententreprise INNER JOIN entreprise ON linkabonnemententreprise.idClient = entreprise.idDirecteur AND entreprise.idEntreprise = :idEntreprise');
     $req->execute(array('idEntreprise' => $idEntreprise));
     $entreprise = $req->fetch();
-    
 
+    
+    if ($entreprise != false) {
     $reqInsertAbonnement = $bdd->getPDO()->prepare('INSERT INTO linkabonnemententreprise(idAbonnement,idClient,idEntreprise,dateDebut,dateFin) VALUES (:idAbonnement,:idClient,:idEntreprise,NOW(),:dateFin)');
     $reqInsertAbonnement->execute(array(
         'idAbonnement' => $entreprise['idAbonnement'],
@@ -63,6 +65,11 @@ if (isset($_POST['submit'])) {
 
 $req->closeCursor();
     success();
+}
+else
+{
+    success();
+}
 }
 
 

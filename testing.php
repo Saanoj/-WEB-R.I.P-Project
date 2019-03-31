@@ -96,6 +96,8 @@ loadLanguageFromSession($_SESSION['lang']);
   //CREATION DE L'ABONNEMENT
 
   $abo = App\Abonnement::createAbonnement($bdd);
+
+  
   // serialize($abo);
   ?>
 
@@ -398,7 +400,108 @@ loadLanguageFromSession($_SESSION['lang']);
                                 <?php } ?>
                               </div>
                             </div>
+                            
+               
+                         
+                          <?php
+           
+                if (checkIfexistEntreprise($bdd) == true) {?>
+                
+                <div>
+                  <a href="deleteEntrepriseFromUser.php"> <button type="button"  class="btn btn-danger"><?php echo _TITRE_NAVBAR_INFOS_QUITTER_ENTREPRISE?></button></a>
+                  </div>
+                  <br>
+                  <div>
+                  <a href="showAbonnementProfil.php"><button type="button" class="btn btn-info"><?php echo 'Voir les informations de l\'entreprise';?></button></a>
+                  </div>
+                  <br>
+                  <?php
+                } else { ?>
+                  <div>
+                  <a href="joinEntreprise.php"> <button type="button"  class="btn btn-info"><?php echo _TITRE_NAVBAR_INFOS_REJOINDRE_ENTREPRISE?></button></a>
+                  </div>
+                  <br>
+                  <div>
+                  <a href="createEntreprise.php"> <button type="button"  class="btn btn-info"><?php echo _TITRE_NAVBAR_INFOS_CREER_ENTREPRISE?></button></a>
+                  </div>
+
+                <?php  }?>
+
+              </div>
+           </div>
+                
+
+                    
+
+                      <!-- Modal footer -->
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+         
+
+
+
+
+
+              <!-- The Modal -->
+              <div class="modal fade" id="mySubscription">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                      <h4 class="modal-title">Informations de mon abonnement</h4>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                          <div class="row">
+                            <div class="col-md-6">
+                              <label>Id de l'abonnement</label>
+                            </div>
+                            <div class="col-md-6">
+                              <span id="idAbonnement" class="datainfo" value="'<?= $abo->getIdAbonnement();?>'"><?= $abo->getIdAbonnement(); ?></span>
+                            </div>
                           </div>
+                          <div class="row">
+                            <div class="col-md-6">
+                              <label>Type de l'abonnement</label>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="gear">
+                                <span id="typeAbonnement" class="datainfo"><?= $abo->getTypeAbonnement(); ?></span>
+                          
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col-md-6">
+                              <label>Engagement sur 12 mois.</label>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="gear">
+                                <span id="isEngagement" class="datainfo"><?php if ( $abo->getIsEngagement() == 1) { echo 'Oui';} if ( $abo->getIsEngagement() == 0) { echo 'Non';} else {
+                                  echo ' ';}?></span>
+                               
+                          
+                              </div>
+                            </div>
+                          </div>
+                        <?php if ($abo->getIdAbonnement() != null) {?>
+                       <a href="showAbonnementProfil.php"><button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal"><?php echo _TITRE_NAVBAR_INFOS_VOIR_INFOS_ABONNEMENTS?></button></a>
+                        <?php } ?>
+                    </div>
+                    <div>
+                    <?php 
+                    if (checkIfAbonnementValide($bdd) == true) {
+                      ?>
+                    <a href="abonnement.php"> <button type="button"  class="btn btn-success"><?php echo _TITRE_NAVBAR_ABO_SOUSCRIRE?></button></a> <?php } ?>
                     </div>
 
                       <!-- Modal footer -->
@@ -409,6 +512,11 @@ loadLanguageFromSession($_SESSION['lang']);
                   </div>
                 </div>
               </div>
+
+
+
+
+
             </div>
           </div>
         </div>
@@ -423,6 +531,7 @@ loadLanguageFromSession($_SESSION['lang']);
 
   </html>
   <?php
+  
   function checkIfAbonnementValide($bdd)
   {
     $req = $bdd->getPDO()->prepare('SELECT * FROM linkabonnemententreprise WHERE idClient = :idClient');
@@ -461,6 +570,10 @@ loadLanguageFromSession($_SESSION['lang']);
       return false;
     }
   }
+
+
+
+
 
 
   ?>

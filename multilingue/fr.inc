@@ -67,11 +67,11 @@ define("_TITRE_NAVBAR_INFOS_EDITER","Editer");
 define("_TITRE_NAVBAR_INFOS_SAUVEGARDER","Sauvegarder");
 
 // Profil Navbar Mes abonnements
-define("_TITRE_NAVBAR_ABO_SOUSCRIRE","Souscrire à un abonnement");
+define("_TITRE_NAVBAR_ABO_SOUSCRIRE","Souscrire à un abonnement ");
 define("_TITRE_NAVBAR_INFOS_QUITTER_ENTREPRISE","Quitter/Supprimer mon entreprise");
 define("_TITRE_NAVBAR_INFOS_REJOINDRE_ENTREPRISE","Rejoindre une entreprise");
 define("_TITRE_NAVBAR_INFOS_CREER_ENTREPRISE","Créer une entreprise");
-define("_TITRE_NAVBAR_INFOS_VOIR_INFOS_ABONNEMENTS","Voir les informations de mon abonnement / mon entreprise ");
+define("_TITRE_NAVBAR_INFOS_VOIR_INFOS_ABONNEMENTS","Voir les informations de mon abonnement");
 
 
 //Contact

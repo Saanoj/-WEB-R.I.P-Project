@@ -28,6 +28,10 @@ isset($_POST['pays']) && !empty($_POST['pays']) &&
 isset($_SESSION['id']) && !empty($_SESSION['id'])
 )
 {
+    $req = $bdd->getPDO()->prepare('DELETE  FROM linkabonnemententreprise WHERE idClient = :idClient');
+    $req->execute(array('idClient' => $_SESSION['id']));
+    $req->closeCursor();
+
         // On insert dans la bdd l'entreprise avec les infos du formulaire
         $req = $bdd->getPDO()->prepare('INSERT INTO entreprise(nameEntreprise,numSiret,adresse,nbSalarie,pays,idDirecteur,numEntreprise) VALUES (:nameEntreprise,:numSiret,:adresse,:nbSalarie,:pays,:idDirecteur,:numEntreprise)');
         $req->execute(array(

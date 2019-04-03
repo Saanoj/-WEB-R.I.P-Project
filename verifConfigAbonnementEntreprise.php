@@ -36,6 +36,10 @@ if ($_GET['isEngagement'] == '1')
 // On créer un abonnement pour toutes les personnes appartenant a l'entreprise
 $dateFin=date("Y-m-d", strtotime("+1 year"));
 
+$req = $bdd->getPDO()->prepare('DELETE * FROM linkabonnemententreprise WHERE idClient = :idClient');
+$req->execute(array('idClient' => $_SESSION['id']));
+$req->closeCursor();
+
 $req = $bdd->getPDO()->prepare('SELECT * FROM `users` INNER JOIN entreprise ON entreprise.idEntreprise = users.idEntreprise
 AND entreprise.idEntreprise = :idEntreprise');
 $req->execute(array('idEntreprise' => $idEntreprise));

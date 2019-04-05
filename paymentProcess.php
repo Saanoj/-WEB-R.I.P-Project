@@ -4,15 +4,7 @@ require 'Class/Autoloader.php';
 App\Autoloader::register();
 $bdd = new App\Database('rip');
 require_once('fpdf/test/tfpdf.php');
-?>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <title>PDF</title>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="Ride in pride">
-<?php
+
 
 
 //Select the Products you want to show in your PDF file
@@ -462,8 +454,13 @@ $req2->execute(array(
   'prixTotal' => $real_price
 ));
 
+
+$destination = 'factures/facture'.$_SESSION['idTrajet'].'.pdf';
+$pdf->Output($destination, 'F');
 $pdf->Output();
+
 ob_end_flush();
+
 
 // Config de la date en francais en PHP
 function dateFrDebut($dateFr) {

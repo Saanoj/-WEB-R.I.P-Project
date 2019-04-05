@@ -437,9 +437,6 @@ loadLanguageFromSession($_SESSION['lang']);
               </div>
            </div>
                 
-
-                    
-
                       <!-- Modal footer -->
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -520,32 +517,169 @@ loadLanguageFromSession($_SESSION['lang']);
                 </div>
               </div>
               
+              
 
-               <!-- The Modal -->
-               <div class="modal fade" id="myTrajet">
-                <div class="modal-dialog modal-lg">
-                  <div class="modal-content">
 
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                      <h4 class="modal-title">Mes trajets</h4>
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
 
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                          <div class="row">
-                            <div class="col-md-6">
-                              <label>Id de l'abonnement</label>
-                            </div>
-                    </div>
-                            
-                    
-                    </div>
-                  </div>
+
+
+<div id="myTrajet" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+             
+            <h4 class="modal-title">Mes trajets</h4>
+            </div>
+            <div class="modal-body">
+            <div class="row">
+            <div class="offset-md-1 md-3">
+            <div><p> Vous pouvez consulter vos trajets ici.</p></div>
+            </div>
+            </div>
+            <div class="row">
+            <div class="offset-md-4 md-3">
+                <a href="#myOldTrajet" role="button" class="btn btn-primary" data-toggle="modal">Mes anciens trajets</a>
                 </div>
+                </div>
+                <br>
+                <br>
+                <div class="row">
+                <div class="offset-md-4 md-3">
+                <a href="#myTrajetEnCours" role="button" class="btn btn-primary" data-toggle="modal">Mes trajets en cours</a>
+                </div>
+                </div>
+                <br>
+                <br>
+                <div class="row">
+                <div class="offset-md-4 md-3">
+                <a href="#myNextTrajet" role="button" class="btn btn-primary" data-toggle="modal">Mes prochains trajets</a>
+                </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+             </div>
               </div>
+              
 
+        </div>
+    </div>
+</div>
+
+<div id="myOldTrajet" class="modal fade modal-child" data-backdrop-limit="1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-modal-parent="#myTrajet">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+            <h4 class="modal-title">Mes anciens trajets</h4>
+            </div>
+            <div class="modal-body">
+            <?php       
+        $reqTrajet = getTrajets($bdd,"Finis");
+            while ($trajet = $reqTrajet->fetch())
+        {
+          ?>
+          <div class="row">
+          <div class="offset-md-1 md-3">
+          <?php
+          $destination = 'factures/facture'.$trajet['idTrajet'].'.pdf';
+          echo 'Numéro de trajet : '. $trajet['idTrajet'] . ' | Voir le récapitulatif : '  ?> <a href="<?= $destination;?>" target=_blank><button type="button" class="btn btn-info" id="<?=$trajet['idTrajet'];?>">Cliquer ici</button></a>
+          <br>
+          <br>
+          </div>
+          </div>
+          <?php
+        }
+        $reqTrajet->closeCursor();
+
+        ?>
+            </div>
+            <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+             </div>
+
+        </div>
+    </div>
+</div>
+
+<div id="myTrajetEnCours" class="modal fade modal-child" data-backdrop-limit="1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-modal-parent="#myTrajet">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Mes trajets en cours</h4>
+            </div>
+            <div class="modal-body">
+            <?php 
+        
+        $reqTrajet = getTrajets($bdd,"En cours");
+            while ($trajet = $reqTrajet->fetch())
+        {
+          ?>
+          <div class="row">
+          <div class="offset-md-1 md-3">
+          <?php
+          $destination = 'factures/facture'.$trajet['idTrajet'].'.pdf';
+          echo 'Numéro de trajet : '. $trajet['idTrajet'] . ' | Voir le récapitulatif : '  ?> <a href="<?= $destination;?>" target=_blank><button type="button" class="btn btn-info" id="<?=$trajet['idTrajet'];?>">Cliquer ici</button></a>
+          <br>
+          <br>
+          </div>
+          </div>
+          <?php
+        }
+        $reqTrajet->closeCursor();
+    
+   
+  
+        ?>
+            </div>
+            <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                      </div>
+
+        </div>
+    </div>
+</div>
+
+<div id="myNextTrajet" class="modal fade modal-child" data-backdrop-limit="1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-modal-parent="#myTrajet">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+            <h4 class="modal-title">Vos trajets finis</h4>
+            </div>
+            <div class="modal-body">
+            <?php 
+        
+        $reqTrajet = getTrajets($bdd,"Pas commencé");
+            while ($trajet = $reqTrajet->fetch())
+        {
+          ?>
+          <div class="row">
+          <div class="offset-md-1 md-3">
+          <?php
+          $destination = 'factures/facture'.$trajet['idTrajet'].'.pdf';
+          echo 'Numéro de trajet : '. $trajet['idTrajet'] . ' | Voir le récapitulatif : '  ?> <a href="<?= $destination;?>" target=_blank><button type="button" class="btn btn-info" id="<?=$trajet['idTrajet'];?>">Cliquer ici</button></a>
+          <br>
+          <br>
+          </div>
+          </div>
+          <?php
+        }
+        $reqTrajet->closeCursor();
+    
+   
+  
+        ?>
+            </div>
+            <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                      </div>
+
+        </div>
+    </div>
+</div>
 
 
 
@@ -603,8 +737,13 @@ loadLanguageFromSession($_SESSION['lang']);
     }
   }
 
-
-
+  function getTrajets($bdd,$state) {
+    $req = $bdd->getPDO()->prepare('SELECT * FROM trajet WHERE idClient = :idClient AND state = :state ORDER BY idTrajet ASC LIMIT 10');
+    $req->execute(array(
+      'idClient' => $_SESSION['id'],
+      'state' => $state));
+      return  $req;
+  }
 
 
 

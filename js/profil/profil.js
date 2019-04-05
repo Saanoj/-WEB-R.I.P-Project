@@ -97,20 +97,12 @@ function update(newval,newid,idProfil,idEntreprise)
 
     });
 }
-/*
-function updateProfil(newval,newid,idProfil) {
 
-	var request = new XMLHttpRequest();
-	request.onreadystatechange = function(){
-	  if(request.status == 200 && request.readyState == 4){
-	  }
-	}
-		data='newval=' + newval + '&newid=' + newid + '&idProfil=' + idProfil.innerHTML;
-		request.open('POST', 'updateProfil.php');
-		request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-		request.send(data);
-		console.log(data)
-  }
-  */
-
-	
+$('#myModal2').on('show', function() {
+	$('#myModal').css('opacity', .5);
+	$('#myModal').unbind();
+});
+$('#myModal2').on('hidden', function() {
+	$('#myModal').css('opacity', 1);
+	$('#myModal').removeData("modal").modal({});
+});

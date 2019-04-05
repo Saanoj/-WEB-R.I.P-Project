@@ -19,8 +19,9 @@ $bdd = new Database('rip');
     private $heureFin;
     private $distance;
     private $duration;
+    private $state;
 
-    public function __construct($start,$end,$price,$idClient,$dateReservation,$dateDebut,$heureFin,$distance,$duration) {
+    public function __construct($start,$end,$price,$idClient,$dateReservation,$dateDebut,$heureFin,$distance,$duration,$state) {
         $this->start = $start;
         $this->end = $end;
         $this->price = $price;
@@ -30,6 +31,7 @@ $bdd = new Database('rip');
         $this->heureFin = $heureFin;
         $this->distance = $distance;
         $this->duration = $duration;
+        $this->state = $state;
 
     }
 
@@ -45,7 +47,7 @@ $bdd = new Database('rip');
     public function getHeureFin() {return $this->heureFin;}
     public function getDistance() {return $this->distance;}
     public function getDuration() {return $this->duration;}
-
+    public function getState() {return $this->state;}
     /* SETTERS */
     public function setStart($newIdAbonnement) {return $this->idAbonnement = $newIdAbonnement;}
     public function setEnd($newIdClient) {return $this->idClient = $newIdClient;}
@@ -56,6 +58,7 @@ $bdd = new Database('rip');
     public function setHeureFin($heureFin) {return $this->heureFin = $heureFin;}
     public function setDistance($distance) {return $this->distance = $distance;}
     public function setDuration($duration) {return $this->duration = $duration;}
+    public function setState($state) {return $this->state = $state;}
 
 
 
@@ -89,6 +92,7 @@ $bdd = new Database('rip');
       $req1->bindValue(':dateReservation', $trajet->getDateReservation());
       $req1->bindValue(':distanceTrajet', intval($trajet->getDistance()));
       $req1->bindValue(':duration', $trajet->getDuration());
+      $req1->bindValue(':state', $trajet->getState());
 
       $req1->execute();
     }

@@ -3,7 +3,6 @@ namespace App;
 
 use \PDO;
 
-
 class Database{
 
   private $db_name;

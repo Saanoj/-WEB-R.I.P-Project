@@ -1,3 +1,18 @@
+<?php 
+namespace App;
+use \PDO;
+use \DateTime;
+use \DateTimeZone;
+
+require_once 'Class/Autoloader.php';
+Autoloader::register();
+$bdd = new Database('rip');
+checkAbonnementValide($bdd);
+checkIfTrajetStarted($bdd);
+
+?>
+
+   
     <!-- Footer section -->
 
     <footer class="footer">
@@ -61,3 +76,74 @@
       <script src="js/modernizr.js"></script>
       <script src="js/main.js"></script>
       <script src="js/popper.min.js"></script>
+
+      <?php 
+function checkAbonnementValide($bdd) {
+  $date = new DateTime('', new DateTimeZone('Europe/Paris'));
+  // echo $date->format('Y-m-d ') . "\n";
+
+  $req = $bdd->getPDO()->prepare('SELECT * FROM linkabonnemententreprise');
+  $req->execute();
+
+  while ($unAbonnement = $req->fetch())
+  {
+      $dateDebut = $unAbonnement['dateDebut'];
+      $dateDebut = date($dateDebut);
+      $dateDebut = new \DateTime($dateDebut);
+
+      $dateFin = $unAbonnement['dateFin'];
+      $dateFin = date($dateFin);
+      $dateFin = new \DateTime($dateFin);
+
+
+      $dateNowLessDateDebut = $dateFin->diff($date);
+
+
+  if ($dateNowLessDateDebut->format('%R') == '+')
+      {
+      $req = $bdd->getPDO()->prepare('DELETE FROM linkabonnemententreprise WHERE idClient = :idClient');
+      $req->execute(array('idClient' => $unAbonnement['idClient']));
+      $req->closeCursor();
+      }
+  }
+ }
+
+ 
+function checkIfTrajetStarted($bdd) {
+
+  $date = new DateTime("now", new DateTimeZone('Europe/Paris'));
+  $req = $bdd->getPDO()->prepare('SELECT * FROM trajet');
+  $req->execute();
+  while ($unTrajet = $req->fetch())
+ {
+  // On convertie la date de début de trajet en DateTime afin de faire les différences.
+  $dateTrajetDebut = new DateTime($unTrajet['heureDebut'], new DateTimeZone('Europe/Paris'));
+  $interval = $date->diff($dateTrajetDebut);
+  // On convertie la date de fin de trajet en DateTime afin de faire les différences.
+  $dateTrajetFin = new DateTime($unTrajet['heureFin'], new DateTimeZone('Europe/Paris'));
+  $intervalFin = $date->diff($dateTrajetFin);
+  
+  // Si la date du jour se situe dans l'intervalle de la date du début et la date de fin du trajet :
+  if ($interval->format('%R') == "-" && $intervalFin->format('%R') == "+")
+  {
+  $reqTrajet = $bdd->getPDO()->prepare('UPDATE trajet SET state="En cours" WHERE idTrajet = :idTrajet');
+  $reqTrajet->bindValue('idTrajet',$unTrajet['idTrajet']);
+  $reqTrajet->execute();
+  }
+  // Si la date du jours est supérieur a la date de fin et supérieur a la date du début :
+  else if ($interval->format('%R') == "-" && $intervalFin->format('%R') == "-") {
+  $reqTrajet = $bdd->getPDO()->prepare('UPDATE trajet SET state="Finis" WHERE idTrajet = :idTrajet');
+  $reqTrajet->bindValue('idTrajet',$unTrajet['idTrajet']);
+  $reqTrajet->execute();
+  }
+  // Le reste ( donc si la date du jour est inférieur a la date de début et fin de trajet)
+  else 
+  {
+  $reqTrajet = $bdd->getPDO()->prepare('UPDATE trajet SET state="Pas commencé" WHERE idTrajet = :idTrajet');
+  $reqTrajet->bindValue('idTrajet',$unTrajet['idTrajet']);
+  $reqTrajet->execute();
+  }
+ }
+}
+  
+      ?>

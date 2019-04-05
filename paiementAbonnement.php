@@ -148,7 +148,6 @@ include 'includehtml/head.html'; ?>
                 "name" => $uneEntreprise['nameEntreprise']
               ],
               "currency" => "eur",
-              "id" => $uneEntreprise['idEntreprise']              
             ]);
             }
             $success = '<div class="alert alert-success">

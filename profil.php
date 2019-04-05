@@ -196,6 +196,8 @@ loadLanguageFromSession($_SESSION['lang']);
                     Ouvrir
                   </button>
                 </div>
+                </div>
+                <div class="row">
                 <div class="col-md-5">
 
                   <h4>Mon abonnement</h4>
@@ -211,6 +213,7 @@ loadLanguageFromSession($_SESSION['lang']);
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myTrajet">
                 Ouvrir
               </button>
+              </div>
               </div>
 
               
@@ -585,7 +588,7 @@ loadLanguageFromSession($_SESSION['lang']);
           <?php
           $destination = 'factures/facture'.$trajet['idTrajet'].'.pdf';
           echo 'Numéro de trajet : '. $trajet['idTrajet'] . ' | Voir le récapitulatif : '  ?> <a href="<?= $destination;?>" target=_blank><button type="button" class="btn btn-info" id="<?=$trajet['idTrajet'];?>">Cliquer ici</button></a>
-          <br>
+          <br>    
           <br>
           </div>
           </div>

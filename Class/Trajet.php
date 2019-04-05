@@ -157,6 +157,37 @@ $bdd = new Database('rip');
 
       return $resFin;
     }
+
+    
+
+    public static function getChauffeur($bdd) {
+
+      $req = $bdd->getPDO()->prepare('SELECT idChauffeur FROM trajet');
+      $req->execute();
+      return $req;
+      $req->closeCursor();
+
+    }
+
+    public static function getStateChauffeur($bdd,$state) {
+
+      $req = $bdd->getPDO()->prepare('SELECT * FROM trajet WHERE state = :state');
+      $req->execute(array('state' => $state));
+      return $req;
+      $req->closeCursor();
+
+    }
+
+    public static function updateChauffeur($bdd,$idCollaborateurs,$isOff) {
+
+      $req = $bdd->getPDO()->prepare('UPDATE collaborateurs SET isOnline = :isOnline WHERE idCollaborateurs = :idCollaborateurs ');
+      $req->execute(array('isOnline' => $isOff,'idCollaborateurs' => $idCollaborateurs));
+      return $req;
+      $req->closeCursor();
+
+    }
+
+
   }
 
 

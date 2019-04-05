@@ -9,6 +9,7 @@ Autoloader::register();
 $bdd = new Database('rip');
 checkAbonnementValide($bdd);
 checkIfTrajetStarted($bdd);
+checkStatusChauffeur($bdd);
 
 ?>
 
@@ -145,5 +146,35 @@ function checkIfTrajetStarted($bdd) {
   }
  }
 }
+
+function checkStatusChauffeur($bdd) {
+
+  $req = Trajet::getStateChauffeur($bdd,"En cours");
+  while ($trajet = $req->fetch())
+  {
+   $reqUpdate = Trajet::updateChauffeur($bdd,$trajet['idChauffeur'],0);
+  }
+  $req->closeCursor();
+
+  $req = Trajet::getStateChauffeur($bdd,"Pas commencé");
+  while ($trajet = $req->fetch())
+  {
+   $reqUpdate = Trajet::updateChauffeur($bdd,$trajet['idChauffeur'],1);
+  }
+  $req->closeCursor();
+
+  $req = Trajet::getStateChauffeur($bdd,"Finis");
+  while ($trajet = $req->fetch())
+  {
+   $reqUpdate = Trajet::updateChauffeur($bdd,$trajet['idChauffeur'],1);
+  }
+  $req->closeCursor();
+
+  
+
+}
+
+
+
   
       ?>

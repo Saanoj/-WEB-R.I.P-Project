@@ -76,7 +76,7 @@ loadLanguageFromSession($_SESSION['lang']);
             <?php echo _TITRE_RESERVATION_TRAJET ?>
           </div>
         </div>
-        <div class="row pt-4 pb-4 bg-secondary rounded">
+        <div class="row pt-2 pb-4 bg-secondary rounded">
           <div class="col-md-2">
 
           <!-- boutton d'autocomplétion de depart depuis son adresse -->
@@ -88,7 +88,7 @@ loadLanguageFromSession($_SESSION['lang']);
           </div>
         <?php } ?>
         </div>
-        <div class="col-md-10">
+        <div class="col-md-13">
           <form action="valideReservation.php" method="post" class="row" id="" onsubmit="return checkGlobal(this)">
             <input type="text" name="start"  id="autocomplete" class="col-md-3 search_input search_input_1 m-2 start" placeholder="<?php echo _ADRESSE_DEPART_RESERVATION ?>" required="required"  onblur="checkStart(this)">
 

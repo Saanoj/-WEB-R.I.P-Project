@@ -63,7 +63,10 @@
 
               $chauffeur = new App\Chauffeur($unChauffeur["idCollaborateurs"],$unChauffeur["email"],$unChauffeur["last_name"],$unChauffeur["first_name"],$unChauffeur["metier"],$unChauffeur["prixCollaborateur"],
                                             $unChauffeur["dateEmbauche"],$unChauffeur["ville"],$unChauffeur["heuresTravailees"],$unChauffeur["rating"],$unChauffeur["ratingNumber"],$unChauffeur["description"],$car["carId"],$car["carBrand"],$car["carModel"],$car["carColor"],$car["nbPlaces"]);
-              ?>
+             
+           // var_dump(checkDriver($bdd,$trajet));
+            
+            ?>
               <li class="list-group-item ">
                 <div class="container">
                   <div class="row">
@@ -150,3 +153,38 @@
     <?php include "includehtml/footer.php" ?>
   </body>
 </html>
+
+
+<?php 
+/*
+function checkDriver($bdd,$trajet) {
+  $req = App\Trajet::getStateChauffeur($bdd,"Pas commencé");
+  while ($unTrajet = $req->fetch())
+  {
+    $dateDebut = new DateTime($trajet->getDateDebut(), new DateTimeZone('Europe/Paris'));
+    $dateFin = new DateTime($trajet->getHeureFin(), new DateTimeZone('Europe/Paris'));
+    
+    
+
+    // On convertie la date de début de trajet en DateTime afin de faire les différences.
+  $dateTrajetDebut = new DateTime($unTrajet['heureDebut'], new DateTimeZone('Europe/Paris'));
+  $interval = $dateDebut->diff($dateTrajetDebut);
+ 
+ 
+
+    // On convertie la date de fin de trajet en DateTime afin de faire les différences.
+    $dateTrajetFin = new DateTime($unTrajet['heureFin'], new DateTimeZone('Europe/Paris'));
+    $intervalFin = $dateFin->diff($dateTrajetFin);
+    
+    // Si la date du jour se situe dans l'intervalle de la date du début et la date de fin du trajet :
+    if ($interval->format('%R') == "-" && $intervalFin->format('%R') == "+")
+    {
+      return false;
+    }
+  }
+
+  return true;
+  $req->closeCursor();
+}
+*/
+?>

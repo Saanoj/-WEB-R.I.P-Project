@@ -4,6 +4,7 @@ App\Autoloader::register();
 $bdd = new App\Database('rip');
 
 checkIfTrajetStarted($bdd);
+checkStatusChauffeur($bdd);
 
 function checkIfTrajetStarted($bdd) {
 
@@ -41,6 +42,34 @@ function checkIfTrajetStarted($bdd) {
     }
    }
   }
+
+  function checkStatusChauffeur($bdd) {
+
+    $req = App\Trajet::getStateChauffeur($bdd,"En cours");
+    while ($trajet = $req->fetch())
+    {
+     $reqUpdate = App\Trajet::updateChauffeur($bdd,$trajet['idChauffeur'],1);
+    }
+    $req->closeCursor();
+
+    $req = App\Trajet::getStateChauffeur($bdd,"Pas commencé");
+    while ($trajet = $req->fetch())
+    {
+     $reqUpdate = App\Trajet::updateChauffeur($bdd,$trajet['idChauffeur'],0);
+    }
+    $req->closeCursor();
+
+    $req = App\Trajet::getStateChauffeur($bdd,"Finis");
+    while ($trajet = $req->fetch())
+    {
+     $reqUpdate = App\Trajet::updateChauffeur($bdd,$trajet['idChauffeur'],0);
+    }
+    $req->closeCursor();
+
+    
+
+  }
+  
     
 
 

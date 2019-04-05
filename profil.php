@@ -204,6 +204,13 @@ loadLanguageFromSession($_SESSION['lang']);
                     Ouvrir
                   </button>
                 </div>
+
+              <div class="col-md-5">
+              <h4>Mes trajets</h4>
+              <!-- Button to Open the Modal -->
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myTrajet">
+                Ouvrir
+              </button>
               </div>
 
               
@@ -512,7 +519,32 @@ loadLanguageFromSession($_SESSION['lang']);
                   </div>
                 </div>
               </div>
+              
 
+               <!-- The Modal -->
+               <div class="modal fade" id="myTrajet">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                      <h4 class="modal-title">Mes trajets</h4>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                          <div class="row">
+                            <div class="col-md-6">
+                              <label>Id de l'abonnement</label>
+                            </div>
+                    </div>
+                            
+                    
+                    </div>
+                  </div>
+                </div>
+              </div>
 
 
 

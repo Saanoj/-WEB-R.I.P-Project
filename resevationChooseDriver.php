@@ -54,9 +54,24 @@
             <form class="funkyradio list-group list-group-flush" method="post" action="valideReservationDriver.php">
               <?php
               // Affichage d'un service
-              $chauffeurs = $bdd->queryPrepareForWhile('SELECT * FROM collaborateurs WHERE metier="chauffeur" and isOnline=1 ORDER BY rating DESC ',$bdd);
-              $i=0;
+              $idChauffeurs = checkDriver($bdd,$trajet);
+              $i =0;
+              $result=" ";
+              foreach($idChauffeurs as $id){
+                if ($i==0)
+                {
+                  $result = " AND idCollaborateurs !=".$id;
+                }
+                else{
+                  $result = $result." AND idCollaborateurs !=".$id;
+                }
+                $i++;
+              }
+               echo $result;
 
+              $chauffeurs = $bdd->queryPrepareForWhile('SELECT * FROM collaborateurs WHERE metier="chauffeur" and isOnline=1'.$result.' ORDER BY rating DESC ',$bdd);
+              $i=0;
+              
               while($unChauffeur = $chauffeurs->fetch())
               {
               $car=App\Chauffeur::getCar($unChauffeur["idCollaborateurs"],$bdd);
@@ -64,7 +79,7 @@
               $chauffeur = new App\Chauffeur($unChauffeur["idCollaborateurs"],$unChauffeur["email"],$unChauffeur["last_name"],$unChauffeur["first_name"],$unChauffeur["metier"],$unChauffeur["prixCollaborateur"],
                                             $unChauffeur["dateEmbauche"],$unChauffeur["ville"],$unChauffeur["heuresTravailees"],$unChauffeur["rating"],$unChauffeur["ratingNumber"],$unChauffeur["description"],$car["carId"],$car["carBrand"],$car["carModel"],$car["carColor"],$car["nbPlaces"]);
              
-           // var_dump(checkDriver($bdd,$trajet));
+            
             
             ?>
               <li class="list-group-item ">
@@ -156,35 +171,39 @@
 
 
 <?php 
-/*
+
 function checkDriver($bdd,$trajet) {
-  $req = App\Trajet::getStateChauffeur($bdd,"Pas commencé");
+  $idChauffeur= [];
+  $req = App\Trajet::getTrajet($bdd,"Pas commencé","En cours");
+  $dateDebut = new DateTime($trajet->getDateDebut(), new DateTimeZone('Europe/Paris')); 
+  $dateFin = new DateTime($trajet->getHeureFin(), new DateTimeZone('Europe/Paris'));
+
   while ($unTrajet = $req->fetch())
   {
-    $dateDebut = new DateTime($trajet->getDateDebut(), new DateTimeZone('Europe/Paris'));
-    $dateFin = new DateTime($trajet->getHeureFin(), new DateTimeZone('Europe/Paris'));
     
-    
+    $dateDebutTrajetBdd = new DateTime($unTrajet['heureDebut'], new DateTimeZone('Europe/Paris')); 
+    $dateFinTrajetBdd = new DateTime($unTrajet['heureFin'], new DateTimeZone('Europe/Paris')); 
 
-    // On convertie la date de début de trajet en DateTime afin de faire les différences.
-  $dateTrajetDebut = new DateTime($unTrajet['heureDebut'], new DateTimeZone('Europe/Paris'));
-  $interval = $dateDebut->diff($dateTrajetDebut);
- 
- 
+   $interval = $dateDebut->diff($dateDebutTrajetBdd);
+   $intervalFin = $dateDebut->diff($dateFinTrajetBdd);
 
-    // On convertie la date de fin de trajet en DateTime afin de faire les différences.
-    $dateTrajetFin = new DateTime($unTrajet['heureFin'], new DateTimeZone('Europe/Paris'));
-    $intervalFin = $dateFin->diff($dateTrajetFin);
+   $interval2 = $dateFin->diff($dateDebutTrajetBdd);
+   $interval2Fin = $dateFin->diff($dateFinTrajetBdd);
+
+   if (!($interval->format('%R') ==='+' && $intervalFin->format('%R') ==='+' || $interval2->format('%R') ==='-' && $interval2Fin->format('%R') ==='-' &&  $intervalFin->format('%R') ==='-' ))
+   {
+    array_push($idChauffeur,$unTrajet['idChauffeur']);
     
-    // Si la date du jour se situe dans l'intervalle de la date du début et la date de fin du trajet :
-    if ($interval->format('%R') == "-" && $intervalFin->format('%R') == "+")
-    {
-      return false;
-    }
+   }
+  
   }
 
-  return true;
-  $req->closeCursor();
+return $idChauffeur;
 }
-*/
+
+
+
+
+
+
 ?>

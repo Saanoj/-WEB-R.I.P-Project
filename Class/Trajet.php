@@ -187,6 +187,15 @@ $bdd = new Database('rip');
 
     }
 
+    public static function getTrajet($bdd,$state,$state2) {
+
+      $req = $bdd->getPDO()->prepare('SELECT * FROM trajet  WHERE state = :state OR state = :state2 HAVING idTrajet < (SELECT MAX(idTrajet) FROM trajet)');
+      $req->execute(array('state' => $state,'state2' => $state2));
+      return $req;
+      $req->closeCursor();
+
+    }
+
 
   }
 

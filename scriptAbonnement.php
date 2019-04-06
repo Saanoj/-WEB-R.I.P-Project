@@ -6,6 +6,8 @@ $bdd = new App\Database('rip');
 checkIfTrajetStarted($bdd);
 checkStatusChauffeur($bdd);
 
+var_dump(App\Trajet::checkChauffeur($bdd));
+
 function checkIfTrajetStarted($bdd) {
 
     $date = new DateTime("now", new DateTimeZone('Europe/Paris'));
@@ -66,9 +68,9 @@ function checkIfTrajetStarted($bdd) {
     }
     $req->closeCursor();
 
-    
-
   }
+
+
   
     
 

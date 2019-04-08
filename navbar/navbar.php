@@ -5,7 +5,7 @@
     <!--header navigation -->
     <header id="header">
       <div class="header-content clearfix"> <a class="logo" href="index.php"><img src="images/RIP2small2.png" alt=""></a>
-        
+
         <nav class="navigation" role="navigation">
           <ul class="primary-nav">
             <li><a href="index.php">Accueil</a></li>
@@ -15,14 +15,15 @@
             <li><a href="contact.php">Contact</a></li>
           </ul>
         </nav>
-        <a href="#" class="nav-toggle">Menu<span></span></a> </div>
+        <a href="#" class="nav-toggle">Menu<span></span></a>
+      </div>
       </header>
       <!--header navigation -->
       <!-- banner text -->
-      <div class="container">
-        <div class="col-md-10 col-md-offset-1">
-          <div class="banner-text text-center">
-            <h1>Ride in Pride</h1>
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-md-8 offset-2 banner-text text-center">
+            <h1 class="text-center">Ride in Pride</h1>
             <p>Services VTC de luxe</p>
 
           </div>

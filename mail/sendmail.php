@@ -1,5 +1,5 @@
 <?php
-
+echo "SSL = ".!extension_loaded('openssl')?"Not Available <br>":"Available <br>";
 use PHPMailer\PHPMailer\PHPMailer;
 include_once "PHPMailer/PHPMailer.php";
 include_once "PHPMailer/Exception.php";
@@ -11,7 +11,7 @@ $mail->isSMTP();
 $mail->SMTPAuth = true;
 $mail->Username = "Welovezhuli77";
 $mail->Password = "Welovezhuli77";
-$mail->SMTPSecure = "ssl"; //tls
+$mail->SMTPSecure = "ssl"; //tls;
 $mail->Port = 465; //587
 
 $mail->addAddress("jonasnizard@gmail.com");

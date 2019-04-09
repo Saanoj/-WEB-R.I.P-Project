@@ -10,10 +10,10 @@ $bdd = new App\Database('rip');
 // Enfin, j'ai mis qu'on peux reserver un interprete au maximum pendant 8h ( a modifier si vous voulez)
 $hour = $_SESSION['timeStart'];
 $res=explode(' ',$hour);
-var_dump($res);
+// var_dump($res);
 
 $trajet = unserialize($_SESSION['trajet']);
-var_dump($trajet);
+//var_dump($trajet);
 
 
 $startInterprete = strtotime($_POST['startInterprete']);
@@ -39,6 +39,9 @@ $_SESSION['startCoachCulture']  = $_POST['startCoachCulture'];
 $_SESSION['endCoachCulture']  = $_POST['endCoachCulture'];
 
 
+
+
+checkDateInterprete($bdd);
 // QUELQUES TEST
 /*
 var_dump((isset($_POST['services'])));
@@ -51,7 +54,6 @@ var_dump($_POST['emailContact']);
 var_dump($_POST['messageContact']);
 */
 
-var_dump(checkInterprete($startInterprete,$endInterprete,$res) == true);
 /*
 var_dump(checkSportif($startCoachSportif,$endCoachSportif,$res) == true);
 var_dump(checkCulture($startCoachCulture,$endCoachCulture,$res) == true);
@@ -61,7 +63,7 @@ var_dump(checkCulture($startCoachCulture,$endCoachCulture,$res) == true);
 // && checkInterprete($startCoachSportif,$endCoachSportif,$res) == true && checkInterprete($startCoachCulture,$endCoachCulture,$res) == true
 
 //verifications que les variables récupérées ne sont pas vides et existent bien
-if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['quantite']) && (!empty($_POST['quantite'])) && checkInterprete($startInterprete,$endInterprete,$res) == true &&  checkSportif($startCoachSportif,$endCoachSportif,$res) &&  checkCulture($startCoachCulture,$endCoachCulture,$res)) {
+if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['quantite']) && (!empty($_POST['quantite'])) ) {
 
   $servicesChoisi=$_POST['services'];
   $quantiteCertainService=$_POST['quantite'];
@@ -154,7 +156,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
 
       foreach ($idArray as $value) {
         //echo "elseif 11 12 13<br>";
-
+/*
         $req=$bdd->getPDO()->prepare('INSERT INTO linkServicetrajet (`idTrajet`,`idService`,`idAnnexe`,`quantite`) VALUES (:idTrajet,:idService,:idAnnexe,:quantite)');
         $req->bindValue(':idTrajet', $_SESSION["idTrajet"]);
         $req->bindValue(':idService', $service);
@@ -162,14 +164,14 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
         $req->bindValue(':quantite', 1);
         $req->execute();
         $req->closeCursor();
-
+*/
       }
 
     }else{
     //on insere les id et la quantité pour lier ce choix de service au trajet dans cette table e liaison
     //echo "else ";
     //echo $thisQuantite."<br>";
-
+/*
     $req=$bdd->getPDO()->prepare('INSERT INTO linkServicetrajet (`idTrajet`,`idService`,`idAnnexe`,`quantite`) VALUES (:idTrajet,:idService,:idAnnexe,:quantite)');
     $req->bindValue(':idTrajet', $_SESSION["idTrajet"]);
     $req->bindValue(':idService', $service);
@@ -177,71 +179,31 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
     $req->bindValue(':quantite', $thisQuantite);
     $req->execute();
     $req->closeCursor();
-
+*/
 
     }
 
   }
 
   //redirection
-    header("location:resevationChooseDriver.php");
+   // header("location:resevationChooseDriver.php");
 }
 else {
 
-   header("location:resevationChooseService.php?probleme");
+   // header("location:resevationChooseService.php?probleme");
 }
 
 
-function checkInterprete($startInterprete,$endInterprete,$res) {
-  if ((!empty($_SESSION['startInterprete'])) && (!empty($_SESSION['endInterprete'])))
-  {
-    var_dump($endInterprete - $startInterprete);
-    if ($startInterprete - strtotime($res[1]) >= 0 &&  $endInterprete - $startInterprete > 0 && $endInterprete - $startInterprete <= 28800)
-    {
-      return true;
-    }
-    else {
-      return false;
-    }
 
-  }
-  else {
-    return true;
-  }
-  }
+function checkDateInterprete($bdd) {
 
-  function checkSportif($startCoachSportif,$endCoachSportif,$res) {
-    if ((!empty($_SESSION['startCoachSportif'])) && (!empty($_SESSION['endCoachSportif'])))
-    {
-      if ($startCoachSportif - strtotime($res[1]) >= 0 &&  $endCoachSportif - $startCoachSportif > 0 && $endCoachSportif - $startCoachSportif <= 28800)
-      {
-        return true;
-      }
-      else {
-        return false;
-      }
+   var_dump($_SESSION['startInterprete']);
+  var_dump($_SESSION['endInterprete']);
 
-    }
-    else {
-      return true;
-    }
-    }
 
-    function checkCulture($startCoachCulture,$endCoachCulture,$res) {
-      if ((!empty($_SESSION['startCoachCulture'])) && (!empty($_SESSION['endCoachCulture'])))
-      {
-        if ($startCoachCulture - strtotime($res[1]) >= 0 &&  $endCoachCulture - $startCoachCulture > 0 && $endCoachCulture - $startCoachCulture <= 28800)
-        {
-          return true;
-        }
-        else {
-          return false;
-        }
 
-      }
-      else {
-        return true;
-      }
-      }
+
+}
+
 
 ?>

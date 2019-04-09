@@ -83,7 +83,7 @@ $navbar = new App\Navbar($backOffice,$type);
 				
 				<!-- Slide -->
 				<div class="owl-item">
-					<div class="background_image" style="background-image:url(images/home_slider.jpg)"></div>
+					<div class="background_image" style="background-image:url(images/paris.jpg)"></div>
 					<div class="home_slider_content_container">
 						<div class="container">
 							<div class="row">

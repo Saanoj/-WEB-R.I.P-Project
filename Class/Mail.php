@@ -1,21 +1,45 @@
 <?php
+
+namespace App;
+
+
 require_once __DIR__.'/.conf.php';
-echo "SSL = ".!extension_loaded('openssl')?"Not Available <br>":"Available <br>";
 use PHPMailer\PHPMailer\PHPMailer;
 include_once "PHPMailer/PHPMailer.php";
 include_once "PHPMailer/Exception.php";
 include_once "PHPMailer/SMTP.php";
-$mail = new PHPMailer();
 define ('GUSER',MAIL);
 define ('GPWD',PASS);
 
-smtpmailer("jonasnizard@gmail.com","Votre abbonement","Donnez nous de l'argent");
+class Mail
+{
 
 
-// make a separate file and include this file in that. call this function in that file.
 
-function smtpmailer($to, $from_name, $subject, $body) {
-    global $error;
+
+
+
+
+  private $to;
+  private $subject;
+  private $body;
+
+  private $error;
+
+
+
+
+  function __construct(string $to, string $sub, string $body)
+  {
+    $this->to = $to;
+    $this->subject = $sub;
+    $this->body = $body;
+
+
+  }
+
+  public static function createMail (string $to, string $sub, string $body):PHPMailer
+  {
     $mail = new PHPMailer();  // create a new object
     $mail->IsSMTP(); // enable SMTP
     $mail->SMTPDebug = 2;  // debugging: 1 = errors and messages, 2 = messages only
@@ -24,13 +48,17 @@ function smtpmailer($to, $from_name, $subject, $body) {
     $mail->SMTPAutoTLS = false;
     $mail->Host = 'smtp.gmail.com';
     $mail->Port = 587;
-
     $mail->Username = GUSER;
     $mail->Password = GPWD;
     $mail->SetFrom("rideinprideesgi@gmail.com", "Ride in Pride");
     $mail->Subject = $subject;
     $mail->Body = $body;
     $mail->AddAddress($to);
+    return $mail;
+  }
+  public function send(): bool
+  {
+    $mail = Mail::createMail($this->to, $this->subject, $this->body);
     if(!$mail->Send()) {
         $error = 'Mail error: '.$mail->ErrorInfo;
         return false;
@@ -38,5 +66,8 @@ function smtpmailer($to, $from_name, $subject, $body) {
         $error = 'Message sent!';
         return true;
     }
+  }
+
+
 }
  ?>

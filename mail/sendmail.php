@@ -1,52 +1,20 @@
 <?php
-
-
+require_once __DIR__.'/.conf.php';
+echo "SSL = ".!extension_loaded('openssl')?"Not Available <br>":"Available <br>";
 use PHPMailer\PHPMailer\PHPMailer;
 include_once "PHPMailer/PHPMailer.php";
 include_once "PHPMailer/Exception.php";
 include_once "PHPMailer/SMTP.php";
-/*
 $mail = new PHPMailer();
+define ('GUSER',MAIL);
+define ('GPWD',PASS);
 
-$mail->Host = "ssl://smtp.gmail.com";
-$mail->isSMTP();
-$mail->SMTPAuth = true;
-$mail->Username = "Welovezhuli77";
-$mail->Password = "Welovezhuli77";
-$mail->SMTPSecure = "ssl"; //tls
-$mail->Port = 465; //587
-
-$mail->addAddress("jonasnizard@gmail.com");
-$mail->setFrom("jonasnizard@gmail.com");
-$mail->Subject = "hello there";
-$mail->isHTML(true);
-$mail->Body = "heloooooooo";
-
-try {
-  $mail->send();
-} catch (\Exception $e) {
-  echo $e;
-}
-
-
-
-if ($mail->send()){
-  echo "Je l'ai envoyez maitre, Igor";
-}else {
-
-  echo $mail->ErrorInfo;
-}
-*/
-
-define ('GUSER','TonMail');
-define ('GPWD','tonMDP');
-
-smtpmailer("hallierarthur@gmail.com","hallierarthur@gmail.com","Arthur","Test","Body");
+smtpmailer("jonasnizard@gmail.com","Votre abbonement","Donnez nous de l'argent");
 
 
 // make a separate file and include this file in that. call this function in that file.
 
-function smtpmailer($to, $from, $from_name, $subject, $body) { 
+function smtpmailer($to, $from_name, $subject, $body) {
     global $error;
     $mail = new PHPMailer();  // create a new object
     $mail->IsSMTP(); // enable SMTP
@@ -57,19 +25,18 @@ function smtpmailer($to, $from, $from_name, $subject, $body) {
     $mail->Host = 'smtp.gmail.com';
     $mail->Port = 587;
 
-    $mail->Username = GUSER;  
-    $mail->Password = GPWD;           
-    $mail->SetFrom($from, $from_name);
+    $mail->Username = GUSER;
+    $mail->Password = GPWD;
+    $mail->SetFrom("rideinprideesgi@gmail.com", "Ride in Pride");
     $mail->Subject = $subject;
     $mail->Body = $body;
     $mail->AddAddress($to);
     if(!$mail->Send()) {
-        $error = 'Mail error: '.$mail->ErrorInfo; 
+        $error = 'Mail error: '.$mail->ErrorInfo;
         return false;
     } else {
         $error = 'Message sent!';
         return true;
     }
 }
-
  ?>

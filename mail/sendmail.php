@@ -9,12 +9,12 @@ $mail = new PHPMailer();
 define ('GUSER',MAIL);
 define ('GPWD',PASS);
 
-smtpmailer("jonasnizard@gmail.com","hallierarthur@gmail.com","Ride in Pride","Votre abbonement","Donnez nous de l'argent");
+smtpmailer("jonasnizard@gmail.com","Votre abbonement","Donnez nous de l'argent");
 
 
 // make a separate file and include this file in that. call this function in that file.
 
-function smtpmailer($to, $from, $from_name, $subject, $body) {
+function smtpmailer($to, $from_name, $subject, $body) {
     global $error;
     $mail = new PHPMailer();  // create a new object
     $mail->IsSMTP(); // enable SMTP
@@ -27,7 +27,7 @@ function smtpmailer($to, $from, $from_name, $subject, $body) {
 
     $mail->Username = GUSER;
     $mail->Password = GPWD;
-    $mail->SetFrom($from, $from_name);
+    $mail->SetFrom("rideinprideesgi@gmail.com", "Ride in Pride");
     $mail->Subject = $subject;
     $mail->Body = $body;
     $mail->AddAddress($to);

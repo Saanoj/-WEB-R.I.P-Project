@@ -1,6 +1,6 @@
 <?php
 
-define('MAIL', 'artificiallightsstudio@gmail.com');
-define('PASS', 'Welovezhuli77');
+define('MAIL', 'rideinprideesgi@gmail.com');
+define('PASS', 'Rideinpride!');
 
 ?>

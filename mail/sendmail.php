@@ -9,8 +9,8 @@ $mail = new PHPMailer();
 $mail->Host = "ssl://smtp.gmail.com";
 $mail->isSMTP();
 $mail->SMTPAuth = true;
-$mail->Username = "Welovezhuli77";
-$mail->Password = "Welovezhuli77";
+$mail->Username = MAIL;
+$mail->Password = PASS;
 $mail->SMTPSecure = "ssl"; //tls;
 $mail->Port = 465; //587
 

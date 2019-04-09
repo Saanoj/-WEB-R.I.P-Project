@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__.'/.conf.php';
 echo "SSL = ".!extension_loaded('openssl')?"Not Available <br>":"Available <br>";
 use PHPMailer\PHPMailer\PHPMailer;
 include_once "PHPMailer/PHPMailer.php";

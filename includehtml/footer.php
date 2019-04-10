@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace App;
 use \PDO;
 use \DateTime;
@@ -13,7 +13,7 @@ checkStatusChauffeur($bdd);
 
 ?>
 
-   
+
     <!-- Footer section -->
 
     <footer class="footer">
@@ -78,7 +78,7 @@ checkStatusChauffeur($bdd);
       <script src="js/main.js"></script>
       <script src="js/popper.min.js"></script>
 
-      <?php 
+      <?php
 function checkAbonnementValide($bdd) {
   $date = new DateTime('', new DateTimeZone('Europe/Paris'));
   // echo $date->format('Y-m-d ') . "\n";
@@ -105,11 +105,24 @@ function checkAbonnementValide($bdd) {
       $req = $bdd->getPDO()->prepare('DELETE FROM linkabonnemententreprise WHERE idClient = :idClient');
       $req->execute(array('idClient' => $unAbonnement['idClient']));
       $req->closeCursor();
+
+      $reqUser  = $bdd->getPDO()->prepare('SELECT * FROM users WHERE id = :id');
+      $reqUser->execute(array('id' => $unAbonnement['idClient']));
+      $user = $reqUser->fetch();
+      $reqUser->closeCursor();
+
+      require_once 'Class/Autoloader.php';
+      Autoloader::register();
+
+      $subject = "Votre abbonement a Ride In Pride est terminé";
+      $body = "Bonjour ".$user['first_name']." votre abbonement est terminé, si vous voulez le renouveller <br> cliquez-ici";
+      $mail = new App\Mail($user['email'],$subject,$body);
+      $mail->send();
       }
   }
  }
 
- 
+
 function checkIfTrajetStarted($bdd) {
 
   $date = new DateTime("now", new DateTimeZone('Europe/Paris'));
@@ -123,7 +136,7 @@ function checkIfTrajetStarted($bdd) {
   // On convertie la date de fin de trajet en DateTime afin de faire les différences.
   $dateTrajetFin = new DateTime($unTrajet['heureFin'], new DateTimeZone('Europe/Paris'));
   $intervalFin = $date->diff($dateTrajetFin);
-  
+
   // Si la date du jour se situe dans l'intervalle de la date du début et la date de fin du trajet :
   if ($interval->format('%R') == "-" && $intervalFin->format('%R') == "+")
   {
@@ -138,7 +151,7 @@ function checkIfTrajetStarted($bdd) {
   $reqTrajet->execute();
   }
   // Le reste ( donc si la date du jour est inférieur a la date de début et fin de trajet)
-  else 
+  else
   {
   $reqTrajet = $bdd->getPDO()->prepare('UPDATE trajet SET state="Pas commencé" WHERE idTrajet = :idTrajet');
   $reqTrajet->bindValue('idTrajet',$unTrajet['idTrajet']);
@@ -170,11 +183,11 @@ function checkStatusChauffeur($bdd) {
   }
   $req->closeCursor();
 
-  
+
 
 }
 
 
 
-  
+
       ?>

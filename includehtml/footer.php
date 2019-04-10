@@ -111,12 +111,10 @@ function checkAbonnementValide($bdd) {
       $user = $reqUser->fetch();
       $reqUser->closeCursor();
 
-      require_once 'Class/Autoloader.php';
-      Autoloader::register();
 
       $subject = "Votre abbonement a Ride In Pride est terminé";
       $body = "Bonjour ".$user['first_name']." votre abbonement est terminé, si vous voulez le renouveller <br> cliquez-ici";
-      $mail = new App\Mail($user['email'],$subject,$body);
+      $mail = new Mail($user['email'],$subject,$body);
       $mail->send();
       }
   }

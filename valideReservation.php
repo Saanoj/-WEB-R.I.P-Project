@@ -9,76 +9,82 @@ $timeStart = $_POST["dateDebut"]." ".$_POST["heureDebut"];
 $dateTrajet = new DateTime($timeStart, new DateTimeZone('Europe/Paris'));
 $dateNow = new DateTime("now", new DateTimeZone('Europe/Paris'));
 $interval = $dateTrajet->diff($dateNow);
-/*
-var_dump($interval->format('%Y %M %D %H %i %S %R'));
-var_dump($interval->format('%S') > 0);
-var_dump($interval->format('%i') > 0);
-var_dump($interval->format('%H') > 0);
-var_dump($interval->format('%D') > 0);
-var_dump($interval->format('%M') > 0);
-var_dump($interval->format('%Y') > 0);
-var_dump($interval->format('%R'));
-var_dump($interval->format('%R') == "-");
-*/
+
 if ($interval->format('%R') == "-")
 {
   if($interval->format('%i') > 0 || $interval->format('%S') > 0 || $interval->format('%H') > 0 || $interval->format('%D') > 0|| $interval->format('%M') > 0 || $interval->format('%Y') > 0)
   {
 
-// echo $timeStart;
+  
+
 $timestampStart = strtotime($timeStart);
-// echo "<br>".$timestampStart;
 
 $start = str_replace(' ',"%20",$_POST["start"]);
 $end = str_replace(' ',"%20",$_POST["end"]);
 $start = str_replace(',',"",$start);
 $end = str_replace(',',"",$end);
 
-//echo "<br>".$start;
-//echo "<br>".$end;
 
 $apiReturn = App\Trajet::getDistanceTime($start, $end);
 
-$estimatedTime=60*$apiReturn["time"]; //temps estimé de 34 minutes
+$estimatedTime=60*$apiReturn["time"]; 
+
 $timestampEnd = $timestampStart+$estimatedTime;
-$dateFin = gmdate('Y-m-d G:i:s', $timestampEnd);
-// var_dump($dateFin);
+
+$dateFin = getEstimateTime($bdd,$apiReturn,$timeStart);
+
+
+
 
 $trajet = new App\Trajet($_POST["start"],$_POST["end"],0,$_SESSION['id'],date('Y-m-d G:i:s'),$timeStart,$dateFin,$apiReturn["distance"],$apiReturn["time"],"Pas commencé");
 $trajet->addTrajetStart($bdd,'INSERT INTO `trajet` (`idClient`, `debut`, `fin`, `prixTrajet`, `heureDebut`,`heureFin`,`dateResevation`,`distanceTrajet`,`duration`,`state`) VALUES (:idClient,:debut,:fin,:prixTrajet,:dateDebut,:dateFin,:dateReservation,:distanceTrajet,:duration,:state)',$trajet);
 $trajet->startSessionId($bdd); //add idTrajet in SESSION
-// echo "<br> temps trajet: ".$trajet->getTimeTrajet();
-
-//echo "<br>";
-//echo "id trajet: ".$_SESSION["idTrajet"];
-//echo "<br>";
-//echo "id: ".$_SESSION["id"];
 
 
 $_SESSION['trajet'] = serialize($trajet);
 $_SESSION['timeStart'] = $timeStart;
 
-// var_dump($_SESSION['id']);
 
 $data=$bdd->query('SELECT * FROM linkabonnemententreprise WHERE idClient='.$_SESSION['id'].'');
 if (!empty($data)) {
- // echo "found";
 
-  header("location: resevationChooseService.php");
+  //header("location: resevationChooseService.php");
 }else{
- // echo "not found";
-   header("location: resevationChooseDriver.php");
+   //header("location: resevationChooseDriver.php");
 }
-
-
-
-
   }
   else {
-    header('location:ReservationTrajet.php');
+    //header('location:ReservationTrajet.php');
   }
 }
 else {
-  header('location:ReservationTrajet.php');
+  //header('location:ReservationTrajet.php');
+
+}
+
+
+
+function getEstimateTime($bdd,$apiReturn,$timeStart) {
+  $hour = explode("hours",$apiReturn['time']);
+  $minutes = explode("mins",$hour[1]);
+  $arrayEstimate = array("heures" => $hour[0],"minutes" => $minutes[0]);
+
+  $arrayEstimate["heures"] = intval($arrayEstimate["heures"]);
+  $arrayEstimate["minutes"] = intval($arrayEstimate["minutes"]);
+  $dateFin = new DateTime($timeStart, new DateTimeZone('Europe/Paris'));
+  $heureDebutTrajet = convertDate($bdd,$timeStart);
+  $dateFin->setTime($arrayEstimate['heures']+$heureDebutTrajet,$arrayEstimate['minutes']);
+  return $dateFin->format('Y-m-d H:i');
+}
+
+function convertDate($bdd,$timeStart) {
+  $timeStart = explode(" ",$timeStart);
+  $res = explode(":",$timeStart[1]);
+  $heureDebutTrajet = intval($res[0]);
+  return $heureDebutTrajet;
+}
+ function getDateInterprete($bdd,$dateTrajet,$dateFin)  {
+  var_dump($dateTrajet);
+  var_dump($dateFin);
 
 }

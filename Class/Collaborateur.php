@@ -135,10 +135,6 @@ $bdd = new Database('rip');
       }
       $_SESSION['email'] = $this->getEmail();
     }
-    
-
-
-
 }
 
 

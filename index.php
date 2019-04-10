@@ -33,7 +33,7 @@ loadLanguageFromSession($_SESSION['lang']);
   $navbar = new App\Navbar($backOffice,$type);
   $navbar->navbar();
 
-  $mail = new App\Mail('jonasnizard@gmail.com','Maxime est une pute','Maxime est une pute');
+  $mail = new App\Mail('hallierarthur@gmail.com','Arthur est une pute','Arthur est une pute');
   $mail->send();
 
   ?>

@@ -38,7 +38,7 @@ class Mail
 
   }
 
-  public static function createMail (string $to, string $sub, string $body):PHPMailer
+  public static function createMail (string $to, string $subject, string $body):PHPMailer
   {
     $mail = new PHPMailer();  // create a new object
     $mail->IsSMTP(); // enable SMTP

@@ -79,6 +79,8 @@ function displayError(input, message) {
   var error = document.createElement('p');
   error.innerHTML = message;
   error.style.color = 'red';
+  $(error).css({"margin-top" : "45px","margin-left" : "62%","position" :"absolute","font-weight" : "bold"});
+  
   var parent = input.parentNode;
   parent.appendChild(error);
 }
@@ -92,7 +94,6 @@ function clearInput(input) {
     parent.removeChild(elements[0]);
   }
 }
-
 
 
 function checkheureDebut(heure)
@@ -113,10 +114,51 @@ if (d.getTime() >= dateNow.getTime())
 }
 else
 {
-  displayError(dateDebut, 'La date est inférieur a la date actuelle');
+  displayError(dateDebut, 'Date invalide');
   return false;
 }
 
+}
+
+
+function checkdateDebut(date) {
+  clearInput(dateDebut);
+
+
+  var heure = document.getElementById("heureDebut").value;
+  if (heure !== "" == true) {
+
+  var res = heure.split(":"); 
+  var date = new Date(date.value);
+  var dateNow = new Date();
+  date.setHours(res[0]);
+  date.setMinutes(res[1]);
+if (date.getTime() >= dateNow.getTime())
+{
+  return true;
+}
+else
+{
+  displayError(dateDebut, 'Date invalide');
+  return false;
+}
+}
+}
+
+
+function checkGlobal(donnees) {
+
+  var dateDebut = checkheureDebut(donnees.dateDebut);
+  var heureDebut = checkheureDebut(donnees.heureDebut);
+
+  if (dateDebut && heureDebut) 
+  {
+    return true;
+  }
+  else
+  {
+    return false;
+  }
 }
  /* SA BUG NEED HELP
 function checkStart(autocomplete) {
@@ -148,46 +190,3 @@ function checkEnd(end) {
   
 }
 */
-
-function checkdateDebut(date) {
-  clearInput(dateDebut);
-
-
-  var heure = document.getElementById("heureDebut").value;
-  if (heure !== "" == true) {
-
-  var res = heure.split(":"); 
-  var date = new Date(date.value);
-  var dateNow = new Date();
-  date.setHours(res[0]);
-  date.setMinutes(res[1]);
-if (date.getTime() >= dateNow.getTime())
-{
-  return true;
-}
-else
-{
-  displayError(dateDebut, 'La date est inférieur a la date actuelle');
-  return false;
-}
-}
-}
-
-
-function checkGlobal(donnees) {
-
-  var dateDebut = checkheureDebut(donnees.dateDebut);
-  var heureDebut = checkheureDebut(donnees.heureDebut);
-
-  if (dateDebut && heureDebut) 
-  {
-    return true;
-  }
-  else
-  {
-    return false;
-  }
-
-
- 
-}

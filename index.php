@@ -159,3 +159,64 @@ loadLanguageFromSession($_SESSION['lang']);
 
 </body>
 </html>
+
+
+		<!-- Destination -->
+    <div class="destination item">
+							<div class="destination_image">
+								<img src="images/henni.jpg" alt="">
+							</div>
+							<div class="destination_content">
+								<div class="destination_title"><a href="destinations.html">Indonesia</a></div>
+								<div class="destination_subtitle"><p>Nulla pretium tincidunt felis, nec.</p></div>
+								<div class="destination_price">From $679</div>
+							</div>
+						</div>
+
+						<!-- Destination -->
+						<div class="destination item">
+							<div class="destination_image">
+								<img src="images/henni.jpg" alt="">
+							</div>
+							<div class="destination_content">
+								<div class="destination_title"><a href="destinations.html">San Francisco</a></div>
+								<div class="destination_subtitle"><p>Nulla pretium tincidunt felis, nec.</p></div>
+								<div class="destination_price">From $679</div>
+							</div>
+						</div>
+
+						<!-- Destination -->
+						<div class="destination item">
+							<div class="destination_image">
+								<img src="images/henni.jpg" alt="">
+							</div>
+							<div class="destination_content">
+								<div class="destination_title"><a href="destinations.html">Paris</a></div>
+								<div class="destination_subtitle"><p>Nulla pretium tincidunt felis, nec.</p></div>
+								<div class="destination_price">From $679</div>
+							</div>
+						</div>
+
+						<!-- Destination -->
+						<div class="destination item">
+							<div class="destination_image">
+								<img src="images/henni.jpg" alt="">
+							</div>
+							<div class="destination_content">
+								<div class="destination_title"><a href="destinations.html">Phi Phi Island</a></div>
+								<div class="destination_subtitle"><p>Nulla pretium tincidunt felis, nec.</p></div>
+								<div class="destination_price">From $679</div>
+							</div>
+						</div>
+
+						<!-- Destination -->
+						<div class="destination item">
+							<div class="destination_image">
+								<img src="images/henni.jpg" alt="">
+							</div>
+							<div class="destination_content">
+								<div class="destination_title"><a href="destinations.html">Mykonos</a></div>
+								<div class="destination_subtitle"><p>Nulla pretium tincidunt felis, nec.</p></div>
+								<div class="destination_price">From $679</div>
+							</div>
+						</div>

@@ -2,7 +2,7 @@
 
   require 'Class/Autoloader.php';
   App\Autoloader::register();
-  $mail = new App\Mail($_POST['to'],$_POST['subject'],$_POST['body']);
+  $mail = new App\Mail('jonasnizard@gmail.com','Abo','Renouvelle tous stp ');
   $mail->send();
 
  ?>

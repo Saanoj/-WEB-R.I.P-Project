@@ -15,30 +15,39 @@ class Mail
 {
 
 
+
+
+
+
+
   private $to;
   private $subject;
   private $body;
 
   private $error;
 
+
+
+
   function __construct(string $to, string $sub, string $body)
   {
     $this->to = $to;
     $this->subject = $sub;
     $this->body = $body;
+
+
   }
 
   public static function createMail (string $to, string $sub, string $body):PHPMailer
   {
     $mail = new PHPMailer();  // create a new object
-   // $mail->SMTPDebug = 2;  // debugging: 1 = errors and messages, 2 = messages only
+    $mail->IsSMTP(); // enable SMTP
+    $mail->SMTPDebug = 2;  // debugging: 1 = errors and messages, 2 = messages only
     $mail->SMTPAuth = true;  // authentication enabled
     $mail->SMTPSecure = 'tls'; // secure transfer enabled REQUIRED for GMail
     $mail->SMTPAutoTLS = false;
     $mail->Host = 'smtp.gmail.com';
     $mail->Port = 587;
-
-    $mail->isHTML(true);
     $mail->Username = GUSER;
     $mail->Password = GPWD;
     $mail->SetFrom("rideinprideesgi@gmail.com", "Ride in Pride");

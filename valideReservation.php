@@ -64,18 +64,18 @@ else {
 
 
 
-function getEstimateTime($bdd,$apiReturn,$timeStart) {
-  $hour = explode("hours",$apiReturn['time']);
-  $minutes = explode("mins",$hour[1]);
-  $arrayEstimate = array("heures" => $hour[0],"minutes" => $minutes[0]);
+// function getEstimateTime($bdd,$apiReturn,$timeStart) {
+//   $hour = explode("hours",$apiReturn['time']);
+//   $minutes = explode("mins",$hour[1]);
+//   $arrayEstimate = array("heures" => $hour[0],"minutes" => $minutes[0]);
 
-  $arrayEstimate["heures"] = intval($arrayEstimate["heures"]);
-  $arrayEstimate["minutes"] = intval($arrayEstimate["minutes"]);
-  $dateFin = new DateTime($timeStart, new DateTimeZone('Europe/Paris'));
-  $heureDebutTrajet = convertDate($bdd,$timeStart);
-  $dateFin->setTime($arrayEstimate['heures']+$heureDebutTrajet,$arrayEstimate['minutes']);
-  return $dateFin->format('Y-m-d H:i');
-}
+//   $arrayEstimate["heures"] = intval($arrayEstimate["heures"]);
+//   $arrayEstimate["minutes"] = intval($arrayEstimate["minutes"]);
+//   $dateFin = new DateTime($timeStart, new DateTimeZone('Europe/Paris'));
+//   $heureDebutTrajet = convertDate($bdd,$timeStart);
+//   $dateFin->setTime($arrayEstimate['heures']+$heureDebutTrajet,$arrayEstimate['minutes']);
+//   return $dateFin->format('Y-m-d H:i');
+// }
 
 function convertDate($bdd,$timeStart) {
   $timeStart = explode(" ",$timeStart);

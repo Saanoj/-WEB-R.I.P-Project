@@ -10,10 +10,6 @@ loadLanguageFromSession($_SESSION['lang']);
 require_once 'Class/Autoloader.php';
 App\Autoloader::register();
 $bdd = new App\Database('rip');
-$backOffice=0;
-$type = 0;
-$navbar = new App\Navbar($backOffice,$type);
-//$navbar->navbar();
 
 ?>
 <!DOCTYPE html>
@@ -35,52 +31,28 @@ $navbar = new App\Navbar($backOffice,$type);
 <body>
 
 <div class="super_container">
-	
+
 	<!-- Header -->
 
-	<header class="header">
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<div class="header_content d-flex flex-row align-items-center justify-content-start">
-						<div class="header_content_inner d-flex flex-row align-items-end justify-content-start">
-							<div class="logo"><a href="index.html">Ride in Pride</a></div>
-							<nav class="main_nav">
-								<ul class="d-flex flex-row align-items-start justify-content-start">
-									<li class="active"><a href="index.html">Accueil</a></li>
-									<li><a href="#">Services</a></li>
-									<li><a href="contact.html">Contactez nous</a></li>
-									<li><a href="inscription.php">Inscription</a></li>
-								</ul>
-							</nav>
-							<div class="header_phone ml-auto">Appeler nous : 01 56 06 90 41</div>
+<?php
+$type = 0;
+$navbar = new App\Navbar($type);
+$navbar->navbar();
 
-							<!-- Hamburger -->
-
-							<div class="hamburger ml-auto">
-								<i class="fa fa-bars" aria-hidden="true"></i>
-							</div>
-
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	
-	</header>
+ ?>
 
 	<!-- Menu -->
 
 
-	
+
 	<!-- Home -->
 
 	<div class="home">
-		
+
 		<!-- Home Slider -->
 		<div class="home_slider_container">
 			<div class="owl-carousel owl-theme home_slider">
-				
+
 				<!-- Slide -->
 				<div class="owl-item">
 					<div class="background_image" style="background-image:url(images/paris.jpg)"></div>
@@ -170,7 +142,7 @@ $navbar = new App\Navbar($backOffice,$type);
 
 						</div>
 					</div>
-				</div>		
+				</div>
 			</div>
 		</div>
 	</div>
@@ -213,8 +185,8 @@ $navbar = new App\Navbar($backOffice,$type);
 							</div>
 						</div>
 
-						
-<?php /* 
+
+<?php /*
    <div class="modal fade" id="exampleModal<?php echo $i ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel<?php echo $i ?>" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">

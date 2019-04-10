@@ -28,12 +28,11 @@ loadLanguageFromSession($_SESSION['lang']);
   require 'Class/Autoloader.php';
   App\Autoloader::register();
   $bdd = new App\Database('rip');
-  $backOffice=0;
   $type = 0;
-  $navbar = new App\Navbar($backOffice,$type);
+  $navbar = new App\Navbar($type);
   $navbar->navbar();
 
-  
+
 
   ?>
   <br>

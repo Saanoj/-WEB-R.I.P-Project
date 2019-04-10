@@ -48,34 +48,36 @@ $_SESSION['timeStart'] = $timeStart;
 $data=$bdd->query('SELECT * FROM linkabonnemententreprise WHERE idClient='.$_SESSION['id'].'');
 if (!empty($data)) {
 
-  //header("location: resevationChooseService.php");
+  header("location: resevationChooseService.php");
 }else{
-   //header("location: resevationChooseDriver.php");
+   header("location: resevationChooseDriver.php");
 }
   }
   else {
-    //header('location:ReservationTrajet.php');
+    header('location:ReservationTrajet.php');
   }
 }
 else {
-  //header('location:ReservationTrajet.php');
+  header('location:ReservationTrajet.php');
 
 }
 
 
 
-// function getEstimateTime($bdd,$apiReturn,$timeStart) {
-//   $hour = explode("hours",$apiReturn['time']);
-//   $minutes = explode("mins",$hour[1]);
-//   $arrayEstimate = array("heures" => $hour[0],"minutes" => $minutes[0]);
+function getEstimateTime($bdd,$apiReturn,$timeStart) {
+  $hour = explode("hours",$apiReturn['time']);
+  $minutes = explode("mins",$hour[1]);
+  $arrayEstimate = array("heures" => $hour[0],"minutes" => $minutes[0]);
 
-//   $arrayEstimate["heures"] = intval($arrayEstimate["heures"]);
-//   $arrayEstimate["minutes"] = intval($arrayEstimate["minutes"]);
-//   $dateFin = new DateTime($timeStart, new DateTimeZone('Europe/Paris'));
-//   $heureDebutTrajet = convertDate($bdd,$timeStart);
-//   $dateFin->setTime($arrayEstimate['heures']+$heureDebutTrajet,$arrayEstimate['minutes']);
-//   return $dateFin->format('Y-m-d H:i');
-// }
+  $arrayEstimate["heures"] = intval($arrayEstimate["heures"]);
+  $arrayEstimate["minutes"] = intval($arrayEstimate["minutes"]);
+  $dateFin = new DateTime($timeStart, new DateTimeZone('Europe/Paris'));
+  $heureDebutTrajet = convertDate($bdd,$timeStart);
+  $dateFin->setTime($arrayEstimate['heures']+$heureDebutTrajet,$arrayEstimate['minutes']);
+  $_SESSION['finTrajet'] = $dateFin->format('Y-m-d H:i');
+  return $dateFin->format('Y-m-d H:i');
+  
+}
 
 function convertDate($bdd,$timeStart) {
   $timeStart = explode(" ",$timeStart);
@@ -83,8 +85,4 @@ function convertDate($bdd,$timeStart) {
   $heureDebutTrajet = intval($res[0]);
   return $heureDebutTrajet;
 }
- function getDateInterprete($bdd,$dateTrajet,$dateFin)  {
-  var_dump($dateTrajet);
-  var_dump($dateFin);
 
-}

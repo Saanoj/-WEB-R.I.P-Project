@@ -16,6 +16,7 @@ $trajet = unserialize($_SESSION['trajet']);
 //var_dump($trajet);
 
 
+
 $startInterprete = strtotime($_POST['startInterprete']);
 $endInterprete = strtotime($_POST['endInterprete']);
 $_SESSION['startInterprete']  = $_POST['startInterprete'];
@@ -42,6 +43,7 @@ $_SESSION['endCoachCulture']  = $_POST['endCoachCulture'];
 
 
 checkDateInterprete($bdd);
+//checkDateInterprete($bdd);
 // QUELQUES TEST
 /*
 var_dump((isset($_POST['services'])));
@@ -197,8 +199,20 @@ else {
 
 function checkDateInterprete($bdd) {
 
-   var_dump($_SESSION['startInterprete']);
-  var_dump($_SESSION['endInterprete']);
+  // var_dump($_SESSION['startInterprete']);
+ // var_dump($_SESSION['endInterprete']);
+ $dateFin = new DateTime($_SESSION['finTrajet'], new DateTimeZone('Europe/Paris'));
+ $dateDebutInterprete = new DateTime($_SESSION['startInterprete'], new DateTimeZone('Europe/Paris'));
+ $dateFinInterprete = new DateTime($_SESSION['endInterprete'], new DateTimeZone('Europe/Paris'));
+
+ $intervalDebut = $dateFin->diff($dateDebutInterprete);
+ var_dump($dateDebutInterprete);
+ var_dump($dateFinInterprete);
+
+ var_dump($intervalDebut->format('%R'));
+
+
+ // var_dump($dateFin);
 
 
 

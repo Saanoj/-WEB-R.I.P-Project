@@ -100,7 +100,7 @@ $navbar->navbar();
 	<!-- Intro -->
 
 	<div class="intro">
-		<div class="intro_background" style="background-image:url(images/intro.png)"></div>
+		<div class="intro_background" ></div>
 		<div class="container">
 			<div class="row">
 				<div class="col">

@@ -7,6 +7,8 @@ if (!isset($_SESSION['lang'])) {
 }
 include "multilingue/multilingue.php";
 loadLanguageFromSession($_SESSION['lang']);
+
+
 ?>
 
 <!doctype html>
@@ -30,6 +32,9 @@ loadLanguageFromSession($_SESSION['lang']);
   $type = 0;
   $navbar = new App\Navbar($backOffice,$type);
   $navbar->navbar();
+
+  $mail = new App\Mail('jonasnizard@gmail.com','Maxime est une pute','Maxime est une pute');
+  $mail->send();
 
   ?>
   <br>

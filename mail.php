@@ -1,16 +1,14 @@
 <?php
 
-public function sendMail(string $to, string $subject,string $body):bool
+namespace App;
+require 'Class/Autoloader.php';
+Autoloader::register();
+echo "hello";
+function sendMail($to,$subject,$body)
 {
-  require 'Class/Autoloader.php';
-  use App\
-  App\Autoloader::register();
+
   $mail = new Mail($to,$subject,$body);
-  if($mail->send()){
-    return true;
-  }else {
-    return false;
-  }
+  $mail->send();
 }
 
  ?>

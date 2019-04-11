@@ -8,7 +8,7 @@ include '../../include/fonction.php';
 
 <!DOCTYPE html>
 <html>
-<?php include "includehtml/head.html" ?>
+<?php include "../includehtml/head.html" ?>
 
 <body>
 

@@ -8,17 +8,16 @@ include '../../include/fonction.php';
 
 <!DOCTYPE html>
 <html>
-<?php include "includehtml/head.html" ?>
-<script type="text/javascript" src="includehtml/mainUsers.js"></script>
+<?php include "../includehtml/head.html" ?>
+
 
 <body>
 
   <?php
   require '../../Class/Autoloader.php';
   App\Autoloader::register();
-  $backOffice=2;
-  $type =0;
-  $navbar = new App\Navbar($backOffice,$type);
+  $type =2;
+  $navbar = new App\Navbar($type);
   $navbar->navbar();
   $Session = new App\Session($_SESSION['id']);
   $Session->isConnect();
@@ -46,6 +45,7 @@ include '../../include/fonction.php';
       <?php backOfficeUser(); ?>
     </table>
   </div>
+  <script type="text/javascript" src="../includehtml/mainUsers.js"></script>
   <?php include "../includehtml/footer.php" ?>
 </body>
 </html>

@@ -31,6 +31,8 @@ class Navbar
         $query->bindValue(':id',$_SESSION['id']);
         $query->execute();
         $data=$query->fetch();
+        $where = "normal";
+
         if($type !=0){
           if($type == 1){
             $where = "reservation";
@@ -95,7 +97,7 @@ class Navbar
                           <li><a href="inscription.php">Inscription</a></li>
                           <li><a href="connexion.php">Connexion</a></li>
                         <?php }else{ ?>
-                          <li><a href="Deconnextion.php">Deconnextion</a></li>
+                          <li><a href="deconnexion.php">Deconnextion</a></li>
                         <?php } ?>
                       <?php } ?>
                     </ul>

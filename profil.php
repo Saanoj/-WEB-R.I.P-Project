@@ -77,9 +77,8 @@ loadLanguageFromSession($_SESSION['lang']);
   require 'Class/Autoloader.php';
   App\Autoloader::register();
   $bdd = new App\Database('rip');
-  $backOffice=0;
   $type = 0;
-  $navbar = new App\Navbar($backOffice,$type);
+  $navbar = new App\Navbar($type);
   $navbar->navbar();
 
   // REQUETE POUR RECUPER LES INFOS DU USER
@@ -97,7 +96,7 @@ loadLanguageFromSession($_SESSION['lang']);
 
   $abo = App\Abonnement::createAbonnement($bdd);
 
-  
+
   // serialize($abo);
   ?>
 
@@ -176,7 +175,7 @@ loadLanguageFromSession($_SESSION['lang']);
             <a href="">A définir</a><br/>
           </div>
         </div>
-              
+
         <div class="col-md-8">
           <div class="tab-content profile-tab" id="myTabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -216,7 +215,7 @@ loadLanguageFromSession($_SESSION['lang']);
               </div>
               </div>
 
-              
+
               <!-- The Modal -->
               <div class="modal fade" id="myInformations">
                 <div class="modal-dialog modal-lg">
@@ -292,7 +291,7 @@ loadLanguageFromSession($_SESSION['lang']);
                     <a class="savebtn">Sauvegarder</a>
                   </div>
                 </div>
-              </div> 
+              </div>
 
                   <div class="row">
                   <div class="col-md-6">
@@ -410,13 +409,13 @@ loadLanguageFromSession($_SESSION['lang']);
                                 <?php } ?>
                               </div>
                             </div>
-                            
-               
-                         
+
+
+
                           <?php
-           
+
                 if (checkIfexistEntreprise($bdd) == true) {?>
-                
+
                 <div>
                   <a href="deleteEntrepriseFromUser.php"> <button type="button"  class="btn btn-danger"><?php echo _TITRE_NAVBAR_INFOS_QUITTER_ENTREPRISE?></button></a>
                   </div>
@@ -439,7 +438,7 @@ loadLanguageFromSession($_SESSION['lang']);
 
               </div>
            </div>
-                
+
                       <!-- Modal footer -->
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -448,7 +447,7 @@ loadLanguageFromSession($_SESSION['lang']);
                   </div>
                 </div>
               </div>
-         
+
 
 
 
@@ -482,7 +481,7 @@ loadLanguageFromSession($_SESSION['lang']);
                             <div class="col-md-6">
                               <div class="gear">
                                 <span id="typeAbonnement" class="datainfo"><?= $abo->getTypeAbonnement(); ?></span>
-                          
+
                               </div>
                             </div>
                           </div>
@@ -495,8 +494,8 @@ loadLanguageFromSession($_SESSION['lang']);
                               <div class="gear">
                                 <span id="isEngagement" class="datainfo"><?php if ( $abo->getIsEngagement() == 1) { echo 'Oui';} if ( $abo->getIsEngagement() == 0) { echo 'Non';} else {
                                   echo ' ';}?></span>
-                               
-                          
+
+
                               </div>
                             </div>
                           </div>
@@ -505,7 +504,7 @@ loadLanguageFromSession($_SESSION['lang']);
                         <?php } ?>
                     </div>
                     <div>
-                    <?php 
+                    <?php
                     if (checkIfAbonnementValide($bdd) == true) {
                       ?>
                     <a href="abonnement.php"> <button type="button"  class="btn btn-success"><?php echo _TITRE_NAVBAR_ABO_SOUSCRIRE?></button></a> <?php } ?>
@@ -519,8 +518,8 @@ loadLanguageFromSession($_SESSION['lang']);
                   </div>
                 </div>
               </div>
-              
-              
+
+
 
 
 
@@ -531,7 +530,7 @@ loadLanguageFromSession($_SESSION['lang']);
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-             
+
             <h4 class="modal-title">Mes trajets</h4>
             </div>
             <div class="modal-body">
@@ -564,7 +563,7 @@ loadLanguageFromSession($_SESSION['lang']);
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
              </div>
               </div>
-              
+
 
         </div>
     </div>
@@ -578,7 +577,7 @@ loadLanguageFromSession($_SESSION['lang']);
             <h4 class="modal-title">Mes anciens trajets</h4>
             </div>
             <div class="modal-body">
-            <?php       
+            <?php
         $reqTrajet = getTrajets($bdd,"Finis");
             while ($trajet = $reqTrajet->fetch())
         {
@@ -588,7 +587,7 @@ loadLanguageFromSession($_SESSION['lang']);
           <?php
           $destination = 'factures/facture'.$trajet['idTrajet'].'.pdf';
           echo 'Numéro de trajet : '. $trajet['idTrajet'] . ' | Voir le récapitulatif : '  ?> <a href="<?= $destination;?>" target=_blank><button type="button" class="btn btn-info" id="<?=$trajet['idTrajet'];?>">Cliquer ici</button></a>
-          <br>    
+          <br>
           <br>
           </div>
           </div>
@@ -614,8 +613,8 @@ loadLanguageFromSession($_SESSION['lang']);
                 <h4 class="modal-title">Mes trajets en cours</h4>
             </div>
             <div class="modal-body">
-            <?php 
-        
+            <?php
+
         $reqTrajet = getTrajets($bdd,"En cours");
             while ($trajet = $reqTrajet->fetch())
         {
@@ -632,9 +631,9 @@ loadLanguageFromSession($_SESSION['lang']);
           <?php
         }
         $reqTrajet->closeCursor();
-    
-   
-  
+
+
+
         ?>
             </div>
             <div class="modal-footer">
@@ -653,8 +652,8 @@ loadLanguageFromSession($_SESSION['lang']);
             <h4 class="modal-title">Vos trajets finis</h4>
             </div>
             <div class="modal-body">
-            <?php 
-        
+            <?php
+
         $reqTrajet = getTrajets($bdd,"Pas commencé");
             while ($trajet = $reqTrajet->fetch())
         {
@@ -671,9 +670,9 @@ loadLanguageFromSession($_SESSION['lang']);
           <?php
         }
         $reqTrajet->closeCursor();
-    
-   
-  
+
+
+
         ?>
             </div>
             <div class="modal-footer">
@@ -700,7 +699,7 @@ loadLanguageFromSession($_SESSION['lang']);
 
   </html>
   <?php
-  
+
   function checkIfAbonnementValide($bdd)
   {
     $req = $bdd->getPDO()->prepare('SELECT * FROM linkabonnemententreprise WHERE idClient = :idClient');

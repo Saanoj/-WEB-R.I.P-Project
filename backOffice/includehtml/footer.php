@@ -50,3 +50,10 @@
       <script src="../../js/retina.min.js"></script>
       <script src="../../js/modernizr.js"></script>
       <script src="../../js/main.js"></script>
+      <script src="../../plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+      <script src="../../plugins/Isotope/isotope.pkgd.min.js"></script>
+      <script src="../../plugins/scrollTo/jquery.scrollTo.min.js"></script>
+      <script src="../../plugins/easing/easing.js"></script>
+      <script src="../../plugins/parallax-js-master/parallax.min.js"></script>
+      <script src="../../js/index/custom.js"></script>
+      <script src="../../js/ReservationTrajet/main.js"></script>

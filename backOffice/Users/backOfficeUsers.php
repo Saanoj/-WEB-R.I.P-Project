@@ -2,8 +2,7 @@
 session_start();
 
 
-include '../../include/config.php';
-include '../../include/fonction.php';
+include 'fonction.php';
 ?>
 
 <!DOCTYPE html>
@@ -37,6 +36,7 @@ include '../../include/fonction.php';
     <table class="table" id=users>
       <thead>
         <tr>
+          <th scope="col">Id</th>
           <th scope="col">Mail</th>
           <th scope="col">Nom</th>
           <th scope="col">Prenom</th>

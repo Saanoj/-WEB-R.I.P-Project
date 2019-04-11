@@ -2,8 +2,7 @@
 session_start();
 
 
-include '../../include/config.php';
-include '../../include/fonction.php';
+include 'fonction.php';
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +21,7 @@ include '../../include/fonction.php';
   $Session = new App\Session($_SESSION['id']);
   $Session->isConnect();
   ?>
-  
+
   <br>
   <br>
   <div class="jumbotron m-5 p-5">

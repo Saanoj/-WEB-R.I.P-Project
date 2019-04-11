@@ -8,16 +8,15 @@ include '../../include/fonctionCollab.php';
 
 <!DOCTYPE html>
 <html>
-<?php include "includehtml/head.html" ?>
+<?php include "../includehtml/head.html" ?>
 
 <body>
 
   <?php
   require '../../Class/Autoloader.php';
   App\Autoloader::register();
-  $backOffice=3;
-  $type = 0 ;
-  $navbar = new App\Navbar($backOffice, $type);
+  $type = 2 ;
+  $navbar = new App\Navbar($type);
   $navbar->navbar();
   $Session = new App\Session($_SESSION['id']);
   $Session->isConnect();

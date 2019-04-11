@@ -24,10 +24,12 @@ $form = new App\Form(array());
 
 <body>
   <?php
-  $backOffice=0;
+
   $type = 0;
-  $navbar = new App\Navbar($backOffice,$type);
+  $navbar = new App\Navbar($type);
   $navbar->navbar();
+
+
   ?>
 
   <div class="container">

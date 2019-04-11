@@ -46,7 +46,7 @@ class Navbar
         }elseif($type==3){
           $where = "reservation";
         }else{
-          $where = "costomer";
+          $where = "customer";
         }
       }elseif($type == 2){
         header('Location:http://localhost/R.I.P-Project/notConnect.php');
@@ -58,7 +58,8 @@ class Navbar
 
     public function showNav(string $where)
     {
-      echo '<header class="header">
+      ?>
+      <header class="header">
         <div class="container">
           <div class="row">
             <div class="col">
@@ -67,12 +68,40 @@ class Navbar
                   <div class="logo"><a href="index.php">Ride in Pride</a></div>
                   <nav class="main_nav">
                     <ul class="d-flex flex-row align-items-start justify-content-start">
-                      <li class="active"><a href="index.html">Accueil</a></li>
-                      <li><a href="#">Services</a></li>
-                      <li><a href="contact.html">Contactez nous</a></li>
-                      <li><a href="inscription.php">Inscription</a></li>
+
+                      <?php if ($where == "reservation") {?>
+                        <li><a href="annulerReservation.php">Annuler la reservation</a></li>
+                      <?php }else{
+
+                        if ($where == "customer" ||$where == "admin" ||$where == "backOffice" ) {
+                          if($where == "admin" || $where == "customer"){
+                            ?>
+                            <li><a href="index.php">Accueil</a></li>
+                            <li><a href="services.php">Services</a></li>
+                            <?php if ($where == "admin") { ?>
+                            <li><a href="backOffice/Users/backOfficeUsers.php">Back Office</a></li>
+                          <?php } ?>
+                            <li><a href="profil.php">Profil</a></li>
+                            <li><a href="contact.php">Contactez nous</a></li>
+                          <?php }else{?>
+                            <li><a href="../../index.php">Accueil</a></li>
+                            <li><a href="../../profil.php">Profil</a></li>
+                            <li><a href="../../deconnexion.php">Deconnexion</a></li>
+                          <?php } ?>
+                        <?php }?>
+
+                        <?php // si il est connecter ou pas
+                        if ($where == "normal"){ ?>
+                          <li><a href="inscription.php">Inscription</a></li>
+                          <li><a href="connexion.php">Connexion</a></li>
+                        <?php }else{ ?>
+                          <li><a href="Deconnextion.php">Deconnextion</a></li>
+                        <?php } ?>
+                      <?php } ?>
                     </ul>
                   </nav>
+
+
 
                   <!-- Hamburger -->
 
@@ -86,7 +115,12 @@ class Navbar
           </div>
         </div>
 
-      </header>';
+      </header>
+      <div style="height: 150px; background-color: #2F2E33">
+
+      </div>
+
+      <?php
     }
 
   }

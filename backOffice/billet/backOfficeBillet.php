@@ -2,7 +2,7 @@
 session_start();
 
 
-include 'fonctionBillet.php';
+include 'functionBillet.php';
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +23,7 @@ include 'fonctionBillet.php';
 
   <div class="jumbotron m-5 p-5 table-responsive">
     <?php include_once '../includehtml/navbarBO.php';
-    navbarBO("abo")?>
+    navbarBO("billet")?>
 
     <h1>Table comptes</h1>
     <table class="table">
@@ -36,7 +36,7 @@ include 'fonctionBillet.php';
           <th scope="col">Supprimer</th>
         </tr>
       </thead>
-      <?php backOfficeAbo();
+      <?php// backOfficeBillet();
       ?>
     </table>
   </div>

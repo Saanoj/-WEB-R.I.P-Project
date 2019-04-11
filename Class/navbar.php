@@ -33,13 +33,10 @@ class Navbar
         $data=$query->fetch();
         $where = "normal";
 
-        if($type !=0){
-          if($type == 1){
-            $where = "reservation";
-          }
-        }elseif($data['isAdmin'] == 1){
+      if($data['isAdmin'] == 1){
           if ($type == 2){
             $where = "backOffice";
+
           }else{
             $where = "admin";
           }
@@ -55,6 +52,7 @@ class Navbar
       }else{
         $where = "normal";
       }
+      echo"<script>console.log('".$where."')</script>";
       $this->showNav($where);
     }
 
@@ -81,8 +79,8 @@ class Navbar
                             <li><a href="index.php">Accueil</a></li>
                             <li><a href="services.php">Services</a></li>
                             <?php if ($where == "admin") { ?>
-                            <li><a href="backOffice/Users/backOfficeUsers.php">Back Office</a></li>
-                          <?php } ?>
+                              <li><a href="backOffice/Users/backOfficeUsers.php">Back Office</a></li>
+                            <?php } ?>
                             <li><a href="profil.php">Profil</a></li>
                             <li><a href="contact.php">Contactez nous</a></li>
                           <?php }else{?>

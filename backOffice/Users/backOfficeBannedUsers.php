@@ -22,7 +22,7 @@ include '../../include/fonction.php';
   $Session = new App\Session($_SESSION['id']);
   $Session->isConnect();
   ?>
-
+  
   <br>
   <br>
   <div class="jumbotron m-5 p-5">

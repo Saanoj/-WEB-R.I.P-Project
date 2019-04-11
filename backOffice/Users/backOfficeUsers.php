@@ -24,6 +24,11 @@ include '../../include/fonction.php';
   ?>
 
   <div class="jumbotron m-5 p-5">
+
+    <?php include_once '../includehtml/navbarBO.php';
+    navbarBO("users")?>
+
+
     <h1 class="display-1">Table Utilisateurs</h1>
     <div class="col-md-4 border border-rounded">
       <div class="display-4">Recherche d'un utilisateur:</div>

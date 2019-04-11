@@ -23,6 +23,9 @@ include '../../include/fonctionAbo.php';
   ?>
 
   <div class="table-responsive">
+    <?php include_once '../includehtml/navbarBO.php';
+    navbarBO("abo")?>
+
     <h1>Table comptes</h1>
     <table class="table">
       <thead>

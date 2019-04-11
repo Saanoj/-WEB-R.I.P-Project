@@ -92,8 +92,11 @@ class Navbar
 
                         <?php // si il est connecter ou pas
                         if ($where == "normal"){ ?>
+                          <li><a href="index.php">Accueil</a></li>
+                          <li><a href="services.php">Services</a></li>
                           <li><a href="inscription.php">Inscription</a></li>
                           <li><a href="connexion.php">Connexion</a></li>
+                          <li><a href="contact.php">Contactez nous</a></li>
                         <?php }else{ ?>
                           <li><a href="deconnexion.php">Deconnextion</a></li>
                         <?php } ?>

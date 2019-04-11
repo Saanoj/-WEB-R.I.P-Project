@@ -1,12 +1,10 @@
 <?php
 session_start();
-include '../../include/fonctionAbo.php';
+include 'include/fonctionAbo.php';
 
-edit($_POST["idClient"],
-$_POST["dateDebut"],
-$_POST["dateFin"],
+edit($_POST["idAbonnement"],
 $_POST["typeAbonnement"],
-$_POST["isEngagement"]
+$_POST["isEngagement"],
 );
 
 header("location: backOfficeAbo.php");

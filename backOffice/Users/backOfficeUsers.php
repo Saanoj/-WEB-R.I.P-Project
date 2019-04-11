@@ -42,8 +42,12 @@ include 'fonction.php';
           <th scope="col">Prenom</th>
           <th scope="col">Date de naissance</th>
           <th scope="col">Sexe</th>
+          <th scope="col">Avatar</th>
+          <th scope="col">Entreprise</th>
           <th scope="col">Edit</th>
           <th scope="col">Admin</th>
+          <th scope="col">Collaborateur</th>
+          <th scope="col">Directeur</th>
           <th scope="col">Ban</th>
         </tr>
       </thead>

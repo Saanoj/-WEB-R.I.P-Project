@@ -1,7 +1,8 @@
 <?php
+define('CONF', '../includehtml/config.php');
 function backOfficeAbo()
 {
-  include ("config.php");
+  include (CONF);
 
 
 
@@ -14,15 +15,14 @@ function backOfficeAbo()
     echo'
     <tr>
         <form method="POST" action="edit.php">
+
           <input  name="id" type="hidden" value="'.$member["idAbonnement"].'"/>
-          <td><input name="idClient" type="text" value="'.$member["idClient"].'"/></td>
-          <td><input name="dateDebut" type="text" value="'.$member["dateDebut"].'"/></td>
-          <td><input name="dateFin" type="text" value="'.$member["dateFin"].'"/></td>
+          <td>'.$member["idAbonnement"].'</td>
           <td><input name="typeAbonnement" type="text" value="'.$member["typeAbonnement"].'"/></td>
           <td><input name="isEngagement" type="text" value="'.$member["isEngagement"].'"/></td>
           <td>
 
-          <button type="submit" class="btn btn-blue">
+          <button type="submit" class="btn btn-warning">
             <span class="glyphicon glyphicon-edit"></span>
           </button>
           </form>
@@ -44,15 +44,13 @@ function backOfficeAbo()
   <tr>
       <form method="POST" action="add.php">
       <input  name="id" type="hidden"/>
-      <td><input name="idClient" type="text"/></td>
-      <td><input name="dateDebut" type="text"/></td>
-      <td><input name="dateFin" type="text"/></td>
+      <td></td>
       <td><input name="typeAbonnement" type="text"/></td>
       <td><input name="isEngagement" type="text"/></td>
 
         <td>
 
-        <button type="submit" class="btn">
+        <button type="submit" class="btn btn-success">
           Add
           <span class="glyphicon glyphicon"></span>
         </button>
@@ -60,51 +58,36 @@ function backOfficeAbo()
         </td>
       ';
 }
-function edit($id,$idClient, $dateDebut, $dateFin, $typeAbonnement, $isEngagement){
-  include ("config.php");
+function edit($id,$typeAbonnement, $isEngagement){
+  include (CONF);
   $query = $bdd->prepare("UPDATE abonnement SET
-    idClient = :idClient,
-    dateDebut = :dateDebut,
-    dateFin = :dateFin,
     typeAbonnement = :typeAbonnement,
-    isEngagement = :isEngagement
+    isEngagement = :isEngagement,
     WHERE idAbonnement = :id");
   $query->execute([
                   "id"=> $id,
-                  "idClient"=>$idClient,
-                  "dateDebut"=>$dateDebut,
-                  "dateFin"=>$dateFin,
                   "typeAbonnement"=>$typeAbonnement,
-                  "isEngagement" => $isEngagement
+                  "isEngagement"=>$isEngagement
                   ]);
 }
-function add($id,$idClient, $dateDebut, $dateFin, $typeAbonnement, $isEngagement){
-  include ("config.php");
-  $query = $bdd->prepare("INSERT INTO abonnement (  idClient, idChauffeur, dateDebut, dateFin, typeAbonnement, isEngagement) VALUES
+function add($id,$typeAbonnement, $isEngagement){
+  include (CONF);
+  $query = $bdd->prepare("INSERT INTO abonnement (typeAbonnement, isEngagement) VALUES
     (
-      idClient = :idClient,
-      dateDebut = :dateDebut,
-      dateFin = :dateFin,
       typeAbonnement = :typeAbonnement,
       isEngagement = :isEngagement
   )
     ");
   $query->execute([
-    "idClient"=>$idClient,
-    "idChauffeur"=>$idChauffeur,
-    "heureDebut"=>$heureDebut,
-    "heureFin"=>$heureFin,
-    "dateResevation" => $dateResevation,
-    "prixtrajet"=> $prixtrajet,
-    "debut"=>$debut,
-    "fin"=>$fin
+    "typeAbonnement"=>$typeAbonnement,
+    "isEngagement"=>$isEngagement
                   ]);
 }
 
 function drop($id)
 {
-  include ("config.php");
-  $query = $bdd->prepare("DELETE FROM `collaborateurs` WHERE idAbonnement = :id");
+  include (CONF);
+  $query = $bdd->prepare("DELETE FROM `abonnement` WHERE idAbonnement = :id");
   $query->execute([
                   "id"=>$id,
 

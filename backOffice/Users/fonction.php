@@ -20,10 +20,12 @@ function backOfficeUser(){
     <tr>
         <form method="POST" action="edit.php">
           <td>'.$member["id"].'</td>
+          <input name="id" type="hidden" value="'.$member["id"].'"/>
           <td><input name="email" type="text" value="'.$member["email"].'"/></td>
           <td><input name="last_name" type="text" value="'.$member["last_name"].'"/></td>
           <td><input name="first_name" type="text" value="'.$member["first_name"].'"/></td>
           <td><input name="birthday" type="text" value="'.$member["birthday"].'"/></td>
+
           ';
           if($member["gender"]=="Homme"){
             echo '
@@ -42,10 +44,13 @@ function backOfficeUser(){
               </select>
             </td>';
           }
+          echo '<td><input name="avatar" type="text" value="'.$member["avatar"].'"/></td>
+          <td><input name="avatar" type="text" value="'.$member["idEntreprise"].'"/></td>';
+
         echo'
           <td>
 
-          <button type="submit" class="btn btn-blue">
+          <button type="submit" class="btn btn-warning">
             <span class="glyphicon glyphicon-edit"></span>
           </button>
           </form>
@@ -73,6 +78,54 @@ function backOfficeUser(){
             </form>
           </td>';
         }
+
+
+
+        if ($member["isCollaborateur"] == 1){
+        echo '
+        <td>
+          <form method="POST" action="#">
+            <input  name="id" type="hidden" value="'.$member["id"].'"/>
+            <input  name="admin" type="hidden" value="1"/>
+            <button name="admin" value="1" class="btn btn-success" onclick="updateAdmin(this.parentElement);"></button>
+          </form>
+        </td>';
+        }
+        else {
+          echo '
+          <td>
+            <form method="POST" action="#">
+              <input  name="id" type="hidden" value="'.$member["id"].'"/>
+              <input  name="admin" type="hidden" value="0"/>
+              <button name="admin" value="0" class="btn btn-danger" onclick="updateAdmin(this.parentElement);"></button>
+            </form>
+          </td>';
+        }
+
+
+
+        if ($member["isDirecteur"] == 1){
+        echo '
+        <td>
+          <form method="POST" action="#">
+            <input  name="id" type="hidden" value="'.$member["id"].'"/>
+            <input  name="admin" type="hidden" value="1"/>
+            <button name="admin" value="1" class="btn btn-success" onclick="updateAdmin(this.parentElement);"></button>
+          </form>
+        </td>';
+        }
+        else {
+          echo '
+          <td>
+            <form method="POST" action="#">
+              <input  name="id" type="hidden" value="'.$member["id"].'"/>
+              <input  name="admin" type="hidden" value="0"/>
+              <button name="admin" value="0" class="btn btn-danger" onclick="updateAdmin(this.parentElement);"></button>
+            </form>
+          </td>';
+        }
+
+
         //bouton de ban
       echo'
       <td>

@@ -74,8 +74,8 @@ function add($typeAbonnement, $isEngagement){
   include (CONF);
   $query = $bdd->prepare("INSERT INTO abonnement (typeAbonnement, isEngagement) VALUES
     (
-      typeAbonnement = :typeAbonnement,
-      isEngagement = :isEngagement
+      :typeAbonnement,
+      :isEngagement
   )
     ");
   $query->execute([

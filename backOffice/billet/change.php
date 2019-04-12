@@ -24,13 +24,13 @@ if (isset($_POST["add"])){
     empty($_POST["villeBillet"])&&
     empty($_POST["prix"])
   )){
-      
+
       add($_POST["nom"],
       $_POST["isValide"],
       $_POST["villeBillet"],
       $_POST["prix"]);
     }
-  //header("location: backOfficeBillet.php");
+  header("location: backOfficeBillet.php");
 }
 
 

@@ -62,7 +62,7 @@ function edit($id,$typeAbonnement, $isEngagement){
   include (CONF);
   $query = $bdd->prepare("UPDATE abonnement SET
     typeAbonnement = :typeAbonnement,
-    isEngagement = :isEngagement,
+    isEngagement = :isEngagement
     WHERE idAbonnement = :id");
   $query->execute([
                   "id"=> $id,
@@ -70,7 +70,7 @@ function edit($id,$typeAbonnement, $isEngagement){
                   "isEngagement"=>$isEngagement
                   ]);
 }
-function add($id,$typeAbonnement, $isEngagement){
+function add($typeAbonnement, $isEngagement){
   include (CONF);
   $query = $bdd->prepare("INSERT INTO abonnement (typeAbonnement, isEngagement) VALUES
     (

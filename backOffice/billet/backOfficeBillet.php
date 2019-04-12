@@ -25,18 +25,20 @@ include 'functionBillet.php';
     <?php include_once '../includehtml/navbarBO.php';
     navbarBO("billet")?>
 
-    <h1>Table comptes</h1>
+    <h1>Billets</h1>
     <table class="table">
       <thead>
         <tr>
           <th scope="col">Id</th>
-          <th scope="col">Type</th>
-          <th scope="col">Engagement</th>
+          <th scope="col">Nom</th>
+          <th scope="col">Validité</th>
+          <th scope="col">Ville</th>
+          <th scope="col">Prix</th>
           <th scope="col">Edit/Add</th>
           <th scope="col">Supprimer</th>
         </tr>
       </thead>
-      <?php// backOfficeBillet();
+      <?php backOfficeBillet();
       ?>
     </table>
   </div>

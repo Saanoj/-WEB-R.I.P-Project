@@ -16,7 +16,7 @@ function navbarBO($where)
       </li>
     <?php }else {?>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Utilisateurs</a>
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Utilisateurs</a>
         <div class="dropdown-menu">
           <a class="dropdown-item" href="../Users/backOfficeBannedUsers.php">Utilisateurs bannis</a>
           <a class="dropdown-item" href="../Users/backOfficeUsers.php">Utilisateur</a>
@@ -25,7 +25,7 @@ function navbarBO($where)
     <?php }
     if ($where == "abo") {?>
       <li class="nav-item">
-        <a class="nav-link" href="backOfficeAbo.php">Abonnement</a>
+        <a class="nav-link active" href="backOfficeAbo.php">Abonnement</a>
       </li>
     <?php }else {?>
       <li class="nav-item">
@@ -35,7 +35,7 @@ function navbarBO($where)
 
     <?php if ($where == "billet") {?>
       <li class="nav-item">
-        <a class="nav-link" href="backOfficeBillet.php">Billets</a>
+        <a class="nav-link active" href="backOfficeBillet.php">Billets</a>
       </li>
     <?php }else {?>
       <li class="nav-item">
@@ -47,7 +47,7 @@ function navbarBO($where)
     if ($where == "chambre") {?>
 
       <li class="nav-item">
-        <a class="nav-link" href="backOfficeChambre.php">Chambres</a>
+        <a class="nav-link active" href="backOfficeChambre.php">Chambres</a>
       </li>
     <?php }else{ ?>
       <li class="nav-item">
@@ -58,7 +58,7 @@ function navbarBO($where)
     if ($where == "collab") { ?>
 
       <li class="nav-item">
-        <a class="nav-link" href="backOfficeCollab.php">Collaborateur</a>
+        <a class="nav-link active" href="backOfficeCollab.php">Collaborateur</a>
       </li>
     <?php }else{ ?>
       <li class="nav-item">
@@ -70,7 +70,7 @@ function navbarBO($where)
     if ($where == "contact") {?>
 
       <li class="nav-item">
-        <a class="nav-link" href="backOfficeContact.php">Contact</a>
+        <a class="nav-link active" href="backOfficeContact.php">Contact</a>
       </li>
 
     <?php }else{ ?>
@@ -82,7 +82,7 @@ function navbarBO($where)
 
     if ($where == "devis") {?>
       <li class="nav-item">
-        <a class="nav-link" href="backOfficeDevis.php">Devis</a>
+        <a class="nav-link active" href="backOfficeDevis.php">Devis</a>
       </li>
     <?php }else{ ?>
       <li class="nav-item">
@@ -93,7 +93,7 @@ function navbarBO($where)
 
     if ($where == "entreprise") {?>
       <li class="nav-item">
-        <a class="nav-link" href="backOfficeEntreprise.php">Entreprise</a>
+        <a class="nav-link active" href="backOfficeEntreprise.php">Entreprise</a>
       </li>
     <?php }else{?>
       <li class="nav-item">
@@ -104,7 +104,7 @@ function navbarBO($where)
     if ($where == "factures") {?>
 
       <li class="nav-item">
-        <a class="nav-link" href="backOfficeFactures.php">Factures</a>
+        <a class="nav-link active" href="backOfficeFactures.php">Factures</a>
       </li>
     <?php }else{ ?>
       <li class="nav-item">
@@ -116,7 +116,7 @@ function navbarBO($where)
     if ($where=="hotel") {?>
 
       <li class="nav-item">
-        <a class="nav-link" href="backOfficeHotel.php">Hôtel</a>
+        <a class="nav-link active" href="backOfficeHotel.php">Hôtel</a>
       </li>
 
     <?php }else{ ?>
@@ -128,7 +128,7 @@ function navbarBO($where)
 
     if ($where == "linkAbo") {?>
       <li class="nav-item">
-        <a class="nav-link" href="backOfficeLinkAbo.php">Liens Abonnement/Entreprise</a>
+        <a class="nav-link active" href="backOfficeLinkAbo.php">Liens Abonnement/Entreprise</a>
       </li>
     <?php }else{ ?>
       <li class="nav-item">
@@ -138,7 +138,7 @@ function navbarBO($where)
 
     if ($where == "linkService") { ?>
       <li class="nav-item">
-        <a class="nav-link" href="backOfficeLinkService.php">Liens Trajet/Services</a>
+        <a class="nav-link active" href="backOfficeLinkService.php">Liens Trajet/Services</a>
       </li>
     <?php }else{ ?>
       <li class="nav-item">
@@ -150,7 +150,7 @@ function navbarBO($where)
     if ($where == "restaurant") {?>
 
       <li class="nav-item">
-        <a class="nav-link" href="backOfficeRestaurants.php">Restaurants</a>
+        <a class="nav-link active" href="backOfficeRestaurants.php">Restaurants</a>
       </li>
     <?php }else{ ?>
       <li class="nav-item">
@@ -161,7 +161,7 @@ function navbarBO($where)
     if ($where == "services") {?>
 
       <li class="nav-item">
-        <a class="nav-link" href="backOfficeServices.php">Services</a>
+        <a class="nav-link active" href="backOfficeServices.php">Services</a>
       </li>
     <?php }else{ ?>
       <li class="nav-item">
@@ -171,7 +171,7 @@ function navbarBO($where)
 
     if ($where == "trajet") {?>
       <li class="nav-item">
-        <a class="nav-link" href="backOfficeTrajet.php">Trajet</a>
+        <a class="nav-link active" href="backOfficeTrajet.php">Trajet</a>
       </li>
     <?php }else{ ?>
       <li class="nav-item">

@@ -121,8 +121,8 @@ function checkAbonnementValide($bdd) {
 
       $subject = "Votre abbonement a Ride In Pride est terminé";
       $body = "Bonjour ".$user['first_name']." votre abbonement est terminé, si vous voulez le renouveller <br> cliquez-ici";
-      $mail = new Mail($user['email'],$subject,$body);
-      $mail->send();
+      include_once 'mail.php';
+      sendMail($user['email'],$subject,$body);
       }
   }
  }

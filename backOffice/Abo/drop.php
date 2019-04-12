@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'fonctionCollab.php';
+include 'fonctionAbo.php';
 
 drop($_POST["id"]);
 header("location: backOfficeCollab.php");

@@ -1,9 +1,10 @@
 <?php
 
 namespace App;
-require 'Class/Autoloader.php';
+require_once 'Class/Autoloader.php';
 Autoloader::register();
 echo "hello";
+
 function sendMail($to,$subject,$body)
 {
 

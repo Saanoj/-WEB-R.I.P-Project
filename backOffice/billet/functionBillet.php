@@ -39,6 +39,7 @@ function backOfficeBillet()
           </button>
         </td>
       </form>
+    </tr>
       <?php
 
 
@@ -63,6 +64,7 @@ function backOfficeBillet()
           </button>
         </form>
       </td>
+    </tr>
 
       <?php
 

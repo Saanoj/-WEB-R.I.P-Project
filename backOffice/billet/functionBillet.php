@@ -90,21 +90,12 @@ function backOfficeBillet()
 
       function add($nom, $isValide, $villeBillet, $prix){
         include (CONF);
-        var_dump($nom, $isValide, $villeBillet, $prix);
-        $query = $bdd->prepare("INSERT INTO billettourisme (nom, isValide, villeBillet, prix) VALUES
-        (
-          nom = :nom,
-          isValide = :isValide,
-          villeBillet = :villeBillet,
-          prix = :prix
-        )
-        ");
-        $query->execute([
-          "nom"=>$nom,
-          "isValide"=>$isValide,
-          "villeBillet"=>$villeBillet,
-          "prix"=>$prix
-        ]);
+        $query = $bdd->prepare("INSERT INTO billettourisme (nom, isValide, villeBillet, prix) VALUES (:nom,:isValide,:villeBillet,:prix)");
+        $query->bindValue("nom",$nom);
+        $query->bindValue("isValide",$isValide);
+        $query->bindValue("villeBillet",$villeBillet);
+        $query->bindValue("prix",$prix);
+        $query->execute();
       }
 
       function drop($id)

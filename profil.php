@@ -90,7 +90,6 @@ loadLanguageFromSession($_SESSION['lang']);
 
 
   // On obtients les informations de l'entreprise
-
   $uneEntreprise = infosEntreprise($bdd);
   //CREATION DE L'ABONNEMENT
 
@@ -719,8 +718,12 @@ loadLanguageFromSession($_SESSION['lang']);
 
   function infosEntreprise($bdd)
   {
-    $req = $bdd->getPDO()->prepare('SELECT * FROM `entreprise` WHERE idDirecteur = idDirecteur');
-    $req->execute(array("idDirecteur" => $_SESSION['id']));
+
+    $req = $bdd->getPDO()->prepare('SELECT idEntreprise FROM users WHERE id = ?');
+    $req->execute(array($_SESSION['id']));
+    $unProfil = $req->fetch();
+    $req = $bdd->getPDO()->prepare('SELECT * FROM `entreprise` WHERE idEntreprise = :idEntreprise');
+    $req->execute(array("idEntreprise" => $unProfil['idEntreprise']));
     return $req->fetch();
     $req->closeCursor();
 

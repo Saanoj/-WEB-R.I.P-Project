@@ -2,8 +2,7 @@
 session_start();
 
 
-include '../../include/config.php';
-include '../../include/fonctionCollab.php';
+include 'fonctionCollab.php';
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +21,9 @@ include '../../include/fonctionCollab.php';
   $Session->isConnect();
   ?>
 
-  <div>
+  <div class="jumbotron m-5 p-5 table-responsive">
+    <?php include_once '../includehtml/navbarBO.php';
+    navbarBO("collab")?>
     <h1>Table collaborateurs</h1>
     <div class="table-responsive">
       <table class="table table-hover">

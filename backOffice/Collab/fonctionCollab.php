@@ -1,7 +1,9 @@
 <?php
+
+define('CONF', '../includehtml/config.php');
 function backOfficeCollab()
 {
-  include ("config.php");
+  include (CONF);
 
 
 
@@ -29,7 +31,7 @@ function backOfficeCollab()
           <td><input name="ratingNumber" type="text" value="'.$member["ratingNumber"].'"/></td>
           <td>
 
-          <button type="submit" class="btn btn-blue">
+          <button type="submit" class="btn btn-warning">
             <span class="glyphicon glyphicon-edit"></span>
           </button>
           </form>
@@ -66,7 +68,7 @@ function backOfficeCollab()
         <td><input name="ratingNumber" type="text" /></td>
         <td>
 
-        <button type="submit" class="btn">
+        <button type="submit" class="btn btn-success">
           Add
           <span class="glyphicon glyphicon"></span>
         </button>
@@ -75,7 +77,7 @@ function backOfficeCollab()
       ';
 }
 function edit($id, $email, $last_name, $first_name, $metier, $description, $prixCollaborateur, $dateEmbauche, $ville, $heuresTravailees,$rating ,$ratingNumber){
-  include ("config.php");
+  include (CONF);
   $query = $bdd->prepare("UPDATE collaborateurs SET
     email = :email,
     first_name = :first_name,
@@ -106,7 +108,7 @@ function edit($id, $email, $last_name, $first_name, $metier, $description, $prix
                   ]);
 }
 function add($email, $last_name, $first_name, $metier, $description, $prixCollaborateur, $dateEmbauche, $ville, $heuresTravailees,$rating ,$ratingNumber){
-  include ("config.php");
+  include (CONF);
   $query = $bdd->prepare("INSERT INTO collaborateurs (email, last_name, first_name, metier, description, prixCollaborateur, dateEmbauche, ville, heuresTravailees, rating, ratingNumber) VALUES
     (:email,
     :first_name,
@@ -137,7 +139,7 @@ function add($email, $last_name, $first_name, $metier, $description, $prixCollab
 
 function drop($id)
 {
-  include ("config.php");
+  include (CONF);
   $query = $bdd->prepare("DELETE FROM `collaborateurs` WHERE idCollaborateurs = :id");
   $query->execute([
                   "id"=>$id,

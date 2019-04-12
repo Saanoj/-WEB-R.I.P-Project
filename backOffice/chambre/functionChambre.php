@@ -32,7 +32,7 @@ function backOfficeBillet()
       </td>
       <form method="POST" action="change.php">
         <td>
-          <input  name="id" type="hidden" value=" <?php echo $member["idBillet"]; ?> "/>
+          <input  name="id" type="hidden" value=" <?php echo $member["idChambre"]; ?> "/>
           <button  name = "drop" type="submit" class="btn btn-danger">
             Delete
             <span class="glyphicon glyphicon"></span>
@@ -49,7 +49,6 @@ function backOfficeBillet()
 
     <tr>
       <form method="POST" action="change.php">
-        <input  name="id" type="hidden"/>
         <td></td>
         <td><input name="typeChambre" type="text"/></td>
         <td><input name="idHotel" type="text"/></td>
@@ -78,7 +77,7 @@ function backOfficeBillet()
         idHotel = :idHotel,
         litsDispo = :litsDispo,
         isDispo = :isDispo
-        WHERE idBillet = :id");
+        WHERE idChambre = :id");
         $query->execute([
           "id"=> $id,
           "typeChambre"=>$typeChambre,
@@ -90,7 +89,7 @@ function backOfficeBillet()
 
       function add($typeChambre, $idHotel, $litsDispo, $isDispo){
         include (CONF);
-        $query = $bdd->prepare("INSERT INTO billettourisme (typeChambre, idHotel, litsDispo, isDispo) VALUES (:typeChambre,:idHotel,:litsDispo,:isDispo)");
+        $query = $bdd->prepare("INSERT INTO chambre (typeChambre, idHotel, litsDispo, isDispo) VALUES (:typeChambre,:idHotel,:litsDispo,:isDispo)");
         $query->bindValue("typeChambre",$typeChambre);
         $query->bindValue("idHotel",$idHotel);
         $query->bindValue("litsDispo",$litsDispo);

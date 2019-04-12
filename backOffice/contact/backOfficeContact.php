@@ -2,7 +2,7 @@
 session_start();
 
 
-include 'fonctionAbo.php';
+include 'functionContact.php';
 ?>
 
 <!DOCTYPE html>
@@ -23,20 +23,23 @@ include 'fonctionAbo.php';
 
   <div class="jumbotron m-5 p-5 table-responsive">
     <?php include_once '../includehtml/navbarBO.php';
-    navbarBO("abo")?>
+    navbarBO("contact")?>
 
-    <h1>Abonnement</h1>
+    <h1>Contact</h1>
     <table class="table">
       <thead>
         <tr>
           <th scope="col">Id</th>
-          <th scope="col">Type</th>
-          <th scope="col">Engagement</th>
+          <th scope="col">Id Client</th>
+          <th scope="col">Nom</th>
+          <th scope="col">Numéro de téléphone</th>
+          <th scope="col">Message</th>
+          <th scope="col">Date</th>
           <th scope="col">Edit/Add</th>
           <th scope="col">Supprimer</th>
         </tr>
       </thead>
-      <?php backOfficeAbo();
+      <?php backOfficeContact();
       ?>
     </table>
   </div>

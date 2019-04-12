@@ -65,7 +65,7 @@ class Navbar
             <div class="col">
               <div class="header_content d-flex flex-row align-items-center justify-content-start">
                 <div class="header_content_inner d-flex flex-row align-items-end justify-content-start">
-                  <div class="logo"><a href="index.php">Ride in Pride</a></div>
+                  <div class="logo"><a href="index2.php">Ride in Pride</a></div>
                   <nav class="main_nav">
                     <ul class="d-flex flex-row align-items-start justify-content-start">
 
@@ -76,7 +76,7 @@ class Navbar
                         if ($where == "customer" ||$where == "admin" ||$where == "backOffice" ) {
                           if($where == "admin" || $where == "customer"){
                             ?>
-                            <li><a href="index.php">Accueil</a></li>
+                            <li><a href="index2.php">Accueil</a></li>
                             <li><a href="services.php">Services</a></li>
                             <?php if ($where == "admin") { ?>
                               <li><a href="backOffice/Users/backOfficeUsers.php">Back Office</a></li>
@@ -84,7 +84,7 @@ class Navbar
                             <li><a href="profil.php">Profil</a></li>
                             <li><a href="contact.php">Contactez nous</a></li>
                           <?php }else{?>
-                            <li><a href="../../index.php">Accueil</a></li>
+                            <li><a href="../../index2.php">Accueil</a></li>
                             <li><a href="../../profil.php">Profil</a></li>
                             <li><a href="../../deconnexion.php">Deconnexion</a></li>
                           <?php } ?>

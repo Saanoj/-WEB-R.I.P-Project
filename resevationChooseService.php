@@ -267,17 +267,13 @@ loadLanguageFromSession($_SESSION['lang']);
                                 $j=0;
                                 $datas = App\BilletTourisme::createBilletTourisme($unBillet['idBillet'],$unBillet['nom'],$unBillet['isValide'],$unBillet['villeBillet'],$unBillet['prix']);
                                 ?>
-
-
                                 <table>
-
                                   <tr>
                                     <th scope="col">Nom du billet : </th>
                                     <th scope="col">Validité : </th>
                                     <th scope="col">Ville : </th>
                                     <th scope="col">Prix : </th>
                                     <th scope="col">Quantité : </th>
-
                                   </tr>
                                   <tr>
                                     <th scope="row"> <?= $unBillet['nom'];?></th>
@@ -298,17 +294,13 @@ loadLanguageFromSession($_SESSION['lang']);
                                     </tr>
                                   </table>
                                   <?php
-
                                 }
                                 break;
                                 case '10' :
                                 ?>
-
                                 <div class="container">
                                   <h5>Vous voulez un service qui n'est pas présent ? Envoyez nous votre demande et nous l'examinerons sous 24h ouvrés.</h5>
                                   <div class="row">
-
-
                                     <div class="row">
                                       <div class="offset-md-6 col-md-12">
                                         <div class="form-group">
@@ -323,16 +315,11 @@ loadLanguageFromSession($_SESSION['lang']);
                                         </div>
                                       </div>
                                     </div>
-
-
-
                                   </div>
                                 </div>
                                 <?php
-
                                 break;
                                 case '11' :
-
                                 $interprete = $bdd->getPDO()->prepare('SELECT * FROM collaborateurs WHERE metier="interprete" ORDER BY idCollaborateurs DESC LIMIT 4 ');
                                 $interprete->execute();
                                 ?>
@@ -342,7 +329,6 @@ loadLanguageFromSession($_SESSION['lang']);
                                 Heure de début :  <input type="time" name="startInterprete" id="startInterprete" value="<?= $res[1]; ?>" min="<?= $res[1]; ?>">
                                 Heure de fin : <input type="time" name="endInterprete" value="<?= $resFin; ?>" min="<?= $resFin; ?>" onblur="checkHeureFinInterprete(this)">
                                 <!-- Nombre d'interprètes : <input type="number" min="1" max="5" class="primary" name="quantite[<?php //echo $service->getIdService(); ?>]" value="1"></input> -->
-
                                 <br> <br> <br>
                                 <?php
                                 $j=0;
@@ -376,9 +362,7 @@ loadLanguageFromSession($_SESSION['lang']);
                                   $j++;
                                 }
                                 break;
-
                                 case '12':
-
                                 $coachSportif = $bdd->getPDO()->prepare('SELECT * FROM collaborateurs WHERE metier="coachSportif" ORDER BY idCollaborateurs DESC LIMIT 4 ');
                                 $coachSportif->execute();
                                 ?>
@@ -387,7 +371,6 @@ loadLanguageFromSession($_SESSION['lang']);
                                 <h6>Vous  pouvez réserver un coach sportif  pendant 8h maximum</h6>
                                 Heure de début :  <input type="time" name="startCoachSportif" id="startCoachSportif"  value="<?= $res[1]; ?>" min="<?= $res[1]; ?>">
                                 Heure de fin : <input type="time" name="endCoachSportif" value="<?= $resFin; ?>" min="<?= $resFin; ?>"  onblur="checkHeureFinSportif(this)">
-
                                 <br> <br> <br>
                                 <?php
                                 $j=0;
@@ -395,7 +378,6 @@ loadLanguageFromSession($_SESSION['lang']);
                                 {
                                   ?>
                                   <table>
-
                                     <tr>
                                       <th scope="col">Nom : </th>
                                       <th scope="col">Prenom : </th>
@@ -422,18 +404,14 @@ loadLanguageFromSession($_SESSION['lang']);
                                 }
                                 break;
                                 case '13':
-
                                 $coachCulture = $bdd->getPDO()->prepare('SELECT * FROM collaborateurs WHERE metier="coachCulture" ORDER BY idCollaborateurs DESC LIMIT 4 ');
                                 $coachCulture->execute();
                                 ?>
-
                                 <h4> Réservation d'un coach cultures pendant la journée du trajet, veuillez choisir une plage horraire : </h4>
                                 <h6>Pour que votre réservation soit valide, l'heure de début doit etre égal ou supérieur a l'heure du trajet. (<?= $res[1]; ?>h) </h6>
                                 <h6>Vous  pouvez réserver un coach cultures  pendant 8h maximum</h6>
                                 Heure de début :  <input type="time" name="startCoachCulture" id="startCoachCulture" value="<?= $res[1]; ?>" min="<?= $res[1]; ?>">
                                 Heure de fin : <input type="time" name="endCoachCulture" value="<?= $resFin; ?>" min="<?= $resFin; ?>" onblur="checkHeureFinCulture(this)">
-
-
                                 <br> <br> <br>
                                 <?php
                                 $j=0;
@@ -441,7 +419,6 @@ loadLanguageFromSession($_SESSION['lang']);
                                 {
                                   ?>
                                   <table>
-
                                     <tr>
                                       <th scope="col">Nom : </th>
                                       <th scope="col">Prenom : </th>
@@ -467,18 +444,11 @@ loadLanguageFromSession($_SESSION['lang']);
                                   $j++;
                                 }
                                 break;
-
-
                                 case '16' :
-
-
-
                                 break;
                                 default:
                                 break;
                               }
-
-
                               ?>
                               <div class="modal-footer">
                                 <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">
@@ -489,9 +459,7 @@ loadLanguageFromSession($_SESSION['lang']);
                           </div>
                         </div>
                       </li>
-
                       <?php
-
                       $i++;
                     }
                     ?>
@@ -507,14 +475,8 @@ loadLanguageFromSession($_SESSION['lang']);
             </div>
           </div>
         </div>
-
-
       </main>
-
-
-
       <?php include "includehtml/footer.php" ?>
       <script src="js/reservationChooseService/main.js"></script>
-      <script src="js/reservationChooseService/calendrier.js"></script>
     </body>
     </html>

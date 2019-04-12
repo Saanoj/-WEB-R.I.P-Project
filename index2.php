@@ -160,7 +160,15 @@ $navbar->navbar();
 			<div class="row destinations_row">
 				<div class="col">
 					<div class="destinations_container item_grid">
-
+<style>
+.glyphicon { margin-right:5px;}
+.rating .glyphicon {font-size: 22px;}
+.rating-num { margin-top:0px;font-size: 54px; }
+.progress { margin-bottom: 5px;}
+.progress-bar { text-align: left; }
+.rating-desc .col-md-3 {padding-right: 0px;}
+.sr-only { margin-left: 5px;overflow: visible;clip: auto; }
+</style>
 						 <?php
       // Affichage d'un service
       $chauffeurs = $bdd->queryPrepareForWhile('SELECT * FROM collaborateurs WHERE metier="chauffeur" ORDER BY rating DESC LIMIT 6',$bdd);
@@ -183,11 +191,83 @@ $navbar->navbar();
 								<div class="destination_subtitle"><p><b>Prix: <?php echo $chauffeur->getPrixCollaborateur()."€ / Km | Note: ".$chauffeur->getRating()."/5 sur ".$chauffeur->getRatingNumber()." votes" ?></b></p></div>
 								<div class="destination_price"> <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal<?php echo $i ?>">Plus d'informations</button></div>
 							</div>
-						</div>
+							<div class="row">
+        <div class="col-xs-12 col-md-6">
+            <div class="well well-sm">
+                <div class="row">
+                    <div class="col-xs-12 col-md-6 text-center">
+                        <h1 style="font-size : 20px" class="rating-num">
+                        <div class="rating">
+                            <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star">
+                            </span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star">
+                            </span><span class="glyphicon glyphicon-star-empty"></span>
+                        </div>
+                       
+                    </div>
+                    <div class="col-xs-12 col-md-12">
+                        <div class="row rating-desc">
+                            <div class="col-xs-3 col-md-3 text-right">
+                                <span class="glyphicon glyphicon-star"></span>
+                            </div>
+
+														<?php if ($chauffeur->getRating() > 0 && $chauffeur->getRating() < 2) { ?>
+											
+                            <div class="col-xs-8 col-md-12">
+                                <div class="progress progress-striped">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="<?=$chauffeur->getRating();?>"
+                                        aria-valuemin="0" aria-valuemax="5" style="width:<?=$chauffeur->getRating()*20?>%"><?=$chauffeur->getRating()."/5"?>
+                                      
+                                    </div>
+                                </div>
+                            </div>
+														<?php } ?>
+
+										<?php if ($chauffeur->getRating() >= 2 && $chauffeur->getRating() < 3.5) { ?>
+                            <div class="col-xs-8 col-md-12">
+                                <div class="progress progress-striped">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow="<?=$chauffeur->getRating();?>"
+                                        aria-valuemin="0" aria-valuemax="5" style="width:<?=$chauffeur->getRating()*20?>%"><?=$chauffeur->getRating()."/5"?>
+                                      
+                                    </div>
+                                </div>
+                            </div>
+										<?php } ?>
+
+										<?php if ($chauffeur->getRating() >= 3.5 && $chauffeur->getRating() <= 5) {  ?>
+											<div class="col-xs-8 col-md-12">
+                                <div class="progress progress-striped">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="<?=$chauffeur->getRating();?>"
+                                        aria-valuemin="0" aria-valuemax="5" style="width:<?=$chauffeur->getRating()*20?>%"><?=$chauffeur->getRating()."/5"?>
+                                      
+                                    </div>
+                                </div>
+                            </div>
+										<?php } ?>
+
+										<?php if ($chauffeur->getRating() == 0) {  ?>
+											<div class="col-xs-8 col-md-12">
+                                <div class="progress progress-striped">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuenow="<?=$chauffeur->getRating();?>"
+                                        aria-valuemin="0" aria-valuemax="5" style="width:0">
+                                      
+                                    </div>
+                                </div>
+                            </div>
+										<?php } ?>
+
+										<div>
+                            <span class="glyphicon glyphicon-user"></span><?=$chauffeur->getRatingNumber()." votes totals";?>
+                     </div>                          
+                        </div>
+                        <!-- end row -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
-<?php /*
-   <div class="modal fade" id="exampleModal<?php echo $i ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel<?php echo $i ?>" aria-hidden="true">
+		<div class="modal fade" id="exampleModal<?php echo $i ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel<?php echo $i ?>" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -228,11 +308,16 @@ $navbar->navbar();
             </div>
           </div>
 		</div>
-		*/ ?>
+		 
 						   <?php
         $i++;
       }
       ?>
+
+						</div>
+
+
+
 					</div>
 				</div>
 			</div>

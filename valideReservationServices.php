@@ -130,7 +130,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
       $monIdMessage['idMessage'];
       $req->closeCursor();
 
-      $req=$bdd->getPDO()->prepare('INSERT INTO linkServicetrajet (`idTrajet`,`idService`,`idAnnexe`,`quantite`) VALUES (:idTrajet,:idService,:idAnnexe,:quantite)');
+      $req=$bdd->getPDO()->prepare('INSERT INTO linkServicetrajet (`idTrajet`,`idService`,`idAnnexe`,`quantite`,`duration`) VALUES (:idTrajet,:idService,:idAnnexe,:quantite,NULL)');
       $req->bindValue(':idTrajet', $_SESSION["idTrajet"]);
       $req->bindValue(':idService', $service);
       $req->bindValue(':idAnnexe',$monIdMessage['idMessage']);
@@ -158,7 +158,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
 
       foreach ($idArray as $value) {
         //echo "elseif 11 12 13<br>";
-/*
+
         $req=$bdd->getPDO()->prepare('INSERT INTO linkServicetrajet (`idTrajet`,`idService`,`idAnnexe`,`quantite`) VALUES (:idTrajet,:idService,:idAnnexe,:quantite)');
         $req->bindValue(':idTrajet', $_SESSION["idTrajet"]);
         $req->bindValue(':idService', $service);
@@ -166,14 +166,14 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
         $req->bindValue(':quantite', 1);
         $req->execute();
         $req->closeCursor();
-*/
+
       }
 
     }else{
     //on insere les id et la quantité pour lier ce choix de service au trajet dans cette table e liaison
     //echo "else ";
     //echo $thisQuantite."<br>";
-/*
+
     $req=$bdd->getPDO()->prepare('INSERT INTO linkServicetrajet (`idTrajet`,`idService`,`idAnnexe`,`quantite`) VALUES (:idTrajet,:idService,:idAnnexe,:quantite)');
     $req->bindValue(':idTrajet', $_SESSION["idTrajet"]);
     $req->bindValue(':idService', $service);
@@ -181,18 +181,18 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
     $req->bindValue(':quantite', $thisQuantite);
     $req->execute();
     $req->closeCursor();
-*/
+
 
     }
 
   }
 
   //redirection
-   // header("location:resevationChooseDriver.php");
+    header("location:resevationChooseDriver.php");
 }
 else {
 
-   // header("location:resevationChooseService.php?probleme");
+    header("location:resevationChooseService.php?probleme");
 }
 
 

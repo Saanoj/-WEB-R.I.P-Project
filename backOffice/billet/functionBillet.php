@@ -39,6 +39,7 @@ function backOfficeBillet()
           </button>
         </td>
       </form>
+    </tr>
       <?php
 
 
@@ -63,6 +64,7 @@ function backOfficeBillet()
           </button>
         </form>
       </td>
+    </tr>
 
       <?php
 
@@ -88,6 +90,7 @@ function backOfficeBillet()
 
       function add($nom, $isValide, $villeBillet, $prix){
         include (CONF);
+        var_dump($nom, $isValide, $villeBillet, $prix);
         $query = $bdd->prepare("INSERT INTO billettourisme (nom, isValide, villeBillet, prix) VALUES
         (
           nom = :nom,

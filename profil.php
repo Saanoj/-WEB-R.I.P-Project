@@ -5,7 +5,7 @@ session_start();
 if (!isset($_SESSION['lang'])) {
   $_SESSION['lang'] = "fr";
 }
-include "multilingue/multilingue.php";
+require_once "multilingue/multilingue.php";
 loadLanguageFromSession($_SESSION['lang']);
 
 ?>
@@ -14,7 +14,7 @@ loadLanguageFromSession($_SESSION['lang']);
 <head>
 
 
-  <?php include 'includehtml/head.html'; ?>
+  <?php require_once 'includehtml/head.html'; ?>
 
   <title>Bootstrap Example</title>
   <meta charset="utf-8">
@@ -74,7 +74,7 @@ loadLanguageFromSession($_SESSION['lang']);
   <?php
 
 
-  require 'Class/Autoloader.php';
+  require_once 'Class/Autoloader.php';
   App\Autoloader::register();
   $bdd = new App\Database('rip');
   $type = 0;
@@ -151,7 +151,7 @@ loadLanguageFromSession($_SESSION['lang']);
               }
               ?>
             </h6>
-            <p class="proile-rating">Notes : <span>8/10</span></p>
+            <p class="proile-rating">Notes : <span>10/10</span></p>
             <ul class="nav nav-tabs" id="myTab" role="tablist">
               <li class="nav-item">
                 <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Information</a>
@@ -162,6 +162,7 @@ loadLanguageFromSession($_SESSION['lang']);
       </div>
       <div class="row">
         <div class="col-md-4">
+        <?php /* ?>
           <div class="profile-work">
             <p>Informations</p>
             <a href="">A définir</a><br/>
@@ -174,6 +175,7 @@ loadLanguageFromSession($_SESSION['lang']);
             <a href="">A définir</a><br/>
             <a href="">A définir</a><br/>
           </div>
+          <?php */ ?>
         </div>
 
         <div class="col-md-8">
@@ -183,7 +185,7 @@ loadLanguageFromSession($_SESSION['lang']);
                 <div class="col-md-5">
                   <h4>Mes informations</h4>
                   <!-- Button to Open the Modal -->
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myInformations">
+                  <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#myInformations">
                     Ouvrir
                   </button>
                 </div>
@@ -191,7 +193,7 @@ loadLanguageFromSession($_SESSION['lang']);
                 <div class="col-md-5">
                   <h4>Mon entreprise</h4>
                   <!-- Button to Open the Modal -->
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myCompany">
+                  <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#myCompany">
                     Ouvrir
                   </button>
                 </div>
@@ -201,7 +203,7 @@ loadLanguageFromSession($_SESSION['lang']);
 
                   <h4>Mon abonnement</h4>
                   <!-- Button to Open the Modal -->
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mySubscription">
+                  <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#mySubscription">
                     Ouvrir
                   </button>
                 </div>
@@ -209,7 +211,7 @@ loadLanguageFromSession($_SESSION['lang']);
               <div class="col-md-5">
               <h4>Mes trajets</h4>
               <!-- Button to Open the Modal -->
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myTrajet">
+              <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#myTrajet">
                 Ouvrir
               </button>
               </div>

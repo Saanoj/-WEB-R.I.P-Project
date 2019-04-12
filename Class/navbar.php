@@ -77,7 +77,7 @@ class Navbar
                           if($where == "admin" || $where == "customer"){
                             ?>
                             <li><a href="index.php">Accueil</a></li>
-                            <li><a href="services.php">Services</a></li>
+
                             <?php if ($where == "admin") { ?>
                               <li><a href="backOffice/Users/backOfficeUsers.php">Back Office</a></li>
                             <?php } ?>
@@ -93,7 +93,6 @@ class Navbar
                         <?php // si il est connecter ou pas
                         if ($where == "normal"){ ?>
                           <li><a href="index.php">Accueil</a></li>
-                          <li><a href="services.php">Services</a></li>
                           <li><a href="inscription.php">Inscription</a></li>
                           <li><a href="connexion.php">Connexion</a></li>
                           <li><a href="contact.php">Contactez nous</a></li>

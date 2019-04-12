@@ -56,7 +56,7 @@ class Navbar
       $this->showNav($where);
     }
 
-    public function showNav(string $where)
+    private function showNav(string $where)
     {
       ?>
       <header class="header">

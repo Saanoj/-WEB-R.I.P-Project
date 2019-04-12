@@ -11,8 +11,7 @@ header("location: backOfficeBillet.php");
 }
 
 if (isset($_POST["drop"])) {
-  drop($_POST["id"],
-);
+  drop($_POST["id"]);
 header("location: backOfficeBillet.php");
 }
 
@@ -25,7 +24,7 @@ if (isset($_POST["add"])){
     empty($_POST["villeBillet"])&&
     empty($_POST["prix"])
   )){
-
+      
       add($_POST["nom"],
       $_POST["isValide"],
       $_POST["villeBillet"],

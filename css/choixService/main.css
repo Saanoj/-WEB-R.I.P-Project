@@ -1,8 +1,10 @@
+
+
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Oswald:400,500,600,700');
+
 div{
   font-family: 'Oswald', sans-serif;
 }
-/* The switch - the box around the slider */
 .switch {
   position: relative;
   display: inline-block;
@@ -11,10 +13,8 @@ div{
   float:right;
 }
 
-/* Hide default HTML checkbox */
 .switch input {display:none;}
 
-/* The slider */
 .slider {
   position: absolute;
   cursor: pointer;
@@ -68,7 +68,7 @@ input:checked + .slider:before {
   transform: translateX(26px);
 }
 
-/* Rounded sliders */
+
 .slider.round {
   border-radius: 34px;
 }
@@ -168,19 +168,15 @@ div {
 .plus:hover{
   background-color: #717fe0 !important;
 }
-/*Prevent text selection*/
+
 span{
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
 }
-/*
-input{  
-  border: 0;
-  width: 2%;
-}
-*/
-nput::-webkit-outer-spin-button,
+
+
+input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
@@ -190,4 +186,24 @@ input:disabled{
   background-color:white;
 }
 
+a.nav-link
+{
+text-decoration: none;
+color: black;
+font-weight:bold;
+}
+
+a:hover.nav-link
+{
+text-decoration: none;
+color: black;
+font-weight:bold;
+}
+
+
+a h3 col-md-9 {
+  text-decoration: none;
+  color: black;
+  font-weight:bold;
+}
        

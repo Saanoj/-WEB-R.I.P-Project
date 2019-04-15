@@ -200,17 +200,26 @@ loadLanguageFromSession($_SESSION['lang']);
                               case '18' :
                               case '19' :
                               ?>
-                              <table>
-
-                                <tr>
-                                  <th scope="col">Quantité</th>
-
-
-                                </tr>
-                                <tr>
-                                  <td><input type="number" min="1" max="4" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]" value="1"></input></td>
-                                </tr>
-                              </table>
+                           
+                                              <!-- Modal content-->
+                                              
+                                              <div class="modal-content">
+                
+                                         <div id="ordinateurs" class="modal-body">
+                                           <div class="row">
+                                         Quantité <input type="number" min="1" max="4" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]" value="1" onblur="checkQuantiteOrdinateur(this)"/>
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                         Debut<input type="time" id="startOrdinateurs<?php echo $service->getIdService(); ?>" value="<?= $res[1]; ?>" name="startOrdinateurs<?php echo $service->getIdService(); ?>" onchange="checkHeureDebutOrdinateurs(this)">
+                                         Fin<input type="time" id="endOrdinateurs<?php echo $service->getIdService(); ?>" value="<?= $resFin; ?>" name="endOrdinateurs<?php echo $service->getIdService(); ?>"  onchange="checkHeureFinOrdinateurs(this)">
+                                        </div>
+                                                </div> 
+                                                <div class="modal-footer"> <div>
+                                           
+                                          </div>     
+                                             
+                        
                               <?php
                               break;
 

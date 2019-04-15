@@ -16,7 +16,7 @@ $trajet = unserialize($_SESSION['trajet']);
 //var_dump($trajet);
 
 
-
+/*
 $startInterprete = strtotime($_POST['startInterprete']);
 $endInterprete = strtotime($_POST['endInterprete']);
 $_SESSION['startInterprete']  = $_POST['startInterprete'];
@@ -38,6 +38,7 @@ $startCoachCulture = strtotime($_POST['startCoachCulture']);
 $endCoachCulture = strtotime($_POST['endCoachCulture']);
 $_SESSION['startCoachCulture']  = $_POST['startCoachCulture'];
 $_SESSION['endCoachCulture']  = $_POST['endCoachCulture'];
+*/
 
 
 
@@ -142,17 +143,17 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
 
       switch ($service) {
         case 11:
-          $idArray = $_POST["idInterprete"];
+         // $idArray = $_POST["idInterprete"];
           break;
         case 12:
-          $idArray = $_POST["idCoachSportif"];
+         // $idArray = $_POST["idCoachSportif"];
           break;
         case 13:
-          $idArray = $_POST["idCoachCulture"];
+       //   $idArray = $_POST["idCoachCulture"];
           break;
 
         default:
-          $idArray = array();;
+          $idArray = array();
           break;
       }
 

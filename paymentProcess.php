@@ -454,12 +454,13 @@ $req2->execute(array(
   'prixTotal' => $real_price
 ));
 
+ob_end_flush();
 
 $destination = 'factures/facture'.$_SESSION['idTrajet'].'.pdf';
 $pdf->Output($destination, 'F');
 $pdf->Output();
 
-ob_end_flush();
+
 
 
 // Config de la date en francais en PHP

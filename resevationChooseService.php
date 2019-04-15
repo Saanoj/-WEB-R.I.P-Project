@@ -19,7 +19,6 @@ loadLanguageFromSession($_SESSION['lang']);
   <link rel="stylesheet" type="text/css" href="css/ReservationTrajet/main_styles.css">
   <link rel="stylesheet" type="text/css" href="css/ReservationTrajet/responsive.css">
   <link rel="stylesheet" type="text/css" href="css/choixService/main.css">
-  <link rel="stylesheet" type="text/css" href="css/choixService/calendrier.css">
 
 
   <?php include 'includehtml/head.html'; ?>
@@ -98,11 +97,11 @@ loadLanguageFromSession($_SESSION['lang']);
 
 
                     <li class="list-group-item row">
-                      <a class="h3 col-md-9"><?php echo $unService["categorie"] ?></a>
+                      <a class="h3 col-md-9" style="color:black"><?php echo $unService["categorie"] ?></a>
                       <!--<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample  " aria-expanded="false" aria-controls="collapseExample">-->
-                      <button class="btn btn-primary pull-right fa fa-plus col-md-3" type="button" data-toggle="collapse" data-target="<?php echo "#".$newCategorie;?>" aria-expanded="true" aria-controls="<?php echo $newCategorie;?>">Ouvrir</button>
+                      <button class="btn btn-primary pull-right fa fa-plus col-md-3" style="background-color:black" type="button" data-toggle="collapse" data-target="<?php echo "#".$newCategorie;?>" aria-expanded="true" aria-controls="<?php echo $newCategorie;?>">Ouvrir</button>
                     </li>
-                    <div class="list-group-item collapse" id="<?php echo $newCategorie;?>">
+                    <div class="list-group-item collapse" style="color:black" id="<?php echo $newCategorie;?>">
 
 
                       <?php
@@ -112,18 +111,18 @@ loadLanguageFromSession($_SESSION['lang']);
                     ?>
                     <li class="row border-bottom mt-1 pt-1 pb-1">
 
-                      <h3 class="col-md-6"><?php echo $service->getNomService(); ?></h3>
-                      <h6 class="col-md-2">idService: <?php echo $service->getIdService()."<br>"; ?> Prix: <?php echo $service->getPrixService()." €"; ?></h6>
-                      <div class="col-md-2">
+                      <h3 class="col-md-6" style="color:black"><?php echo $service->getNomService(); ?></h3>
+                      <h6 class="col-md-2" style="color:black">idService: <?php echo $service->getIdService()."<br>"; ?> Prix: <?php echo $service->getPrixService()." €"; ?></h6>
+                      <div class="col-md-2" style="color:black">
                         <label class="">Description:</label>
                         <?php echo $service->getDescription(); ?>
                       </div>
                       <div class="col-md-2">
                         <label class="switch">
-                          <input type="checkbox" class="primary" name="services[<?php echo $i ?>]" value="<?php echo $service->getIdService(); ?>">
+                          <input type="checkbox" class="primary" id="<?php echo $service->getIdService(); ?>"name="services[<?php echo $i ?>]" value="<?php echo $service->getIdService(); ?>" onchange="checkInput(this)">
                           <span class="slider round"></span>
                         </label>
-                        <button type="button" href="#costumModal<?php echo $i ?>" data-target="#costumModal<?php echo $i ?>" name="services[<?php echo $service->getIdService(); ?>]" class="btn btn-info" data-toggle="modal">Choisir</button>
+                        <button style="visibility:hidden" id="services[<?php echo $i ?>]" type="button" href="#costumModal<?php echo $i ?>" data-target="#costumModal<?php echo $i ?>" name="services[<?php echo $service->getIdService(); ?>]" class="btn btn-info" data-toggle="modal">Choisir</button>
                       </div>
 
 
@@ -283,11 +282,11 @@ loadLanguageFromSession($_SESSION['lang']);
                                       else{ echo "Non valide";}?></td>
                                       <td> <?= $unBillet['villeBillet'];?></td>
                                       <td>  <?= $unBillet['prix']. '€';?> </td>
-                                      <td><input type="number" min="1" max="10" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]" value="1"></input></td>
+                                      <td><input type="number" min="1" max="10" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]" value="1"></td>
 
                                       <td>
                                         <div class="funkyradio-primary col-md-6 center-block">
-                                          <input type="radio" name="idBillet" id="<?php echo $unBillet['idBillet'] ?>" value="<?php echo $unBillet['idBillet'] ?>" checked></input>
+                                          <input type="radio" name="idBillet" id="<?php echo $unBillet['idBillet'] ?>" value="<?php echo $unBillet['idBillet'] ?>" >
                                           <label for="radio<?php echo $unBillet['idBillet'] ?>">Choisir ce billet</label>
                                         </div>
                                       </td>
@@ -325,10 +324,6 @@ loadLanguageFromSession($_SESSION['lang']);
                                 ?>
                                 <h4> Réservation d'un interprête pendant la journée du trajet, veuillez choisir une plage horraire : </h4>
                                 <h6>Pour que votre réservation soit valide, l'heure de début doit etre égal ou supérieur a l'heure du trajet. (<?= $res[1]; ?>h) </h6>
-                                <h6>Vous ne pouvez réserver un interprète au maximum pendant 8h</h6>
-                                Heure de début :  <input type="time" name="startInterprete" id="startInterprete" value="<?= $res[1]; ?>" min="<?= $res[1]; ?>">
-                                Heure de fin : <input type="time" name="endInterprete" value="<?= $resFin; ?>" min="<?= $resFin; ?>" onblur="checkHeureFinInterprete(this)">
-                                <!-- Nombre d'interprètes : <input type="number" min="1" max="5" class="primary" name="quantite[<?php //echo $service->getIdService(); ?>]" value="1"></input> -->
                                 <br> <br> <br>
                                 <?php
                                 $j=0;
@@ -343,6 +338,7 @@ loadLanguageFromSession($_SESSION['lang']);
                                       <th scope="col">Prix :</th>
                                       <th scope="col">Note</th>
                                       <th scope="col">Langue:</th>
+                                      <th scope="col">Heures:</th>
                                     </tr>
                                     <tr>
                                       <th scope="row"> <?= $unInterprete['last_name'];?></th>
@@ -352,8 +348,33 @@ loadLanguageFromSession($_SESSION['lang']);
                                       <td>  <?= $unInterprete['description'];?> </td>
                                       <td>
                                         <div class="funkyradio-primary col-md-6 center-block">
-                                          <input type="checkbox" name="idInterprete[<?php echo $j ?>]" id="<?php echo $unInterprete['idCollaborateurs'] ?>" value="<?php echo $unInterprete['idCollaborateurs'] ?>" <?php $check = ($j==0)?("checked"):("unchecked"); echo $check ?>></input>
+                                          <input type="checkbox" name="idInterprete<?php echo $unInterprete['idCollaborateurs']?>" id="<?php echo $unInterprete['idCollaborateurs'] ?>" value="<?php echo $unInterprete['idCollaborateurs'] ?>" onchange="checkRadioInterprete(this)">
                                           <label for="radio<?php echo $unInterprete['idCollaborateurs'] ?>">Choisir cet interprète</label>
+                                        </div>
+                                        <div>
+                                        <button style="visibility:hidden" id="buttonHours<?php echo $unInterprete['idCollaborateurs']?>" type="button" class="btn btn-primary" data-toggle="modal" data-target="#heuresInterprete<?php echo $unInterprete['idCollaborateurs']?>">Heures</button>
+
+                                        
+                                        <input type="hidden" id="heureTrajetFin"value="<?= $resFin;?>">
+                                         <input type="hidden" id="heureTrajetDebut"value="<?= $res[1];?>">
+                                          <div id="heuresInterprete<?php echo $unInterprete['idCollaborateurs']?>" class="modal fade" role="dialog" style="z-index: 1400;">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                              <!-- Modal content-->
+                                              <div class="modal-content">
+                                              <div class="modal-header">
+                                          <h4 class="modal-title">Heure de l'interprète <?= $unInterprete['first_name']." ".$unInterprete['last_name']; ?></h4>
+                                          </div>
+                                         <div id="interprete" class="modal-body">
+                                         Debut <input type="time" id="startInterprete<?= $unInterprete['idCollaborateurs'] ?>" value="<?= $res[1]; ?>" name="startInterprete<?= $unInterprete['idCollaborateurs'] ?>" onchange="checkHeureDebutInterprete(this)">
+                                         Fin  <input type="time" id="endInterprete<?= $unInterprete['idCollaborateurs'] ?>" value="<?= $resFin; ?>" name="endInterprete<?= $unInterprete['idCollaborateurs'] ?>"  onchange="checkHeureFinInterprete(this)">
+                                                
+                                                </div> 
+                                                <div class="modal-footer"> <div>
+                                           
+                                          </div>     
+                                              </div>
+                                            </div>
+                                            </div>                                            
                                         </div>
                                       </td>
                                     </tr>
@@ -368,9 +389,6 @@ loadLanguageFromSession($_SESSION['lang']);
                                 ?>
                                 <h4> Réservation d'un coach sportif pendant la journée du trajet, veuillez choisir une plage horraire : </h4>
                                 <h6>Pour que votre réservation soit valide, l'heure de début doit etre égal ou supérieur a l'heure du trajet. (<?= $res[1]; ?>h) </h6>
-                                <h6>Vous  pouvez réserver un coach sportif  pendant 8h maximum</h6>
-                                Heure de début :  <input type="time" name="startCoachSportif" id="startCoachSportif"  value="<?= $res[1]; ?>" min="<?= $res[1]; ?>">
-                                Heure de fin : <input type="time" name="endCoachSportif" value="<?= $resFin; ?>" min="<?= $resFin; ?>"  onblur="checkHeureFinSportif(this)">
                                 <br> <br> <br>
                                 <?php
                                 $j=0;
@@ -393,9 +411,28 @@ loadLanguageFromSession($_SESSION['lang']);
                                       <td>  <?= $unCoachSportif['description'];?> </td>
                                       <td>
                                         <div class="funkyradio-primary col-md-6 center-block">
-                                          <input type="checkbox" name="idCoachSportif[<?php echo $j ?>]" id="<?php echo $unCoachSportif['idCollaborateurs'] ?>" value="<?php echo $unCoachSportif['idCollaborateurs'] ?>" <?php $check = ($j==0)?("checked"):("unchecked"); echo $check ?>></input>
+                                          <input type="checkbox" name="idCoachSportif<?=$unCoachSportif['idCollaborateurs']?>" id="<?php echo $unCoachSportif['idCollaborateurs'] ?>" value="<?php echo $unCoachSportif['idCollaborateurs'] ?>" onchange="checkRadioCoachSportifs(this)">
                                           <label for="radio<?php echo $unCoachSportif['idCollaborateurs'] ?>">Choisir ce coach</label>
+                                          <button style="visibility:hidden" id="buttonHours<?php echo $unCoachSportif['idCollaborateurs']?>" type="button" class="btn btn-primary" data-toggle="modal" data-target="#heuresCoachSportif<?php echo $unCoachSportif['idCollaborateurs']?>">Heures</button>
                                         </div>
+                                        <div id="heuresCoachSportif<?php echo $unCoachSportif['idCollaborateurs']?>" class="modal fade" role="dialog" style="z-index: 1400;">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                              <!-- Modal content-->
+                                              <div class="modal-content">
+                                              <div class="modal-header">
+                                          <h4 class="modal-title">Heure du coach sportif <?= $unCoachSportif['first_name']." ".$unCoachSportif['last_name']; ?></h4>
+                                          </div>
+                                         <div id="interprete" class="modal-body">
+                                         Debut <input type="time" id="startCoachSportif<?= $unCoachSportif['idCollaborateurs'] ?>" value="<?= $res[1]; ?>" name="startCoachSportif<?= $unCoachSportif['idCollaborateurs'] ?>" onchange="checkHeureDebutSportif(this)">
+                                         Fin  <input type="time" id="endCoachSportif<?= $unCoachSportif['idCollaborateurs'] ?>" value="<?= $resFin; ?>" name="endCoachSportif<?= $unCoachSportif['idCollaborateurs'] ?>"  onchange="checkHeureFinSportif(this)">
+                                                
+                                                </div> 
+                                                <div class="modal-footer"> <div>
+                                           
+                                          </div>     
+                                              </div>
+                                            </div>
+
                                       </td>
                                     </tr>
                                   </table>
@@ -409,10 +446,7 @@ loadLanguageFromSession($_SESSION['lang']);
                                 ?>
                                 <h4> Réservation d'un coach cultures pendant la journée du trajet, veuillez choisir une plage horraire : </h4>
                                 <h6>Pour que votre réservation soit valide, l'heure de début doit etre égal ou supérieur a l'heure du trajet. (<?= $res[1]; ?>h) </h6>
-                                <h6>Vous  pouvez réserver un coach cultures  pendant 8h maximum</h6>
-                                Heure de début :  <input type="time" name="startCoachCulture" id="startCoachCulture" value="<?= $res[1]; ?>" min="<?= $res[1]; ?>">
-                                Heure de fin : <input type="time" name="endCoachCulture" value="<?= $resFin; ?>" min="<?= $resFin; ?>" onblur="checkHeureFinCulture(this)">
-                                <br> <br> <br>
+                                 <br> <br> <br>
                                 <?php
                                 $j=0;
                                 while ($unCoachCulture = $coachCulture->fetch())
@@ -434,8 +468,26 @@ loadLanguageFromSession($_SESSION['lang']);
                                       <td>  <?= $unCoachCulture['description'];?> </td>
                                       <td>
                                         <div class="funkyradio-primary col-md-6 center-block">
-                                          <input type="checkbox" name="idCoachCulture[<?php echo $j ?>]" id="<?php echo $unCoachCulture['idCollaborateurs'] ?>" value="<?php echo $unCoachCulture['idCollaborateurs'] ?>" <?php $check = ($j==0)?("checked"):("unchecked"); echo $check ?>></input>
+                                        <input type="checkbox" name="idCoachCulture<?=$unCoachCulture['idCollaborateurs']?>" id="<?php echo $unCoachCulture['idCollaborateurs'] ?>" value="<?php echo $unCoachCulture['idCollaborateurs'] ?>" onchange="checkRadioCoachCulture(this)">
                                           <label for="radio<?php echo $unCoachCulture['idCollaborateurs'] ?>">Choisir ce coach</label>
+                                          <button style="visibility:hidden" id="buttonHours<?php echo $unCoachCulture['idCollaborateurs']?>" type="button" class="btn btn-primary" data-toggle="modal" data-target="#heuresCoachCulture<?php echo $unCoachCulture['idCollaborateurs']?>">Heures</button>
+                                          <div id="heuresCoachCulture<?php echo $unCoachCulture['idCollaborateurs']?>" class="modal fade" role="dialog" style="z-index: 1400;">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                              <!-- Modal content-->
+                                              <div class="modal-content">
+                                              <div class="modal-header">
+                                          <h4 class="modal-title">Heure du coach culture <?= $unCoachCulture['first_name']." ".$unCoachCulture['last_name']; ?></h4>
+                                          </div>
+                                         <div id="interprete" class="modal-body">
+                                         Debut <input type="time" id="startCoachCulture<?= $unCoachCulture['idCollaborateurs'] ?>" value="<?= $res[1]; ?>" name="startCoachCulture<?= $unCoachSportif['idCollaborateurs'] ?>" onchange="checkHeureDebutCulture(this)">
+                                         Fin  <input type="time" id="endCoachCulture<?= $unCoachCulture['idCollaborateurs'] ?>" value="<?= $resFin; ?>" name="endCoachCulture<?= $unCoachSportif['idCollaborateurs'] ?>"  onchange="checkHeureFinCulture(this)">
+                                                
+                                                </div> 
+                                                <div class="modal-footer"> <div>
+                                           
+                                          </div>     
+                                              </div>
+                                            </div>
                                         </div>
                                       </td>
                                     </tr>

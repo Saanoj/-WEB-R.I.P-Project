@@ -21,6 +21,22 @@ $bdd = new App\Database('rip');
 <meta name="description" content="Travello template project">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <?php include "includehtml/head.html" ?>
+
+<script type="text/javascript">
+function autoFillStart(home) {
+  console.log(home);
+  $('#autocomplete').val(home);
+  $('#autocomplete2').val("");
+  console.log("start addr");
+}
+function autoFillEnd(home) {
+  console.log(home);
+  $('#autocomplete2').val(home);
+  $('#autocomplete').val("");
+  console.log("end addr");
+}
+</script>
+
 </head>
 <body>
 
@@ -33,6 +49,7 @@ $type = 0;
 $navbar = new App\Navbar($type);
 $navbar->navbar();
 
+$user=$bdd->queryOne('SELECT * FROM users WHERE id='.$_SESSION["id"].'');
  ?>
 
 	<!-- Menu -->
@@ -77,7 +94,15 @@ $navbar->navbar();
 						<div class="home_search_content">
 							<form action="valideReservation.php" method="post" class="home_search_form" id="home_search_form" onsubmit="return checkGlobal(this)">
 								<div class="d-flex flex-lg-row flex-column align-items-start justify-content-lg-between justify-content-start">
-									<input type="text" name="start"  id="autocomplete" class="search_input search_input_1" placeholder="Adresse de départ" required="required">
+                    <!-- boutton d'autocomplétion de depart depuis son adresse -->
+                    <?php if (!empty($user["address"])) {
+                      ?>
+                      <div class="col-md-2">
+                        <button class="fas fa-home btn btn-dark row col-md-12 mt-1 start" style="height: 25px;" href="#" onClick="autoFillStart('<?php echo $user["address"]." ".$user["zip_code"];?>'); return false;">From</button>
+                        <button class="fas fa-home btn btn-dark row col-md-12 mt-1 end" style="height: 25px;" href="#" onClick="autoFillEnd('<?php echo $user["address"]." ".$user["zip_code"];?>'); return false;">Go</button>
+                      </div>
+                      <?php } ?>
+                  <input type="text" name="start"  id="autocomplete" class="search_input search_input_1" placeholder="Adresse de départ" required="required">
 									<input type="text"  name="end"  id="autocomplete2" class="search_input search_input_2" placeholder="Adresse d'arrivée" required="required">
 									<input type="date" id="dateDebut" name="dateDebut" class="search_input search_input_3" placeholder="Date du trajet" required="required" onblur="checkdateDebut(this)">
 									<input type="time" id="heureDebut" name="heureDebut" class="search_input search_input_4" placeholder="Heure du trajet" required="required" onblur="checkheureDebut(this)">
@@ -196,7 +221,7 @@ $navbar->navbar();
                             </span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star">
                             </span><span class="glyphicon glyphicon-star-empty"></span>
                         </div>
-                       
+
                     </div>
                     <div class="col-xs-12 col-md-12">
                         <div class="row rating-desc">
@@ -205,12 +230,12 @@ $navbar->navbar();
                             </div>
 
 														<?php if ($chauffeur->getRating() > 0 && $chauffeur->getRating() < 2) { ?>
-											
+
                             <div class="col-xs-8 col-md-12">
                                 <div class="progress progress-striped">
                                     <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="<?=$chauffeur->getRating();?>"
                                         aria-valuemin="0" aria-valuemax="5" style="width:<?=$chauffeur->getRating()*20?>%"><?=$chauffeur->getRating()."/5"?>
-                                      
+
                                     </div>
                                 </div>
                             </div>
@@ -221,7 +246,7 @@ $navbar->navbar();
                                 <div class="progress progress-striped">
                                     <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow="<?=$chauffeur->getRating();?>"
                                         aria-valuemin="0" aria-valuemax="5" style="width:<?=$chauffeur->getRating()*20?>%"><?=$chauffeur->getRating()."/5"?>
-                                      
+
                                     </div>
                                 </div>
                             </div>
@@ -232,7 +257,7 @@ $navbar->navbar();
                                 <div class="progress progress-striped">
                                     <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="<?=$chauffeur->getRating();?>"
                                         aria-valuemin="0" aria-valuemax="5" style="width:<?=$chauffeur->getRating()*20?>%"><?=$chauffeur->getRating()."/5"?>
-                                      
+
                                     </div>
                                 </div>
                             </div>
@@ -243,7 +268,7 @@ $navbar->navbar();
                                 <div class="progress progress-striped">
                                     <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuenow="<?=$chauffeur->getRating();?>"
                                         aria-valuemin="0" aria-valuemax="5" style="width:0">
-                                      
+
                                     </div>
                                 </div>
                             </div>
@@ -251,7 +276,7 @@ $navbar->navbar();
 
 										<div>
                             <span class="glyphicon glyphicon-user"></span><?=$chauffeur->getRatingNumber()." votes totals";?>
-                     </div>                          
+                     </div>
                         </div>
                         <!-- end row -->
                     </div>
@@ -302,7 +327,7 @@ $navbar->navbar();
             </div>
           </div>
 		</div>
-		 
+
 						   <?php
         $i++;
       }

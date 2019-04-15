@@ -26,6 +26,7 @@ function backOfficeBillet()
         <td>
 
           <button name="edit" type="submit" class="btn btn-warning">
+            edit
             <span class="glyphicon glyphicon-edit"></span>
           </button>
         </form>

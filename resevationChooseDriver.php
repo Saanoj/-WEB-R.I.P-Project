@@ -67,20 +67,20 @@
                 }
                 $i++;
               }
-               echo $result;
+               //echo $result;
 
               $chauffeurs = $bdd->queryPrepareForWhile('SELECT * FROM collaborateurs WHERE metier="chauffeur" and isOnline=1'.$result.' ORDER BY rating DESC ',$bdd);
               $i=0;
-              
+
               while($unChauffeur = $chauffeurs->fetch())
               {
               $car=App\Chauffeur::getCar($unChauffeur["idCollaborateurs"],$bdd);
 
               $chauffeur = new App\Chauffeur($unChauffeur["idCollaborateurs"],$unChauffeur["email"],$unChauffeur["last_name"],$unChauffeur["first_name"],$unChauffeur["metier"],$unChauffeur["prixCollaborateur"],
                                             $unChauffeur["dateEmbauche"],$unChauffeur["ville"],$unChauffeur["heuresTravailees"],$unChauffeur["rating"],$unChauffeur["ratingNumber"],$unChauffeur["description"],$car["carId"],$car["carBrand"],$car["carModel"],$car["carColor"],$car["nbPlaces"]);
-             
-            
-            
+
+
+
             ?>
               <li class="list-group-item ">
                 <div class="container">
@@ -170,19 +170,19 @@
 </html>
 
 
-<?php 
+<?php
 
 function checkDriver($bdd,$trajet) {
   $idChauffeur= [];
   $req = App\Trajet::getTrajet($bdd,"Pas commencé","En cours");
-  $dateDebut = new DateTime($trajet->getDateDebut(), new DateTimeZone('Europe/Paris')); 
+  $dateDebut = new DateTime($trajet->getDateDebut(), new DateTimeZone('Europe/Paris'));
   $dateFin = new DateTime($trajet->getHeureFin(), new DateTimeZone('Europe/Paris'));
 
   while ($unTrajet = $req->fetch())
   {
-    
-    $dateDebutTrajetBdd = new DateTime($unTrajet['heureDebut'], new DateTimeZone('Europe/Paris')); 
-    $dateFinTrajetBdd = new DateTime($unTrajet['heureFin'], new DateTimeZone('Europe/Paris')); 
+
+    $dateDebutTrajetBdd = new DateTime($unTrajet['heureDebut'], new DateTimeZone('Europe/Paris'));
+    $dateFinTrajetBdd = new DateTime($unTrajet['heureFin'], new DateTimeZone('Europe/Paris'));
 
    $interval = $dateDebut->diff($dateDebutTrajetBdd);
    $intervalFin = $dateDebut->diff($dateFinTrajetBdd);
@@ -193,9 +193,9 @@ function checkDriver($bdd,$trajet) {
    if (!($interval->format('%R') ==='+' && $intervalFin->format('%R') ==='+' || $interval2->format('%R') ==='-' && $interval2Fin->format('%R') ==='-' &&  $intervalFin->format('%R') ==='-' ))
    {
     array_push($idChauffeur,$unTrajet['idChauffeur']);
-    
+
    }
-  
+
   }
 
 return $idChauffeur;

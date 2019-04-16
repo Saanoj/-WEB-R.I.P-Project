@@ -490,8 +490,8 @@ function checkHeureFinInterprete(heure)
 function checkQuantiteOrdinateur(ordinateur) {
   clearInput(ordinateur);
   if (ordinateur.value >= 1 && ordinateur.value <= 10 && ordinateur.value !== '')
-  {  //RemoveDateOrdinateur(ordinateur);
-
+  {  
+ 
     addDateOrdinateur(ordinateur);
     return true;
 
@@ -502,26 +502,33 @@ function checkQuantiteOrdinateur(ordinateur) {
     return false;
   }
 }
+function clearOrdinateur(ordinateur) {
 
-function addDateOrdinateur(ordinateur) {
- 
- }
-
-
-
-/*
-  function RemoveDateOrdinateur(ordinateur) {
-
-    var parent = ordinateur.parentNode;
-    console.log("elements lenghts :" +elements.length);
-    console.log("elements : " + elements);
-    for (i=ordinateur.value;i<elements.length;i++) {
-      parent.removeChild(elements[i]);
-      console.log("test")
+  var parent = ordinateur.parentNode;
+    if (parent.hasChildNodes()) {
+      var children = parent.getElementsByTagName('input');
+      console.log("children lenght ;"+children.length);
+    
+      for (var i = 1; i < children.length; i++) {
+        console.log(children[i])
+        parent.removeChild(children[i]);
+      }
+    }
   }
 
+function addDateOrdinateur(ordinateur) {
+  
+
+  for (i=1;i<=ordinateur.value;i++)
+  {
+  var startDebut = document.createElement('input');
+  startDebut.setAttribute("type","date");
+  var parent = ordinateur.parentNode;
+  parent.appendChild(startDebut);
+  }
+  clearOrdinateur(ordinateur);
 }
-*/
+
 
   
 

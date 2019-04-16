@@ -7,7 +7,6 @@ Autoloader::register();
 
 function sendMail($to,$subject,$body)
 {
-  echo $to;
   $mail = new Mail($to,$subject,$body);
   $mail->send();
 }

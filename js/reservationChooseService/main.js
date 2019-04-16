@@ -487,6 +487,47 @@ function checkHeureFinInterprete(heure)
 
 }
 
+function checkQuantiteOrdinateur(ordinateur) {
+  clearInput(ordinateur);
+  if (ordinateur.value >= 1 && ordinateur.value <= 10 && ordinateur.value !== '')
+  {  //RemoveDateOrdinateur(ordinateur);
+
+    addDateOrdinateur(ordinateur);
+    return true;
+
+  }
+  else{
+   // RemoveDateOrdinateur(ordinateur);
+    displayError(ordinateur, '');
+    return false;
+  }
+}
+
+function addDateOrdinateur(ordinateur) {
+ 
+ }
+
+
+
+/*
+  function RemoveDateOrdinateur(ordinateur) {
+
+    var parent = ordinateur.parentNode;
+    console.log("elements lenghts :" +elements.length);
+    console.log("elements : " + elements);
+    for (i=ordinateur.value;i<elements.length;i++) {
+      parent.removeChild(elements[i]);
+      console.log("test")
+  }
+
+}
+*/
+
+  
+
+
+
+
 
 function checkIfSameDay(dateDebut,dateFin) {
 

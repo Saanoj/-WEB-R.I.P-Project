@@ -94,9 +94,9 @@ function backOfficeDevis()
       function drop($id)
       {
         include (CONF);
-        $query = $bdd->prepare("DELETE FROM `contact` WHERE idDevis = :id");
+        $query = $bdd->prepare("DELETE FROM `devis` WHERE idDevis = :id");
         $query->execute([
-          "id"=>$id,
+          "id"=>$id
 
         ]);
 

@@ -2,7 +2,7 @@
 session_start();
 
 
-include 'functionDevis.php';
+include 'functionEntreprise.php';
 ?>
 
 <!DOCTYPE html>
@@ -23,22 +23,26 @@ include 'functionDevis.php';
 
   <div class="jumbotron m-5 p-5 table-responsive">
     <?php include_once '../includehtml/navbarBO.php';
-    navbarBO("devis")?>
+    navbarBO("factures")?>
 
-    <h1>Devis</h1>
+    <h1>Entreprise</h1>
     <table class="table">
       <thead>
         <tr>
           <th scope="col">Id</th>
-          <th scope="col">Validé</th>
-          <th scope="col">Prix Trajet</th>
-          <th scope="col">Prix Services</th>
+          <th scope="col">Nom</th>
+          <th scope="col">Numéro</th>
+          <th scope="col">Adresse</th>
+          <th scope="col">Siret</th>
+          <th scope="col">Id Directeur</th>
+          <th scope="col">Nombre de salarié</th>
+          <th scope="col">Pays</th>
           <th scope="col">Date</th>
           <th scope="col">Edit/Add</th>
           <th scope="col">Supprimer</th>
         </tr>
       </thead>
-      <?php backOfficeDevis();
+      <?php backOfficeEntreprise();
       ?>
     </table>
   </div>

@@ -488,7 +488,7 @@ function checkHeureFinInterprete(heure)
 }
 
 function checkQuantiteOrdinateur(ordinateur) {
-  clearInput(ordinateur);
+ // clearInput(ordinateur);
   if (ordinateur.value >= 1 && ordinateur.value <= 10 && ordinateur.value !== '')
   {  
  
@@ -504,13 +504,16 @@ function checkQuantiteOrdinateur(ordinateur) {
 }
 function clearOrdinateur(ordinateur) {
 
-  var parent = ordinateur.parentNode;
+  let parent = ordinateur.parentNode;
     if (parent.hasChildNodes()) {
-      var children = parent.getElementsByTagName('input');
-      console.log("children lenght ;"+children.length);
-    
-      for (var i = 1; i < children.length; i++) {
-        console.log(children[i])
+      let children = parent.getElementsByClassName('clear');
+      //console.log(children.length)
+      let size = children.length
+      console.log(size)
+         
+      for (let i = 0; i < size; i++) {
+        console.log("i="+i)
+        
         parent.removeChild(children[i]);
       }
     }
@@ -518,15 +521,18 @@ function clearOrdinateur(ordinateur) {
 
 function addDateOrdinateur(ordinateur) {
   
-
-  for (i=1;i<=ordinateur.value;i++)
+  clearOrdinateur(ordinateur);
+  
+  for (i=0;i<=ordinateur.value-1;i++)
   {
-  var startDebut = document.createElement('input');
+  let startDebut = document.createElement('input');
   startDebut.setAttribute("type","date");
-  var parent = ordinateur.parentNode;
+  startDebut.setAttribute("class","clear");
+  let parent = ordinateur.parentNode;
   parent.appendChild(startDebut);
   }
-  clearOrdinateur(ordinateur);
+
+
 }
 
 

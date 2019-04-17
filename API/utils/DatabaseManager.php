@@ -9,8 +9,12 @@ class DatabaseManager {
 
   private function __construct()
   {
+    
     $conn = DB_DRIVER . ':host=' . DB_HOST . ';port=' . DB_PORT . ';dbname=' . DB_NAME . ';charset=UTF8';
     $this->pdo = new PDO($conn, DB_USER, DB_PASSWORD);
+    
+    
+
   }
 
   public static function getDatabase(): DatabaseManager {

@@ -31,7 +31,7 @@ class UserService {
 
   public function allUsers(): array{
     $db = DatabaseManager::getDatabase();
-    $list = $db->getALL('SELECT * FROM Users');
+    $list = $db->getALL('SELECT * FROM users');
     $users = [];
     foreach ($list as $data) {
       $users[] = User::UserFromArray($data);

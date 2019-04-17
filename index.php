@@ -33,7 +33,6 @@ loadLanguageFromSession($_SESSION['lang']);
   $navbar->navbar();
 
 
-
   ?>
   <br>
   <div class="col-md-6 offset-3" id="map"></div>

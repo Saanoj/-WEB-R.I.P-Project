@@ -38,7 +38,41 @@ loadLanguageFromSession($_SESSION['lang']);
       <div class="panel panel-info" >
         <div class="panel-heading">
           <div class="panel-title"><?php echo _TITRE_CONNEXION ?></div>
-          <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#"><?php echo _PASSWORD_OUBLIE_CONNEXION ?></a></div>
+
+
+          <div style="float:right; font-size: 80%; position: relative; top:-10px" >
+            <a href="#" data-toggle="modal" data-target="#exampleModalCenter"><?php echo _PASSWORD_OUBLIE_CONNEXION ?></a>
+
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle"><?php echo _PASSWORD_OUBLIE_CONNEXION ?></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body container">
+
+                    <form class="" action="connexion.php" method="post">
+                      <input type="text" name="email" value="" placeholder="Email">
+                      <button type="submit" name="forget" class="btn-primary">Envoyer un mail</button>
+                    </form>
+
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
         </div>
 
         <div style="padding-top:30px" class="panel-body" >
@@ -93,6 +127,54 @@ loadLanguageFromSession($_SESSION['lang']);
     </div>
 
   </div>
+
+
+
+  <?php
+   function chiffrerPassword($password) {
+    $salage='SuP4rS4aL4g3';
+    return hash('md5',$salage.$password);
+
+  }
+
+  function generateRandomString($length = 10) {
+      return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);
+  }
+
+
+if (isset($_POST["forget"])){
+  if (isset($_POST["email"])&&!empty($_POST["email"])) {
+
+    require_once 'Class/Autoloader.php';
+    App\Autoloader::register();
+    $bdd = new App\Database('rip');
+
+    $password = generateRandomString();
+    $passwordHash = chiffrerPassword($password);
+    $email = $_POST['email'];
+    $query = $bdd->getPDO()->prepare("UPDATE users SET
+      password = :password
+      WHERE email = :email");
+      $query->execute([
+        "email"=>$email,
+        "password"=>$passwordHash
+
+      ]);
+    $subject = "Nouveau mot de passe";
+    $body = "Bonjour ,\n Voici votre nouveau mot de passe : ".$password;
+
+    require_once "mail.php";
+      \App\sendMail($email,$subject,$body);
+
+    ?>
+    <div class="alert alert-success" role="alert">
+    Un mail avec votre nouveau mot de passe a été envoyé.
+    </div>
+    <?php
+  }
+}
+   ?>
+
 
 
   <?php include "includehtml/footer.php" ?>

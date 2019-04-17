@@ -19,28 +19,28 @@ class TrajetService {
 
   public function allTripsToValidate(int $idChauffeur): array{
     $db = DatabaseManager::getDatabase();
-    $list = $db->getALL('SELECT * FROM Trajet WHERE stateDriver = 0 AND idChauffeur = ? ORDER BY heureDebut',[$idChauffeur]);
+    $list = $db->getALL('SELECT * FROM trajet WHERE stateDriver = 0 AND idChauffeur = ? ORDER BY heureDebut',[$idChauffeur]);
 
     return $list;
   }
 
   public function allTripsValidated(int $idChauffeur): array{
     $db = DatabaseManager::getDatabase();
-    $list = $db->getALL('SELECT * FROM Trajet WHERE stateDriver = 1 AND idChauffeur = ? ORDER BY heureDebut',[$idChauffeur]);
+    $list = $db->getALL('SELECT * FROM trajet WHERE stateDriver = 1 AND idChauffeur = ? ORDER BY heureDebut',[$idChauffeur]);
 
     return $list;
   }
 
   public function deleteTrip(int $idTrip): int{
     $db = DatabaseManager::getDatabase();
-    $list = $db->exec('DELETE FROM Trajet WHERE idTrajet = ?',[$idTrip]);
+    $list = $db->exec('DELETE FROM trajet WHERE idTrajet = ?',[$idTrip]);
 
     return $list;
   }
 
   public function setTripValidated(int $idTrip): int{
     $db = DatabaseManager::getDatabase();
-    $list = $db->exec('UPDATE Trajet SET stateDriver = 1 WHERE idTrajet = ?',[$idTrip]);
+    $list = $db->exec('UPDATE trajet SET stateDriver = 1 WHERE idTrajet = ?',[$idTrip]);
 
     return $list;
   }

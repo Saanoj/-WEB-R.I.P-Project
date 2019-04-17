@@ -41,14 +41,14 @@ class UserService {
 
   public function UserCollab(int $id): array{
     $db = DatabaseManager::getDatabase();
-    $collab = $db->findOne('SELECT * FROM Collaborateurs WHERE idCollaborateurs = ? AND isOff = 0',[$id]);
+    $collab = $db->findOne('SELECT * FROM collaborateurs WHERE idCollaborateurs = ? AND isOff = 0',[$id]);
     //print_r($collab);
     return $collab;
   }
 
   public function switchOnline(int $id, int $isOnline): int{
     $db = DatabaseManager::getDatabase();
-    $collab = $db->exec('UPDATE Collaborateurs SET isOnline = ? WHERE idCollaborateurs = ? AND isOff = 0',[$isOnline,$id]);
+    $collab = $db->exec('UPDATE collaborateurs SET isOnline = ? WHERE idCollaborateurs = ? AND isOff = 0',[$isOnline,$id]);
     return $collab;
   }
 }

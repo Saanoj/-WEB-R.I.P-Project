@@ -207,7 +207,7 @@ loadLanguageFromSession($_SESSION['lang']);
                 
                                          <div id="ordinateurs" class="modal-body">
                                            <div class="row">
-                                         Quantité <input type="number" min="1" max="4" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]" value="1" onblur="checkQuantiteOrdinateur(this)"/>
+                                         Quantité <input type="number" min="1" max="4" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]"  onblur="checkQuantiteOrdinateur(this)"/>
                                         </div>
                                         <br>
                                         <div class="row">

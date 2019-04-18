@@ -488,46 +488,105 @@ function checkHeureFinInterprete(heure)
 }
 
 function checkQuantiteOrdinateur(ordinateur) {
-  clearInput(ordinateur);
+ // clearInput(ordinateur);
   if (ordinateur.value >= 1 && ordinateur.value <= 10 && ordinateur.value !== '')
   {  
- 
-    addDateOrdinateur(ordinateur);
+    
+    checkOrdinateur(ordinateur);
     return true;
 
   }
   else{
-   // RemoveDateOrdinateur(ordinateur);
     displayError(ordinateur, '');
     return false;
   }
 }
-function clearOrdinateur(ordinateur) {
 
-  var parent = ordinateur.parentNode;
-    if (parent.hasChildNodes()) {
-      var children = parent.getElementsByTagName('input');
-      console.log("children lenght ;"+children.length);
-    
-      for (var i = 1; i < children.length; i++) {
-        console.log(children[i])
-        parent.removeChild(children[i]);
-      }
-    }
-  }
 
-function addDateOrdinateur(ordinateur) {
+function checkOrdinateur(ordinateur) {
   
-
-  for (i=1;i<=ordinateur.value;i++)
-  {
-  var startDebut = document.createElement('input');
-  startDebut.setAttribute("type","date");
   var parent = ordinateur.parentNode;
-  parent.appendChild(startDebut);
-  }
-  clearOrdinateur(ordinateur);
+  var children = parent.getElementsByClassName('clear');
+  console.log(children.length);
+  console.log(ordinateur.value)
+ if (children.length > ordinateur.value*2)
+ {
+  removeDateOrdinateur(ordinateur,parent);
+ }
+ else
+ {
+  addDateOrdinateur(ordinateur,parent);
+ }
 }
+
+function removeDateOrdinateur(ordinateur,parent)
+{
+  let childrenInput = parent.getElementsByClassName('clear');
+  // let childrenText = parent.get
+  let size =  children.length - ordinateur.value*2
+  
+  for (i=0;i<size;i++)
+  {
+    let childNode = parent.lastChild;
+    parent.removeChild(childNode);
+  }
+
+}
+  function addDateOrdinateur(ordinateur,parent)
+  {
+    let size=0;
+    parent = ordinateur.parentNode;
+    let children = parent.getElementsByClassName('clear');
+    if (children.length === 0)
+    {
+     size = ordinateur.value - children.length;
+     for (i=0;i<size;i++)
+     {
+      let startDebut = document.createElement('input');
+     let sautLigne = document.createElement('br')
+     let startDebutText = document.createTextNode("Debut"); 
+     let startFinText = document.createTextNode("Fin");
+     startDebut.setAttribute("type","time");
+     startDebut.setAttribute("class","clear");
+     let startEnd = document.createElement('input');
+     startEnd.setAttribute("type","time");
+     startEnd.setAttribute("class","clear");
+     parent.appendChild(startDebutText);
+     parent.appendChild(startDebut);
+     parent.appendChild(startFinText);
+     parent.appendChild(startEnd);
+     parent.appendChild(sautLigne);
+
+
+     }
+    }
+    else
+    {
+     size = ordinateur.value*2 - children.length;
+     for (i=0;i<size/2;i++)
+     {
+     let startDebut = document.createElement('input');
+     let sautLigne = document.createElement('br')
+     let startDebutText = document.createTextNode("Debut"); 
+     let startFinText = document.createTextNode("Fin");
+     startDebut.setAttribute("type","time");
+     startDebut.setAttribute("class","clear");
+     let startEnd = document.createElement('input');
+     startEnd.setAttribute("type","time");
+     startEnd.setAttribute("class","clear");
+     parent.appendChild(startDebutText);
+     parent.appendChild(startDebut);
+     parent.appendChild(startFinText);
+     parent.appendChild(startEnd);
+     parent.appendChild(sautLigne);
+     }
+    }
+    console.log(size)
+ 
+}
+
+
+
 
 
   

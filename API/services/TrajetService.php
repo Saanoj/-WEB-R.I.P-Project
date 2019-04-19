@@ -44,5 +44,12 @@ class TrajetService {
 
     return $list;
   }
+
+  public function setTripFinished(int $idTrip): int{
+    $db = DatabaseManager::getDatabase();
+    $list = $db->exec('UPDATE trajet SET stateDriver = 2 state = "Finis" WHERE idTrajet = ?',[$idTrip]);
+
+    return $list;
+  }
 }
 ?>

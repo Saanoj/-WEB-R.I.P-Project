@@ -42,7 +42,6 @@ class UserService {
   public function UserCollab(int $id): array{
     $db = DatabaseManager::getDatabase();
     $collab = $db->findOne('SELECT * FROM collaborateurs WHERE idCollaborateurs = ? AND isOff = 0',[$id]);
-    //print_r($collab);
     return $collab;
   }
 

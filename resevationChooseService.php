@@ -119,7 +119,7 @@ loadLanguageFromSession($_SESSION['lang']);
                       </div>
                       <div class="col-md-2">
                         <label class="switch">
-                          <input type="checkbox" class="primary" id="<?php echo $service->getIdService(); ?>"name="services[<?php echo $i ?>]" value="<?php echo $service->getIdService(); ?>" onchange="checkInput(this)">
+                          <input type="checkbox" class="primary" id="<?php echo $service->getIdService(); ?>" name="services[<?php echo $i ?>]" value="<?php echo $service->getIdService(); ?>" onchange="checkInput(this)">
                           <span class="slider round"></span>
                         </label>
                         <button style="visibility:hidden" id="services[<?php echo $i ?>]" type="button" href="#costumModal<?php echo $i ?>" data-target="#costumModal<?php echo $i ?>" name="services[<?php echo $service->getIdService(); ?>]" class="btn btn-info" data-toggle="modal">Choisir</button>
@@ -204,16 +204,13 @@ loadLanguageFromSession($_SESSION['lang']);
                                               <!-- Modal content-->
                                               
                                               <div class="modal-content">
-                
                                          <div id="ordinateurs" class="modal-body">
-                                           <div class="row">
-                                         Quantité <input type="number" min="1" max="4" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]"  onblur="checkQuantiteOrdinateur(this)"/>
-                                        </div>
+                                       <?php /*  <form action="valideReservationServices.php" id="form<?=$service->getIdService();?>" method="POST" onsubmit="return checkheure(this)"> */ ?>
+                                       
+                                         Quantité <input type="number" value=""  class="primary" name="quantite[<?php echo $service->getIdService(); ?>]"  onkeyup="checkQuantiteOrdinateur(this)"/>
+                                     
                                         <br>
-                                        <div class="row">
-                                         Debut<input type="time" id="startOrdinateurs<?php echo $service->getIdService(); ?>" value="<?= $res[1]; ?>" name="startOrdinateurs<?php echo $service->getIdService(); ?>" onchange="checkHeureDebutOrdinateurs(this)">
-                                         Fin<input type="time" id="endOrdinateurs<?php echo $service->getIdService(); ?>" value="<?= $resFin; ?>" name="endOrdinateurs<?php echo $service->getIdService(); ?>"  onchange="checkHeureFinOrdinateurs(this)">
-                                        </div>
+                                   
                                                 </div> 
                                                 <div class="modal-footer"> <div>
                                            
@@ -488,8 +485,8 @@ loadLanguageFromSession($_SESSION['lang']);
                                           <h4 class="modal-title">Heure du coach culture <?= $unCoachCulture['first_name']." ".$unCoachCulture['last_name']; ?></h4>
                                           </div>
                                          <div id="interprete" class="modal-body">
-                                         Debut <input type="time" id="startCoachCulture<?= $unCoachCulture['idCollaborateurs'] ?>" value="<?= $res[1]; ?>" name="startCoachCulture<?= $unCoachSportif['idCollaborateurs'] ?>" onchange="checkHeureDebutCulture(this)">
-                                         Fin  <input type="time" id="endCoachCulture<?= $unCoachCulture['idCollaborateurs'] ?>" value="<?= $resFin; ?>" name="endCoachCulture<?= $unCoachSportif['idCollaborateurs'] ?>"  onchange="checkHeureFinCulture(this)">
+                                         Debut <input type="time" id="startCoachCulture<?= $unCoachCulture['idCollaborateurs'] ?>" value="<?= $res[1]; ?>" name="startCoachCulture<?= $unCoachCulture['idCollaborateurs'] ?>" onchange="checkHeureDebutCulture(this)">
+                                         Fin  <input type="time" id="endCoachCulture<?= $unCoachCulture['idCollaborateurs'] ?>" value="<?= $resFin; ?>" name="endCoachCulture<?= $unCoachCulture['idCollaborateurs'] ?>"  onchange="checkHeureFinCulture(this)">
                                                 
                                                 </div> 
                                                 <div class="modal-footer"> <div>
@@ -512,9 +509,11 @@ loadLanguageFromSession($_SESSION['lang']);
                               }
                               ?>
                               <div class="modal-footer">
-                                <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">
-                                  Sauvegarder
-                                </button>
+                               
+                               <?php /* <input type="button" value="Sauvegarder" class="btn btn-success" id="<?= $service->getIdService();?>" onclick="return checkheure(this)"/> */ ?>
+                               <input type="button" value="Sauvegarder" class="btn btn-success" data-dismiss="modal" id="<?= $service->getIdService();?>"/>
+                </form>
+                               
                               </div>
                             </div>
                           </div>

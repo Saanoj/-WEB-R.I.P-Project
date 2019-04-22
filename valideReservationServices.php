@@ -13,82 +13,27 @@ $res=explode(' ',$hour);
 // var_dump($res);
 
 $trajet = unserialize($_SESSION['trajet']);
-//var_dump($trajet);
 
-
-/*
-$startInterprete = strtotime($_POST['startInterprete']);
-$endInterprete = strtotime($_POST['endInterprete']);
-$_SESSION['startInterprete']  = $_POST['startInterprete'];
-$_SESSION['endInterprete']  = $_POST['endInterprete'];
-
-
-
-// POUR LE COACH SPORTIF CETTE FOIS CI
-
-$startCoachSportif = strtotime($_POST['startCoachSportif']);
-$endCoachSportif = strtotime($_POST['endCoachSportif']);
-$_SESSION['startCoachSportif']  = $_POST['startCoachSportif'];
-$_SESSION['endCoachSportif']  = $_POST['endCoachSportif'];
-
-
-// Pour le coach culture
-
-$startCoachCulture = strtotime($_POST['startCoachCulture']);
-$endCoachCulture = strtotime($_POST['endCoachCulture']);
-$_SESSION['startCoachCulture']  = $_POST['startCoachCulture'];
-$_SESSION['endCoachCulture']  = $_POST['endCoachCulture'];
-*/
-
-
-
-
-checkDateInterprete($bdd);
-//checkDateInterprete($bdd);
-// QUELQUES TEST
-/*
-var_dump((isset($_POST['services'])));
-var_dump(!empty($_POST['services']));
-var_dump(isset($_POST['quantite']));
-var_dump((!empty($_POST['quantite'])));
-
-
-var_dump($_POST['emailContact']);
-var_dump($_POST['messageContact']);
-*/
-
-/*
-var_dump(checkSportif($startCoachSportif,$endCoachSportif,$res) == true);
-var_dump(checkCulture($startCoachCulture,$endCoachCulture,$res) == true);
-*/
-
-
-// && checkInterprete($startCoachSportif,$endCoachSportif,$res) == true && checkInterprete($startCoachCulture,$endCoachCulture,$res) == true
-
-//verifications que les variables récupérées ne sont pas vides et existent bien
 if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['quantite']) && (!empty($_POST['quantite'])) ) {
 
   $servicesChoisi=$_POST['services'];
   $quantiteCertainService=$_POST['quantite'];
 
- 
-
   $thisQuantite=0;
   //on boucle nos services choisis
   foreach ($servicesChoisi as $service) {
-    // On recupere la quantite si c'est un service qui a une quantité en foncition de son id
+    // On recupere la quantite si c'est un service qui a une quantité en fonction de son id
     foreach ($quantiteCertainService as $key => $quantite) {
-      
+
       if ($key == $service) {
         $thisQuantite=$quantite;
       }
-    }
-    //echo $thisQuantite." ".$service."<br>";
-
+  }
 
     //affectation de l'id annexe du service si besoin
+
     switch ($service) {
-      
+
       case 1:
       if (isset($_POST["idRestaurant"]) && (!empty($_POST["idRestaurant"]))) {
       $idAnnexe=$_POST["idRestaurant"];
@@ -111,9 +56,10 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
       $idAnnexe=-1;
       break;
     }
+   
+    var_dump($service);
 
-
-    if ($service == 10/*isset($_POST['emailContact']) && isset($_POST['messageContact']) && (!empty($_POST['emailContact'])) && (!empty($_POST['messageContact']))*/)
+    if ($service == 10)
     {
       $req=$bdd->getPDO()->prepare('INSERT INTO serviceautre (`contenuMessage`,`dateMessage`,`emailClient`) VALUES (:contenuMessage,NOW(),:emailClient)');
       $req->bindValue(':contenuMessage',$_POST['messageContact']);
@@ -139,86 +85,590 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
       $req->execute();
       $req->closeCursor();
 
-    }else if($service == 11 || $service == 12 || $service == 13){
+    }
+
+    var_dump($service);
+    if ($service == 19)
+    {
+      var_dump($service);
+      var_dump("Ok");
+    }
+  
+    else if ($service >= 2 && $service <= 6 || $service = 9 || $service == 15 || $service == 16 || $service == 18 || $service == 19)
+    {
+
+      switch ($service)
+      {
+
+        case 2:
+
+        $array2DateDebut = array ();
+        $array2DateFin = array();
+        for ($i=0;$i<$thisQuantite;$i++)
+        {
+        $array2DateDebut = array_push_assoc($array2DateDebut,$i,$_POST['ordinateurStart'.$service.'_'.$i.'']);
+        $array2DateFin = array_push_assoc($array2DateFin,$i,$_POST['ordinateurEnd'.$service.'_'.$i.'']);
+        }
+        // var_dump($array2DateDebut);
+        // var_dump($array2DateFin);
+        break;
+        case 3:
+        $array3DateDebut = array ();
+        $array3DateFin = array();
+        for ($i=0;$i<$thisQuantite;$i++)
+        {
+        $array3DateDebut = array_push_assoc($array3DateDebut,$i,$_POST['ordinateurStart'.$service.'_'.$i.'']);
+        $array3DateFin = array_push_assoc($array3DateFin,$i,$_POST['ordinateurEnd'.$service.'_'.$i.'']);
+        }
+        // var_dump($array3DateDebut);
+        // var_dump($array3DateFin);
+        break;
+        case 4:
+        $array4DateDebut = array ();
+        $array4DateFin = array();
+        for ($i=0;$i<$thisQuantite;$i++)
+        {
+        $array4DateDebut = array_push_assoc($array4DateDebut,$i,$_POST['ordinateurStart'.$service.'_'.$i.'']);
+        $array4DateFin = array_push_assoc($array4DateFin,$i,$_POST['ordinateurEnd'.$service.'_'.$i.'']);
+        }
+        // var_dump($array3DateDebut);
+        // var_dump($array3DateFin);
+        break;
+        case 5:
+        $array5DateDebut = array ();
+        $array5DateFin = array();
+        for ($i=0;$i<$thisQuantite;$i++)
+        {
+        $array5DateDebut = array_push_assoc($array5DateDebut,$i,$_POST['tabletteStart'.$service.'_'.$i.'']);
+        $array5DateFin = array_push_assoc($array5DateFin,$i,$_POST['tabletteEnd'.$service.'_'.$i.'']);
+        }
+        // var_dump($array3DateDebut);
+        // var_dump($array3DateFin);
+        break;
+        case 6:
+        $array6DateDebut = array ();
+        $array6DateFin = array();
+        for ($i=0;$i<$thisQuantite;$i++)
+        {
+        $array6DateDebut = array_push_assoc($array6DateDebut,$i,$_POST['audioGuidesStart'.$service.'_'.$i.'']);
+        $array6DateFin = array_push_assoc($array6DateFin,$i,$_POST['audioGuidesEnd'.$service.'_'.$i.'']);
+        }
+        // var_dump($array3DateDebut);
+        // var_dump($array3DateFin);
+        break;
+        case 9:
+        $array9DateDebut = array ();
+        $array9DateFin = array();
+        for ($i=0;$i<$thisQuantite;$i++)
+        {
+        $array9DateDebut = array_push_assoc($array9DateDebut,$i,$_POST['ordinateurStart'.$service.'_'.$i.'']);
+        $array9DateFin = array_push_assoc($array9DateFin,$i,$_POST['ordinateurEnd'.$service.'_'.$i.'']);
+        }
+        // var_dump($array3DateDebut);
+        // var_dump($array3DateFin);
+        break;
+        case 15:
+        $array15DateDebut = array ();
+        $array15DateFin = array();
+        for ($i=0;$i<$thisQuantite;$i++)
+        {
+        $array15DateDebut = array_push_assoc($array15DateDebut,$i,$_POST['transportAnimalStart'.$service.'_'.$i.'']);
+        $array15DateFin = array_push_assoc($array15DateFin,$i,$_POST['transportAnimalEnd'.$service.'_'.$i.'']);
+        }
+        // var_dump($array3DateDebut);
+        // var_dump($array3DateFin);
+        break;
+        case 16:
+        $array16DateDebut = array ();
+        $array16DateFin = array();
+        for ($i=0;$i<$thisQuantite;$i++)
+        {
+        $array16DateDebut = array_push_assoc($array16DateDebut,$i,$_POST['transportVeteniraireStart'.$service.'_'.$i.'']);
+        $array16DateFin = array_push_assoc($array16DateFin,$i,$_POST['transportVeteniraireStart'.$service.'_'.$i.'']);
+        }
+        // var_dump($array3DateDebut);
+        // var_dump($array3DateFin);
+        break;
+        case 18:
+        $array18DateDebut = array();
+        $array18DateFin = array();
+        for ($i=0;$i<$thisQuantite;$i++)
+        {
+        $array18DateDebut = array_push_assoc($array18DateDebut,$i,$_POST['menuJourStart'.$service.'_'.$i.'']);
+        $array18DateFin = array_push_assoc($array18DateFin,$i,$_POST['menuJourEnd'.$service.'_'.$i.'']);
+        }
+        // var_dump($array3DateDebut);
+        // var_dump($array3DateFin);
+        break;
+        case 19:
+        var_dump($service);
+        $array19DateDebut = array ();
+        $array19DateFin = array();
+        for ($i=0;$i<$thisQuantite;$i++)
+        {
+        $array19DateDebut = array_push_assoc($array19DateDebut,$i,$_POST['menuGastronomiqueStart'.$service.'_'.$i.'']);
+        $array19DateFin = array_push_assoc($array19DateFin,$i,$_POST['menuGastronomiqueEnd'.$service.'_'.$i.'']);
+        }
+        // var_dump($array3DateDebut);
+        // var_dump($array3DateFin);
+        break;
+      }
+
+    }
+    else if($service == 11 || $service == 12 || $service == 13){
 
       switch ($service) {
         case 11:
-         // $idArray = $_POST["idInterprete"];
+        $req = getId("interprete",$bdd);
+
+        $arrayInterprete  = array();
+        $arrayInterpreteDateDebut = array();
+        $arrayInterpreteDateFin = array();
+          while ($id = $req->fetch()) {
+            if (isset($_POST['idInterprete'.$id['idCollaborateurs'].'']) && !empty($_POST['idInterprete'.$id['idCollaborateurs'].'']))
+            {
+              if (!in_array($id['idCollaborateurs'],$arrayInterprete))
+              {
+                array_push($arrayInterprete,$id['idCollaborateurs']);
+              }
+            }
+          }
+
+          foreach ($arrayInterprete as $idInterprete) {
+            $arrayInterpreteDateDebut = array_push_assoc($arrayInterpreteDateDebut,$idInterprete,$_POST['startInterprete'.$idInterprete.'']);
+        }
+        foreach ($arrayInterprete as $idInterprete) {
+          $arrayInterpreteDateFin = array_push_assoc($arrayInterpreteDateFin,$idInterprete,$_POST['endInterprete'.$idInterprete.'']);
+      }
+          //  var_dump($arrayInterprete);
+          //  var_dump($arrayInterpreteDateDebut);
+          //  var_dump($arrayInterpreteDateFin);
+
           break;
         case 12:
-         // $idArray = $_POST["idCoachSportif"];
+        $req = getId("coachSportif",$bdd);
+        $arrayCoachSportif  = array();
+        $arrayCoachSportifDateDebut = array();
+        $arrayCoachSportifDateFin = array();
+        while ($id = $req->fetch()) {
+            if (isset($_POST['idCoachSportif'.$id['idCollaborateurs'].'']) && !empty($_POST['idCoachSportif'.$id['idCollaborateurs'].'']))
+            {
+              if (!in_array($id['idCollaborateurs'],$arrayCoachSportif))
+              {
+                array_push($arrayCoachSportif,$id['idCollaborateurs']);
+              }
+            }
+          }
+
+          foreach ($arrayCoachSportif as $idCoachSportif) {
+            $arrayCoachSportifDateDebut = array_push_assoc($arrayCoachSportifDateDebut,$idCoachSportif,$_POST['startCoachSportif'.$idCoachSportif.'']);
+        }
+        foreach ($arrayCoachSportif as $idCoachSportif) {
+          $arrayCoachSportifDateFin = array_push_assoc($arrayCoachSportifDateFin,$idCoachSportif,$_POST['endCoachSportif'.$idCoachSportif.'']);
+      }
+          //  var_dump($arrayCoachSportif);
+          // var_dump($arrayCoachSportifDateDebut);
+          //  var_dump($arrayCoachSportifDateFin);
+
           break;
         case 13:
-       //   $idArray = $_POST["idCoachCulture"];
-          break;
+        $req = getId("coachCulture",$bdd);
+          $arrayCoachCulture  = array();
+          $arrayCoachCultureDateDebut = array();
+          $arrayCoachCulturefDateFin = array();
+          while ($id = $req->fetch()) {
+              if (isset($_POST['idCoachCulture'.$id['idCollaborateurs'].'']) && !empty($_POST['idCoachCulture'.$id['idCollaborateurs'].'']))
+              {
+                if (!in_array($id['idCollaborateurs'],$arrayCoachCulture))
+                {
+                  array_push($arrayCoachCulture,$id['idCollaborateurs']);
+                }
+              }
+            }
 
-        default:
-          $idArray = array();
+
+            foreach ($arrayCoachCulture as $idCoachCulture) {
+              $arrayCoachCultureDateDebut = array_push_assoc($arrayCoachCultureDateDebut,$idCoachCulture,$_POST['startCoachCulture'.$idCoachCulture.'']);
+          }
+          foreach ($arrayCoachCulture as $idCoachCulture) {
+            $arrayCoachCulturefDateFin = array_push_assoc($arrayCoachCulturefDateFin,$idCoachCulture,$_POST['endCoachCulture'.$idCoachCulture.'']);
+        }
+        // var_dump($arrayCoachCulture);
+        //     var_dump($arrayCoachCultureDateDebut);
+        //      var_dump($arrayCoachCulturefDateFin);
+
           break;
       }
+    }
 
-      foreach ($idArray as $value) {
-        //echo "elseif 11 12 13<br>";
+      if ($service >= 2 && $service <= 6 || $service = 9 || $service == 15 || $service == 16 || $service == 18 || $service == 19)
+      {
 
-        $req=$bdd->getPDO()->prepare('INSERT INTO linkServicetrajet (`idTrajet`,`idService`,`idAnnexe`,`quantite`) VALUES (:idTrajet,:idService,:idAnnexe,:quantite)');
+        for($i=0;$i<$thisQuantite;$i++)
+        {
+
+        $req=$bdd->getPDO()->prepare('INSERT INTO linkServicetrajet (idTrajet,idService,idAnnexe,quantite,statut,dateStart,dateEnd) VALUES (:idTrajet,:idService,:idAnnexe,:quantite,:statut,:dateStart,:dateEnd)');
+        $req->bindValue(':idTrajet', $_SESSION["idTrajet"]);
+        $req->bindValue(':idService', $service);
+        $req->bindValue(':idAnnexe',-1);
+        $req->bindValue(':quantite', 1);
+        $req->bindValue(':statut', 0);
+        $req->bindValue(':dateStart', "00:00");
+        $req->bindValue(':dateEnd', "00:00");
+        $req->execute();
+        $req->closeCursor();
+
+      $req = getLastId($bdd);
+      $idLink = $req->fetch();
+      $arrayDebut ="array".$service."DateDebut";
+      $arrayFin ="array".$service."DateFin";
+
+          if ($service == 2)
+          {
+          //var_dump($array2DateDebut);
+        $req=$bdd->getPDO()->prepare('UPDATE linkservicetrajet SET dateStart = :dateStart WHERE idTrajet = :idTrajet AND idLink = :idLink');
+        $req->execute(array(
+          'dateStart' => $array2DateDebut[$i],
+          'idTrajet' => $_SESSION["idTrajet"],
+          'idLink' => $idLink['idLink']
+        ));
+        $req->closeCursor();
+
+        $req=$bdd->getPDO()->prepare('UPDATE linkservicetrajet SET dateEnd = :dateEnd WHERE idTrajet = :idTrajet AND idLink = :idLink');
+        $req->execute(array(
+          'dateEnd' => $array2DateFin[$i],
+          'idTrajet' => $_SESSION["idTrajet"],
+          'idLink' => $idLink['idLink']
+        ));
+        $req->closeCursor();
+      }
+      else if ($service == 3)
+      {
+        var_dump("Ok");
+        $req=$bdd->getPDO()->prepare('UPDATE linkservicetrajet SET dateStart = :dateStart WHERE idTrajet = :idTrajet AND idLink = :idLink');
+        $req->execute(array(
+          'dateStart' => $array3DateDebut[$i],
+          'idTrajet' => $_SESSION["idTrajet"],
+          'idLink' => $idLink['idLink']
+        ));
+        $req->closeCursor();
+
+        $req=$bdd->getPDO()->prepare('UPDATE linkservicetrajet SET dateEnd = :dateEnd WHERE idTrajet = :idTrajet AND idLink = :idLink');
+        $req->execute(array(
+          'dateEnd' => $array3DateFin[$i],
+          'idTrajet' => $_SESSION["idTrajet"],
+          'idLink' => $idLink['idLink']
+        ));
+        $req->closeCursor();
+      }
+      else if ($service == 4)
+      {
+        $req=$bdd->getPDO()->prepare('UPDATE linkservicetrajet SET dateStart = :dateStart WHERE idTrajet = :idTrajet AND idLink = :idLink');
+        $req->execute(array(
+          'dateStart' => $array4DateDebut[$i],
+          'idTrajet' => $_SESSION["idTrajet"],
+          'idLink' => $idLink['idLink']
+        ));
+        $req->closeCursor();
+
+        $req=$bdd->getPDO()->prepare('UPDATE linkservicetrajet SET dateEnd = :dateEnd WHERE idTrajet = :idTrajet AND idLink = :idLink');
+        $req->execute(array(
+          'dateEnd' => $array4DateFin[$i],
+          'idTrajet' => $_SESSION["idTrajet"],
+          'idLink' => $idLink['idLink']
+        ));
+        $req->closeCursor();
+      }
+      else if ($service == 5)
+      {
+        $req=$bdd->getPDO()->prepare('UPDATE linkservicetrajet SET dateStart = :dateStart WHERE idTrajet = :idTrajet AND idLink = :idLink');
+        $req->execute(array(
+          'dateStart' => $array5DateDebut[$i],
+          'idTrajet' => $_SESSION["idTrajet"],
+          'idLink' => $idLink['idLink']
+        ));
+        $req->closeCursor();
+
+        $req=$bdd->getPDO()->prepare('UPDATE linkservicetrajet SET dateEnd = :dateEnd WHERE idTrajet = :idTrajet AND idLink = :idLink');
+        $req->execute(array(
+          'dateEnd' => $array5DateFin[$i],
+          'idTrajet' => $_SESSION["idTrajet"],
+          'idLink' => $idLink['idLink']
+        ));
+        $req->closeCursor();
+      }
+      else if ($service == 6)
+      {
+        $req=$bdd->getPDO()->prepare('UPDATE linkservicetrajet SET dateStart = :dateStart WHERE idTrajet = :idTrajet AND idLink = :idLink');
+        $req->execute(array(
+          'dateStart' => $array6DateDebut[$i],
+          'idTrajet' => $_SESSION["idTrajet"],
+          'idLink' => $idLink['idLink']
+        ));
+        $req->closeCursor();
+
+        $req=$bdd->getPDO()->prepare('UPDATE linkservicetrajet SET dateEnd = :dateEnd WHERE idTrajet = :idTrajet AND idLink = :idLink');
+        $req->execute(array(
+          'dateEnd' => $array6DateFin[$i],
+          'idTrajet' => $_SESSION["idTrajet"],
+          'idLink' => $idLink['idLink']
+        ));
+        $req->closeCursor();
+      }
+      else if ($service == 9)
+      {
+        $req=$bdd->getPDO()->prepare('UPDATE linkservicetrajet SET dateStart = :dateStart WHERE idTrajet = :idTrajet AND idLink = :idLink');
+        $req->execute(array(
+          'dateStart' => $array9DateDebut[$i],
+          'idTrajet' => $_SESSION["idTrajet"],
+          'idLink' => $idLink['idLink']
+        ));
+        $req->closeCursor();
+
+        $req=$bdd->getPDO()->prepare('UPDATE linkservicetrajet SET dateEnd = :dateEnd WHERE idTrajet = :idTrajet AND idLink = :idLink');
+        $req->execute(array(
+          'dateEnd' => $array9DateFin[$i],
+          'idTrajet' => $_SESSION["idTrajet"],
+          'idLink' => $idLink['idLink']
+        ));
+        $req->closeCursor();
+      }
+      else if ($service == 15)
+      {
+        $req=$bdd->getPDO()->prepare('UPDATE linkservicetrajet SET dateStart = :dateStart WHERE idTrajet = :idTrajet AND idLink = :idLink');
+        $req->execute(array(
+          'dateStart' => $array15DateDebut[$i],
+          'idTrajet' => $_SESSION["idTrajet"],
+          'idLink' => $idLink['idLink']
+        ));
+        $req->closeCursor();
+
+        $req=$bdd->getPDO()->prepare('UPDATE linkservicetrajet SET dateEnd = :dateEnd WHERE idTrajet = :idTrajet AND idLink = :idLink');
+        $req->execute(array(
+          'dateEnd' => $array15DateFin[$i],
+          'idTrajet' => $_SESSION["idTrajet"],
+          'idLink' => $idLink['idLink']
+        ));
+        $req->closeCursor();
+      }
+      else if ($service == 16)
+      {
+        $req=$bdd->getPDO()->prepare('UPDATE linkservicetrajet SET dateStart = :dateStart WHERE idTrajet = :idTrajet AND idLink = :idLink');
+        $req->execute(array(
+          'dateStart' => $array16DateDebut[$i],
+          'idTrajet' => $_SESSION["idTrajet"],
+          'idLink' => $idLink['idLink']
+        ));
+        $req->closeCursor();
+
+        $req=$bdd->getPDO()->prepare('UPDATE linkservicetrajet SET dateEnd = :dateEnd WHERE idTrajet = :idTrajet AND idLink = :idLink');
+        $req->execute(array(
+          'dateEnd' => $array16DateFin[$i],
+          'idTrajet' => $_SESSION["idTrajet"],
+          'idLink' => $idLink['idLink']
+        ));
+        $req->closeCursor();
+      }
+      else if ($service == 18)
+      {
+
+        $req=$bdd->getPDO()->prepare('UPDATE linkservicetrajet SET dateStart = :dateStart WHERE idTrajet = :idTrajet AND idLink = :idLink');
+        $req->execute(array(
+          'dateStart' => $array18DateDebut[$i],
+          'idTrajet' => $_SESSION["idTrajet"],
+          'idLink' => $idLink['idLink']
+        ));
+        $req->closeCursor();
+
+        $req=$bdd->getPDO()->prepare('UPDATE linkservicetrajet SET dateEnd = :dateEnd WHERE idTrajet = :idTrajet AND idLink = :idLink');
+        $req->execute(array(
+          'dateEnd' => $array18DateFin[$i],
+          'idTrajet' => $_SESSION["idTrajet"],
+          'idLink' => $idLink['idLink']
+        ));
+        $req->closeCursor();
+      }
+      else if ($service == 19)
+      {
+
+        $req=$bdd->getPDO()->prepare('UPDATE linkservicetrajet SET dateStart = :dateStart WHERE idTrajet = :idTrajet AND idLink = :idLink');
+        $req->execute(array(
+          'dateStart' => $array19DateDebut[$i],
+          'idTrajet' => $_SESSION["idTrajet"],
+          'idLink' => $idLink['idLink']
+        ));
+        $req->closeCursor();
+
+        $req=$bdd->getPDO()->prepare('UPDATE linkservicetrajet SET dateEnd = :dateEnd WHERE idTrajet = :idTrajet AND idLink = :idLink');
+        $req->execute(array(
+          'dateEnd' => $array19DateFin[$i],
+          'idTrajet' => $_SESSION["idTrajet"],
+          'idLink' => $idLink['idLink']
+        ));
+        $req->closeCursor();
+      }
+    }
+  }
+      else if ($service == 11) {
+      foreach ($arrayInterprete as $value) {
+
+        $req=$bdd->getPDO()->prepare('INSERT INTO linkServicetrajet (idTrajet,idService,idAnnexe,quantite,statut,dateStart,dateEnd) VALUES (:idTrajet,:idService,:idAnnexe,:quantite,:statut,:dateStart,:dateEnd)');
         $req->bindValue(':idTrajet', $_SESSION["idTrajet"]);
         $req->bindValue(':idService', $service);
         $req->bindValue(':idAnnexe', $value);
         $req->bindValue(':quantite', 1);
+        $req->bindValue(':statut', 0);
+        $req->bindValue(':dateStart', "00:00");
+        $req->bindValue(':dateEnd', "00:00");
         $req->execute();
         $req->closeCursor();
 
+        foreach($arrayInterpreteDateDebut as $value =>$dateStart)
+        {
+          $req=$bdd->getPDO()->prepare('UPDATE linkservicetrajet SET dateStart = :dateStart WHERE idTrajet = :idTrajet AND idAnnexe = :idAnnexe');
+          $req->execute(array(
+            'dateStart' => $dateStart,
+            'idTrajet' => $_SESSION["idTrajet"],
+            'idAnnexe' => $value
+          ));
+          $req->closeCursor();
+
+        }
+        foreach($arrayInterpreteDateFin as $value =>$dateEnd)
+        {
+          $req=$bdd->getPDO()->prepare('UPDATE linkservicetrajet SET dateEnd = :dateEnd WHERE idTrajet = :idTrajet AND idAnnexe = :idAnnexe');
+          $req->execute(array(
+            'dateEnd' => $dateEnd,
+            'idTrajet' => $_SESSION["idTrajet"],
+            'idAnnexe' => $value
+          ));
+          $req->closeCursor();
+
+        }
+    }
+  }
+    else if ($service == 12)
+    {
+      foreach ($arrayCoachSportif as $value) {
+
+        $req=$bdd->getPDO()->prepare('INSERT INTO linkServicetrajet (idTrajet,idService,idAnnexe,quantite,statut,dateStart,dateEnd) VALUES (:idTrajet,:idService,:idAnnexe,:quantite,:statut,:dateStart,:dateEnd)');
+        $req->bindValue(':idTrajet', $_SESSION["idTrajet"]);
+        $req->bindValue(':idService', $service);
+        $req->bindValue(':idAnnexe', $value);
+        $req->bindValue(':quantite', 1);
+        $req->bindValue(':statut', 0);
+        $req->bindValue(':dateStart', "00:00");
+        $req->bindValue(':dateEnd', "00:00");
+        $req->execute();
+        $req->closeCursor();
+
+        foreach($arrayCoachSportifDateDebut as $value =>$dateStart)
+        {
+          $req=$bdd->getPDO()->prepare('UPDATE linkservicetrajet SET dateStart = :dateStart WHERE idTrajet = :idTrajet AND idAnnexe = :idAnnexe');
+          $req->execute(array(
+            'dateStart' => $dateStart,
+            'idTrajet' => $_SESSION["idTrajet"],
+            'idAnnexe' => $value
+          ));
+          $req->closeCursor();
+
+        }
+        foreach($arrayCoachSportifDateFin as $value =>$dateEnd)
+        {
+          $req=$bdd->getPDO()->prepare('UPDATE linkservicetrajet SET dateEnd = :dateEnd WHERE idTrajet = :idTrajet AND idAnnexe = :idAnnexe');
+          $req->execute(array(
+            'dateEnd' => $dateEnd,
+            'idTrajet' => $_SESSION["idTrajet"],
+            'idAnnexe' => $value
+          ));
+          $req->closeCursor();
+
+        }
+    }
+    }
+    else if($service == 13)
+    {
+      foreach ($arrayCoachCulture as $value) {
+
+        $req=$bdd->getPDO()->prepare('INSERT INTO linkServicetrajet (idTrajet,idService,idAnnexe,quantite,statut,dateStart,dateEnd) VALUES (:idTrajet,:idService,:idAnnexe,:quantite,:statut,:dateStart,:dateEnd)');
+        $req->bindValue(':idTrajet', $_SESSION["idTrajet"]);
+        $req->bindValue(':idService', $service);
+        $req->bindValue(':idAnnexe', $value);
+        $req->bindValue(':quantite', 1);
+        $req->bindValue(':statut', 0);
+        $req->bindValue(':dateStart', "00:00");
+        $req->bindValue(':dateEnd', "00:00");
+        $req->execute();
+        $req->closeCursor();
+
+
+
+      foreach($arrayCoachCultureDateDebut as $value =>$dateStart)
+      {
+        $req=$bdd->getPDO()->prepare('UPDATE linkservicetrajet SET dateStart = :dateStart WHERE idTrajet = :idTrajet AND idAnnexe = :idAnnexe');
+        $req->execute(array(
+          'dateStart' => $dateStart,
+          'idTrajet' => $_SESSION["idTrajet"],
+          'idAnnexe' => $value
+        ));
+        $req->closeCursor();
+
       }
+      foreach($arrayCoachCulturefDateFin as $value =>$dateEnd)
+      {
+        $req=$bdd->getPDO()->prepare('UPDATE linkservicetrajet SET dateEnd = :dateEnd WHERE idTrajet = :idTrajet AND idAnnexe = :idAnnexe');
+        $req->execute(array(
+          'dateEnd' => $dateEnd,
+          'idTrajet' => $_SESSION["idTrajet"],
+          'idAnnexe' => $value
+        ));
+        $req->closeCursor();
 
-    }else{
-    //on insere les id et la quantité pour lier ce choix de service au trajet dans cette table e liaison
-    //echo "else ";
-    //echo $thisQuantite."<br>";
+      }
+    }
+    }
 
-    $req=$bdd->getPDO()->prepare('INSERT INTO linkServicetrajet (`idTrajet`,`idService`,`idAnnexe`,`quantite`) VALUES (:idTrajet,:idService,:idAnnexe,:quantite)');
-    $req->bindValue(':idTrajet', $_SESSION["idTrajet"]);
-    $req->bindValue(':idService', $service);
-    $req->bindValue(':idAnnexe', $idAnnexe);
-    $req->bindValue(':quantite', $thisQuantite);
-    $req->execute();
-    $req->closeCursor();
-
-
+    else
+    {
+      $req=$bdd->getPDO()->prepare('INSERT INTO linkServicetrajet (`idTrajet`,`idService`,`idAnnexe`,`quantite`) VALUES (:idTrajet,:idService,:idAnnexe,:quantite)');
+      $req->bindValue(':idTrajet', $_SESSION["idTrajet"]);
+      $req->bindValue(':idService', $service);
+      $req->bindValue(':idAnnexe', $idAnnexe);
+      $req->bindValue(':quantite', $thisQuantite);
+      $req->execute();
+      $req->closeCursor();
     }
 
   }
 
+
   //redirection
-    header("location:resevationChooseDriver.php");
+   // header("location:resevationChooseDriver.php");
 }
 else {
 
-    header("location:resevationChooseService.php?probleme");
+    // header("location:resevationChooseService.php?probleme");
 }
 
+function array_push_assoc($array, $key, $value){
+  $array[$key] = $value;
+  return $array;
+  }
 
+  function getId($metier,$bdd)
+  {
+    $req = $bdd->getPDO()->prepare('SELECT idCollaborateurs FROM collaborateurs WHERE metier= :metier');
+    $req->execute(array(
+      'metier' => $metier
+    ));
+    return $req;
+  }
 
-function checkDateInterprete($bdd) {
-
-  // var_dump($_SESSION['startInterprete']);
- // var_dump($_SESSION['endInterprete']);
- $dateFin = new DateTime($_SESSION['finTrajet'], new DateTimeZone('Europe/Paris'));
- $dateDebutInterprete = new DateTime($_SESSION['startInterprete'], new DateTimeZone('Europe/Paris'));
- $dateFinInterprete = new DateTime($_SESSION['endInterprete'], new DateTimeZone('Europe/Paris'));
-
- $intervalDebut = $dateFin->diff($dateDebutInterprete);
- var_dump($dateDebutInterprete);
- var_dump($dateFinInterprete);
-
- var_dump($intervalDebut->format('%R'));
-
-
- // var_dump($dateFin);
-
-
-
-
-}
-
+  function getLastId($bdd)
+  {
+    $req = $bdd->getPDO()->prepare('SELECT idLink from linkservicetrajet ORDER BY idLink DESC');
+    $req->execute();
+    return $req;
+  }
 
 ?>

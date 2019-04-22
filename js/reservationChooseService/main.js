@@ -16,6 +16,7 @@ function clearInput(input) {
     parent.removeChild(elements[0]);
   }
 }
+
 function checkHeureDebutSportif(heure) 
 {
   clearInput(heure);
@@ -143,10 +144,6 @@ function checkHeureFinSportif(heure)
   }
 }
 
-
-
-
-
 function checkHeureDebutCulture(heure)
 {
   clearInput(heure);
@@ -273,6 +270,7 @@ function checkHeureFinCulture(heure)
     return false;
   }
 }
+
 function checkGlobal(donnees)
 
 {
@@ -339,7 +337,6 @@ else{
 }
 }
 
-
 function checkHeureDebutInterprete(heure) {
   clearInput(heure);
   var array = new Array;
@@ -384,16 +381,7 @@ function checkHeureDebutInterprete(heure) {
     
       }
     }
-    
-
-
-
-
  
-   
-  
-
-
   if (dateStartInterprete.getTime() >= dateStartTrajet.getTime() && 
   dateStartInterprete.getTime() <= dateEndTrajet.getTime() && 
   dateEndtInterprete.getTime() >= dateStartInterprete.getTime() && 
@@ -488,7 +476,12 @@ function checkHeureFinInterprete(heure)
 }
 
 function checkQuantiteOrdinateur(ordinateur) {
- // clearInput(ordinateur);
+  var idService = ordinateur.name;
+  idService = idService.split("[");
+  idService = idService[1].split("]");
+  idService = idService[0]
+  console.log(idService);
+  if (idService >= 2 && idService <=6) {
   if (ordinateur.value >= 1 && ordinateur.value <= 10 && ordinateur.value !== '')
   {  
     
@@ -497,34 +490,91 @@ function checkQuantiteOrdinateur(ordinateur) {
 
   }
   else{
+   
     displayError(ordinateur, '');
+    removeAllOrdinateur(ordinateur);
+    return false;
+  }
+}
+else if (idService >= 15 && idService <=16)
+{
+  if (ordinateur.value >= 1 && ordinateur.value <= 2 && ordinateur.value !== '')
+  {  
+    
+    checkOrdinateur(ordinateur);
+    return true;
+
+  }
+  else{
+   
+    displayError(ordinateur, '');
+    removeAllOrdinateur(ordinateur);
+    return false;
+  }
+}
+else if (idService >= 18 && idService <=19 || idService == 9)
+{
+  if (ordinateur.value >= 1 && ordinateur.value <= 4 && ordinateur.value !== '')
+  {  
+    
+    checkOrdinateur(ordinateur);
+    return true;
+
+  }
+  else{
+   
+    displayError(ordinateur, '');
+    removeAllOrdinateur(ordinateur);
     return false;
   }
 }
 
+}
+
+
+
+function removeAllOrdinateur(ordinateur) {
+  
+  var parent = ordinateur.parentNode; 
+  let childrenInput = parent.getElementsByTagName('row');
+  
+  let size =  childrenInput.length
+
+  for (i=0;i<=size;i++)
+  {
+    let childNode = parent.lastChild;
+    parent.removeChild(childNode);
+  }
+
+}
 
 function checkOrdinateur(ordinateur) {
-  
+  var idService = ordinateur.name;
+  idService = idService.split("[");
+  idService = idService[1].split("]");
+  idService = idService[0]
+
   var parent = ordinateur.parentNode;
   var children = parent.getElementsByClassName('clear');
-  console.log(children.length);
-  console.log(ordinateur.value)
- if (children.length > ordinateur.value*2)
+ if (children.length > ordinateur.value*4)
  {
+  clearInput(ordinateur);
   removeDateOrdinateur(ordinateur,parent);
  }
  else
  {
-  addDateOrdinateur(ordinateur,parent);
+  clearInput(ordinateur);
+  addDateOrdinateur(ordinateur,parent,idService);
  }
 }
 
 function removeDateOrdinateur(ordinateur,parent)
 {
-  let childrenInput = parent.getElementsByClassName('clear');
-  // let childrenText = parent.get
-  let size =  children.length - ordinateur.value*2
+ 
+  let childrenInput = parent.getElementsByTagName('row');
   
+  let size =  childrenInput.length - ordinateur.value
+
   for (i=0;i<size;i++)
   {
     let childNode = parent.lastChild;
@@ -532,68 +582,257 @@ function removeDateOrdinateur(ordinateur,parent)
   }
 
 }
-  function addDateOrdinateur(ordinateur,parent)
+
+function addDateOrdinateur(ordinateur,parent,idService)
   {
+    console.log(idService);
     let size=0;
     parent = ordinateur.parentNode;
     let children = parent.getElementsByClassName('clear');
     if (children.length === 0)
     {
      size = ordinateur.value - children.length;
+     sizeChildren = children.length
      for (i=0;i<size;i++)
      {
-      let startDebut = document.createElement('input');
-     let sautLigne = document.createElement('br')
-     let startDebutText = document.createTextNode("Debut"); 
-     let startFinText = document.createTextNode("Fin");
-     startDebut.setAttribute("type","time");
-     startDebut.setAttribute("class","clear");
-     let startEnd = document.createElement('input');
+    
+    var br = document.createElement("br");
+   let row = document.createElement("row");
+   let startFinText = document.createElement("input");
+    let startDebutText = document.createElement("input"); 
+    let startDebut = document.createElement('input');
+    let startEnd = document.createElement('input');
+
+    startDebut.setAttribute("type","time");
+    startDebut.setAttribute("class","clear");
+    startDebut.setAttribute("onblur","checkHeureDebutOrdinateur(this)");
+    if (idService >=2 && idService <=4) {
+      startDebut.setAttribute("id","ordinateurStart["+idService+"]"+(i+(sizeChildren/4)));
+      startDebut.setAttribute("name","ordinateurStart"+idService+"_"+(i+(sizeChildren/4)));
+    }
+      else if (idService == 5)
+      {
+       startDebut.setAttribute("id","tabletteStart["+idService+"]"+(i+(sizeChildren/4)));
+       startDebut.setAttribute("name","tabletteStart"+idService+"_"+(i+(sizeChildren/4)));
+ 
+      }
+      else if (idService == 6)
+      {
+       startDebut.setAttribute("id","audioGuidesStart["+idService+"]"+(i+(sizeChildren/4)));
+       startDebut.setAttribute("name","audioGuidesStart"+idService+"_"+(i+(sizeChildren/4)));
+      }     
+      else if (idService == 15)
+      {
+       startDebut.setAttribute("id","transportAnimalStart["+idService+"]"+(i+(sizeChildren/4)));
+       startDebut.setAttribute("name","transportAnimalStart"+idService+"_"+(i+(sizeChildren/4)));
+      } 
+      else if (idService == 16)
+      {
+       startDebut.setAttribute("id","transportVeteniraireStart["+idService+"]"+(i+(sizeChildren/4)));
+       startDebut.setAttribute("name","transportVeteniraireStart"+idService+"_"+(i+(sizeChildren/4)));
+       
+      } 
+      else if (idService == 18)
+      {
+       startDebut.setAttribute("id","menuJourStart["+idService+"]"+(i+(sizeChildren/4)));
+       startDebut.setAttribute("name","menuJourStart"+idService+"_"+(i+(sizeChildren/4)));
+      }
+      else if (idService == 19)
+      {
+       startDebut.setAttribute("id","menuGastronomiqueStart["+idService+"]"+(i+(sizeChildren/4)));
+       startDebut.setAttribute("name","menuGastronomiqueStart"+idService+"_"+(i+(sizeChildren/4)));
+      }
+      
+     startDebutText.setAttribute("type","text");
+     startDebutText.setAttribute("class","clear");
+     startDebutText.setAttribute("value","Date de début");
+     startDebutText.setAttribute("disabled","disabled");
+     
+     startFinText.setAttribute("type","text");
+     startFinText.setAttribute("class","clear");
+     startFinText.setAttribute("value","Date de fin");
+     startFinText.setAttribute("disabled","disabled");
+     
      startEnd.setAttribute("type","time");
      startEnd.setAttribute("class","clear");
-     parent.appendChild(startDebutText);
-     parent.appendChild(startDebut);
-     parent.appendChild(startFinText);
-     parent.appendChild(startEnd);
-     parent.appendChild(sautLigne);
+     startEnd.setAttribute("onblur","checkHeureFinOrdinateur(this)");
+     if (idService >=2 && idService <=4) {
+      startEnd.setAttribute("id","ordinateurEnd["+idService+"]"+(i+(sizeChildren/4)));
+      startEnd.setAttribute("name","ordinateurEnd"+idService+"_"+(i+(sizeChildren/4)));
 
 
+    }
+      else if (idService == 5)
+      {
+        startEnd.setAttribute("id","tabletteEnd["+idService+"]"+(i+(sizeChildren/4)));
+        startEnd.setAttribute("name","tabletteEnd"+idService+"_"+(i+(sizeChildren/4)));
+
+ 
+      }
+      else if (idService == 6)
+      {
+        startEnd.setAttribute("id","audioGuidesEnd["+idService+"]"+(i+(sizeChildren/4)));
+        startEnd.setAttribute("name","audioGuidesEnd"+idService+"_"+(i+(sizeChildren/4)));
+
+      }
+
+      else if (idService == 15)
+      {
+        startEnd.setAttribute("id","transportAnimalEnd["+idService+"]"+(i+(sizeChildren/4)));
+        startEnd.setAttribute("name","transportAnimalEnd"+idService+"_"+(i+(sizeChildren/4)));
+
+      } 
+      else if (idService == 16)
+      {
+        startEnd.setAttribute("id","transportVeteniraireEnd["+idService+"]"+(i+(sizeChildren/4)));
+        startEnd.setAttribute("name","transportVeteniraireEnd"+idService+"_"+(i+(sizeChildren/4)));
+
+      } 
+      else if (idService == 18)
+      {
+        startEnd.setAttribute("id","menuJourEnd["+idService+"]"+(i+(sizeChildren/4)));
+        startEnd.setAttribute("name","menuJourEnd"+idService+"_"+(i+(sizeChildren/4)));
+
+      }
+      else if (idService == 19)
+      {
+        startEnd.setAttribute("id","menuGastronomiqueEnd["+idService+"]"+(i+(sizeChildren/4)));
+        startEnd.setAttribute("name","menuGastronomiqueEnd"+idService+"_"+(i+(sizeChildren/4)));
+      }
+     
+     parent.appendChild(row);
+     row.appendChild(startDebutText);
+     row.appendChild(startDebut);
+     row.appendChild(startFinText);
+     row.appendChild(startEnd);
+     row.appendChild(br);
      }
     }
     else
     {
-     size = ordinateur.value*2 - children.length;
-     for (i=0;i<size/2;i++)
+     size = ordinateur.value*4 - children.length;
+     sizeChildren = children.length;
+     for (i=0;i<size/4;i++)
      {
-     let startDebut = document.createElement('input');
-     let sautLigne = document.createElement('br')
-     let startDebutText = document.createTextNode("Debut"); 
-     let startFinText = document.createTextNode("Fin");
+      
+      var br = document.createElement("br");
+      let startDebut = document.createElement('input');
+      let row = document.createElement("row");
+      let startEnd = document.createElement('input');
+      let startDebutText = document.createElement("input"); 
+      let startFinText = document.createElement("input");
+
      startDebut.setAttribute("type","time");
      startDebut.setAttribute("class","clear");
-     let startEnd = document.createElement('input');
+     if (idService >=2 && idService <=4) {
+     startDebut.setAttribute("id","ordinateurStart["+idService+"]"+(i+(sizeChildren/4)));
+     startDebut.setAttribute("name","ordinateurStart"+idService+"_"+(i+(sizeChildren/4)));
+
+     }
+     else if (idService == 5)
+     {
+      startDebut.setAttribute("id","tabletteStart["+idService+"]"+(i+(sizeChildren/4)));
+      startDebut.setAttribute("name","tabletteStart"+idService+"_"+(i+(sizeChildren/4)));
+
+
+     }
+     else if (idService == 6)
+     {
+      startDebut.setAttribute("id","audioGuidesStart["+idService+"]"+(i+(sizeChildren/4)));
+      startDebut.setAttribute("name","audioGuidesStart"+idService+"_"+(i+(sizeChildren/4)));
+
+     }
+     else if (idService == 15)
+     {
+      startDebut.setAttribute("id","transportAnimalStart["+idService+"]"+(i+(sizeChildren/4)));
+      startDebut.setAttribute("name","transportAnimalStart"+idService+"_"+(i+(sizeChildren/4)));
+
+     } 
+     else if (idService == 16)
+     {
+      startDebut.setAttribute("id","transportVeteniraireStart["+idService+"]"+(i+(sizeChildren/4)));
+      startDebut.setAttribute("name","transportVeteniraireStart"+idService+"_"+(i+(sizeChildren/4)));
+
+     } 
+     else if (idService == 18)
+     {
+      startDebut.setAttribute("id","menuJourStart["+idService+"]"+(i+(sizeChildren/4)));
+      startDebut.setAttribute("name","menuJourStart"+idService+"_"+(i+(sizeChildren/4)));
+
+     }
+     else if (idService == 19)
+     {
+      startDebut.setAttribute("id","menuGastronomiqueStart["+idService+"]"+(i+(sizeChildren/4)));
+      startDebut.setAttribute("name","menuGastronomiqueStart"+idService+"_"+(i+(sizeChildren/4)));
+
+     }
+     startDebutText.setAttribute("type","text");
+     startDebutText.setAttribute("class","clear");
+     startDebutText.setAttribute("value","Date de début");
+     startDebutText.setAttribute("disabled","disabled");
+
+     startFinText.setAttribute("type","text");
+     startFinText.setAttribute("class","clear");
+     startFinText.setAttribute("value","Date de fin");
+     startFinText.setAttribute("disabled","disabled");
+
      startEnd.setAttribute("type","time");
      startEnd.setAttribute("class","clear");
-     parent.appendChild(startDebutText);
-     parent.appendChild(startDebut);
-     parent.appendChild(startFinText);
-     parent.appendChild(startEnd);
-     parent.appendChild(sautLigne);
-     }
+     if (idService >=2 && idService <=4) {
+      startEnd.setAttribute("id","ordinateurEnd["+idService+"]"+(i+(sizeChildren/4)));
+      startEnd.setAttribute("name","ordinateurEnd"+idService+"_"+(i+(sizeChildren/4)));
+
     }
-    console.log(size)
+      else if (idService == 5)
+      {
+        startEnd.setAttribute("id","tabletteEnd["+idService+"]"+(i+(sizeChildren/4)));
+        startEnd.setAttribute("name","tabletteEnd"+idService+"_"+(i+(sizeChildren/4)));
+
  
-}
+      }
+      else if (idService == 6)
+      {
+        startEnd.setAttribute("id","audioGuidesEnd["+idService+"]"+(i+(sizeChildren/4)));
+        startEnd.setAttribute("name","audioGuidesEnd"+idService+"_"+(i+(sizeChildren/4)));
 
+      }
 
+      else if (idService == 15)
+      {
+        startEnd.setAttribute("id","transportAnimalEnd["+idService+"]"+(i+(sizeChildren/4)));
+        startEnd.setAttribute("name","transportAnimalEnd"+idService+"_"+(i+(sizeChildren/4)));
 
+      } 
+      else if (idService == 16)
+      {
+        startEnd.setAttribute("id","transportVeteniraireEnd["+idService+"]"+(i+(sizeChildren/4)));
+        startEnd.setAttribute("name","transportVeteniraireEnd"+idService+"_"+(i+(sizeChildren/4)));
 
+      } 
+      else if (idService == 18)
+      {
+        startEnd.setAttribute("id","menuJourEnd["+idService+"]"+(i+(sizeChildren/4)));
+        startEnd.setAttribute("name","menuJourEnd"+idService+"_"+(i+(sizeChildren/4)));
+
+      }
+      else if (idService == 19)
+      {
+        startEnd.setAttribute("id","menuGastronomiqueEnd["+idService+"]"+(i+(sizeChildren/4)));
+        startEnd.setAttribute("name","menuGastronomiqueEnd"+idService+"_"+(i+(sizeChildren/4)));
+
+      }
 
   
-
-
-
-
+     parent.appendChild(row);
+     row.appendChild(startDebutText);
+     row.appendChild(startDebut);
+     row.appendChild(startFinText);
+     row.appendChild(startEnd);
+     row.appendChild(br);
+     }
+    }
+ 
+}
 
 function checkIfSameDay(dateDebut,dateFin) {
 
@@ -618,5 +857,256 @@ function checkIfSameDay(dateDebut,dateFin) {
   array.push(dateStart,dateEnd);
   return array;
   
+}
+
+function checkHeureDebutOrdinateur(heure)
+{
+  clearInput(heure);
+  var array = new Array;
+  var arrayInterprete = new Array;
+  var nbService=-1;
+  nbInterprete = heure.id.split("endInterprete");
+  var service = heure.id;
+  service = service.split("[");
+  var idService = service[1].split("]");
+  idService = idService[0]
+  nbService = service[1].split("]");
+  nbService = nbService[1];
+  var dateStartTrajet = new Date();
+  var dateEndTrajet = new Date();
+  var dateStartInterprete = new Date();
+  var dateEndtInterprete = new Date();
+  var parent = heure.parentNode;
+  //console.log(parent)
+  // Date du trajet
+  array = checkIfSameDay(document.getElementById("heureTrajetDebut"),document.getElementById("heureTrajetFin"));
+
+  dateStartTrajet = array[0];
+  dateEndTrajet = array[1];
+
+  // Heure début de l'interprete
+  nameService = heure.id.split("["+idService+"]"+nbService);
+  nameService = nameService[0].split("End");
+  nameService = nameService[0];
+  //console.log(nameService);
+  //console.log(nameService+"Start["+idService+"]"+nbService);
+  heureDebutInterprete = heure.value;
+  heureDebutInterprete = heureDebutInterprete.split(":")
+  dateStartInterprete.setHours(heureDebutInterprete[0])
+  dateStartInterprete.setMinutes(heureDebutInterprete[1]);
+
+  // Heure fin de l'interprete
+  heureFinInterprete = heure.value;
+  heureFinInterprete = heureFinInterprete.split(":")
+  dateEndtInterprete.setHours(heureFinInterprete[0])
+  dateEndtInterprete.setMinutes(heureFinInterprete[1])
+
+
+
+  if (dateStartInterprete.getHours() >= dateStartTrajet.getHours() &&  dateStartInterprete.getHours() <= dateEndTrajet.getHours() &&  
+  dateEndtInterprete.getHours() >= dateStartTrajet.getHours() &&  dateEndtInterprete.getHours() <= dateEndTrajet.getHours() && dateEndtInterprete.getHours() >= dateStartInterprete.getHours())
+  {
+
+  }
+  else {
+    if (dateStartInterprete.getHours() + dateStartTrajet.getHours() >= dateStartTrajet.getHours() && dateStartInterprete.getHours() + dateStartTrajet.getHours() <= dateStartTrajet.getHours() + dateEndTrajet.getHours())
+    {
+      dateStartInterprete.setDate(dateStartInterprete.getDate()+1);
+
+    }
+    if (dateEndtInterprete.getHours() + dateStartTrajet.getHours() >= dateStartTrajet.getHours() && dateEndtInterprete.getHours() + dateStartTrajet.getHours() <= dateStartTrajet.getHours() + dateEndTrajet.getHours())
+    {
+      dateEndtInterprete.setDate(dateEndtInterprete.getDate()+1);
+  
+    }
+  }
+  
+
+ 
+   
+
+  //  console.log(dateStartTrajet)
+  //  console.log(dateEndTrajet)
+  //  console.log(dateStartInterprete)
+  //  console.log(dateEndtInterprete)
+
+
+   if (dateStartInterprete.getTime() >= dateStartTrajet.getTime() && 
+   dateStartInterprete.getTime() <= dateEndTrajet.getTime() && 
+   dateEndtInterprete.getTime() >= dateStartInterprete.getTime() && 
+   dateEndtInterprete.getTime() <= dateEndTrajet.getTime() && 
+   dateEndtInterprete.getTime() >= dateStartInterprete.getTime())
+  {
+    return true;
+  }
+  else 
+  {
+    displayError(heure, '');
+    return false;
+  }
+}
+
+function checkHeureFinOrdinateur(heure) 
+{
+  clearInput(heure);
+  console.log(heure)
+  var array = new Array;
+  var arrayInterprete = new Array;
+  var nbService=-1;
+  nbInterprete = heure.id.split("endInterprete");
+  var service = heure.id;
+  service = service.split("[");
+ 
+  var idService = service[1].split("]");
+  idService = idService[0]
+  nbService = service[1].split("]");
+  nbService = nbService[1];
+  var dateStartTrajet = new Date();
+  var dateEndTrajet = new Date();
+  var dateStartInterprete = new Date();
+  var dateEndtInterprete = new Date();
+  var parent = heure.parentNode;
+  // Date du trajet
+  array = checkIfSameDay(document.getElementById("heureTrajetDebut"),document.getElementById("heureTrajetFin"));
+
+  dateStartTrajet = array[0];
+  dateEndTrajet = array[1];
+
+  // Heure début de l'interprete
+  nameService = heure.id.split("["+idService+"]"+nbService);
+  nameService = nameService[0].split("End");
+  nameService = nameService[0];
+  //console.log(nameService);
+  //console.log(nameService+"Start["+idService+"]"+nbService);
+  heureDebutInterprete = document.getElementById(nameService+"Start["+idService+"]"+nbService).value;
+  heureDebutInterprete = heureDebutInterprete.split(":")
+  dateStartInterprete.setHours(heureDebutInterprete[0])
+  dateStartInterprete.setMinutes(heureDebutInterprete[1]);
+
+  // Heure fin de l'interprete
+  heureFinInterprete = heure.value;
+  heureFinInterprete = heureFinInterprete.split(":")
+  dateEndtInterprete.setHours(heureFinInterprete[0])
+  dateEndtInterprete.setMinutes(heureFinInterprete[1])
+
+
+
+  if (dateStartInterprete.getHours() >= dateStartTrajet.getHours() &&  dateStartInterprete.getHours() <= dateEndTrajet.getHours() &&  
+  dateEndtInterprete.getHours() >= dateStartTrajet.getHours() &&  dateEndtInterprete.getHours() <= dateEndTrajet.getHours() && dateEndtInterprete.getHours() >= dateStartInterprete.getHours())
+  {
+
+  }
+  else {
+    if (dateStartInterprete.getHours() + dateStartTrajet.getHours() >= dateStartTrajet.getHours() && dateStartInterprete.getHours() + dateStartTrajet.getHours() <= dateStartTrajet.getHours() + dateEndTrajet.getHours())
+    {
+      dateStartInterprete.setDate(dateStartInterprete.getDate()+1);
+
+    }
+    if (dateEndtInterprete.getHours() + dateStartTrajet.getHours() >= dateStartTrajet.getHours() && dateEndtInterprete.getHours() + dateStartTrajet.getHours() <= dateStartTrajet.getHours() + dateEndTrajet.getHours())
+    {
+      dateEndtInterprete.setDate(dateEndtInterprete.getDate()+1);
+  
+    }
+  }
+  
+
+ 
+   
+
+  //  console.log(dateStartTrajet)
+  //  console.log(dateEndTrajet)
+  //  console.log(dateStartInterprete)
+  //  console.log(dateEndtInterprete)
+
+
+   if (dateStartInterprete.getTime() >= dateStartTrajet.getTime() && 
+   dateStartInterprete.getTime() <= dateEndTrajet.getTime() && 
+   dateEndtInterprete.getTime() >= dateStartInterprete.getTime() && 
+   dateEndtInterprete.getTime() <= dateEndTrajet.getTime() && 
+   dateEndtInterprete.getTime() >= dateStartInterprete.getTime())
+  {
+    return true;
+  }
+  else 
+  {
+    displayError(heure, '');
+    return false;
+  }
+  
+}
+
+function checkheure(button)
+{
+  if (button.id >= 2 && button.id <=6 || button.id <=9 || button.id == 15 ||button.id == 16 || button.id==18 ||button.id == 19) {
+  
+  button.removeAttribute("data-dismiss");
+  var count=0;
+  firstChild = parent[1]
+  form = document.getElementById("form"+button.id);
+  parent = form.childNodes;
+  for (i=5;i<parent.length;i++)
+  {
+    
+    child = parent[i];
+    child = child.childNodes;
+    for (j=0;j<5;j++)
+    {
+      if (j==1 || j==3)
+      {
+        style = child[j].getAttributeNode("style");
+        if (style != null)
+        {
+        
+          if (child[j].getAttributeNode("style").value !== "" || child[j].value === "")
+          {
+   
+            count++;
+          }
+        }
+        else
+        {
+          if (child[j].value === "")
+          {
+            count++;
+          }
+        }
+       
+      }
+    }
+   
+  }
+  if ( parent[1].value === "")
+  {
+   button.setAttribute("data-dismiss","modal");
+  }
+ if (count == 0 && parent[1].value !== "")
+ {
+  style = parent[1].getAttributeNode("style");
+  if (style != null)
+  {
+    if (parent[1].getAttributeNode("style").value === "" && parent[1].value !== "")
+    {
+      button.setAttribute("data-dismiss","modal");
+      return true;
+    }
+  }
+  else
+  {
+      button.setAttribute("data-dismiss","modal");
+      return true;
+  }
+ }
+
+ 
+ else
+ {
+   return false
+ }
+}
+else
+ {
+  button.setAttribute("data-dismiss","modal");
+   return true;
+ }
 }
 

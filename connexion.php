@@ -143,34 +143,45 @@ loadLanguageFromSession($_SESSION['lang']);
 
 
 if (isset($_POST["forget"])){
-  if (isset($_POST["email"])&&!empty($_POST["email"])) {
+    if (isset($_POST["email"])&&!empty($_POST["email"])) {
 
-    require_once 'Class/Autoloader.php';
-    App\Autoloader::register();
-    $bdd = new App\Database('rip');
+      require_once 'Class/Autoloader.php';
+      App\Autoloader::register();
+      $bdd = new App\Database('rip');
 
-    $password = generateRandomString();
-    $passwordHash = chiffrerPassword($password);
-    $email = $_POST['email'];
-    $query = $bdd->getPDO()->prepare("UPDATE users SET
-      password = :password
-      WHERE email = :email");
-      $query->execute([
-        "email"=>$email,
-        "password"=>$passwordHash
+      $query = $bdd->queryOne('SELECT * FROM users where email = "'.$_POST["email"].'" ');
+      if (isset($query)&&!empty($query)){
 
-      ]);
-    $subject = "Nouveau mot de passe";
-    $body = "Bonjour ,\n Voici votre nouveau mot de passe : ".$password;
 
-    require_once "mail.php";
-      \App\sendMail($email,$subject,$body);
+      $password = generateRandomString();
+      $passwordHash = chiffrerPassword($password);
+      $email = $_POST['email'];
+      $query = $bdd->getPDO()->prepare("UPDATE users SET
+        password = :password
+        WHERE email = :email");
+        $query->execute([
+          "email"=>$email,
+          "password"=>$passwordHash
 
-    ?>
-    <div class="alert alert-success" role="alert">
-    Un mail avec votre nouveau mot de passe a été envoyé.
-    </div>
-    <?php
+        ]);
+      $subject = "Nouveau mot de passe";
+      $body = "Bonjour ,\n Voici votre nouveau mot de passe : ".$password;
+
+      require_once "mail.php";
+        \App\sendMail($email,$subject,$body);
+
+      ?>
+      <div class="alert alert-success" role="alert">
+      Un mail avec votre nouveau mot de passe a été envoyé.
+      </div>
+      <?php
+    }else {
+      ?>
+      <div class="alert alert-warning" role="alert">
+      Votre email n'est pas dans notre base de donnée
+      </div>
+      <?php
+    }
   }
 }
    ?>

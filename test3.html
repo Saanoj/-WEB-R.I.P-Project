@@ -1,0 +1,17 @@
+
+ <input type="number"   onblur="test(this)"/>
+<script>
+function test(ordinateur) {
+  for (i=0;i<10;i++) {
+    parent = ordinateur.parentNode;
+  var br = document.createElement("br");
+  let startEnd = document.createElement('input');
+  let row = document.createElement("row");
+  parent.appendChild(row);
+  row.appendChild(br);
+  row.appendChild(startEnd);
+  
+  }
+
+}
+</script>

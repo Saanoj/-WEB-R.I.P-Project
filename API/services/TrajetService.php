@@ -56,6 +56,25 @@ class TrajetService {
     return $list;
   }
 
+  public function allTripsOld(int $idCollaborateur): array{
+    $db = DatabaseManager::getDatabase();
+    $list = $db->getALL('SELECT * FROM trajet WHERE state = "Finis"  AND idChauffeur = ? ORDER BY heureDebut',[$idCollaborateur]);
+
+    //if not a driver
+    if (empty($list)) {
+        $listLink = $db->getALL('SELECT idTrajet FROM linkservicetrajet WHERE (idService=11 OR idService=12 OR idService=13) AND idAnnexe = ? AND statut=1',[$idCollaborateur]);
+        //print_r($listLink);
+
+        $list2 = array();
+        foreach ($listLink as $key => $idTrajet) {
+          $trip = $db->findOne('SELECT * FROM trajet WHERE idTrajet = ? AND state = "Finis" ',[$idTrajet["idTrajet"]]);
+          array_push($list2,$trip);
+        }
+        return $list2;
+    }
+    return $list;
+  }
+
   public function deleteTrip(int $idTrip): int{
     $db = DatabaseManager::getDatabase();
     $list = $db->exec('DELETE FROM trajet WHERE idTrajet = ?',[$idTrip]);

@@ -1,3 +1,33 @@
+$(document).ready(function() {
+    // var button = radio.name.split('services');
+    let count=0;
+     for (i=0;i<100;i++)
+     {
+       if(document.getElementById("idRestaurant"+i) == "" || document.getElementById("idRestaurant"+i) == null)
+       {
+       }
+       else
+       {
+         count++;
+  
+      
+           
+       }
+     }
+       if (count == 0)
+       {
+         var parent = document.getElementById("slider1").parentNode;
+         var text = document.createElement("p");
+         document.getElementById("slider1").style.visibility="hidden";
+         text.innerHTML="Non disponible";
+         parent.appendChild(text);
+         document.getElementById("slider1");
+ 
+       }
+   
+ 
+});
+
 function displayError(input, message) {
   input.style.borderColor = 'red';
   var error = document.createElement('p');
@@ -271,25 +301,6 @@ function checkHeureFinCulture(heure)
   }
 }
 
-function checkGlobal(donnees)
-
-{
-var interprete = checkHeureFinInterprete(donnees.heure);
-var interpreteDebut = checkHeureDebutInterprete(donnees.heure);
-var sportif = checkHeureFinSportif(donnees.heure);
-var culture = checkHeureFinCulture(donnees.heure);
-
-
-
-if (interprete && sportif && culture && interpreteDebut)
-{
-  return true;
-}
-else {
-  return false;
-}
-}
-
 function checkRadioInterprete(radio)
 {
   var button = radio.name.split('idInterprete');
@@ -530,8 +541,6 @@ else if (idService >= 18 && idService <=19 || idService == 9)
 }
 
 }
-
-
 
 function removeAllOrdinateur(ordinateur) {
   
@@ -1109,4 +1118,33 @@ else
    return true;
  }
 }
+
+function checkGlobal(donnees)
+
+{
+  console.log(donnees)
+//var interpreteDebut = checkHeureDebutInterprete(donnees.heure);
+//var sportifDebut = checkHeureDebutSportif(donnees.heure);
+//var cultureDebut = checkHeureDebutCulture(donnees.heure);
+//var interpreteFin = checkHeureFinInterprete(donnees.heure);
+//var sportifFin = checkHeureFinSportif(donnees.heure);
+//var cultureFin = checkHeureFinCulture(donnees.heure);
+
+
+console.log("test")
+//if (interpreteDebut && sportifDebut && cultureDebut && interpreteDebut && interpreteFin && sportifFin && cultureFin )
+//{
+  //return true;
+///}
+//else {
+  //return false;
+//}
+//return false;
+}
+
+
+
+
+
+
 

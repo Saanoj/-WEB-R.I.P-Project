@@ -45,24 +45,7 @@ loadLanguageFromSession($_SESSION['lang']);
   $isAbonnee = $req->fetch();
 
 
-  //que si on a un abonnement
-  if (!empty($isAbonnee['idAbonnement'])) {
-  // ON VERIFIE LA DIFFERENCE D'HEURE ENTRE LE DEBUT ET LA FIN DU CRENEAU DE L"INTERPRETE
-  $_SESSION['startInterprete'];
-  $_SESSION['endInterprete'];
-
-  //si temps de trajet < 1H alors on passe le temps d'interprete a un 1 et si au dessus on la tronque à l'heure en dessous
-  $hourInterprete = (strtotime($_SESSION['endInterprete']) - strtotime($_SESSION['startInterprete']));
-  $hourInterprete = $hourInterprete/3600>1?floor($hourInterprete/3600):ceil($hourInterprete/3600);
-
-  // ON VERIFIE LA DIFFERENCE D'HEURE ENTRE LE DEBUT ET LA FIN DU CRENEAU DU COACH SPORTIF
-  $hourCoachSportif = (strtotime($_SESSION['endCoachSportif']) - strtotime($_SESSION['startCoachSportif']));
-  $hourCoachSportif = $hourCoachSportif/3600>1?floor($hourCoachSportif/3600):ceil($hourCoachSportif/3600);
-
-  //  ON VERIFIE LA DIFFERENCE D'HEURE ENTRE LE DEBUT ET LA FIN DU CRENEAU DU COACH CULTURE
-  $hourCoachCulture = (strtotime($_SESSION['endCoachCulture']) - strtotime($_SESSION['startCoachCulture']));
-  $hourCoachCulture =  $hourCoachCulture/3600>1?floor($hourCoachCulture/3600):ceil($hourCoachCulture/3600);
-  }
+  
   // On recupere l'objet trajet contenant nos infos de trajet depuis la session
   $trajet = unserialize($_SESSION['trajet']);
 
@@ -251,7 +234,7 @@ loadLanguageFromSession($_SESSION['lang']);
                     }else {
                       //on boucle les id des services choisis
                       $totalServices = 0;
-                      $i=0;$j=0;$k=0;
+                      $i=0;$j=0;$k=0;$h=0;$l=0;$m=0;$n=0;$o=0;
                       foreach ($idServices as $unIdService) {
                         //on recupere les infos du service en fonction de son id
                         $service = $bdd->queryOne('SELECT * FROM services WHERE idService='.$unIdService["idService"].'');
@@ -275,21 +258,24 @@ loadLanguageFromSession($_SESSION['lang']);
                           $typeEtablissement="Interprete";
                           $infoLinkService=$infoLinkService[$i];
                           $i++;
-                          $numHour=$hourInterprete;
+                          $numHour=calculHeure($bdd,11,$trajet);
+                          //$numHour=$hourInterprete;
 
                         }elseif ($unIdService["idService"] == 12) {
                           $infoLinkService = $bdd->query('SELECT *  FROM collaborateurs INNER JOIN linkservicetrajet WHERE collaborateurs.idCollaborateurs = linkservicetrajet.idAnnexe AND idTrajet='.$_SESSION["idTrajet"].' AND idService ='.$unIdService["idService"].'');
                           $typeEtablissement="Coach Sportif";
                           $infoLinkService=$infoLinkService[$j];
                           $j++;
-                          $numHour=$hourCoachSportif;
+                          $numHour=calculHeure($bdd,12,$trajet); 
+                         // $numHour=$hourCoachSportif;
 
                         }elseif ($unIdService["idService"] == 13) {
                           $infoLinkService = $bdd->query('SELECT *  FROM collaborateurs INNER JOIN linkservicetrajet WHERE collaborateurs.idCollaborateurs = linkservicetrajet.idAnnexe AND idTrajet='.$_SESSION["idTrajet"].' AND idService ='.$unIdService["idService"].'');
                           $typeEtablissement="Coach Culture";
                           $infoLinkService=$infoLinkService[$k];
                           $k++;
-                          $numHour=$hourCoachCulture;
+                          $numHour=calculHeure($bdd,13,$trajet);
+                         // $numHour=$hourCoachCulture;
 
                         }else {
                           $numHour=0;
@@ -298,11 +284,52 @@ loadLanguageFromSession($_SESSION['lang']);
 
                         //Affichage des infos
                         if ($linkService["idAnnexe"] < 0) {
-                          echo $service["nomService"].":  ".$linkService["quantite"]." * ".$service["prixService"]."€  = ".($service["prixService"]*$linkService["quantite"])."€";
-                          $totalServices += ($service["prixService"]*$linkService["quantite"]);
+                          if ($unIdService["idService"] == 2) {
+                            if ($h == 0) {
+                              $q = countElement($bdd,$service["idService"]);
+                              echo $service["nomService"].":  ".$q." * ".$service["prixService"]."€  = ".$service["prixService"]*$q."€";
+                              $totalServices += ($service["prixService"]*$q);
+                              $h++;
+                            }
+                      }
 
-                        }
+                  if ($unIdService["idService"] == 3) {
+                    if ($l == 0) {
+                      $q = countElement($bdd,$service["idService"]);
+                      echo $service["nomService"].":  ".$q." * ".$service["prixService"]."€  = ".$service["prixService"]*$q."€";
+                      $totalServices += ($service["prixService"]*$q);
+                      $l++;
+                    }
+              }
 
+              if ($unIdService["idService"] == 4) {
+                if ($m == 0) {
+                  $q = countElement($bdd,$service["idService"]);
+                  echo $service["nomService"].":  ".$q." * ".$service["prixService"]."€  = ".$service["prixService"]*$q."€";
+                  $totalServices += ($service["prixService"]*$q);
+                  $m++;
+                }
+          }
+          if ($unIdService["idService"] == 5) {
+            if ($n == 0) {
+              $q = countElement($bdd,$service["idService"]);
+              echo $service["nomService"].":  ".$q." * ".$service["prixService"]."€  = ".$service["prixService"]*$q."€";
+              $totalServices += ($service["prixService"]*$q);
+              $n++;
+            }
+      }
+      if ($unIdService["idService"] == 6) {
+        if ($o == 0) {
+          $q = countElement($bdd,$service["idService"]);
+          echo $service["nomService"].":  ".$q." * ".$service["prixService"]."€  = ".$service["prixService"]*$q."€";
+          $totalServices += ($service["prixService"]*$q);
+          $o++;
+        }
+  }
+}
+                    
+               
+      
                         else if ($linkService["idService"] == 10) {
 
                           echo $service["nomService"]." service | "."Votre message est  : ".$unMessage['contenuMessage']." publié le : ".$unMessage['dateMessage']." | 0€ ";
@@ -375,3 +402,51 @@ loadLanguageFromSession($_SESSION['lang']);
   <?php include "includehtml/footer.php" ?>
 </body>
 </html>
+
+
+<?php 
+
+function countElement($bdd,$idService) 
+{
+  $count=0;
+  $req = $bdd->getPDO()->prepare('SELECT * FROM linkservicetrajet WHERE idService = :idService AND idTrajet = :idTrajet');
+  $req->execute(array(
+    'idService' => $idService,
+    'idTrajet' => $_SESSION['idTrajet']
+  ));
+  while ($c = $req->fetch())
+  {
+    $count++;
+  }
+  return $count;
+}
+
+function calculHeure($bdd,$idService,$trajet) 
+{
+  $req = $bdd->getPDO()->prepare('SELECT heureDebut,heureFin FROM trajet WHERE idTrajet = ?');
+  $req->execute(array($_SESSION['idTrajet']));
+  $dateTrajet = $req->fetch();
+  $dateDebutTrajet  = new DateTime($dateTrajet['heureDebut'], new DateTimeZone('Europe/Paris'));
+  $dateDebutTrajet = $dateDebutTrajet->format('Y-m-d H:i:s');
+  $dateDebutTrajet = explode(' ',$dateDebutTrajet);
+  $dateFinTrajet  = new DateTime($dateTrajet['heureFin'], new DateTimeZone('Europe/Paris'));
+  $dateFinTrajet = $dateFinTrajet->format('Y-m-d H:i:s');
+  $dateFinTrajet = explode(' ',$dateFinTrajet);
+
+  $req = $bdd->getPDO()->prepare('SELECT idAnnexe,dateStart,dateEnd FROM linkservicetrajet WHERE idTrajet = :idTrajet AND idService = :idService');
+  $req->execute(array('idTrajet' => $_SESSION['idTrajet'],'idService' => $idService));
+ while ($unTrajet = $req->fetch())
+ {
+   $unTrajet['dateStart'] = $dateDebutTrajet[0]." ".$unTrajet['dateStart'];
+   $unTrajet['dateEnd'] = $dateFinTrajet[0]." ".$unTrajet['dateEnd'];
+
+   var_dump($unTrajet['dateStart']);
+   var_dump($unTrajet['dateEnd']);
+   $heures = strtotime($unTrajet['dateEnd']) - strtotime($unTrajet['dateStart']);
+   $heures /=3600;
+   return $heures;
+ } 
+
+}
+
+?>

@@ -63,7 +63,7 @@ loadLanguageFromSession($_SESSION['lang']);
               <?php $trajet->showInfosTrajet(); ?>
             </div>
 
-            <form class="list-group list-group-flush container" method="POST" action="valideReservationServices.php" >
+            <form class="list-group list-group-flush container" method="POST" action="valideReservationServices.php" onsubmit="return checkGlobal(this)">
 
 
               <div class="container">
@@ -120,7 +120,7 @@ loadLanguageFromSession($_SESSION['lang']);
                       <div class="col-md-2">
                         <label class="switch">
                           <input type="checkbox" class="primary" id="<?php echo $service->getIdService(); ?>" name="services[<?php echo $i ?>]" value="<?php echo $service->getIdService(); ?>" onchange="checkInput(this)">
-                          <span class="slider round"></span>
+                          <span class="slider round" id="slider<?=$service->getIdService();?>"></span>
                         </label>
                         <button style="visibility:hidden" id="services[<?php echo $i ?>]" type="button" href="#costumModal<?php echo $i ?>" data-target="#costumModal<?php echo $i ?>" name="services[<?php echo $service->getIdService(); ?>]" class="btn btn-info" data-toggle="modal">Choisir</button>
                       </div>
@@ -175,11 +175,11 @@ loadLanguageFromSession($_SESSION['lang']);
                                       <th scope="row"> <?= $unRestaurants['nom'];?></th>
                                       <td> <?= $unRestaurants['adresseRestaurant'];?></td>
                                       <td> <?= $unRestaurants['prix']. '€';?></td>
-                                      <td><input type="number" min="1" max="10" id="<?php echo $service->getIdService(); ?>" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]" value="1"></input></td>
+                                      <td><input type="number" min="1" max="10" id="<?php echo $service->getIdService(); ?>" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]" value="1"/></td>
 
                                       <td>
                                         <div class="funkyradio-primary col-md-6 center-block">
-                                          <input type="radio"  name="idRestaurant" id="<?php echo $unRestaurants['idRestaurant'] ?>" value="<?php echo $unRestaurants['idRestaurant'] ?>" checked ></input>
+                                          <input type="radio"  name="idRestaurant" id="idRestaurant<?php echo $unRestaurants['idRestaurant'] ?>" value="<?php echo $unRestaurants['idRestaurant'] ?>"  />
                                           <label for="radio<?php echo $unRestaurants['idRestaurant'] ?>">Choisir ce restaurant</label>
                                         </div>
                                       </td>
@@ -199,6 +199,7 @@ loadLanguageFromSession($_SESSION['lang']);
                               case '16' :
                               case '18' :
                               case '19' :
+                             
                               ?>
                            
                                               <!-- Modal content-->
@@ -249,11 +250,11 @@ loadLanguageFromSession($_SESSION['lang']);
                                     <td> <?= $unHotel['prix'] . '€ la nuit';?></td>
                                     <td> <?= $unHotel['typeChambre'];?></td>
                                     <td> <?= $unHotel['litsDispo'];?></td>
-                                    <td><input type="number" min="1" max="10" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]" value="1"></input></td>
+                                    <td><input type="number" min="1" max="10" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]" value="1"/></td>
 
                                     <td>
                                       <div class="funkyradio-primary col-md-6 center-block">
-                                        <input type="radio" name="idHotel" id="<?php echo $unHotel['idHotel'] ?>" value="<?php echo $unHotel['idHotel'] ?>" checked></input>
+                                        <input type="radio" name="idHotel" id="<?php echo $unHotel['idHotel'] ?>" value="<?php echo $unHotel['idHotel'] ?>" />
                                         <label for="radio<?php echo $unHotel['idHotel'] ?>">Choisir cet hotel</label>
                                       </div>
                                     </td>
@@ -537,6 +538,7 @@ loadLanguageFromSession($_SESSION['lang']);
         </div>
       </main>
       <?php include "includehtml/footer.php" ?>
+
       <script src="js/reservationChooseService/main.js"></script>
     </body>
     </html>

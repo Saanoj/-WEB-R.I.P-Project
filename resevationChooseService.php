@@ -175,7 +175,7 @@ loadLanguageFromSession($_SESSION['lang']);
                                       <th scope="row"> <?= $unRestaurants['nom'];?></th>
                                       <td> <?= $unRestaurants['adresseRestaurant'];?></td>
                                       <td> <?= $unRestaurants['prix']. '€';?></td>
-                                      <td><input type="number" min="1" max="10" id="<?php echo $service->getIdService(); ?>" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]" value="1"/></td>
+                                      <td><input type="number" min="1" max="10" id="<?php echo $service->getIdService(); ?>" id="quantites<?=$service->getIdService();?>" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]" value="1"/></td>
 
                                       <td>
                                         <div class="funkyradio-primary col-md-6 center-block">
@@ -208,7 +208,7 @@ loadLanguageFromSession($_SESSION['lang']);
                                          <div id="ordinateurs" class="modal-body">
                                        <?php /*  <form action="valideReservationServices.php" id="form<?=$service->getIdService();?>" method="POST" onsubmit="return checkheure(this)"> */ ?>
                                        
-                                         Quantité <input type="number" value=""  class="primary" name="quantite[<?php echo $service->getIdService(); ?>]"  onkeyup="checkQuantiteOrdinateur(this)"/>
+                                         Quantité <input type="number" value="" id="quantites<?=$service->getIdService();?>" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]"  onkeyup="checkQuantiteOrdinateur(this)"/>
                                      
                                         <br>
                                    

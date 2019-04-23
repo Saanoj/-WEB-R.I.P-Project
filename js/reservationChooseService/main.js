@@ -37,6 +37,44 @@ function displayError(input, message) {
   parent.appendChild(error);
 }
 
+function displayErrorP(input,message,i)
+{
+  
+  input.style.borderColor = 'red';
+  var error = document.createElement('p');
+  error.setAttribute("class","p_errorDonnee");
+  error.setAttribute("id","p_errorDonnee"+i);
+  error.innerHTML = message;
+  error.style.color = 'red';
+  var parent = input.parentNode;
+  parent.appendChild(error);
+}
+
+function displayErrorDonnees(input,message,id)
+{
+  input.style.borderColor = 'red';
+  var error = document.createElement('p');
+  error.setAttribute("class","errorDonnee");
+  error.setAttribute("id",id);
+  error.innerHTML = message;
+  error.style.color = 'red';
+  var parent = input.parentNode;
+  parent.appendChild(error);
+}
+
+function clearP(element)
+{
+  
+  var parent = element.parentNode
+  var elements = parent.getElementsByClassName('p_errorDonnee');
+    for (i=0;i<elements.length;i++)
+    {
+     let childNode = parent.lastChild;
+     parent.removeChild(childNode);
+    }
+}
+
+
 function clearInput(input) {
   input.style.borderColor = '';
 
@@ -44,6 +82,45 @@ function clearInput(input) {
   var elements = parent.getElementsByTagName('p');
   if(elements.length > 0){
     parent.removeChild(elements[0]);
+  }
+}
+
+function clearInputDonnees(donnees)
+{
+  var parent = donnees.parentNode
+  var elements = document.getElementsByClassName('errorDonnee');
+  
+    for (i=0;i<elements.length;i++)
+    {
+     let childNode = parent.lastChild;
+     parent.removeChild(childNode);
+    }
+}
+
+function checkIfErrorMessage(id)
+{
+  
+  var elements  = document.getElementById(id);
+  if (elements !== null)
+  {
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}
+
+function checkIfErrorMessageP(id)
+{
+  var elements  = document.getElementById(id);
+  if (elements !== null)
+  {
+    return true;
+  }
+  else
+  {
+    return false;
   }
 }
 
@@ -491,7 +568,6 @@ function checkQuantiteOrdinateur(ordinateur) {
   idService = idService.split("[");
   idService = idService[1].split("]");
   idService = idService[0]
-  console.log(idService);
   if (idService >= 2 && idService <=6) {
   if (ordinateur.value >= 1 && ordinateur.value <= 10 && ordinateur.value !== '')
   {  
@@ -500,6 +576,12 @@ function checkQuantiteOrdinateur(ordinateur) {
     return true;
 
   }
+  if (ordinateur.value == 0 || ordinateur.value === '')
+  {
+    clearInput(ordinateur);
+    checkOrdinateur(ordinateur);
+  }
+
   else{
    
     displayError(ordinateur, '');
@@ -516,6 +598,12 @@ else if (idService >= 15 && idService <=16)
     return true;
 
   }
+  if (ordinateur.value == 0 || ordinateur.value === '')
+  {
+    clearInput(ordinateur);
+    checkOrdinateur(ordinateur);
+  }
+ 
   else{
    
     displayError(ordinateur, '');
@@ -532,6 +620,12 @@ else if (idService >= 18 && idService <=19 || idService == 9)
     return true;
 
   }
+  if (ordinateur.value == 0 || ordinateur.value === '')
+  {
+    clearInput(ordinateur);
+    checkOrdinateur(ordinateur);
+  }
+
   else{
    
     displayError(ordinateur, '');
@@ -567,11 +661,13 @@ function checkOrdinateur(ordinateur) {
   var children = parent.getElementsByClassName('clear');
  if (children.length > ordinateur.value*4)
  {
+  clearP(ordinateur);
   clearInput(ordinateur);
   removeDateOrdinateur(ordinateur,parent);
  }
  else
  {
+  clearP(ordinateur);
   clearInput(ordinateur);
   addDateOrdinateur(ordinateur,parent,idService);
  }
@@ -594,7 +690,6 @@ function removeDateOrdinateur(ordinateur,parent)
 
 function addDateOrdinateur(ordinateur,parent,idService)
   {
-    console.log(idService);
     let size=0;
     parent = ordinateur.parentNode;
     let children = parent.getElementsByClassName('clear');
@@ -1122,24 +1217,77 @@ else
 function checkGlobal(donnees)
 
 {
-  console.log(donnees)
-//var interpreteDebut = checkHeureDebutInterprete(donnees.heure);
-//var sportifDebut = checkHeureDebutSportif(donnees.heure);
-//var cultureDebut = checkHeureDebutCulture(donnees.heure);
-//var interpreteFin = checkHeureFinInterprete(donnees.heure);
-//var sportifFin = checkHeureFinSportif(donnees.heure);
-//var cultureFin = checkHeureFinCulture(donnees.heure);
+  clearInputDonnees(donnees);
 
+  var array = new Array();
+  var count=0;
+  for (i=0;i<20;i++)
+  {
+    
+    if (document.getElementById("quantites"+i)  )
+    {
 
-console.log("test")
-//if (interpreteDebut && sportifDebut && cultureDebut && interpreteDebut && interpreteFin && sportifFin && cultureFin )
-//{
-  //return true;
-///}
-//else {
-  //return false;
-//}
-//return false;
+      element = document.getElementById("quantites"+i);      
+      if (element.style.borderColor !== '')
+      {
+        if (checkIfErrorMessageP("p_errorDonnee"+i) == false)
+        {
+       displayErrorP(element,"Erreur ! ",i);
+        }
+        count++;
+        array.push(element);
+      }
+      
+    }
+  }
+  if (count >0)
+  {
+    for (var i = 0; i < array.length; i++) {
+      element = array[i].id.split("quantites");
+      element = element[1];
+      if (element >= 2 && element <=6)
+      {
+        if(checkIfErrorMessage("appareils") == false)
+        {
+       
+          displayErrorDonnees(donnees,"Erreur de quantité dans la section : Locations appareils numériques.","appareils");
+        }
+     
+        
+      }
+      if (element == 9)
+      {
+        if(checkIfErrorMessage("visites") == false)
+        {
+          displayErrorDonnees(donnees,"Erreur de quantité dans la section : Préparations de visites touristiques.","visites");
+        
+        }
+      }
+      
+      if (element == 15 || element == 16)
+      {
+        if(checkIfErrorMessage("pets") == false)
+        {
+          displayErrorDonnees(donnees,"Erreur de quantité dans la section : Pets Sittings.","pets");
+      
+        }
+      }
+      if (element == 18 || element == 19)
+      {
+        if(checkIfErrorMessage("boissons") == false)
+        {
+          displayErrorDonnees(donnees,"Erreur de quantité dans la section : Services de repas et de boissons.","boissons");
+        }
+      }
+    }
+    return false;
+  }
+else
+{
+  // return true;
+  return false;
+}
+
 }
 
 

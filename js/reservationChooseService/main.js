@@ -37,6 +37,54 @@ function displayError(input, message) {
   parent.appendChild(error);
 }
 
+function displayErrorP(input,message,i)
+{
+  
+  input.style.borderColor = 'red';
+  var error = document.createElement('p');
+  error.setAttribute("class","p_errorDonnee");
+  error.setAttribute("id","p_errorDonnee"+i);
+  error.innerHTML = message;
+  error.style.color = 'red';
+  var parent = input.parentNode;
+  parent.appendChild(error);
+}
+
+function displayErrorDonnees(input,message,id)
+{
+  input.style.borderColor = 'red';
+  var error = document.createElement('p');
+  error.setAttribute("class","errorDonnee");
+  error.setAttribute("id",id);
+  error.innerHTML = message;
+  error.style.color = 'red';
+  var parent = input.parentNode;
+  parent.appendChild(error);
+  console.log(error);
+}
+
+function clearP(element)
+{
+  
+  var parent = element.parentNode
+  var elements = parent.getElementsByClassName('p_errorDonnee');
+    for (i=0;i<elements.length;i++)
+    {
+     let childNode = parent.lastChild;
+     parent.removeChild(childNode);
+    }
+}
+
+function clearPCollaborateurs(element) {
+  var parent = element.parentNode
+  var elements = parent.getElementsByClassName('collaborateurs_errorDonnee');
+    for (i=0;i<elements.length;i++)
+    {
+     let childNode = parent.lastChild;
+     parent.removeChild(childNode);
+    }
+}
+
 function clearInput(input) {
   input.style.borderColor = '';
 
@@ -45,6 +93,116 @@ function clearInput(input) {
   if(elements.length > 0){
     parent.removeChild(elements[0]);
   }
+}
+
+function clearInputDonnees(donnees)
+{
+  var parent = donnees.parentNode
+  var elements = document.getElementsByClassName('errorDonnee');
+  
+    for (i=0;i<elements.length;i++)
+    {
+     let childNode = parent.lastChild;
+     parent.removeChild(childNode);
+    }
+}
+
+function checkIfErrorMessage(id)
+{
+  
+  var elements  = document.getElementById(id);
+  if (elements !== null)
+  {
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}
+
+function checkIfErrorMessageP(id)
+{
+  var elements  = document.getElementById(id);
+  if (elements !== null)
+  {
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}
+
+function checkIfErrorMessageCollaborateurs(id) {
+  
+  var elements  = document.getElementById(id);
+  console.log(elements)
+  if (elements !== null)
+  {
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}
+function displayErrorMessageInterprete(input,message,j) {
+  input.style.borderColor = 'red';
+  var error = document.createElement('p');
+  error.setAttribute("class","errorDonnee");
+  error.setAttribute("id","collaborateurs_errorDonnee"+j);
+  error.innerHTML = message;
+  error.style.color = 'red';
+  var parent = input.parentNode;
+  parent.appendChild(error);
+
+}
+function displayErrorMessageCoachSportif(input,message,j) {
+  input.style.borderColor = 'red';
+  var error = document.createElement('p');
+  error.setAttribute("class","errorDonnee");
+  error.setAttribute("id","collaborateurs_errorDonnee"+j);
+  error.innerHTML = message;
+  error.style.color = 'red';
+  var parent = input.parentNode;
+  parent.appendChild(error);
+
+}
+function displayErrorMessageCoachCulture(input,message,j) {
+  input.style.borderColor = 'red';
+  var error = document.createElement('p');
+  error.setAttribute("class","errorDonnee");
+  error.setAttribute("id","collaborateurs_errorDonnee"+j);
+  error.innerHTML = message;
+  error.style.color = 'red';
+  var parent = input.parentNode;
+  parent.appendChild(error);
+
+}
+
+function displayErrorMessageCollaborateurs(input,message,j) {
+  input.style.borderColor = 'red';
+  var error = document.createElement('p');
+  error.setAttribute("class","errorDonnee");
+  error.setAttribute("id","collaborateurs_errorDonnee"+j);
+  error.innerHTML = message;
+  error.style.color = 'red';
+  var parent = input.parentNode;
+  parent.appendChild(error);
+
+}
+
+function displayErrorMessageBillets(input,message,j)
+{
+  input.style.borderColor = 'red';
+  var error = document.createElement('p');
+  error.setAttribute("class","errorDonnee");
+  error.setAttribute("id","billets_errorDonnee"+j);
+  error.innerHTML = message;
+  error.style.color = 'red';
+  var parent = input.parentNode;
+  parent.appendChild(error);
 }
 
 function checkHeureDebutSportif(heure) 
@@ -334,9 +492,43 @@ else{
 }
 }
 
+function checkRadioBillet(radio)
+{
+    var button = radio.name.split('idBillet');
+    var quantites = document.getElementById("quantites8["+button[1]+"]");
+  if(radio.checked == true && quantites.value > 0 && quantites.value <=5){
+    document.getElementById("buttonHours"+button[1]).style.visibility="visible";
+  }
+else{
+  document.getElementById("buttonHours"+button[1]).style.visibility="hidden";
+}
+}
+
+function checkRadioHotel(radio)
+{
+  var button = radio.name.split('idHotel');
+  button = button[1].split('[');
+  idHotel = button[0];
+  console.log(idHotel)
+  idChambre = button[1].split(']');
+  idChambre = idChambre[0]
+  console.log(idChambre)
+    if (radio.checked == true)
+    {
+      document.getElementById("buttonHoursHotel"+idHotel+"["+idChambre+"]").style.visibility="visible"
+    }
+    else
+    {
+      document.getElementById("buttonHoursHotel"+idHotel+"["+idChambre+"]").style.visibility="hidden"
+    }
+}
+
+
+
 function checkInput(radio)
 {
   var button = radio.name.split('services');
+  
 
   if(radio.checked == true){
     document.getElementById("services"+button[1]).style.visibility="visible";
@@ -348,8 +540,151 @@ else{
 }
 }
 
+function checkHeureFinBillet(heure) {
+
+  clearInput(heure);
+  //clearPCollaborateurs(heure);
+  var array = new Array;
+  nbInterprete = heure.id.split("endBillet");
+  var dateStartTrajet = new Date();
+  var dateEndTrajet = new Date();
+  var dateStartInterprete = new Date();
+  var dateEndtInterprete = new Date();
+  // Date du trajet
+  array = checkIfSameDay(document.getElementById("heureTrajetDebut"),document.getElementById("heureTrajetFin"));
+
+  dateStartTrajet = array[0];
+  dateEndTrajet = array[1];
+
+
+  // Heure début de l'interprete
+  heureDebutInterprete = heure.value;
+  heureDebutInterprete = heureDebutInterprete.split(":")
+  dateStartInterprete.setHours(heureDebutInterprete[0])
+  dateStartInterprete.setMinutes(heureDebutInterprete[1]);
+
+  // Heure fin de l'interprete
+  heureFinInterprete = heure.value;
+  heureFinInterprete = heureFinInterprete.split(":")
+  dateEndtInterprete.setHours(heureFinInterprete[0])
+  dateEndtInterprete.setMinutes(heureFinInterprete[1])
+
+   if (dateStartInterprete.getHours() >= dateStartTrajet.getHours() &&  dateStartInterprete.getHours() <= dateEndTrajet.getHours() &&  
+    dateEndtInterprete.getHours() >= dateStartTrajet.getHours() &&  dateEndtInterprete.getHours() <= dateEndTrajet.getHours() && dateEndtInterprete.getHours() >= dateStartInterprete.getHours())
+    {
+
+    }
+    else {
+      if (dateStartInterprete.getHours() + dateStartTrajet.getHours() >= dateStartTrajet.getHours() && dateStartInterprete.getHours() + dateStartTrajet.getHours() <= dateStartTrajet.getHours() + dateEndTrajet.getHours())
+      {
+        dateStartInterprete.setDate(dateStartInterprete.getDate()+1);
+
+      }
+      if (dateEndtInterprete.getHours() + dateStartTrajet.getHours() >= dateStartTrajet.getHours() && dateEndtInterprete.getHours() + dateStartTrajet.getHours() <= dateStartTrajet.getHours() + dateEndTrajet.getHours())
+      {
+        dateEndtInterprete.setDate(dateEndtInterprete.getDate()+1);
+    
+      }
+    }
+ 
+  if (dateStartInterprete.getTime() >= dateStartTrajet.getTime() && 
+  dateStartInterprete.getTime() <= dateEndTrajet.getTime() && 
+  dateEndtInterprete.getTime() >= dateStartInterprete.getTime() && 
+  dateEndtInterprete.getTime() <= dateEndTrajet.getTime() && 
+  dateEndtInterprete.getTime() >= dateStartInterprete.getTime())
+  {
+    return true;
+  }
+  else 
+  {
+    displayError(heure, '');
+    return false;
+  }
+
+}
+
+function checkHeureFinHotel(heure) {
+
+  clearInput(heure);
+  //clearPCollaborateurs(heure);
+  var array = new Array;
+  nbInterprete = heure.id.split("endHotel");
+  var dateStartTrajet = new Date();
+  var dateEndTrajet = new Date();
+  var dateStartInterprete = new Date();
+  var dateEndtInterprete = new Date();
+  // Date du trajet
+  array = checkIfSameDay(document.getElementById("heureTrajetDebut"),document.getElementById("heureTrajetFin"));
+
+  dateStartTrajet = array[0];
+  dateEndTrajet = array[1];
+
+
+  // Heure début de l'interprete
+  heureDebutInterprete = heure.value;
+  heureDebutInterprete = heureDebutInterprete.split(":")
+  dateStartInterprete.setHours(heureDebutInterprete[0])
+  dateStartInterprete.setMinutes(heureDebutInterprete[1]);
+
+  // Heure fin de l'interprete
+  heureFinInterprete = heure.value;
+  heureFinInterprete = heureFinInterprete.split(":")
+  dateEndtInterprete.setHours(heureFinInterprete[0])
+  dateEndtInterprete.setMinutes(heureFinInterprete[1])
+
+   if (dateStartInterprete.getHours() >= dateStartTrajet.getHours() &&  dateStartInterprete.getHours() <= dateEndTrajet.getHours() &&  
+    dateEndtInterprete.getHours() >= dateStartTrajet.getHours() &&  dateEndtInterprete.getHours() <= dateEndTrajet.getHours() && dateEndtInterprete.getHours() >= dateStartInterprete.getHours())
+    {
+
+    }
+    else {
+      if (dateStartInterprete.getHours() + dateStartTrajet.getHours() >= dateStartTrajet.getHours() && dateStartInterprete.getHours() + dateStartTrajet.getHours() <= dateStartTrajet.getHours() + dateEndTrajet.getHours())
+      {
+        dateStartInterprete.setDate(dateStartInterprete.getDate()+1);
+
+      }
+      if (dateEndtInterprete.getHours() + dateStartTrajet.getHours() >= dateStartTrajet.getHours() && dateEndtInterprete.getHours() + dateStartTrajet.getHours() <= dateStartTrajet.getHours() + dateEndTrajet.getHours())
+      {
+        dateEndtInterprete.setDate(dateEndtInterprete.getDate()+1);
+    
+      }
+    }
+ 
+  if (dateStartInterprete.getTime() >= dateStartTrajet.getTime() && 
+  dateStartInterprete.getTime() <= dateEndTrajet.getTime() && 
+  dateEndtInterprete.getTime() >= dateStartInterprete.getTime() && 
+  dateEndtInterprete.getTime() <= dateEndTrajet.getTime() && 
+  dateEndtInterprete.getTime() >= dateStartInterprete.getTime())
+  {
+    return true;
+  }
+  else 
+  {
+    displayError(heure, '');
+    return false;
+  }
+
+}
+
+function checkQuantiteBillet(billet) {
+  clearP(billet);
+  clearInput(billet);
+ if (billet.value >= 0 && billet.value <= 5)
+ {
+ 
+ 
+ }
+ else
+ {
+  //clearP(billet);
+  displayError(billet,' ');
+ // clearInput(ordinateur);
+ }
+}
+
 function checkHeureDebutInterprete(heure) {
   clearInput(heure);
+  clearPCollaborateurs(heure);
   var array = new Array;
   nbInterprete = heure.id.split("endInterprete");
   var dateStartTrajet = new Date();
@@ -408,11 +743,12 @@ function checkHeureDebutInterprete(heure) {
   }
   
   
-}
+} 
 
 function checkHeureFinInterprete(heure)
 {
   clearInput(heure);
+  clearPCollaborateurs(heure);
   var array = new Array;
   var arrayInterprete = new Array;
   nbInterprete = heure.id.split("endInterprete");
@@ -459,16 +795,6 @@ function checkHeureFinInterprete(heure)
     }
   }
   
-
- 
-   
-
-   console.log(dateStartTrajet)
-   console.log(dateEndTrajet)
-   console.log(dateStartInterprete)
-   console.log(dateEndtInterprete)
-
-
    if (dateStartInterprete.getTime() >= dateStartTrajet.getTime() && 
    dateStartInterprete.getTime() <= dateEndTrajet.getTime() && 
    dateEndtInterprete.getTime() >= dateStartInterprete.getTime() && 
@@ -491,7 +817,6 @@ function checkQuantiteOrdinateur(ordinateur) {
   idService = idService.split("[");
   idService = idService[1].split("]");
   idService = idService[0]
-  console.log(idService);
   if (idService >= 2 && idService <=6) {
   if (ordinateur.value >= 1 && ordinateur.value <= 10 && ordinateur.value !== '')
   {  
@@ -500,6 +825,12 @@ function checkQuantiteOrdinateur(ordinateur) {
     return true;
 
   }
+  if (ordinateur.value == 0 || ordinateur.value === '')
+  {
+    clearInput(ordinateur);
+    checkOrdinateur(ordinateur);
+  }
+
   else{
    
     displayError(ordinateur, '');
@@ -516,6 +847,12 @@ else if (idService >= 15 && idService <=16)
     return true;
 
   }
+  if (ordinateur.value == 0 || ordinateur.value === '')
+  {
+    clearInput(ordinateur);
+    checkOrdinateur(ordinateur);
+  }
+ 
   else{
    
     displayError(ordinateur, '');
@@ -532,6 +869,12 @@ else if (idService >= 18 && idService <=19 || idService == 9)
     return true;
 
   }
+  if (ordinateur.value == 0 || ordinateur.value === '')
+  {
+    clearInput(ordinateur);
+    checkOrdinateur(ordinateur);
+  }
+
   else{
    
     displayError(ordinateur, '');
@@ -567,11 +910,13 @@ function checkOrdinateur(ordinateur) {
   var children = parent.getElementsByClassName('clear');
  if (children.length > ordinateur.value*4)
  {
+  clearP(ordinateur);
   clearInput(ordinateur);
   removeDateOrdinateur(ordinateur,parent);
  }
  else
  {
+  clearP(ordinateur);
   clearInput(ordinateur);
   addDateOrdinateur(ordinateur,parent,idService);
  }
@@ -594,7 +939,6 @@ function removeDateOrdinateur(ordinateur,parent)
 
 function addDateOrdinateur(ordinateur,parent,idService)
   {
-    console.log(idService);
     let size=0;
     parent = ordinateur.parentNode;
     let children = parent.getElementsByClassName('clear');
@@ -1122,25 +1466,380 @@ else
 function checkGlobal(donnees)
 
 {
-  console.log(donnees)
-//var interpreteDebut = checkHeureDebutInterprete(donnees.heure);
-//var sportifDebut = checkHeureDebutSportif(donnees.heure);
-//var cultureDebut = checkHeureDebutCulture(donnees.heure);
-//var interpreteFin = checkHeureFinInterprete(donnees.heure);
-//var sportifFin = checkHeureFinSportif(donnees.heure);
-//var cultureFin = checkHeureFinCulture(donnees.heure);
+  clearInputDonnees(donnees);
+  var countError=0;
+    // On check les interprete, les coach sportif et les coach culture s'il possède des erreurs dans les dates 
+    // On fait la meme chose pour les billets touristiques et les hotels.
+  var countCollab=0;
+  var arrayCollab = new Array();
+  var interprete ="Interprete";
+  var coachSportif = "CoachSportif";
+  var coachCulture = "CoachCulture"
+  var billet = "Billet"
+  var hotel = "Hotel"
+  var start = "start"
+  var end = "end";
+  var countBillet = 0;
+  var arrayCollab = new Array;
+  var billet = "Billet"
+  var idBillet = 8
+  var hotel = "Hotel"
+  var idHotel = 9
+  var arrayHotel = new Array;
+
+  for (j=0;j<100;j++)
+  {
+    if (document.getElementById(start+interprete+j) !== null && document.getElementById(end+interprete+j) !== null)
+    {
+      var inputStart = document.getElementById(start+interprete+j);
+      var inputEnd = document.getElementById(end+interprete+j);
+      if (inputStart.style.borderColor !== '' || inputEnd.style.borderColor !== '')
+      {
+        if (checkIfErrorMessageCollaborateurs("collaborateurs_errorDonnee"+j) == false && document.getElementById(j).checked === true)
+          {
+             displayErrorMessageInterprete(inputStart,"Erreur ! ",j);
+          }
+      countCollab++;
+      arrayCollab.push(j);
+      }
+    }
+    else if (document.getElementById(start+coachSportif+j) !== null && document.getElementById(end+coachSportif+j) !== null)
+    {
+      var inputStart = document.getElementById(start+coachSportif+j);
+      var inputEnd = document.getElementById(end+coachSportif+j);
+      if (inputStart.style.borderColor !== '' || inputEnd.style.borderColor !== '')
+      {
+        if (checkIfErrorMessageCollaborateurs("collaborateurs_errorDonnee"+j) == false && document.getElementById(j).checked === true)
+          {
+             displayErrorMessageCoachSportif(inputStart,"Erreur ! ",j);
+          }
+      countCollab++;
+      arrayCollab.push(j);
+      }
+    }
+    else if (document.getElementById(start+coachCulture+j) !== null && document.getElementById(end+coachCulture+j) !== null)
+    {
+      var inputStart = document.getElementById(start+coachCulture+j);
+      var inputEnd = document.getElementById(end+coachCulture+j);
+      if (inputStart.style.borderColor !== '' || inputEnd.style.borderColor !== '')
+      {
+        if (checkIfErrorMessageCollaborateurs("collaborateurs_errorDonnee"+j) == false && document.getElementById(j).checked === true)
+          {
+             displayErrorMessageCoachCulture(inputStart,"Erreur ! ",j);
+          }
+      countCollab++;
+      arrayCollab.push(j);
+      }
+    }
+  
+    else if (document.getElementById("startBillet"+j) !== null)
+    {
+      var inputStart = document.getElementById("startBillet"+j);
+      if (inputStart.style.borderColor !== '')
+      {
+        //if (checkIfErrorMessageCollaborateurs("billets_errorDonnee"+j) == false)
+        //{
+        //     displayErrorMessageBillets(inputStart,"Erreur ! ",j);
+        //  }
+      countCollab++;
+      arrayCollab.push(j);
+      }
+    }
+   
+      for (k=0;k<30;k++)
+      {
+       // console.log(document.getElementById("startHotel"+j+"["+k+"]"))
+        if ( document.getElementById("startHotel"+j+"["+k+"]") !== null)
+        {
+        var inputStart = document.getElementById("startHotel"+j+"["+k+"]");
+        if (inputStart.style.borderColor !== '')
+        {
+        countCollab++;
+        arrayCollab.push(j);
+        arrayHotel.push(k);
+        }
+      }
+    }
+ 
+    
+   
+   
+  }
 
 
-console.log("test")
-//if (interpreteDebut && sportifDebut && cultureDebut && interpreteDebut && interpreteFin && sportifFin && cultureFin )
-//{
-  //return true;
-///}
-//else {
-  //return false;
-//}
-//return false;
+
+  if (countCollab >0)
+  {
+ 
+    for (var i = 0; i < arrayCollab.length; i++) {
+      //element = arrayCollab[i].id.split("quantites");
+      element = arrayCollab[i];
+      var inputStartInterprete = document.getElementById("startInterprete"+element);
+      var inputStartCoachSportif = document.getElementById("startCoachSportif"+element);
+      var inputStartCoachCulture = document.getElementById("startCoachCulture"+element);
+      var inputStartBillet = document.getElementById("startBillet"+element);
+
+
+
+      if (inputStartInterprete !== null)
+      {
+        inputStart = inputStartInterprete;
+      }
+      else if (inputStartCoachSportif !== null)
+      {
+        inputStart = inputStartCoachSportif;
+      }
+      else if (inputStartCoachCulture !== null)
+      {
+        inputStart = inputStartCoachCulture;
+      }
+      else if (inputStartBillet !== null)
+      {
+        inputStart = inputStartBillet;
+      }
+      if (inputStart === null)
+       {
+      for (var l = 0; l < arrayHotel.length; l++) {
+        element2 = arrayHotel[l];
+          if ( document.getElementById("startHotel"+element+"["+element2+"]") !== null)
+          {
+             inputStart = document.getElementById("startHotel"+element+"["+element2+"]");
+          }
+      }
+    }
+    
+      //console.log(inputStart);
+      var name = inputStart.id.split("start");
+      name2 = name[1].split(element);
+      name = name2[0]
+      console.log(name) // Ok
+      if (name == "Interprete")
+      {
+
+        var button = document.getElementById("11").parentNode;  
+        button = button.childNodes
+        button = button[1]
+        if(checkIfErrorMessage("interpreteError") == false && buttonChecked(button) == true && buttonChecked(document.getElementById(element).checked) ==true)
+        {
+          
+          displayErrorDonnees(donnees,"Erreur de date au niveau des interprètes","interpreteError");
+          countError++;
+        }
+    }
+    else if (name == "CoachSportif")
+    {
+      var button = document.getElementById("12").parentNode;  
+      button = button.childNodes
+      button = button[1]
+      if(checkIfErrorMessage("coachSportifError") == false && buttonChecked(button) == true)
+      {
+        
+        displayErrorDonnees(donnees,"Erreur de date au niveau des coach sportifs","coachSportifError");
+        countError++;
+      }
+    }
+    else if (name == "CoachCulture")
+    {
+      var button = document.getElementById("13").parentNode;  
+      button = button.childNodes
+      button = button[1]
+      if(checkIfErrorMessage("CoachCultureError") == false && buttonChecked(button) == true)
+      {
+        
+        displayErrorDonnees(donnees,"Erreur de date au niveau des coach cultures","CoachCultureError");
+        countError++;
+        
+      }
+    }
+    else if (name == "Billet")
+    {
+     
+
+      var button = document.getElementById("idBillet"+element);  
+      if(checkIfErrorMessage("BilletError") == false && buttonChecked(button) == true)
+      {
+        
+        displayErrorDonnees(donnees,"Erreur de date au niveau des billets touristiques","BilletError");
+        countError++;
+        
+      }
+    }
+    else if (name == "Hotel")
+    {
+      //console.log(inputStart);
+      var split = inputStart.id.split("startHotel");
+      split = split[1].split("[");
+      idHotel = split[0]
+      idChambre = split[1].split("]");
+      idChambre = idChambre[0];
+
+      var button = document.getElementById("idHotel"+idHotel+"["+idChambre+"]");  
+      if(checkIfErrorMessage("HotelError") == false && buttonChecked(button) == true)
+      {
+        
+        displayErrorDonnees(donnees,"Erreur de date au niveau des hôtels","HotelError");
+        countError++;
+        
+      }
+    }
+
+    }
+
+  }
+
+  var array = new Array();
+  var count=0;
+  for (i=0;i<200;i++)
+  {
+    
+    if (document.getElementById("quantites"+i))
+    {
+
+      element = document.getElementById("quantites"+i);      
+      if (element.style.borderColor !== '')
+      {
+        if (checkIfErrorMessageP("p_errorDonnee"+i) == false)
+        {
+       displayErrorP(element,"Erreur ! ",i);
+        }
+        count++;
+        array.push(element);
+      }
+      
+    }
+  }
+  if (count >0)
+  {
+    for (var i = 0; i < array.length; i++) {
+      element = array[i].id.split("quantites");
+      element = element[1];
+     
+      var button = document.getElementById("slider"+element).parentNode;  
+      button = button.childNodes
+      button = button[1]
+      if (element >= 2 && element <=6)
+      {
+    
+        if(checkIfErrorMessage("appareils") == false && buttonChecked(button) == true)
+        {
+      
+          displayErrorDonnees(donnees,"Erreur de quantité dans la section : Locations appareils numériques.","appareils");
+          countError++;
+        }
+     
+        
+      }
+     
+      if (element == 9)
+      {
+        if(checkIfErrorMessage("visites") == false && buttonChecked(button) == true)
+        {
+          displayErrorDonnees(donnees,"Erreur de quantité dans la section : Préparations de visites touristiques.","visites");
+          countError++;
+        
+        }
+      }
+      
+      if (element == 15 || element == 16)
+      {
+        if(checkIfErrorMessage("pets") == false && buttonChecked(button) == true)
+        {
+          displayErrorDonnees(donnees,"Erreur de quantité dans la section : Pets Sittings.","pets");
+          countError++;
+      
+        }
+      }
+      if (element == 18 || element == 19)
+      {
+        if(checkIfErrorMessage("boissons") == false && buttonChecked(button) == true)
+        {
+          displayErrorDonnees(donnees,"Erreur de quantité dans la section : Services de repas et de boissons.","boissons");
+          countError++;
+        }
+      }
+    }
+  }
+
+
+
+  for (i=0;i<100;i++)
+  {
+    // pour les billets
+    if (document.getElementById("quantites"+idBillet+"["+i+"]"))
+    {
+      element = document.getElementById("quantites"+idBillet+"["+i+"]");  
+     // clearPCollaborateurs(element);
+          
+      if (element.style.borderColor !== '')
+      {
+        if (checkIfErrorMessageP("p_errorDonnee"+i) == false)
+        {
+       displayErrorP(element,"Erreur ! ",i);
+        }
+        countBillet++;
+        array.push(element);
+      }
+    }   
+  }
+ 
+
+  if (countBillet >0)
+  {
+    for (var i = 0; i < array.length; i++) {
+      element = array[i].id.split("quantites");
+      element = element[1];
+      element = element.split("[");
+      element = element[0];
+     
+      var button = document.getElementById("slider"+element).parentNode;  
+      button = button.childNodes
+      button = button[1]
+      
+      if (element == 8  || element == 7)
+      {
+        
+        if(checkIfErrorMessage("visites") == false && buttonChecked(button) == true)
+        {
+          displayErrorDonnees(donnees,"Erreur de quantité dans la section : Préparations de visites touristiques.","visites");
+          
+        
+        }
+     
+        
+      }
+  
+    }
+
+  }
+
+
+
+  if (countError > 0)
+  {
+    return false;
+  }
+  else
+  {
+    return false;
+     //return true;
+  }
+
+
 }
+
+function buttonChecked(button)
+{
+  if (button.checked == true)
+      {
+        return true;
+      }
+      else
+      {
+        return false;
+      }
+}
+
+
 
 
 

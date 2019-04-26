@@ -15,7 +15,7 @@ if ($interval->format('%R') == "-")
   if($interval->format('%i') > 0 || $interval->format('%S') > 0 || $interval->format('%H') > 0 || $interval->format('%D') > 0|| $interval->format('%M') > 0 || $interval->format('%Y') > 0)
   {
 
-  
+
 
 $timestampStart = strtotime($timeStart);
 
@@ -27,7 +27,7 @@ $end = str_replace(',',"",$end);
 
 $apiReturn = App\Trajet::getDistanceTime($start, $end);
 
-$estimatedTime=60*$apiReturn["time"]; 
+$estimatedTime=60*$apiReturn["time"];
 
 $timestampEnd = $timestampStart+$estimatedTime;
 
@@ -36,7 +36,7 @@ $dateFin = getEstimateTime($bdd,$apiReturn,$timeStart);
 
 
 
-$trajet = new App\Trajet($_POST["start"],$_POST["end"],0,$_SESSION['id'],date('Y-m-d G:i:s'),$timeStart,$dateFin,$apiReturn["distance"],$apiReturn["time"],"Pas commencé");
+$trajet = new App\Trajet($_POST["start"],$_POST["end"],0,$_SESSION['id'],date('Y-m-d G:i:s'),$timeStart,$dateFin,$apiReturn["distance"],$apiReturn["time"],"Attente Collab");
 $trajet->addTrajetStart($bdd,'INSERT INTO `trajet` (`idClient`, `debut`, `fin`, `prixTrajet`, `heureDebut`,`heureFin`,`dateResevation`,`distanceTrajet`,`duration`,`state`) VALUES (:idClient,:debut,:fin,:prixTrajet,:dateDebut,:dateFin,:dateReservation,:distanceTrajet,:duration,:state)',$trajet);
 $trajet->startSessionId($bdd); //add idTrajet in SESSION
 
@@ -76,7 +76,7 @@ function getEstimateTime($bdd,$apiReturn,$timeStart) {
   $dateFin->setTime($arrayEstimate['heures']+$heureDebutTrajet,$arrayEstimate['minutes']);
   $_SESSION['finTrajet'] = $dateFin->format('Y-m-d H:i');
   return $dateFin->format('Y-m-d H:i');
-  
+
 }
 
 function convertDate($bdd,$timeStart) {
@@ -85,4 +85,3 @@ function convertDate($bdd,$timeStart) {
   $heureDebutTrajet = intval($res[0]);
   return $heureDebutTrajet;
 }
-

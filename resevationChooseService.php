@@ -150,6 +150,17 @@ loadLanguageFromSession($_SESSION['lang']);
 
                               $restaurants = $bdd->getPDO()->prepare('SELECT * FROM restaurants ORDER BY idRestaurant DESC LIMIT 10 ');
                               $restaurants->execute();
+                              ?>
+                                  <table>
+
+                              <tr>
+                                <th scope="col">Nom du restaurant : </th>
+                                <th scope="col">Adresse : </th>
+                                <th scope="col">Prix moyen : </th>
+                                <th scope="col">Quantité : </th>
+
+                              </tr>
+                              <?php
                               while($unRestaurants = $restaurants->fetch())
                               {
                                 $datas = App\Restaurant::createRestaurant($unRestaurants['idRestaurant'],$unRestaurants['nom'],$unRestaurants['prix'],$unRestaurants['horrairesDebut'],$unRestaurants['horrairesFin'],$unRestaurants['adresseRestaurant'],$unRestaurants['villeRestaurant']);
@@ -162,15 +173,7 @@ loadLanguageFromSession($_SESSION['lang']);
                                 {
 
                                   ?>
-                                  <table>
-
-                                    <tr>
-                                      <th scope="col">Nom du restaurant : </th>
-                                      <th scope="col">Adresse : </th>
-                                      <th scope="col">Prix moyen : </th>
-                                      <th scope="col">Quantité : </th>
-
-                                    </tr>
+                              
                                     <tr>
                                       <th scope="row"> <?= $unRestaurants['nom'];?></th>
                                       <td> <?= $unRestaurants['adresseRestaurant'];?></td>
@@ -179,13 +182,14 @@ loadLanguageFromSession($_SESSION['lang']);
 
                                       <td>
                                         <div class="funkyradio-primary col-md-6 center-block">
-                                          <input type="radio"  name="idRestaurant" id="idRestaurant<?php echo $unRestaurants['idRestaurant'] ?>" value="<?php echo $unRestaurants['idRestaurant'] ?>"  />
+                                          <input type="radio" class="primary"  name="idRestaurant" id="idRestaurant<?php echo $unRestaurants['idRestaurant'] ?>" value="<?php echo $unRestaurants['idRestaurant'] ?>"  />
                                           <label for="radio<?php echo $unRestaurants['idRestaurant'] ?>">Choisir ce restaurant</label>
                                         </div>
                                       </td>
                                     </tr>
-                                  </table> <?php
+                                 <?php
                                 }
+                               ?> </table> <?php
 
                               }
                               break;
@@ -225,6 +229,18 @@ loadLanguageFromSession($_SESSION['lang']);
 
                               $hotel = $bdd->getPDO()->prepare('SELECT * FROM chambre INNER JOIN hotel ON chambre.idHotel = hotel.idHotel WHERE isDispo = 1 AND litsDispo > 0 ORDER BY idChambre DESC LIMIT 10 ');
                               $hotel->execute();
+                              ?>   <table>
+
+                              <tr>
+                                <th scope="col">Nom de l'hotel : </th>
+                                <th scope="col">Adresse : </th>
+                                <th scope="col">Prix : </th>
+                                <th scope="col">Type de chambre : </th>
+                                <th scope="col">Lits disponibles : </th>
+                                <th scope="col">Choix des horraires  : </th>
+
+                              </tr>
+                              <?php
                               while($unHotel = $hotel->fetch())
                               {
                                 $datas = App\Hotel::createHotel($unHotel['idHotel'],$unHotel['nom'],$unHotel['adresseHotel'],$unHotel['prix']);
@@ -234,46 +250,58 @@ loadLanguageFromSession($_SESSION['lang']);
 
 
                                 ?>
-                                <table>
-
-                                  <tr>
-                                    <th scope="col">Nom de l'hotel : </th>
-                                    <th scope="col">Adresse : </th>
-                                    <th scope="col">Prix : </th>
-                                    <th scope="col">Type de chambre : </th>
-                                    <th scope="col">Lits disponibles : </th>
-
-                                  </tr>
+                              
                                   <tr>
                                     <th scope="row"> <?= $unHotel['nom'];?></th>
                                     <td> <?= $unHotel['adresseHotel'];?></td>
                                     <td> <?= $unHotel['prix'] . '€ la nuit';?></td>
                                     <td> <?= $unHotel['typeChambre'];?></td>
                                     <td> <?= $unHotel['litsDispo'];?></td>
-                                    <td><input type="number" min="1" max="10" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]" value="1"/></td>
 
                                     <td>
-                                      <div class="funkyradio-primary col-md-6 center-block">
-                                        <input type="radio" name="idHotel" id="<?php echo $unHotel['idHotel'] ?>" value="<?php echo $unHotel['idHotel'] ?>" />
-                                        <label for="radio<?php echo $unHotel['idHotel'] ?>">Choisir cet hotel</label>
-                                      </div>
+                                    <div class="funkyradio-primary col-md-6 center-block">
+                                          <input type="checkbox" name="idHotel<?php echo $unHotel['idHotel'] ?>[<?= $unHotel['idChambre'] ?>]" id="idHotel<?php echo $unHotel['idHotel'] ?>[<?= $unHotel['idChambre'] ?>]" onchange="checkRadioHotel(this)">
+                                          <label for="radio<?php echo $unHotel['idHotel'] ?>">Choisir</label>
+                                          <button  style="visibility:hidden" id="buttonHoursHotel<?php echo $unHotel['idHotel']?>[<?= $unHotel['idChambre'] ?>]" type="button" class="btn btn-dark" data-toggle="modal" data-target="#heuresHotel<?php echo $unHotel['idHotel'] ?>_<?= $unHotel['idChambre'] ?>">Heures</button>
+
+                                          <input type="hidden" id="heureTrajetFin"value="<?= $resFin;?>">
+                                         <input type="hidden" id="heureTrajetDebut"value="<?= $res[1];?>">
+                                          <div id="heuresHotel<?php echo $unHotel['idHotel'] ?>_<?= $unHotel['idChambre'] ?>" class="modal fade" role="dialog" style="z-index: 1400;">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                              <!-- Modal content-->
+                                              <div class="modal-content">
+                                              <div class="modal-header">
+
+                                          <h4 class="modal-title">Heure pour l'hotel  <?php echo $unHotel['nom'] ?></h4>
+                                          </div>
+                                         <div id="Hotel" class="modal-body">
+                                         Debut <input type="time" id="startHotel<?php echo $unHotel['idHotel'] ?>[<?= $unHotel['idChambre'] ?>]" value="<?= $res[1]; ?>" name="startHotel<?php echo $unHotel['idHotel'] ?>[<?= $unHotel['idChambre'] ?>]" onchange="checkHeureFinHotel(this)">
+                                           <input type="time" style="visibility:hidden" id="endHotel<?php echo $unHotel['idHotel'] ?>[<?= $unHotel['idChambre'] ?>]" value="<?= $resFin; ?>" name="endHotel<?php echo $unHotel['idHotel'] ?>[<?= $unHotel['idChambre'] ?>]">
+                                                
+                                                </div> 
+                                                <div class="modal-footer"> <div>
+                                           
+                                          </div>     
+                                              </div>
+                                            </div>
+
+                                        </div>
                                     </td>
+                                    <?php $j++; ?>
                                   </tr>
-                                </table>
+                            
                                 <?php
 
                               }
+                               ?></table> <?php
                               break;
 
                               case '8' :
                               $billet = $bdd->getPDO()->prepare('SELECT * FROM billettourisme ORDER BY idBillet DESC LIMIT 10');
                               $billet->execute();
-                              while($unBillet = $billet->fetch())
-                              {
-                                $j=0;
-                                $datas = App\BilletTourisme::createBilletTourisme($unBillet['idBillet'],$unBillet['nom'],$unBillet['isValide'],$unBillet['villeBillet'],$unBillet['prix']);
-                                ?>
-                                <table>
+                              $j=0;
+                              ?>
+                                   <table>
                                   <tr>
                                     <th scope="col">Nom du billet : </th>
                                     <th scope="col">Validité : </th>
@@ -281,6 +309,13 @@ loadLanguageFromSession($_SESSION['lang']);
                                     <th scope="col">Prix : </th>
                                     <th scope="col">Quantité : </th>
                                   </tr>
+                                  <?php
+                              while($unBillet = $billet->fetch())
+                              {
+                               
+                                $datas = App\BilletTourisme::createBilletTourisme($unBillet['idBillet'],$unBillet['nom'],$unBillet['isValide'],$unBillet['villeBillet'],$unBillet['prix']);
+                                ?>
+                           
                                   <tr>
                                     <th scope="row"> <?= $unBillet['nom'];?></th>
                                     <td>  <?php
@@ -289,18 +324,43 @@ loadLanguageFromSession($_SESSION['lang']);
                                       else{ echo "Non valide";}?></td>
                                       <td> <?= $unBillet['villeBillet'];?></td>
                                       <td>  <?= $unBillet['prix']. '€';?> </td>
-                                      <td><input type="number" min="1" max="10" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]" value="1"></td>
+                                      <td><input type="number"  id="quantites<?=$service->getIdService()."[".$unBillet['idBillet']."]";?>" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]"  onkeyup="checkQuantiteBillet(this)"/></td>
 
                                       <td>
                                         <div class="funkyradio-primary col-md-6 center-block">
-                                          <input type="radio" name="idBillet" id="<?php echo $unBillet['idBillet'] ?>" value="<?php echo $unBillet['idBillet'] ?>" >
+                                          <input type="checkbox" name="idBillet<?php echo $unBillet['idBillet'] ?>" id="idBillet<?php echo $unBillet['idBillet'] ?>"  onchange="checkRadioBillet(this)" >
                                           <label for="radio<?php echo $unBillet['idBillet'] ?>">Choisir ce billet</label>
+                                          <button style="visibility:hidden" id="buttonHours<?php echo $unBillet['idBillet']?>" type="button" class="btn btn-primary" data-toggle="modal" data-target="#heuresBillet<?php echo $unBillet['idBillet']?>">Heures</button>
+
+                                          <input type="hidden" id="heureTrajetFin"value="<?= $resFin;?>">
+                                         <input type="hidden" id="heureTrajetDebut"value="<?= $res[1];?>">
+                                          <div id="heuresBillet<?php echo $unBillet['idBillet'] ?>" class="modal fade" role="dialog" style="z-index: 1400;">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                              <!-- Modal content-->
+                                              <div class="modal-content">
+                                              <div class="modal-header">
+
+                                          <h4 class="modal-title">Heure de du billet pour le  <?php echo $unBillet['nom'] ?></h4>
+                                          </div>
+                                         <div id="billet" class="modal-body">
+                                         Debut <input type="time" id="startBillet<?php echo $unBillet['idBillet'] ?>" value="<?= $res[1]; ?>" name="startBillet<?php echo $unBillet['idBillet'] ?>" onchange="checkHeureFinBillet(this)">
+                                           <input type="time" style="visibility:hidden" id="endBillet<?php echo $unBillet['idBillet'] ?>" value="<?= $resFin; ?>" name="endBillet<?php echo $unBillet['idBillet'] ?>">
+                                                
+                                                </div> 
+                                                <div class="modal-footer"> <div>
+                                           
+                                          </div>     
+                                              </div>
+                                            </div>
+
                                         </div>
                                       </td>
                                     </tr>
-                                  </table>
+                                    <?php $j++; ?>
+                                 
                                   <?php
                                 }
+                                 ?></table> <?php
                                 break;
                                 case '10' :
                                 ?>

@@ -209,7 +209,7 @@ loadLanguageFromSession($_SESSION['lang']);
                                               <!-- Modal content-->
                                               
                                               <div class="modal-content">
-                                         <div id="ordinateurs" class="modal-body">
+                                         <div id="ordinateurs_<?=$service->getIdService();?> " class="modal-body">
                                        <?php /*  <form action="valideReservationServices.php" id="form<?=$service->getIdService();?>" method="POST" onsubmit="return checkheure(this)"> */ ?>
                                        
                                          Quantité <input type="number" value="" id="quantites<?=$service->getIdService();?>" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]"  onkeyup="checkQuantiteOrdinateur(this)"/>
@@ -260,7 +260,7 @@ loadLanguageFromSession($_SESSION['lang']);
 
                                     <td>
                                     <div class="funkyradio-primary col-md-6 center-block">
-                                          <input type="checkbox" name="idHotel<?php echo $unHotel['idHotel'] ?>[<?= $unHotel['idChambre'] ?>]" id="idHotel<?php echo $unHotel['idHotel'] ?>[<?= $unHotel['idChambre'] ?>]" onchange="checkRadioHotel(this)">
+                                          <input type="checkbox" name="idHotel<?php echo $unHotel['idHotel'] ?>_<?= $unHotel['idChambre'] ?>" id="idHotel<?php echo $unHotel['idHotel'] ?>[<?= $unHotel['idChambre'] ?>]" onchange="checkRadioHotel(this)">
                                           <label for="radio<?php echo $unHotel['idHotel'] ?>">Choisir</label>
                                           <button  style="visibility:hidden" id="buttonHoursHotel<?php echo $unHotel['idHotel']?>[<?= $unHotel['idChambre'] ?>]" type="button" class="btn btn-dark" data-toggle="modal" data-target="#heuresHotel<?php echo $unHotel['idHotel'] ?>_<?= $unHotel['idChambre'] ?>">Heures</button>
 
@@ -275,8 +275,8 @@ loadLanguageFromSession($_SESSION['lang']);
                                           <h4 class="modal-title">Heure pour l'hotel  <?php echo $unHotel['nom'] ?></h4>
                                           </div>
                                          <div id="Hotel" class="modal-body">
-                                         Debut <input type="time" id="startHotel<?php echo $unHotel['idHotel'] ?>[<?= $unHotel['idChambre'] ?>]" value="<?= $res[1]; ?>" name="startHotel<?php echo $unHotel['idHotel'] ?>[<?= $unHotel['idChambre'] ?>]" onchange="checkHeureFinHotel(this)">
-                                           <input type="time" style="visibility:hidden" id="endHotel<?php echo $unHotel['idHotel'] ?>[<?= $unHotel['idChambre'] ?>]" value="<?= $resFin; ?>" name="endHotel<?php echo $unHotel['idHotel'] ?>[<?= $unHotel['idChambre'] ?>]">
+                                         Debut <input type="time" id="startHotel<?php echo $unHotel['idHotel'] ?>[<?= $unHotel['idChambre'] ?>]" value="<?= $res[1]; ?>" name="startHotel<?php echo $unHotel['idHotel'] ?>_<?= $unHotel['idChambre'] ?>" onchange="checkHeureFinHotel(this)">
+                                           <input type="time" style="visibility:hidden" id="endHotel<?php echo $unHotel['idHotel'] ?>[<?= $unHotel['idChambre'] ?>]" value="<?= $resFin; ?>" name="endHotel<?php echo $unHotel['idHotel'] ?>_<?= $unHotel['idChambre'] ?>">
                                                 
                                                 </div> 
                                                 <div class="modal-footer"> <div>
@@ -324,7 +324,7 @@ loadLanguageFromSession($_SESSION['lang']);
                                       else{ echo "Non valide";}?></td>
                                       <td> <?= $unBillet['villeBillet'];?></td>
                                       <td>  <?= $unBillet['prix']. '€';?> </td>
-                                      <td><input type="number"  id="quantites<?=$service->getIdService()."[".$unBillet['idBillet']."]";?>" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]"  onkeyup="checkQuantiteBillet(this)"/></td>
+                                      <td><input type="number"  id="quantites<?=$service->getIdService()."[".$unBillet['idBillet']."]";?>" class="primary" name="quantite_<?=$unBillet['idBillet'];?>"  onkeyup="checkQuantiteBillet(this)"/></td>
 
                                       <td>
                                         <div class="funkyradio-primary col-md-6 center-block">

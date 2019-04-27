@@ -60,7 +60,6 @@ function displayErrorDonnees(input,message,id)
   error.style.color = 'red';
   var parent = input.parentNode;
   parent.appendChild(error);
-  console.log(error);
 }
 
 function clearP(element)
@@ -109,7 +108,7 @@ function clearInputDonnees(donnees)
 
 function checkIfErrorMessage(id)
 {
-  
+
   var elements  = document.getElementById(id);
   if (elements !== null)
   {
@@ -135,9 +134,7 @@ function checkIfErrorMessageP(id)
 }
 
 function checkIfErrorMessageCollaborateurs(id) {
-  
   var elements  = document.getElementById(id);
-  console.log(elements)
   if (elements !== null)
   {
     return true;
@@ -147,47 +144,14 @@ function checkIfErrorMessageCollaborateurs(id) {
     return false;
   }
 }
-function displayErrorMessageInterprete(input,message,j) {
-  input.style.borderColor = 'red';
-  var error = document.createElement('p');
-  error.setAttribute("class","errorDonnee");
-  error.setAttribute("id","collaborateurs_errorDonnee"+j);
-  error.innerHTML = message;
-  error.style.color = 'red';
-  var parent = input.parentNode;
-  parent.appendChild(error);
-
-}
-function displayErrorMessageCoachSportif(input,message,j) {
-  input.style.borderColor = 'red';
-  var error = document.createElement('p');
-  error.setAttribute("class","errorDonnee");
-  error.setAttribute("id","collaborateurs_errorDonnee"+j);
-  error.innerHTML = message;
-  error.style.color = 'red';
-  var parent = input.parentNode;
-  parent.appendChild(error);
-
-}
-function displayErrorMessageCoachCulture(input,message,j) {
-  input.style.borderColor = 'red';
-  var error = document.createElement('p');
-  error.setAttribute("class","errorDonnee");
-  error.setAttribute("id","collaborateurs_errorDonnee"+j);
-  error.innerHTML = message;
-  error.style.color = 'red';
-  var parent = input.parentNode;
-  parent.appendChild(error);
-
-}
 
 function displayErrorMessageCollaborateurs(input,message,j) {
   input.style.borderColor = 'red';
-  var error = document.createElement('p');
-  error.setAttribute("class","errorDonnee");
-  error.setAttribute("id","collaborateurs_errorDonnee"+j);
-  error.innerHTML = message;
-  error.style.color = 'red';
+  var error = document.createElement('span');
+  // error.setAttribute("class","errorDonnee");
+   error.setAttribute("id","collaborateurs_errorDonnee"+j);
+   error.innerHTML = message;
+   error.style.color = 'red';
   var parent = input.parentNode;
   parent.appendChild(error);
 
@@ -197,8 +161,8 @@ function displayErrorMessageBillets(input,message,j)
 {
   input.style.borderColor = 'red';
   var error = document.createElement('p');
-  error.setAttribute("class","errorDonnee");
   error.setAttribute("id","billets_errorDonnee"+j);
+ // error.setAttribute("class","errorDonnee");
   error.innerHTML = message;
   error.style.color = 'red';
   var parent = input.parentNode;
@@ -507,12 +471,9 @@ else{
 function checkRadioHotel(radio)
 {
   var button = radio.name.split('idHotel');
-  button = button[1].split('[');
+  button = button[1].split('_');
   idHotel = button[0];
-  console.log(idHotel)
-  idChambre = button[1].split(']');
-  idChambre = idChambre[0]
-  console.log(idChambre)
+  idChambre = button[1]
     if (radio.checked == true)
     {
       document.getElementById("buttonHoursHotel"+idHotel+"["+idChambre+"]").style.visibility="visible"
@@ -522,8 +483,6 @@ function checkRadioHotel(radio)
       document.getElementById("buttonHoursHotel"+idHotel+"["+idChambre+"]").style.visibility="hidden"
     }
 }
-
-
 
 function checkInput(radio)
 {
@@ -973,7 +932,12 @@ function addDateOrdinateur(ordinateur,parent,idService)
       {
        startDebut.setAttribute("id","audioGuidesStart["+idService+"]"+(i+(sizeChildren/4)));
        startDebut.setAttribute("name","audioGuidesStart"+idService+"_"+(i+(sizeChildren/4)));
-      }     
+      }    
+      else if (idService == 9)
+      {
+       startDebut.setAttribute("id","reservationRestaurantStart["+idService+"]"+(i+(sizeChildren/4)));
+       startDebut.setAttribute("name","reservationRestaurantStart"+idService+"_"+(i+(sizeChildren/4)));
+      }  
       else if (idService == 15)
       {
        startDebut.setAttribute("id","transportAnimalStart["+idService+"]"+(i+(sizeChildren/4)));
@@ -1028,6 +992,11 @@ function addDateOrdinateur(ordinateur,parent,idService)
         startEnd.setAttribute("name","audioGuidesEnd"+idService+"_"+(i+(sizeChildren/4)));
 
       }
+      else if (idService == 9)
+      {
+        startEnd.setAttribute("id","reservationRestaurantEnd["+idService+"]"+(i+(sizeChildren/4)));
+        startEnd.setAttribute("name","reservationRestaurantEnd"+idService+"_"+(i+(sizeChildren/4)));
+      } 
 
       else if (idService == 15)
       {
@@ -1095,6 +1064,11 @@ function addDateOrdinateur(ordinateur,parent,idService)
       startDebut.setAttribute("name","audioGuidesStart"+idService+"_"+(i+(sizeChildren/4)));
 
      }
+     else if (idService == 9)
+     {
+      startDebut.setAttribute("id","reservationRestaurantStart["+idService+"]"+(i+(sizeChildren/4)));
+      startDebut.setAttribute("name","reservationRestaurantStart"+idService+"_"+(i+(sizeChildren/4)));
+     }
      else if (idService == 15)
      {
       startDebut.setAttribute("id","transportAnimalStart["+idService+"]"+(i+(sizeChildren/4)));
@@ -1148,6 +1122,11 @@ function addDateOrdinateur(ordinateur,parent,idService)
         startEnd.setAttribute("id","audioGuidesEnd["+idService+"]"+(i+(sizeChildren/4)));
         startEnd.setAttribute("name","audioGuidesEnd"+idService+"_"+(i+(sizeChildren/4)));
 
+      }
+      else if (idService == 9)
+      {
+        startEnd.setAttribute("id","reservationRestaurantEnd["+idService+"]"+(i+(sizeChildren/4)));
+        startEnd.setAttribute("name","reservationRestaurantEnd"+idService+"_"+(i+(sizeChildren/4)));
       }
 
       else if (idService == 15)
@@ -1302,7 +1281,6 @@ function checkHeureDebutOrdinateur(heure)
 function checkHeureFinOrdinateur(heure) 
 {
   clearInput(heure);
-  console.log(heure)
   var array = new Array;
   var arrayInterprete = new Array;
   var nbService=-1;
@@ -1466,10 +1444,12 @@ else
 function checkGlobal(donnees)
 
 {
+
   clearInputDonnees(donnees);
   var countError=0;
     // On check les interprete, les coach sportif et les coach culture s'il possède des erreurs dans les dates 
     // On fait la meme chose pour les billets touristiques et les hotels.
+ 
   var countCollab=0;
   var arrayCollab = new Array();
   var interprete ="Interprete";
@@ -1488,16 +1468,30 @@ function checkGlobal(donnees)
   var arrayHotel = new Array;
 
   for (j=0;j<100;j++)
-  {
+  { 
+   if (document.getElementById(start+billet+j) !== null)
+    {
+      
+      var inputStart = document.getElementById(start+billet+j);
+      if (inputStart.style.borderColor !== '')
+      {
+        if (checkIfErrorMessageCollaborateurs("billets_errorDonnee"+j) == false  && document.getElementById(j).checked == true)
+        {
+            displayErrorMessageBillets(inputStart,"Erreur ! ",j);
+         }
+      countCollab++;
+      arrayCollab.push(j);
+      }
+    }
     if (document.getElementById(start+interprete+j) !== null && document.getElementById(end+interprete+j) !== null)
     {
       var inputStart = document.getElementById(start+interprete+j);
       var inputEnd = document.getElementById(end+interprete+j);
       if (inputStart.style.borderColor !== '' || inputEnd.style.borderColor !== '')
       {
-        if (checkIfErrorMessageCollaborateurs("collaborateurs_errorDonnee"+j) == false && document.getElementById(j).checked === true)
+        if (checkIfErrorMessageCollaborateurs("collaborateurs_errorDonnee"+j) == false && document.getElementById(j).checked == true)
           {
-             displayErrorMessageInterprete(inputStart,"Erreur ! ",j);
+             displayErrorMessageCollaborateurs(inputStart,"Erreur ! ",j);
           }
       countCollab++;
       arrayCollab.push(j);
@@ -1505,46 +1499,37 @@ function checkGlobal(donnees)
     }
     else if (document.getElementById(start+coachSportif+j) !== null && document.getElementById(end+coachSportif+j) !== null)
     {
+        
       var inputStart = document.getElementById(start+coachSportif+j);
       var inputEnd = document.getElementById(end+coachSportif+j);
       if (inputStart.style.borderColor !== '' || inputEnd.style.borderColor !== '')
       {
-        if (checkIfErrorMessageCollaborateurs("collaborateurs_errorDonnee"+j) == false && document.getElementById(j).checked === true)
+        if (checkIfErrorMessageCollaborateurs("collaborateurs_errorDonnee"+j) == false && document.getElementById(j).checked == true)
           {
-             displayErrorMessageCoachSportif(inputStart,"Erreur ! ",j);
+            displayErrorMessageCollaborateurs(inputStart,"Erreur ! ",j);
           }
       countCollab++;
       arrayCollab.push(j);
       }
-    }
+
     else if (document.getElementById(start+coachCulture+j) !== null && document.getElementById(end+coachCulture+j) !== null)
     {
       var inputStart = document.getElementById(start+coachCulture+j);
       var inputEnd = document.getElementById(end+coachCulture+j);
       if (inputStart.style.borderColor !== '' || inputEnd.style.borderColor !== '')
       {
-        if (checkIfErrorMessageCollaborateurs("collaborateurs_errorDonnee"+j) == false && document.getElementById(j).checked === true)
+        if (checkIfErrorMessageCollaborateurs("collaborateurs_errorDonnee"+j) == false && document.getElementById(j).checked == true)
           {
-             displayErrorMessageCoachCulture(inputStart,"Erreur ! ",j);
+            displayErrorMessageCollaborateurs(inputStart,"Erreur ! ",j);
           }
       countCollab++;
       arrayCollab.push(j);
       }
     }
-  
-    else if (document.getElementById("startBillet"+j) !== null)
-    {
-      var inputStart = document.getElementById("startBillet"+j);
-      if (inputStart.style.borderColor !== '')
-      {
-        //if (checkIfErrorMessageCollaborateurs("billets_errorDonnee"+j) == false)
-        //{
-        //     displayErrorMessageBillets(inputStart,"Erreur ! ",j);
-        //  }
-      countCollab++;
-      arrayCollab.push(j);
-      }
-    }
+    
+   
+  }
+
    
       for (k=0;k<30;k++)
       {
@@ -1597,8 +1582,6 @@ function checkGlobal(donnees)
       {
         inputStart = inputStartBillet;
       }
-      if (inputStart === null)
-       {
       for (var l = 0; l < arrayHotel.length; l++) {
         element2 = arrayHotel[l];
           if ( document.getElementById("startHotel"+element+"["+element2+"]") !== null)
@@ -1606,75 +1589,82 @@ function checkGlobal(donnees)
              inputStart = document.getElementById("startHotel"+element+"["+element2+"]");
           }
       }
-    }
+    
     
       //console.log(inputStart);
       var name = inputStart.id.split("start");
       name2 = name[1].split(element);
       name = name2[0]
-      console.log(name) // Ok
       if (name == "Interprete")
       {
 
         var button = document.getElementById("11").parentNode;  
         button = button.childNodes
         button = button[1]
-        if(checkIfErrorMessage("interpreteError") == false && buttonChecked(button) == true && buttonChecked(document.getElementById(element).checked) ==true)
+        if(checkIfErrorMessage("interpreteError") == false && buttonChecked(button) == true && buttonChecked(document.getElementById(element)) == true)
         {
           
           displayErrorDonnees(donnees,"Erreur de date au niveau des interprètes","interpreteError");
-          countError++;
+         
         }
+        countError++;
     }
     else if (name == "CoachSportif")
     {
       var button = document.getElementById("12").parentNode;  
       button = button.childNodes
       button = button[1]
-      if(checkIfErrorMessage("coachSportifError") == false && buttonChecked(button) == true)
+     
+      if(checkIfErrorMessage("coachSportifError") == false && buttonChecked(button) === true  && buttonChecked(document.getElementById(element)) == true)
       {
         
         displayErrorDonnees(donnees,"Erreur de date au niveau des coach sportifs","coachSportifError");
-        countError++;
+        
       }
+      countError++;
     }
     else if (name == "CoachCulture")
     {
       var button = document.getElementById("13").parentNode;  
       button = button.childNodes
       button = button[1]
-      if(checkIfErrorMessage("CoachCultureError") == false && buttonChecked(button) == true)
+      if(checkIfErrorMessage("CoachCultureError") == false && buttonChecked(button) === true  && buttonChecked(document.getElementById(element)) == true)
       {
         
         displayErrorDonnees(donnees,"Erreur de date au niveau des coach cultures","CoachCultureError");
-        countError++;
-        
       }
+      countError++;
     }
     else if (name == "Billet")
     {
-     
-
+      var slider = document.getElementById("slider8").parentNode;  
+      slider = slider.childNodes
+      slider = slider[1]
       var button = document.getElementById("idBillet"+element);  
-      if(checkIfErrorMessage("BilletError") == false && buttonChecked(button) == true)
+      if(checkIfErrorMessage("BilletError") == false && buttonChecked(button) == true && buttonChecked(slider) == true)
       {
         
         displayErrorDonnees(donnees,"Erreur de date au niveau des billets touristiques","BilletError");
-        countError++;
+        
         
       }
+      countError++;
     }
     else if (name == "Hotel")
     {
-      //console.log(inputStart);
       var split = inputStart.id.split("startHotel");
       split = split[1].split("[");
       idHotel = split[0]
       idChambre = split[1].split("]");
       idChambre = idChambre[0];
+     
+
+      var slider = document.getElementById("slider7").parentNode; 
+      slider = slider.childNodes; 
+      slider = slider[1]
 
       var button = document.getElementById("idHotel"+idHotel+"["+idChambre+"]");  
-      if(checkIfErrorMessage("HotelError") == false && buttonChecked(button) == true)
+      if(checkIfErrorMessage("HotelError") == false && buttonChecked(slider) == true && buttonChecked(button) == true)
       {
         
         displayErrorDonnees(donnees,"Erreur de date au niveau des hôtels","HotelError");
@@ -1695,7 +1685,7 @@ function checkGlobal(donnees)
     if (document.getElementById("quantites"+i))
     {
 
-      element = document.getElementById("quantites"+i);      
+      element = document.getElementById("quantites"+i);   
       if (element.style.borderColor !== '')
       {
         if (checkIfErrorMessageP("p_errorDonnee"+i) == false)
@@ -1719,7 +1709,7 @@ function checkGlobal(donnees)
       button = button[1]
       if (element >= 2 && element <=6)
       {
-    
+      
         if(checkIfErrorMessage("appareils") == false && buttonChecked(button) == true)
         {
       
@@ -1760,8 +1750,6 @@ function checkGlobal(donnees)
     }
   }
 
-
-
   for (i=0;i<100;i++)
   {
     // pour les billets
@@ -1801,6 +1789,7 @@ function checkGlobal(donnees)
         if(checkIfErrorMessage("visites") == false && buttonChecked(button) == true)
         {
           displayErrorDonnees(donnees,"Erreur de quantité dans la section : Préparations de visites touristiques.","visites");
+          countError++;
           
         
         }
@@ -1813,15 +1802,299 @@ function checkGlobal(donnees)
   }
 
 
+  var arrayDate = new Array;
+  var countDate=0;
+  for (var i=0;i<100;i++)
+  {
+    for (var j=0;j<100;j++)
+    {
+      if (document.getElementById("ordinateurStart["+i+"]"+j) !== null && document.getElementById("ordinateurEnd["+i+"]"+j))
+      {
+        var inputStart = document.getElementById("ordinateurStart["+i+"]"+j);
+        var inputEnd = document.getElementById("ordinateurEnd["+i+"]"+j);
+        if (inputStart.style.borderColor !== '' || inputEnd.style.borderColor !== '')
+        {
+          arrayDate.push(i);
+          countDate++;
+        }
+      }
+      else if (document.getElementById("tabletteStart["+i+"]"+j) !== null && document.getElementById("tabletteEnd["+i+"]"+j))
+      {
+        var inputStart = document.getElementById("tabletteStart["+i+"]"+j);
+        var inputEnd = document.getElementById("tabletteEnd["+i+"]"+j);
+        if (inputStart.style.borderColor !== '' || inputEnd.style.borderColor !== '')
+        {
+          arrayDate.push(i);
+          countDate++;
+        }
+      }
 
+      else if (document.getElementById("audioGuidesStart["+i+"]"+j) !== null && document.getElementById("audioGuidesEnd["+i+"]"+j))
+      {
+        var inputStart = document.getElementById("audioGuidesStart["+i+"]"+j);
+        var inputEnd = document.getElementById("audioGuidesEnd["+i+"]"+j);
+        if (inputStart.style.borderColor !== '' || inputEnd.style.borderColor !== '')
+        {
+          arrayDate.push(i);
+          countDate++;
+        }
+      }
+
+      else if (document.getElementById("reservationRestaurantStart["+i+"]"+j) !== null && document.getElementById("reservationRestaurantEnd["+i+"]"+j))
+      {
+        var inputStart = document.getElementById("reservationRestaurantStart["+i+"]"+j);
+        var inputEnd = document.getElementById("reservationRestaurantEnd["+i+"]"+j);
+        if (inputStart.style.borderColor !== '' || inputEnd.style.borderColor !== '')
+        {
+          arrayDate.push(i);
+          countDate++;
+        }
+      }
+      else if (document.getElementById("transportAnimalStart["+i+"]"+j) !== null && document.getElementById("transportAnimalEnd["+i+"]"+j))
+      {
+        var inputStart = document.getElementById("transportAnimalStart["+i+"]"+j);
+        var inputEnd = document.getElementById("transportAnimalEnd["+i+"]"+j);
+        if (inputStart.style.borderColor !== '' || inputEnd.style.borderColor !== '')
+        {
+          arrayDate.push(i);
+          countDate++;
+        }
+      }
+
+      else if (document.getElementById("transportVeteniraireStart["+i+"]"+j) !== null && document.getElementById("transportVeteniraireEnd["+i+"]"+j))
+      {
+        var inputStart = document.getElementById("transportVeteniraireStart["+i+"]"+j);
+        var inputEnd = document.getElementById("transportVeteniraireEnd["+i+"]"+j);
+        if (inputStart.style.borderColor !== '' || inputEnd.style.borderColor !== '')
+        {
+          arrayDate.push(i);
+          countDate++;
+        }
+      }
+
+      else if (document.getElementById("menuGastronomiqueStart["+i+"]"+j) !== null && document.getElementById("menuGastronomiqueEnd["+i+"]"+j))
+      {
+        var inputStart = document.getElementById("menuGastronomiqueStart["+i+"]"+j);
+        var inputEnd = document.getElementById("menuGastronomiqueEnd["+i+"]"+j);
+        if (inputStart.style.borderColor !== '' || inputEnd.style.borderColor !== '')
+        {
+          arrayDate.push(i);
+          countDate++;
+        }
+      }
+
+      else if (document.getElementById("menuJourStart["+i+"]"+j) !== null && document.getElementById("menuJourEnd["+i+"]"+j))
+      {
+        var inputStart = document.getElementById("menuJourStart["+i+"]"+j);
+        var inputEnd = document.getElementById("menuJourEnd["+i+"]"+j);
+        if (inputStart.style.borderColor !== '' || inputEnd.style.borderColor !== '')
+        {
+          arrayDate.push(i);
+          countDate++;
+        }
+      }
+    }
+  }
+  
+  if (countDate >0)
+  {
+ 
+    for (var i = 0; i < arrayDate.length; i++) {
+      element = arrayDate[i];
+      for (var j=0;j<arrayDate.length;j++)
+      {
+
+      //element = arrayCollab[i].id.split("quantites");
+      var ordinateurStart = document.getElementById("ordinateurStart["+element+"]"+j);
+      var tabletteStart = document.getElementById("tabletteStart["+element+"]"+j);
+      var audioGuidesStart = document.getElementById("audioGuidesStart["+element+"]"+j);
+      var reservationRestaurantStart = document.getElementById("reservationRestaurantStart["+element+"]"+j);
+      var transportAnimalStart = document.getElementById("transportAnimalStart["+element+"]"+j);
+      var transportVeteniraireStart = document.getElementById("transportVeteniraireStart["+element+"]"+j);
+      var menuGastronomiqueStart = document.getElementById("menuGastronomiqueStart["+element+"]"+j);
+      var menuJourStart = document.getElementById("menuJourStart["+element+"]"+j);
+
+
+      if (ordinateurStart !== null)
+      {
+        inputStart = ordinateurStart;
+      }
+      else if (tabletteStart !== null)
+      {
+        inputStart = tabletteStart;
+      }
+      else if (audioGuidesStart !== null)
+      {
+        inputStart = audioGuidesStart;
+      }
+      else if (reservationRestaurantStart !== null)
+      {
+        inputStart = reservationRestaurantStart;
+      }
+      else if (transportAnimalStart !== null)
+      {
+        inputStart = transportAnimalStart;
+      }
+      else if (transportVeteniraireStart !== null)
+      {
+        inputStart = transportVeteniraireStart;
+      }
+      else if (menuGastronomiqueStart !== null)
+      {
+        inputStart = menuGastronomiqueStart;
+      }
+      else if (menuJourStart !== null)
+      {
+        inputStart = menuJourStart;
+      }
+   
+      var name = inputStart.name.split("_");
+      name = name[0]
+  
+      if (name == "ordinateurStart2")
+      {
+        var button = document.getElementById("slider2").parentNode; 
+        button = button.childNodes; 
+        button = button[1];
+        if(checkIfErrorMessage("dateOrdinateurError"+element) == false && buttonChecked(button) == true)
+        {
+          
+          displayErrorDonnees(donnees,"Erreur de date pour les ordinateurs portable Mac Book Air","dateOrdinateurError"+element);
+          countError++;
+        }
+    }
+    if (name == "ordinateurStart3")
+    {
+      var button = document.getElementById("slider3").parentNode; 
+      button = button.childNodes; 
+      button = button[1];
+
+
+      if(checkIfErrorMessage("dateOrdinateurError"+element) == false && buttonChecked(button) == true)
+      {
+        
+        displayErrorDonnees(donnees,"Erreur de date pour les ordinateurs portable Mac Book Pro","dateOrdinateurError"+element);
+        countError++;
+      }
+  }
+  if (name == "ordinateurStart4")
+  {
+    
+
+    var button = document.getElementById("slider4").parentNode; 
+      button = button.childNodes; 
+      button = button[1];
+    if(checkIfErrorMessage("dateOrdinateurError"+element) == false && buttonChecked(button) == true)
+    {
+      
+      displayErrorDonnees(donnees,"Erreur de date pour les ordinateurs portable Windows","dateOrdinateurError"+element);
+      
+    }
+}
+if (name == "tabletteStart5")
+{
+
+  var button = document.getElementById("slider5").parentNode; 
+  button = button.childNodes; 
+  button = button[1];
+  if(checkIfErrorMessage("dateOrdinateurError"+element) == false && buttonChecked(button) == true)
+  {
+    
+    displayErrorDonnees(donnees,"Erreur de date pour les tablettes Android ou Windows","dateOrdinateurError"+element);
+    countError++;
+  }
+}
+if (name == "audioGuidesStart6")
+{
+
+  var button = document.getElementById("slider6").parentNode; 
+  button = button.childNodes; 
+  button = button[1];
+  if(checkIfErrorMessage("dateAudioGuides"+element) == false && buttonChecked(button) == true)
+  {
+    
+    displayErrorDonnees(donnees,"Erreur de date pour la réservation d'audio-guides","dateAudioGuides"+element);
+    countError++;
+  }
+}
+if (name == "reservationRestaurantStart9")
+{
+
+  var button = document.getElementById("slider9").parentNode; 
+  button = button.childNodes; 
+  button = button[1];
+  if(checkIfErrorMessage("dateReservationRestaurant"+element) == false && buttonChecked(button) == true)
+  {
+    
+    displayErrorDonnees(donnees,"Erreur de date pour la réservation de restaurant","dateReservationRestaurant"+element);
+    countError++;
+  }
+}
+if (name == "transportAnimalStart15")
+{
+
+  var button = document.getElementById("slider15").parentNode; 
+  button = button.childNodes; 
+  button = button[1];
+  if(checkIfErrorMessage("dateTransportAnimal"+element) == false && buttonChecked(button) == true)
+  {
+    
+    displayErrorDonnees(donnees,"Erreur de date pour le transport de petit animal","dateTransportAnimal"+element);
+    countError++;
+  }
+}
+if (name == "transportVeteniraireStart16")
+{
+
+  var button = document.getElementById("slider16").parentNode; 
+  button = button.childNodes; 
+  button = button[1];
+  if(checkIfErrorMessage("dateTransportVeterinaire"+element) == false && buttonChecked(button) == true)
+  {
+    
+    displayErrorDonnees(donnees,"Erreur de date pour le service transport vétérinaire","dateTransportVeterinaire"+element);
+    countError++;
+  }
+}
+if (name == "menuJourStart18")
+{
+
+  var button = document.getElementById("slider18").parentNode; 
+  button = button.childNodes; 
+  button = button[1];
+  if(checkIfErrorMessage("dateMenuGastronomique"+element) == false && buttonChecked(button) == true)
+  {
+    
+    displayErrorDonnees(donnees,"Erreur de date pour le menu du jour","dateMenuGastronomique"+element);
+    countError++;
+  }
+}
+if (name == "menuGastronomiqueStart19")
+{
+
+  var button = document.getElementById("slider19").parentNode; 
+  button = button.childNodes; 
+  button = button[1];
+  if(checkIfErrorMessage("dateMenuJour"+element) == false && buttonChecked(button) == true)
+  {
+    
+    displayErrorDonnees(donnees,"Erreur de date pour le menu gastronomique","dateMenuJour"+element);
+    countError++;
+  }
+}
+
+    }
+  }
+
+  }
+console.log(countError);
   if (countError > 0)
   {
     return false;
   }
   else
   {
-    return false;
-     //return true;
+     return true;
   }
 
 

@@ -85,25 +85,25 @@ loadLanguageFromSession($_SESSION['lang']);
                 $i=0;$j=0;$k=0;
                 foreach ($idServices as $unIdService) {
 
-
+                    
 
                     //on recupere les infos du service en fonction de son id
                     $service = $bdd->queryOne('SELECT * FROM services WHERE idService='.$unIdService["idService"].'');
                     $linkService = $bdd->queryOne('SELECT * FROM linkServicetrajet WHERE idService='.$unIdService["idService"].' AND idTrajet='.$_SESSION["idTrajet"].'');
 
-
+                 // var_dump($linkService);
 
                     //choix en fonction du type de service special
                     if($unIdService["idService"] == 1){
-                      $infoLinkService = $bdd->queryOne('SELECT * FROM restaurants WHERE idRestaurant='.$linkService["idAnnexe"].'');
+                      $infoLinkService = $bdd->queryOne('SELECT * FROM restaurants WHERE idRestaurant='.$unIdService["idAnnexe"].'');
                       $typeEtablissement="Restaurant";
 
                     }elseif ($unIdService["idService"] == 7) {
-                      $infoLinkService = $bdd->queryOne('SELECT * FROM hotel WHERE idHotel='.$linkService["idAnnexe"].'');
+                      $infoLinkService = $bdd->queryOne('SELECT * FROM hotel WHERE idHotel='.$unIdService["idAnnexe"].'');
                       $typeEtablissement="Hotel";
 
                     }elseif ($unIdService["idService"] == 8) {
-                      $infoLinkService = $bdd->queryOne('SELECT * FROM billettourisme WHERE idBillet='.$linkService["idAnnexe"].'');
+                      $infoLinkService = $bdd->queryOne('SELECT * FROM billettourisme WHERE idBillet='.$unIdService["idAnnexe"].'');
                       $typeEtablissement="Billet touristque";
 
                     }elseif ($unIdService["idService"] == 11) {
@@ -242,15 +242,18 @@ loadLanguageFromSession($_SESSION['lang']);
 
                         //choix en fonciton du type de service special
                         if($unIdService["idService"] == 1){
-                          $infoLinkService = $bdd->queryOne('SELECT * FROM restaurants WHERE idRestaurant='.$linkService["idAnnexe"].'');
+                          $infoLinkService = $bdd->queryOne('SELECT * FROM restaurants WHERE idRestaurant='.$unIdService["idAnnexe"].'');
                           $typeEtablissement="Restaurant";
                         }elseif ($unIdService["idService"] == 7) {
-                          $infoLinkService = $bdd->queryOne('SELECT * FROM hotel WHERE idHotel='.$linkService["idAnnexe"].'');
+                          $infoLinkService = $bdd->queryOne('SELECT * FROM chambre INNER JOIN hotel WHERE chambre.idHotel = hotel.idHotel AND chambre.idChambre = '.$unIdService["idAnnexe"].'');
                           $typeEtablissement="Hotel";
-
+                  
+                          
                         }elseif ($unIdService["idService"] == 8) {
-                          $infoLinkService = $bdd->queryOne('SELECT * FROM billettourisme WHERE idBillet='.$linkService["idAnnexe"].'');
+                          $infoLinkService = $bdd->queryOne('SELECT * FROM billettourisme WHERE idBillet='.$unIdService["idAnnexe"].'');
                           $typeEtablissement="Billet touristque";
+                          //var_dump($linkService);
+                          //var_dump($infoLinkService);
                         }
 
                         elseif ($unIdService["idService"] == 11) {
@@ -337,21 +340,25 @@ loadLanguageFromSession($_SESSION['lang']);
 
                         }
                         else if ($linkService["idService"] == 11 || $linkService["idService"] == 12 || $linkService["idService"] == 13) {
-                          echo $service["nomService"]." : ".$infoLinkService["last_name"]." ".$infoLinkService["first_name"]." | Prix: ".$infoLinkService["prixCollaborateur"]."€/h *".$numHour ."h = ".($infoLinkService["prixCollaborateur"]*$numHour)." €";
+                          echo $service["nomService"]." : ".$infoLinkService["last_name"]." ".$infoLinkService["first_name"]." | Prix: ".$infoLinkService["prixCollaborateur"]."€/h *".$numHour ."h = ".($infoLinkService["prixCollaborateur"]*$numHour)." €"; ?> </b> <?php
                           $totalServices += ($infoLinkService["prixCollaborateur"]*$numHour);
 
                         }
                         else if ($linkService["idService"] == 7 ) {
-                          echo $service["nomService"]." | Prix de la chambre : ".$infoLinkService["prix"]."€/personne * ".$linkService["quantite"]." + ".$service["prixService"]."€ = ".($infoLinkService["prix"]*$linkService["quantite"]+$service['prixService'])." €";
+                         ?> <b> <?php echo $service["nomService"]." ".$infoLinkService["nom"]. "| Type de chambre : ".$infoLinkService["typeChambre"]."| Prix de la chambre : ".$infoLinkService["prix"]."€/personne * ".$linkService["quantite"]." + ".$service["prixService"]."€ = ".($infoLinkService["prix"]*$linkService["quantite"]+$service['prixService'])." €"; ?> </b> <?php
+                          $totalServices += ($infoLinkService["prix"]+$service['prixService']);
+                        }
+                        else if ($linkService["idService"] == 8 ) {
+                          ?> <b> <?php   echo $service["nomService"]." pour le ".$infoLinkService["nom"]." | Prix du billet : ".$infoLinkService["prix"]."€ * ".$linkService["quantite"]." + ".$service["prixService"]."€ = ".($infoLinkService["prix"]*$linkService["quantite"]+$service['prixService'])." €"; ?> </b> <?php
                           $totalServices += ($infoLinkService["prix"]+$service['prixService']);
                         }
                         else if ($linkService["idService"] == 2 || $linkService["idService"] == 3 || $linkService["idService"] == 4|| $linkService["idService"] == 5 || $linkService["idService"] == 6 ||$linkService["idService"] == 9 || $linkService["idService"] == 18 || $linkService["idService"] == 19) {
-                          echo $service["nomService"]." | Prix: ".$infoLinkService["prixCollaborateur"]."€/h *";
+                          ?> <b> <?php  echo $service["nomService"]." | Prix: ".$infoLinkService["prixCollaborateur"]."€/h *"; ?> </b> <?php
                           $totalServices += ($infoLinkService["prix"]*$linkService["quantite"]+$service["prixService"]);
 
 
                         }else{
-                          echo $service["nomService"].": ".$typeEtablissement." ".$infoLinkService["nom"]." | ".$infoLinkService["prix"]."€ * ".$linkService["quantite"]." places + ".$service["prixService"]."€  = ".($infoLinkService["prix"]*$linkService["quantite"]+$service["prixService"])."€";
+                          ?> <b> <?php   echo $service["nomService"].": ".$typeEtablissement." ".$infoLinkService["nom"]." | ".$infoLinkService["prix"]."€ * ".$linkService["quantite"]." places + ".$service["prixService"]."€  = ".($infoLinkService["prix"]*$linkService["quantite"]+$service["prixService"])."€"; ?> </b> <?php
                           $totalServices += ($infoLinkService["prix"]*$linkService["quantite"]+$service["prixService"]);
                         }
                         ?></p><?php

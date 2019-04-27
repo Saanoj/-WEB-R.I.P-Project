@@ -268,8 +268,8 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
         $array9DateFin = array();
         for ($i=0;$i<$thisQuantite;$i++)
         {
-        $array9DateDebut = array_push_assoc($array9DateDebut,$i,$_POST['ordinateurStart'.$service.'_'.$i.'']);
-        $array9DateFin = array_push_assoc($array9DateFin,$i,$_POST['ordinateurEnd'.$service.'_'.$i.'']);
+        $array9DateDebut = array_push_assoc($array9DateDebut,$i,$_POST['reservationRestaurantStart'.$service.'_'.$i.'']);
+        $array9DateFin = array_push_assoc($array9DateFin,$i,$_POST['reservationRestaurantEnd'.$service.'_'.$i.'']);
         }
         // var_dump($array3DateDebut);
         // var_dump($array3DateFin);

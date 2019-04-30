@@ -142,15 +142,21 @@ function stripeResponseHandler(status, response) {
 }
 
 function addPDFButton(){
+  sendSMS();
   var button = document.createElement("submit");
   var buttonSuccess = document.getElementById('buttonSuccess').remove();
-  button.className = "btn btn-success";
+  button.className = "btn btn-info";
 	button.innerText = "Facture PDF";
   document.getElementById('id1').appendChild(button);
   button.setAttribute("onclick","generatePDF()");
-
-
- 
+  var buttonHome = document.createElement("submit");
+  buttonHome.className = "btn btn-dark";
+	buttonHome.innerText = "Retour à l'accueil";
+  buttonHome.setAttribute("onclick","location.href = 'index.php';");
+  var br = document.createElement("br");
+  document.getElementById('id1').appendChild(br);
+  
+  document.getElementById('id1').appendChild(buttonHome);
 
 }
 
@@ -169,6 +175,18 @@ function generatePDF() {
 	request.send(data);
   document.location.href="paymentProcess.php"
   return false;
+
+  }
+
+
+  
+  function sendSMS() {
+    $.ajax({
+      url : 'envoieSMS.php', // Le nom du script a changé, c'est send_mail.php maintenant !
+      type : 'GET', // Le type de la requête HTTP, ici devenu POST
+
+   });
+   return false;
 
   }
 

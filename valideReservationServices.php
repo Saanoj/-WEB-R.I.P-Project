@@ -858,7 +858,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
 }
 else {
 
-    // header("location:resevationChooseService.php?probleme");
+  header("location:resevationChooseDriver.php");
 }
 
 function array_push_assoc($array, $key, $value){

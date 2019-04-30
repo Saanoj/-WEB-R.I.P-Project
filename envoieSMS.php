@@ -1,5 +1,5 @@
 <?php 
-
+session_start();
 require_once 'Class/Autoloader.php';
   App\Autoloader::register();
   $bdd = new App\Database('rip');
@@ -8,29 +8,50 @@ require_once 'Class/Autoloader.php';
 
 
   $req = getTrajet($bdd);
- // var_dump($req);
+
 
 
 
 function getTrajet($bdd) {
     $now = new DateTime("now", new DateTimeZone('Europe/Paris'));
-    $req = $bdd->getPDO()->prepare('SELECT * FROM trajet WHERE state = :state');
-    $req->execute(array('state' => "Pas commencé"));
+    $req = $bdd->getPDO()->prepare('SELECT * FROM trajet WHERE idTrajet = :idTrajet');
+    $req->execute(array('idTrajet' => $_SESSION['idTrajet']));
+
     while ($unTrajet = $req->fetch()) {
       
         $dateTrajet = new DateTime($unTrajet["heureDebut"], new DateTimeZone('Europe/Paris'));
         $interval = $dateTrajet->diff($now);
-        var_dump($interval);
-        if ($interval->y == 0 && $interval->m == 0 && $interval->d == 0 && $interval->y == 0 && $interval->h == 0 && $interval->i == 30 )
-        {
+        
             $phoneNumber = getNumero($bdd,$unTrajet['idClient']);
-            if (isset($phoneNumber) && !empty($phoneNumber) && $phoneNumber != null) {
-            $unChauffeur = getNumeroChauffeur($bdd,$unTrajet['idChauffeur']);
-            if (isset($unChauffeur['phoneNumber']) && !empty($unChauffeur['phoneNumber']) && $unChauffeur['phoneNumber'] != null) {
+            if (isset($phoneNumber) && !empty($phoneNumber) && $phoneNumber != null)
+            {
+             if (isset($phoneNumber) && !empty($phoneNumber) && $phoneNumber != null) {
+                    $unChauffeur = getNumeroChauffeur($bdd,$unTrajet['idChauffeur']);
+             if (isset($unChauffeur['phoneNumber']) && !empty($unChauffeur['phoneNumber']) && $unChauffeur['phoneNumber'] != null) {
+                $datefmt = new IntlDateFormatter('fr_FR', NULL, NULL, NULL, NULL, 'dd MMMM yyyy');
+
                 $unTrajet['debut'] = str_replace(' ', '+', $unTrajet['debut']);
                 $unTrajet['fin'] = str_replace(' ', '+', $unTrajet['fin']);
+
+                $unTrajet['heureDebut'] = new DateTime($unTrajet['heureDebut'], new DateTimeZone('Europe/Paris'));
+                $unTrajet['heureFin'] = new DateTime($unTrajet['heureFin'], new DateTimeZone('Europe/Paris'));
+
+                $heureDebut = $unTrajet['heureDebut']->format('H:i');
+                $heureFin = $unTrajet['heureFin']->format('H:i');
+
+                $newHeure = convertHeure($bdd,$heureDebut,$heureFin);
+                $heureDebut = $newHeure[0];
+                $heureFin = $newHeure[1];
+
+                $dateDebut = $datefmt->format($unTrajet['heureDebut']);
+                $dateFin = $datefmt->format($unTrajet['heureFin']);
+
+                $dateDebut = str_replace(" ","+",$dateDebut);
+                $dateFin = str_replace(" ","+",$dateFin);
+
                 $message ="Votre+trajet+de+%0a+".$unTrajet["debut"]."+%3D%3E+".$unTrajet["fin"]."+%0a+commence+le+".$dateDebut."+%E0++".$heureDebut."+jusqu'%E0+".$dateFin."+%E0++".$heureFin."+%0a+Votre+chauffeur+s'appele+".$unChauffeur['first_name']."+".$unChauffeur['last_name']."";
                 $sms = file_get_contents("https://api.smsmode.com/http/1.6/sendSMS.do?pseudo=ripESGI&pass=Rideinpride77!&message=".$message."&numero=".$phoneNumber."");
+                
             }
             else 
             {
@@ -57,12 +78,13 @@ function getTrajet($bdd) {
 
                 $message ="Votre+trajet+de+%0a+".$unTrajet["debut"]."+%3D%3E+".$unTrajet["fin"]."+%0a+commence+le+".$dateDebut."+%E0++".$heureDebut."+jusqu'%E0+".$dateFin."+%E0++".$heureFin."+%0a+Votre+chauffeur+s'appele+".$unChauffeur['first_name']."+".$unChauffeur['last_name']."";
                 $sms = file_get_contents("https://api.smsmode.com/http/1.6/sendSMS.do?pseudo=ripESGI&pass=Rideinpride77!&message=".$message."&numero=".$phoneNumber."");
+              
             }
 
         }
 
             
-        }
+    }
 
     }
     

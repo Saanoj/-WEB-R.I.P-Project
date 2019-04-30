@@ -97,14 +97,14 @@ function clearInput(input) {
 function clearInputDonnees(donnees)
 {
   var parent = donnees.parentNode
-  var elements = document.getElementsByClassName('errorDonnee');
-  
-    for (i=0;i<elements.length;i++)
-    {
-     let childNode = parent.lastChild;
-     parent.removeChild(childNode);
-    }
+  var elements = document.getElementsByClassName('errorDonnee'); 
+    while(elements.length)
+{
+  elements[0].parentNode.removeChild(elements[0]);
 }
+
+}
+
 
 function checkIfErrorMessage(id)
 {
@@ -168,10 +168,22 @@ function displayErrorMessageBillets(input,message,j)
   var parent = input.parentNode;
   parent.appendChild(error);
 }
+function displayErrorMessageRestaurants(input,message,j)
+{
+  input.style.borderColor = 'red';
+  var error = document.createElement('p');
+  error.setAttribute("id","restaurants_errorDonnee"+j);
+ // error.setAttribute("class","errorDonnee");
+  error.innerHTML = message;
+  error.style.color = 'red';
+  var parent = input.parentNode;
+  parent.appendChild(error);
+}
 
 function checkHeureDebutSportif(heure) 
 {
   clearInput(heure);
+  clearPCollaborateurs(heure);
   var array = new Array;
   var arrayCoachSportif = new Array;
   nbCoachSportif = heure.id.split("endCoachSportif");
@@ -235,6 +247,7 @@ function checkHeureDebutSportif(heure)
 function checkHeureFinSportif(heure)
 {
   clearInput(heure);
+  clearPCollaborateurs(heure);
   var array = new Array;
   nbCoachSportif = heure.id.split("endCoachSportif");
   var dateStartTrajet = new Date();
@@ -299,6 +312,7 @@ function checkHeureFinSportif(heure)
 function checkHeureDebutCulture(heure)
 {
   clearInput(heure);
+  clearPCollaborateurs(heure);
   var array = new Array;
   var arrayCoachSportif = new Array;
   nbCoachCulture = heure.id.split("endCoachCulture");
@@ -362,6 +376,7 @@ function checkHeureDebutCulture(heure)
 function checkHeureFinCulture(heure)
 {
   clearInput(heure);
+  clearPCollaborateurs(heure);
   var array = new Array;
   nbCoachCulture = heure.id.split("endCoachCulture");
   var dateStartTrajet = new Date();
@@ -461,10 +476,22 @@ function checkRadioBillet(radio)
     var button = radio.name.split('idBillet');
     var quantites = document.getElementById("quantites8["+button[1]+"]");
   if(radio.checked == true && quantites.value > 0 && quantites.value <=5){
-    document.getElementById("buttonHours"+button[1]).style.visibility="visible";
+    document.getElementById("buttonHoursBillet"+button[1]).style.visibility="visible";
   }
 else{
-  document.getElementById("buttonHours"+button[1]).style.visibility="hidden";
+  document.getElementById("buttonHoursBillet"+button[1]).style.visibility="hidden";
+}
+}
+
+function checkRadioRestaurant(radio)
+{
+    var button = radio.name.split('idRestaurant');
+    var quantites = document.getElementById("quantites1["+button[1]+"]");
+  if(radio.checked == true && quantites.value > 0 && quantites.value <=5){
+    document.getElementById("buttonHoursRestaurant"+button[1]).style.visibility="visible";
+  }
+else{
+  document.getElementById("buttonHoursRestaurant"+button[1]).style.visibility="hidden";
 }
 }
 
@@ -637,6 +664,22 @@ function checkQuantiteBillet(billet) {
  {
   //clearP(billet);
   displayError(billet,' ');
+ // clearInput(ordinateur);
+ }
+}
+
+function checkQuantiteRestaurant(restaurant) {
+  clearP(restaurant);
+  clearInput(restaurant);
+ if (restaurant.value >= 0 && restaurant.value <= 5)
+ {
+ 
+ 
+ }
+ else
+ {
+  //clearP(billet);
+  displayError(restaurant,' ');
  // clearInput(ordinateur);
  }
 }
@@ -1444,12 +1487,12 @@ else
 function checkGlobal(donnees)
 
 {
-
+  
   clearInputDonnees(donnees);
-  var countError=0;
+  
     // On check les interprete, les coach sportif et les coach culture s'il possède des erreurs dans les dates 
     // On fait la meme chose pour les billets touristiques et les hotels.
- 
+  var countError=0;
   var countCollab=0;
   var arrayCollab = new Array();
   var interprete ="Interprete";
@@ -1458,11 +1501,14 @@ function checkGlobal(donnees)
   var billet = "Billet"
   var hotel = "Hotel"
   var start = "start"
+  var restaurant = "Restaurant";
   var end = "end";
   var countBillet = 0;
   var arrayCollab = new Array;
   var billet = "Billet"
   var idBillet = 8
+  var idRestaurant = 1
+  var countRestaurant=0;
   var hotel = "Hotel"
   var idHotel = 9
   var arrayHotel = new Array;
@@ -1479,6 +1525,7 @@ function checkGlobal(donnees)
         {
             displayErrorMessageBillets(inputStart,"Erreur ! ",j);
          }
+
       countCollab++;
       arrayCollab.push(j);
       }
@@ -1512,23 +1559,46 @@ function checkGlobal(donnees)
       arrayCollab.push(j);
       }
 
-    else if (document.getElementById(start+coachCulture+j) !== null && document.getElementById(end+coachCulture+j) !== null)
+
+  }
+
+  for (l=0;l<100;l++)
+  {
+     if (document.getElementById(start+coachCulture+l) !== null && document.getElementById(end+coachCulture+l) !== null)
     {
-      var inputStart = document.getElementById(start+coachCulture+j);
-      var inputEnd = document.getElementById(end+coachCulture+j);
+      var inputStart = document.getElementById(start+coachCulture+l);
+      var inputEnd = document.getElementById(end+coachCulture+l);
       if (inputStart.style.borderColor !== '' || inputEnd.style.borderColor !== '')
       {
-        if (checkIfErrorMessageCollaborateurs("collaborateurs_errorDonnee"+j) == false && document.getElementById(j).checked == true)
+        if (checkIfErrorMessageCollaborateurs("collaborateurs_errorDonnee"+l) == false && document.getElementById(l).checked == true)
           {
-            displayErrorMessageCollaborateurs(inputStart,"Erreur ! ",j);
+            displayErrorMessageCollaborateurs(inputStart,"Erreur ! ",l);
           }
       countCollab++;
-      arrayCollab.push(j);
+      arrayCollab.push(l);
       }
     }
-    
-   
   }
+
+  for (var c=0;c<100;c++)
+  {
+    if (document.getElementById(start+restaurant+c) !== null)
+    {
+      
+      var inputStart = document.getElementById(start+restaurant+c);
+      if (inputStart.style.borderColor !== '')
+      {
+        if (checkIfErrorMessageCollaborateurs("restaurants_errorDonnee"+c) == false  && document.getElementById("idRestaurant"+c).checked == true)
+        {
+            displayErrorMessageRestaurants(inputStart,"Erreur ! ",c);
+         }
+
+      countCollab++;
+      arrayCollab.push(c);
+      }
+  }
+}
+
 
    
       for (k=0;k<30;k++)
@@ -1563,6 +1633,7 @@ function checkGlobal(donnees)
       var inputStartCoachSportif = document.getElementById("startCoachSportif"+element);
       var inputStartCoachCulture = document.getElementById("startCoachCulture"+element);
       var inputStartBillet = document.getElementById("startBillet"+element);
+      var inputStartRestaurant = document.getElementById("startRestaurant"+element);
 
 
 
@@ -1581,6 +1652,10 @@ function checkGlobal(donnees)
       else if (inputStartBillet !== null)
       {
         inputStart = inputStartBillet;
+      }
+      else if (inputStartRestaurant !== null)
+      {
+        inputStart = inputStartRestaurant;
       }
       for (var l = 0; l < arrayHotel.length; l++) {
         element2 = arrayHotel[l];
@@ -1605,9 +1680,11 @@ function checkGlobal(donnees)
         {
           
           displayErrorDonnees(donnees,"Erreur de date au niveau des interprètes","interpreteError");
-         
+          
         }
         countError++;
+        
+       
     }
     else if (name == "CoachSportif")
     {
@@ -1619,9 +1696,10 @@ function checkGlobal(donnees)
       {
         
         displayErrorDonnees(donnees,"Erreur de date au niveau des coach sportifs","coachSportifError");
+        countError++;
         
       }
-      countError++;
+      
     }
     else if (name == "CoachCulture")
     {
@@ -1632,8 +1710,10 @@ function checkGlobal(donnees)
       {
         
         displayErrorDonnees(donnees,"Erreur de date au niveau des coach cultures","CoachCultureError");
+       
       }
       countError++;
+      
     }
     else if (name == "Billet")
     {
@@ -1645,8 +1725,19 @@ function checkGlobal(donnees)
       {
         
         displayErrorDonnees(donnees,"Erreur de date au niveau des billets touristiques","BilletError");
+      }
+      countError++;
+    }
+    else if (name == "Restaurant")
+    {
+      var slider = document.getElementById("slider1").parentNode;  
+      slider = slider.childNodes
+      slider = slider[1]
+      var button = document.getElementById("idRestaurant"+element);  
+      if(checkIfErrorMessage("RestaurantError") == false && buttonChecked(button) == true && buttonChecked(slider) == true)
+      {
         
-        
+        displayErrorDonnees(donnees,"Erreur de date au niveau du menu au choix","RestaurantError");
       }
       countError++;
     }
@@ -1668,9 +1759,10 @@ function checkGlobal(donnees)
       {
         
         displayErrorDonnees(donnees,"Erreur de date au niveau des hôtels","HotelError");
-        countError++;
+        
         
       }
+      countError++;
     }
 
     }
@@ -1725,9 +1817,10 @@ function checkGlobal(donnees)
         if(checkIfErrorMessage("visites") == false && buttonChecked(button) == true)
         {
           displayErrorDonnees(donnees,"Erreur de quantité dans la section : Préparations de visites touristiques.","visites");
-          countError++;
+         
         
         }
+        countError++;
       }
       
       if (element == 15 || element == 16)
@@ -1735,17 +1828,19 @@ function checkGlobal(donnees)
         if(checkIfErrorMessage("pets") == false && buttonChecked(button) == true)
         {
           displayErrorDonnees(donnees,"Erreur de quantité dans la section : Pets Sittings.","pets");
-          countError++;
+          
       
         }
+        countError++;
       }
       if (element == 18 || element == 19)
       {
         if(checkIfErrorMessage("boissons") == false && buttonChecked(button) == true)
         {
           displayErrorDonnees(donnees,"Erreur de quantité dans la section : Services de repas et de boissons.","boissons");
-          countError++;
+          
         }
+        countError++;
       }
     }
   }
@@ -1765,6 +1860,26 @@ function checkGlobal(donnees)
        displayErrorP(element,"Erreur ! ",i);
         }
         countBillet++;
+        array.push(element);
+      }
+    }   
+  }
+
+  for (i=0;i<100;i++)
+  {
+    // pour les billets
+    if (document.getElementById("quantites"+idRestaurant+"["+i+"]"))
+    {
+      element = document.getElementById("quantites"+idRestaurant+"["+i+"]");  
+     // clearPCollaborateurs(element);
+          
+      if (element.style.borderColor !== '')
+      {
+        if (checkIfErrorMessageP("p_errorDonnee"+i) == false)
+        {
+       displayErrorP(element,"Erreur ! ",i);
+        }
+        countRestaurant++;
         array.push(element);
       }
     }   
@@ -1789,6 +1904,36 @@ function checkGlobal(donnees)
         if(checkIfErrorMessage("visites") == false && buttonChecked(button) == true)
         {
           displayErrorDonnees(donnees,"Erreur de quantité dans la section : Préparations de visites touristiques.","visites");
+          countError++;
+          
+        
+        }
+     
+        
+      }
+  
+    }
+
+  }
+
+  if (countRestaurant >0)
+  {
+    for (var i = 0; i < array.length; i++) {
+      element = array[i].id.split("quantites");
+      element = element[1];
+      element = element.split("[");
+      element = element[0];
+     
+      var button = document.getElementById("slider"+element).parentNode;  
+      button = button.childNodes
+      button = button[1]
+      
+      if (element == 1 )
+      {
+        
+        if(checkIfErrorMessage("boissons") == false && buttonChecked(button) == true)
+        {
+          displayErrorDonnees(donnees,"Erreur de quantité dans la section : Menu au choix","boissons");
           countError++;
           
         
@@ -1960,8 +2105,9 @@ function checkGlobal(donnees)
         {
           
           displayErrorDonnees(donnees,"Erreur de date pour les ordinateurs portable Mac Book Air","dateOrdinateurError"+element);
-          countError++;
+          
         }
+        countError++;
     }
     if (name == "ordinateurStart3")
     {
@@ -1974,8 +2120,9 @@ function checkGlobal(donnees)
       {
         
         displayErrorDonnees(donnees,"Erreur de date pour les ordinateurs portable Mac Book Pro","dateOrdinateurError"+element);
-        countError++;
+       
       }
+      countError++;
   }
   if (name == "ordinateurStart4")
   {
@@ -1990,6 +2137,7 @@ function checkGlobal(donnees)
       displayErrorDonnees(donnees,"Erreur de date pour les ordinateurs portable Windows","dateOrdinateurError"+element);
       
     }
+    countError++;
 }
 if (name == "tabletteStart5")
 {
@@ -2001,8 +2149,9 @@ if (name == "tabletteStart5")
   {
     
     displayErrorDonnees(donnees,"Erreur de date pour les tablettes Android ou Windows","dateOrdinateurError"+element);
-    countError++;
+    
   }
+  countError++;
 }
 if (name == "audioGuidesStart6")
 {
@@ -2014,8 +2163,9 @@ if (name == "audioGuidesStart6")
   {
     
     displayErrorDonnees(donnees,"Erreur de date pour la réservation d'audio-guides","dateAudioGuides"+element);
-    countError++;
+  
   }
+  countError++;
 }
 if (name == "reservationRestaurantStart9")
 {
@@ -2027,8 +2177,9 @@ if (name == "reservationRestaurantStart9")
   {
     
     displayErrorDonnees(donnees,"Erreur de date pour la réservation de restaurant","dateReservationRestaurant"+element);
-    countError++;
+  
   }
+  countError++;
 }
 if (name == "transportAnimalStart15")
 {
@@ -2040,8 +2191,9 @@ if (name == "transportAnimalStart15")
   {
     
     displayErrorDonnees(donnees,"Erreur de date pour le transport de petit animal","dateTransportAnimal"+element);
-    countError++;
+   
   }
+  countError++;
 }
 if (name == "transportVeteniraireStart16")
 {
@@ -2053,8 +2205,9 @@ if (name == "transportVeteniraireStart16")
   {
     
     displayErrorDonnees(donnees,"Erreur de date pour le service transport vétérinaire","dateTransportVeterinaire"+element);
-    countError++;
+    
   }
+  countError++;
 }
 if (name == "menuJourStart18")
 {
@@ -2066,8 +2219,9 @@ if (name == "menuJourStart18")
   {
     
     displayErrorDonnees(donnees,"Erreur de date pour le menu du jour","dateMenuGastronomique"+element);
-    countError++;
+    
   }
+  countError++;
 }
 if (name == "menuGastronomiqueStart19")
 {
@@ -2079,21 +2233,23 @@ if (name == "menuGastronomiqueStart19")
   {
     
     displayErrorDonnees(donnees,"Erreur de date pour le menu gastronomique","dateMenuJour"+element);
-    countError++;
+   
   }
+  countError++;
 }
 
     }
   }
 
   }
-console.log(countError);
+
   if (countError > 0)
   {
     return false;
   }
   else
   {
+   
      return true;
   }
 
@@ -2111,12 +2267,6 @@ function buttonChecked(button)
         return false;
       }
 }
-
-
-
-
-
-
 
 
 

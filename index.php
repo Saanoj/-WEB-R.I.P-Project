@@ -74,7 +74,7 @@ if(isset($_SESSION["id"])){
 							<div class="row">
 								<div class="col">
 									<div class="home_slider_content">
-										<div class="home_title"><h2>Réserver votre trajet !</h2></div>
+										<div class="home_title"><h2><?php echo _TITRE_BODY; ?></h2></div>
 									</div>
 								</div>
 							</div>
@@ -92,7 +92,7 @@ if(isset($_SESSION["id"])){
 			<div class="row">
 				<div class="col">
 					<div class="home_search_container">
-						<div class="home_search_title">Réserver votre trajet </div>
+						<div class="home_search_title"><?php echo _TITRE_BODY; ?> </div>
 						<div class="home_search_content">
 							<form action="valideReservation.php" method="post" class="home_search_form" id="home_search_form" onsubmit="return checkGlobal(this)">
 								<div class="d-flex flex-lg-row flex-column align-items-start justify-content-lg-between justify-content-start">

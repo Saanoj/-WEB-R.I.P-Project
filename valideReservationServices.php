@@ -36,8 +36,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
       }
   }
   $serviceActual = $service;
-  var_dump($service);
-  var_dump($thisQuantite);
+
   
     //affectation de l'id annexe du service si besoin
 
@@ -236,8 +235,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
         }
           
       }
-      var_dump($array7DateDebut);
-         var_dump($array7DateFin);
+
  
       }
       if ($service === "8") {
@@ -293,10 +291,10 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
         for ($i=0;$i<$thisQuantite;$i++)
         {
         $array16DateDebut = array_push_assoc($array16DateDebut,$i,$_POST['transportVeteniraireStart'.$service.'_'.$i.'']);
-        $array16DateFin = array_push_assoc($array16DateFin,$i,$_POST['transportVeteniraireStart'.$service.'_'.$i.'']);
+        $array16DateFin = array_push_assoc($array16DateFin,$i,$_POST['transportVeteniraireEnd'.$service.'_'.$i.'']);
         }
-        // var_dump($array3DateDebut);
-        // var_dump($array3DateFin);
+        //  var_dump($array16DateDebut);
+        //  var_dump($array16DateFin);
       }
         
       if ($service === "18") {
@@ -434,7 +432,6 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
 
           if ($service === "2")
           {
-          //var_dump($array2DateDebut);
         if ($array2DateDebut[$i] !== '' && $array2DateFin[$i] !== '') {
         $req=$bdd->getPDO()->prepare('UPDATE linkservicetrajet SET dateStart = :dateStart,dateEnd = :dateEnd WHERE idTrajet = :idTrajet AND idLink = :idLink');
         $req->execute(array(

@@ -171,6 +171,7 @@ loadLanguageFromSession($_SESSION['lang']);
               <h3 class="display-4 text-center">Votre chauffeur</h3>
               <p>
                 <?php
+               
                 //$idServices = $bdd->query('SELECT idService FROM linkServicetrajet WHERE idTrajet='.$_SESSION["idTrajet"].'');
                 $idChauffeur= $bdd->queryOne('SELECT idChauffeur FROM trajet WHERE idTrajet='.$_SESSION["idTrajet"].'');
                 $unChauffeur= $bdd->queryOne('SELECT * FROM collaborateurs WHERE idCollaborateurs='.$idChauffeur["idChauffeur"].'');
@@ -352,7 +353,7 @@ loadLanguageFromSession($_SESSION['lang']);
                           ?> <b> <?php   echo $service["nomService"]." pour le ".$infoLinkService["nom"]." | Prix du billet : ".$infoLinkService["prix"]."€ * ".$linkService["quantite"]." + ".$service["prixService"]."€ = ".($infoLinkService["prix"]*$linkService["quantite"]+$service['prixService'])." €"; ?> </b> <?php
                           $totalServices += ($infoLinkService["prix"]+$service['prixService']);
                         }
-                        else if ($linkService["idService"] == 2 || $linkService["idService"] == 3 || $linkService["idService"] == 4|| $linkService["idService"] == 5 || $linkService["idService"] == 6 ||$linkService["idService"] == 9 || $linkService["idService"] == 18 || $linkService["idService"] == 19) {
+                        else if ($linkService["idService"] == 2 || $linkService["idService"] == 3 || $linkService["idService"] == 4|| $linkService["idService"] == 5 || $linkService["idService"] == 6 ||$linkService["idService"] == 9 || $linkService["idService"] == 15 || $linkService["idService"] == 16|| $linkService["idService"] == 18 || $linkService["idService"] == 19) {
                           ?> <b> <?php  echo $service["nomService"]." | Prix: ".$infoLinkService["prixCollaborateur"]."€/h *"; ?> </b> <?php
                           $totalServices += ($infoLinkService["prix"]*$linkService["quantite"]+$service["prixService"]);
 

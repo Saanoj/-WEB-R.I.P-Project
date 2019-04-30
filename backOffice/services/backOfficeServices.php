@@ -2,7 +2,7 @@
 session_start();
 
 
-include 'functionRestaurants.php';
+include 'functionServices.php';
 ?>
 
 <!DOCTYPE html>
@@ -23,25 +23,22 @@ include 'functionRestaurants.php';
 
   <div class="jumbotron m-5 p-5 table-responsive">
     <?php include_once '../includehtml/navbarBO.php';
-    navbarBO("restaurant")?>
+    navbarBO("services")?>
 
-    <h1>Link service abbonement</h1>
+    <h1>Services</h1>
     <table class="table">
       <thead>
         <tr>
           <th scope="col">Id</th>
-          <th scope="col">Disponibilité</th>
           <th scope="col">Nom</th>
           <th scope="col">Prix</th>
-          <th scope="col">Debut</th>
-          <th scope="col">Fin</th>
-          <th scope="col">addresse</th>
-          <th scope="col">Ville</th>
+          <th scope="col">Catégorie</th>
+          <th scope="col">Description</th>
           <th scope="col">Edit/Add</th>
           <th scope="col">Supprimer</th>
         </tr>
       </thead>
-      <?php backOfficeRestaurants();
+      <?php backOfficeServices();
       ?>
     </table>
   </div>

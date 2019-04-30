@@ -379,6 +379,10 @@ loadLanguageFromSession($_SESSION['lang']);
               if (empty($isAbonnee['idAbonnement'])) {
                 echo "<p class='display-4'>Prix total: ".($totalChauffeurTrajet)."€ TTC</p>"; $total=$totalChauffeurTrajet;
               }else {
+                if (!isset($totalServices) || empty($totalServices))
+                {
+                  $totalServices = 0;
+                }
                 echo "<p class='display-4'>Prix total: ".($totalServices+$totalChauffeurTrajet)."€ TTC</p>"; $total=$totalServices+$totalChauffeurTrajet;
               }
               ?>

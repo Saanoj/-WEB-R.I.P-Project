@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 require 'Class/Autoloader.php';
 App\Autoloader::register();
@@ -27,18 +28,7 @@ $trajet = unserialize($_SESSION['trajet']);
 
 
 if(!empty($isAbonnee['idAbonnement'])){
-//temps des collabs
-//si temps de trajet < 1H alors on passe le temps d'interprete a un 1 et si au dessus on la tronque à l'heure en dessous
-$hourInterprete = (strtotime($_SESSION['endInterprete']) - strtotime($_SESSION['startInterprete']));
-$hourInterprete = $hourInterprete/3600>1?floor($hourInterprete/3600):ceil($hourInterprete/3600);
 
-// ON VERIFIE LA DIFFERENCE D'HEURE ENTRE LE DEBUT ET LA FIN DU CRENEAU DU COACH SPORTIF
-$hourCoachSportif = (strtotime($_SESSION['endCoachSportif']) - strtotime($_SESSION['startCoachSportif']));
-$hourCoachSportif = $hourCoachSportif/3600>1?floor($hourCoachSportif/3600):ceil($hourCoachSportif/3600);
-
-//  ON VERIFIE LA DIFFERENCE D'HEURE ENTRE LE DEBUT ET LA FIN DU CRENEAU DU COACH CULTURE
-$hourCoachCulture = (strtotime($_SESSION['endCoachCulture']) - strtotime($_SESSION['startCoachCulture']));
-$hourCoachCulture =  $hourCoachCulture/3600>1?floor($hourCoachCulture/3600):ceil($hourCoachCulture/3600);
 
 
 //on boucle les id des services choisis
@@ -454,11 +444,13 @@ $req2->execute(array(
   'prixTotal' => $real_price
 ));
 
-ob_end_flush();
 
+ob_end_flush();
 $destination = 'factures/facture'.$_SESSION['idTrajet'].'.pdf';
 $pdf->Output($destination, 'F');
-$pdf->Output();
+$pdf->Output('facture'.$_SESSION['idTrajet'].'.pdf', 'D');
+
+
 
 
 

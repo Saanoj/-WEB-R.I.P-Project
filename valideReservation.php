@@ -1,8 +1,13 @@
 <?php
 session_start();
+
 require 'Class/Autoloader.php';
 App\Autoloader::register();
 $bdd = new App\Database('rip');
+if (!isset($_SESSION['id']) || empty($_SESSION['id']))
+{
+  header('location:connexion.php');
+}
 
 // VERIFICATION DE LA DATE DU TRAJET : IL DOIT ETRE SUPERIEUR A LA DATE DU JOUR
 $timeStart = $_POST["dateDebut"]." ".$_POST["heureDebut"];

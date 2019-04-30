@@ -146,12 +146,8 @@ loadLanguageFromSession($_SESSION['lang']);
                             switch ($service->getIdService()) {
 
                               case '1':
-
-
-                              $restaurants = $bdd->getPDO()->prepare('SELECT * FROM restaurants ORDER BY idRestaurant DESC LIMIT 10 ');
-                              $restaurants->execute();
-                              ?>
-                                  <table>
+?>
+                              <table>
 
                               <tr>
                                 <th scope="col">Nom du restaurant : </th>
@@ -160,6 +156,11 @@ loadLanguageFromSession($_SESSION['lang']);
                                 <th scope="col">Quantité : </th>
 
                               </tr>
+                              <?php
+                              $restaurants = $bdd->getPDO()->prepare('SELECT * FROM restaurants ORDER BY idRestaurant DESC LIMIT 10 ');
+                              $restaurants->execute();
+                              ?>
+                       
                               <?php
                               while($unRestaurants = $restaurants->fetch())
                               {
@@ -173,20 +174,44 @@ loadLanguageFromSession($_SESSION['lang']);
                                 {
 
                                   ?>
+                                      <tr>
+                                    <th scope="row"> <?= $unRestaurants['nom'];?></th>
+                                    <td> <?= $unRestaurants['adresseRestaurant'];?></td>
+                                    <td> <?= $unRestaurants['prix'] . '€/repas';?></td>
+                                    <td><input type="number"  id="quantites<?=$service->getIdService()."[".$unRestaurants['idRestaurant']."]";?>" class="primary" name="quantite_<?=$unRestaurants['idRestaurant'];?>"  onkeyup="checkQuantiteRestaurant(this)"/></td>
+                            
                               
-                                    <tr>
-                                      <th scope="row"> <?= $unRestaurants['nom'];?></th>
-                                      <td> <?= $unRestaurants['adresseRestaurant'];?></td>
-                                      <td> <?= $unRestaurants['prix']. '€';?></td>
-                                      <td><input type="number" min="1" max="10" id="<?php echo $service->getIdService(); ?>" id="quantites<?=$service->getIdService();?>" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]" value="1"/></td>
-
-                                      <td>
+                              <td>
                                         <div class="funkyradio-primary col-md-6 center-block">
-                                          <input type="radio" class="primary"  name="idRestaurant" id="idRestaurant<?php echo $unRestaurants['idRestaurant'] ?>" value="<?php echo $unRestaurants['idRestaurant'] ?>"  />
+                                          <input type="checkbox" name="idRestaurant<?php echo $unRestaurants['idRestaurant'] ?>" id="idRestaurant<?php echo $unRestaurants['idRestaurant'] ?>"  onchange="checkRadioRestaurant(this)" >
                                           <label for="radio<?php echo $unRestaurants['idRestaurant'] ?>">Choisir ce restaurant</label>
+                                          <button style="visibility:hidden" id="buttonHoursRestaurant<?php echo $unRestaurants['idRestaurant']?>" type="button" class="btn btn-primary" data-toggle="modal" data-target="#heuresRestaurant<?php echo $unRestaurants['idRestaurant']?>">Heures</button>
+
+                                          <input type="hidden" id="heureTrajetFin"value="<?= $resFin;?>">
+                                         <input type="hidden" id="heureTrajetDebut"value="<?= $res[1];?>">
+                                          <div id="heuresRestaurant<?php echo $unRestaurants['idRestaurant'] ?>" class="modal fade" role="dialog" style="z-index: 1400;">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                              <!-- Modal content-->
+                                              <div class="modal-content">
+                                              <div class="modal-header">
+
+                                          <h4 class="modal-title">Heure de réservation pour le restaurant  <?php echo $unRestaurants['nom'] ?></h4>
+                                          </div>
+                                         <div id="Restaurant" class="modal-body">
+                                         Debut <input type="time" id="startRestaurant<?php echo $unRestaurants['idRestaurant'] ?>" value="<?= $res[1]; ?>" name="startRestaurant<?php echo $unRestaurants['idRestaurant'] ?>" onchange="checkHeureFinBillet(this)">
+                                           <input type="time" style="visibility:hidden" id="endRestaurant<?php echo $unRestaurants['idRestaurant'] ?>" value="<?= $resFin; ?>" name="endRestaurant<?php echo $unRestaurants['idRestaurant'] ?>">
+                                                
+                                                </div> 
+                                                <div class="modal-footer"> <div>
+                                           
+                                          </div>     
+                                              </div>
+                                            </div>
+
                                         </div>
                                       </td>
                                     </tr>
+                                    <?php $j++; ?>
                                  <?php
                                 }
                                ?> </table> <?php
@@ -330,7 +355,7 @@ loadLanguageFromSession($_SESSION['lang']);
                                         <div class="funkyradio-primary col-md-6 center-block">
                                           <input type="checkbox" name="idBillet<?php echo $unBillet['idBillet'] ?>" id="idBillet<?php echo $unBillet['idBillet'] ?>"  onchange="checkRadioBillet(this)" >
                                           <label for="radio<?php echo $unBillet['idBillet'] ?>">Choisir ce billet</label>
-                                          <button style="visibility:hidden" id="buttonHours<?php echo $unBillet['idBillet']?>" type="button" class="btn btn-primary" data-toggle="modal" data-target="#heuresBillet<?php echo $unBillet['idBillet']?>">Heures</button>
+                                          <button style="visibility:hidden" id="buttonHoursBillet<?php echo $unBillet['idBillet']?>" type="button" class="btn btn-primary" data-toggle="modal" data-target="#heuresBillet<?php echo $unBillet['idBillet']?>">Heures</button>
 
                                           <input type="hidden" id="heureTrajetFin"value="<?= $resFin;?>">
                                          <input type="hidden" id="heureTrajetDebut"value="<?= $res[1];?>">

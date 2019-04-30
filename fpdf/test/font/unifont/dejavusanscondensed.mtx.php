@@ -13,7 +13,7 @@ $desc=array (
 );
 $up=-63;
 $ut=44;
-$ttffile='C:\wamp\www\R.I.P-Project\fpdf\test/font/unifont/DejaVuSansCondensed.ttf';
+$ttffile='C:\wamp64\www\Ride in pride\-WEB-R.I.P-Project\fpdf\test/font/unifont/DejaVuSansCondensed.ttf';
 $originalsize=680264;
 $fontkey='dejavu';
 ?>

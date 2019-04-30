@@ -2,8 +2,7 @@
 session_start();
 
 
-include '../../include/config.php';
-include '../../include/fonctionTrajet.php';
+include 'functionLinkService.php';
 ?>
 
 <!DOCTYPE html>
@@ -22,25 +21,27 @@ include '../../include/fonctionTrajet.php';
   $Session->isConnect();
   ?>
 
-  <div>
-    <h1>Table comptes</h1>
+  <div class="jumbotron m-5 p-5 table-responsive">
+    <?php include_once '../includehtml/navbarBO.php';
+    navbarBO("linkService")?>
+
+    <h1>Link service abbonement</h1>
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">Client</th>
-          <th scope="col">Chauffeur</th>
-          <th scope="col">Heure du début</th>
-          <th scope="col">Heure de fin </th>
-          <th scope="col">Date</th>
-          <th scope="col">Distance</th>
-          <th scope="col">Prix</th>
-          <th scope="col">Debut</th>
-          <th scope="col">Fin</th>
+          <th scope="col">Id</th>
+          <th scope="col">Id du trajet</th>
+          <th scope="col">Id du service</th>
+          <th scope="col">Id annexe</th>
+          <th scope="col">Quantite</th>
+          <th scope="col">Statut</th>
+          <th scope="col">Date de début</th>
+          <th scope="col">Date de fin</th>
           <th scope="col">Edit/Add</th>
           <th scope="col">Supprimer</th>
         </tr>
       </thead>
-      <?php backOfficeTrajet();
+      <?php backOfficeLinkService();
       ?>
     </table>
   </div>

@@ -1,13 +1,13 @@
 <?php
 define('CONF', '../includehtml/config.php');
 
-function backOfficeEntreprise()
+function backOfficeFactures()
 {
   include (CONF);
 
 
 
-  $query=$bdd->prepare("SELECT * FROM entreprise");
+  $query=$bdd->prepare("SELECT * FROM factures");
   $query->execute();
 
   $result = $query->fetchAll();
@@ -17,15 +17,13 @@ function backOfficeEntreprise()
     <tr>
       <form method="POST" action="change.php">
 
-        <input  name="id" type="hidden" value="<?php echo $member["idEntreprise"]?>"/>
-        <td><?php echo $member["idEntreprise"]?> </td>
-        <td><input name="nameEntreprise" type="text" value="<?php echo $member["nameEntreprise"]?>"/></td>
-        <td><input name="numEntreprise" type="text" value="<?php echo $member["numEntreprise"]?>"/></td>
-        <td><input name="adresse" type="text" value="<?php echo $member["adresse"]?>"/></td>
-        <td><input name="numSiret" type="text" value="<?php echo $member["numSiret"]?>"/></td>
-        <td><input name="idDirecteur" type="text" value="<?php echo $member["idDirecteur"]?>"/></td>
-        <td><input name="nbSalarie" type="text" value="<?php echo $member["nbSalarie"]?>"/></td>
-        <td><input name="pays" type="text" value="<?php echo $member["pays"]?>"/></td>
+        <input  name="id" type="hidden" value="<?php echo $member["idFacture"]?>"/>
+        <td><?php echo $member["idFacture"]?> </td>
+        <td><input name="idTrajet" type="text" value="<?php echo $member["idTrajet"]?>"/></td>
+        <td><input name="prixTrajet" type="text" value="<?php echo $member["prixTrajet"]?>"/></td>
+        <td><input name="prixService" type="text" value="<?php echo $member["prixService"]?>"/></td>
+        <td><input name="prixTotal" type="text" value="<?php echo $member["prixTotal"]?>"/></td>
+        <td><input name="dateFacture" type="text" value="<?php echo $member["dateFacture"]?>"/></td>
         <td>
           <button name="edit" type="submit" class="btn btn-warning">
             edit
@@ -35,7 +33,7 @@ function backOfficeEntreprise()
       </td>
       <form method="POST" action="change.php">
         <td>
-          <input  name="id" type="hidden" value=" <?php echo $member["idEntreprise"]; ?> "/>
+          <input  name="id" type="hidden" value=" <?php echo $member["idFacture"]; ?> "/>
           <button  name = "drop" type="submit" class="btn btn-danger">
             Delete
             <span class="glyphicon glyphicon"></span>
@@ -53,13 +51,11 @@ function backOfficeEntreprise()
     <tr>
       <form method="POST" action="change.php">
         <td></td>
-        <td><input name="nameEntreprise" type="text"/></td>
-        <td><input name="numEntreprise" type="text"/></td>
-        <td><input name="adresse" type="text" /></td>
-        <td><input name="numSiret" type="text" /></td>
-        <td><input name="idDirecteur" type="text" /></td>
-        <td><input name="nbSalarie" type="text" /></td>
-        <td><input name="pays" type="text" /></td>
+        <td><input name="idTrajet" type="text"/></td>
+        <td><input name="prixTrajet" type="text"/></td>
+        <td><input name="prixService" type="text" /></td>
+        <td><input name="prixTotal" type="text" /></td>
+        <td><input name="dateFacture" type="text" /></td>
         <td>
 
           <button name="add" type="submit" class="btn btn-success">
@@ -74,48 +70,43 @@ function backOfficeEntreprise()
 
     }
 
-    function edit($id, $nameEntreprise, $numEntreprise, $adresse, $numSiret, $idDirecteur, $nbSalarie, $pays)
+    function edit($id, $idTrajet, $prixTrajet, $prixService, $prixTotal, $dateFacture)
     {
       include (CONF);
-      $query = $bdd->prepare("UPDATE entreprise SET
-        nameEntreprise = :nameEntreprise,
-        numEntreprise = :numEntreprise,
-        adresse = :adresse,
-        numSiret = :numSiret,
-        idDirecteur = :idDirecteur,
-        nbSalarie = :nbSalarie,
-        pays = :pays
-        WHERE idEntreprise = :id");
+      $query = $bdd->prepare("UPDATE factures SET
+        idTrajet = :idTrajet,
+        prixTrajet = :prixTrajet,
+        prixService = :prixService,
+        prixTotal = :prixTotal,
+        dateFacture = :dateFacture
+        WHERE idFacture = :id");
         $query->execute([
           "id"=> $id,
-          "nameEntreprise"=>$nameEntreprise,
-          "numEntreprise"=>$numEntreprise,
-          "adresse"=>$adresse,
-          "numSiret"=>$numSiret,
-          "idDirecteur"=>$idDirecteur,
-          "nbSalarie"=>$nbSalarie,
-          "pays"=>$pays
+          "idTrajet"=>$idTrajet,
+          "prixTrajet"=>$prixTrajet,
+          "prixService"=>$prixTrajet,
+          "prixTotal"=>$prixService,
+          "dateFacture"=>$dateFacture
         ]);
       }
 
-      function add($nameEntreprise, $numEntreprise, $adresse, $numSiret, $idDirecteur, $nbSalarie, $pays){
+      function add($idTrajet, $prixTrajet, $prixService, $prixTotal, $dateFacture){
         include (CONF);
-        $query = $bdd->prepare("INSERT INTO entreprise (nameEntreprise, numEntreprise, adresse, numSiret, idDirecteur, nbSalarie, pays) VALUES (:nameEntreprise, :numEntreprise, :adresse, :numSiret, :idDirecteur, :nbSalarie, :pays)");
+        $query = $bdd->prepare("INSERT INTO factures (idTrajet, prixTrajet, prixService, prixTotal, dateFacture)
+        VALUES (:idTrajet, :prixTrajet, :prixService, :prixTotal, :dateFacture)");
         $query->execute([
-          "nameEntreprise"=>$nameEntreprise,
-          "numEntreprise"=>$numEntreprise,
-          "adresse"=>$adresse,
-          "numSiret"=>$numSiret,
-          "idDirecteur"=>$idDirecteur,
-          "nbSalarie"=>$nbSalarie,
-          "pays"=>$pays
+          "idTrajet"=>$idTrajet,
+          "prixTrajet"=>$prixTrajet,
+          "prixService"=>$prixService,
+          "prixTotal"=>$prixTotal,
+          "dateFacture"=>$dateFacture
         ]);
       }
 
       function drop($id)
       {
         include (CONF);
-        $query = $bdd->prepare("DELETE FROM `entreprise` WHERE idEntreprise = :id");
+        $query = $bdd->prepare("DELETE FROM `factures` WHERE idFacture = :id");
         $query->execute([
           "id"=>$id
 

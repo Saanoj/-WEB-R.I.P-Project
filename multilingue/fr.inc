@@ -5,8 +5,8 @@ define("_ACCUEIL","Accueil");
 define("_RESERVER_SERVICE","Réserver un trajet");
 
 //index.php
-define("_TITRE_BODY","Body en francais");
-define("_TITRE_BOUTTON","Petit boutton vert!");
+define("_TITRE_BODY","Réserver votre trajet");
+
 define("_TITRE_CHAUFFEUR","Nos 3 meilleurs chauffeurs!");
 define("_PRIX","Prix");
 define("_NOTE","Rang");

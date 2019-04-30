@@ -5,8 +5,9 @@ define("_ACCUEIL","Home");
 define("_RESERVER_SERVICE","Book a trip");
 
 //index.php
-define("_TITRE_BODY","Body in english");
-define("_TITRE_BOUTTON","Little green button!");
+define("_TITRE_BODY","Book a trip");
+
+
 define("_TITRE_CHAUFFEUR","Our 3 best drivers!");
 define("_PRIX","Price");
 define("_NOTE","Rank");

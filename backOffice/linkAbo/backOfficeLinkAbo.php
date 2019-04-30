@@ -2,7 +2,7 @@
 session_start();
 
 
-include 'functionFactures.php';
+include 'functionLinkAbo.php';
 ?>
 
 <!DOCTYPE html>
@@ -23,23 +23,23 @@ include 'functionFactures.php';
 
   <div class="jumbotron m-5 p-5 table-responsive">
     <?php include_once '../includehtml/navbarBO.php';
-    navbarBO("factures")?>
+    navbarBO("linkAbo")?>
 
     <h1>Factures</h1>
     <table class="table">
       <thead>
         <tr>
           <th scope="col">Id</th>
-          <th scope="col">id du Trajet</th>
-          <th scope="col">Prix du Trajet</th>
-          <th scope="col">Prix des Services</th>
-          <th scope="col">Prix total</th>
-          <th scope="col">Date de la factures</th>
+          <th scope="col">Id de l'abonnement</th>
+          <th scope="col">Id du Client</th>
+          <th scope="col">Id de l'entreprise</th>
+          <th scope="col">Date de début</th>
+          <th scope="col">Date de fin</th>
           <th scope="col">Edit/Add</th>
           <th scope="col">Supprimer</th>
         </tr>
       </thead>
-      <?php backOfficeFactures();
+      <?php backOfficeLinkAbo();
       ?>
     </table>
   </div>

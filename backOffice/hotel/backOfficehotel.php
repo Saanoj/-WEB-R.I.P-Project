@@ -2,7 +2,7 @@
 session_start();
 
 
-include 'functionFactures.php';
+include 'functionHotel.php';
 ?>
 
 <!DOCTYPE html>
@@ -23,23 +23,20 @@ include 'functionFactures.php';
 
   <div class="jumbotron m-5 p-5 table-responsive">
     <?php include_once '../includehtml/navbarBO.php';
-    navbarBO("factures")?>
+    navbarBO("hotel")?>
 
     <h1>Factures</h1>
     <table class="table">
       <thead>
         <tr>
           <th scope="col">Id</th>
-          <th scope="col">id du Trajet</th>
-          <th scope="col">Prix du Trajet</th>
-          <th scope="col">Prix des Services</th>
-          <th scope="col">Prix total</th>
-          <th scope="col">Date de la factures</th>
+          <th scope="col">Nom</th>
+          <th scope="col">Adresse</th>
           <th scope="col">Edit/Add</th>
           <th scope="col">Supprimer</th>
         </tr>
       </thead>
-      <?php backOfficeFactures();
+      <?php backOfficeHotel();
       ?>
     </table>
   </div>

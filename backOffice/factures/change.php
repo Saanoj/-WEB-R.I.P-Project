@@ -1,46 +1,40 @@
 <?php
-require_once 'functionEntreprise.php';
+require_once 'functionFactures.php';
 if (isset($_POST["edit"])) {
   edit($_POST["id"],
-  $_POST["nameEntreprise"],
-  $_POST["numEntreprise"],
-  $_POST["adresse"],
-  $_POST["numSiret"],
-  $_POST["idDirecteur"],
-  $_POST["nbSalarie"],
-  $_POST["pays"]
+  $_POST["idTrajet"],
+  $_POST["prixTrajet"],
+  $_POST["prixService"],
+  $_POST["prixTotal"],
+  $_POST["dateFacture"]
 );
-header("location: backOfficeEntreprise.php");
+header("location: backOfficeFactures.php");
 }
 
 if (isset($_POST["drop"])) {
   drop($_POST["id"]);
-header("location: backOfficeEntreprise.php");
+header("location: backOfficeFactures.php");
 }
 
 if (isset($_POST["add"])){
 
   if(
     !(
-    empty($_POST["nameEntreprise"])&&
-    empty($_POST["numEntreprise"])&&
-    empty($_POST["adresse"])&&
-    empty($_POST["numSiret"])&&
-    empty($_POST["idDirecteur"])&&
-    empty($_POST["nbSalarie"])&&
-    empty($_POST["pays"])
+    empty($_POST["idTrajet"])&&
+    empty($_POST["prixTrajet"])&&
+    empty($_POST["prixService"])&&
+    empty($_POST["prixTotal"])&&
+    empty($_POST["dateFacture"])
   )){
 
-      add($_POST["nameEntreprise"],
-      $_POST["numEntreprise"],
-      $_POST["adresse"],
-      $_POST["numSiret"],
-      $_POST["idDirecteur"],
-      $_POST["nbSalarie"],
-      $_POST["pays"]
+      add($_POST["idTrajet"],
+      $_POST["prixTrajet"],
+      $_POST["prixService"],
+      $_POST["prixTotal"],
+      $_POST["dateFacture"]
     );
     }
-  header("location: backOfficeEntreprise.php");
+  header("location: backOfficeFactures.php");
 }
 
 

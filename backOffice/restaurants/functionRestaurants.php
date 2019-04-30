@@ -35,7 +35,7 @@ function backOfficeRestaurants()
       </td>
       <form method="POST" action="change.php">
         <td>
-          <input  name="id" type="hidden" value=" <?php echo $member["idLink"]; ?> "/>
+          <input  name="id" type="hidden" value=" <?php echo $member["idRestaurant"]; ?> "/>
           <button  name = "drop" type="submit" class="btn btn-danger">
             Delete
             <span class="glyphicon glyphicon"></span>
@@ -89,7 +89,7 @@ function backOfficeRestaurants()
         $query->execute([
           "id"=> $id,
           "isDispo"=>$isDispo,
-          "idService"=>$nom,
+          "nom"=>$nom,
           "prix"=>$prix,
           "horrairesDebut"=>$horrairesDebut,
           "horrairesFin"=>$horrairesFin,

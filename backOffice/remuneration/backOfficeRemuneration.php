@@ -25,7 +25,7 @@ include 'functionRemuneration.php';
     <?php include_once '../includehtml/navbarBO.php';
     navbarBO("remuneration")?>
 
-    <h1>Devis</h1>
+    <h1>Remuneration</h1>
     <table class="table">
       <thead>
         <tr>

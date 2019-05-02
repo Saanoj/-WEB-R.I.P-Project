@@ -147,6 +147,16 @@ function navbarBO($where)
 
     <?php }
 
+    if($where == "remuneration"){?>
+      <li class="nav-item">
+        <a class="nav-link active" href="backOfficeRemuneration.php">Remuneration</a>
+      </li>
+    <?php }else{ ?>
+      <li class="nav-item">
+        <a class="nav-link" href="../remuneration/backOfficeRemuneration.php">Remuneration</a>
+      </li>
+    <?php }
+
     if ($where == "restaurant") {?>
 
       <li class="nav-item">

@@ -2,7 +2,7 @@
 session_start();
 
 
-include 'functionDevis.php';
+include 'functionRemuneration.php';
 ?>
 
 <!DOCTYPE html>
@@ -23,21 +23,21 @@ include 'functionDevis.php';
 
   <div class="jumbotron m-5 p-5 table-responsive">
     <?php include_once '../includehtml/navbarBO.php';
-    navbarBO("devis")?>
+    navbarBO("remuneration")?>
 
     <h1>Devis</h1>
     <table class="table">
       <thead>
         <tr>
           <th scope="col">Id</th>
-          <th scope="col">Validé</th>
-          <th scope="col">Prix Trajet</th>
-          <th scope="col">Prix Services</th>
+          <th scope="col">Id du collaborateur</th>
+          <th scope="col">Id du trajet</th>
+          <th scope="col">Prix</th>
           <th scope="col">Edit/Add</th>
           <th scope="col">Supprimer</th>
         </tr>
       </thead>
-      <?php backOfficeDevis();
+      <?php backOfficeRemuneration();
       ?>
     </table>
   </div>

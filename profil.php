@@ -26,6 +26,7 @@ loadLanguageFromSession($_SESSION['lang']);
 <body class="bg-secondary">
   <script type="text/javascript">
   $(document).ready(function(){
+
     $('#submitAvatar').on('click', function() {
       console.log("clickkkkkkkkkk");
       id = $('#id').val();
@@ -42,7 +43,8 @@ loadLanguageFromSession($_SESSION['lang']);
         type: 'post',
         success: function(php_script_response){
           //$('#message').html(php_script_response); // display response from the PHP script, if any
-          if (php_script_response.include("images/avatar/")) {
+
+          if (php_script_response.includes("images/avatar/")) {
             alert("Image succesfully loaded");
             var image = document.getElementById("avatar")
             $('#avatar').removeAttr('src');

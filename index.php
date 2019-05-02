@@ -199,12 +199,20 @@ if(isset($_SESSION["id"])){
         $car=App\Chauffeur::getCar($unChauffeur["idCollaborateurs"],$bdd);
         $chauffeur = new App\Chauffeur($unChauffeur["idCollaborateurs"],$unChauffeur["email"],$unChauffeur["last_name"],$unChauffeur["first_name"],$unChauffeur["metier"],$unChauffeur["prixCollaborateur"],
         $unChauffeur["dateEmbauche"],$unChauffeur["ville"],$unChauffeur["heuresTravailees"],$unChauffeur["rating"],$unChauffeur["ratingNumber"],$unChauffeur["description"],$car["carId"],$car["carBrand"],$car["carModel"],$car["carColor"],$car["nbPlaces"]);
+
+        $chauffeursUser = $bdd->queryOne('SELECT * FROM users WHERE id='.$unChauffeur["idCollaborateurs"].'',$bdd);
+
+        if(isset($chauffeursUser["avatar"])){
+          $avatar = $chauffeursUser["avatar"];
+        } else {
+          $avatar = "ripdefaultavatar.png";
+        }
         ?>
 
 						<!-- Destination -->
 						<div class="destination item">
 							<div class="destination_image">
-								<img src="images/henni.jpg" alt="">
+								<img class="" src="images/avatar/<?php echo $avatar ?>" alt="" width="200px">
 								<!-- <div class="spec_offer text-center"><a href="#">Special Offer</a></div> !-->
 							</div>
 							<div class="destination_content">

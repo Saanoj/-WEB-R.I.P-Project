@@ -72,20 +72,20 @@ function backOfficeRemuneration()
       $query = $bdd->prepare("UPDATE remuneration SET
         idCollab = :idCollab,
         idTrajet = :idTrajet,
-        prixPriceServices = :Price
+        Price = :Price
         WHERE idRemuneration = :id");
         $query->execute([
           "id"=> $id,
           "idCollab"=>$idCollab,
-          "prixTrajet"=>$prixTrajet,
+          "idTrajet"=>$idTrajet,
           "Price"=>$Price
         ]);
       }
 
       function add($idCollab, $idTrajet, $Price){
         include (CONF);
-        $query = $bdd->prepare("INSERT INTO remuneration (idCollab, idTrajet, prixServices)
-        VALUES (:idCollab, :prixTrajet, :prixServices)");
+        $query = $bdd->prepare("INSERT INTO remuneration (idCollab, idTrajet, Price)
+        VALUES (:idCollab, :idTrajet, :Price)");
         $query->bindValue("idCollab",$idCollab);
         $query->bindValue("idTrajet",$idTrajet);
         $query->bindValue("Price",$Price);

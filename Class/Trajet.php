@@ -158,7 +158,7 @@ $bdd = new Database('rip');
       return $resFin;
     }
 
-    
+
 
     public static function getChauffeur($bdd) {
 

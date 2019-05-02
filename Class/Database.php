@@ -31,6 +31,13 @@ class Database{
     return $this->pdo;
   }
 
+  public function exec($statement,$params = []){
+    $chauffeurs = $this->getPDO()->prepare($statement);
+    $chauffeurs->execute($params);
+    $chauffeurs->closeCursor();
+    return $chauffeurs;
+  }
+
   public function queryPrepareForWhile($statement,$bdd){
     $chauffeurs = $bdd->getPDO()->prepare($statement);
     $chauffeurs->execute();

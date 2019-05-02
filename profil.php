@@ -16,7 +16,7 @@ loadLanguageFromSession($_SESSION['lang']);
 
   <?php require_once 'includehtml/head.html'; ?>
 
-  <title>Bootstrap Example</title>
+  <title>Profil</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -586,12 +586,25 @@ loadLanguageFromSession($_SESSION['lang']);
         {
           ?>
           <div class="row">
-          <div class="offset-md-1 md-3">
-          <?php
-          $destination = 'factures/facture'.$trajet['idTrajet'].'.pdf';
-          echo 'Numéro de trajet : '. $trajet['idTrajet'] . ' | Voir le récapitulatif : '  ?> <a href="<?= $destination;?>" target=_blank><button type="button" class="btn btn-info" id="<?=$trajet['idTrajet'];?>">Cliquer ici</button></a>
-          <br>
-          <br>
+            <div class=" col-md-8">
+              <?php
+              $destination = 'factures/facture'.$trajet['idTrajet'].'.pdf';
+              echo ' <p>Numéro de trajet : '. $trajet['idTrajet'] . ' | Voir le récapitulatif : '
+              ?> <a href="<?= $destination;?>" target=_blank><button type="button" class="btn btn-info" id="<?=$trajet['idTrajet'];?>">Cliquer ici</button></a>
+              <?php echo "</p>"; ?>
+            </div>
+          <!-- Rating old trips part :) -->
+          <div class="col-md-4">
+
+              <select id="<?php echo "input".$trajet['idTrajet'] ?>">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5" selected="true">5</option>
+              </select>
+              <button type="button" name="buttonRating" class="ratingbtn" onclick="validateRating(<?php echo $trajet['idTrajet'] ?>)">Valider rating</button>
           </div>
           </div>
           <?php
@@ -699,6 +712,37 @@ loadLanguageFromSession($_SESSION['lang']);
   <?php include "includehtml/footer.php" ?>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script type="text/javascript" src="js/profil/profil.js"></script>
+
+
+
+  <script type="text/javascript">
+
+    function validateRating(idTrajet){
+
+      var input = document.getElementById("input" + idTrajet );
+
+      updateRating(input.value, idTrajet);
+    }
+
+    function updateRating(rating, idTrajet)
+    {
+    	datas='rating=' + rating + '&idTrajet=' + idTrajet;
+
+    	$.ajax({
+            url: "updateRating.php",
+            type: "post",
+            data: datas ,
+            success: function (response) {
+                alert(response);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+               console.log(textStatus, errorThrown);
+            }
+
+
+        });
+    }
+  </script>
 
   </html>
   <?php

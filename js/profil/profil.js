@@ -27,7 +27,7 @@ $(document).ready(function(){
 			$('<select  name="'+newid+'" id="'+newid+'" class="hlite"> <option value="Homme">Homme </option><option value="Femme">Femme </option> </select>').appendTo(dataset);
 
 		 }
-		 
+
 		if (theid != 'gender' && theid != 'birthday' )
 		 {
 
@@ -36,9 +36,9 @@ $(document).ready(function(){
 		$(this).css("display", "none");
 		savebtn.css("display", "block");
 
-	 
+
 	});
-  
+
 	$(".savebtn").on("click", function(e){
 	  e.preventDefault();
 	  var elink   = $(this).prev(".editlink");
@@ -47,9 +47,9 @@ $(document).ready(function(){
 		var newid   = $(this).attr("id");
 		var einput  = $("#"+newid+"-form");
 		var newval  = einput.val();
-		
 
-	
+
+
 		einput.remove();
 		if (newid == 'birthday') {
 			var newConvertDate = convertDate(newval)
@@ -61,12 +61,12 @@ $(document).ready(function(){
 			}
 
 
-		
+
 
 		update(newval,newid,idProfil,idEntreprise);
 
 	  });
-  
+
 	  $(this).css("display", "none");
 	  elink.css("display", "block");
 	});
@@ -87,7 +87,7 @@ function update(newval,newid,idProfil,idEntreprise)
         type: "post",
         data: datas ,
         success: function (response) {
-		   // you will get response from your php page (what you echo or print)  
+		   // you will get response from your php page (what you echo or print)
 
         },
         error: function(jqXHR, textStatus, errorThrown) {

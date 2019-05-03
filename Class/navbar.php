@@ -73,7 +73,7 @@ class Navbar
       ?>
       <style media="screen">
         body {
-          /*margin-top: -10px;*/
+          margin-top: -25px;
         }
       </style>
       <header class="header" style="/*background-color: #2F2E33">

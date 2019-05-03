@@ -37,38 +37,59 @@ class Navbar
       if($data['isAdmin'] == 1){
           if ($type == 2){
             $where = "backOffice";
+            $this->showNav($where,1);
 
           } else if ($type == 3) {
             $where = "reservation";
+            $this->showNav($where);
           } else {
             $where = "admin";
+            $this->showNav($where);
           }
         }elseif($type == 2){
           header('Location:http://localhost/R.I.P-Project/notConnect.php');
         }elseif($type==3){
           $where = "reservation";
+          $this->showNav($where);
         }else{
           $where = "customer";
+          $this->showNav($where);
         }
       }elseif($type == 2){
         header('Location:http://localhost/R.I.P-Project/notConnect.php');
       }else{
         $where = "normal";
+        $this->showNav($where);
       }
       echo"<script>console.log('".$where."')</script>";
-      $this->showNav($where);
+
     }
 
-    private function showNav(string $where)
+    private function showNav(string $where, int $boNavbar = 0)
     {
 
-      //multilingue
-      if (!isset($_SESSION['lang'])) {
-        $_SESSION['lang'] = "fr";
-      }
-      require_once "multilingue/multilingue.php";
-      loadLanguageFromSession($_SESSION['lang']);
 
+      if ($boNavbar != 1) {
+        //multilingue
+        if (!isset($_SESSION['lang'])) {
+          $_SESSION['lang'] = "fr";
+        }
+
+        require_once "multilingue/multilingue.php";
+
+        loadLanguageFromSession($_SESSION['lang']);
+      } else {
+
+        //multilingue
+        if (!isset($_SESSION['lang'])) {
+          $_SESSION['lang'] = "fr";
+        }
+
+        require_once "../../multilingue/multilingue.php";
+
+        loadLanguageFromSession($_SESSION['lang'],$boNavbar);
+
+      }
 
       ?>
       <style media="screen">

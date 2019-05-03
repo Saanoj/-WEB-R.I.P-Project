@@ -145,6 +145,7 @@ session_start();
               }
               ?>
             </h6>
+            <p><?php echo $datas['email'] ?></p>
             <p class="proile-rating">Notes : <span>10/10</span></p>
             <ul class="nav nav-tabs" id="myTab" role="tablist">
               <li class="nav-item">

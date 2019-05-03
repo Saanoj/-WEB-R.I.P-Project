@@ -24,9 +24,12 @@ $form = new App\Form(array());
   $navbar->navbar();
   ?>
 
-  <div class="container">
+  <div class="container bg-light mt-5">
     <div class="display-1 text-center">
       Inscription Collaborateur
+    </div>
+    <div class="dropdown-divider">
+
     </div>
     <div class="container">
 

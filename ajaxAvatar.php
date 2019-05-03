@@ -14,7 +14,7 @@ if(isset($_FILES["file"]["type"]))
 
 
   if ((($_FILES["file"]["type"] == "image/png") || ($_FILES["file"]["type"] == "image/jpg") || ($_FILES["file"]["type"] == "image/jpeg")
-  ) && ($_FILES["file"]["size"] < 3000000)//Approx. 3Mb files can be uploaded.
+  ) && ($_FILES["file"]["size"] < 100000000)//Approx. 3Mb files can be uploaded.
   && in_array($file_extension, $validextensions)) {
     if ($_FILES["file"]["error"] > 0)
     {
@@ -45,9 +45,9 @@ if(isset($_FILES["file"]["type"]))
   }
   else
   {
-    echo "<span id='invalid'>***Invalid file Size or Type***<span>";
+    echo "***Invalid file Size( > 3 Mo) or Type***";
   }
 }else{
-  echo "<span>No image<span>";
+  echo "No image selected";
 }
 ?>

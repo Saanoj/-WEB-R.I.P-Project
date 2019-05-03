@@ -21,10 +21,8 @@ $req = $bdd->getPDO()->prepare('SELECT * FROM users INNER JOIN abonnement INNER 
 $req->execute(array($_SESSION['id']));
 $unAbonnement = $req->fetch();
 
-
-
-?>
-
+if ($unAbonnement != false) {
+    ?>
 <!-- ENTREPRISE <!-->
 <?php if ($unAbonnement['idAbonnement'] == 3 || $unAbonnement['idAbonnement'] == 4)
 {
@@ -107,7 +105,7 @@ $unAbonnement = $req->fetch();
                             </div>
                             
 
-                        <?php if ($unAbonnement['idAbonnement'] == 3 || $unAbonnement['idAbonnement'] == 4)
+                        <?php if ($unAbonnement['idAbonnement'] == 3 || $unAbonnement['idAbonnement'] == 4 || $unAbonnement == false)
                             { ?>
 
                             
@@ -173,7 +171,8 @@ $unAbonnement = $req->fetch();
                                         <?php }}?>
                                     </div>
                                 </div>
-                                        <?php } ?>
+                                        <?php } 
+                                        ?>
 
                             </div>
                             </div>
@@ -182,6 +181,74 @@ $unAbonnement = $req->fetch();
                             </div>
                           
                             </form>
+                                        <?php } else {
+                                            $idEntreprise = getIdEntreprise($bdd);
+                                            
+                                            $req = $bdd->getPDO()->prepare('SELECT * FROM entreprise WHERE idEntreprise = :idEntreprise');
+                                            $req->execute(array('idEntreprise' => $idEntreprise));
+                                            $uneEntreprise = $req->fetch();
+                                            
+                                            ?>
+             <input type="text" id="idEntreprise" value="<?= $idEntreprise;?>" hidden>   
+             <input type="text" id="idSession" value="<?= $_SESSION['id'];?>" hidden>
+                
+<div class="container register">
+                <div class="row">
+                    <div class="col-md-3 register-left">
+                        <h3>Ride in Pride</h3>
+                        <p>Mon entreprise</p>
+                        
+                    </div>
+                   
+                    <div class="col-md-9 register-right">
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <h3 class="register-heading">Mon entreprise</h3>
+                                
+                                <div class="row register-form">
+                           
+                                    <div class="col-md-6">
+                                  
+                        
+                                        <div class="form-group">
+                                        <span >Numéro de téléphone de l'entreprise :</span>
+                                            <input type="text" name="numEntreprise" id="numEntreprise" class="form-control" placeholder="<?= $uneEntreprise['numEntreprise'];?>" value="<?= $uneEntreprise['numEntreprise'];?>" disabled/>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                        <span >Numéro SIRET de l'entreprise :</span>
+                                            <input type="text" name="numSiret" id="numSiret"class="form-control"  placeholder="<?= $uneEntreprise['numSiret'];?>" value="<?= $uneEntreprise['numSiret'];?>" disabled />
+                                        </div>
+                                       
+                                       
+                                       
+                                    </div>
+                                    <div class="col-md-6">
+                                    <div class="form-group">
+                                    <span >Adresse de l'entreprise :</span>
+                                            <input type="text" name="adresse" id="adresse" class="form-control"  placeholder="<?= $uneEntreprise['adresse'];?>" value="<?= $uneEntreprise['adresse'];?>" disabled/>
+                                        </div>
+                                        <div class="form-group">
+                                        <span >Nombre de salariés :</span>
+                                            <input type="text" name="nbSalarie" id="nbSalarie" class="form-control"  placeholder="<?= $uneEntreprise['nbSalarie'];?>" value="<?= $uneEntreprise['nbSalarie'];?>" disabled/>
+                                        </div>
+                                        <div class="form-group">
+                                        <span >Pays de l'entreprise :</span>
+                                            
+                                        <input type="text" name="pays" id="pays" class="form-control"  placeholder="<?= $uneEntreprise['pays'];?>" value="<?= $uneEntreprise['pays'];?>" disabled/>
+                                        </div>
+                                       <?php  if ($uneEntreprise['idDirecteur'] == $_SESSION['id']) {?>
+                                        <a href="profil.php"><button type="button" class="btnRegister" data-toggle="modal" data-target="#exampleModal"onclick="deleteEntreprise()">Supprimer entreprise</button></a>
+                                        <?php } ?>
+                                        </div>
+                                </div>
+
+                            </div>
+
+
+
+                                        <?php }?>
+                                        
 
                             </body>
 
@@ -250,6 +317,14 @@ $unAbonnement = $req->fetch();
 
                                 return $prix;
 
+                            }
+
+                            function getIdEntreprise($bdd) {
+                                $req = $bdd->getPDO()->prepare('SELECT idEntreprise FROM users WHERE id = :id');
+                                $req->execute(array('id' => $_SESSION['id']));
+                                $id = $req->fetch();
+                                $req->closeCursor();
+                                return $id['idEntreprise'];
                             }
 
 

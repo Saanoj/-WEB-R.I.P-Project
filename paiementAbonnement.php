@@ -1,13 +1,6 @@
 <?php
 session_start();
 
-//multilingue
-if (!isset($_SESSION['lang'])) {
-  $_SESSION['lang'] = "fr";
-}
-include "multilingue/multilingue.php";
-loadLanguageFromSession($_SESSION['lang']);
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,16 +38,16 @@ else
 }
  }
 
- else 
+ else
  {
   $req = $bdd->getPDO()->prepare('SELECT * FROM entreprise INNER JOIN abonnement ON entreprise.idDirecteur = :idDirecteur');
   $req->execute(array("idDirecteur" => $_SESSION['id']));
   $uneEntreprise = $req->fetch();
-      if ($_GET['isEngagement'] == 0) 
+      if ($_GET['isEngagement'] == 0)
       {
         $prixTotal = 80;
       }
-      else 
+      else
       {
         $prixTotal = 65;
       }
@@ -67,16 +60,16 @@ else
       }
       if ($nbSalarie > 10 )
       {
-          
+
           for ($i=$nbSalarie;$i>0;)
           {
               $count +=1;
               $i -=10;
-           
+
           }
-  
+
           $prixTotal = 85+(12*$count);
-  
+
       }
       */
  }
@@ -120,7 +113,7 @@ include 'includehtml/head.html'; ?>
 
         if ($_POST) {
           Stripe::setApiKey("sk_test_ze3ZePlRbWuZCbCAfKs4DOTc");
-          
+
 
           try {
             if (!isset($_POST['stripeToken']))
@@ -132,14 +125,14 @@ include 'includehtml/head.html'; ?>
                 "nickname" => $unAbonnement['typeAbonnement'],
                 "product" => [
                   "name" => $unAbonnement['first_name'].' '.$unAbonnement['last_name']
-                  
+
                 ],
                 "currency" => "eur",
-                
+
 
               ]);
             }
-            else 
+            else
             {
               Stripe_Plan::create([
               "amount" => $prixTotal*100,
@@ -244,6 +237,6 @@ include 'includehtml/head.html'; ?>
     </form>
     <?php //  include "includehtml/footer.php" ?>
     <script src="js/paiementAbonnement/main.js"></script>
-    
+
   </body>
   </html>

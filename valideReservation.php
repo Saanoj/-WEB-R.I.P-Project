@@ -9,6 +9,7 @@ if (!isset($_SESSION['id']) || empty($_SESSION['id']))
   header('location:connexion.php');
 }
 
+
 // VERIFICATION DE LA DATE DU TRAJET : IL DOIT ETRE SUPERIEUR A LA DATE DU JOUR
 $timeStart = $_POST["dateDebut"]." ".$_POST["heureDebut"];
 $dateTrajet = new DateTime($timeStart, new DateTimeZone('Europe/Paris'));

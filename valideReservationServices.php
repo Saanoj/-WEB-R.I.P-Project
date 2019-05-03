@@ -19,12 +19,12 @@ $heureFin = explode(' ',$heureFin);
 
 updateTrajet($bdd);
 if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['quantite']) && (!empty($_POST['quantite'])) ) {
- 
+
   $servicesChoisi=$_POST['services'];
   $quantiteCertainService=$_POST['quantite'];
 
   $thisQuantite=0;
-  
+
   //on boucle nos services choisis
   foreach ($servicesChoisi as $service) {
 
@@ -37,18 +37,13 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
   }
   $serviceActual = $service;
 
-  
+
     //affectation de l'id annexe du service si besoin
 
     switch ($service) {
 
       case 1:
-      if (isset($_POST["idRestaurant"]) && (!empty($_POST["idRestaurant"]))) {
-      $idAnnexe=$_POST["idRestaurant"];
-      }
-      else {
-        header('location:resevationChooseService.php');
-      }
+      
       break;
       case 7:
        if (isset($_POST["idHotel"]) && !empty($_POST["idHotel"]))
@@ -78,7 +73,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
       $idAnnexe=-1;
       break;
     }
-   
+
     if ($service === "1")
     {
       $req=$bdd->getPDO()->prepare('INSERT INTO linkServicetrajet (idTrajet,idService,idAnnexe,quantite,statut,dateStart,dateEnd) VALUES (:idTrajet,:idService,:idAnnexe,:quantite,:statut,:dateStart,:dateEnd)');
@@ -91,7 +86,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
       $req->bindValue(':dateEnd', null);
       $req->execute();
       $req->closeCursor();
-      
+
     }
 
     if ($service === "7")
@@ -109,7 +104,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
       $req->closeCursor();
       }
     }
-       
+
       if ($service === "8")
       {
         if ($idAnnexe != null) {
@@ -158,7 +153,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
       }
 
     }
-    
+
         if ($service === "2") {
 
         $array2DateDebut = array ();
@@ -181,8 +176,8 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
 
         }
       }
-      
-     
+
+
         if ($service === "4") {
         $array4DateDebut = array ();
         $array4DateFin = array();
@@ -205,7 +200,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
         // var_dump($array3DateDebut);
         // var_dump($array3DateFin);
       }
-       
+
       if ($service === "6") {
         $array6DateDebut = array ();
         $array6DateFin = array();
@@ -217,9 +212,9 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
         // var_dump($array3DateDebut);
         // var_dump($array3DateFin);
       }
-     
+
       if ($service === "7") {
-        
+
         $array7DateDebut = array ();
         $array7DateFin = array();
         for ($i=0;$i<30;$i++)
@@ -230,20 +225,20 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
               $array7DateDebut = array_push_assoc($array7DateDebut,$j,$_POST['startHotel'.$i.'_'.$j.'']);
               $thisQuantite++;
             }
-          
+
 
         }
-          
+
       }
 
- 
+
       }
       if ($service === "8") {
-        
+
         $array8DateDebut = array ();
         $array8Quantite = array();
         $array8 = array ();
-        
+
         for ($i=0;$i<30;$i++)
         {
             if (isset($_POST['idBillet'.$i])) {
@@ -251,16 +246,16 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
               $array8DateDebut = array_push_assoc($array8DateDebut,$i,$_POST['startBillet'.$i]);
               $array8Quantite = array_push_assoc($array8Quantite,$i,$thisQuantite);
               $array8[$i] = array($i,$thisQuantite,$_POST['startBillet'.$i]);
-              
-            }  
+
+            }
       }
       // var_dump($array8DateDebut);
       // var_dump($array8Quantite);
-     
- 
+
+
       }
-      
-        
+
+
       if ($service === "9") {
         $array9DateDebut = array ();
         $array9DateFin = array();
@@ -272,7 +267,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
         // var_dump($array3DateDebut);
         // var_dump($array3DateFin);
       }
-       
+
       if ($service === "15") {
         $array15DateDebut = array ();
         $array15DateFin = array();
@@ -284,7 +279,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
         // var_dump($array3DateDebut);
         // var_dump($array3DateFin);
       }
-        
+
       if ($service === "16") {
         $array16DateDebut = array ();
         $array16DateFin = array();
@@ -296,20 +291,20 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
         //  var_dump($array16DateDebut);
         //  var_dump($array16DateFin);
       }
-        
+
       if ($service === "18") {
         $array18DateDebut = array();
         $array18DateFin = array();
         for ($i=0;$i<$thisQuantite;$i++)
         {
-          
+
         $array18DateDebut = array_push_assoc($array18DateDebut,$i,$_POST['menuJourStart'.$service.'_'.$i.'']);
         $array18DateFin = array_push_assoc($array18DateFin,$i,$_POST['menuJourEnd'.$service.'_'.$i.'']);
         }
         // var_dump($array3DateDebut);
         // var_dump($array3DateFin);
       }
-      
+
       if ($service === "19") {
         $array19DateDebut = array ();
         $array19DateFin = array();
@@ -319,8 +314,8 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
         $array19DateFin = array_push_assoc($array19DateFin,$i,$_POST['menuGastronomiqueEnd'.$service.'_'.$i.'']);
         }
       }
-       
-    
+
+
       if ($service === "11") {
         $req = getId("interprete",$bdd);
 
@@ -347,7 +342,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
           //  var_dump($arrayInterpreteDateDebut);
           //  var_dump($arrayInterpreteDateFin);
     }
-          
+
     if ($service === "12") {
         $req = getId("coachSportif",$bdd);
         $arrayCoachSportif  = array();
@@ -399,21 +394,21 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
         //      var_dump($arrayCoachCulturefDateFin);
       }
       if (
-       $service === "2" || 
+       $service === "2" ||
        $service === "3" ||
-       $service === "4" || 
-       $service === "5" || 
-       $service === "6" || 
-       $service === "9" || 
-      $service === "15" || 
-      $service === "16" || 
-      $service === "18" || 
+       $service === "4" ||
+       $service === "5" ||
+       $service === "6" ||
+       $service === "9" ||
+      $service === "15" ||
+      $service === "16" ||
+      $service === "18" ||
       $service === "19")
       {
 
         for($i=0;$i<$thisQuantite;$i++)
         {
-        
+
         $req=$bdd->getPDO()->prepare('INSERT INTO linkServicetrajet (idTrajet,idService,idAnnexe,quantite,statut,dateStart,dateEnd) VALUES (:idTrajet,:idService,:idAnnexe,:quantite,:statut,:dateStart,:dateEnd)');
         $req->bindValue(':idTrajet', $_SESSION["idTrajet"]);
         $req->bindValue(':idService', $service);
@@ -428,7 +423,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
         $req = getLastId($bdd);
         $idLink = $req->fetch();
 
-      
+
 
           if ($service === "2")
           {
@@ -442,7 +437,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
         ));
         $req->closeCursor();
       }
-      else 
+      else
       {
         $req=$bdd->getPDO()->prepare('UPDATE linkservicetrajet SET dateEnd = :dateEnd,dateStart = :dateStart WHERE idTrajet = :idTrajet AND idLink = :idLink');
         $req->execute(array(
@@ -466,7 +461,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
           ));
           $req->closeCursor();
         }
-        else 
+        else
         {
           $req=$bdd->getPDO()->prepare('UPDATE linkservicetrajet SET dateEnd = :dateEnd,dateStart = :dateStart WHERE idTrajet = :idTrajet AND idLink = :idLink');
           $req->execute(array(
@@ -490,7 +485,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
           ));
           $req->closeCursor();
         }
-        else 
+        else
         {
           $req=$bdd->getPDO()->prepare('UPDATE linkservicetrajet SET dateEnd = :dateEnd,dateStart = :dateStart WHERE idTrajet = :idTrajet AND idLink = :idLink');
           $req->execute(array(
@@ -514,7 +509,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
           ));
           $req->closeCursor();
         }
-        else 
+        else
         {
           $req=$bdd->getPDO()->prepare('UPDATE linkservicetrajet SET dateEnd = :dateEnd,dateStart = :dateStart WHERE idTrajet = :idTrajet AND idLink = :idLink');
           $req->execute(array(
@@ -538,7 +533,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
           ));
           $req->closeCursor();
         }
-        else 
+        else
         {
           $req=$bdd->getPDO()->prepare('UPDATE linkservicetrajet SET dateEnd = :dateEnd,dateStart = :dateStart WHERE idTrajet = :idTrajet AND idLink = :idLink');
           $req->execute(array(
@@ -551,7 +546,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
         }
       }
 
-      
+
 
 
        if ($service === "9")
@@ -566,7 +561,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
           ));
           $req->closeCursor();
         }
-        else 
+        else
         {
           $req=$bdd->getPDO()->prepare('UPDATE linkservicetrajet SET dateEnd = :dateEnd,dateStart = :dateStart WHERE idTrajet = :idTrajet AND idLink = :idLink');
           $req->execute(array(
@@ -590,7 +585,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
           ));
           $req->closeCursor();
         }
-        else 
+        else
         {
           $req=$bdd->getPDO()->prepare('UPDATE linkservicetrajet SET dateEnd = :dateEnd,dateStart = :dateStart WHERE idTrajet = :idTrajet AND idLink = :idLink');
           $req->execute(array(
@@ -614,7 +609,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
           ));
           $req->closeCursor();
         }
-        else 
+        else
         {
           $req=$bdd->getPDO()->prepare('UPDATE linkservicetrajet SET dateEnd = :dateEnd,dateStart = :dateStart WHERE idTrajet = :idTrajet AND idLink = :idLink');
           $req->execute(array(
@@ -639,7 +634,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
           ));
           $req->closeCursor();
         }
-        else 
+        else
         {
           $req=$bdd->getPDO()->prepare('UPDATE linkservicetrajet SET dateEnd = :dateEnd,dateStart = :dateStart WHERE idTrajet = :idTrajet AND idLink = :idLink');
           $req->execute(array(
@@ -664,7 +659,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
           ));
           $req->closeCursor();
         }
-        else 
+        else
         {
           $req=$bdd->getPDO()->prepare('UPDATE linkservicetrajet SET dateEnd = :dateEnd,dateStart = :dateStart WHERE idTrajet = :idTrajet AND idLink = :idLink');
           $req->execute(array(
@@ -797,7 +792,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
     }
     }
 
-    
+
     if ($service === "7")
     {
 
@@ -814,7 +809,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
         $req->execute();
         $req->closeCursor();
     }
-  
+
     }
     if ($service === "8")
     {
@@ -832,10 +827,10 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
           $req->bindValue(':dateEnd', $heureFin[1]);
           $req->execute();
           $req->closeCursor();
-        
+
       }
-    }    
-       
+    }
+
 /*
     else
     {
@@ -849,7 +844,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
     }
     */
     //var_dump($serviceActual);
-   
+
   }
 
 

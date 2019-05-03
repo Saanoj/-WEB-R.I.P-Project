@@ -29,6 +29,19 @@ define("_ADRESSE_ARRIVEE_RESERVATION","Adresse d'arrivée");
 define("_DATE_DEBUT_RESERVATION_TRAJET","Date du trajet");
 define("_HEURE_DEBUT_RESERVATION_TRAJET","Heure du trajet");
 define("_BOUTTON_RESERVATION_TRAJET","Réserver");
+
+//navbar
+define("_NAVBAR_INDEX","Ride in Pride");
+define("_NAVBAR_ACCUEIL","Accueil");
+define("_NAVBAR_ANNULER_RESERVATION","Annuler la reservation");
+define("_NAVBAR_BACK_OFFICE","Back Office");
+define("_NAVBAR_PROFIL","Profil");
+define("_NAVBAR_CONTACT","Contactez Nous");
+define("_NAVBAR_DECO","Déconnexion");
+define("_NAVBAR_INSCRIPTION","Inscription");
+define("_NAVBAR_CONNEXION","Connexion");
+
+
 // RESERVATION Services
 define("_TITRE_SERVICE","Reservation de services");
 define("_TITRE_CHOOSE_SERVICE","Choisissez vos services");
@@ -80,6 +93,13 @@ define("_CONTACT_SEND_MESSAGE","'Envoyez un message'");
 define("_CONTACT_NAME", "'Votre nom'");
 define("_CONTACT_NUM", "'Votre numero de téléphone'");
 define("_CONTACT_CORE_MESSAGE", "'Votre message'");
+
+//driver index
+define("_DRIVER_COMPETANT","DES COLLABORATEURS COMPETENTS");
+define("_DRIVER_TITRE","Les meilleurs chaufferus");
+define("_PRICE", "Prix");
+define("_SUR_VOTE", "sur");
+define("_DRIVER_INFO", "PLUS D'INFORMATION");
 
 
  ?>

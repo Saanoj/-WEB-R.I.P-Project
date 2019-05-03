@@ -1,10 +1,21 @@
 <?php
 
-function loadLanguageFromSession($langue){
+function loadLanguageFromSession($langue,$boNavbar = 0){
+
   if($langue == "fr"){
-       include "multilingue/fr.inc";
+      if ($boNavbar == 1) {
+        include "../../multilingue/fr.inc";
+      } else {
+        include "multilingue/fr.inc";
+      }
+
   }else if ($langue == "en"){
-      include "multilingue/en.inc";
+
+      if ($boNavbar == 1) {
+        include "../../multilingue/en.inc";
+      } else {
+        include "multilingue/en.inc";
+      }
   }
 }
 

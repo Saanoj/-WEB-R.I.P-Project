@@ -1,12 +1,6 @@
 <?php
 session_start();
 
-//multilingue
-if (!isset($_SESSION['lang'])) {
-  $_SESSION['lang'] = "fr";
-}
-include "multilingue/multilingue.php";
-loadLanguageFromSession($_SESSION['lang']);
 
 ?>
 
@@ -53,7 +47,7 @@ loadLanguageFromSession($_SESSION['lang']);
   $bdd = new App\Database('rip');
   $backOffice=0;
   $type = 0;
-  $navbar = new App\Navbar($backOffice,$type);
+  $navbar = new App\Navbar($type);
   $navbar->navbar();
   $Session = new App\Session($_SESSION['id']);
   $Session->isConnect();

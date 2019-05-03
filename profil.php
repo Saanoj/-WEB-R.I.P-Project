@@ -1,13 +1,6 @@
 <?php
 session_start();
 
-//multilingue
-if (!isset($_SESSION['lang'])) {
-  $_SESSION['lang'] = "fr";
-}
-require_once "multilingue/multilingue.php";
-loadLanguageFromSession($_SESSION['lang']);
-
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -152,6 +145,7 @@ loadLanguageFromSession($_SESSION['lang']);
               }
               ?>
             </h6>
+            <p><?php echo $datas['email'] ?></p>
             <p class="proile-rating">Notes : <span>10/10</span></p>
             <ul class="nav nav-tabs" id="myTab" role="tablist">
               <li class="nav-item">
@@ -179,9 +173,23 @@ loadLanguageFromSession($_SESSION['lang']);
           <?php */ ?>
         </div>
 
+
         <div class="col-md-8">
           <div class="tab-content profile-tab" id="myTabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+              <div class="row">
+                <div class="col-md-5">
+                  <h4>Espace collaborateur</h4>
+
+                  <?php if ($_SESSION['isCollaborateur']==0) { ?>
+                    <a class="btn btn-dark" href="inscriptionCollab.php">Inscription Collaborateur</a>
+                  <?php }else{ ?>
+                    <a class="btn btn-dark" href="homeCollab.php">Espace Collaborateur</a>
+                  <?php } ?>
+
+                </div>
+              </div>
+              <div class="dropdown-divider"></div>
               <div class="row">
                 <div class="col-md-5">
                   <h4>Mes informations</h4>

@@ -1,12 +1,6 @@
 <?php
 session_start();
 
-//multilingue
-if (!isset($_SESSION['lang'])) {
-  $_SESSION['lang'] = "fr";
-}
-include "multilingue/multilingue.php";
-loadLanguageFromSession($_SESSION['lang']);
 
 ?>
 <!DOCTYPE html>

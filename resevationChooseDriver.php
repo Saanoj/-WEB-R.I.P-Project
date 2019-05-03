@@ -1,12 +1,6 @@
 <?php
     session_start();
 
-    //multilingue
-    if (!isset($_SESSION['lang'])) {
-      $_SESSION['lang'] = "fr";
-    }
-    include "multilingue/multilingue.php";
-    loadLanguageFromSession($_SESSION['lang']);
  ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -31,9 +25,8 @@
     require 'Class/Autoloader.php';
     App\Autoloader::register();
     $bdd = new App\Database('rip');
-    $backOffice=0;
-    $type = 1;
-    $navbar = new App\Navbar($backOffice,$type);
+    $type = 3;
+    $navbar = new App\Navbar($type);
     $navbar->navbar();
 
     $form = new App\Form(array());
@@ -88,6 +81,14 @@
                     <div class="col-md-3">
                       <h3><?php echo $chauffeur->getFirst_name()." ".$chauffeur->getLast_name();?></h3>
                       <h6>ID: <?php echo $chauffeur->getIdCollaborateur(); ?> | Prix: <?php echo $chauffeur->getPrixCollaborateur()."€ / Km | Note: ".$chauffeur->getRating()."/5 sur ".$chauffeur->getRatingNumber()." votes" ?></h6>
+                      <div class="col-md-12">
+                          <div class="progress progress-striped">
+                              <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="<?=$chauffeur->getRating();?>"
+                                  aria-valuemin="0" aria-valuemax="5" style="width:<?=$chauffeur->getRating()*20?>%"><?=$chauffeur->getRating()."/5"?>
+
+                              </div>
+                          </div>
+                      </div>
                     </div>
                     <!-- Button trigger modal -->
                     <div class="col-md-5">

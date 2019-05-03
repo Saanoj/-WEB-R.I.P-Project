@@ -1,13 +1,6 @@
 <?php
 session_start();
 
-//multilingue
-if (!isset($_SESSION['lang'])) {
-  $_SESSION['lang'] = "fr";
-}
-include "multilingue/multilingue.php";
-loadLanguageFromSession($_SESSION['lang']);
-
 
 require 'Class/Autoloader.php';
 App\Autoloader::register();
@@ -31,9 +24,12 @@ $form = new App\Form(array());
   $navbar->navbar();
   ?>
 
-  <div class="container">
+  <div class="container bg-light mt-5">
     <div class="display-1 text-center">
       Inscription Collaborateur
+    </div>
+    <div class="dropdown-divider">
+
     </div>
     <div class="container">
 

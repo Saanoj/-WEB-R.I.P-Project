@@ -1,12 +1,6 @@
 <?php
 session_start();
 
-//multilingue
-if (!isset($_SESSION['lang'])) {
-  $_SESSION['lang'] = "fr";
-}
-include "multilingue/multilingue.php";
-loadLanguageFromSession($_SESSION['lang']);
 
 ?>
 <!DOCTYPE html>
@@ -26,8 +20,8 @@ require 'Class/Autoloader.php';
 App\Autoloader::register();
 $bdd = new App\Database('rip');
 $backOffice=0;
-$type = 1;
-$navbar = new App\Navbar($backOffice,$type);
+$type = 3;
+$navbar = new App\Navbar($type);
 $navbar->navbar();
 $trajet = unserialize($_SESSION['trajet']);
 
@@ -70,7 +64,7 @@ include 'includehtml/head.html'; ?>
 
         if ($_POST) {
           Stripe::setApiKey("sk_test_ze3ZePlRbWuZCbCAfKs4DOTc");
-          
+
 
           try {
             if (!isset($_POST['stripeToken']))

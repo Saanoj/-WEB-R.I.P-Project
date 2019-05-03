@@ -7,7 +7,6 @@ define("_RESERVER_SERVICE","Book a trip");
 //index.php
 define("_TITRE_BODY","Book a trip");
 
-
 define("_TITRE_CHAUFFEUR","Our 3 best drivers!");
 define("_PRIX","Price");
 define("_NOTE","Rank");
@@ -23,8 +22,6 @@ define("_MODELE","Model");
 define("_COULEUR","Color");
 define("_PLACES","Places");
 
-
-
 //Reservation trajet
 define("_TITRE_RESERVATION_TRAJET","Book a trip");
 define("_ADRESSE_DEPART_RESERVATION","Start location");
@@ -39,6 +36,19 @@ define("_TITRE_INFO2_RESERVATION","Cheapest trips");
 define("_INFO2_RESERVATION","Afordable prices for trips and services of this level of quality.");
 define("_TITRE_INFO3_RESERVATION","Services");
 define("_INFO3_RESERVATION","In addition to our trips, we propose a number of services to enhace your experience");
+
+
+//navbar
+define("_NAVBAR_INDEX","Ride in Pride");
+define("_NAVBAR_ACCUEIL","Home");
+define("_NAVBAR_ANNULER_RESERVATION","Cancel your reservation");
+define("_NAVBAR_BACK_OFFICE","Back Office");
+define("_NAVBAR_PROFIL","Profile");
+define("_NAVBAR_CONTACT","Contact us");
+define("_NAVBAR_DECO","Deconnect");
+define("_NAVBAR_INSCRIPTION","Sign in");
+define("_NAVBAR_CONNEXION","Log in");
+
 // RESERVATION Services
 define("_TITRE_SERVICE","Reservation of your services");
 define("_TITRE_CHOOSE_SERVICE","Choose your services");
@@ -82,4 +92,10 @@ define("_CONTACT_NAME", "'Your name'");
 define("_CONTACT_NUM", "'Your phone number'");
 define("_CONTACT_CORE_MESSAGE", "'Your message'");
 
+//driver index
+define("_DRIVER_COMPETANT","Some competant partners");
+define("_DRIVER_TITRE","Our best drivers");
+define("_PRICE", "Price");
+define("_SUR_VOTE", "of");
+define("_DRIVER_INFO", "MORE INFORMATION");
  ?>

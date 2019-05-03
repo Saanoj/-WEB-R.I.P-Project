@@ -95,6 +95,9 @@ $bdd = new Database('rip');
       $req1->bindValue(':state', $trajet->getState());
 
       $req1->execute();
+
+      //echo $req1->lastInsertId();
+
     }
 
     public function startSessionId($bdd) {
@@ -158,7 +161,7 @@ $bdd = new Database('rip');
       return $resFin;
     }
 
-    
+
 
     public static function getChauffeur($bdd) {
 

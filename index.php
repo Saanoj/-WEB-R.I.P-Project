@@ -1,12 +1,15 @@
 <?php
 session_start();
-
+/*
 //multilingue
 if (!isset($_SESSION['lang'])) {
   $_SESSION['lang'] = "fr";
 }
 require_once "multilingue/multilingue.php";
 loadLanguageFromSession($_SESSION['lang']);
+
+*/
+
 require_once 'Class/Autoloader.php';
 App\Autoloader::register();
 $bdd = new App\Database('rip');
@@ -20,6 +23,7 @@ $bdd = new App\Database('rip');
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="Travello template project">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <?php include "includehtml/head.html" ?>
 
 <script type="text/javascript">
@@ -174,8 +178,8 @@ if(isset($_SESSION["id"])){
 		<div class="container">
 			<div class="row">
 				<div class="col text-center">
-					<div class="section_subtitle">Des collaborateurs compétents</div>
-					<div class="section_title"><h2>Les meilleurs chauffeurs</h2></div>
+					<div class="section_subtitle"><?php echo _DRIVER_COMPETANT ?></div>
+					<div class="section_title"><h2><?php echo _DRIVER_TITRE ?></h2></div>
 				</div>
 			</div>
 			<div class="row destinations_row">
@@ -217,8 +221,8 @@ if(isset($_SESSION["id"])){
 							</div>
 							<div class="destination_content">
 								<div class="destination_title"><a href="#"><?php echo $chauffeur->getFirst_name()." ".$chauffeur->getLast_name();?></a></div>
-								<div class="destination_subtitle"><p><b>Prix: <?php echo $chauffeur->getPrixCollaborateur()."€ / Km | Note: ".$chauffeur->getRating()."/5 sur ".$chauffeur->getRatingNumber()." votes" ?></b></p></div>
-								<div class="destination_price"> <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal<?php echo $i ?>">Plus d'informations</button></div>
+								<div class="destination_subtitle"><p><b><?php echo _PRICE ?>: <?php echo $chauffeur->getPrixCollaborateur()."€ / Km | Note: ".$chauffeur->getRating()."/5 "._SUR_VOTE." ".$chauffeur->getRatingNumber()." votes" ?></b></p></div>
+								<div class="destination_price"> <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal<?php echo $i ?>"><?php echo _DRIVER_INFO ?></button></div>
 							</div>
 							<div class="row">
         <div class="col-xs-12 col-md-6">

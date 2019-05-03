@@ -33,9 +33,9 @@ loadLanguageFromSession($_SESSION['lang']);
   App\Autoloader::register();
   $bdd = new App\Database('rip');
   $form =new App\Form(array());
-  $backOffice=0;
-  $type = 1;
-  $navbar = new App\Navbar($backOffice,$type);
+
+  $type = 3;
+  $navbar = new App\Navbar($type);
   $navbar->navbar();
 
   $form = new App\Form(array());
@@ -160,7 +160,7 @@ loadLanguageFromSession($_SESSION['lang']);
                               $restaurants = $bdd->getPDO()->prepare('SELECT * FROM restaurants ORDER BY idRestaurant DESC LIMIT 10 ');
                               $restaurants->execute();
                               ?>
-                       
+
                               <?php
                               while($unRestaurants = $restaurants->fetch())
                               {
@@ -179,8 +179,8 @@ loadLanguageFromSession($_SESSION['lang']);
                                     <td> <?= $unRestaurants['adresseRestaurant'];?></td>
                                     <td> <?= $unRestaurants['prix'] . '€/repas';?></td>
                                     <td><input type="number"  id="quantites<?=$service->getIdService()."[".$unRestaurants['idRestaurant']."]";?>" class="primary" name="quantite_<?=$unRestaurants['idRestaurant'];?>"  onkeyup="checkQuantiteRestaurant(this)"/></td>
-                            
-                              
+
+
                               <td>
                                         <div class="funkyradio-primary col-md-6 center-block">
                                           <input type="checkbox" name="idRestaurant<?php echo $unRestaurants['idRestaurant'] ?>" id="idRestaurant<?php echo $unRestaurants['idRestaurant'] ?>"  onchange="checkRadioRestaurant(this)" >
@@ -200,11 +200,11 @@ loadLanguageFromSession($_SESSION['lang']);
                                          <div id="Restaurant" class="modal-body">
                                          Debut <input type="time" id="startRestaurant<?php echo $unRestaurants['idRestaurant'] ?>" value="<?= $res[1]; ?>" name="startRestaurant<?php echo $unRestaurants['idRestaurant'] ?>" onchange="checkHeureFinBillet(this)">
                                            <input type="time" style="visibility:hidden" id="endRestaurant<?php echo $unRestaurants['idRestaurant'] ?>" value="<?= $resFin; ?>" name="endRestaurant<?php echo $unRestaurants['idRestaurant'] ?>">
-                                                
-                                                </div> 
+
+                                                </div>
                                                 <div class="modal-footer"> <div>
-                                           
-                                          </div>     
+
+                                          </div>
                                               </div>
                                             </div>
 
@@ -228,25 +228,25 @@ loadLanguageFromSession($_SESSION['lang']);
                               case '16' :
                               case '18' :
                               case '19' :
-                             
+
                               ?>
-                           
+
                                               <!-- Modal content-->
-                                              
+
                                               <div class="modal-content">
                                          <div id="ordinateurs_<?=$service->getIdService();?> " class="modal-body">
                                        <?php /*  <form action="valideReservationServices.php" id="form<?=$service->getIdService();?>" method="POST" onsubmit="return checkheure(this)"> */ ?>
-                                       
+
                                          Quantité <input type="number" value="" id="quantites<?=$service->getIdService();?>" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]"  onkeyup="checkQuantiteOrdinateur(this)"/>
-                                     
+
                                         <br>
-                                   
-                                                </div> 
+
+                                                </div>
                                                 <div class="modal-footer"> <div>
-                                           
-                                          </div>     
-                                             
-                        
+
+                                          </div>
+
+
                               <?php
                               break;
 
@@ -275,7 +275,7 @@ loadLanguageFromSession($_SESSION['lang']);
 
 
                                 ?>
-                              
+
                                   <tr>
                                     <th scope="row"> <?= $unHotel['nom'];?></th>
                                     <td> <?= $unHotel['adresseHotel'];?></td>
@@ -302,11 +302,11 @@ loadLanguageFromSession($_SESSION['lang']);
                                          <div id="Hotel" class="modal-body">
                                          Debut <input type="time" id="startHotel<?php echo $unHotel['idHotel'] ?>[<?= $unHotel['idChambre'] ?>]" value="<?= $res[1]; ?>" name="startHotel<?php echo $unHotel['idHotel'] ?>_<?= $unHotel['idChambre'] ?>" onchange="checkHeureFinHotel(this)">
                                            <input type="time" style="visibility:hidden" id="endHotel<?php echo $unHotel['idHotel'] ?>[<?= $unHotel['idChambre'] ?>]" value="<?= $resFin; ?>" name="endHotel<?php echo $unHotel['idHotel'] ?>_<?= $unHotel['idChambre'] ?>">
-                                                
-                                                </div> 
+
+                                                </div>
                                                 <div class="modal-footer"> <div>
-                                           
-                                          </div>     
+
+                                          </div>
                                               </div>
                                             </div>
 
@@ -314,7 +314,7 @@ loadLanguageFromSession($_SESSION['lang']);
                                     </td>
                                     <?php $j++; ?>
                                   </tr>
-                            
+
                                 <?php
 
                               }
@@ -337,10 +337,10 @@ loadLanguageFromSession($_SESSION['lang']);
                                   <?php
                               while($unBillet = $billet->fetch())
                               {
-                               
+
                                 $datas = App\BilletTourisme::createBilletTourisme($unBillet['idBillet'],$unBillet['nom'],$unBillet['isValide'],$unBillet['villeBillet'],$unBillet['prix']);
                                 ?>
-                           
+
                                   <tr>
                                     <th scope="row"> <?= $unBillet['nom'];?></th>
                                     <td>  <?php
@@ -370,11 +370,11 @@ loadLanguageFromSession($_SESSION['lang']);
                                          <div id="billet" class="modal-body">
                                          Debut <input type="time" id="startBillet<?php echo $unBillet['idBillet'] ?>" value="<?= $res[1]; ?>" name="startBillet<?php echo $unBillet['idBillet'] ?>" onchange="checkHeureFinBillet(this)">
                                            <input type="time" style="visibility:hidden" id="endBillet<?php echo $unBillet['idBillet'] ?>" value="<?= $resFin; ?>" name="endBillet<?php echo $unBillet['idBillet'] ?>">
-                                                
-                                                </div> 
+
+                                                </div>
                                                 <div class="modal-footer"> <div>
-                                           
-                                          </div>     
+
+                                          </div>
                                               </div>
                                             </div>
 
@@ -382,7 +382,7 @@ loadLanguageFromSession($_SESSION['lang']);
                                       </td>
                                     </tr>
                                     <?php $j++; ?>
-                                 
+
                                   <?php
                                 }
                                  ?></table> <?php
@@ -446,7 +446,7 @@ loadLanguageFromSession($_SESSION['lang']);
                                         <div>
                                         <button style="visibility:hidden" id="buttonHours<?php echo $unInterprete['idCollaborateurs']?>" type="button" class="btn btn-primary" data-toggle="modal" data-target="#heuresInterprete<?php echo $unInterprete['idCollaborateurs']?>">Heures</button>
 
-                                        
+
                                         <input type="hidden" id="heureTrajetFin"value="<?= $resFin;?>">
                                          <input type="hidden" id="heureTrajetDebut"value="<?= $res[1];?>">
                                           <div id="heuresInterprete<?php echo $unInterprete['idCollaborateurs']?>" class="modal fade" role="dialog" style="z-index: 1400;">
@@ -459,14 +459,14 @@ loadLanguageFromSession($_SESSION['lang']);
                                          <div id="interprete" class="modal-body">
                                          Debut <input type="time" id="startInterprete<?= $unInterprete['idCollaborateurs'] ?>" value="<?= $res[1]; ?>" name="startInterprete<?= $unInterprete['idCollaborateurs'] ?>" onchange="checkHeureDebutInterprete(this)">
                                          Fin  <input type="time" id="endInterprete<?= $unInterprete['idCollaborateurs'] ?>" value="<?= $resFin; ?>" name="endInterprete<?= $unInterprete['idCollaborateurs'] ?>"  onchange="checkHeureFinInterprete(this)">
-                                                
-                                                </div> 
+
+                                                </div>
                                                 <div class="modal-footer"> <div>
-                                           
-                                          </div>     
+
+                                          </div>
                                               </div>
                                             </div>
-                                            </div>                                            
+                                            </div>
                                         </div>
                                       </td>
                                     </tr>
@@ -517,11 +517,11 @@ loadLanguageFromSession($_SESSION['lang']);
                                          <div id="interprete" class="modal-body">
                                          Debut <input type="time" id="startCoachSportif<?= $unCoachSportif['idCollaborateurs'] ?>" value="<?= $res[1]; ?>" name="startCoachSportif<?= $unCoachSportif['idCollaborateurs'] ?>" onchange="checkHeureDebutSportif(this)">
                                          Fin  <input type="time" id="endCoachSportif<?= $unCoachSportif['idCollaborateurs'] ?>" value="<?= $resFin; ?>" name="endCoachSportif<?= $unCoachSportif['idCollaborateurs'] ?>"  onchange="checkHeureFinSportif(this)">
-                                                
-                                                </div> 
+
+                                                </div>
                                                 <div class="modal-footer"> <div>
-                                           
-                                          </div>     
+
+                                          </div>
                                               </div>
                                             </div>
 
@@ -573,11 +573,11 @@ loadLanguageFromSession($_SESSION['lang']);
                                          <div id="interprete" class="modal-body">
                                          Debut <input type="time" id="startCoachCulture<?= $unCoachCulture['idCollaborateurs'] ?>" value="<?= $res[1]; ?>" name="startCoachCulture<?= $unCoachCulture['idCollaborateurs'] ?>" onchange="checkHeureDebutCulture(this)">
                                          Fin  <input type="time" id="endCoachCulture<?= $unCoachCulture['idCollaborateurs'] ?>" value="<?= $resFin; ?>" name="endCoachCulture<?= $unCoachCulture['idCollaborateurs'] ?>"  onchange="checkHeureFinCulture(this)">
-                                                
-                                                </div> 
+
+                                                </div>
                                                 <div class="modal-footer"> <div>
-                                           
-                                          </div>     
+
+                                          </div>
                                               </div>
                                             </div>
                                         </div>
@@ -595,11 +595,11 @@ loadLanguageFromSession($_SESSION['lang']);
                               }
                               ?>
                               <div class="modal-footer">
-                               
+
                                <?php /* <input type="button" value="Sauvegarder" class="btn btn-success" id="<?= $service->getIdService();?>" onclick="return checkheure(this)"/> */ ?>
                                <input type="button" value="Sauvegarder" class="btn btn-success" data-dismiss="modal" id="<?= $service->getIdService();?>"/>
                 </form>
-                               
+
                               </div>
                             </div>
                           </div>

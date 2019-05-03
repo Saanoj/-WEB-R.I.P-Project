@@ -11,6 +11,7 @@ class Navbar
 
   private $type;
   private $where;
+
   public function __construct($type)
   {
     $this->type=$type;
@@ -37,7 +38,9 @@ class Navbar
           if ($type == 2){
             $where = "backOffice";
 
-          }else{
+          } else if ($type == 3) {
+            $where = "reservation";
+          } else {
             $where = "admin";
           }
         }elseif($type == 2){

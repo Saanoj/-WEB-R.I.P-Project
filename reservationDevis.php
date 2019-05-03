@@ -33,9 +33,8 @@ loadLanguageFromSession($_SESSION['lang']);
   require 'Class/Autoloader.php';
   App\Autoloader::register();
   $bdd = new App\Database('rip');
-  $backOffice=0;
-  $type = 1;
-  $navbar = new App\Navbar($backOffice,$type);
+  $type = 3;
+  $navbar = new App\Navbar($type);
   $navbar->navbar();
 
   $form = new App\Form(array());
@@ -45,7 +44,7 @@ loadLanguageFromSession($_SESSION['lang']);
   $isAbonnee = $req->fetch();
 
 
-  
+
   // On recupere l'objet trajet contenant nos infos de trajet depuis la session
   $trajet = unserialize($_SESSION['trajet']);
 
@@ -85,7 +84,7 @@ loadLanguageFromSession($_SESSION['lang']);
                 $i=0;$j=0;$k=0;
                 foreach ($idServices as $unIdService) {
 
-                    
+
 
                     //on recupere les infos du service en fonction de son id
                     $service = $bdd->queryOne('SELECT * FROM services WHERE idService='.$unIdService["idService"].'');
@@ -171,7 +170,7 @@ loadLanguageFromSession($_SESSION['lang']);
               <h3 class="display-4 text-center">Votre chauffeur</h3>
               <p>
                 <?php
-               
+
                 //$idServices = $bdd->query('SELECT idService FROM linkServicetrajet WHERE idTrajet='.$_SESSION["idTrajet"].'');
                 $idChauffeur= $bdd->queryOne('SELECT idChauffeur FROM trajet WHERE idTrajet='.$_SESSION["idTrajet"].'');
                 $unChauffeur= $bdd->queryOne('SELECT * FROM collaborateurs WHERE idCollaborateurs='.$idChauffeur["idChauffeur"].'');
@@ -183,7 +182,10 @@ loadLanguageFromSession($_SESSION['lang']);
                 <li class="list-group">
                   <?php //echo $i?>
                   <h4 class="h1"><?php echo $chauffeur->getFirst_name()." ".$chauffeur->getLast_name();?></h4>
-                  <p>id du Chauffeur: <?php echo $chauffeur->getIdCollaborateur(); ?> Prix: <?php echo $chauffeur->getPrixCollaborateur()."€ / Km  // AJOUTER SYSTEME PHOTO + SYSTEME ETOILES" ?></p>
+
+                  <img src="images/avatar/<?php echo $unChauffeur["avatar"] ?>" height="100px">
+
+                  <p>id du Chauffeur: <?php echo $chauffeur->getIdCollaborateur(); ?> Prix: <?php echo $chauffeur->getPrixCollaborateur()."€ / Km | Note : ". $chauffeur->getRating()." / 5 étoiles" ?></p>
                   <div class="row">
                     <div class="col-md-4">
                       <h4 class="h2">Infos: </h4>
@@ -248,8 +250,8 @@ loadLanguageFromSession($_SESSION['lang']);
                         }elseif ($unIdService["idService"] == 7) {
                           $infoLinkService = $bdd->queryOne('SELECT * FROM chambre INNER JOIN hotel WHERE chambre.idHotel = hotel.idHotel AND chambre.idChambre = '.$unIdService["idAnnexe"].'');
                           $typeEtablissement="Hotel";
-                  
-                          
+
+
                         }elseif ($unIdService["idService"] == 8) {
                           $infoLinkService = $bdd->queryOne('SELECT * FROM billettourisme WHERE idBillet='.$unIdService["idAnnexe"].'');
                           $typeEtablissement="Billet touristque";
@@ -270,7 +272,7 @@ loadLanguageFromSession($_SESSION['lang']);
                           $typeEtablissement="Coach Sportif";
                           $infoLinkService=$infoLinkService[$j];
                           $j++;
-                          $numHour=calculHeure($bdd,12,$trajet); 
+                          $numHour=calculHeure($bdd,12,$trajet);
                          // $numHour=$hourCoachSportif;
 
                         }elseif ($unIdService["idService"] == 13) {
@@ -331,9 +333,9 @@ loadLanguageFromSession($_SESSION['lang']);
         }
   }
 }
-                    
-               
-      
+
+
+
                         else if ($linkService["idService"] == 10) {
 
                           echo $service["nomService"]." service | "."Votre message est  : ".$unMessage['contenuMessage']." publié le : ".$unMessage['dateMessage']." | 0€ ";
@@ -341,7 +343,7 @@ loadLanguageFromSession($_SESSION['lang']);
 
                         }
                         else if ($linkService["idService"] == 11 || $linkService["idService"] == 12 || $linkService["idService"] == 13) {
-                          echo $service["nomService"]." : ".$infoLinkService["last_name"]." ".$infoLinkService["first_name"]." | Prix: ".$infoLinkService["prixCollaborateur"]."€/h *".$numHour ."h = ".($infoLinkService["prixCollaborateur"]*$numHour)." €"; ?> </b> <?php
+                          echo $service["nomService"]." : ".$infoLinkService["last_name"]." ".$infoLinkService["first_name"]." | Prix: ".$infoLinkService["prixCollaborateur"]."€/h *".sprintf("%.2f",$numHour)."h = ".($infoLinkService["prixCollaborateur"]*sprintf("%.2f",$numHour))." €"; ?> </b> <?php
                           $totalServices += ($infoLinkService["prixCollaborateur"]*$numHour);
 
                         }
@@ -365,7 +367,7 @@ loadLanguageFromSession($_SESSION['lang']);
                         ?></p><?php
 
                       }
-                      echo "<p class='h2'>Total Services: ".$totalServices."€ TTC</p>";
+                      echo "<p class='h2'>Total Services: ".sprintf("%.2f",$totalServices)."€ TTC</p>";
                     }
                     ?>
                   </div>
@@ -383,7 +385,7 @@ loadLanguageFromSession($_SESSION['lang']);
                 {
                   $totalServices = 0;
                 }
-                echo "<p class='display-4'>Prix total: ".($totalServices+$totalChauffeurTrajet)."€ TTC</p>"; $total=$totalServices+$totalChauffeurTrajet;
+                echo "<p class='display-4'>Prix total: ".sprintf("%.2f",($totalServices+$totalChauffeurTrajet))."€ TTC</p>"; $total=sprintf("%.2f",$totalServices+$totalChauffeurTrajet);
               }
               ?>
             </div>
@@ -416,9 +418,9 @@ loadLanguageFromSession($_SESSION['lang']);
 </html>
 
 
-<?php 
+<?php
 
-function countElement($bdd,$idService) 
+function countElement($bdd,$idService)
 {
   $count=0;
   $req = $bdd->getPDO()->prepare('SELECT * FROM linkservicetrajet WHERE idService = :idService AND idTrajet = :idTrajet');
@@ -433,7 +435,7 @@ function countElement($bdd,$idService)
   return $count;
 }
 
-function calculHeure($bdd,$idService,$trajet) 
+function calculHeure($bdd,$idService,$trajet)
 {
   $req = $bdd->getPDO()->prepare('SELECT heureDebut,heureFin FROM trajet WHERE idTrajet = ?');
   $req->execute(array($_SESSION['idTrajet']));
@@ -452,12 +454,13 @@ function calculHeure($bdd,$idService,$trajet)
    $unTrajet['dateStart'] = $dateDebutTrajet[0]." ".$unTrajet['dateStart'];
    $unTrajet['dateEnd'] = $dateFinTrajet[0]." ".$unTrajet['dateEnd'];
 
-   var_dump($unTrajet['dateStart']);
-   var_dump($unTrajet['dateEnd']);
+   //var_dump($unTrajet['dateStart']);
+   //var_dump($unTrajet['dateEnd']);
+   echo "Debut: ".$unTrajet['dateStart']." | fin: ".$unTrajet['dateEnd'];
    $heures = strtotime($unTrajet['dateEnd']) - strtotime($unTrajet['dateStart']);
    $heures /=3600;
    return $heures;
- } 
+ }
 
 }
 

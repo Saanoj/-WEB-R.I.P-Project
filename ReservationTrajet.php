@@ -53,7 +53,7 @@ loadLanguageFromSession($_SESSION['lang']);
   $bdd = new App\Database('rip');
   $backOffice=0;
   $type = 0;
-  $navbar = new App\Navbar($backOffice,$type);
+  $navbar = new App\Navbar($type);
   $navbar->navbar();
   $Session = new App\Session($_SESSION['id']);
   $Session->isConnect();

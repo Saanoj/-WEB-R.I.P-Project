@@ -39,6 +39,12 @@ define("_TITRE_INFO2_RESERVATION","Cheapest trips");
 define("_INFO2_RESERVATION","Afordable prices for trips and services of this level of quality.");
 define("_TITRE_INFO3_RESERVATION","Services");
 define("_INFO3_RESERVATION","In addition to our trips, we propose a number of services to enhace your experience");
+
+
+//navbar
+
+
+
 // RESERVATION Services
 define("_TITRE_SERVICE","Reservation of your services");
 define("_TITRE_CHOOSE_SERVICE","Choose your services");

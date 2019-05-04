@@ -76,6 +76,9 @@ session_start();
                   }
                 //on boucle les id des services choisis
                 $i=0;$j=0;$k=0;$z=0;
+                $h=0;$l=0;$m=0;$n=0;$o=0;
+                $arrayLink = array();
+
                 foreach ($idServices as $unIdService) {
 
 
@@ -83,6 +86,9 @@ session_start();
                     //on recupere les infos du service en fonction de son id
                     $service = $bdd->queryOne('SELECT * FROM services WHERE idService='.$unIdService["idService"].'');
                     $linkService = $bdd->queryOne('SELECT * FROM linkServicetrajet WHERE idService='.$unIdService["idService"].' AND idTrajet='.$_SESSION["idTrajet"].'');
+                    array_push($arrayLink,$linkService['idLink']);
+                    var_dump($arrayLink);
+                   //  var_dump($linkService);
 
                  // var_dump($linkService);
 
@@ -92,7 +98,7 @@ session_start();
                       $typeEtablissement="Restaurant";
 
                     }elseif ($unIdService["idService"] == 7) {
-                      $infoLinkService = $bdd->queryOne('SELECT * FROM hotel WHERE idHotel='.$unIdService["idAnnexe"].'');
+                      $infoLinkService = $bdd->queryOne('SELECT * FROM chambre INNER JOIN hotel WHERE chambre.idHotel = hotel.idHotel AND chambre.idChambre = '.$unIdService["idAnnexe"].'');
                       $typeEtablissement="Hotel";
 
                     }elseif ($unIdService["idService"] == 8) {
@@ -123,10 +129,50 @@ session_start();
                     //Affichage des infos
 
                     if ($linkService["idAnnexe"] < 0) {
-                      if ($z == 0) {
-                      $quantity = getQuantite($bdd,$service["idService"],$_SESSION['idTrajet']);
-                      echo "ID: ".$service["idService"]." | ".$service["nomService"]." | Quantitée: ".$quantity;
-                      $z++;
+
+                                            if ($unIdService["idService"] == 2) {
+                                              if ($h == 0) {
+                                                $q = countElement($bdd,$service["idService"]);
+                                                echo "ID: ".$service["idService"]." | ".$service["nomService"]." | Quantitée: ".$q;
+                                                $h++;
+                                                echo "<br><br>";
+                                              }
+                                        }
+
+                                    if ($unIdService["idService"] == 3) {
+                                      if ($l == 0) {
+                                        $q = countElement($bdd,$service["idService"]);
+                                        echo "ID: ".$service["idService"]." | ".$service["nomService"]." | Quantitée: ".$q;
+                                         $l++;
+                                         echo "<br><br>";
+                                      }
+                                }
+
+                                if ($unIdService["idService"] == 4) {
+                                  if ($m == 0) {
+                                    $q = countElement($bdd,$service["idService"]);
+                                    echo "ID: ".$service["idService"]." | ".$service["nomService"]." | Quantitée: ".$q;
+                                      $m++;
+                                      echo "<br><br>";
+                                  }
+                            }
+                            if ($unIdService["idService"] == 5) {
+                              if ($n == 0) {
+                                $q = countElement($bdd,$service["idService"]);
+                                echo "ID: ".$service["idService"]." | ".$service["nomService"]." | Quantitée: ".$q;
+                                 $n++;
+                                 echo "<br><br>";
+                              }
+
+                        }
+                        if ($unIdService["idService"] == 6) {
+                          if ($o == 0) {
+                            $q = countElement($bdd,$service["idService"]);
+                            echo "ID: ".$service["idService"]." | ".$service["nomService"]." | Quantitée: ".$q;
+                             $o++;
+                             echo "<br><br>";
+                          }
+                      }
                       }
 
 
@@ -139,17 +185,33 @@ session_start();
                       $req->execute();
                       $unMessage = $req->fetch();
                       echo "ID: ".$service["idService"]." | ". $service["nomService"]." service | "."Votre message est  : ".$unMessage['contenuMessage']." publié le : ".$unMessage['dateMessage'];
+                      echo "<br><br>";
 
                     }
                     else if ($linkService["idService"] == 11) {
                       echo "ID: ".$service["idService"]." | ".$service["nomService"]." : ".$infoLinkService["last_name"]." ".$infoLinkService["first_name"]." | Langue: ".$infoLinkService["description"];
-
+                      echo "<br><br>";
                     }
                     else if ($linkService["idService"] == 12) {
                       echo "ID: ".$service["idService"]." | ".$service["nomService"]." : ".$infoLinkService["last_name"]." ".$infoLinkService["first_name"]." | Domaine: ".$infoLinkService["description"];
+                      echo "<br><br>";
                     }
                     else if ($linkService["idService"] == 13) {
                       echo "ID: ".$service["idService"]." | ".$service["nomService"]." : ".$infoLinkService["last_name"]." ".$infoLinkService["first_name"]." | Guide en: ".$infoLinkService["description"];
+                      echo "<br><br>";
+                    }
+                    else if($linkService["idService"] == 7)
+                    {
+                      echo "ID: ".$service["idService"]." |  ".$typeEtablissement." ".$infoLinkService["nom"]." | Quantitée: ".$linkService["quantite"]." chambres";
+                      echo "<br><br>";
+                    }
+
+                    else if($linkService["idService"] == 8)
+                    {
+                     // var_dump($linkService);
+                      echo "ID: ".$service["idService"]." | ".$typeEtablissement." ".$infoLinkService["nom"]." | Quantitée: ".$linkService["quantite"]." billets";
+                      echo "<br><br>";
+
                     }
 
                     else{
@@ -157,9 +219,10 @@ session_start();
                       echo "ID: ".$service["idService"]." | ".$service["nomService"]." : ".$typeEtablissement." ".$infoLinkService["nom"]." | Quantitée: ".$quantity." places";
 
                     }
-                    echo "<br><br>";
+                   // echo "<br><br>";
 
                 }
+
               }
             }else{
                 echo "Aucun abonnements souscrit, pas de services disponibles.";

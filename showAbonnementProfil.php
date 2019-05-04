@@ -69,7 +69,9 @@ $unAbonnement = $req->fetch();
 
                   <div class="form-group">
                     <span >Engagement sur 12 mois</span>
-                    <input type="text" name="isEngagement" class="form-control" value="<?php if($unAbonnement['isEngagement'] == 1) {echo "Oui";} else{echo "Non";}?>" disabled/>
+                    <input type="text" name="isEngagement" class="form-control" value="<?php   if ($abo->getIsEngagement() == null) {echo ' ';} 
+                                if ($abo->getIsEngagement() == 1) { echo 'Oui';}  
+                                if ($abo->getIsEngagement() == 0 && $abo->getIsEngagement() != null) { echo 'Non';}  ?>" disabled/>
                   </div>
 
 

@@ -108,7 +108,7 @@ class Navbar
                     <ul class="d-flex flex-row align-items-start justify-content-start">
 
                       <?php if ($where == "reservation") {?>
-                        <li><a href="annulerReservation.php"><?php echo _NAVBAR_ANNULER_RESERVATION ?></a></li>
+                        <li><a href="annulerReservation.php" id="resNavbar"><?php echo _NAVBAR_ANNULER_RESERVATION ?></a></li>
                       <?php }else{
 
                         if ($where == "customer" ||$where == "admin" ||$where == "backOffice" ) {

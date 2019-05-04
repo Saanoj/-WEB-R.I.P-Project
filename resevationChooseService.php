@@ -90,7 +90,7 @@ session_start();
                     ?>
 
 
-                    <li class="list-group-item row">
+                    <li class="list-group-item row bg-white">
                       <a class="h3 col-md-9" style="color:black"><?php echo $unService["categorie"] ?></a>
                       <!--<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample  " aria-expanded="false" aria-controls="collapseExample">-->
                       <button class="btn btn-primary pull-right fa fa-plus col-md-3" style="background-color:black" type="button" data-toggle="collapse" data-target="<?php echo "#".$newCategorie;?>" aria-expanded="true" aria-controls="<?php echo $newCategorie;?>">Ouvrir</button>

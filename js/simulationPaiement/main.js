@@ -155,8 +155,9 @@ function addPDFButton(){
   buttonHome.setAttribute("onclick","location.href = 'index.php';");
   var br = document.createElement("br");
   document.getElementById('id1').appendChild(br);
-  
+  document.getElementById('id1').appendChild(br);
   document.getElementById('id1').appendChild(buttonHome);
+
 
 }
 
@@ -179,7 +180,7 @@ function generatePDF() {
   }
 
 
-  
+
   function sendSMS() {
     $.ajax({
       url : 'envoieSMS.php', // Le nom du script a changé, c'est send_mail.php maintenant !
@@ -189,4 +190,3 @@ function generatePDF() {
    return false;
 
   }
-

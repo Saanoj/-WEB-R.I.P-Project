@@ -178,7 +178,7 @@ session_start();
           <div class="tab-content profile-tab" id="myTabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
               <div class="row">
-                <div class="col-md-5">
+                <div class="col-md-12">
                   <h4>Espace collaborateur</h4>
 
                   <?php if ($_SESSION['isCollaborateur']==0) { ?>
@@ -189,7 +189,37 @@ session_start();
 
                 </div>
               </div>
+
               <div class="dropdown-divider"></div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <h4>Invitation a des entreprises</h4>
+
+                  <?php
+                  $invitations = $bdd->query('SELECT * FROM notifentreprise WHERE idClient = '.$_SESSION["id"].'',$bdd);
+
+                  if (sizeof($invitations) == 0) {
+                    echo "Vous n'avez aucune invitation à une entreprise";
+                  } else {
+                    foreach ($invitations as $invitation) {
+
+                      $entreprise = $bdd->queryOne('SELECT * FROM entreprise WHERE idEntreprise = '.$invitation['idEntreprise'].'');
+
+                      echo "<div id='inviteID".$entreprise["idEntreprise"]."'><p class='row pl-3'>Vous avez été invité par ".$entreprise["nameEntreprise"]." pour le service d'abonnement <button class='mr-2 ml-2' onclick='acceptInvite(".$invitation['idEntreprise'].",".$_SESSION["id"].")'> Accepter </button> <button class='' onclick='refuseInvite(".$invitation['idEntreprise'].",".$_SESSION["id"].")'> Refuser </button></p>";
+                      echo "<div class='dropdown-divider'></div></div>";
+                    }
+                  }
+
+                   ?>
+
+
+
+                </div>
+              </div>
+
+              <div class="dropdown-divider"></div>
+
               <div class="row">
                 <div class="col-md-5">
                   <h4>Mes informations</h4>
@@ -720,6 +750,7 @@ session_start();
   <?php include "includehtml/footer.php" ?>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script type="text/javascript" src="js/profil/profil.js"></script>
+  <script type="text/javascript" src="js/profil/jsAjax.js"></script>
 
 
 

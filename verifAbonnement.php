@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace App;
 use \PDO;
 session_start();
@@ -24,12 +24,12 @@ switch ($_POST['submit'])
     $isEngagement = 1;
     $idAbonnement = 2;
     $dateFin=date("Y-m-d", strtotime("+1 year"));
-    if (existEntreprise($bdd) == true) 
+    if (existEntreprise($bdd) == true)
     {
     req($idAbonnement,$isEngagement,$dateFin,$bdd);
-    
+
     }
-    else 
+    else
     {
         header('location:appartientEntreprise.php?isValide=0');
     }
@@ -39,11 +39,11 @@ switch ($_POST['submit'])
     $isEngagement = 0;
     $idAbonnement = 1;
     $dateFin=date("Y-m-d", strtotime("+10 year"));
-    if (existEntreprise($bdd) == true) 
+    if (existEntreprise($bdd) == true)
     {
     req($idAbonnement,$isEngagement,$dateFin,$bdd);
     }
-    else 
+    else
     {
         header('location:appartientEntreprise.php?isValide=0');
     }
@@ -58,7 +58,7 @@ switch ($_POST['submit'])
     $isEngagement =1;
     reqEntreprise($bdd,$isEngagement);
     break;
-   
+
     default:
     header('location:abonnement.php');
     break;
@@ -71,7 +71,7 @@ else
 }
 
 
-function checkIfAbonnementValide($bdd) 
+function checkIfAbonnementValide($bdd)
 {
 $req = $bdd->getPDO()->prepare('SELECT * FROM linkabonnemententreprise WHERE idClient = :idClient');
 $req->execute(array('idClient' => $_SESSION['id']));
@@ -100,11 +100,11 @@ function req($idAbonnement,$isEngagement,$dateFin,$bdd)
     ));
     $req->closeCursor();
 ?>
-    <?php 
+    <?php
     header('location:paiementAbonnement.php?isEngagement='.$isEngagement.'&idAbonnement='.$idAbonnement.'');
   //  header ('Refresh: 0;URL=recapAbonnement?isEngagement='.$isEngagement.'&idAbonnement='.$idAbonnement.'');
 }
-else 
+else
 {
     header('location:profil?Deja_abonne');
 
@@ -117,7 +117,7 @@ function reqEntreprise($bdd,$isEngagement)
  {
     if (checkIfAbonnementValide($bdd) == true)
     {
-       
+
  $req = $bdd->getPDO()->prepare('SELECT * FROM entreprise WHERE idDirecteur = :idDirecteur');
  $req->execute(array('idDirecteur' => $_SESSION['id']));
  $req->closeCursor();
@@ -127,9 +127,9 @@ function reqEntreprise($bdd,$isEngagement)
  else
  {
     header('location:configAbonnementEntreprise.php?isEngagement='.$isEngagement.'');
-    
+
  }
- 
+
 }
 else
 {
@@ -153,7 +153,7 @@ function reqIsDirecteur($bdd)
     {
         return false;
     }
-    
+
 }
 */
 
@@ -164,12 +164,12 @@ function existEntreprise($bdd) {
     {
         $req->closeCursor();
         return true;
-    } 
+    }
     else {
         $req->closeCursor();
         return false;
     }
-    
+
 
 }
 ?>

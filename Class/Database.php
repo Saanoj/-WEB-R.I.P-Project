@@ -35,7 +35,7 @@ class Database{
     $chauffeurs = $this->getPDO()->prepare($statement);
     $chauffeurs->execute($params);
     $chauffeurs->closeCursor();
-    return $chauffeurs;
+    return $chauffeurs->rowCount();
   }
 
   public function queryPrepareForWhile($statement,$bdd){

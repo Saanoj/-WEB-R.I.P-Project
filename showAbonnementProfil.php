@@ -13,10 +13,8 @@ $navbar->navbar();
 <!DOCTYPE HTML>
 <head>
   <meta charset='utf-8'>
-  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+  <?php require_once 'includehtml/head.html'; ?>
   <link href="css/abonnement/verifAbonnement/style.css" rel="stylesheet">
 </head>
 
@@ -134,6 +132,7 @@ $unAbonnement = $req->fetch();
                       <div class="form-group">
                         <span >Nom de l'entreprise :</span>
                         <input type="text" name="nameEntreprise" class="form-control" placeholder="<?= $uneEntreprise['nameEntreprise'];?>" value="<?= $uneEntreprise['nameEntreprise'];?>" disabled />
+                        <div id="idEntreprise"><?php echo $uneEntreprise['idEntreprise']; ?></div>
                       </div>
                       <div class="form-group">
                         <span >Numéro de téléphone de l'entreprise :</span>
@@ -185,7 +184,9 @@ $unAbonnement = $req->fetch();
                           <div class="col-md-12 offset-2">
                             <div class="row">
                               <h2>Ajouter un utilisateur a votre entreprise</h2>
+
                               <h6>Cherchez un utilisateur pour lui envoyer une invitation</h6>
+
                             </div>
                             <div class="row">
                               <input type="text" name="" id="searchUser" value="">
@@ -195,6 +196,24 @@ $unAbonnement = $req->fetch();
                         <div class="row register-form p-0 m-0">
 
                             <div id="users" class="offset-4 col-md-8">
+
+                            </div>
+                        </div>
+                        <div class="row register-form m-0 p-0">
+                          <div class="col-md-12 offset-2">
+                            <div class="row">
+                              <h2>Supprimer/gérer un utilisateur</h2>
+                              <h6>Cherchez un utilisateur pour le gérer</h6>
+
+                            </div>
+                            <div class="row">
+                              <input type="text" name="" id="searchUserIn" value="">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row register-form p-0 m-0">
+
+                            <div id="usersIn" class="offset-4 col-md-8">
 
                             </div>
                         </div>
@@ -284,5 +303,6 @@ $unAbonnement = $req->fetch();
     ?>
     <script src="js/profil/showAbonnementProfil/main.js"></script>
     <script src="js/showAbonnementProfil/main.js"></script>
+    <script src="js/showAbonnementProfil/sendNotif.js"></script>
     <?php include "includehtml/footer.php" ?>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

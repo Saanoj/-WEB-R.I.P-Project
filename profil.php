@@ -146,7 +146,6 @@ session_start();
               ?>
             </h6>
             <p><?php echo $datas['email'] ?></p>
-            <p class="proile-rating">Notes : <span>10/10</span></p>
             <ul class="nav nav-tabs" id="myTab" role="tablist">
               <li class="nav-item">
                 <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Information</a>
@@ -533,8 +532,8 @@ session_start();
                             </div>
                             <div class="col-md-6">
                               <div class="gear">
-                                <span id="isEngagement" class="datainfo"><?php   if ($abo->getIsEngagement() == null) {echo ' ';} 
-                                if ($abo->getIsEngagement() == 1) { echo 'Oui';}  
+                                <span id="isEngagement" class="datainfo"><?php   if ($abo->getIsEngagement() == null) {echo ' ';}
+                                if ($abo->getIsEngagement() == 1) { echo 'Oui';}
                                 if ($abo->getIsEngagement() == 0 && $abo->getIsEngagement() != null) { echo 'Non';}  ?></span>
 
 

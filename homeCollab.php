@@ -37,7 +37,7 @@ session_start();
   //var_dump($collaborateur);
   ?>
 
-    <div class="container bg-light">
+    <div class="container bg-light pb-5">
       <div class="row">
         <div class="col-md-10 col-md-offset-2">
           <h1 class="page-header">Dashboard Collaborateur: <?php echo $collaborateur["metier"]; ?></h1>
@@ -89,25 +89,22 @@ session_start();
       <hr>
 
       <div class="row">
-        <div class="col-md-3 text-center">
+        <div class="col-md-4 text-center">
           Changer ses infos profil:
         </div>
-        <div class="col-md-3 text-center">
+        <div class="col-md-4 text-center">
           Statut en/hors ligne
         </div>
-        <div class="col-md-3 text-center">
+        <div class="col-md-4 text-center">
           Détruire votre compte
-        </div>
-        <div class="col-md-3 text-center">
-          Trajet
         </div>
       </div>
 
       <div class="row">
-        <div class="col-md-3 text-center">
+        <div class="col-md-4 text-center">
             <a href="profil.php" class="btn btn-primary col-md-12">Changer ses<br>informations profil</a>
         </div>
-        <div class="col-md-3 text-center">
+        <div class="col-md-4 text-center">
 
           <?php if($collaborateur["isOnline"] == 0){ ?>
             <button type="button" id="onlineButton" class="btn btn-success col-md-12" onclick="updateCollabStatus(1)">Se mettre<br>en ligne ajax</button>
@@ -115,7 +112,7 @@ session_start();
             <button type="button" id="onlineButton" class="btn btn-warning col-md-12" onclick="updateCollabStatus(0)">Se mettre<br>hors ligne ajax</button>
           <?php } ?>
         </div>
-        <div class="col-md-3 text-center">
+        <div class="col-md-4 text-center">
           <!-- Button trigger modal -->
           <button type="button" class="btn btn-danger  col-md-12" data-toggle="modal" data-target="#exampleModal">
             Désactiver son<br>compte Collaborateur
@@ -141,12 +138,6 @@ session_start();
             </div>
           </div>
         </div>
-        <div class="col-md-3 text-center">
-          <!-- Button trigger modal -->
-          <button type="button" class="btn btn-success col-md-12" data-toggle="modal" data-target="#exampleModal">
-            Terminer<br>le trajet
-          </button>
-        </div>
       </div>
 
       <hr>
@@ -155,143 +146,98 @@ session_start();
         <?php
         if($collaborateur["metier"]=="chauffeur"){
 
-        $car=App\Chauffeur::getCar($_SESSION["id"],$bdd);
+          $car=App\Chauffeur::getCar($_SESSION["id"],$bdd);
 
-        echo "<p class='display-4'>Votre voiture: ".$car["carBrand"]." ".$car["carModel"]." ".$car["carColor"]." ".$car["nbPlaces"]." place(s)</p>";
-        } ?>
+          echo "<p class='display-4'>Votre voiture: ".$car["carBrand"]." ".$car["carModel"]." ".$car["carColor"]." ".$car["nbPlaces"]." place(s)</p>";
+        } else {
+          echo "<p class='display-4'>Profession: ".$collaborateur["metier"]."</p>";
+        }
+
+
+        ?>
+
+      </div>
+      <h2>Gérez vos trajet sur l'application android "RIPCollab"</h2>
+      <div class="dropdown-divider">
+
+      </div>
+      <h3>Trajets à venir</h3>
+      <div class="row m-5">
+
+        <?php
+        $idCollaborateur = $_SESSION["id"];
+        $trips = [];
+
+        $list = $bdd->query('SELECT * FROM trajet WHERE stateDriver = 0 AND idChauffeur = '.$idCollaborateur.' AND state = "Attente Collab" ORDER BY heureDebut');
+
+        //if not a driver
+        if (empty($list)) {
+            $listLink = $bdd->query('SELECT idTrajet FROM linkservicetrajet WHERE (idService=11 OR idService=12 OR idService=13) AND idAnnexe = '.$idCollaborateur.' AND statut=0');
+            //print_r($listLink);
+
+            $list2 = array();
+            foreach ($listLink as $key => $idTrajet) {
+              $trip = $bdd->queryOne('SELECT * FROM trajet WHERE idTrajet = '.$idTrajet["idTrajet"].' AND state = "Attente Collab" ');
+              array_push($list2,$trip);
+            }
+            $trips =  $list2;
+        } else {
+            $trips = $list;
+        }
+
+        if (empty($trips)) {
+          echo "Aucun trajets dans cette liste";
+        } else {
+          foreach ($trips as $trip) {
+            echo "<p>".$trip["start"]."</p>";
+          }
+        }
+
+
+         ?>
+
+      </div>
+      <div class="dropdown-divider"></div>
+      <h3>Anciens Trajets</h3>
+      <div class="row m-5">
+
+        <?php
+        $idCollaborateur = $_SESSION["id"];
+        $trips = [];
+
+        $list = $bdd->query('SELECT * FROM trajet WHERE state = "Finis"  AND idChauffeur = '.$idCollaborateur.' ORDER BY heureDebut');
+
+        //if not a driver
+        if (empty($list)) {
+            $listLink = $bdd->query('SELECT idTrajet FROM linkservicetrajet WHERE (idService=11 OR idService=12 OR idService=13) AND idAnnexe = '.$idCollaborateur.' AND statut=1');
+            //print_r($listLink);
+
+            $list2 = array();
+            foreach ($listLink as $key => $idTrajet) {
+              $trip = $bdd->queryOne('SELECT * FROM trajet WHERE idTrajet = '.$idTrajet["idTrajet"].' ');
+              if($trip["state"] == "Finis"){
+                  array_push($list2,$trip);
+              }
+            }
+            $trips = $list2;
+        } else {
+          $trips = $list;
+        }
+
+        if (empty($trips)) {
+          echo "Aucun trajets dans cette liste";
+        } else {
+          foreach ($trips as $trip) {
+            echo "<p>".$trip["start"]."</p>";
+          }
+        }
+
+
+         ?>
 
       </div>
 
-      <br>
-      <br>
-      <h2 class="sub-header">Section title</h2>
-      <div class="table-responsive">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Header</th>
-              <th>Header</th>
-              <th>Header</th>
-              <th>Header</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1,001</td>
-              <td>Lorem</td>
-              <td>ipsum</td>
-              <td>dolor</td>
-              <td>sit</td>
-            </tr>
-            <tr>
-              <td>1,002</td>
-              <td>amet</td>
-              <td>consectetur</td>
-              <td>adipiscing</td>
-              <td>elit</td>
-            </tr>
-            <tr>
-              <td>1,003</td>
-              <td>Integer</td>
-              <td>nec</td>
-              <td>odio</td>
-              <td>Praesent</td>
-            </tr>
-            <tr>
-              <td>1,003</td>
-              <td>libero</td>
-              <td>Sed</td>
-              <td>cursus</td>
-              <td>ante</td>
-            </tr>
-            <tr>
-              <td>1,004</td>
-              <td>dapibus</td>
-              <td>diam</td>
-              <td>Sed</td>
-              <td>nisi</td>
-            </tr>
-            <tr>
-              <td>1,005</td>
-              <td>Nulla</td>
-              <td>quis</td>
-              <td>sem</td>
-              <td>at</td>
-            </tr>
-            <tr>
-              <td>1,006</td>
-              <td>nibh</td>
-              <td>elementum</td>
-              <td>imperdiet</td>
-              <td>Duis</td>
-            </tr>
-            <tr>
-              <td>1,007</td>
-              <td>sagittis</td>
-              <td>ipsum</td>
-              <td>Praesent</td>
-              <td>mauris</td>
-            </tr>
-            <tr>
-              <td>1,008</td>
-              <td>Fusce</td>
-              <td>nec</td>
-              <td>tellus</td>
-              <td>sed</td>
-            </tr>
-            <tr>
-              <td>1,009</td>
-              <td>augue</td>
-              <td>semper</td>
-              <td>porta</td>
-              <td>Mauris</td>
-            </tr>
-            <tr>
-              <td>1,010</td>
-              <td>massa</td>
-              <td>Vestibulum</td>
-              <td>lacinia</td>
-              <td>arcu</td>
-            </tr>
-            <tr>
-              <td>1,011</td>
-              <td>eget</td>
-              <td>nulla</td>
-              <td>Class</td>
-              <td>aptent</td>
-            </tr>
-            <tr>
-              <td>1,012</td>
-              <td>taciti</td>
-              <td>sociosqu</td>
-              <td>ad</td>
-              <td>litora</td>
-            </tr>
-            <tr>
-              <td>1,013</td>
-              <td>torquent</td>
-              <td>per</td>
-              <td>conubia</td>
-              <td>nostra</td>
-            </tr>
-            <tr>
-              <td>1,014</td>
-              <td>per</td>
-              <td>inceptos</td>
-              <td>himenaeos</td>
-              <td>Curabitur</td>
-            </tr>
-            <tr>
-              <td>1,015</td>
-              <td>sodales</td>
-              <td>ligula</td>
-              <td>in</td>
-              <td>libero</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+
     </div>
 
 

@@ -75,7 +75,7 @@ session_start();
 
                   }
                 //on boucle les id des services choisis
-                $i=0;$j=0;$k=0;
+                $i=0;$j=0;$k=0;$z=0;
                 foreach ($idServices as $unIdService) {
 
 
@@ -121,8 +121,16 @@ session_start();
                     }
 
                     //Affichage des infos
+                    
                     if ($linkService["idAnnexe"] < 0) {
-                      echo "ID: ".$service["idService"]." | ".$service["nomService"]." | Quantitée: ".$linkService["quantite"];
+                      if ($z == 0) {
+                      $quantity = getQuantite($bdd,$service["idService"],$_SESSION['idTrajet']);
+                      echo "ID: ".$service["idService"]." | ".$service["nomService"]." | Quantitée: ".$quantity;
+                      $z++;
+                      }
+                    
+                   
+                      
                     }
                     else if ($linkService["idService"] == 10) {
 
@@ -145,7 +153,9 @@ session_start();
                     }
 
                     else{
-                      echo "ID: ".$service["idService"]." | ".$service["nomService"]." : ".$typeEtablissement." ".$infoLinkService["nom"]." | Quantitée: ".$linkService["quantite"]." places";
+                      $quantity = getQuantite($bdd,$service["idService"],$_SESSION['idTrajet']);
+                      echo "ID: ".$service["idService"]." | ".$service["nomService"]." : ".$typeEtablissement." ".$infoLinkService["nom"]." | Quantitée: ".$quantity." places";
+                   
                     }
                     echo "<br><br>";
 
@@ -176,8 +186,8 @@ session_start();
                 <li class="list-group">
                   <?php //echo $i?>
                   <h4 class="h1"><?php echo $chauffeur->getFirst_name()." ".$chauffeur->getLast_name();?></h4>
-
-                  <img src="images/avatar/<?php echo $unChauffeur["avatar"] ?>" height="100px">
+              
+                 <?php /* <img src="images/avatar/<?php echo $unChauffeur["avatar"] ?>" height="100px"> */ ?>
 
                   <p>id du Chauffeur: <?php echo $chauffeur->getIdCollaborateur(); ?> Prix: <?php echo $chauffeur->getPrixCollaborateur()."€ / Km | Note : ". $chauffeur->getRating()." / 5 étoiles" ?></p>
                   <div class="row">
@@ -456,6 +466,17 @@ function calculHeure($bdd,$idService,$trajet)
    return $heures;
  }
 
+}
+
+function getQuantite($bdd,$idService,$idTrajet)
+{
+  $req = $bdd->getPDO()->prepare('SELECT * FROM linkservicetrajet WHERE idService = :idService AND idTrajet = :idTrajet ');
+  $req->execute(array(
+    'idService' => $idService,
+    'idTrajet' => $idTrajet
+  ));
+  $count = $req->rowCount();
+  return $count;
 }
 
 ?>

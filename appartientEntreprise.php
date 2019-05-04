@@ -24,7 +24,21 @@ $bdd = new Database('rip');
 </body>
 <?php 
 header ('Refresh: 4;URL=abonnement.php');
-} else { 
+} 
+if ($_GET['isValide'] == 1)
+{?>
+<body>
+<div class="alert alert-danger" role="alert">
+  Vous n'êtes pas le directeur de votre entreprise. <br> 
+  Vous ne pouvez donc pas souscrire à un abonnement d'entreprise. Contacter votre directeur pour plus d'informations
+    </div>
+</body>
+<?php 
+header ('Refresh: 4;URL=abonnement.php');
+} 
+
+
+else { 
 
 header ('location:abonnement.php');
 }

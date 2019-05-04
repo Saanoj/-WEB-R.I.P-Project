@@ -51,12 +51,24 @@ switch ($_POST['submit'])
 
     case 'nonEngagementEntreprise':
     $isEngagement = 0;
+    if (isDirecteur($bdd) == true){
     reqEntreprise($bdd,$isEngagement);
+    }
+    else
+    {
+        header('location:appartientEntreprise.php?isValide=1');
+    }
     break;
 
     case 'engagementEntreprise':
     $isEngagement =1;
+    if (isDirecteur($bdd) == true){
     reqEntreprise($bdd,$isEngagement);
+    }
+    else
+    {
+        header('location:appartientEntreprise.php?isValide=1');
+    }
     break;
    
     default:
@@ -158,18 +170,35 @@ function reqIsDirecteur($bdd)
 */
 
 function existEntreprise($bdd) {
-    $req = $bdd->getPDO()->prepare('SELECT * FROM entreprise WHERE idDirecteur = :idDirecteur');
-    $req->execute(array('idDirecteur' => $_SESSION['id']));
-    if($req->rowCount() == 0)
+    $req = $bdd->getPDO()->prepare('SELECT idEntreprise FROM users WHERE id = :id');
+    $req->execute(array('id' => $_SESSION['id']));
+    $uneEntreprise = $req->fetch();
+    $req->closeCursor();
+    if ($uneEntreprise['idEntreprise'] != null)
     {
-        $req->closeCursor();
-        return true;
-    } 
-    else {
-        $req->closeCursor();
         return false;
     }
-    
-
+    else
+    {
+        return true;
+    }
 }
+    
+    function isDirecteur($bdd) {
+        $req = $bdd->getPDO()->prepare('SELECT isDirecteur FROM users WHERE id = :id ');
+        $req->execute(array('id' => $_SESSION['id']));
+        $unUser = $req->fetch();
+        $req->closeCursor();
+        if ($unUser['isDirecteur'] == 1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+
+
 ?>

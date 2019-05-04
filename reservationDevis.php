@@ -121,16 +121,16 @@ session_start();
                     }
 
                     //Affichage des infos
-                    
+
                     if ($linkService["idAnnexe"] < 0) {
                       if ($z == 0) {
                       $quantity = getQuantite($bdd,$service["idService"],$_SESSION['idTrajet']);
                       echo "ID: ".$service["idService"]." | ".$service["nomService"]." | Quantitée: ".$quantity;
                       $z++;
                       }
-                    
-                   
-                      
+
+
+
                     }
                     else if ($linkService["idService"] == 10) {
 
@@ -155,7 +155,7 @@ session_start();
                     else{
                       $quantity = getQuantite($bdd,$service["idService"],$_SESSION['idTrajet']);
                       echo "ID: ".$service["idService"]." | ".$service["nomService"]." : ".$typeEtablissement." ".$infoLinkService["nom"]." | Quantitée: ".$quantity." places";
-                   
+
                     }
                     echo "<br><br>";
 
@@ -186,7 +186,7 @@ session_start();
                 <li class="list-group">
                   <?php //echo $i?>
                   <h4 class="h1"><?php echo $chauffeur->getFirst_name()." ".$chauffeur->getLast_name();?></h4>
-              
+
                  <?php /* <img src="images/avatar/<?php echo $unChauffeur["avatar"] ?>" height="100px"> */ ?>
 
                   <p>id du Chauffeur: <?php echo $chauffeur->getIdCollaborateur(); ?> Prix: <?php echo $chauffeur->getPrixCollaborateur()."€ / Km | Note : ". $chauffeur->getRating()." / 5 étoiles" ?></p>

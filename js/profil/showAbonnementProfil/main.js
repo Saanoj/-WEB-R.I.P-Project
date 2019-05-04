@@ -4,8 +4,8 @@ function deleteAbonnement() {
 	request.onreadystatechange = function(){
         if(request.status == 200 && request.readyState == 4){
     }
-}    
-        data='id=' + idSession;  
+}
+        data='id=' + idSession;
 		request.open('POST', 'updateProfil.php');
 		request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		request.send(data);
@@ -19,13 +19,12 @@ function deleteAbonnement() {
 	request.onreadystatechange = function(){
         if(request.status == 200 && request.readyState == 4){
     }
-}    
+}
         data='id=' + idSession + '&idEntreprise=' + idEntreprise;
 		request.open('POST', 'updateProfil.php');
         request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        
+
 		request.send(data);
   }
 
-  
   

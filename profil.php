@@ -503,12 +503,8 @@ session_start();
                             </div>
                             <div class="col-md-6">
                               <div class="gear">
-                                <span id="isEngagement" class="datainfo">
-                                <?php 
-                                if ($abo->getIsEngagement() == null) {echo ' ';} 
-                                if ($abo->getIsEngagement() == 1) { echo 'Oui';}  
-                                if ($abo->getIsEngagement() == 0 && $abo->getIsEngagement() != null) { echo 'Non';}  ?>
-                                  </span>
+                                <span id="isEngagement" class="datainfo"><?php if ( $abo->getIsEngagement() == 1) { echo 'Oui';} if ( $abo->getIsEngagement() == 0) { echo 'Non';} else {
+                                  echo ' ';}?></span>
 
 
                               </div>

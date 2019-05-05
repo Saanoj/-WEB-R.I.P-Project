@@ -22,7 +22,10 @@ $navbar->navbar();
 $req = $bdd->getPDO()->prepare('SELECT * FROM users INNER JOIN abonnement INNER JOIN linkabonnemententreprise ON users.id = ? AND abonnement.idAbonnement = linkabonnemententreprise.idAbonnement');
 $req->execute(array($_SESSION['id']));
 $unAbonnement = $req->fetch();
+var_dump($unAbonnement);
 
+if ($unAbonnement != false)
+{
 
 
 ?>
@@ -67,9 +70,7 @@ $unAbonnement = $req->fetch();
 
                   <div class="form-group">
                     <span >Engagement sur 12 mois</span>
-                    <input type="text" name="isEngagement" class="form-control" value="<?php   if ($abo->getIsEngagement() == null) {echo ' ';} 
-                                if ($abo->getIsEngagement() == 1) { echo 'Oui';}  
-                                if ($abo->getIsEngagement() == 0 && $abo->getIsEngagement() != null) { echo 'Non';}  ?>" disabled/>
+                    <input type="text" name="isEngagement" class="form-control" value="" disabled/>
                   </div>
 
 
@@ -110,6 +111,7 @@ $unAbonnement = $req->fetch();
         </div>
       </div>
 
+                    <?php } ?>
 
       <?php if ($unAbonnement['idAbonnement'] == 3 || $unAbonnement['idAbonnement'] == 4)
       { ?>
@@ -300,6 +302,15 @@ $unAbonnement = $req->fetch();
       return $prix;
 
     }
+
+
+       function getIdEntreprise($bdd) {
+        $req = $bdd->getPDO()->prepare('SELECT idEntreprise FROM users WHERE id = :id');
+        $req->execute(array('id' => $_SESSION['id']));
+        $id = $req->fetch();
+        $req->closeCursor();
+        return $id['idEntreprise'];
+}
 
 
     ?>

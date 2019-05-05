@@ -19,9 +19,11 @@ function backOfficeDevis()
 
         <input  name="id" type="hidden" value="<?php echo $member["idDevis"]?>"/>
         <td><?php echo $member["idDevis"]?> </td>
-        <td><input name="isValide" type="text" value="<?php echo $member["isValide"]?>"/></td>
+        <td><input name="idTrajet" type="text" value="<?php echo $member["idTrajet"]?>"/></td>
         <td><input name="prixTrajet" type="text" value="<?php echo $member["prixTrajet"]?>"/></td>
-        <td><input name="prixServices" type="text" value="<?php echo $member["prixServices"]?>"/></td>
+        <td><input name="prixService" type="text" value="<?php echo $member["prixService"]?>"/></td>
+        <td><input name="prixTotal" type="text" value="<?php echo $member["prixTotal"]?>"/></td>
+        <td><input name="dateDevis" type="text" value="<?php echo $member["dateDevis"]?>"/></td>
         <td>
           <button name="edit" type="submit" class="btn btn-warning">
             edit
@@ -49,9 +51,11 @@ function backOfficeDevis()
     <tr>
       <form method="POST" action="change.php">
         <td></td>
-        <td><input name="isValide" type="text"/></td>
+        <td><input name="idTrajet" type="text"/></td>
         <td><input name="prixTrajet" type="text"/></td>
-        <td><input name="prixServices" type="text" /></td>
+        <td><input name="prixService" type="text" /></td>
+        <td><input name="prixTotal" type="text" /></td>
+        <td><input name="dateDevis" type="text" /></td>
         <td>
 
           <button name="add" type="submit" class="btn btn-success">
@@ -66,29 +70,37 @@ function backOfficeDevis()
 
     }
 
-    function edit($id, $isValide, $prixTrajet, $prixServices)
+    function edit($id, $idTrajet, $prixTrajet, $prixService, $prixTotal, $dateDevis)
     {
       include (CONF);
       $query = $bdd->prepare("UPDATE devis SET
-        isValide = :isValide,
+        idTrajet = :idTrajet,
         prixTrajet = :prixTrajet,
-        prixServices = :prixServices
+        prixService = :prixService,
+        prixTotal = :prixTotal,
+        dateDevis = :dateDevis
         WHERE idDevis = :id");
         $query->execute([
           "id"=> $id,
-          "isValide"=>$isValide,
+          "idTrajet"=>$idTrajet,
           "prixTrajet"=>$prixTrajet,
-          "prixServices"=>$prixServices
+          "prixService"=>$prixTrajet,
+          "prixTotal"=>$prixService,
+          "dateDevis"=>$dateDevis
         ]);
       }
 
-      function add($isValide, $prixTrajet, $prixServices){
+      function add($idTrajet, $prixTrajet, $prixService, $prixTotal, $dateDevis){
         include (CONF);
-        $query = $bdd->prepare("INSERT INTO devis (isValide, prixTrajet, prixServices) VALUES (:isValide, :prixTrajet, :prixServices)");
-        $query->bindValue("isValide",$isValide);
-        $query->bindValue("prixTrajet",$prixTrajet);
-        $query->bindValue("prixServices",$prixServices);
-        $query->execute();
+        $query = $bdd->prepare("INSERT INTO devis (idTrajet, prixTrajet, prixService, prixTotal, dateDevis)
+        VALUES (:idTrajet, :prixTrajet, :prixService, :prixTotal, :dateDevis)");
+        $query->execute([
+          "idTrajet"=>$idTrajet,
+          "prixTrajet"=>$prixTrajet,
+          "prixService"=>$prixService,
+          "prixTotal"=>$prixTotal,
+          "dateDevis"=>$dateDevis
+        ]);
       }
 
       function drop($id)

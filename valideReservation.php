@@ -26,6 +26,9 @@ $end = str_replace(',',"",$end);
 
 
 $apiReturn = App\Trajet::getDistanceTime($start, $end);
+if ($apiReturn["time"] == null ) {
+  header("location: index.php");
+}
 
 $estimatedTime=60*$apiReturn["time"];
 

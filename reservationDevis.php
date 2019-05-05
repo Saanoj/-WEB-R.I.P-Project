@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+deleteMtx();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -558,6 +558,18 @@ function getQuantite($bdd,$idService,$idTrajet)
   ));
   $count = $req->rowCount();
   return $count;
+}
+
+function deleteMtx()
+{
+  $mtxdemort1 = __DIR__ . "/fpdf/test/font/unifont/dejavusanscondensed-bold.mtx.php";
+  $mtxdemort2 = __DIR__ . "/fpdf/test/font/unifont/dejavusanscondensed.mtx.php";
+  if( file_exists ( $mtxdemort1 )){
+          unlink( $mtxdemort1  ) ;
+  }
+  if( file_exists ( $mtxdemort2 )){
+          unlink( $mtxdemort2 ) ;
+  }
 }
 
 ?>

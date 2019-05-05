@@ -122,8 +122,8 @@ $bdd = new Database('rip');
     }
 
     public function showInfosTrajet(){
-      echo "<p>Trajet: "."<br>".$this->getStart(). " => ".$this->getEnd()."</p>
-      <p>Temps de trajet estimé: ".$this->getDuration()." | Distance: ".$this->getDistance()." Km | Heure d'arrivée prévue: ".$this->getEndofTrajet()."</p>";
+      echo "<p>"._TITRE_CHAUFFEUR_TRAJET." "."<br>".$this->getStart(). " => ".$this->getEnd()."</p>
+      <p>"._TITRE_CHAUFFEUR_TRAJET_ESTIMATION." ".$this->getDuration()." | Distance: ".$this->getDistance()." Km | "._TITRE_CHAUFFEUR_TRAJET_HEURE_ARRIVE." ".$this->getEndofTrajet()."</p>";
     }
 
     static public function getDistanceTime($start,$end){

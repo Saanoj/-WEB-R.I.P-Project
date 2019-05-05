@@ -11,6 +11,7 @@ define("_TITRE_CHAUFFEUR","Nos 3 meilleurs chauffeurs!");
 define("_PRIX","Prix");
 define("_NOTE","Rang");
 define("_VOTES","Votes totaux");
+define("_SUR","sur");
 
 // MODAL CHAUFFEURS
 define("_VILLE","Ville d'opération : ");
@@ -45,6 +46,13 @@ define("_NAVBAR_CONNEXION","Connexion");
 // RESERVATION Services
 define("_TITRE_SERVICE","Reservation de services");
 define("_TITRE_CHOOSE_SERVICE","Choisissez vos services");
+
+// RESERVATION CHAUFFEURS
+define("_TITRE_CHAUFFEUR_DRIVER","Choisissez votre chauffeur");
+define("_TITRE_CHAUFFEUR_TRAJET","Trajet :");
+define("_TITRE_CHAUFFEUR_TRAJET_ESTIMATION","Temps de trajet estimé:");
+define("_TITRE_CHAUFFEUR_TRAJET_HEURE_ARRIVE","Heure d'arrivée prévue:");
+
 
 // RESERVATION TRAJET
 define("_TITRE_INFO1_RESERVATION","Course sécurisée");
@@ -101,5 +109,20 @@ define("_PRICE", "Prix");
 define("_SUR_VOTE", "sur");
 define("_DRIVER_INFO", "PLUS D'INFORMATION");
 
+// Informations modal CHAUFFEUR
+define("_DRIVER_INFO_VILLE", "Ville d'operation : "); 
+define("_DRIVER_INFO_HEURE", "Heures Travailées : "); 
+define("_DRIVER_INFO_DATE", "Date d'embauche : "); 
+
+define("_DRIVER_INFO_MARQUE", "Marque : "); 
+define("_DRIVER_INFO_MODELE", "Modèle : "); 
+define("_DRIVER_INFO_COULEUR", "Couleur : "); 
+define("_DRIVER_INFO_PLACES", "Places : "); 
+
+define("_DRIVER_INFO_VEHICULE", "Véhicule : "); 
+
+define("_DRIVER_INFO_DESCRIPTION", "Description : "); 
+define("_DRIVER_INFO_CHOISIR_DRIVER", "Choisir : ");
+define("_DRIVER_INFO_VALIDER_DRIVER", "Valider :");
 
  ?>

@@ -40,7 +40,7 @@
           <div class="card" style="margin:50px 0">
              <!-- Default panel contents -->
              <div class="card-header">
-               <h1 class="display-3 text-center">Choisissez votre chauffeur</h1>
+               <h1 class="display-3 text-center"><?= _TITRE_CHAUFFEUR_DRIVER ?></h1>
                <?php $trajet->showInfosTrajet(); ?>
              </div>
 
@@ -80,7 +80,7 @@
                   <div class="row">
                     <div class="col-md-3">
                       <h3><?php echo $chauffeur->getFirst_name()." ".$chauffeur->getLast_name();?></h3>
-                      <h6>ID: <?php echo $chauffeur->getIdCollaborateur(); ?> | Prix: <?php echo $chauffeur->getPrixCollaborateur()."€ / Km | Note: ".$chauffeur->getRating()."/5 sur ".$chauffeur->getRatingNumber()." votes" ?></h6>
+                      <h6>ID: <?php echo $chauffeur->getIdCollaborateur()." | "._PRIX ." : ". $chauffeur->getPrixCollaborateur()."€ / Km | "._NOTE." ".$chauffeur->getRating()."/5"." ". _SUR ." ".$chauffeur->getRatingNumber()." votes" ?></h6>
                       <div class="col-md-12">
                           <div class="progress progress-striped">
                               <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="<?=$chauffeur->getRating();?>"
@@ -98,7 +98,7 @@
                     </div>
                     <div class="funkyradio-primary col-md-4 center-block">
                         <input type="radio" name="idChauffeur" id="radio<?php echo $i ?>" value="<?php echo $chauffeur->getIdCollaborateur() ?>" checked/>
-                        <label for="radio<?php echo $i ?>">Choisir<?php echo " ".$chauffeur->getFirst_name(); ?></label>
+                        <label for="radio<?php echo $i ?>"> <?=_DRIVER_INFO_CHOISIR_DRIVER. " ".$chauffeur->getFirst_name(); ?> </label>
                     </div>
 
                   </div>
@@ -122,18 +122,18 @@
                           <div class="col-md-4">
                             <h4>Infos: </h4>
                             <ul>
-                              <li><?php echo "Ville d'operation: ".$chauffeur->getVille(); ?></li>
-                              <li><?php echo "Heures Travailées: ".$chauffeur->getHeuresTravailees(); ?></li>
-                              <li><?php echo "Date d'embauche: ".$chauffeur->getDateEmbauche(); ?></li>
+                              <li><?php echo _DRIVER_INFO_VILLE." ".$chauffeur->getVille(); ?></li>
+                              <li><?php echo _DRIVER_INFO_HEURE." ".$chauffeur->getHeuresTravailees(); ?></li>
+                              <li><?php echo _DRIVER_INFO_DATE." ".$chauffeur->getDateEmbauche(); ?></li>
                             </ul>
                           </div>
                           <div class="col-md-4">
-                            <h4>Véhicule: </h4>
+                            <h4><?= _DRIVER_INFO_VEHICULE ?> </h4>
                             <ul>
-                              <li><?php echo "Marque: ".$chauffeur->getCarBrand(); ?></li>
-                              <li><?php echo "Modèle: ".$chauffeur->getCarModel(); ?></li>
-                              <li><?php echo "Couleur: ".$chauffeur->getCarColor(); ?></li>
-                              <li><?php echo "Places: ".$chauffeur->getCarSeats(); ?></li>
+                              <li><?php echo _DRIVER_INFO_MARQUE." ".$chauffeur->getCarBrand(); ?></li>
+                              <li><?php echo _DRIVER_INFO_MODELE." ".$chauffeur->getCarModel(); ?></li>
+                              <li><?php echo _DRIVER_INFO_COULEUR." ".$chauffeur->getCarColor(); ?></li>
+                              <li><?php echo _DRIVER_INFO_PLACES." ".$chauffeur->getCarSeats(); ?></li>
                             </ul>
                           </div>
                           <div class="col-md-4">
@@ -157,7 +157,7 @@
               ?>
               <li class="list-group-item">
                 <div class="center-block">
-                  <?php echo $form->submit(); ?>
+                <input type="submit"   class="btn btn-dark" name="submit"  value="<?= _DRIVER_INFO_VALIDER_DRIVER ?>">
                 </div>
               </li>
             </form>

@@ -11,6 +11,7 @@ define("_TITRE_CHAUFFEUR","Our 3 best drivers!");
 define("_PRIX","Price");
 define("_NOTE","Rank");
 define("_VOTES","Total votes");
+define("_SUR","on");
 
 // MODAL CHAUFFEUR
 define("_VILLE","City : ");
@@ -52,6 +53,13 @@ define("_NAVBAR_CONNEXION","Log in");
 // RESERVATION Services
 define("_TITRE_SERVICE","Reservation of your services");
 define("_TITRE_CHOOSE_SERVICE","Choose your services");
+
+// RESERVATION CHAUFFEURS
+define("_TITRE_CHAUFFEUR_DRIVER","Choose your driver");
+define("_TITRE_CHAUFFEUR_TRAJET","Travel :");
+define("_TITRE_CHAUFFEUR_TRAJET_ESTIMATION","Estimated travel time
+:");
+define("_TITRE_CHAUFFEUR_TRAJET_HEURE_ARRIVE","Estimated time of arrival :");
 
 //connexion
 define("_TITRE_CONNEXION","Connect to Ride in Pride");
@@ -98,4 +106,19 @@ define("_DRIVER_TITRE","Our best drivers");
 define("_PRICE", "Price");
 define("_SUR_VOTE", "of");
 define("_DRIVER_INFO", "MORE INFORMATION");
- ?>
+
+// Informations modal CHAUFFEUR
+define("_DRIVER_INFO_VILLE", "City of operation :"); 
+define("_DRIVER_INFO_HEURE", "Hours worked :"); 
+define("_DRIVER_INFO_DATE", "Hiring date :"); 
+
+define("_DRIVER_INFO_MARQUE", "Brand :" ); 
+define("_DRIVER_INFO_MODELE", "Model :"); 
+define("_DRIVER_INFO_COULEUR", "Color :"); 
+define("_DRIVER_INFO_PLACES", "Seats :"); 
+
+define("_DRIVER_INFO_VEHICULE", "Car:"); 
+
+define("_DRIVER_INFO_DESCRIPTION", "Description : "); 
+define("_DRIVER_INFO_CHOISIR_DRIVER", "Choose : ");
+define("_DRIVER_INFO_VALIDER_DRIVER", "Validate");

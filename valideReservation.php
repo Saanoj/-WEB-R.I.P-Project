@@ -4,6 +4,11 @@ require_once __DIR__ .'/require_class.php';
 
 $bdd = new App\Database('rip');
 
+if (!isset($_SESSION['idTrajet'] ))
+{
+  header('location:connexion.php');
+}
+
 // VERIFICATION DE LA DATE DU TRAJET : IL DOIT ETRE SUPERIEUR A LA DATE DU JOUR
 $timeStart = $_POST["dateDebut"]." ".$_POST["heureDebut"];
 $dateTrajet = new DateTime($timeStart, new DateTimeZone('Europe/Paris'));

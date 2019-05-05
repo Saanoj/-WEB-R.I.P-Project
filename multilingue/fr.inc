@@ -30,6 +30,7 @@ define("_ADRESSE_ARRIVEE_RESERVATION","Adresse d'arrivée");
 define("_DATE_DEBUT_RESERVATION_TRAJET","Date du trajet");
 define("_HEURE_DEBUT_RESERVATION_TRAJET","Heure du trajet");
 define("_BOUTTON_RESERVATION_TRAJET","Réserver");
+define("_RECHERCHER","Rechercher !");
 
 //navbar
 define("_NAVBAR_INDEX","Ride in Pride");
@@ -41,6 +42,18 @@ define("_NAVBAR_CONTACT","Contactez Nous");
 define("_NAVBAR_DECO","Déconnexion");
 define("_NAVBAR_INSCRIPTION","Inscription");
 define("_NAVBAR_CONNEXION","Connexion");
+
+//footer
+define("_FOOTER_LOCAUX","Nos locaux");
+define("_FOOTER_SERVICES","Nos Services");
+define("_FOOTER_INTERPRETES_COACH","Interpretes et coachs");
+define("_FOOTER_VOITURE","Voitures de luxe");
+define("_FOOTER_BOISSON","Boissons & nourriture");
+define("_FOOTER_SOCIAL","Réseaux sociaux");
+define("_FOOTER_EXP","Experience hors-norme");
+define("_FOOTER_LANGUE","Langues");
+define("_FOOTER_VENIR","à venir");
+define("_FOOTER_PARTAGE","Partager");
 
 
 // RESERVATION Services
@@ -110,18 +123,18 @@ define("_SUR_VOTE", "sur");
 define("_DRIVER_INFO", "PLUS D'INFORMATION");
 
 // Informations modal CHAUFFEUR
-define("_DRIVER_INFO_VILLE", "Ville d'operation : "); 
-define("_DRIVER_INFO_HEURE", "Heures Travailées : "); 
-define("_DRIVER_INFO_DATE", "Date d'embauche : "); 
+define("_DRIVER_INFO_VILLE", "Ville d'operation : ");
+define("_DRIVER_INFO_HEURE", "Heures Travailées : ");
+define("_DRIVER_INFO_DATE", "Date d'embauche : ");
 
-define("_DRIVER_INFO_MARQUE", "Marque : "); 
-define("_DRIVER_INFO_MODELE", "Modèle : "); 
-define("_DRIVER_INFO_COULEUR", "Couleur : "); 
-define("_DRIVER_INFO_PLACES", "Places : "); 
+define("_DRIVER_INFO_MARQUE", "Marque : ");
+define("_DRIVER_INFO_MODELE", "Modèle : ");
+define("_DRIVER_INFO_COULEUR", "Couleur : ");
+define("_DRIVER_INFO_PLACES", "Places : ");
 
-define("_DRIVER_INFO_VEHICULE", "Véhicule : "); 
+define("_DRIVER_INFO_VEHICULE", "Véhicule : ");
 
-define("_DRIVER_INFO_DESCRIPTION", "Description : "); 
+define("_DRIVER_INFO_DESCRIPTION", "Description : ");
 define("_DRIVER_INFO_CHOISIR_DRIVER", "Choisir : ");
 define("_DRIVER_INFO_VALIDER_DRIVER", "Valider :");
 

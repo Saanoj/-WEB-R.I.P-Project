@@ -112,7 +112,7 @@ if(isset($_SESSION["id"])){
 									<input type="text"  name="end"  id="autocomplete2" class="search_input search_input_2" placeholder="<?= _ADRESSE_ARRIVEE_RESERVATION ?>" required="required">
 									<input type="date" id="dateDebut" name="dateDebut" class="search_input search_input_3" placeholder="Date du trajet" required="required" onblur="checkdateDebut(this)">
 									<input type="time" id="heureDebut" name="heureDebut" class="search_input search_input_4" placeholder="Heure du trajet" required="required" onblur="checkheureDebut(this)">
-									<button class="home_search_button">Rechercher</button>
+									<button class="home_search_button"><?= _RECHERCHER ?></button>
 								</div>
 							</form>
 						</div>

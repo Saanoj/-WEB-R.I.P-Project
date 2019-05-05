@@ -76,7 +76,6 @@ $form = new App\Form(array());
         <div class="panel panel-info">
           <div class="panel-heading">
             <div class="panel-title">Inscrivez vous</div>
-            <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="connexionCollab.php">ou connectez vous si vous etes deja inscris</a></div>
           </div>
 
 

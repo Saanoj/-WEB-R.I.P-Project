@@ -21,38 +21,38 @@ checkStatusChauffeur($bdd);
         <div class="container">
           <div class="row">
             <div class="footer-col col-md-4">
-              <h5>Nos locaux</h5>
+              <h5><?php echo _FOOTER_LOCAUX ?></h5>
               <p>242 rue faubourg saint antoine, Paris 12ème France.<br>
-                0101010101<br>
+                06 10 07 32 40<br>
                 email@email.com</p>
               <p>Copyright © 2019 Ride in Pride Inc. All Rights Reserved. Made with <i class="fa fa-heart pulse"></i> by Arthur, Jonas et Maxime</p>
             </div>
             <div class="footer-col col-md-2">
-              <h5>Nos Services</h5>
+              <h5><?php echo _FOOTER_SERVICES ?></h5>
               <p>
               <ul>
-                <li><a href="#">Interpretes</a></li>
-                <li><a href="#">Voitures de luxe</a></li>
-                <li><a href="#">Boissons & nourriture</a></li>
-                <li><a href="#">Social Media</a></li>
-                <li><a href="#">User Experience</a></li>
+                <li><a href="#"><?php echo _FOOTER_INTERPRETES_COACH ?></a></li>
+                <li><a href="#"><?php echo _FOOTER_VOITURE ?></a></li>
+                <li><a href="#"><?php echo _FOOTER_BOISSON ?></a></li>
+                <li><a href="#"><?php echo _FOOTER_SOCIAL ?></a></li>
+                <li><a href="#"><?php echo _FOOTER_EXP ?></a></li>
               </ul>
               </p>
             </div>
             <div class="footer-col col-md-2">
-              <h5>Langues</h5>
+              <h5><?php echo _FOOTER_LANGUE ?></h5>
               <p>
               <ul>
                 <li><a href="multilingue/changeLanguage.php?lang=fr">Francais</a></li>
-                <li><a href="multilingue/changeLanguage.php?lang=en">Anglais</a></li>
-                <li><a href="#">à venir</a></li>
-                <li><a href="#">à venir</a></li>
-                <li><a href="#">à venir</a></li>
+                <li><a href="multilingue/changeLanguage.php?lang=en">English</a></li>
+                <li><a href="#"><?php echo _FOOTER_VENIR ?></a></li>
+                <li><a href="#"><?php echo _FOOTER_VENIR ?></a></li>
+                <li><a href="#"><?php echo _FOOTER_VENIR ?></a></li>
               </ul>
               </p>
             </div>
             <div class="footer-col col-md-3">
-              <h5>Partager</h5>
+              <h5><?php echo _FOOTER_PARTAGE ?></h5>
               <ul class="footer-share">
                 <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                 <li><a href="#"><i class="fa fa-twitter"></i></a></li>

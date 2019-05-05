@@ -30,6 +30,7 @@ define("_ADRESSE_ARRIVEE_RESERVATION","End location");
 define("_DATE_DEBUT_RESERVATION_TRAJET","Trip date");
 define("_HEURE_DEBUT_RESERVATION_TRAJET","Trip time");
 define("_BOUTTON_RESERVATION_TRAJET","Validate");
+define("_RECHERCHER","Book !");
 
 define("_TITRE_INFO1_RESERVATION","Secure trips");
 define("_INFO1_RESERVATION","We take your comfort and security very seriously.");
@@ -49,6 +50,18 @@ define("_NAVBAR_CONTACT","Contact us");
 define("_NAVBAR_DECO","Deconnect");
 define("_NAVBAR_INSCRIPTION","Sign in");
 define("_NAVBAR_CONNEXION","Log in");
+
+//footer
+define("_FOOTER_LOCAUX","Our spaces");
+define("_FOOTER_SERVICES","Our Services");
+define("_FOOTER_INTERPRETES_COACH","Translators and coaches");
+define("_FOOTER_VOITURE","Deluxe cars");
+define("_FOOTER_BOISSON","Food & beverages");
+define("_FOOTER_SOCIAL","Social Media");
+define("_FOOTER_EXP","User Experience");
+define("_FOOTER_LANGUE","Languages");
+define("_FOOTER_VENIR","Cominf soon");
+define("_FOOTER_PARTAGE","Share");
 
 // RESERVATION Services
 define("_TITRE_SERVICE","Reservation of your services");
@@ -108,17 +121,17 @@ define("_SUR_VOTE", "of");
 define("_DRIVER_INFO", "MORE INFORMATION");
 
 // Informations modal CHAUFFEUR
-define("_DRIVER_INFO_VILLE", "City of operation :"); 
-define("_DRIVER_INFO_HEURE", "Hours worked :"); 
-define("_DRIVER_INFO_DATE", "Hiring date :"); 
+define("_DRIVER_INFO_VILLE", "City of operation :");
+define("_DRIVER_INFO_HEURE", "Hours worked :");
+define("_DRIVER_INFO_DATE", "Hiring date :");
 
-define("_DRIVER_INFO_MARQUE", "Brand :" ); 
-define("_DRIVER_INFO_MODELE", "Model :"); 
-define("_DRIVER_INFO_COULEUR", "Color :"); 
-define("_DRIVER_INFO_PLACES", "Seats :"); 
+define("_DRIVER_INFO_MARQUE", "Brand :" );
+define("_DRIVER_INFO_MODELE", "Model :");
+define("_DRIVER_INFO_COULEUR", "Color :");
+define("_DRIVER_INFO_PLACES", "Seats :");
 
-define("_DRIVER_INFO_VEHICULE", "Car:"); 
+define("_DRIVER_INFO_VEHICULE", "Car:");
 
-define("_DRIVER_INFO_DESCRIPTION", "Description : "); 
+define("_DRIVER_INFO_DESCRIPTION", "Description : ");
 define("_DRIVER_INFO_CHOISIR_DRIVER", "Choose : ");
 define("_DRIVER_INFO_VALIDER_DRIVER", "Validate");

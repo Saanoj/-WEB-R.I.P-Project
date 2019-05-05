@@ -6,12 +6,6 @@ require_once __DIR__ .'/require_class.php';
 
 $bdd = new Database('rip');
 ?>
-
-
-<body>
-</body>
-
-
 <?php
 
 
@@ -57,10 +51,8 @@ isset($_SESSION['id']) && !empty($_SESSION['id'])
             'id' => $_SESSION['id']
         ));
         $req->closeCursor();
-        
-   header('location:profil.php');
 
-  
+   header('location:profil.php');
 }
 else 
 {

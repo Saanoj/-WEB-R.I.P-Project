@@ -19,8 +19,7 @@ $heureFin = explode(' ',$heureFin);
 
 updateTrajet($bdd);
 
-var_dump($_POST['services']);
-var_dump($_POST['quantite']);
+
 if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['quantite']) && (!empty($_POST['quantite'])) ) {
 
   $servicesChoisi=$_POST['services'];
@@ -679,9 +678,6 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
   }
 
 
-
-
-
        if ($service === "11") {
       foreach ($arrayInterprete as $value) {
 
@@ -878,11 +874,11 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
 
 
   //redirection
-   header("location:resevationChooseDriver.php");
+header("location:resevationChooseDriver.php");
 }
 else {
 
-  header("location:resevationChooseDriver.php");
+header("location:resevationChooseDriver.php");
 }
 
 function array_push_assoc($array, $key, $value){

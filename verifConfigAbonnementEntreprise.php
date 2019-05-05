@@ -44,12 +44,7 @@ while ($uneEntreprise = $req->fetch())
     ));
 }
 $req->closeCursor();
-?>
-<div class="alert alert-success" role="alert">
-Votre entreprise possède désormais un abonnement. Dîtes à vos salariés de rejoindre l'entreprise afin de profiter des différents services ! <br>
-Vous allez être redirigé dans quelques secondes.
-</div>
-<?php
- header ("Refresh: 6;URL=index.php");
+
+ header ("location:index.php");
 
 ?>

@@ -228,7 +228,7 @@ session_start();
           echo "Aucun trajets dans cette liste";
         } else {
           foreach ($trips as $trip) {
-            echo "<p>".$trip["start"]."</p>";
+            echo "<p>".$trip["debut"]."</p>";
           }
         }
 

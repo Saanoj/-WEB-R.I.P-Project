@@ -1562,24 +1562,7 @@ function checkGlobal(donnees)
 
   }
 
-  for (l=0;l<100;l++)
-  {
-     if (document.getElementById(start+coachCulture+l) !== null && document.getElementById(end+coachCulture+l) !== null)
-    {
-      var inputStart = document.getElementById(start+coachCulture+l);
-      var inputEnd = document.getElementById(end+coachCulture+l);
-      if (inputStart.style.borderColor !== '' || inputEnd.style.borderColor !== '')
-      {
-        if (checkIfErrorMessageCollaborateurs("collaborateurs_errorDonnee"+l) == false && document.getElementById(l).checked == true)
-          {
-            displayErrorMessageCollaborateurs(inputStart,"Erreur ! ",l);
-          }
-      countCollab++;
-      arrayCollab.push(l);
-      }
-    }
-  }
-
+ 
   for (var c=0;c<100;c++)
   {
     if (document.getElementById(start+restaurant+c) !== null)
@@ -1600,7 +1583,6 @@ function checkGlobal(donnees)
 }
 
 
-   
       for (k=0;k<30;k++)
       {
        // console.log(document.getElementById("startHotel"+j+"["+k+"]"))
@@ -1615,12 +1597,29 @@ function checkGlobal(donnees)
         }
       }
     }
- 
-    
-   
    
   }
 
+ 
+
+  for (l=0;l<100;l++)
+  {
+     if (document.getElementById(start+coachCulture+l) !== null && document.getElementById(end+coachCulture+l) !== null)
+    {
+      var inputStart = document.getElementById(start+coachCulture+l);
+      var inputEnd = document.getElementById(end+coachCulture+l);
+      if (inputStart.style.borderColor !== '' || inputEnd.style.borderColor !== '')
+      {
+        if (checkIfErrorMessageCollaborateurs("collaborateurs_errorDonnee"+l) == false && document.getElementById(l).checked == true)
+          {
+            displayErrorMessageCollaborateurs(inputStart,"Erreur ! ",l);
+          }
+      countCollab++;
+      arrayCollab.push(l);
+      }
+    }
+  }
+     
 
 
   if (countCollab >0)
@@ -1682,7 +1681,10 @@ function checkGlobal(donnees)
           displayErrorDonnees(donnees,"Erreur de date au niveau des interprètes","interpreteError");
           
         }
+        if (buttonChecked(button) === true  && buttonChecked(document.getElementById(element)) == true)
+        {
         countError++;
+        }
         
        
     }
@@ -1696,8 +1698,10 @@ function checkGlobal(donnees)
       {
         
         displayErrorDonnees(donnees,"Erreur de date au niveau des coach sportifs","coachSportifError");
-        countError++;
-        
+      }
+      if (buttonChecked(button) === true  && buttonChecked(document.getElementById(element)) == true)
+      {
+      countError++;
       }
       
     }
@@ -1712,7 +1716,10 @@ function checkGlobal(donnees)
         displayErrorDonnees(donnees,"Erreur de date au niveau des coach cultures","CoachCultureError");
        
       }
+      if (buttonChecked(button) === true  && buttonChecked(document.getElementById(element)) == true)
+      {
       countError++;
+      }
       
     }
     else if (name == "Billet")
@@ -1726,7 +1733,10 @@ function checkGlobal(donnees)
         
         displayErrorDonnees(donnees,"Erreur de date au niveau des billets touristiques","BilletError");
       }
+      if (buttonChecked(slider) == true && buttonChecked(button) == true)
+      {
       countError++;
+      }
     }
     else if (name == "Restaurant")
     {
@@ -1739,7 +1749,10 @@ function checkGlobal(donnees)
         
         displayErrorDonnees(donnees,"Erreur de date au niveau du menu au choix","RestaurantError");
       }
+      if (buttonChecked(slider) == true && buttonChecked(button) == true)
+      {
       countError++;
+      }
     }
     else if (name == "Hotel")
     {
@@ -1759,10 +1772,11 @@ function checkGlobal(donnees)
       {
         
         displayErrorDonnees(donnees,"Erreur de date au niveau des hôtels","HotelError");
-        
-        
       }
+      if (buttonChecked(slider) == true && buttonChecked(button) == true)
+      {
       countError++;
+      }
     }
 
     }
@@ -2242,7 +2256,7 @@ if (name == "menuGastronomiqueStart19")
   }
 
   }
-
+console.log(countError);
   if (countError > 0)
   {
     return false;

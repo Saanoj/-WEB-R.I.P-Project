@@ -60,7 +60,8 @@
                 }
                 $i++;
               }
-               //echo $result;
+              var_dump($result);
+              //echo $result;
 
               $chauffeurs = $bdd->queryPrepareForWhile('SELECT * FROM collaborateurs WHERE metier="chauffeur" and isOnline=1'.$result.' ORDER BY rating DESC ',$bdd);
               $i=0;
@@ -175,7 +176,8 @@
 
 function checkDriver($bdd,$trajet) {
   $idChauffeur= [];
-  $req = App\Trajet::getTrajet($bdd,"Pas commencé","En cours");
+  $req = App\Trajet::getTrajet($bdd,"Pas commencé","En cours","Attente Collab");
+  var_dump($req);
   $dateDebut = new DateTime($trajet->getDateDebut(), new DateTimeZone('Europe/Paris'));
   $dateFin = new DateTime($trajet->getHeureFin(), new DateTimeZone('Europe/Paris'));
 
@@ -191,11 +193,22 @@ function checkDriver($bdd,$trajet) {
    $interval2 = $dateFin->diff($dateDebutTrajetBdd);
    $interval2Fin = $dateFin->diff($dateFinTrajetBdd);
 
+   //var_dump($dateDebutTrajetBdd);
+  //var_dump($dateFinTrajetBdd > $dateDebutTrajetBdd);
+   //var_dump($dateDebut < $dateDebutTrajetBdd && $dateDebut > $dateFinTrajetBdd && $dateFin > $dateDebutTrajetBdd && $dateFin > $dateFinTrajetBdd);
+
    if (!($interval->format('%R') ==='+' && $intervalFin->format('%R') ==='+' || $interval2->format('%R') ==='-' && $interval2Fin->format('%R') ==='-' &&  $intervalFin->format('%R') ==='-' ))
    {
     array_push($idChauffeur,$unTrajet['idChauffeur']);
 
    }
+   
+  /*
+  if ($dateDebut < $dateDebutTrajetBdd  && $dateFin < $dateDebutTrajetBdd || $dateDebut > $dateDebutTrajetBdd  && $dateFin > $dateDebutTrajetBdd && $dateFin > $dateDebut )
+  {
+    array_push($idChauffeur,$unTrajet['idChauffeur']);
+  }
+  */
 
   }
 

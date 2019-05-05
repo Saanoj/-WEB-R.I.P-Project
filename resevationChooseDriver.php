@@ -60,8 +60,6 @@
                 }
                 $i++;
               }
-              var_dump($result);
-              //echo $result;
 
               $chauffeurs = $bdd->queryPrepareForWhile('SELECT * FROM collaborateurs WHERE metier="chauffeur" and isOnline=1'.$result.' ORDER BY rating DESC ',$bdd);
               $i=0;
@@ -79,20 +77,68 @@
               <li class="list-group-item ">
                 <div class="container">
                   <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                       <h3><?php echo $chauffeur->getFirst_name()." ".$chauffeur->getLast_name();?></h3>
                       <h6>ID: <?php echo $chauffeur->getIdCollaborateur()." | "._PRIX ." : ". $chauffeur->getPrixCollaborateur()."€ / Km | "._NOTE." ".$chauffeur->getRating()."/5"." ". _SUR ." ".$chauffeur->getRatingNumber()." votes" ?></h6>
                       <div class="col-md-12">
-                          <div class="progress progress-striped">
-                              <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="<?=$chauffeur->getRating();?>"
-                                  aria-valuemin="0" aria-valuemax="5" style="width:<?=$chauffeur->getRating()*20?>%"><?=$chauffeur->getRating()."/5"?>
+                        <div class="row rating-desc">
+                            <div class="col-xs-3 col-md-3 text-right">
+                                <span class="glyphicon glyphicon-star"></span>
+                            </div>
 
-                              </div>
-                          </div>
+                            <?php if ($chauffeur->getRating() > 0 && $chauffeur->getRating() < 2) { ?>
+
+                            <div class="col-xs-8 col-md-12">
+                                <div class="progress progress-striped">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="<?=$chauffeur->getRating();?>"
+                                        aria-valuemin="0" aria-valuemax="5" style="width:<?=$chauffeur->getRating()*20?>%"><?=$chauffeur->getRating()."/5"?>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <?php } ?>
+
+                    <?php if ($chauffeur->getRating() >= 2 && $chauffeur->getRating() < 3.5) { ?>
+                            <div class="col-xs-8 col-md-12">
+                                <div class="progress progress-striped">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow="<?=$chauffeur->getRating();?>"
+                                        aria-valuemin="0" aria-valuemax="5" style="width:<?=$chauffeur->getRating()*20?>%"><?=$chauffeur->getRating()."/5"?>
+
+                                    </div>
+                                </div>
+                            </div>
+                    <?php } ?>
+
+                    <?php if ($chauffeur->getRating() >= 3.5 && $chauffeur->getRating() <= 5) {  ?>
+                      <div class="col-xs-8 col-md-12">
+                                <div class="progress progress-striped">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="<?=$chauffeur->getRating();?>"
+                                        aria-valuemin="0" aria-valuemax="5" style="width:<?=$chauffeur->getRating()*20?>%"><?=$chauffeur->getRating()."/5"?>
+
+                                    </div>
+                                </div>
+                            </div>
+                    <?php } ?>
+
+                    <?php if ($chauffeur->getRating() == 0) {  ?>
+                      <div class="col-xs-8 col-md-12">
+                                <div class="progress progress-striped">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuenow="<?=$chauffeur->getRating();?>"
+                                        aria-valuemin="0" aria-valuemax="5" style="width:0">
+
+                                    </div>
+                                </div>
+                            </div>
+                    <?php } ?>
+
+                    <div>
+                            <span class="glyphicon glyphicon-user"></span><?=$chauffeur->getRatingNumber()." votes totals";?>
+                     </div>
+                        </div>
                       </div>
                     </div>
                     <!-- Button trigger modal -->
-                    <div class="col-md-5">
+                    <div class="col-md-3 pt-3">
                       <button type="button" class="btn btn-secondary " data-toggle="modal" data-target="#exampleModal<?php echo $i ?>">
                         Infos<br>chauffeur
                       </button>
@@ -177,7 +223,6 @@
 function checkDriver($bdd,$trajet) {
   $idChauffeur= [];
   $req = App\Trajet::getTrajet($bdd,"Pas commencé","En cours","Attente Collab");
-  var_dump($req);
   $dateDebut = new DateTime($trajet->getDateDebut(), new DateTimeZone('Europe/Paris'));
   $dateFin = new DateTime($trajet->getHeureFin(), new DateTimeZone('Europe/Paris'));
 
@@ -202,7 +247,7 @@ function checkDriver($bdd,$trajet) {
     array_push($idChauffeur,$unTrajet['idChauffeur']);
 
    }
-   
+
   /*
   if ($dateDebut < $dateDebutTrajetBdd  && $dateFin < $dateDebutTrajetBdd || $dateDebut > $dateDebutTrajetBdd  && $dateFin > $dateDebutTrajetBdd && $dateFin > $dateDebut )
   {

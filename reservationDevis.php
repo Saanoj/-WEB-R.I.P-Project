@@ -287,6 +287,60 @@ deleteMtx();
 
                   <img src="images/avatar/<?php if(isset($avatar["avatar"])){ echo $avatar["avatar"]; } else { echo "ripdefaultavatar"; }  ?>" height="" width="100px">
 
+                  <div class="row rating-desc col-md-4 mt-1">
+                      <div class="col-xs-3 col-md-3 text-right">
+                          <span class="glyphicon glyphicon-star"></span>
+                      </div>
+
+                      <?php if ($chauffeur->getRating() > 0 && $chauffeur->getRating() < 2) { ?>
+
+                      <div class="col-xs-8 col-md-12">
+                          <div class="progress progress-striped">
+                              <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="<?=$chauffeur->getRating();?>"
+                                  aria-valuemin="0" aria-valuemax="5" style="width:<?=$chauffeur->getRating()*20?>%"><?=$chauffeur->getRating()."/5"?>
+
+                              </div>
+                          </div>
+                      </div>
+                      <?php } ?>
+
+              <?php if ($chauffeur->getRating() >= 2 && $chauffeur->getRating() < 3.5) { ?>
+                      <div class="col-xs-8 col-md-12">
+                          <div class="progress progress-striped">
+                              <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow="<?=$chauffeur->getRating();?>"
+                                  aria-valuemin="0" aria-valuemax="5" style="width:<?=$chauffeur->getRating()*20?>%"><?=$chauffeur->getRating()."/5"?>
+
+                              </div>
+                          </div>
+                      </div>
+              <?php } ?>
+
+              <?php if ($chauffeur->getRating() >= 3.5 && $chauffeur->getRating() <= 5) {  ?>
+                <div class="col-xs-8 col-md-12">
+                          <div class="progress progress-striped">
+                              <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="<?=$chauffeur->getRating();?>"
+                                  aria-valuemin="0" aria-valuemax="5" style="width:<?=$chauffeur->getRating()*20?>%"><?=$chauffeur->getRating()."/5"?>
+
+                              </div>
+                          </div>
+                      </div>
+              <?php } ?>
+
+              <?php if ($chauffeur->getRating() == 0) {  ?>
+                <div class="col-xs-8 col-md-12">
+                          <div class="progress progress-striped">
+                              <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuenow="<?=$chauffeur->getRating();?>"
+                                  aria-valuemin="0" aria-valuemax="5" style="width:0">
+
+                              </div>
+                          </div>
+                      </div>
+              <?php } ?>
+
+              <div>
+                      <span class="glyphicon glyphicon-user"></span><?=$chauffeur->getRatingNumber()." votes totals";?>
+               </div>
+                  </div>
                   <p>id du Chauffeur: <?php echo $chauffeur->getIdCollaborateur(); ?> Prix: <?php echo $chauffeur->getPrixCollaborateur()."€ / Km | Note : ". $chauffeur->getRating()." / 5 étoiles" ?></p>
                   <div class="row">
                     <div class="col-md-4">

@@ -37,7 +37,7 @@ $dateFin = getEstimateTime($bdd,$apiReturn,$timeStart);
 
 
 $trajet = new App\Trajet($_POST["start"],$_POST["end"],0,$_SESSION['id'],date('Y-m-d G:i:s'),$timeStart,$dateFin,$apiReturn["distance"],$apiReturn["time"],"Attente Collab");
-$idTrajet = $trajet->addTrajetStart($bdd,'INSERT INTO `trajet` (`idClient`, `debut`, `fin`, `prixTrajet`, `heureDebut`,`heureFin`,`dateResevation`,`distanceTrajet`,`duration`,`state`) VALUES (:idClient,:debut,:fin,:prixTrajet,:dateDebut,:dateFin,:dateReservation,:distanceTrajet,:duration,:state)',$trajet);
+$idTrajet = $trajet->addTrajetStart($bdd,'INSERT INTO `trajet` (`idClient`, `debut`, `fin`, `prixTrajet`, `heureDebut`,`heureFin`,`dateResevation`,`distanceTrajet`,`duration`,`state`) VALUES (:idClient,:debut,:fin,:prixTrajet,:dateDebut,:dateFin,:dateReservation,:distanceTrajet,:duration,:state)',$trajet,$timeStart);
 $trajet->startSessionId($bdd); //add idTrajet in SESSION
 
 $_SESSION['trajet'] = serialize($trajet);

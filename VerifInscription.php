@@ -1,8 +1,6 @@
 <?php
 namespace App;
 use \PDO;
-
-
 require_once __DIR__ .'/require_class.php';
 
 $bdd = new Database('rip');

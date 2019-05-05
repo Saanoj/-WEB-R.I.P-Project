@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . '/Class/Autoloader.php';
-App\Autoloader::register();
+
 $bdd = new App\Database('rip');
 session_start();
 
@@ -32,7 +32,7 @@ foreach ($sentNotif as $notif) {
 
 $stmtStr.=" AND id != ".$_SESSION["id"];
 
-$users = $bdd->query('SELECT * FROM USERS WHERE isBanned = 0 '.$stmtStr.' AND CONCAT(id, email, last_name, first_name, birthday, gender, isAdmin, isBanned) LIKE "%'.$_GET["inputText"].'%" LIMIT 5');
+$users = $bdd->query('SELECT * FROM users WHERE isBanned = 0 '.$stmtStr.' AND CONCAT(id, email, last_name, first_name, birthday, gender, isAdmin, isBanned) LIKE "%'.$_GET["inputText"].'%" LIMIT 5');
 
 
 foreach ($users as $user) {

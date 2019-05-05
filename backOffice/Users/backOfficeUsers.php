@@ -13,8 +13,8 @@ include 'fonction.php';
 <body>
 
   <?php
-  require '../../Class/Autoloader.php';
-  App\Autoloader::register();
+  require __DIR__ . '../../require_class.php';
+
   $type =2;
   $navbar = new App\Navbar($type);
   $navbar->navbar();

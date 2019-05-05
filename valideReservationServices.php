@@ -1,7 +1,7 @@
 <?php
 session_start();
-require 'Class/Autoloader.php';
-App\Autoloader::register();
+require_once __DIR__ .'/require_class.php';
+
 $bdd = new App\Database('rip');
 
 
@@ -45,7 +45,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
 
     switch ($service) {
 
-  
+
       case 7:
        if (isset($_POST["idHotel"]) && !empty($_POST["idHotel"]))
       {

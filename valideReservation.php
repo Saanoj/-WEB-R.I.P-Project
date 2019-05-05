@@ -1,7 +1,7 @@
 <?php
 session_start();
-require 'Class/Autoloader.php';
-App\Autoloader::register();
+require_once __DIR__ .'/require_class.php';
+
 $bdd = new App\Database('rip');
 
 // VERIFICATION DE LA DATE DU TRAJET : IL DOIT ETRE SUPERIEUR A LA DATE DU JOUR

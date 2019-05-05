@@ -12,8 +12,8 @@ include 'fonction.php';
 <body>
 
   <?php
-  require '../../Class/Autoloader.php';
-  App\Autoloader::register();
+  require __DIR__ . '../../require_class.php';
+
   $backOffice=2;
   $type =0;
   $navbar = new App\Navbar($backOffice,$type);

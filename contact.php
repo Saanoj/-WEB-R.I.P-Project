@@ -20,8 +20,8 @@ session_start();
 </head>
 <body>
   <?php
-  require 'Class/Autoloader.php';
-  App\Autoloader::register();
+  require_once __DIR__ .'/require_class.php';
+
   $bdd = new App\Database('rip');
   $backOffice=0;
   $type = 0;

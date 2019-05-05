@@ -7,7 +7,7 @@ use \PDO;
 
 
 //require 'Autoloader.php';
-//Autoloader::register();
+//
 $bdd = new Database('rip');
 
 Class Contact {

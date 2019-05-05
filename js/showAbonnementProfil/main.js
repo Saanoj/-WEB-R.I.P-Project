@@ -3,7 +3,7 @@
 $(document).ready(function() {
 
   $("#searchUser").keyup(function() {
-
+    console.log("liste");
     //console.log("yay");
     $.ajax({    //create an ajax request to display.php
       type: "GET",

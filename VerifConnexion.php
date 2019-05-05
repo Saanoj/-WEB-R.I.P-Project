@@ -10,8 +10,8 @@ use \PDO;
 </head>
 <?php
 
-require 'Class/Autoloader.php';
-Autoloader::register();
+require_once __DIR__ .'/require_class.php';
+
 $bdd = new Database('rip');
 
 
@@ -99,9 +99,9 @@ if  (
            {
             ?><div class="alert alert-danger" role="alert">
             Vous avez été banni ! Veuillez contacter le support afin d'avoir plus d'informations.
-              </div> <?php 
+              </div> <?php
               header ('Refresh: 3;URL=connexion.php');
-            
+
            }
         }
            else {

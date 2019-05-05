@@ -14,8 +14,8 @@ loadLanguageFromSession($_SESSION['lang']);
 <?php
 
 include 'includehtml/head.html';
-require 'Class/Autoloader.php';
-App\Autoloader::register();
+require_once __DIR__ .'/require_class.php';
+
 $backOffice=0;
 $navbar = new App\Navbar($backOffice);
 $navbar->navbar();?>

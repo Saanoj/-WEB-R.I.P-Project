@@ -1,8 +1,8 @@
 <?php
 
 namespace App;
-require_once 'Class/Autoloader.php';
-Autoloader::register();
+require_once __DIR__ . '/require_class.php';
+
 
 
 function sendMail($to,$subject,$body)

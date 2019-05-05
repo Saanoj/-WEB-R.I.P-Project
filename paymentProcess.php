@@ -1,8 +1,8 @@
 <?php
 
 session_start();
-require 'Class/Autoloader.php';
-App\Autoloader::register();
+require_once __DIR__ .'/require_class.php';
+
 $bdd = new App\Database('rip');
 require_once('fpdf/test/tfpdf.php');
 
@@ -190,7 +190,7 @@ if(!empty($isAbonnee['idAbonnement'])){
     $total_prix = 0;
     foreach ($idServices as $unIdService) {
 
-     
+
          //on recupere les infos du service en fonction de son id
       //   $service = $bdd->queryOne('SELECT * FROM services WHERE idService='.$unIdService["idService"].'');
          $stmtIdLink = "";
@@ -238,7 +238,7 @@ if(!empty($isAbonnee['idAbonnement'])){
            $column_Services = "Billet touristique"." ".$infoLinkService["nom"];
            $column_Prix = ($infoLinkService["prix"] * $linkService["quantite"] + $service['prixService']);
            break;
-         
+
            case 10:
            $req=$bdd->getPDO()->prepare('SELECT * FROM serviceautre WHERE emailClient = :emailClient ORDER BY idMessage DESC');
            $req->bindValue(':emailClient',$_SESSION['email']);
@@ -246,7 +246,7 @@ if(!empty($isAbonnee['idAbonnement'])){
            $column_Services = "Demande de services";
            $unMessage = $req->fetch();
            $column_Prix = 0;
-         
+
            break;
            case 11:
            $infoLinkService = $bdd->queryOne('SELECT *  FROM collaborateurs INNER JOIN linkservicetrajet WHERE collaborateurs.idCollaborateurs = linkservicetrajet.idAnnexe AND idTrajet='.$_SESSION["idTrajet"].' AND idService ='.$unIdService["idService"].' '.$stmtIdLink);
@@ -271,7 +271,7 @@ if(!empty($isAbonnee['idAbonnement'])){
            $numHour=calculHeure($bdd,13);
            $column_Prix = ($infoLinkService["prixCollaborateur"]*$numHour);
            break;
-        
+
            default:
            $column_Id = "";
            $column_Services="";
@@ -283,7 +283,7 @@ if(!empty($isAbonnee['idAbonnement'])){
          }
 
 
-      
+
       // Pour chaque service, on affiche ses informations
 
 
@@ -370,7 +370,7 @@ if ( $pdf->getY() > 270)
   $Y_Table_Position = 0;
 }
 // On affiche le prix total
-$total_prix +=  ($reqChauffeur["prixCollaborateur"]*$reqTrajet["distanceTrajet"]); 
+$total_prix +=  ($reqChauffeur["prixCollaborateur"]*$reqTrajet["distanceTrajet"]);
 $total_prix = sprintf("%.2f",$total_prix)."€";
 $pdf->SetFillColor(232,232,232);
 $pdf->SetFont('DejaVu','B',10);
@@ -454,10 +454,10 @@ function dateFrDebut($dateFr) {
       $req->closeCursor();
       $dateTrajetDebut = explode(" ", $unTrajet['heureDebut']);
       $dateTrajetDebut = $dateTrajetDebut[0];
-      
+
       $dateTrajetFin = explode(" ", $unTrajet['heureFin']);
       $dateTrajetFin = $dateTrajetFin[0];
-      
+
 
       $req = $bdd->getPDO()->prepare('SELECT dateStart,dateEnd FROM linkservicetrajet WHERE idTrajet = :idTrajet');
       $req->execute(array(
@@ -472,7 +472,7 @@ function dateFrDebut($dateFr) {
       $heures /=3600;
     //  var_dump($heures);
       return $heures;
- 
+
   }
 
 ?>

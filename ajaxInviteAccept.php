@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . '/Class/Autoloader.php';
-App\Autoloader::register();
+
 $bdd = new App\Database('rip');
 session_start();
 
@@ -12,12 +12,17 @@ session_start();
   //on prends les infos abbo du directeur
   $abboDirecteur = $bdd->queryOne('SELECT * FROM linkabonnemententreprise WHERE idClient = '.$entreprise["idDirecteur"].'');
 
+
+  //on supp l'abbo du client deja existant
   $abbos = $bdd->query('SELECT * FROM linkabonnemententreprise');
   foreach ($abbos as $abbo) {
     if ($abbo['idClient'] == $_POST["idClient"]) {
       $bdd->exec('DELETE FROM linkabonnemententreprise WHERE idClient = '.$_POST["idClient"].'');
     }
   }
+
+//update idEntrepise dans users
+  $bdd->exec('UPDATE users SET idEntreprise = '.$_POST["idEntreprise"].' WHERE id = '.$_POST["idClient"].'');
 
   //on ajoute pour le user le meme abbo que le directeur
   $req = $bdd->getPDO()->prepare('INSERT INTO linkabonnemententreprise (idAbonnement,idClient,dateDebut,dateFin,idEntreprise) VALUES(:idAbonnement,:idClient,:dateDebut,:dateFin,:idEntreprise)');

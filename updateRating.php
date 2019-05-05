@@ -1,8 +1,8 @@
 <?php
 
 require_once __DIR__ . '/API/utils/DatabaseManager.php';
-require 'Class/Autoloader.php';
-App\Autoloader::register();
+require_once __DIR__ .'/require_class.php';
+
 $bdd = new App\Database('rip');
 
 $bdd2 = DatabaseManager::getDatabase();

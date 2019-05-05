@@ -25,8 +25,8 @@ loadLanguageFromSession($_SESSION['lang']);
   <?php
 
 
-  require 'Class/Autoloader.php';
-  App\Autoloader::register();
+  require_once __DIR__ .'/require_class.php';
+  
   $bdd = new App\Database('rip');
   $type = 0;
   $navbar = new App\Navbar($type);

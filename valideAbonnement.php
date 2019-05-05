@@ -16,7 +16,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="Ride in pride">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+
   <link rel="stylesheet" type="text/css" href="css/ReservationTrajet/main_styles.css">
   <link rel="stylesheet" type="text/css" href="css/ReservationTrajet/responsive.css">
 
@@ -29,8 +29,8 @@
   <body>
     <?php
 
-    require 'Class/Autoloader.php';
-    App\Autoloader::register();
+    require_once __DIR__ .'/require_class.php';
+
     $bdd = new App\Database('rip');
     $backOffice=0;
     $navbar = new App\Navbar($backOffice);

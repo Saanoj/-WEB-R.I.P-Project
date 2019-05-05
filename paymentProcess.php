@@ -290,7 +290,12 @@ if(!empty($isAbonnee['idAbonnement'])){
 $total_prix += $column_Prix;
 $column_Id = $unIdService['idService'];
 $column_Quantitee = $unIdService['quantite'];
-$column_IdAnnexe = $unIdService['idAnnexe'];
+if ($unIdService['idAnnexe'] == -1) {
+  $column_IdAnnexe = "*Aucun*";
+} else {
+  $column_IdAnnexe = $unIdService['idAnnexe'];
+}
+
 $column_Prix = sprintf("%.2f",$column_Prix);
 $pdf->SetFillColor(255,255,255);
 $pdf->SetFont('DejaVu','',10);

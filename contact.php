@@ -48,7 +48,7 @@ session_start();
                             <input type="text" name="nameClient" id="name" class="form-control" placeholder=<?php echo _CONTACT_NAME; ?> onblur="checkfirstName(this)" />
                         </div>
                         <div class="form-group">
-                            <input type="text" name="email" id="email" class="form-control" placeholder="Votre email *" value="<?= $_SESSION["email"]; ?>" readonly="readonly" />
+                            <input type="text" name="email" id="email" class="form-control" placeholder="Votre email *" value="<?php if(isset($_SESSION["email"])){ echo $_SESSION["email"];}else{echo "Email: Personne non connectée";} ?>" readonly="readonly" />
                         </div>
                         <div class="form-group">
                             <input type="text" name="phoneNumber" id="phone" class="form-control" placeholder=<?php echo _CONTACT_NUM; ?> onblur="Verifier_Numero_Telephone(this)" />

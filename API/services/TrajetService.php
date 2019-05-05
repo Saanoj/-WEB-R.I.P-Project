@@ -155,7 +155,7 @@ class TrajetService {
 
   public function setTripFinished(int $idTrip): int{
     $db = DatabaseManager::getDatabase();
-    $list = $db->exec('UPDATE trajet SET stateDriver = 2 state = "Finis" WHERE idTrajet = ?',[$idTrip]);
+    $list = $db->exec('UPDATE trajet SET state = "Finis" WHERE idTrajet = ?',[$idTrip]);
 
     return $list;
   }

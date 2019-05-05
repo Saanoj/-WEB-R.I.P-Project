@@ -45,7 +45,7 @@ $form = new App\Form(array());
           $reqUser = $bdd->queryOne('SELECT * FROM users WHERE id = '.$_SESSION["id"].'');
 
           //si addr et zip ne sont pas rempli
-          if (!isset($reqUser["address"]) || empty($reqUser["address"]) || !isset($reqUser["zip_code"]) || empty($reqUser["zip_code"])) {
+          if (!isset($reqUser["address"]) || empty($reqUser["address"])) {
             echo "<div class='h1'>Remplissez votre adresse et code postal dans votre profil avant de continuer</div>";
           }else if($reqUser["isAdmin"]!=0){
             echo "<div class='h1'>Vous ne pouvez pas devenir collaborateur si vous etes administrateur</div>";

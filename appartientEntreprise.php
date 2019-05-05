@@ -36,9 +36,3 @@ if ($_GET['isValide'] == 1)
 <?php 
 header ('Refresh: 4;URL=abonnement.php');
 } 
-
-
-else { 
-
-header ('location:abonnement.php');
-}

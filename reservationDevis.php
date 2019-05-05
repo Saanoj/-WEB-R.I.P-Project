@@ -250,7 +250,7 @@ deleteMtx();
                       echo "ID: ".$service["idService"]." | ".$service["nomService"]." : ".$typeEtablissement." ".$infoLinkService["nom"]." | Quantitée: ".$quantity." places";
 
                     }
-                    var_dump($service["idService"]);
+                   // var_dump($service["idService"]);
                     // encapsulation de tous les trajets
                     echo "</div>";
 

@@ -180,9 +180,9 @@ $pdf->Ln();
 // A partir d'ici, on écrit dans le tableau la liste des services
 
 // Si on a bien un abonnement, sa veut dire qu'on a des services
-
+$reqChauffeur = $bdd->queryOne("SELECT * FROM collaborateurs WHERE idCollaborateurs=".$reqTrajet["idChauffeur"]."");
 if(!empty($isAbonnee['idAbonnement'])){
-  $reqChauffeur = $bdd->queryOne("SELECT * FROM collaborateurs WHERE idCollaborateurs=".$reqTrajet["idChauffeur"]."");
+ 
     //on recupere les id des services choisis sur ce trajet
     $idServices = $bdd->query('SELECT * FROM linkServicetrajet WHERE idTrajet='.$_SESSION["idTrajet"].'');
     $i=0;$j=0;$k=0;$z=0;$h=0;$l=0;$m=0;$n=0;$o=0;
@@ -393,6 +393,73 @@ $pdf->Cell(30,6,$total_prix,1,0,'C',1);
 
 
 
+}
+else
+{
+  $Y_Table_Position = 170;
+   // On affiche les informations du chauffeur
+$pdf->SetFillColor(232,232,232);
+
+$pdf->SetFont('DejaVu','B',10);
+$pdf->SetY($Y_Table_Position);
+$pdf->SetX(5);
+$pdf->Cell(30,6,'ID Trajet',1,0,'C',1);
+$pdf->SetY($Y_Table_Position);
+$pdf->SetX(35);
+$pdf->Cell(30,6,'ID Chauffeur',1,0,'C',1);
+$pdf->SetY($Y_Table_Position);
+$pdf->SetX(65);
+$pdf->Cell(75,6,'Chauffeur',1,0,'C',1);
+$pdf->SetY($Y_Table_Position);
+$pdf->SetX(140);
+$pdf->Cell(30,6,'Distance',1,0,'C',1);
+$pdf->SetY($Y_Table_Position);
+$pdf->SetX(170);
+$pdf->Cell(30,6,'Prix',1,0,'C',1);
+$Y_Table_Position +=6;
+
+if ( $pdf->getY() > 270)
+{
+  $pdf->AddPage();
+  $Y_Table_Position = 0;
+}
+$pdf->SetFillColor(255,255,255);
+$pdf->SetFont('DejaVu','',10);
+$pdf->SetY($Y_Table_Position);
+$pdf->SetX(5);
+$pdf->Cell(30,6,$_SESSION['idTrajet'],1,0,'C',1);
+$pdf->SetY($Y_Table_Position);
+$pdf->SetX(35);
+$pdf->Cell(30,6,$reqChauffeur['idCollaborateurs'],1,0,'C',1);
+$pdf->SetY($Y_Table_Position);
+$pdf->SetX(65);
+$pdf->Cell(75,6,$reqChauffeur["first_name"]." ".$reqChauffeur["last_name"]." Prix: ".$reqChauffeur["prixCollaborateur"]."€/Km",1,0,'C',1);
+$pdf->SetY($Y_Table_Position);
+$pdf->SetX(140);
+$pdf->Cell(30,6,($reqTrajet["distanceTrajet"]." Km"),1,0,'C',1);
+$pdf->SetY($Y_Table_Position);
+$pdf->SetX(170);
+$pdf->Cell(30,6,(sprintf("%.2f",$reqChauffeur["prixCollaborateur"]*$reqTrajet["distanceTrajet"]))."€",1,0,'C',1);
+$Y_Table_Position +=6;
+if ( $pdf->getY() > 270)
+{
+  $pdf->AddPage();
+  $Y_Table_Position = 0;
+}
+// On affiche le prix total
+$total_prix =  ($reqChauffeur["prixCollaborateur"]*$reqTrajet["distanceTrajet"]);
+$total_prix = sprintf("%.2f",$total_prix)."€";
+$pdf->SetFillColor(232,232,232);
+$pdf->SetFont('DejaVu','B',10);
+$pdf->SetY($Y_Table_Position);
+$pdf->SetX(170);
+$pdf->Cell(30,6,"Prix total",1,0,'C',1);
+$Y_Table_Position +=6;
+$pdf->SetFillColor(255,255,255);
+$pdf->SetFont('DejaVu','',10);
+$pdf->SetY($Y_Table_Position);
+$pdf->SetX(170);
+$pdf->Cell(30,6,(sprintf("%.2f",$reqChauffeur["prixCollaborateur"]*$reqTrajet["distanceTrajet"]))."€",1,0,'C',1);
 }
 
 

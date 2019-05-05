@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/Class/Autoloader.php';
+require_once __DIR__ . '/require_class.php';
 
 $bdd = new App\Database('rip');
 session_start();

@@ -73,8 +73,8 @@ if ($unAbonnement != false) {
 
                   <div class="form-group">
                     <span >Engagement sur 12 mois</span>
-                    <input type="text" name="isEngagement" class="form-control" value="<?php   if ($abo->getIsEngagement() == null) {echo ' ';} 
-                                if ($abo->getIsEngagement() == 1) { echo 'Oui';}  
+                    <input type="text" name="isEngagement" class="form-control" value="<?php   if ($abo->getIsEngagement() == null) {echo ' ';}
+                                if ($abo->getIsEngagement() == 1) { echo 'Oui';}
                                 if ($abo->getIsEngagement() == 0 && $abo->getIsEngagement() != null) { echo 'Non';}  ?>" disabled/>
                   </div>
 
@@ -116,10 +116,10 @@ if ($unAbonnement != false) {
         </div>
       </div>
 
-      <?php }  
-  
+      <?php }
+
       $idEntreprise = getIdEntreprise($bdd);
-                                            
+
       $req = $bdd->getPDO()->prepare('SELECT * FROM entreprise WHERE idEntreprise = :idEntreprise');
       $req->execute(array('idEntreprise' => $idEntreprise));
       $uneEntreprise = $req->fetch();
@@ -140,7 +140,7 @@ if ($unAbonnement != false) {
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                   <h3 class="register-heading">Récapitulatif de l'entreprise</h3>
                   <div class="row register-form  pb-0 mb-0">
-                    
+
 
                     <div class="col-md-6">
                       <div class="form-group">
@@ -181,7 +181,7 @@ if ($unAbonnement != false) {
                       </div>
 
                       <input type="submit" class="btnRegister"  value="Profil"/>
-                     <?php 
+                     <?php
                         if ($uneEntreprise['idDirecteur'] == $_SESSION['id']) {?>
                           <a href="profil.php"><button type="button" class="btnRegister" data-toggle="modal" data-target="#exampleModal"onclick="deleteEntreprise()">Supprimer entreprise</button></a>
                         <?php }?>
@@ -214,24 +214,27 @@ if ($unAbonnement != false) {
                           <div class="col-md-12 offset-2">
                             <div class="row">
                               <h2>Supprimer/gérer un utilisateur</h2>
-                              <h6>Cherchez un utilisateur pour le gérer</h6>
 
-                            </div>
-                            <div class="row">
-                              <input type="text" name="" id="searchUserIn" value="">
                             </div>
                           </div>
                         </div>
                         <div class="row register-form p-0 m-0">
+                            <?php
+                            $users = $bdd->query('SELECT * FROM users WHERE isBanned = 0 AND idEntreprise = '.$uneEntreprise['idEntreprise'].' AND id != '.$_SESSION['id'].'');
+                             ?>
+                            <div id="users2" class="offset-4 col-md-8">
+                              <?php
 
-                            <div id="usersIn" class="offset-4 col-md-8">
-
+                              foreach ($users as $user) {
+                                echo "<div class='row p-1' id='rowId".$user["id"]."'><div class='btn btn-primary btnNotif' id='".$user["id"]."' onClick='kickEntreprise(".$user["id"].")'>Kick user</div> ".$user["first_name"]." ".$user["last_name"]."</div>";
+                              }
+                               ?>
                             </div>
                         </div>
                         <br>
                 <?php }
               ?>
-                
+
 
                 </div>
               </div>
@@ -324,5 +327,6 @@ if ($unAbonnement != false) {
     <script src="js/profil/showAbonnementProfil/main.js"></script>
     <script src="js/showAbonnementProfil/main.js"></script>
     <script src="js/showAbonnementProfil/sendNotif.js"></script>
+    <script src="js/showAbonnementProfil/kickEntreprise.js"></script>
  <?php /*   <?php include "includehtml/footer.php" */ ?>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

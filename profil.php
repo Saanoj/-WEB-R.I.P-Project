@@ -90,7 +90,6 @@ session_start();
 
   $abo = App\Abonnement::createAbonnement($bdd);
 
-
   // serialize($abo);
   ?>
 

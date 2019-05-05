@@ -14,6 +14,8 @@ function deleteAbonnement() {
 function deleteEntreprise() {
   var idSession = document.getElementById('idSession').value;
   var idEntreprise = document.getElementById('idEntreprise').value;
+  console.log(idSession);
+  console.log(idEntreprise);
   
   var request = new XMLHttpRequest();
   request.onreadystatechange = function(){

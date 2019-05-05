@@ -50,10 +50,15 @@ $bdd = new Database('rip');
     }
 
     public static function getAll($bdd) {
-        $statement = 'SELECT * FROM linkabonnemententreprise INNER JOIN abonnement ON  linkabonnemententreprise.idClient = ?';
+        $statement = 'SELECT * FROM linkabonnemententreprise WHERE idClient = ?';
         $reqAbo = $bdd->getPDO()->prepare($statement);
         $reqAbo->execute(array($_SESSION['id']));
-        $dataAbonnement = $reqAbo->fetch();
+        $reqAbo = $reqAbo->fetch();
+        $idAbonnement = $reqAbo['idAbonnement'];
+        $statement2 =  'SELECT * FROM linkabonnemententreprise INNER JOIN abonnement ON linkabonnemententreprise.idClient = ? AND linkabonnemententreprise.idAbonnement = abonnement.idAbonnement AND linkabonnemententreprise.idAbonnement = ?';
+        $reqAbo2 = $bdd->getPDO()->prepare($statement2);
+        $reqAbo2->execute(array($_SESSION['id'],$idAbonnement));
+        $dataAbonnement = $reqAbo2->fetch();
          return $dataAbonnement;
 
     }

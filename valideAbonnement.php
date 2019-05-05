@@ -8,24 +8,10 @@
     include "multilingue/multilingue.php";
     loadLanguageFromSession($_SESSION['lang']);
  ?>
-<!DOCTYPE html>
-<html lang="fr">
-  <head>
-  <title>Reservation de services</title>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="Ride in pride">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <link rel="stylesheet" type="text/css" href="css/ReservationTrajet/main_styles.css">
-  <link rel="stylesheet" type="text/css" href="css/ReservationTrajet/responsive.css">
 
 
-  <?php include 'includehtml/head.html'; ?>
 
-  <link rel="stylesheet" type="text/css" href="css/choixService/main.css">
 
-  </head>
   <body>
     <?php
 

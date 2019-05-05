@@ -75,12 +75,7 @@ else
 
 function success() 
 {
-    ?>
-    <div class="alert alert-success" role="alert">
-    Bravo ! Vous venez de rejoindre <?= $_POST['nameEntreprise'];?>. Vous allez être redirigé dans quelques instants.
-      </div>
-<?php
-    header ('Refresh: 3;URL=profil.php');
+    header ('location:profil.php');
 }
 
 

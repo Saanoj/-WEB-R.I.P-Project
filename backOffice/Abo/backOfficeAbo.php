@@ -12,7 +12,7 @@ include 'fonctionAbo.php';
 <body>
 
   <?php
-  require __DIR__ . '../../require_class.php';
+  require __DIR__ . '../../../require_class.php';
 
   $type = 2 ;
   $navbar = new App\Navbar($type);

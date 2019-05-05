@@ -12,7 +12,7 @@ include 'fonction.php';
 <body>
 
   <?php
-  require __DIR__ . '../../require_class.php';
+   require __DIR__ . '../../../require_class.php';
 
   $backOffice=2;
   $type =0;

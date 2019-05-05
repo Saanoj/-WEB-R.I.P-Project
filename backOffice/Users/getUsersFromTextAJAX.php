@@ -1,7 +1,7 @@
 <?php
 
 require '../../Class/Autoloader.php';
-App\Autoloader::register();
+
 $bdd = new App\Database('rip');
 session_start();
 

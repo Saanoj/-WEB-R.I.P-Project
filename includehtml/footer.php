@@ -4,8 +4,8 @@ use \PDO;
 use \DateTime;
 use \DateTimeZone;
 
-require_once 'Class/Autoloader.php';
-Autoloader::register();
+require_once __DIR__ . '/../require_class.php';
+
 $bdd = new Database('rip');
 checkAbonnementValide($bdd);
 checkIfTrajetStarted($bdd);

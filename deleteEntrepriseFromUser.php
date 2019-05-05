@@ -2,8 +2,8 @@
 
 
 session_start();
-require_once 'Class/Autoloader.php';
-App\Autoloader::register();
+require_once __DIR__ . '/require_class.php';
+
 $bdd = new App\Database('rip');
 // On recupere l'id de l'entreprise
 $req = $bdd->getPDO()->prepare('SELECT idEntreprise FROM users WHERE id = :id');

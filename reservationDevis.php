@@ -23,8 +23,8 @@ session_start();
   <?php
 
 
-  require 'Class/Autoloader.php';
-  App\Autoloader::register();
+  require_once __DIR__ .'/require_class.php';
+
   $bdd = new App\Database('rip');
   $type = 3;
   $navbar = new App\Navbar($type);
@@ -76,6 +76,8 @@ session_start();
                   //on boucle les id des services choisis
                   $i=0;$j=0;$k=0;$z=0;
                   $h=0;$l=0;$m=0;$n=0;$o=0;
+                  $aa=0;$ab=0;$ac=0;$ad=0;$ae=0;
+
                   $arrayLink = array();
 
                   foreach ($idServices as $unIdService) {
@@ -143,26 +145,21 @@ session_start();
                           $h++;
                           echo "<br><br>";
                         }
-                      }
-
-                      if ($unIdService["idService"] == 3) {
+                      }else if ($unIdService["idService"] == 3) {
                         if ($l == 0) {
                           $q = countElement($bdd,$service["idService"]);
                           echo "ID: ".$service["idService"]." | ".$service["nomService"]." | Quantitée: ".$q;
                           $l++;
                           echo "<br><br>";
                         }
-                      }
-
-                      if ($unIdService["idService"] == 4) {
+                      }else if ($unIdService["idService"] == 4) {
                         if ($m == 0) {
                           $q = countElement($bdd,$service["idService"]);
                           echo "ID: ".$service["idService"]." | ".$service["nomService"]." | Quantitée: ".$q;
                           $m++;
                           echo "<br><br>";
                         }
-                      }
-                      if ($unIdService["idService"] == 5) {
+                      }else if ($unIdService["idService"] == 5) {
                         if ($n == 0) {
                           $q = countElement($bdd,$service["idService"]);
                           echo "ID: ".$service["idService"]." | ".$service["nomService"]." | Quantitée: ".$q;
@@ -170,12 +167,46 @@ session_start();
                           echo "<br><br>";
                         }
 
-                      }
-                      if ($unIdService["idService"] == 6) {
+                      }else if ($unIdService["idService"] == 6) {
                         if ($o == 0) {
                           $q = countElement($bdd,$service["idService"]);
                           echo "ID: ".$service["idService"]." | ".$service["nomService"]." | Quantitée: ".$q;
                           $o++;
+                          echo "<br><br>";
+                        }
+                      } else if ($unIdService["idService"] == 9) {
+                        if ($aa == 0) {
+                          $q = countElement($bdd,$service["idService"]);
+                          echo "ID: ".$service["idService"]." | ".$service["nomService"]." | Quantitée: ".$q;
+                          $aa++;
+                          echo "<br><br>";
+                        }
+                      }else if ($unIdService["idService"] == 15) {
+                        if ($ab == 0) {
+                          $q = countElement($bdd,$service["idService"]);
+                          echo "ID: ".$service["idService"]." | ".$service["nomService"]." | Quantitée: ".$q;
+                          $ab++;
+                          echo "<br><br>";
+                        }
+                      }else if ($unIdService["idService"] == 16) {
+                        if ($ac == 0) {
+                          $q = countElement($bdd,$service["idService"]);
+                          echo "ID: ".$service["idService"]." | ".$service["nomService"]." | Quantitée: ".$q;
+                          $ac++;
+                          echo "<br><br>";
+                        }
+                      }else if ($unIdService["idService"] == 18) {
+                        if ($ad == 0) {
+                          $q = countElement($bdd,$service["idService"]);
+                          echo "ID: ".$service["idService"]." | ".$service["nomService"]." | Quantitée: ".$q;
+                          $ad++;
+                          echo "<br><br>";
+                        }
+                      }else if ($unIdService["idService"] == 19) {
+                        if ($ae == 0) {
+                          $q = countElement($bdd,$service["idService"]);
+                          echo "ID: ".$service["idService"]." | ".$service["nomService"]." | Quantitée: ".$q;
+                          $ae++;
                           echo "<br><br>";
                         }
                       }
@@ -214,10 +245,12 @@ session_start();
                       echo "<br><br>";
 
                     } else{
+                      echo "kooo";
                       $quantity = getQuantite($bdd,$service["idService"],$_SESSION['idTrajet']);
                       echo "ID: ".$service["idService"]." | ".$service["nomService"]." : ".$typeEtablissement." ".$infoLinkService["nom"]." | Quantitée: ".$quantity." places";
 
                     }
+                    var_dump($service["idService"]);
                     // encapsulation de tous les trajets
                     echo "</div>";
 
@@ -307,6 +340,7 @@ session_start();
                         //on boucle les id des services choisis
                         $totalServices = 0;
                         $i=0;$j=0;$k=0;$h=0;$l=0;$m=0;$n=0;$o=0;
+                        $aa=0;$ab=0;$ac=0;$ad=0;$ae=0;
                         $arrayLink = [];
                         foreach ($idServices as $unIdService) {
                           //on recupere les infos du service en fonction de son id
@@ -375,39 +409,73 @@ session_start();
                                 $totalServices += ($service["prixService"]*$q);
                                 $h++;
                               }
-                            }
-
-                            if ($unIdService["idService"] == 3) {
+                            }else if ($unIdService["idService"] == 3) {
                               if ($l == 0) {
                                 $q = countElement($bdd,$service["idService"]);
                                 echo $service["nomService"].":  ".$q." * ".$service["prixService"]."€  = ".$service["prixService"]*$q."€";
                                 $totalServices += ($service["prixService"]*$q);
                                 $l++;
                               }
-                            }
-
-                            if ($unIdService["idService"] == 4) {
+                            }else if ($unIdService["idService"] == 4) {
                               if ($m == 0) {
                                 $q = countElement($bdd,$service["idService"]);
                                 echo $service["nomService"].":  ".$q." * ".$service["prixService"]."€  = ".$service["prixService"]*$q."€";
                                 $totalServices += ($service["prixService"]*$q);
                                 $m++;
                               }
-                            }
-                            if ($unIdService["idService"] == 5) {
+                            }else if ($unIdService["idService"] == 5) {
                               if ($n == 0) {
                                 $q = countElement($bdd,$service["idService"]);
                                 echo $service["nomService"].":  ".$q." * ".$service["prixService"]."€  = ".$service["prixService"]*$q."€";
                                 $totalServices += ($service["prixService"]*$q);
                                 $n++;
                               }
-                            }
-                            if ($unIdService["idService"] == 6) {
+                            }else if ($unIdService["idService"] == 6) {
                               if ($o == 0) {
                                 $q = countElement($bdd,$service["idService"]);
                                 echo $service["nomService"].":  ".$q." * ".$service["prixService"]."€  = ".$service["prixService"]*$q."€";
                                 $totalServices += ($service["prixService"]*$q);
                                 $o++;
+                              }
+                            }else if ($unIdService["idService"] == 9) {
+                              if ($aa == 0) {
+                                $q = countElement($bdd,$service["idService"]);
+                                echo $service["nomService"].":  ".$q." * ".$service["prixService"]."€  = ".$service["prixService"]*$q."€";
+                                $totalServices += ($service["prixService"]*$q);
+                                $aa++;
+                                echo "<br><br>";
+                              }
+                            }else if ($unIdService["idService"] == 15) {
+                              if ($ab == 0) {
+                                $q = countElement($bdd,$service["idService"]);
+                                echo $service["nomService"].":  ".$q." * ".$service["prixService"]."€  = ".$service["prixService"]*$q."€";
+                                $totalServices += ($service["prixService"]*$q);
+                                $ab++;
+                                echo "<br><br>";
+                              }
+                            }else if ($unIdService["idService"] == 16) {
+                              if ($ac == 0) {
+                                $q = countElement($bdd,$service["idService"]);
+                                echo $service["nomService"].":  ".$q." * ".$service["prixService"]."€  = ".$service["prixService"]*$q."€";
+                                $totalServices += ($service["prixService"]*$q);
+                                $ac++;
+                                echo "<br><br>";
+                              }
+                            }else if ($unIdService["idService"] == 18) {
+                              if ($ad == 0) {
+                                $q = countElement($bdd,$service["idService"]);
+                                echo $service["nomService"].":  ".$q." * ".$service["prixService"]."€  = ".$service["prixService"]*$q."€";
+                                $totalServices += ($service["prixService"]*$q);
+                                $ad++;
+                                echo "<br><br>";
+                              }
+                            }else if ($unIdService["idService"] == 19) {
+                              if ($ae == 0) {
+                                $q = countElement($bdd,$service["idService"]);
+                                echo $service["nomService"].":  ".$q." * ".$service["prixService"]."€  = ".$service["prixService"]*$q."€";
+                                $totalServices += ($service["prixService"]*$q);
+                                $ae++;
+                                echo "<br><br>";
                               }
                             }
                           }
@@ -429,18 +497,14 @@ session_start();
                             ?> <b> <?php echo $service["nomService"]." ".$infoLinkService["nom"]. "| Type de chambre : ".$infoLinkService["typeChambre"]."| Prix de la chambre : ".$infoLinkService["prix"]."€/personne * ".$linkService["quantite"]." + ".$service["prixService"]."€ = ".($infoLinkService["prix"]*$linkService["quantite"]+$service['prixService'])." €"; ?> </b> <?php
                             $totalServices += ($infoLinkService["prix"] * $linkService["quantite"] + $service['prixService']);
                           }
-                          else if ($linkService["idService"] == 8 ) {
-                            ?> <b> <?php   echo $service["nomService"]." pour le ".$infoLinkService["nom"]." | Prix du billet : ".$infoLinkService["prix"]."€ * ".$linkService["quantite"]." + ".$service["prixService"]."€ = ".($infoLinkService["prix"]*$linkService["quantite"]+$service['prixService'])." €"; ?> </b>
-                            <?php
-                            $totalServices += ($infoLinkService["prix"] * $linkService["quantite"] + $service['prixService']);
+                          else if ($linkService["idService"] == 1 ) {
+                            ?> <b> <?php   echo $service["nomService"]." pour le ".$infoLinkService["nom"]." | Prix du restaurant : ".$infoLinkService["prix"]."€ * ".$linkService["quantite"]." couverts + ".$service["prixService"]."€ = ".($infoLinkService["prix"]*$linkService["quantite"]+$service['prixService'])." € "; ?> </b>
+                            <?php $totalServices += ($infoLinkService["prix"] * $linkService["quantite"] + $service['prixService']);
                           }
-                          else if ($linkService["idService"] == 2 || $linkService["idService"] == 3 || $linkService["idService"] == 4|| $linkService["idService"] == 5 || $linkService["idService"] == 6 ||$linkService["idService"] == 9 || $linkService["idService"] == 15 || $linkService["idService"] == 16|| $linkService["idService"] == 18 || $linkService["idService"] == 19) {
-                            ?> <b> <?php  echo $service["nomService"]." | Prix: ".$infoLinkService["prixCollaborateur"]."€/h *"; ?> </b>
-                            <?php
-                            $totalServices += ($infoLinkService["prix"]*$linkService["quantite"]+$service["prixService"]);
-
-
-                          }else{
+                          else if ($linkService["idService"] == 8 ) {
+                            ?> <b> <?php   echo $service["nomService"]." pour le ".$infoLinkService["nom"]." | Prix du billet : ".$infoLinkService["prix"]."€ * ".$linkService["quantite"]." + ".$service["prixService"]."€ = ".($infoLinkService["prix"]*$linkService["quantite"]+$service['prixService'])." € "; ?> </b>
+                            <?php $totalServices += ($infoLinkService["prix"] * $linkService["quantite"] + $service['prixService']);
+                          } else {
                             ?> <b> <?php   echo $service["nomService"].": ".$typeEtablissement." ".$infoLinkService["nom"]." | ".$infoLinkService["prix"]."€ * ".$linkService["quantite"]." places + ".$service["prixService"]."€  = ".($infoLinkService["prix"]*$linkService["quantite"]+$service["prixService"])."€"; ?> </b> <?php
                             $totalServices += ($infoLinkService["prix"]*$linkService["quantite"]+$service["prixService"]);
                           }
@@ -486,11 +550,11 @@ session_start();
             <div class="center-block">
               <?php echo $form->submit(); ?>
             </div>
-         
- 
+
+
           </form>
           <br>
-          <div class="center-block"> 
+          <div class="center-block">
             <button class="btn btn-dark"><a style="color:#FFFFFF" href="pdfDevis.php">Devis PDF</a></button>
 </div>
         </div>

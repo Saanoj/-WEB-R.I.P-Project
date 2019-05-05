@@ -10,8 +10,8 @@ loadLanguageFromSession($_SESSION['lang']);
 
 */
 
-require_once 'Class/Autoloader.php';
-App\Autoloader::register();
+require_once __DIR__ . '/require_class.php';
+
 $bdd = new App\Database('rip');
 
 ?>

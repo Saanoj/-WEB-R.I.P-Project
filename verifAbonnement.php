@@ -2,21 +2,11 @@
 namespace App;
 use \PDO;
 session_start();
-require 'Class/Autoloader.php';
-Autoloader::register();
+require_once __DIR__ .'/require_class.php';
+
 $bdd = new Database('rip');
 
-?>
-<!DOCTYPE HTML>
-<head>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<link href="css/abonnement/verifAbonnement/style.css" rel="stylesheet"></link>
-</head>
-<!------ Include the above in your HEAD tag ---------->
 
-<?php
 if (isset($_POST['submit']) && !empty($_POST['submit'])) {
 switch ($_POST['submit'])
 {

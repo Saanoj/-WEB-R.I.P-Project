@@ -1,8 +1,8 @@
 <?php
 
 session_start();
-require_once __DIR__.'/class/Autoloader.php';
-App\Autoloader::register();
+require_once __DIR__.'/require_class.php';
+
 $bdd = new App\Database('rip');
 
 $type = 0;
@@ -11,6 +11,7 @@ $navbar->navbar();
 
 ?>
 <!DOCTYPE HTML>
+<html>
 <head>
   <meta charset='utf-8'>
 
@@ -246,9 +247,8 @@ if ($unAbonnement != false) {
       </form>
 
     </body>
+<html>
 
-    <footer>
-    </footer>
 
     <?php
 
@@ -324,6 +324,7 @@ if ($unAbonnement != false) {
 
 
     ?>
+  
     <script src="js/profil/showAbonnementProfil/main.js"></script>
     <script src="js/showAbonnementProfil/main.js"></script>
     <script src="js/showAbonnementProfil/sendNotif.js"></script>

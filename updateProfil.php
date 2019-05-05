@@ -1,8 +1,8 @@
 <?php
 
 
-require 'Class/Autoloader.php';
-App\Autoloader::register();
+require_once __DIR__ .'/require_class.php';
+
 $bdd = new App\Database('rip');
 
 if (isset($_POST['idProfil']) && isset($_POST['newval']) && isset($_POST['newid'])) {
@@ -25,7 +25,7 @@ echo $newval;
 echo $columnName;
 }
 
-else 
+else
 {
     $req = $bdd->getPDO()->prepare('UPDATE entreprise SET '.$columnName.' = :columnValue WHERE idEntreprise =:idEntreprise');
     $req->bindValue(':columnValue', $newval);
@@ -77,7 +77,7 @@ if ($idDirecteur == $_POST['id'])
     $req->closeCursor();
 }
 
-// UPDATE USER 
+// UPDATE USER
 $req = $bdd->getPDO()->prepare('UPDATE users SET idEntreprise = NULL,isDirecteur = 0 WHERE id = :id');
 $req->execute(array('id' => $_POST['id']));
 $req->closeCursor();

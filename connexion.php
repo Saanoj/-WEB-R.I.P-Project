@@ -13,8 +13,8 @@ session_start();
 <body>
   <?php
 
-  require 'Class/Autoloader.php';
-  App\Autoloader::register();
+  require_once __DIR__ .'/require_class.php';
+
   // init des objets
   $bdd = new App\Database('rip');
   $form = new App\Form(array());
@@ -139,8 +139,8 @@ session_start();
 if (isset($_POST["forget"])){
     if (isset($_POST["email"])&&!empty($_POST["email"])) {
 
-      require_once 'Class/Autoloader.php';
-      App\Autoloader::register();
+      require_once __DIR__ . '/require_class.php';
+
       $bdd = new App\Database('rip');
 
       $query = $bdd->queryOne('SELECT * FROM users where email = "'.$_POST["email"].'" ');

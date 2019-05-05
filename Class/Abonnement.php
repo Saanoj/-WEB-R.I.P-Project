@@ -6,7 +6,8 @@ use \PDO;
 
 
 //require 'Autoloader.php';
-//Autoloader::register();
+//
+require_once __DIR__ . '/../require_class.php';
 $bdd = new Database('rip');
 
  class Abonnement {
@@ -46,7 +47,7 @@ $bdd = new Database('rip');
     public static function createAbonnement($bdd) {
         $dataAbonnement = Abonnement::getAll($bdd);
         return $abo = new Abonnement($dataAbonnement['idAbonnement'],$dataAbonnement['typeAbonnement'],$dataAbonnement['isEngagement']);
-        
+
     }
 
     public static function getAll($bdd) {
@@ -64,17 +65,17 @@ $bdd = new Database('rip');
     }
 }
 
-  
-
-    
-
-    
-
-  
 
 
 
 
 
- 
+
+
+
+
+
+
+
+
 ?>

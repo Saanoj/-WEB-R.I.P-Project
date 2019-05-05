@@ -2,8 +2,8 @@
 session_start();
 
 
-require 'Class/Autoloader.php';
-App\Autoloader::register();
+require_once __DIR__ .'/require_class.php';
+
 
 $form = new App\Form(array());
 

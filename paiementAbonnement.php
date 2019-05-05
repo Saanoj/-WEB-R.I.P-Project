@@ -15,8 +15,8 @@ session_start();
   <link rel="stylesheet" href="css/simulationPaiement/bootstrap-side-notes.css" />
 
 <?php
-require 'Class/Autoloader.php';
-App\Autoloader::register();
+require_once __DIR__ .'/require_class.php';
+
 $bdd = new App\Database('rip');
 $backOffice=0;
 $type = 0;

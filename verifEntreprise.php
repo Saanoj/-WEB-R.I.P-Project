@@ -2,8 +2,8 @@
 namespace App;
 use \PDO;
 session_start();
-require 'Class/Autoloader.php';
-Autoloader::register();
+require_once __DIR__ .'/require_class.php';
+
 $bdd = new Database('rip');
 ?>
 <head>

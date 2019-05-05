@@ -1,7 +1,7 @@
 <?php
 session_start();
-require 'Class/Autoloader.php';
-App\Autoloader::register();
+require_once __DIR__ .'/require_class.php';
+
 $bdd = new App\Database('rip');
 
 $bdd->exec('DELETE FROM trajet WHERE idTrajet = ? ',[$_SESSION["idTrajet"]]);

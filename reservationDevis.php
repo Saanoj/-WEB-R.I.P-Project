@@ -10,7 +10,6 @@ session_start();
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="Ride in pride">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="css/ReservationTrajet/bootstrap4/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="css/ReservationTrajet/main_styles.css">
   <link rel="stylesheet" type="text/css" href="css/ReservationTrajet/responsive.css">
 
@@ -487,7 +486,13 @@ session_start();
             <div class="center-block">
               <?php echo $form->submit(); ?>
             </div>
+         
+ 
           </form>
+          <br>
+          <div class="center-block"> 
+            <button class="btn btn-dark"><a style="color:#FFFFFF" href="pdfDevis.php">Devis PDF</a></button>
+</div>
         </div>
       </div>
     </div>

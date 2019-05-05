@@ -18,6 +18,9 @@ $heureFin = $trajet->getHeureFin();
 $heureFin = explode(' ',$heureFin);
 
 updateTrajet($bdd);
+
+var_dump($_POST['services']);
+var_dump($_POST['quantite']);
 if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['quantite']) && (!empty($_POST['quantite'])) ) {
 
   $servicesChoisi=$_POST['services'];
@@ -42,9 +45,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
 
     switch ($service) {
 
-      case 1:
-      
-      break;
+  
       case 7:
        if (isset($_POST["idHotel"]) && !empty($_POST["idHotel"]))
       {
@@ -74,20 +75,6 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
       break;
     }
 
-    if ($service === "1")
-    {
-      $req=$bdd->getPDO()->prepare('INSERT INTO linkServicetrajet (idTrajet,idService,idAnnexe,quantite,statut,dateStart,dateEnd) VALUES (:idTrajet,:idService,:idAnnexe,:quantite,:statut,:dateStart,:dateEnd)');
-      $req->bindValue(':idTrajet', $_SESSION["idTrajet"]);
-      $req->bindValue(':idService', $service);
-      $req->bindValue(':idAnnexe',$idAnnexe);
-      $req->bindValue(':quantite', $thisQuantite);
-      $req->bindValue(':statut', 0);
-      $req->bindValue(':dateStart', $res[1]);
-      $req->bindValue(':dateEnd', null);
-      $req->execute();
-      $req->closeCursor();
-
-    }
 
     if ($service === "7")
     {
@@ -213,6 +200,25 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
         // var_dump($array3DateFin);
       }
 
+      if ($service === "1") {
+
+        $array1DateDebut = array ();
+        $array1Quantite = array();
+        $array1 = array ();
+
+        for ($i=0;$i<300;$i++)
+        {
+            if (isset($_POST['idRestaurant'.$i])) {
+              $thisQuantite = $_POST['quantite_'.$i];
+              $array1DateDebut = array_push_assoc($array1DateDebut,$i,$_POST['startRestaurant'.$i]);
+              $array1Quantite = array_push_assoc($array1Quantite,$i,$thisQuantite);
+              $array1[$i] = array($i,$thisQuantite,$_POST['startRestaurant'.$i]);
+
+            }
+      }
+
+      }
+
       if ($service === "7") {
 
         $array7DateDebut = array ();
@@ -249,9 +255,6 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
 
             }
       }
-      // var_dump($array8DateDebut);
-      // var_dump($array8Quantite);
-
 
       }
 
@@ -394,6 +397,7 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
         //      var_dump($arrayCoachCulturefDateFin);
       }
       if (
+
        $service === "2" ||
        $service === "3" ||
        $service === "4" ||
@@ -673,6 +677,11 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
       }
     }
   }
+
+
+
+
+
        if ($service === "11") {
       foreach ($arrayInterprete as $value) {
 
@@ -814,6 +823,26 @@ if (isset($_POST['services']) && (!empty($_POST['services'])) && isset($_POST['q
     if ($service === "8")
     {
       foreach($array8 as $cle =>$valeur){
+        $idAnnexe = $valeur[0];
+        $quantite = $valeur[1];
+        $dateDebut = $valeur[2];
+          $req=$bdd->getPDO()->prepare('INSERT INTO linkServicetrajet (idTrajet,idService,idAnnexe,quantite,statut,dateStart,dateEnd) VALUES (:idTrajet,:idService,:idAnnexe,:quantite,:statut,:dateStart,:dateEnd)');
+          $req->bindValue(':idTrajet', $_SESSION["idTrajet"]);
+          $req->bindValue(':idService', $service);
+          $req->bindValue(':idAnnexe',$idAnnexe);
+          $req->bindValue(':quantite', $quantite);
+          $req->bindValue(':statut', 0);
+          $req->bindValue(':dateStart', $dateDebut);
+          $req->bindValue(':dateEnd', $heureFin[1]);
+          $req->execute();
+          $req->closeCursor();
+
+      }
+    }
+
+    if ($service === "1")
+    {
+      foreach($array1 as $cle =>$valeur){
         $idAnnexe = $valeur[0];
         $quantite = $valeur[1];
         $dateDebut = $valeur[2];

@@ -400,7 +400,7 @@ $pdf->Cell(30,6,$total_prix,1,0,'C',1);
 
 // On créer une facture du trajet pour pouvoir récuperer les informations plus tard
 
-$req2 = $bdd->getPDO()->prepare('INSERT INTO factures(prixTrajet,idTrajet,prixService,prixTotal,dateFacture) VALUES (:prixTrajet,:idTrajet,:prixService,:prixTotal,NOW())');
+$req2 = $bdd->getPDO()->prepare('INSERT INTO devis(prixTrajet,idTrajet,prixService,prixTotal,dateDevis) VALUES (:prixTrajet,:idTrajet,:prixService,:prixTotal,NOW())');
 $req2->execute(array(
   'prixTrajet' => $reqTrajet["prixtrajet"],
   'idTrajet' =>$code,
@@ -412,9 +412,9 @@ $req2->execute(array(
 
 
 ob_end_flush();
-$destination = 'factures/factures'.$_SESSION['idTrajet'].'.pdf';
+$destination = 'devis/devis'.$_SESSION['idTrajet'].'.pdf';
 $pdf->Output($destination, 'F');
-$pdf->Output('factures'.$_SESSION['idTrajet'].'.pdf', 'D');
+$pdf->Output('devis'.$_SESSION['idTrajet'].'.pdf', 'D');
 
 
 

@@ -60,7 +60,7 @@
                 }
                 $i++;
               }
-              var_dump($result);
+             // var_dump($result);
               //echo $result;
 
               $chauffeurs = $bdd->queryPrepareForWhile('SELECT * FROM collaborateurs WHERE metier="chauffeur" and isOnline=1'.$result.' ORDER BY rating DESC ',$bdd);
@@ -177,7 +177,7 @@
 function checkDriver($bdd,$trajet) {
   $idChauffeur= [];
   $req = App\Trajet::getTrajet($bdd,"Pas commencé","En cours","Attente Collab");
-  var_dump($req);
+  //var_dump($req);
   $dateDebut = new DateTime($trajet->getDateDebut(), new DateTimeZone('Europe/Paris'));
   $dateFin = new DateTime($trajet->getHeureFin(), new DateTimeZone('Europe/Paris'));
 

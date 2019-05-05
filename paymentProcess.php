@@ -412,9 +412,9 @@ $req2->execute(array(
 
 
 ob_end_flush();
-$destination = 'factures/factures'.$_SESSION['idTrajet'].'.pdf';
+$destination = 'factures/facture'.$_SESSION['idTrajet'].'.pdf';
 $pdf->Output($destination, 'F');
-$pdf->Output('factures'.$_SESSION['idTrajet'].'.pdf', 'D');
+$pdf->Output('facture'.$_SESSION['idTrajet'].'.pdf', 'D');
 
 
 

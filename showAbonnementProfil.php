@@ -194,14 +194,16 @@ if ($unAbonnement != false) {
                       if ($uneEntreprise['idDirecteur'] == $_SESSION['id']) {?>
                         <div class="row register-form m-0 p-0">
                           <div class="col-md-12 offset-2">
-                            <div class="row">
-                              <h2>Ajouter un utilisateur a votre entreprise</h2>
-
-                              <h6>Cherchez un utilisateur pour lui envoyer une invitation</h6>
-
+                            
+                             <div class="row">
+                              <h4>Ajouter un utilisateur a votre entreprise</h4>
+                             </div>
+                             <div class="row">
+                              <h4>Cherchez un utilisateur pour lui envoyer une invitation</h4>
                             </div>
+
                             <div class="row">
-                              <input type="text" name="" id="searchUser" value="">
+                              <input type="text" name="" placeholder="Chercher un utilisateur..." id="searchUser" value="">
                             </div>
                           </div>
                         </div>
@@ -214,7 +216,7 @@ if ($unAbonnement != false) {
                         <div class="row register-form m-0 p-0">
                           <div class="col-md-12 offset-2">
                             <div class="row">
-                              <h2>Supprimer/gérer un utilisateur</h2>
+                              <h4>Supprimer/gérer un utilisateur</h4>
 
                             </div>
                           </div>

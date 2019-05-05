@@ -30,7 +30,7 @@ function backOfficeHotel()
       </td>
       <form method="POST" action="change.php">
         <td>
-          <input  name="id" type="hidden" value=" <?php echo $member["idFacture"]; ?> "/>
+          <input  name="id" type="hidden" value=" <?php echo $member["idHotel"]; ?> "/>
           <button  name = "drop" type="submit" class="btn btn-danger">
             Delete
             <span class="glyphicon glyphicon"></span>

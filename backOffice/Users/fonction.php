@@ -6,7 +6,7 @@ define('CONF', '../includehtml/config.php');
 //---------------------------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------------------------
 function backOfficeUser(){
-  include (CONF);
+  require_once (CONF);
 
 
 
@@ -85,20 +85,20 @@ function backOfficeUser(){
         if ($member["isCollaborateur"] == 1){
         echo '
         <td>
-          <form method="POST" action="#">
+          <form method="POST" action="collab.php">
             <input  name="id" type="hidden" value="'.$member["id"].'"/>
-            <input  name="admin" type="hidden" value="1"/>
-            <button name="admin" value="1" class="btn btn-success" onclick="updateAdmin(this.parentElement);"></button>
+            <input  name="collab" type="hidden" value="1"/>
+            <button name="collab" value="1" class="btn btn-success"></button>
           </form>
         </td>';
         }
         else {
           echo '
           <td>
-            <form method="POST" action="#">
+            <form method="POST" action="collab.php">
               <input  name="id" type="hidden" value="'.$member["id"].'"/>
-              <input  name="admin" type="hidden" value="0"/>
-              <button name="admin" value="0" class="btn btn-danger" onclick="updateAdmin(this.parentElement);"></button>
+              <input  name="collab" type="hidden" value="0"/>
+              <button name="collab" value="0" class="btn btn-danger"></button>
             </form>
           </td>';
         }
@@ -108,20 +108,20 @@ function backOfficeUser(){
         if ($member["isDirecteur"] == 1){
         echo '
         <td>
-          <form method="POST" action="#">
+          <form method="POST" action="dir.php">
             <input  name="id" type="hidden" value="'.$member["id"].'"/>
-            <input  name="admin" type="hidden" value="1"/>
-            <button name="admin" value="1" class="btn btn-success" onclick="updateAdmin(this.parentElement);"></button>
+            <input  name="dir" type="hidden" value="1"/>
+            <button name="dir" value="1" class="btn btn-success"></button>
           </form>
         </td>';
         }
         else {
           echo '
           <td>
-            <form method="POST" action="#">
+            <form method="POST" action="dir.php">
               <input  name="id" type="hidden" value="'.$member["id"].'"/>
-              <input  name="admin" type="hidden" value="0"/>
-              <button name="admin" value="0" class="btn btn-danger" onclick="updateAdmin(this.parentElement);"></button>
+              <input  name="dir" type="hidden" value="0"/>
+              <button name="dir" value="0" class="btn btn-danger"></button>
             </form>
           </td>';
         }
@@ -144,7 +144,7 @@ function backOfficeUser(){
 //---------------------------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------------------------
 function showBannedUser(){
-  include (CONF);
+  require_once (CONF);
   $query=$bdd->prepare("SELECT id, email, last_name, first_name, birthday, gender, isAdmin, isBanned FROM USERS WHERE isBanned = 1");
   $query->execute();
 
@@ -194,21 +194,21 @@ function showBannedUser(){
 //---------------------------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------------------------
 function ban($id){
-  include (CONF);
+  require_once (CONF);
   $query = $bdd->prepare("UPDATE USERS SET isBanned = 1 WHERE id =:id");
   $query->execute(["id"=>$id]);
 }
 //---------------------------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------------------------
 function unban($id){
-  include (CONF);
+  require_once (CONF);
   $query = $bdd->prepare("UPDATE USERS SET isBanned = 0 WHERE id = :id");
   $query->execute(["id"=>$id]);
 }
 //---------------------------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------------------------
 function edit($id, $email, $first_name, $last_name, $birthday, $gender){
-  include (CONF);
+  require_once (CONF);
   $query = $bdd->prepare("UPDATE USERS SET email = :email, first_name = :first_name, last_name = :last_name, birthday = :birthday, gender = :gender WHERE id = :id");
   $query->execute([
                   "id"=>$id,
@@ -222,13 +222,39 @@ function edit($id, $email, $first_name, $last_name, $birthday, $gender){
 //---------------------------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------------------------
 function admin($id, $admin){
-  include (CONF);
+  require_once (CONF);
   if($admin == 0){
     $query = $bdd->prepare("UPDATE USERS SET isAdmin = 1 WHERE id =:id");
     $query->execute(["id"=>$id]);
 
   }elseif($admin == 1){
     $query = $bdd->prepare("UPDATE USERS SET isAdmin = 0 WHERE id =:id");
+    $query->execute(["id"=>$id]);
+  }
+}
+//---------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------
+function collab($id, $collab){
+  require_once (CONF);
+  if($collab == 0){
+    $query = $bdd->prepare("UPDATE USERS SET isCollaborateur = 1 WHERE id =:id");
+    $query->execute(["id"=>$id]);
+
+  }elseif($collab == 1){
+    $query = $bdd->prepare("UPDATE USERS SET isCollaborateur = 0 WHERE id =:id");
+    $query->execute(["id"=>$id]);
+  }
+}
+//---------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------
+function dirrec($id, $dir){
+  require_once (CONF);
+  if($dir == 0){
+    $query = $bdd->prepare("UPDATE USERS SET isDirecteur = 1 WHERE id =:id");
+    $query->execute(["id"=>$id]);
+
+  }elseif($dir == 1){
+    $query = $bdd->prepare("UPDATE USERS SET isDirecteur = 0 WHERE id =:id");
     $query->execute(["id"=>$id]);
   }
 }

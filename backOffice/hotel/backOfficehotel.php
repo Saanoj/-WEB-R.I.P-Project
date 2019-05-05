@@ -13,7 +13,7 @@ include 'functionHotel.php';
 
   <?php
   require __DIR__ . '../../../require_class.php';
-  
+
   $type = 2 ;
   $navbar = new App\Navbar($type);
   $navbar->navbar();
@@ -25,7 +25,7 @@ include 'functionHotel.php';
     <?php include_once '../includehtml/navbarBO.php';
     navbarBO("hotel")?>
 
-    <h1>Factures</h1>
+    <h1>Hotel</h1>
     <table class="table">
       <thead>
         <tr>

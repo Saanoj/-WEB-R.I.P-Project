@@ -2,9 +2,11 @@
 require_once 'functionDevis.php';
 if (isset($_POST["edit"])) {
   edit($_POST["id"],
-  $_POST["isValide"],
+  $_POST["idTrajet"],
   $_POST["prixTrajet"],
-  $_POST["prixServices"]
+  $_POST["prixService"],
+  $_POST["prixTotal"],
+  $_POST["dateDevis"]
 );
 header("location: backOfficeDevis.php");
 }
@@ -18,14 +20,19 @@ if (isset($_POST["add"])){
 
   if(
     !(
-    empty($_POST["isValide"])&&
+    empty($_POST["idTrajet"])&&
     empty($_POST["prixTrajet"])&&
-    empty($_POST["prixServices"])
+    empty($_POST["prixService"])&&
+    empty($_POST["prixTotal"])&&
+    empty($_POST["dateDevis"])
   )){
 
-      add($_POST["isValide"],
+      add($_POST["idTrajet"],
       $_POST["prixTrajet"],
-      $_POST["prixServices"]);
+      $_POST["prixService"],
+      $_POST["prixTotal"],
+      $_POST["dateDevis"]
+    );
     }
   header("location: backOfficeDevis.php");
 }

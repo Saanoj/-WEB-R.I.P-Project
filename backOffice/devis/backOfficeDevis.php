@@ -13,7 +13,7 @@ include 'functionDevis.php';
 
   <?php
   require __DIR__ . '../../../require_class.php';
-  
+
   $type = 2 ;
   $navbar = new App\Navbar($type);
   $navbar->navbar();
@@ -30,9 +30,11 @@ include 'functionDevis.php';
       <thead>
         <tr>
           <th scope="col">Id</th>
-          <th scope="col">Validé</th>
-          <th scope="col">Prix Trajet</th>
-          <th scope="col">Prix Services</th>
+          <th scope="col">id du Trajet</th>
+          <th scope="col">Prix du Trajet</th>
+          <th scope="col">Prix des Services</th>
+          <th scope="col">Prix total</th>
+          <th scope="col">Date de la Devis</th>
           <th scope="col">Edit/Add</th>
           <th scope="col">Supprimer</th>
         </tr>

@@ -30,6 +30,7 @@ define("_ADRESSE_ARRIVEE_RESERVATION","Adresse d'arrivée");
 define("_DATE_DEBUT_RESERVATION_TRAJET","Date du trajet");
 define("_HEURE_DEBUT_RESERVATION_TRAJET","Heure du trajet");
 define("_BOUTTON_RESERVATION_TRAJET","Réserver");
+define("_RECHERCHER","Rechercher !");
 
 //navbar
 define("_NAVBAR_INDEX","Ride in Pride");
@@ -41,6 +42,18 @@ define("_NAVBAR_CONTACT","Contactez Nous");
 define("_NAVBAR_DECO","Déconnexion");
 define("_NAVBAR_INSCRIPTION","Inscription");
 define("_NAVBAR_CONNEXION","Connexion");
+
+//footer
+define("_FOOTER_LOCAUX","Nos locaux");
+define("_FOOTER_SERVICES","Nos Services");
+define("_FOOTER_INTERPRETES_COACH","Interpretes et coachs");
+define("_FOOTER_VOITURE","Voitures de luxe");
+define("_FOOTER_BOISSON","Boissons & nourriture");
+define("_FOOTER_SOCIAL","Réseaux sociaux");
+define("_FOOTER_EXP","Experience hors-norme");
+define("_FOOTER_LANGUE","Langues");
+define("_FOOTER_VENIR","à venir");
+define("_FOOTER_PARTAGE","Partager");
 
 
 // RESERVATION Services
@@ -110,18 +123,18 @@ define("_SUR_VOTE", "sur");
 define("_DRIVER_INFO", "PLUS D'INFORMATION");
 
 // Informations modal CHAUFFEUR
-define("_DRIVER_INFO_VILLE", "Ville d'operation : "); 
-define("_DRIVER_INFO_HEURE", "Heures Travailées : "); 
-define("_DRIVER_INFO_DATE", "Date d'embauche : "); 
+define("_DRIVER_INFO_VILLE", "Ville d'operation : ");
+define("_DRIVER_INFO_HEURE", "Heures Travailées : ");
+define("_DRIVER_INFO_DATE", "Date d'embauche : ");
 
-define("_DRIVER_INFO_MARQUE", "Marque : "); 
-define("_DRIVER_INFO_MODELE", "Modèle : "); 
-define("_DRIVER_INFO_COULEUR", "Couleur : "); 
-define("_DRIVER_INFO_PLACES", "Places : "); 
+define("_DRIVER_INFO_MARQUE", "Marque : ");
+define("_DRIVER_INFO_MODELE", "Modèle : ");
+define("_DRIVER_INFO_COULEUR", "Couleur : ");
+define("_DRIVER_INFO_PLACES", "Places : ");
 
-define("_DRIVER_INFO_VEHICULE", "Véhicule : "); 
+define("_DRIVER_INFO_VEHICULE", "Véhicule : ");
 
-define("_DRIVER_INFO_DESCRIPTION", "Description : "); 
+define("_DRIVER_INFO_DESCRIPTION", "Description : ");
 define("_DRIVER_INFO_CHOISIR_DRIVER", "Choisir : ");
 define("_DRIVER_INFO_VALIDER_DRIVER", "Valider :");
 
@@ -169,3 +182,42 @@ define("_SERVICE_TITLE_DATE_EXPIRATION","Date d'expiration");
 define("_SERVICE_TITLE_CVV", "CVV.");
 define("_SERVICE_TITLE_PAYER", "Payez maintenant");
 ?>
+
+//SERVICES coachCulture
+define("_COACH_VERIFY_H","Pour que votre réservation soit valide, l'heure de début doit etre égal ou supérieur a l'heure du trajet.");
+
+define("_COACH_NOM","Nom : ");
+define("_COACH_PRENOM","Prenom : ");
+define("_COACH_PRIX", "Prix : ");
+define("_COACH_NOTE", "Note");
+define("_COACH_DOMAINE", "Domaine");
+
+define("_COACH_LANGUE", "Langue : ");
+define("_COACH_HEURES", "Heures :");
+
+define("_COACH_DOMAINE_HEURES", "Heures");
+define("_COACH_CHOIX_CULTURE","Choisir ce coach");
+define("_COACH_CHOIX_INTERPRETE","Choisir cet interprete");
+
+define("_INTERPRETE_H","Heure de l'interprète");
+define("_INTERPRETE_TITLE","Réservation d'un interprête pendant la journée du trajet, veuillez choisir une plage horraire : ");
+
+
+define("_COACH_SPORTIF_H","Heure du coach sportif");
+define("_COACH_SPORTIF_TITLE","Réservation d'un coach sportif pendant la journée du trajet, veuillez choisir une plage horraire :");
+
+
+define("_COACH_CULTURE_H","Heure du coach culture");
+define("_COACH_CULTURE_TITLE","Réservation d'un coach cultures pendant la journée du trajet, veuillez choisir une plage horraire :");
+
+
+define("_COACH_START","Debut");
+define("_COACH_END","Fin");
+
+
+
+
+
+
+
+ ?>

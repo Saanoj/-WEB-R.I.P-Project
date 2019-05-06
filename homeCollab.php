@@ -236,6 +236,26 @@ session_start();
          ?>
 
       </div>
+      <div class="dropdown-divider"></div>
+      <h3>Mes rémunérations</h3>
+      <div class="container m-5">
+
+        <?php
+        $idCollaborateur = $_SESSION["id"];
+
+        $list = $bdd->query('SELECT * FROM remuneration WHERE idCollab = '.$idCollaborateur.'');
+
+        if (empty($list)) {
+          echo "Aucun trajets dans cette liste";
+        } else {
+          foreach ($list as $item) {
+            $trip = $bdd->queryOne('SELECT * FROM trajet WHERE idtrajet = '.$item["idTrajet"].'');
+            echo "<p class='row'><strong>Tajet </strong>: id-".$trip["idTrajet"]." le ".$trip["heureDebut"]." pour un prix de ".$item["Price"]." € </p>\n";
+          }
+        }
+         ?>
+
+      </div>
 
 
     </div>

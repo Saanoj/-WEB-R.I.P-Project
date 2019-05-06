@@ -30,6 +30,7 @@ define("_ADRESSE_ARRIVEE_RESERVATION","End location");
 define("_DATE_DEBUT_RESERVATION_TRAJET","Trip date");
 define("_HEURE_DEBUT_RESERVATION_TRAJET","Trip time");
 define("_BOUTTON_RESERVATION_TRAJET","Validate");
+define("_RECHERCHER","Book !");
 
 define("_TITRE_INFO1_RESERVATION","Secure trips");
 define("_INFO1_RESERVATION","We take your comfort and security very seriously.");
@@ -49,6 +50,18 @@ define("_NAVBAR_CONTACT","Contact us");
 define("_NAVBAR_DECO","Deconnect");
 define("_NAVBAR_INSCRIPTION","Sign in");
 define("_NAVBAR_CONNEXION","Log in");
+
+//footer
+define("_FOOTER_LOCAUX","Our spaces");
+define("_FOOTER_SERVICES","Our Services");
+define("_FOOTER_INTERPRETES_COACH","Translators and coaches");
+define("_FOOTER_VOITURE","Deluxe cars");
+define("_FOOTER_BOISSON","Food & beverages");
+define("_FOOTER_SOCIAL","Social Media");
+define("_FOOTER_EXP","User Experience");
+define("_FOOTER_LANGUE","Languages");
+define("_FOOTER_VENIR","Cominf soon");
+define("_FOOTER_PARTAGE","Share");
 
 // RESERVATION Services
 define("_TITRE_SERVICE","Reservation of your services");
@@ -108,18 +121,18 @@ define("_SUR_VOTE", "of");
 define("_DRIVER_INFO", "MORE INFORMATION");
 
 // Informations modal CHAUFFEUR
-define("_DRIVER_INFO_VILLE", "City of operation :"); 
-define("_DRIVER_INFO_HEURE", "Hours worked :"); 
-define("_DRIVER_INFO_DATE", "Hiring date :"); 
+define("_DRIVER_INFO_VILLE", "City of operation :");
+define("_DRIVER_INFO_HEURE", "Hours worked :");
+define("_DRIVER_INFO_DATE", "Hiring date :");
 
-define("_DRIVER_INFO_MARQUE", "Brand :" ); 
-define("_DRIVER_INFO_MODELE", "Model :"); 
-define("_DRIVER_INFO_COULEUR", "Color :"); 
-define("_DRIVER_INFO_PLACES", "Seats :"); 
+define("_DRIVER_INFO_MARQUE", "Brand :" );
+define("_DRIVER_INFO_MODELE", "Model :");
+define("_DRIVER_INFO_COULEUR", "Color :");
+define("_DRIVER_INFO_PLACES", "Seats :");
 
-define("_DRIVER_INFO_VEHICULE", "Car:"); 
+define("_DRIVER_INFO_VEHICULE", "Car:");
 
-define("_DRIVER_INFO_DESCRIPTION", "Description : "); 
+define("_DRIVER_INFO_DESCRIPTION", "Description : ");
 define("_DRIVER_INFO_CHOISIR_DRIVER", "Choose : ");
 define("_DRIVER_INFO_VALIDER_DRIVER", "Validate");
 
@@ -166,3 +179,34 @@ define("_SERVICE_TITLE_DATE_EXPIRATION", "Expiration date");
 define("_SERVICE_TITLE_CVV", "CVV.");
 define("_SERVICE_TITLE_PAYER", "Pay now");
 ?>
+
+
+define("_COACH_VERIFY_H","For your booking to be valid, the time of start needs to be above of the trip start.");
+
+define("_COACH_NOM","Name : ");
+define("_COACH_PRENOM","Surname : ");
+define("_COACH_PRIX", "Price : ");
+define("_COACH_NOTE", "Note");
+define("_COACH_DOMAINE", "Domain");
+
+define("_COACH_LANGUE", "Language : ");
+define("_COACH_HEURES", "Hours :");
+
+define("_COACH_DOMAINE_HEURES", "Hours");
+define("_COACH_CHOIX_CULTURE","Choose this coach");
+define("_COACH_CHOIX_INTERPRETE","Choose this translator");
+
+define("_INTERPRETE_H","Time of the translator");
+define("_INTERPRETE_TITLE","Booking of a translator for the day, please choose a range of time : ");
+
+
+define("_COACH_SPORTIF_H","Time of the sports coach");
+define("_COACH_SPORTIF_TITLE","Booking of a sports coach for the day, please choose a range of time :");
+
+
+define("_COACH_CULTURE_H","Time of the culture coach");
+define("_COACH_CULTURE_TITLE","Booking of a culture coach for the day, please choose a range of time :");
+
+
+define("_COACH_START","Start");
+define("_COACH_END","End");

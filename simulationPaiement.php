@@ -52,8 +52,8 @@ include 'includehtml/head.html'; ?>
         </div>
         <noscript>
           <div class="bs-callout bs-callout-danger">
-            <h4>JavaScript n'est pas installé.</h4>
-            <p>Activez javaScript puis reloader la page. Regarder <a href="http://enable-javascript.com" target="_blank">enable-javascript.com</a> for more informations.</p>
+            <h4><?= _SERVICE_TITLE_PAIEMENT?></h4>
+            <p><?=_SERVICE_TITLE_JAVASCRIPT?> Regarder <a href="http://enable-javascript.com" target="_blank">enable-javascript.com</a> for more informations.</p>
           </div>
         </noscript>
         <?php

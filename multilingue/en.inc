@@ -178,7 +178,7 @@ define("_SERVICE_TITLE_NUMERO_CARTE", "Card number");
 define("_SERVICE_TITLE_DATE_EXPIRATION", "Expiration date");
 define("_SERVICE_TITLE_CVV", "CVV.");
 define("_SERVICE_TITLE_PAYER", "Pay now");
-?>
+
 
 
 define("_COACH_VERIFY_H","For your booking to be valid, the time of start needs to be above of the trip start.");

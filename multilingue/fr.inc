@@ -181,7 +181,7 @@ define("_SERVICE_TITLE_NUMERO_CARTE", "Numéro de carte");
 define("_SERVICE_TITLE_DATE_EXPIRATION","Date d'expiration");
 define("_SERVICE_TITLE_CVV", "CVV.");
 define("_SERVICE_TITLE_PAYER", "Payez maintenant");
-?>
+
 
 //SERVICES coachCulture
 define("_COACH_VERIFY_H","Pour que votre réservation soit valide, l'heure de début doit etre égal ou supérieur a l'heure du trajet.");
@@ -213,11 +213,4 @@ define("_COACH_CULTURE_TITLE","Réservation d'un coach cultures pendant la journ
 
 define("_COACH_START","Debut");
 define("_COACH_END","Fin");
-
-
-
-
-
-
-
  ?>

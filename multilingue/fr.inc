@@ -140,7 +140,7 @@ define("_DRIVER_INFO_VALIDER_DRIVER", "Valider :");
 
 
 // Les services
-define("_SERVICE_OUVRIR", "Ouvrir"); 
+define("_SERVICE_OUVRIR", "Ouvrir");
 
 // SERVICE 1
 define("_SERVICE1_NOM_RESTAURANT", "Nom du restaurant :");
@@ -175,13 +175,15 @@ define("_SERVICE_TITLE_PAIEMENT", "Paiement sécurisé");
 define("_SERVICE_TITLE_JAVASCRIPT", "JavaScript n'est pas installé.");
 define("_SERVICE_TITLE_ACTIVE_JAVASCRIPT", "Activez javaScript puis reloader la page.");
 
-// Carte bleu 
+// Carte bleu
 
 define("_SERVICE_TITLE_NUMERO_CARTE", "Numéro de carte");
 define("_SERVICE_TITLE_DATE_EXPIRATION","Date d'expiration");
 define("_SERVICE_TITLE_CVV", "CVV.");
 define("_SERVICE_TITLE_PAYER", "Payez maintenant");
 
+//SERVICES
+define("_SERVICES_CHOISIR","Choisir");
 
 //SERVICES coachCulture
 define("_COACH_VERIFY_H","Pour que votre réservation soit valide, l'heure de début doit etre égal ou supérieur a l'heure du trajet.");

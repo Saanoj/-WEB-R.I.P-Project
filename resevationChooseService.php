@@ -408,8 +408,8 @@ session_start();
                                 $interprete = $bdd->getPDO()->prepare('SELECT * FROM collaborateurs WHERE metier="interprete" ORDER BY idCollaborateurs DESC LIMIT 4 ');
                                 $interprete->execute();
                                 ?>
-                                <h4> Réservation d'un interprête pendant la journée du trajet, veuillez choisir une plage horraire : </h4>
-                                <h6>Pour que votre réservation soit valide, l'heure de début doit etre égal ou supérieur a l'heure du trajet. (<?= $res[1]; ?>h) </h6>
+                                <h4> <?php echo _INTERPRETE_TITLE ?></h4>
+                                <h6><?php echo _COACH_VERIFY_H ?> (<?= $res[1]; ?>h) </h6>
                                 <br> <br> <br>
                                 <?php
                                 $j=0;
@@ -419,12 +419,12 @@ session_start();
                                   <table>
 
                                     <tr>
-                                      <th scope="col">Nom : </th>
-                                      <th scope="col">Prenom : </th>
-                                      <th scope="col">Prix :</th>
-                                      <th scope="col">Note</th>
-                                      <th scope="col">Langue:</th>
-                                      <th scope="col">Heures:</th>
+                                      <th scope="col"><?php echo _COACH_NOM ?></th>
+                                      <th scope="col"><?php echo _COACH_PRENOM ?> </th>
+                                      <th scope="col"><?php echo _COACH_PRIX ?></th>
+                                      <th scope="col"><?php echo _COACH_NOTE ?></th>
+                                      <th scope="col"><?php echo _COACH_LANGUE ?></th>
+                                      <th scope="col"><?php echo _COACH_HEURES ?></th>
                                     </tr>
                                     <tr>
                                       <th scope="row"> <?= $unInterprete['last_name'];?></th>
@@ -435,10 +435,10 @@ session_start();
                                       <td>
                                         <div class="funkyradio-primary col-md-6 center-block">
                                           <input type="checkbox" name="idInterprete<?php echo $unInterprete['idCollaborateurs']?>" id="<?php echo $unInterprete['idCollaborateurs'] ?>" value="<?php echo $unInterprete['idCollaborateurs'] ?>" onchange="checkRadioInterprete(this)">
-                                          <label for="radio<?php echo $unInterprete['idCollaborateurs'] ?>">Choisir cet interprète</label>
+                                          <label for="radio<?php echo $unInterprete['idCollaborateurs'] ?>"><?php echo _COACH_CHOIX_INTERPRETE ?></label>
                                         </div>
                                         <div>
-                                        <button style="visibility:hidden" id="buttonHours<?php echo $unInterprete['idCollaborateurs']?>" type="button" class="btn btn-primary" data-toggle="modal" data-target="#heuresInterprete<?php echo $unInterprete['idCollaborateurs']?>">Heures</button>
+                                        <button style="visibility:hidden" id="buttonHours<?php echo $unInterprete['idCollaborateurs']?>" type="button" class="btn btn-primary" data-toggle="modal" data-target="#heuresInterprete<?php echo $unInterprete['idCollaborateurs']?>"><?php echo _COACH_DOMAINE_HEURES ?></button>
 
 
                                         <input type="hidden" id="heureTrajetFin"value="<?= $resFin;?>">
@@ -448,11 +448,11 @@ session_start();
                                               <!-- Modal content-->
                                               <div class="modal-content">
                                               <div class="modal-header">
-                                          <h4 class="modal-title">Heure de l'interprète <?= $unInterprete['first_name']." ".$unInterprete['last_name']; ?></h4>
+                                          <h4 class="modal-title"> <?php echo _INTERPRETE_H ?> <?= $unInterprete['first_name']." ".$unInterprete['last_name']; ?></h4>
                                           </div>
                                          <div id="interprete" class="modal-body">
-                                         Debut <input type="time" id="startInterprete<?= $unInterprete['idCollaborateurs'] ?>" value="<?= $res[1]; ?>" name="startInterprete<?= $unInterprete['idCollaborateurs'] ?>" onchange="checkHeureDebutInterprete(this)">
-                                         Fin  <input type="time" id="endInterprete<?= $unInterprete['idCollaborateurs'] ?>" value="<?= $resFin; ?>" name="endInterprete<?= $unInterprete['idCollaborateurs'] ?>"  onchange="checkHeureFinInterprete(this)">
+                                         <?php echo _COACH_START ?> <input type="time" id="startInterprete<?= $unInterprete['idCollaborateurs'] ?>" value="<?= $res[1]; ?>" name="startInterprete<?= $unInterprete['idCollaborateurs'] ?>" onchange="checkHeureDebutInterprete(this)">
+                                         <?php echo _COACH_FIN ?>  <input type="time" id="endInterprete<?= $unInterprete['idCollaborateurs'] ?>" value="<?= $resFin; ?>" name="endInterprete<?= $unInterprete['idCollaborateurs'] ?>"  onchange="checkHeureFinInterprete(this)">
 
                                                 </div>
                                                 <div class="modal-footer"> <div>
@@ -473,8 +473,8 @@ session_start();
                                 $coachSportif = $bdd->getPDO()->prepare('SELECT * FROM collaborateurs WHERE metier="coachSportif" ORDER BY idCollaborateurs DESC LIMIT 4 ');
                                 $coachSportif->execute();
                                 ?>
-                                <h4> Réservation d'un coach sportif pendant la journée du trajet, veuillez choisir une plage horraire : </h4>
-                                <h6>Pour que votre réservation soit valide, l'heure de début doit etre égal ou supérieur a l'heure du trajet. (<?= $res[1]; ?>h) </h6>
+                                <h4><?php echo _COACH_SPORTIF_TITLE ?></h4>
+                                <h6><?php echo _COACH_VERIFY_H ?> (<?= $res[1]; ?>h) </h6>
                                 <br> <br> <br>
                                 <?php
                                 $j=0;
@@ -483,11 +483,11 @@ session_start();
                                   ?>
                                   <table>
                                     <tr>
-                                      <th scope="col">Nom : </th>
-                                      <th scope="col">Prenom : </th>
-                                      <th scope="col">Prix :</th>
-                                      <th scope="col">Note</th>
-                                      <th scope="col">Domaine:</th>
+                                      <th scope="col"><?php echo _COACH_NOM ?></th>
+                                      <th scope="col"><?php echo _COACH_PRENOM ?> </th>
+                                      <th scope="col"><?php echo _COACH_PRIX ?></th>
+                                      <th scope="col"><?php echo _COACH_NOTE ?></th>
+                                      <th scope="col"><?php echo _COACH_DOMAINE ?></th>
                                     </tr>
                                     <tr>
                                       <th scope="row"> <?= $unCoachSportif['last_name'];?></th>
@@ -498,19 +498,19 @@ session_start();
                                       <td>
                                         <div class="funkyradio-primary col-md-6 center-block">
                                           <input type="checkbox" name="idCoachSportif<?=$unCoachSportif['idCollaborateurs']?>" id="<?php echo $unCoachSportif['idCollaborateurs'] ?>" value="<?php echo $unCoachSportif['idCollaborateurs'] ?>" onchange="checkRadioCoachSportifs(this)">
-                                          <label for="radio<?php echo $unCoachSportif['idCollaborateurs'] ?>">Choisir ce coach</label>
-                                          <button style="visibility:hidden" id="buttonHours<?php echo $unCoachSportif['idCollaborateurs']?>" type="button" class="btn btn-primary" data-toggle="modal" data-target="#heuresCoachSportif<?php echo $unCoachSportif['idCollaborateurs']?>">Heures</button>
+                                          <label for="radio<?php echo $unCoachSportif['idCollaborateurs'] ?>"><?php echo _COACH_CHOIX_CULTURE ?></label>
+                                          <button style="visibility:hidden" id="buttonHours<?php echo $unCoachSportif['idCollaborateurs']?>" type="button" class="btn btn-primary" data-toggle="modal" data-target="#heuresCoachSportif<?php echo $unCoachSportif['idCollaborateurs']?>"><?php echo _COACH_DOMAINE_HEURES ?></button>
                                         </div>
                                         <div id="heuresCoachSportif<?php echo $unCoachSportif['idCollaborateurs']?>" class="modal fade" role="dialog" style="z-index: 1400;">
                                             <div class="modal-dialog modal-dialog-centered">
                                               <!-- Modal content-->
                                               <div class="modal-content">
                                               <div class="modal-header">
-                                          <h4 class="modal-title">Heure du coach sportif <?= $unCoachSportif['first_name']." ".$unCoachSportif['last_name']; ?></h4>
+                                          <h4 class="modal-title"><?php echo _COACH_SPORTIF_H ?> <?= $unCoachSportif['first_name']." ".$unCoachSportif['last_name']; ?></h4>
                                           </div>
                                          <div id="interprete" class="modal-body">
-                                         Debut <input type="time" id="startCoachSportif<?= $unCoachSportif['idCollaborateurs'] ?>" value="<?= $res[1]; ?>" name="startCoachSportif<?= $unCoachSportif['idCollaborateurs'] ?>" onchange="checkHeureDebutSportif(this)">
-                                         Fin  <input type="time" id="endCoachSportif<?= $unCoachSportif['idCollaborateurs'] ?>" value="<?= $resFin; ?>" name="endCoachSportif<?= $unCoachSportif['idCollaborateurs'] ?>"  onchange="checkHeureFinSportif(this)">
+                                         <?php echo _COACH_START ?> <input type="time" id="startCoachSportif<?= $unCoachSportif['idCollaborateurs'] ?>" value="<?= $res[1]; ?>" name="startCoachSportif<?= $unCoachSportif['idCollaborateurs'] ?>" onchange="checkHeureDebutSportif(this)">
+                                         <?php echo _COACH_END ?>  <input type="time" id="endCoachSportif<?= $unCoachSportif['idCollaborateurs'] ?>" value="<?= $resFin; ?>" name="endCoachSportif<?= $unCoachSportif['idCollaborateurs'] ?>"  onchange="checkHeureFinSportif(this)">
 
                                                 </div>
                                                 <div class="modal-footer"> <div>
@@ -530,8 +530,8 @@ session_start();
                                 $coachCulture = $bdd->getPDO()->prepare('SELECT * FROM collaborateurs WHERE metier="coachCulture" ORDER BY idCollaborateurs DESC LIMIT 4 ');
                                 $coachCulture->execute();
                                 ?>
-                                <h4> Réservation d'un coach cultures pendant la journée du trajet, veuillez choisir une plage horraire : </h4>
-                                <h6>Pour que votre réservation soit valide, l'heure de début doit etre égal ou supérieur a l'heure du trajet. (<?= $res[1]; ?>h) </h6>
+                                <h4> <?php echo _COACH_CULTURE_TITLE ?></h4>
+                                <h6><?php echo _COACH_VERIFY_H ?>(<?= $res[1]; ?>h) </h6>
                                  <br> <br> <br>
                                 <?php
                                 $j=0;
@@ -540,11 +540,11 @@ session_start();
                                   ?>
                                   <table>
                                     <tr>
-                                      <th scope="col">Nom : </th>
-                                      <th scope="col">Prenom : </th>
-                                      <th scope="col">Prix :</th>
-                                      <th scope="col">Note</th>
-                                      <th scope="col">Domaine:</th>
+                                      <th scope="col"><?php echo _COACH_NOM ?></th>
+                                      <th scope="col"><?php echo _COACH_PRENOM ?> </th>
+                                      <th scope="col"><?php echo _COACH_PRIX ?></th>
+                                      <th scope="col"><?php echo _COACH_NOTE ?></th>
+                                      <th scope="col"><?php echo _COACH_DOMAINE ?></th>
                                     </tr>
                                     <tr>
                                       <th scope="row"> <?= $unCoachCulture['last_name'];?></th>
@@ -555,18 +555,18 @@ session_start();
                                       <td>
                                         <div class="funkyradio-primary col-md-6 center-block">
                                         <input type="checkbox" name="idCoachCulture<?=$unCoachCulture['idCollaborateurs']?>" id="<?php echo $unCoachCulture['idCollaborateurs'] ?>" value="<?php echo $unCoachCulture['idCollaborateurs'] ?>" onchange="checkRadioCoachCulture(this)">
-                                          <label for="radio<?php echo $unCoachCulture['idCollaborateurs'] ?>">Choisir ce coach</label>
-                                          <button style="visibility:hidden" id="buttonHours<?php echo $unCoachCulture['idCollaborateurs']?>" type="button" class="btn btn-primary" data-toggle="modal" data-target="#heuresCoachCulture<?php echo $unCoachCulture['idCollaborateurs']?>">Heures</button>
+                                          <label for="radio<?php echo $unCoachCulture['idCollaborateurs'] ?>"><?php echo _COACH_CHOIX_CULTURE ?></label>
+                                          <button style="visibility:hidden" id="buttonHours<?php echo $unCoachCulture['idCollaborateurs']?>" type="button" class="btn btn-primary" data-toggle="modal" data-target="#heuresCoachCulture<?php echo $unCoachCulture['idCollaborateurs']?>"><?php echo _COACH_DOMAINE_HEURES ?></button>
                                           <div id="heuresCoachCulture<?php echo $unCoachCulture['idCollaborateurs']?>" class="modal fade" role="dialog" style="z-index: 1400;">
                                             <div class="modal-dialog modal-dialog-centered">
                                               <!-- Modal content-->
                                               <div class="modal-content">
                                               <div class="modal-header">
-                                          <h4 class="modal-title">Heure du coach culture <?= $unCoachCulture['first_name']." ".$unCoachCulture['last_name']; ?></h4>
+                                          <h4 class="modal-title"><?php echo _COACH_CULTURE_H ?> <?= $unCoachCulture['first_name']." ".$unCoachCulture['last_name']; ?></h4>
                                           </div>
                                          <div id="interprete" class="modal-body">
-                                         Debut <input type="time" id="startCoachCulture<?= $unCoachCulture['idCollaborateurs'] ?>" value="<?= $res[1]; ?>" name="startCoachCulture<?= $unCoachCulture['idCollaborateurs'] ?>" onchange="checkHeureDebutCulture(this)">
-                                         Fin  <input type="time" id="endCoachCulture<?= $unCoachCulture['idCollaborateurs'] ?>" value="<?= $resFin; ?>" name="endCoachCulture<?= $unCoachCulture['idCollaborateurs'] ?>"  onchange="checkHeureFinCulture(this)">
+                                         <?php echo _COACH_START ?> <input type="time" id="startCoachCulture<?= $unCoachCulture['idCollaborateurs'] ?>" value="<?= $res[1]; ?>" name="startCoachCulture<?= $unCoachCulture['idCollaborateurs'] ?>" onchange="checkHeureDebutCulture(this)">
+                                         <?php echo _COACH_FIN ?>  <input type="time" id="endCoachCulture<?= $unCoachCulture['idCollaborateurs'] ?>" value="<?= $resFin; ?>" name="endCoachCulture<?= $unCoachCulture['idCollaborateurs'] ?>"  onchange="checkHeureFinCulture(this)">
 
                                                 </div>
                                                 <div class="modal-footer"> <div>

@@ -138,4 +138,43 @@ define("_DRIVER_INFO_DESCRIPTION", "Description : ");
 define("_DRIVER_INFO_CHOISIR_DRIVER", "Choisir : ");
 define("_DRIVER_INFO_VALIDER_DRIVER", "Valider :");
 
+
+
+//SERVICES coachCulture
+define("_COACH_VERIFY_H","Pour que votre réservation soit valide, l'heure de début doit etre égal ou supérieur a l'heure du trajet.");
+
+define("_COACH_NOM","Nom : ");
+define("_COACH_PRENOM","Prenom : ");
+define("_COACH_PRIX", "Prix : ");
+define("_COACH_NOTE", "Note");
+define("_COACH_DOMAINE", "Domaine");
+
+define("_COACH_LANGUE", "Langue : ");
+define("_COACH_HEURES", "Heures :");
+
+define("_COACH_DOMAINE_HEURES", "Heures");
+define("_COACH_CHOIX_CULTURE","Choisir ce coach");
+define("_COACH_CHOIX_INTERPRETE","Choisir cet interprete");
+
+define("_INTERPRETE_H","Heure de l'interprète");
+define("_INTERPRETE_TITLE","Réservation d'un interprête pendant la journée du trajet, veuillez choisir une plage horraire : ");
+
+
+define("_COACH_SPORTIF_H","Heure du coach sportif");
+define("_COACH_SPORTIF_TITLE","Réservation d'un coach sportif pendant la journée du trajet, veuillez choisir une plage horraire :");
+
+
+define("_COACH_CULTURE_H","Heure du coach culture");
+define("_COACH_CULTURE_TITLE","Réservation d'un coach cultures pendant la journée du trajet, veuillez choisir une plage horraire :");
+
+
+define("_COACH_START","Debut");
+define("_COACH_END","Fin");
+
+
+
+
+
+
+
  ?>

@@ -135,3 +135,35 @@ define("_DRIVER_INFO_VEHICULE", "Car:");
 define("_DRIVER_INFO_DESCRIPTION", "Description : ");
 define("_DRIVER_INFO_CHOISIR_DRIVER", "Choose : ");
 define("_DRIVER_INFO_VALIDER_DRIVER", "Validate");
+
+
+
+define("_COACH_VERIFY_H","For your booking to be valid, the time of start needs to be above of the trip start.");
+
+define("_COACH_NOM","Name : ");
+define("_COACH_PRENOM","Surname : ");
+define("_COACH_PRIX", "Price : ");
+define("_COACH_NOTE", "Note");
+define("_COACH_DOMAINE", "Domain");
+
+define("_COACH_LANGUE", "Language : ");
+define("_COACH_HEURES", "Hours :");
+
+define("_COACH_DOMAINE_HEURES", "Hours");
+define("_COACH_CHOIX_CULTURE","Choose this coach");
+define("_COACH_CHOIX_INTERPRETE","Choose this translator");
+
+define("_INTERPRETE_H","Time of the translator");
+define("_INTERPRETE_TITLE","Booking of a translator for the day, please choose a range of time : ");
+
+
+define("_COACH_SPORTIF_H","Time of the sports coach");
+define("_COACH_SPORTIF_TITLE","Booking of a sports coach for the day, please choose a range of time :");
+
+
+define("_COACH_CULTURE_H","Time of the culture coach");
+define("_COACH_CULTURE_TITLE","Booking of a culture coach for the day, please choose a range of time :");
+
+
+define("_COACH_START","Start");
+define("_COACH_END","End");

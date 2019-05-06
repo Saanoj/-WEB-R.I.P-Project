@@ -172,7 +172,7 @@ define("_SERVICE_TITLE_PAIEMENT", "Secured payment");
 define("_SERVICE_TITLE_JAVASCRIPT", "JavaScript is not installed.");
 define("_SERVICE_TITLE_ACTIVE_JAVASCRIPT", "Activate javaScript and reload the page.");
 
-// Carte bleu 
+// Carte bleu
 
 define("_SERVICE_TITLE_NUMERO_CARTE", "Card number");
 define("_SERVICE_TITLE_DATE_EXPIRATION", "Expiration date");
@@ -180,6 +180,7 @@ define("_SERVICE_TITLE_CVV", "CVV.");
 define("_SERVICE_TITLE_PAYER", "Pay now");
 
 
+define("_SERVICES_CHOISIR","Choose");
 
 define("_COACH_VERIFY_H","For your booking to be valid, the time of start needs to be above of the trip start.");
 

@@ -116,7 +116,7 @@ session_start();
                           <input type="checkbox" class="primary" id="<?php echo $service->getIdService(); ?>" name="services[<?php echo $i ?>]" value="<?php echo $service->getIdService(); ?>" onchange="checkInput(this)">
                           <span class="slider round" id="slider<?=$service->getIdService();?>"></span>
                         </label>
-                        <button style="visibility:hidden" id="services[<?php echo $i ?>]" type="button" href="#costumModal<?php echo $i ?>" data-target="#costumModal<?php echo $i ?>" name="services[<?php echo $service->getIdService(); ?>]" class="btn btn-info" data-toggle="modal">Choisir</button>
+      <button style="visibility:hidden" id="services[<?php echo $i ?>]" type="button" href="#costumModal<?php echo $i ?>" data-target="#costumModal<?php echo $i ?>" name="services[<?php echo $service->getIdService(); ?>]" class="btn btn-info" data-toggle="modal"><?php echo _SERVICES_CHOISIR; ?></button>
                       </div>
 
 
@@ -452,7 +452,7 @@ session_start();
                                           </div>
                                          <div id="interprete" class="modal-body">
                                          <?php echo _COACH_START ?> <input type="time" id="startInterprete<?= $unInterprete['idCollaborateurs'] ?>" value="<?= $res[1]; ?>" name="startInterprete<?= $unInterprete['idCollaborateurs'] ?>" onchange="checkHeureDebutInterprete(this)">
-                                         <?php echo _COACH_FIN ?>  <input type="time" id="endInterprete<?= $unInterprete['idCollaborateurs'] ?>" value="<?= $resFin; ?>" name="endInterprete<?= $unInterprete['idCollaborateurs'] ?>"  onchange="checkHeureFinInterprete(this)">
+                                         <?php echo _COACH_END ?>  <input type="time" id="endInterprete<?= $unInterprete['idCollaborateurs'] ?>" value="<?= $resFin; ?>" name="endInterprete<?= $unInterprete['idCollaborateurs'] ?>"  onchange="checkHeureFinInterprete(this)">
 
                                                 </div>
                                                 <div class="modal-footer"> <div>
@@ -566,7 +566,7 @@ session_start();
                                           </div>
                                          <div id="interprete" class="modal-body">
                                          <?php echo _COACH_START ?> <input type="time" id="startCoachCulture<?= $unCoachCulture['idCollaborateurs'] ?>" value="<?= $res[1]; ?>" name="startCoachCulture<?= $unCoachCulture['idCollaborateurs'] ?>" onchange="checkHeureDebutCulture(this)">
-                                         <?php echo _COACH_FIN ?>  <input type="time" id="endCoachCulture<?= $unCoachCulture['idCollaborateurs'] ?>" value="<?= $resFin; ?>" name="endCoachCulture<?= $unCoachCulture['idCollaborateurs'] ?>"  onchange="checkHeureFinCulture(this)">
+                                         <?php echo _COACH_END ?>  <input type="time" id="endCoachCulture<?= $unCoachCulture['idCollaborateurs'] ?>" value="<?= $resFin; ?>" name="endCoachCulture<?= $unCoachCulture['idCollaborateurs'] ?>"  onchange="checkHeureFinCulture(this)">
 
                                                 </div>
                                                 <div class="modal-footer"> <div>

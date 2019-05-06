@@ -122,3 +122,47 @@ define("_DRIVER_INFO_VEHICULE", "Car:");
 define("_DRIVER_INFO_DESCRIPTION", "Description : "); 
 define("_DRIVER_INFO_CHOISIR_DRIVER", "Choose : ");
 define("_DRIVER_INFO_VALIDER_DRIVER", "Validate");
+
+// Les services
+define("_SERVICE_OUVRIR", "Open");
+
+// SERVICE 1
+define("_SERVICE1_NOM_RESTAURANT", "Name of restaurant :");
+define("_SERVICE1_ADRESSE", "Adress :");
+define("_SERVICE1_PRIX", "Price :");
+define("_SERVICE1_QUANTITE", "Quantity :");
+
+// Service 7
+define("_SERVICE7_NOM_HOTEL", "Name of hotel :");
+define("_SERVICE7_ADRESSE", "Adress :");
+define("_SERVICE7_PRIX", "Price :");
+define("_SERVICE7_TYPE_CHAMBRE", "Type of room :");
+define("_SERVICE7_NOM_LIT", "Beds available :");
+define("_SERVICE7_CHOIX_HORRAIRES", "Choice of horraires :");
+define("_SERVICE7_HORRAIRES", "Hours for hotel");
+define("_SERVICE7_DEBUT", "Start");
+define("_SERVICE7_CHOOSE", "Choose");
+define("_SERVICE7_HEURES", "Hours");
+
+// Service 8
+define("_SERVICE8_NOM_BILLET", "ticket name :");
+define("_SERVICE8_VALIDITE", "Validity :");
+define("_SERVICE8_VILLE", "City :");
+define("_SERVICE8_HORRAIRES", "Hours for ");
+
+// Service 10
+define("_SERVICE10_TEXT", "You want a service that is not present? Send us your request and we will examine it within 24 hours");
+
+
+// Simulation paiement
+define("_SERVICE_TITLE_PAIEMENT", "Secured payment");
+define("_SERVICE_TITLE_JAVASCRIPT", "JavaScript is not installed.");
+define("_SERVICE_TITLE_ACTIVE_JAVASCRIPT", "Activate javaScript and reload the page.");
+
+// Carte bleu 
+
+define("_SERVICE_TITLE_NUMERO_CARTE", "Card number");
+define("_SERVICE_TITLE_DATE_EXPIRATION", "Expiration date");
+define("_SERVICE_TITLE_CVV", "CVV.");
+define("_SERVICE_TITLE_PAYER", "Pay now");
+?>

@@ -93,7 +93,7 @@ session_start();
                     <li class="list-group-item row bg-white">
                       <a class="h3 col-md-9" style="color:black"><?php echo $unService["categorie"] ?></a>
                       <!--<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample  " aria-expanded="false" aria-controls="collapseExample">-->
-                      <button class="btn btn-primary pull-right fa fa-plus col-md-3" style="background-color:black" type="button" data-toggle="collapse" data-target="<?php echo "#".$newCategorie;?>" aria-expanded="true" aria-controls="<?php echo $newCategorie;?>">Ouvrir</button>
+                      <button class="btn btn-primary pull-right fa fa-plus col-md-3" style="background-color:black" type="button" data-toggle="collapse" data-target="<?php echo "#".$newCategorie;?>" aria-expanded="true" aria-controls="<?php echo $newCategorie;?>"><?= _SERVICE_OUVRIR ?></button>
                     </li>
                     <div class="list-group-item collapse" style="color:black" id="<?php echo $newCategorie;?>">
 
@@ -108,7 +108,7 @@ session_start();
                       <h3 class="col-md-6" style="color:black"><?php echo $service->getNomService(); ?></h3>
                       <h6 class="col-md-2" style="color:black">idService: <?php echo $service->getIdService()."<br>"; ?> Prix: <?php echo $service->getPrixService()." €"; ?></h6>
                       <div class="col-md-2" style="color:black">
-                        <label class="">Description:</label>
+                        <label class=""><?= _DRIVER_INFO_DESCRIPTION ?></label>
                         <?php echo $service->getDescription(); ?>
                       </div>
                       <div class="col-md-2">
@@ -144,10 +144,10 @@ session_start();
                               <table>
 
                               <tr>
-                                <th scope="col">Nom du restaurant : </th>
-                                <th scope="col">Adresse : </th>
-                                <th scope="col">Prix moyen : </th>
-                                <th scope="col">Quantité : </th>
+                                <th scope="col"><?=_SERVICE1_NOM_RESTAURANT?></th>
+                                <th scope="col"><?=_SERVICE1_ADRESSE?> </th>
+                                <th scope="col"><?=_SERVICE1_PRIX?></th>
+                                <th scope="col"><?=_SERVICE1_QUANTITE?></th>
 
                               </tr>
                               <?php
@@ -231,7 +231,7 @@ session_start();
                                          <div id="ordinateurs_<?=$service->getIdService();?> " class="modal-body">
                                        <?php /*  <form action="valideReservationServices.php" id="form<?=$service->getIdService();?>" method="POST" onsubmit="return checkheure(this)"> */ ?>
 
-                                         Quantité <input type="number" value="" id="quantites<?=$service->getIdService();?>" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]"  onkeyup="checkQuantiteOrdinateur(this)"/>
+                                         <?= _SERVICE1_QUANTITE ?> <input type="number" value="" id="quantites<?=$service->getIdService();?>" class="primary" name="quantite[<?php echo $service->getIdService(); ?>]"  onkeyup="checkQuantiteOrdinateur(this)"/>
 
                                         <br>
 
@@ -251,12 +251,12 @@ session_start();
                               ?>   <table>
 
                               <tr>
-                                <th scope="col">Nom de l'hotel : </th>
-                                <th scope="col">Adresse : </th>
-                                <th scope="col">Prix : </th>
-                                <th scope="col">Type de chambre : </th>
-                                <th scope="col">Lits disponibles : </th>
-                                <th scope="col">Choix des horraires  : </th>
+                                <th scope="col"><?=  _SERVICE7_NOM_HOTEL?></th>
+                                <th scope="col"><?=  _SERVICE7_ADRESSE?></th>
+                                <th scope="col"><?= _SERVICE7_PRIX ?></th>
+                                <th scope="col"><?= _SERVICE7_TYPE_CHAMBRE ?> </th>
+                                <th scope="col"><?= _SERVICE7_NOM_LIT ?> </th>
+                                <th scope="col"><?= _SERVICE7_CHOIX_HORRAIRES ?> </th>
 
                               </tr>
                               <?php
@@ -280,8 +280,8 @@ session_start();
                                     <td>
                                     <div class="funkyradio-primary col-md-6 center-block">
                                           <input type="checkbox" name="idHotel<?php echo $unHotel['idHotel'] ?>_<?= $unHotel['idChambre'] ?>" id="idHotel<?php echo $unHotel['idHotel'] ?>[<?= $unHotel['idChambre'] ?>]" onchange="checkRadioHotel(this)">
-                                          <label for="radio<?php echo $unHotel['idHotel'] ?>">Choisir</label>
-                                          <button  style="visibility:hidden" id="buttonHoursHotel<?php echo $unHotel['idHotel']?>[<?= $unHotel['idChambre'] ?>]" type="button" class="btn btn-dark" data-toggle="modal" data-target="#heuresHotel<?php echo $unHotel['idHotel'] ?>_<?= $unHotel['idChambre'] ?>">Heures</button>
+                                          <label for="radio<?php echo $unHotel['idHotel'] ?>"><?= _SERVICE7_CHOOSE?></label>
+                                          <button  style="visibility:hidden" id="buttonHoursHotel<?php echo $unHotel['idHotel']?>[<?= $unHotel['idChambre'] ?>]" type="button" class="btn btn-dark" data-toggle="modal" data-target="#heuresHotel<?php echo $unHotel['idHotel'] ?>_<?= $unHotel['idChambre'] ?>"><?=_SERVICE7_HEURES ?> </button>
 
                                           <input type="hidden" id="heureTrajetFin"value="<?= $resFin;?>">
                                          <input type="hidden" id="heureTrajetDebut"value="<?= $res[1];?>">
@@ -291,10 +291,10 @@ session_start();
                                               <div class="modal-content">
                                               <div class="modal-header">
 
-                                          <h4 class="modal-title">Heure pour l'hotel  <?php echo $unHotel['nom'] ?></h4>
+                                          <h4 class="modal-title"><?= _SERVICE7_HORRAIRES." ".$unHotel['nom'] ?></h4>
                                           </div>
                                          <div id="Hotel" class="modal-body">
-                                         Debut <input type="time" id="startHotel<?php echo $unHotel['idHotel'] ?>[<?= $unHotel['idChambre'] ?>]" value="<?= $res[1]; ?>" name="startHotel<?php echo $unHotel['idHotel'] ?>_<?= $unHotel['idChambre'] ?>" onchange="checkHeureFinHotel(this)">
+                                         <?= _SERVICE7_DEBUT ?> <input type="time" id="startHotel<?php echo $unHotel['idHotel'] ?>[<?= $unHotel['idChambre'] ?>]" value="<?= $res[1]; ?>" name="startHotel<?php echo $unHotel['idHotel'] ?>_<?= $unHotel['idChambre'] ?>" onchange="checkHeureFinHotel(this)">
                                            <input type="time" style="visibility:hidden" id="endHotel<?php echo $unHotel['idHotel'] ?>[<?= $unHotel['idChambre'] ?>]" value="<?= $resFin; ?>" name="endHotel<?php echo $unHotel['idHotel'] ?>_<?= $unHotel['idChambre'] ?>">
 
                                                 </div>
@@ -322,11 +322,11 @@ session_start();
                               ?>
                                    <table>
                                   <tr>
-                                    <th scope="col">Nom du billet : </th>
-                                    <th scope="col">Validité : </th>
-                                    <th scope="col">Ville : </th>
-                                    <th scope="col">Prix : </th>
-                                    <th scope="col">Quantité : </th>
+                                    <th scope="col"><?= _SERVICE8_NOM_BILLET?></th>
+                                    <th scope="col"><?= _SERVICE8_VALIDITE?></th>
+                                    <th scope="col"><?= _SERVICE8_VILLE?></th>
+                                    <th scope="col"><?= _SERVICE1_PRIX?> </th>
+                                    <th scope="col"><?= _SERVICE1_QUANTITE?> </th>
                                   </tr>
                                   <?php
                               while($unBillet = $billet->fetch())
@@ -348,8 +348,8 @@ session_start();
                                       <td>
                                         <div class="funkyradio-primary col-md-6 center-block">
                                           <input type="checkbox" name="idBillet<?php echo $unBillet['idBillet'] ?>" id="idBillet<?php echo $unBillet['idBillet'] ?>"  onchange="checkRadioBillet(this)" >
-                                          <label for="radio<?php echo $unBillet['idBillet'] ?>">Choisir ce billet</label>
-                                          <button style="visibility:hidden" id="buttonHoursBillet<?php echo $unBillet['idBillet']?>" type="button" class="btn btn-primary" data-toggle="modal" data-target="#heuresBillet<?php echo $unBillet['idBillet']?>">Heures</button>
+                                          <label for="radio<?php echo $unBillet['idBillet'] ?>"><?= _SERVICE7_CHOOSE?></label>
+                                          <button style="visibility:hidden" id="buttonHoursBillet<?php echo $unBillet['idBillet']?>" type="button" class="btn btn-primary" data-toggle="modal" data-target="#heuresBillet<?php echo $unBillet['idBillet']?>"><?=_SERVICE7_HEURES?></button>
 
                                           <input type="hidden" id="heureTrajetFin"value="<?= $resFin;?>">
                                          <input type="hidden" id="heureTrajetDebut"value="<?= $res[1];?>">
@@ -359,10 +359,10 @@ session_start();
                                               <div class="modal-content">
                                               <div class="modal-header">
 
-                                          <h4 class="modal-title">Heure de du billet pour le  <?php echo $unBillet['nom'] ?></h4>
+                                          <h4 class="modal-title"><?= _SERVICE8_NOM_BILLET ." ".$unBillet['nom'] ?></h4>
                                           </div>
                                          <div id="billet" class="modal-body">
-                                         Debut <input type="time" id="startBillet<?php echo $unBillet['idBillet'] ?>" value="<?= $res[1]; ?>" name="startBillet<?php echo $unBillet['idBillet'] ?>" onchange="checkHeureFinBillet(this)">
+                                         <?= _SERVICE8_HORRAIRES ?> <input type="time" id="startBillet<?php echo $unBillet['idBillet'] ?>" value="<?= $res[1]; ?>" name="startBillet<?php echo $unBillet['idBillet'] ?>" onchange="checkHeureFinBillet(this)">
                                            <input type="time" style="visibility:hidden" id="endBillet<?php echo $unBillet['idBillet'] ?>" value="<?= $resFin; ?>" name="endBillet<?php echo $unBillet['idBillet'] ?>">
 
                                                 </div>
@@ -384,7 +384,7 @@ session_start();
                                 case '10' :
                                 ?>
                                 <div class="container">
-                                  <h5>Vous voulez un service qui n'est pas présent ? Envoyez nous votre demande et nous l'examinerons sous 24h ouvrés.</h5>
+                                  <h5><?= _SERVICE10_TEXT?></h5>
                                   <div class="row">
                                     <div class="row">
                                       <div class="offset-md-6 col-md-12">

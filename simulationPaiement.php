@@ -8,7 +8,7 @@ session_start();
 <head>
   <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Secure Payment Form</title>
+  <title>Simulation de paiement</title>
   <link rel="stylesheet" href="css/simulationPaiement/bootstrap-min.css">
   <link rel="stylesheet" href="css/simulationPaiement/bootstrap-formhelpers-min.css" media="screen">
   <link rel="stylesheet" href="css/simulationPaiement/bootstrapValidator-min.css"/>
@@ -48,7 +48,7 @@ include 'includehtml/head.html'; ?>
     <div class="row row-centered">
       <div class="col-md-4 col-md-offset-4">
         <div class="page-header">
-          <h2 class="gdfg">Paiement sécurisé.</h2>
+          <h2 class="gdfg"><?= _SERVICE_TITLE_PAIEMENT ?> </h2>
         </div>
         <noscript>
           <div class="bs-callout bs-callout-danger">
@@ -93,15 +93,15 @@ include 'includehtml/head.html'; ?>
 
         <!-- Card Number -->
         <div class="form-group">
-          <label class="col-sm-4 control-label" for="textinput">Numéro de carte</label>
+          <label class="col-sm-4 control-label" for="textinput"><?= _SERVICE_TITLE_NUMERO_CARTE?></label>
           <div class="col-sm-6">
-            <input type="text" id="cardnumber" maxlength="19" placeholder="Numéro de carte" class="card-number form-control">
+            <input type="text" id="cardnumber" maxlength="19" placeholder="<?=_SERVICE_TITLE_NUMERO_CARTE?>" class="card-number form-control">
           </div>
         </div>
 
         <!-- Expiry-->
         <div class="form-group">
-          <label class="col-sm-4 control-label" for="textinput">Date d'expiration</label>
+          <label class="col-sm-4 control-label" for="textinput"><?=_SERVICE_TITLE_DATE_EXPIRATION ?></label>
           <div class="col-sm-6">
             <div class="form-inline">
               <select name="select2" data-stripe="exp-month" class="card-expiry-month stripe-sensitive required form-control">
@@ -135,7 +135,7 @@ include 'includehtml/head.html'; ?>
 
         <!-- CVV -->
         <div class="form-group">
-          <label class="col-sm-4 control-label" for="textinput">CVV</label>
+          <label class="col-sm-4 control-label" for="textinput"><?=_SERVICE_TITLE_CVV?></label>
           <div class="col-sm-3">
             <input type="text" id="cvv" placeholder="CVV" maxlength="3" class="card-cvc form-control">
           </div>
@@ -147,7 +147,7 @@ include 'includehtml/head.html'; ?>
         <div class="control-group">
           <div class="controls">
             <center>
-              <button class="btn btn-success" id="buttonSuccess" type="submit">Payez maintenant <?= $_SESSION['price']."€";?></button>
+              <button class="btn btn-success" id="buttonSuccess" type="submit"><?= _SERVICE_TITLE_PAYER." ".$_SESSION['price']."€";?></button>
             </center>
           </div>
         </div>
